@@ -1,0 +1,369 @@
+<system>
+    <parameters>
+        <!-- 
+        <platform_name>"zed"</platform_name>
+        <part_name>"xc7z020clg484-1"</part_name>
+        <arch_name>"zynq"</arch_name>
+        -->
+        <platform_name>"ml605"</platform_name>
+        <part_name>"xc6vlx240tff1156-1"</part_name> 
+        <arch_name>"virtex6lx"</arch_name>
+        <mailbox_axi_base>"0x43800000"</mailbox_axi_base>
+        <clock_period>"10.0ns"</clock_period>
+        <debug_flag>"on"</debug_flag>
+        <monitor_all_fifos>"on"</monitor_all_fifos>
+        <!--
+        -->
+    </parameters>
+	<!-- ************************ -->
+	<!-- Computational Components -->
+	<!-- ************************ -->
+	<component name="application_processor">
+		<type>"Computation"</type>
+		<parameters>
+			<iram_size>"64K"</iram_size>
+			<dram_size>"64K"</dram_size>
+		</parameters>
+		<port dir="in" name="fifo_in" type="connect_type1">""</port>
+		<port dir="out" name="fifo_out" type="connect_type1">""</port>
+		<port dir="inout" name="data_inout" type="connect_axi">""</port>
+		<mapping>
+			<task_list>
+				<task name="*">""</task>
+			</task_list>
+		</mapping>
+        <metrics_of_arm>
+            <parser   lat=666/>
+            <dequant  lat=12194/>
+            <idct_row lat=28942/>
+            <idct_col lat=27613/>
+            <cc_mc    lat=100/>
+            <tu       lat=4764/>
+        </metrics_of_arm>
+		<implementation name="parser_sw_imp0" task="parser">
+			<generator>"perl ./scripts/hw_gen.pl ./task1_imp2"</generator>
+			<report>"./task1_imp2/report.xml"</report>
+			<regenerate>"false"</regenerate>
+			<metrics>
+				<best_lat>"121"</best_lat>
+				<aver_lat>"121"</aver_lat>
+				<worst_lat>"121"</worst_lat>
+				<num_BRAM>"0"</num_BRAM>
+				<num_DSP>"0"</num_DSP>
+				<num_FF>"0"</num_FF>
+				<num_LUT>"0"</num_LUT>
+				<power>"?"</power>
+			</metrics>
+		</implementation>
+		<implementation name="dequant_sw_imp0" task="dequant">
+			<generator>"perl ./scripts/hw_gen.pl ./task1_imp2"</generator>
+			<report>"./task1_imp2/report.xml"</report>
+			<regenerate>"false"</regenerate>
+			<metrics>
+				<best_lat>"50356"</best_lat>
+				<aver_lat>"50356"</aver_lat>
+				<worst_lat>"50356"</worst_lat>
+				<num_BRAM>"0"</num_BRAM>
+				<num_DSP>"0"</num_DSP>
+				<num_FF>"0"</num_FF>
+				<num_LUT>"0"</num_LUT>
+				<power>"?"</power>
+			</metrics>
+		</implementation>
+		<implementation name="idct_row_sw_imp0" task="idct_row">
+			<generator>"perl ./scripts/hw_gen.pl ./task1_imp2"</generator>
+			<report>"./task1_imp2/report.xml"</report>
+			<regenerate>"false"</regenerate>
+			<metrics>
+				<best_lat>"156323"</best_lat>
+				<aver_lat>"156323"</aver_lat>
+				<worst_lat>"156323"</worst_lat>
+				<num_BRAM>"0"</num_BRAM>
+				<num_DSP>"0"</num_DSP>
+				<num_FF>"0"</num_FF>
+				<num_LUT>"0"</num_LUT>
+				<power>"?"</power>
+			</metrics>
+		</implementation>
+		<implementation name="idct_col_sw_imp0" task="idct_col">
+			<generator>"perl ./scripts/hw_gen.pl ./task1_imp2"</generator>
+			<report>"./task1_imp2/report.xml"</report>
+			<regenerate>"false"</regenerate>
+			<metrics>
+				<best_lat>"184684"</best_lat>
+				<aver_lat>"184684"</aver_lat>
+				<worst_lat>"184684"</worst_lat>
+				<num_BRAM>"0"</num_BRAM>
+				<num_DSP>"0"</num_DSP>
+				<num_FF>"0"</num_FF>
+				<num_LUT>"0"</num_LUT>
+				<power>"?"</power>
+			</metrics>
+		</implementation>
+		<implementation name="cc_mc_sw_imp0" task="cc_mc">
+			<generator>"perl ./scripts/hw_gen.pl ./task1_imp2"</generator>
+			<report>"./task1_imp2/report.xml"</report>
+			<regenerate>"false"</regenerate>
+			<metrics>
+				<best_lat>"170"</best_lat>
+				<aver_lat>"170"</aver_lat>
+				<worst_lat>"170"</worst_lat>
+				<num_BRAM>"0"</num_BRAM>
+				<num_DSP>"0"</num_DSP>
+				<num_FF>"0"</num_FF>
+				<num_LUT>"0"</num_LUT>
+				<power>"?"</power>
+			</metrics>
+		</implementation>
+		<implementation name="tu_sw_imp0" task="tu">
+			<generator>"perl ./scripts/hw_gen.pl ./task1_imp2"</generator>
+			<report>"./task1_imp2/report.xml"</report>
+			<regenerate>"false"</regenerate>
+			<metrics>
+				<best_lat>"24180"</best_lat>
+				<aver_lat>"24180"</aver_lat>
+				<worst_lat>"24180"</worst_lat>
+				<num_BRAM>"0"</num_BRAM>
+				<num_DSP>"0"</num_DSP>
+				<num_FF>"0"</num_FF>
+				<num_LUT>"0"</num_LUT>
+				<power>"?"</power>
+			</metrics>
+		</implementation>
+	</component>
+	<component name="dequantAcc">
+		<type>"Accelerator"</type>
+		<implementation name="dequant_hw_imp0" task="dequant">
+            <source_dir>"./src/dequant"</source_dir>  <!-- required -->
+			<configuration>"cfg.xml"</configuration> <!-- optional: default is source_dir/cfg.xml. if not exist, call cfg_gen module_p.cfg at source_dir -->
+
+            <design_space>"design_space.xml"</design_space>
+            <metrics_model>"metrics_model.xml"</metrics_model>
+
+			<evaluator>"hw_eval_c.pl"</evaluator>  <!-- optional: default is source_dir/hw_eval_p.pl. if not exist, copied from system script dir -->
+			<report>"report.xml"</report> <!-- optional: default is source_dir/report.xml -->
+			<metrics>
+				<best_lat>"211"</best_lat>
+				<aver_lat>"240"</aver_lat>
+				<worst_lat>"283"</worst_lat>
+				<num_BRAM>"10"</num_BRAM>
+				<num_DSP>"3"</num_DSP>
+				<num_FF>"1171"</num_FF>
+				<num_LUT>"2290"</num_LUT>
+				<power>"345"</power>
+			</metrics>
+
+			<generator>"hw_gen_c.pl"</generator>
+			<module_impl>"pcores"</module_impl>
+
+			<hw_debug_scanner>"gen_hw_debug.pl"</hw_debug_scanner>
+            <hw_debug_info>"debug_cfg.xml"</hw_debug_info>
+
+            <annotation>"module_ann.xml"</annotation>
+
+			<reevaluate>"false"</reevaluate>
+			<regenerate>"false"</regenerate>
+
+            <!--
+			<reevaluate>"false"</reevaluate>
+			<regenerate>"false"</regenerate>
+            -->
+            <!--
+			<generator>"perl ../../../scripts/hw_gen.pl ./src/dequant dequant"</generator>
+			<pcore>"./src/dequant/pcores"</pcore>
+            <hw_debug>"./src/dequant/hw_debug.xml"</hw_debug>
+            -->
+		</implementation>
+	</component>
+	<component name="parserAcc">
+		<type>"Accelerator"</type>
+		<implementation name="parser_hw_imp0" task="parser">
+			<generator>"perl ../../../scripts/hw_gen.pl ./src/parser parser"</generator>
+			<report>"./src/parser/report.xml"</report>
+			<pcore>"./src/parser/pcores"</pcore>
+			<metrics>
+				<best_lat>"210"</best_lat>
+				<aver_lat>"1084"</aver_lat>
+				<worst_lat>"2653"</worst_lat>
+				<num_BRAM>"33"</num_BRAM>
+				<num_DSP>"1"</num_DSP>
+				<num_FF>"1139"</num_FF>
+				<num_LUT>"2823"</num_LUT>
+				<power>"397"</power>
+			</metrics>
+			<reevaluate>"false"</reevaluate>
+			<regenerate>"false"</regenerate>
+		</implementation>
+	</component>
+	<component name="idct_colAcc">
+		<type>"Accelerator"</type>
+		<implementation name="idct_col_hw_imp0" task="idct_col">
+			<source_dir>"./src/BlockIDCT_Col"</source_dir>
+			<metrics>
+				<best_lat>"357"</best_lat>
+				<aver_lat>"357"</aver_lat>
+				<worst_lat>"357"</worst_lat>
+				<num_BRAM>"9"</num_BRAM>
+				<num_DSP>"8"</num_DSP>
+				<num_FF>"960"</num_FF>
+				<num_LUT>"658"</num_LUT>
+				<power>"161"</power>
+			</metrics>
+			<reevaluate>"false"</reevaluate>
+			<regenerate>"false"</regenerate>
+		</implementation>
+	</component>
+	<component name="idct_rowAcc">
+		<type>"Accelerator"</type>
+		<implementation name="idct_row_hw_imp0" task="idct_row">
+			<source_dir>"./src/BlockIDCT_Row"</source_dir>
+			<metrics>
+				<best_lat>"181"</best_lat>
+				<aver_lat>"181"</aver_lat>
+				<worst_lat>"181"</worst_lat>
+				<num_BRAM>"8"</num_BRAM>
+				<num_DSP>"8"</num_DSP>
+				<num_FF>"612"</num_FF>
+				<num_LUT>"167"</num_LUT>
+				<power>"75"</power>
+			</metrics>
+			<reevaluate>"false"</reevaluate>
+			<regenerate>"false"</regenerate>
+		</implementation>
+	</component>
+	<component name="cc_mcAcc">
+		<type>"Accelerator"</type>
+		<base_addr>
+			<port name="recFrame">"0x50000000"</port>
+		</base_addr>
+		<implementation name="cc_mc_hw_imp0" task="cc_mc">
+			<source_dir>"./src/cc_mc"</source_dir>
+			<metrics>
+				<best_lat>"70"</best_lat>
+				<aver_lat>"70"</aver_lat>
+				<worst_lat>"70"</worst_lat>
+				<num_BRAM>"12"</num_BRAM>
+				<num_DSP>"4"</num_DSP>
+				<num_FF>"562"</num_FF>
+				<num_LUT>"1195"</num_LUT>
+				<power>"170"</power>
+			</metrics>
+			<reevaluate>"false"</reevaluate>
+			<regenerate>"false"</regenerate>
+		</implementation>
+	</component>
+	<component name="tuAcc">
+		<type>"Accelerator"</type>
+		<base_addr>
+			<port name="recFrame">"0x50000100"</port>
+		</base_addr>
+		<implementation name="tu_hw_imp0" task="tu">
+			<source_dir>"./src/tu"</source_dir>
+			<metrics>
+				<best_lat>"499"</best_lat>
+				<aver_lat>"1021"</aver_lat>
+				<worst_lat>"1291"</worst_lat>
+				<num_BRAM>"1"</num_BRAM>
+				<num_DSP>"2"</num_DSP>
+				<num_FF>"309"</num_FF>
+				<num_LUT>"438"</num_LUT>
+				<power>"73"</power>
+			</metrics>
+			<reevaluate>"false"</reevaluate>
+			<regenerate>"false"</regenerate>
+		</implementation>
+	</component>
+    <component name="debug_module">
+		<type>"Auxilliary"</type>
+		<implementation name="debug_module_0">
+            <source_dir>"./debug_module"</source_dir>  <!-- required -->
+			<module_impl>"module_impl"</module_impl>
+			<reevaluate>"false"</reevaluate>
+			<regenerate>"true"</regenerate>
+		</implementation>
+    </component>
+    <component name="fsl_debug_mode">
+		<type>"Auxilliary"</type>
+		<implementation name="fsl_debug_mode_0">
+            <source_dir>"./fsl_debug_mode"</source_dir>  <!-- required -->
+			<module_impl>"pcore"</module_impl>
+			<reevaluate>"false"</reevaluate>
+			<regenerate>"false"</regenerate>
+		</implementation>
+    </component>
+	<!-- ******************* -->
+	<!-- Storage  Components -->
+	<!-- ******************* -->
+	<component name="SRAM">
+		<type>"Storage"</type>
+		<port dir="in" name="data_in" type="connect_axi">""</port>
+		<port dir="out" name="data_out" type="connect_axi">""</port>
+	</component>
+	<component name="DRAM">
+		<type>"Storage"</type>
+		<port dir="in" name="data_in" type="connect_axi">""</port>
+		<port dir="out" name="data_out" type="connect_axi">""</port>
+	</component>
+	<!-- ************************ -->
+	<!-- Communication Components -->
+	<!-- ************************ -->
+	<component name="axi_bus">
+		<type>"Communication"</type>
+		<port count="0.." dir="in" name="masterW" type="connect_axi">""</port>
+		<port count="0.." dir="out" name="masterR" type="connect_axi">""</port>
+		<port count="0.." dir="inout" name="slave" type="connect_axi">""</port>
+		<paths>
+			<path>
+				<from>"masterW"</from>
+				<to>"slave"</to>
+			</path>
+			<path>
+				<from>"slave"</from>
+				<to>"masterR"</to>
+			</path>
+		</paths>
+	</component>
+	<component name="fsl_fifo">
+		<type>"Communication"</type>
+		<port dir="in" name="data_in" type="connect_axi">""</port>
+		<port dir="out" name="data_out" type="connect_axi">""</port>
+	</component>
+	<!-- *************************** -->
+	<!-- Interconnection Constraints -->
+	<!-- *************************** -->
+	<connect_type name="connect_fifo">
+		<!-- FSL bus -->
+		<in>"FSL_slave"</in>
+		<out>"FSL_master"</out>
+		<connect_rules>
+			<connect s="in" t="out">""</connect>
+		</connect_rules>
+	</connect_type>
+	<connect_type name="connect_axi">
+		<!-- AXI bus -->
+		<in>"AXI_slave"</in>
+		<out>"AXI_master"</out>
+		<inout>"AXI_masterslave"</inout>
+		<connect_rules>
+			<connect s="in" t="out">""</connect>
+			<connect s="in" t="inout">""</connect>
+			<connect s="inout" t="out">""</connect>
+			<connect s="inout" t="inout">""</connect>
+		</connect_rules>
+	</connect_type>
+	<!-- ********************************* -->
+	<!-- Platform Architecture Constraints -->
+	<!-- ********************************* -->
+	<platform name="system">
+		<instance component="microblaze" count="1" name="mb">""</instance>
+		<instance component="parserAcc" count="0..1" name="parserAcc">""</instance>
+		<instance component="dequantAcc" count="0..1" name="dequantAcc">""</instance>
+		<instance component="idct_rowAcc" count="0..1" name="idct_rowAcc">""</instance>
+		<instance component="idct_colAcc" count="0..1" name="idct_colAcc">""</instance>
+		<instance component="cc_mcAcc" count="0..1" name="cc_mcAcc">""</instance>
+		<instance component="tuAcc" count="0..1" name="tuAcc">""</instance>
+		<instance component="connect_axi" count="1" name="connect_axi0">""</instance>
+		<instance component="fsl_fifo" count="*" name="fsl_fifo">""</instance>
+		<instance component="DRAM" count="1" name="dram">""</instance>
+	</platform>
+</system>

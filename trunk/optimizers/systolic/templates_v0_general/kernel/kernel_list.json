@@ -1,0 +1,23 @@
+{
+    "load_IN_and_forward": {
+        "load_IN_and_forward": "subkernel"
+    }
+    "load_W_and_forward": {
+        "load_W_and_forward": "subkernel"
+    }
+    "feed_IN_kernel": {
+        "feed_IN_kernel": "autorunkernel"
+    }
+    "feed_W_kernel": {
+        "feed_W_kernel": "autorunkernel"
+    }
+    "PE_kernel": {
+        "PE_kernel": "autorunkernel"
+    }
+    "drain_OUT_chain_node_kernel": {
+        "drain_OUT_chain_node_kernel": "autorunkernel"
+    }
+    "drain_OUT_write_tree_root_to_mem_kernel": {
+        "drain_OUT_write_tree_root_to_mem_kernel": "subkernel"
+    }
+}

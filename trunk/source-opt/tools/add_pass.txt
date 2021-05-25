@@ -1,0 +1,11 @@
+The files related to a new pass
+
+# /
+## CMakeLists.txt -- add the subdirectory pass_name
+
+# pass_name/
+- pass_name/CMakeLists.txt -- use cake.pl to generate it
+
+# mars_opt/
+- mars_opt/src/mars_opt.cpp
+- mars_opt/CMakeLists.txt -- add "-DPASS_NAME" to the COMPILE_FLAGS, and link the library

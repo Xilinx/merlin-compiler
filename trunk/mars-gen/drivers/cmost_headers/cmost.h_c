@@ -1,0 +1,46 @@
+
+//#ifndef _CMOST_H_INCLUDED_
+//#define _CMOST_H_INCLUDED_
+
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <assert.h>
+//#include <math.h>
+
+//#include "cmost_test_common.h"
+//#include "cl_platform.h"
+
+#define CMOST_CC
+#define CMOSTCC 
+
+
+#define FPGA_DDR_USER_BASE (0xc0000000)
+
+
+int cmost_malloc(void ** a, int size );
+int cmost_malloc_1d(void ** a, const char * filename, int unit_size, int d0 );
+int cmost_malloc_2d(void *** a, const char * filename, int unit_size, int d0, int d1 );
+int cmost_malloc_3d(void **** a, const char * filename, int unit_size, int d0, int d1, int d2 );
+
+int cmost_free_1d(void * a);
+int cmost_free_2d(void ** a);
+int cmost_free_3d( void *** a);
+
+int cmost_dump_1d(void * a, const char * filename);
+int cmost_dump_2d(void ** a, const char * filename);
+int cmost_dump_3d(void *** a, const char * filename);
+void cmost_break_point();
+
+void cmost_write_file(void * buffer, const char * file_name, int size);
+void cmost_load_file(void * buffer, const char * file_name, int size);
+
+void  cmost_start_timer(int i);
+void  cmost_read_timer_new(int i, float * sec);   // return the time in seconds
+
+int cmost_free(void * a);
+int cmost_dump(void * a, const char * filename);
+
+
+//#endif //_CMOST_H_INCLUDED_
+
+

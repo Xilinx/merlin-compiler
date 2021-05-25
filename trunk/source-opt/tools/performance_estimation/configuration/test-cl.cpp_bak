@@ -1,0 +1,472 @@
+#include <CL/opencl.h>
+#include <assert.h>
+#include <fcntl.h>
+#include <math.h>
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <sys/stat.h>
+#include <sys/time.h>
+#include <sys/types.h>
+#include <unistd.h>
+
+int load_file_to_memory(const char *filename, char **result) {
+  size_t size = 0;
+  FILE *f = fopen(filename, "rb");
+  if (f == NULL) {
+    *result = NULL;
+    return -1;  //  -1 means file opening fail
+  }
+  fseek(f, 0, SEEK_END);
+  size = ftell(f);
+  fseek(f, 0, SEEK_SET);
+  *result = static_cast<char *>(malloc(size + 1));
+  if (size != fread(*result, sizeof(char), size, f)) {
+    free(*result);
+    return -2;  //  -2 means file reading fail
+  }
+  fclose(f);
+  (*result)[size] = 0;
+  return size;
+}
+
+cl_context context;             //  compute context
+cl_command_queue commands[16];  //  compute command queue
+cl_kernel kernel[16];           //  compute kernel
+cl_uint device_count = 0;
+
+void run_test(int number_host, int length_host, int dram_read_en,
+              int dram_write_en, int stride, int bitwidth, float *seconds,
+              int64_t *bytes) {
+  int err = 0;
+
+  cl_mem inout0[16];
+  cl_mem inout1[16];
+  cl_mem inout2[16];
+  cl_mem inout3[16];
+  cl_event read_event[4 * 16];
+  cl_event exec_event;
+  cl_event write_event[2 * 16];
+
+  printf("DRAM test 512b burst length : %d (%f KB) \n", length_host,
+         static_cast<float>(bitwidth) * length_host / 1024);
+  printf("DRAM test mem transaction per kernel call : %d (Total : %f MB) \n",
+         number_host,
+         static_cast<double>(64.0F) * number_host * length_host / 1024 / 1024);
+  printf("DRAM read enable = %d\n", dram_read_en);
+  printf("DRAM write enable = %d\n", dram_write_en);
+  printf("DRAM stride = %d\n", stride);
+
+  int vec_size = number_host * length_host * 16;  //  for uint512
+  printf("vec_size : %d * 4B\n", vec_size);
+
+  float *a = static_cast<float *>(malloc(vec_size * sizeof(float)));
+  float *results = static_cast<float *>(malloc(vec_size * sizeof(float)));
+  unsigned int correct;  //  number of correct results returned
+
+  //  Fill our data sets with pattern
+  //
+  int i;
+  float acc = 0;
+  for (i = 0; i < vec_size; i++) {
+    a[i] = acc;
+    acc += 1.0;
+  }
+  for (i = 0; i < vec_size; i++) {
+    results[i] = 0.0;
+  }
+
+  //  Create the input and output arrays in device memory for our calculation
+  for (int i = 0; i < device_count; i++) {
+    inout0[i] = clCreateBuffer(context, CL_MEM_READ_WRITE,
+                               sizeof(float) * vec_size, NULL, NULL);
+    inout1[i] = clCreateBuffer(context, CL_MEM_READ_WRITE,
+                               sizeof(float) * vec_size, NULL, NULL);
+    //  input_a = clCreateBuffer(context,  CL_MEM_READ_ONLY,
+    //  sizeof(float)*write_size, NULL, NULL); input_b = clCreateBuffer(context,
+    //  CL_MEM_READ_ONLY,  sizeof(float) * vec_size, NULL, NULL);
+    inout2[i] = clCreateBuffer(context, CL_MEM_READ_WRITE,
+                               sizeof(float) * vec_size, NULL, NULL);
+    inout3[i] = clCreateBuffer(context, CL_MEM_READ_WRITE,
+                               sizeof(float) * vec_size, NULL, NULL);
+    //  output = clCreateBuffer(context, CL_MEM_WRITE_ONLY,
+    //  sizeof(float)*read_size, NULL, NULL);
+    if ((inout0[i] == nullptr) || (inout1[i] == nullptr) ||
+        (inout2[i] == nullptr) || (inout3[i] == nullptr)) {
+      printf("Error: Failed to allocate device memory!\n");
+      printf("Test failed\n");
+      exit(1);
+    }
+  }
+
+  for (int i = 0; i < device_count; i++) {
+    err = 0;
+    err |= clSetKernelArg(kernel[i], 0, sizeof(cl_mem), &inout0[i]);
+    err |= clSetKernelArg(kernel[i], 1, sizeof(cl_mem), &inout1[i]);
+    err |= clSetKernelArg(kernel[i], 2, sizeof(cl_mem), &inout2[i]);
+    err |= clSetKernelArg(kernel[i], 3, sizeof(cl_mem), &inout3[i]);
+    err |= clSetKernelArg(kernel[i], 4, sizeof(int), &number_host);
+    err |= clSetKernelArg(kernel[i], 5, sizeof(int), &length_host);
+    err |= clSetKernelArg(kernel[i], 6, sizeof(int), &dram_read_en);
+    err |= clSetKernelArg(kernel[i], 7, sizeof(int), &dram_write_en);
+    err |= clSetKernelArg(kernel[i], 8, sizeof(int), &stride);
+
+    if (err != CL_SUCCESS) {
+      printf("Error: Failed to set kernel arguments! %d\n", err);
+      printf("Test failed\n");
+      exit(1);
+    }
+  }
+
+  for (int i = 0; i < device_count; i++) {
+    err = clEnqueueWriteBuffer(commands[i], inout0[i], CL_TRUE, 0,
+                               sizeof(float) * vec_size, a, 0, NULL, NULL);
+    err = clEnqueueWriteBuffer(commands[i], inout1[i], CL_TRUE, 0,
+                               sizeof(float) * vec_size, a, 0, NULL, NULL);
+    err = clEnqueueWriteBuffer(commands[i], inout2[i], CL_TRUE, 0,
+                               sizeof(float) * vec_size, a, 0, NULL, NULL);
+    err = clEnqueueWriteBuffer(commands[i], inout3[i], CL_TRUE, 0,
+                               sizeof(float) * vec_size, a, 0, NULL, NULL);
+  }
+  if (err != CL_SUCCESS) {
+    printf("Error: Failed to write to source array a!\n");
+    printf("Test failed\n");
+    exit(1);
+  }
+
+  for (int i = 0; i < device_count; i++) {
+    err = clEnqueueTask(commands[i], kernel[i], 0, NULL, NULL);
+  }
+
+  for (int i = 0; i < device_count; i++) {
+    err = clEnqueueReadBuffer(commands[i], inout0[i], CL_TRUE, 0, sizeof(float),
+                              results, 0, NULL, &read_event[4 * i + 0]);
+    err = clEnqueueReadBuffer(commands[i], inout1[i], CL_TRUE, 0, sizeof(float),
+                              results, 0, NULL, &read_event[4 * i + 1]);
+    err = clEnqueueReadBuffer(commands[i], inout2[i], CL_TRUE, 0, sizeof(float),
+                              results, 0, NULL, &read_event[4 * i + 2]);
+    err = clEnqueueReadBuffer(commands[i], inout3[i], CL_TRUE, 0, sizeof(float),
+                              results, 0, NULL, &read_event[4 * i + 3]);
+  }
+  clWaitForEvents(4 * device_count, read_event);
+
+  struct timeval ts;
+  struct timeval te;
+  struct timeval td;
+
+  printf("Timer start!\n");
+  gettimeofday(&ts, NULL);
+
+  for (int i = 0; i < device_count; i++) {
+    err = clEnqueueTask(commands[i], kernel[i], 0, NULL, NULL);
+
+    if (err != 0) {
+      printf("Error: Failed to execute kernel! %d\n", err);
+      printf("Test failed\n");
+      exit(1);
+    }
+  }
+
+  for (int i = 0; i < device_count; i++) {
+    err = clEnqueueReadBuffer(commands[i], inout0[i], CL_TRUE, 0, sizeof(float),
+                              results, 0, NULL, &read_event[0]);
+    //  err = clEnqueueReadBuffer( commands, inout1, CL_TRUE, 0, sizeof(float),
+    //  results, 0, NULL, &read_event [1]); err = clEnqueueReadBuffer( commands,
+    //  inout2, CL_TRUE, 0, sizeof(float), results, 0, NULL, &read_event [2]);
+    //  err = clEnqueueReadBuffer( commands, inout3, CL_TRUE, 0, sizeof(float),
+    //  results, 0, NULL, &read_event [3]);
+    if (err != CL_SUCCESS) {
+      printf("Error: Failed to read output array! %d\n", err);
+      printf("Test failed\n");
+      exit(1);
+    }
+  }
+  clWaitForEvents(1 * device_count, read_event);
+  gettimeofday(&te, NULL);
+  timersub(&ts, &te, &td);
+  *seconds = fabs(td.tv_sec + static_cast<float>(td.tv_usec) / 1000000.0);
+  printf("execution time: %.6fs\n", *seconds);
+  int ch_num = ((dram_read_en)&0x1) + ((dram_read_en >> 1) & 0x1) +
+               ((dram_read_en >> 2) & 0x1) + ((dram_read_en >> 3) & 0x1) +
+               ((dram_write_en)&0x1) + ((dram_write_en >> 1) & 0x1) +
+               ((dram_write_en >> 2) & 0x1) + ((dram_write_en >> 3) & 0x1);
+  *bytes = static_cast<int64_t>(vec_size) * 4;
+  printf("bw: %.6f GB/s\n",
+         static_cast<float>(*bytes) / 1024 / 1024 / 1024 / *seconds);
+}
+
+int main(int argc, char **argv) {
+  //  TARGET_DEVICE macro needs to be passed from gcc command line
+#if defined(SDA_PLATFORM) && !defined(TARGET_DEVICE)
+#define STR_VALUE(arg) #arg
+#define GET_STRING(name) STR_VALUE(name)
+#define TARGET_DEVICE GET_STRING(SDA_PLATFORM)
+#endif
+  const char *target_device_name = TARGET_DEVICE;
+
+  int err;  //  error code returned from api calls
+
+  size_t global[2];  //  global domain size for our calculation
+  size_t local[2];   //  local domain size for our calculation
+
+  cl_platform_id platforms[16];  //  platform id
+  cl_platform_id platform_id;    //  platform id
+  cl_uint platform_count;
+  cl_device_id device_id;  //  compute device id
+  cl_program program[16];  //  compute program
+
+  char cl_platform_vendor[1001];
+
+  //  Get all platforms and then select Xilinx platform
+  err = clGetPlatformIDs(16, platforms, &platform_count);
+  if (err != CL_SUCCESS) {
+    printf("Error: Failed to find an OpenCL platform!\n");
+    printf("Test failed\n");
+    return EXIT_FAILURE;
+  }
+  printf("INFO: Found %d platforms\n", platform_count);
+
+  //  Find Xilinx Plaftorm
+  int platform_found = 0;
+  for (unsigned int iplat = 0; iplat < platform_count; iplat++) {
+    err = clGetPlatformInfo(platforms[iplat], CL_PLATFORM_VENDOR, 1000,
+                            static_cast<void *>(cl_platform_vendor, NULL));
+    if (err != CL_SUCCESS) {
+      printf("Error: clGetPlatformInfo(CL_PLATFORM_VENDOR) failed!\n");
+      printf("Test failed\n");
+      return EXIT_FAILURE;
+    }
+    if (strcmp(cl_platform_vendor, "Xilinx") == 0) {
+      printf("INFO: Selected platform %d from %s\n", iplat, cl_platform_vendor);
+      platform_id = platforms[iplat];
+      platform_found = 1;
+    }
+  }
+  if (platform_found == 0) {
+    printf("ERROR: Platform Xilinx not found. Exit.\n");
+    return EXIT_FAILURE;
+  }
+
+  //  Connect to a compute device
+  //  find all devices and then select the target device
+  cl_device_id devices[16];       //  compute device id
+  cl_device_id devices_temp[16];  //  compute device id
+  cl_uint device_count_temp;
+  int max_device = 1;
+  printf("Max # of device = %d\n", max_device);
+  char cl_device_name[1001];
+  err = clGetDeviceIDs(platform_id, CL_DEVICE_TYPE_ACCELERATOR, 16,
+                       devices_temp, &device_count_temp);
+  if (err != CL_SUCCESS) {
+    printf("Error: Failed to create a device group!\n");
+    printf("Test failed\n");
+    return EXIT_FAILURE;
+  }
+
+  //  iterate all devices to select the target device.
+  for (int i = 0; i < device_count_temp; i++) {
+    //  for (int i=0; i<1; i++) {
+    err = clGetDeviceInfo(devices_temp[i], CL_DEVICE_NAME, 1024, cl_device_name,
+                          0);
+    if (err != CL_SUCCESS) {
+      printf("Error: Failed to get device name for device %d!\n", i);
+      printf("Test failed\n");
+      return EXIT_FAILURE;
+    }
+    printf("CL_DEVICE_NAME %s\n", cl_device_name);
+    //  if(strcmp(cl_device_name, target_device_name) == 0) {
+    devices[device_count] = devices_temp[i];
+    device_count++;
+    printf("INFO: Selected %s as the target device\n", cl_device_name);
+    //  }
+  }
+
+  if (device_count == 0) {
+    printf("ERROR: Target device %s not found. Exit.\n", target_device_name);
+    return EXIT_FAILURE;
+  }
+
+  device_count = (max_device < device_count) ? max_device : device_count;
+  printf("INFO: Num of devices set to %d\n", device_count);
+
+  err = clGetDeviceIDs(platform_id, CL_DEVICE_TYPE_ACCELERATOR, 1, &device_id,
+                       NULL);
+  if (err != CL_SUCCESS) {
+    printf("Error: Failed to create a device group!\n");
+    printf("Test failed\n");
+    return EXIT_FAILURE;
+  }
+
+  //  Create a compute context
+  //
+  context = clCreateContext(0, device_count, devices, NULL, NULL, &err);
+  if (context == nullptr) {
+    printf("Error: Failed to create a compute context!\n");
+    printf("Test failed\n");
+    return EXIT_FAILURE;
+  }
+  //  Create a command commands
+  //
+  for (int i = 0; i < device_count; i++) {
+    commands[i] = clCreateCommandQueue(context, devices[i], 0, &err);
+    if (commands[i] == nullptr) {
+      printf("Error: Failed to create a command %d commands!\n", i);
+      printf("Error: code %i\n", err);
+      printf("Test failed\n");
+      return EXIT_FAILURE;
+    }
+  }
+
+  int status;
+
+  //  Create Program Objects
+  //
+
+  //  Load binary from disk
+  unsigned char *kernelbinary;
+  char *xclbin = argv[1];
+  printf("INFO: Loading %s\n", xclbin);
+  int n_i =
+      load_file_to_memory(xclbin, reinterpret_cast<char **>(&kernelbinary));
+  if (n_i < 0) {
+    printf("failed to load kernel from xclbin: %s\n", xclbin);
+    printf("Test failed\n");
+    return EXIT_FAILURE;
+  }
+  size_t n = n_i;
+  //  Create the compute program from offline
+  for (int i = 0; i < device_count; i++) {
+    program[i] = clCreateProgramWithBinary(
+        context, 1, &devices[i], &n, (const unsigned char **)&kernelbinary,
+        &status, &err);
+    if ((program[i] == nullptr) || (err != CL_SUCCESS)) {
+      printf("Error: Failed to create compute program from binary %d!\n", err);
+      printf("Test failed\n");
+      return EXIT_FAILURE;
+    }
+
+    //  Build the program executable
+    //
+    err = clBuildProgram(program[i], 0, NULL, NULL, NULL, NULL);
+    if (err != CL_SUCCESS) {
+      size_t len;
+      char buffer[2048];
+
+      printf("Error: Failed to build program executable!\n");
+
+      clGetProgramBuildInfo(program[i], devices[i], CL_PROGRAM_BUILD_LOG,
+                            sizeof(buffer), buffer, &len);
+      printf("%d:%s\n", i, buffer);
+      printf("Test failed\n");
+      return EXIT_FAILURE;
+    }
+
+    //  Create the compute kernel in the program we wish to run
+    //
+    kernel[i] = clCreateKernel(program[i], "mmult", &err);
+    if ((kernel[i] == nullptr) || err != CL_SUCCESS) {
+      printf("Error: Failed to create compute kernel!\n");
+      printf("Test failed\n");
+      return EXIT_FAILURE;
+    }
+  }
+
+  if (argc < 3) {
+    printf("Format: mmult_ex bin_mmult_hw.xclbin <DRAM_param_file_path>\n");
+    return EXIT_FAILURE;
+  }
+
+  int number_host;
+  int length_host;
+  int dram_read_en;
+  int dram_write_en;
+  int stride;
+  int bitwidth = 64;
+  int ch_num = ((dram_read_en)&0x1) + ((dram_read_en >> 1) & 0x1) +
+               ((dram_read_en >> 2) & 0x1) + ((dram_read_en >> 3) & 0x1) +
+               ((dram_write_en)&0x1) + ((dram_write_en >> 1) & 0x1) +
+               ((dram_write_en >> 2) & 0x1) + ((dram_write_en >> 3) & 0x1);
+  float seconds;
+  int64_t bytes;
+  printf("------------ DRAM burst BW test -------------\n");
+  number_host = 2048;
+  length_host = 2048;
+  dram_read_en = 0x1;
+  dram_write_en = 0x0;
+  stride = 0;
+  run_test(number_host, length_host, dram_read_en, dram_write_en, stride,
+           bitwidth, &seconds, &bytes);
+  float RBW_GBs = static_cast<float>(bytes) / 1024 / 1024 / 1024 / seconds;
+
+  number_host = 2048;
+  length_host = 2048;
+  dram_read_en = 0x0;
+  dram_write_en = 0x1;
+  stride = 0;
+  run_test(number_host, length_host, dram_read_en, dram_write_en, stride,
+           bitwidth, &seconds, &bytes);
+  float WBW_GBs = static_cast<float>(bytes) / 1024 / 1024 / 1024 / seconds;
+
+  printf("------------ DRAM latency test  -------------\n");
+  number_host = 4194304;
+  length_host = 1;
+  dram_read_en = 0x1;
+  dram_write_en = 0x0;
+  stride = 0;
+  run_test(number_host, length_host, dram_read_en, dram_write_en, stride,
+           bitwidth, &seconds, &bytes);
+  float RLat_ns = seconds * 1000000000 / number_host;
+
+  number_host = 4194304;
+  length_host = 1;
+  dram_read_en = 0x0;
+  dram_write_en = 0x1;
+  stride = 0;
+  run_test(number_host, length_host, dram_read_en, dram_write_en, stride,
+           bitwidth, &seconds, &bytes);
+  float WLat_ns = seconds * 1000000000 / number_host;
+
+  printf("------------ DRAM strided BW test  -------------\n");
+  number_host = 2048;
+  length_host = 2048;
+  dram_read_en = 0x1;
+  dram_write_en = 0x0;
+  stride = 2;
+  run_test(number_host, length_host, dram_read_en, dram_write_en, stride,
+           bitwidth, &seconds, &bytes);
+  float RandLat_ns = seconds * 1000000000 / number_host / length_host;
+
+  FILE *fout = fopen(argv[2], "w");
+  if (fout == NULL) {
+    printf("File %s cannot be opened for writing. Exiting...\n", argv[2]);
+    return EXIT_FAILURE;
+  }
+  //  Generating output json file contatining DRAM parameter
+  printf("{\n");
+  fprintf(fout, "{\n");
+  printf("    \"%s\":{\n", target_device_name);
+  fprintf(fout, "    \"%s\": {\n", target_device_name);
+  printf("        \"RBW_GBs\": \"%f\",\n", RBW_GBs);
+  fprintf(fout, "        \"RBW_GBs\": \"%f\",\n", RBW_GBs);
+  printf("        \"WBW_GBs\": \"%f\",\n", WBW_GBs);
+  fprintf(fout, "        \"WBW_GBs\": \"%f\",\n", WBW_GBs);
+  printf("        \"RLat_ns\": \"%f\",\n", RLat_ns);
+  fprintf(fout, "        \"RLat_ns\": \"%f\",\n", RLat_ns);
+  printf("        \"WLat_ns\": \"%f\",\n", WLat_ns);
+  fprintf(fout, "        \"WLat_ns\": \"%f\",\n", WLat_ns);
+  printf("        \"RandLat_ns\": \"%f\"\n", RandLat_ns);
+  fprintf(fout, "        \"RandLat_ns\": \"%f\"\n", RandLat_ns);
+  printf("    }\n");
+  fprintf(fout, "    }\n");
+  printf("}\n");
+  fprintf(fout, "}\n");
+
+  fclose(fout);
+  printf("DRAM parameter written to %s\n", argv[2]);
+  printf("Please copy the output json file to "
+         "trunk/source-opt/tools/performance_estimation/configuration/ "
+         "directory, and add to git for others to use. Thanks.\n");
+
+  return EXIT_SUCCESS;
+}

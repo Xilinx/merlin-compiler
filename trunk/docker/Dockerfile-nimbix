@@ -1,0 +1,4 @@
+FROM merlin-nimbix-base:latest
+MAINTAINER Tian.Jin tianj@facon-computing.com
+
+ADD . /opt/merlin

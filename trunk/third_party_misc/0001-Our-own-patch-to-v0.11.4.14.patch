@@ -1,0 +1,3345 @@
+From fcd9482de2b73606ebb44368e6edf45c3c13b2fa Mon Sep 17 00:00:00 2001
+From: Gary Bai <guangzebai@falcon-computing.com>
+Date: Thu, 5 Nov 2020 01:49:28 -0500
+Subject: [PATCH] Our own patch to v0.11.4.14
+
+It contains two parts:
+  the patch to work around new issues from v0.11.4.14
+  the partial patch picked from our last upgrade to v0.10.0.30
+---
+ .../CxxCodeGeneration/unparseCxx_expressions.C     |   2 +-
+ .../CxxCodeGeneration/unparseCxx_statements.C      |  83 +---
+ .../languageIndependenceSupport/modified_sage.C    | 119 +----
+ src/backend/unparser/nameQualificationSupport.C    |  10 +
+ src/backend/unparser/nameQualificationSupport.h    |   2 +-
+ .../checkIsCompilerGeneratedFlag.C                 |   4 +-
+ .../checkIsFrontendSpecificFlag.C                  |   8 +-
+ .../checkPhysicalSourcePosition.C                  |   4 +-
+ .../astPostProcessing/fixupDeclarationScope.C      |   1 +
+ .../fixupDefiningAndNondefiningDeclarations.C      |  46 +-
+ .../fixupFunctionDefaultArguments.C                |   8 +
+ .../fixupFunctionDefaultArguments.h                |   3 +-
+ .../astPostProcessing/resetParentPointers.C        | 112 +++--
+ src/frontend/SageIII/sageInterface/sageInterface.C | 132 +++++-
+ src/frontend/SageIII/sageInterface/sageInterface.h |   2 +
+ .../SageIII/sageInterface/sageInterface_type.C     |   3 +-
+ src/frontend/SageIII/sage_support/sage_support.cpp |   4 +-
+ src/frontend/SageIII/virtualCFG/memberFunctions.C  |  11 +-
+ src/midend/astDiagnostics/AstPerformance.C         |   4 +
+ src/midend/astUtil/astInterface/AstInterface.h     |   2 +-
+ .../programAnalysis/defUseAnalysis/DFAFilter.h     |   3 +-
+ .../programAnalysis/defUseAnalysis/DFAnalysis.h    |  15 +-
+ .../defUseAnalysis/DefUseAnalysis.cpp              | 365 ++++++++++++++-
+ .../defUseAnalysis/DefUseAnalysis.h                |  32 +-
+ .../defUseAnalysis/DefUseAnalysisAbstract.cpp      |  22 +-
+ .../defUseAnalysis/DefUseAnalysisAbstract.h        |  26 ++
+ .../defUseAnalysis/DefUseAnalysis_perFunction.cpp  | 490 +++++++++++++++------
+ .../defUseAnalysis/DefUseAnalysis_perFunction.h    |  15 +-
+ .../defUseAnalysis/GlobalVarAnalysis.cpp           |   5 +-
+ .../defUseAnalysis/LivenessAnalysis.cpp            |  61 ++-
+ .../programAnalysis/defUseAnalysis/dfaToDot.cpp    |  53 ++-
+ tutorial/defuseAnalysis.C                          |   1 -
+ tutorial/reductionRecognition.C                    |   1 -
+ 33 files changed, 1179 insertions(+), 470 deletions(-)
+
+diff --git a/src/backend/unparser/CxxCodeGeneration/unparseCxx_expressions.C b/src/backend/unparser/CxxCodeGeneration/unparseCxx_expressions.C
+index 5147fdc..4f2014d 100644
+--- a/src/backend/unparser/CxxCodeGeneration/unparseCxx_expressions.C
++++ b/src/backend/unparser/CxxCodeGeneration/unparseCxx_expressions.C
+@@ -7446,7 +7446,7 @@ Unparse_ExprStmt::unparseAggrInit(SgExpression* expr, SgUnparse_Info& info)
+        // DQ (3/12/2018): Could this be what should drive the introduction of the class name?
+           if (info.inAggregateInitializer() == true)
+              {
+-               curprint("/* Need explicit braces: is this where we insert the class name? */ ");
++               // curprint("/* Need explicit braces: is this where we insert the class name? */ ");
+              }
+ 
+           curprint("{");
+diff --git a/src/backend/unparser/CxxCodeGeneration/unparseCxx_statements.C b/src/backend/unparser/CxxCodeGeneration/unparseCxx_statements.C
+index 9a3be82..645ee41 100644
+--- a/src/backend/unparser/CxxCodeGeneration/unparseCxx_statements.C
++++ b/src/backend/unparser/CxxCodeGeneration/unparseCxx_statements.C
+@@ -5156,23 +5156,7 @@ Unparse_ExprStmt::unparseFuncDeclStmt(SgStatement* stmt, SgUnparse_Info& info)
+ 
+           if (funcdecl_stmt->isExternBrace())
+              {
+-#if 0
+-               printf ("Inside of unparseFuncDeclStmt(): Output extern closing brace \n");
+-               curprint("/* Inside of unparseFuncDeclStmt(): Output extern closing brace */ \n");
+-#endif
+-#if 0
+-            // DQ (8/16/2020): I think that this is redundant with the use of braces on the class containing such extern c declarations.
+-            // These extern brace cases are handled via the CPP preprocessor support.
+-            // curprint(" }");
+-               if (info.get_extern_C_with_braces() == true)
+-                  {
+-                    curprint(" }");
+-                  }
+-
+-            // DQ (8/15/2020): Record when we are in an extern "C" so that we can avoid nesting (see Cxx_tests/test2020_28.C).
+-            // ROSE_ASSERT(info.get_extern_C_with_braces() == true);
+-               info.set_extern_C_with_braces(false);
+-#endif
++               curprint(" }");
+              }
+         }
+        else
+@@ -5541,19 +5525,8 @@ Unparse_ExprStmt::unparseFuncDeclStmt(SgStatement* stmt, SgUnparse_Info& info)
+                   {
+ #if 0
+                     printf ("In Unparse_ExprStmt::unparseFuncDeclStmt(): output extern brace \n");
+-                    curprint("/* Inside of Unparse_ExprStmt::unparseFuncDeclStmt(): Output extern closing brace */ \n");
+-#endif
+-#if 0
+-                 // curprint(" }");
+-                    if (info.get_extern_C_with_braces() == true)
+-                       {
+-                         curprint(" }");
+-                       }
+-
+-                 // DQ (8/15/2020): Record when we are in an extern "C" so that we can avoid nesting (see Cxx_tests/test2020_28.C).
+-                 // ROSE_ASSERT(info.get_extern_C_with_braces() == true);
+-                    info.set_extern_C_with_braces(false);
+ #endif
++                    curprint(" }");
+                   }
+              }
+             else
+@@ -6461,21 +6434,9 @@ Unparse_ExprStmt::unparseMFuncDeclStmt(SgStatement* stmt, SgUnparse_Info& info)
+ 
+           if (mfuncdecl_stmt->isExternBrace())
+              {
+-#if 1
+-               printf ("Inside of unparseMFuncDeclStmt(): Output extern closing brace \n");
+-               curprint("/* Inside of unparseMFuncDeclStmt(): Output extern closing brace */ \n");
+-#endif
+-#if 0
+-            // DQ (8/16/2020): I think that this is redundant with the use of braces on the class containing such extern c declarations.
+-            // These extern brace cases are handled via the CPP preprocessor support.
+                unp->cur.format(mfuncdecl_stmt, info, FORMAT_BEFORE_BASIC_BLOCK2);
+                curprint ( string(" }"));
+                unp->cur.format(mfuncdecl_stmt, info, FORMAT_AFTER_BASIC_BLOCK2);
+-
+-            // DQ (8/15/2020): Record when we are in an extern "C" so that we can avoid nesting (see Cxx_tests/test2020_28.C).
+-            // ROSE_ASSERT(info.get_extern_C_with_braces() == true);
+-               info.set_extern_C_with_braces(false);
+-#endif
+              }
+         }
+        else 
+@@ -6944,19 +6905,7 @@ Unparse_ExprStmt::unparseMFuncDeclStmt(SgStatement* stmt, SgUnparse_Info& info)
+                curprint(";");
+                if (mfuncdecl_stmt->isExternBrace())
+                   {
+-#if 0
+-                    printf ("Inside of unparseMFuncDeclStmt(): Output extern closing brace \n");
+-                    curprint("/* Inside of unparseMFuncDeclStmt(): Output extern closing brace */ \n");
+-#endif
+-#if 0
+-                 // DQ (8/16/2020): I think that this is redundant with the use of braces on the class containing such extern c declarations.
+-                 // These extern brace cases are handled via the CPP preprocessor support.
+                     curprint(" }");
+-
+-                 // DQ (8/15/2020): Record when we are in an extern "C" so that we can avoid nesting (see Cxx_tests/test2020_28.C).
+-                 // ROSE_ASSERT(info.get_extern_C_with_braces() == true);
+-                    info.set_extern_C_with_braces(false);
+-#endif
+                   }
+              }
+             else
+@@ -9137,19 +9086,7 @@ Unparse_ExprStmt::unparseClassDeclStmt(SgStatement* stmt, SgUnparse_Info& info)
+ 
+                if (classdecl_stmt->isExternBrace())
+                   {
+-#if 0
+-                    printf ("Inside of unparseClassDeclStmt(): Output extern closing brace \n");
+-                    curprint("/* Inside of unparseClassDeclStmt(): Output extern closing brace */ \n");
+-#endif
+-#if 0
+-                 // DQ (8/16/2020): I think that this is redundant with the use of braces on the class containing such extern c declarations.
+-                 // These extern brace cases are handled via the CPP preprocessor support.
+                     curprint(" }");
+-
+-                 // DQ (8/15/2020): Record when we are in an extern "C" so that we can avoid nesting (see Cxx_tests/test2020_28.C).
+-                 // ROSE_ASSERT(info.get_extern_C_with_braces() == true);
+-                    info.set_extern_C_with_braces(false);
+-#endif
+                   }
+              }
+         }
+@@ -9829,10 +9766,6 @@ Unparse_ExprStmt::unparseEnumDeclStmt(SgStatement* stmt, SgUnparse_Info& info)
+                if (enum_stmt->isExternBrace())
+                   {
+                     curprint(" }");
+-
+-                 // DQ (8/15/2020): Record when we are in an extern "C" so that we can avoid nesting (see Cxx_tests/test2020_28.C).
+-                 // ROSE_ASSERT(info.get_extern_C_with_braces() == true);
+-                    info.set_extern_C_with_braces(false);
+                   }
+              }
+ #endif
+@@ -9858,19 +9791,7 @@ Unparse_ExprStmt::unparseEnumDeclStmt(SgStatement* stmt, SgUnparse_Info& info)
+           curprint ( string(";"));
+           if (enum_stmt->isExternBrace())
+              {
+-#if 0
+-               printf ("Inside of unparseEnumDeclStmt(): Output extern closing brace \n");
+-               curprint("/* Inside of unparseEnumDeclStmt(): Output extern closing brace */ \n");
+-#endif
+-#if 0
+-            // DQ (8/16/2020): I think that this is redundant with the use of braces on the class containing such extern c declarations.
+-            // These extern brace cases are handled via the CPP preprocessor support.
+                curprint(" }");
+-
+-            // DQ (8/15/2020): Record when we are in an extern "C" so that we can avoid nesting (see Cxx_tests/test2020_28.C).
+-            // ROSE_ASSERT(info.get_extern_C_with_braces() == true);
+-               info.set_extern_C_with_braces(false);
+-#endif
+              }
+         }
+ 
+diff --git a/src/backend/unparser/languageIndependenceSupport/modified_sage.C b/src/backend/unparser/languageIndependenceSupport/modified_sage.C
+index 67c3a4f..07d3067 100644
+--- a/src/backend/unparser/languageIndependenceSupport/modified_sage.C
++++ b/src/backend/unparser/languageIndependenceSupport/modified_sage.C
+@@ -1567,67 +1567,14 @@ Unparse_MOD_SAGE::outputExternLinkageSpecifier ( SgDeclarationStatement* decl_st
+   // if (decl_stmt->get_declarationModifier().get_storageModifier().isExtern() && decl_stmt->get_linkage())
+      if (decl_stmt->get_declarationModifier().get_storageModifier().isExtern() && decl_stmt->get_linkage().empty() == false)
+         {
+-#if DEBUG_EXTERN
+-           printf ("/* output extern keyword */ \n");
+-#endif
+-          if (info.get_extern_C_with_braces() == false)
++          curprint( "extern \"" + decl_stmt->get_linkage() + "\" ");
++          if (decl_stmt->isExternBrace())
+              {
+-            // curprint( "extern \"" + decl_stmt->get_linkage() + "\" ");
+-               if (decl_stmt->isExternBrace() == true)
+-                  {
+-#if DEBUG_EXTERN
+-                    printf ("/* output extern brace */ \n");
+-#endif
+-#if 0
+-                 // DQ (8/16/2020): I think that this is redundant with the use of braces on the class containing such extern c declarations.
+-                 // These extern brace cases are handled via the CPP preprocessor support.
+-                    curprint( "extern \"" + decl_stmt->get_linkage() + "\" ");
+-                    curprint( "{ ");
+-
+-                 // DQ (8/15/2020): Record when we are in an extern "C" so that we can avoid nesting (see Cxx_tests/test2020_28.C).
+-                    ROSE_ASSERT(info.get_extern_C_with_braces() == false);
+-                    info.set_extern_C_with_braces(true);
+-#endif
+-                  }
+-                 else
+-                  {
+-#if DEBUG_EXTERN
+-                    printf ("/* info.get_extern_C_with_braces() == false: output extern keyword only */ \n");
+-#endif
+-                    curprint( "extern \"" + decl_stmt->get_linkage() + "\" ");
+-                  }
+-             }
+-            else
+-             {
+-#if DEBUG_EXTERN
+-               printf ("/* info.get_extern_C_with_braces() == true: output extern keyword only */ \n");
+-#endif
+-            // DQ (8/17/2020): This is required for test2020_37.C but not for test2020_28.C.
+-            // curprint( "extern \"" + decl_stmt->get_linkage() + "\" ");
+-            // curprint( "extern ");
+-            // curprint( "extern /* testing */ ");
+-
+-            // DQ (8/18/2020): friend functions cannot use the extern storage specification.
+-               if (decl_stmt->get_declarationModifier().isFriend() == true)
+-                  {
+-                   /* Suppress the extern keyword */
+-                   // curprint( "/* Suppress the extern keyword */ ");
+-                  }
+-                 else
+-                  {
+-                 // curprint( "extern /* not a friend declaration */ ");
+-                    curprint( "extern ");
+-                  }
++               curprint( "{ ");
+              }
+         }
+-
+-#if DEBUG_EXTERN
+-     printf ("Leaving outputExternLinkageSpecifier() decl_stmt = %p = %s decl_stmt->isExternBrace() = %s \n",decl_stmt,decl_stmt->class_name().c_str(),decl_stmt->isExternBrace() ? "true" : "false");
+-     printf ("   --- info.get_extern_C_with_braces()                                       = %s \n",info.get_extern_C_with_braces() ? "true" : "false");
+-#endif
+    }
+ 
+-
+ void
+ Unparse_MOD_SAGE::outputTemplateSpecializationSpecifier ( SgDeclarationStatement* decl_stmt )
+    {
+@@ -2188,65 +2135,7 @@ Unparse_MOD_SAGE::printSpecifier2(SgDeclarationStatement* decl_stmt, SgUnparse_I
+        // if (isSgTemplateVariableDeclaration(decl_stmt) == NULL)
+           if ( (decl_stmt->get_declarationModifier().isFriend() == false) && (isSgTemplateVariableDeclaration(decl_stmt) == NULL) )
+              {
+-#if 0
+-               printf ("In Unparse_MOD_SAGE::printSpecifier2(): Output the extern keyword \n");
+-#endif
+-            // DQ (9/18/2020): If this is a static variable then Clang does not allow the output of the extern keyword.
+-            // Check if there is a previous declaration associated with this declaration (e.g. in a namespace as an 
+-            // extern declaration, or in a class as a static variable declaration.
+-            // curprint( "extern /* Unparse_MOD_SAGE::printSpecifier2() */ ");
+-            // curprint("extern ");
+-               bool supress_extern_keyword = false;
+-#if 1
+-               SgVariableDeclaration* variableDeclaration = isSgVariableDeclaration(decl_stmt);
+-               if (variableDeclaration != NULL)
+-                  {
+-                    SgInitializedName* initializedName = SageInterface::getFirstInitializedName(variableDeclaration);
+-                    ROSE_ASSERT(initializedName != NULL);
+-                    SgType* initializedName_type = initializedName->get_type();
+-#if 0
+-                    printf ("initializedName       = %p name = %s \n",initializedName,initializedName->get_name().str());
+-                    printf ("initializedName_type  = %p = %s \n",initializedName_type,initializedName_type->class_name().c_str());
+-#endif
+-                 // Clang does not allow the use of extern on classes when the there is static declaration in the class 
+-                 // (see Cxx11_tests/test2020_96.C for an example, also test2020_97.C and test2020_98.C).
+-                 // SgClassType* classType = isSgClassType(initializedName_type);
+-                 // if (classType == NULL)
+-                    SgNamedType* namedType = isSgNamedType(initializedName_type);
+-                    if (namedType == NULL)
+-                       {
+-                         SgInitializedName* previous_initializedName = initializedName->get_prev_decl_item();
+-                         if (previous_initializedName != NULL)
+-                            {
+-#if 0
+-                              printf ("Found previous_initializedName = %p name = %s \n",previous_initializedName,previous_initializedName->get_name().str());
+-#endif
+-                           // supress_extern_keyword = true;
+-
+-                           // Check if the parent variable declaration is for a static variable declaration and if so then suppress the output of the extern keyword.
+-                              SgVariableDeclaration* previous_variableDeclaration = isSgVariableDeclaration(previous_initializedName->get_parent());
+-                              if (variableDeclaration != NULL)
+-                                 {
+-#if 0
+-                                   printf ("Found previous_variableDeclaration->get_declarationModifier().get_storageModifier().isStatic() = %s \n",
+-                                        previous_variableDeclaration->get_declarationModifier().get_storageModifier().isStatic() ? "true" : "false");
+-#endif
+-                                   if (previous_variableDeclaration->get_declarationModifier().get_storageModifier().isStatic() == true)
+-                                      {
+-                                        supress_extern_keyword = true;
+-                                      }
+-                                 }
+-                            }
+-                       }
+-                  }
+-#endif
+-
+-               if (supress_extern_keyword == false)
+-                  {
+-                 // curprint( "extern /* Unparse_MOD_SAGE::printSpecifier2() */ ");
+-                    curprint("extern ");
+-                  }
+-
++               curprint("extern ");
+              }
+         }
+ 
+diff --git a/src/backend/unparser/nameQualificationSupport.C b/src/backend/unparser/nameQualificationSupport.C
+index 4f0d44c..c3c9d17 100644
+--- a/src/backend/unparser/nameQualificationSupport.C
++++ b/src/backend/unparser/nameQualificationSupport.C
+@@ -152,6 +152,7 @@ NameQualificationTraversal::generateNestedTraversalWithExplicitScope( SgNode* no
+ 
+   // Call the traversal.
+      t.traverse(node,ih);
++     t.declarationSet = NULL;
+ 
+ #if 0
+      mfprintf(mlog [ WARN ] ) ("**************************************************************** \n");
+@@ -342,6 +343,15 @@ NameQualificationTraversal::NameQualificationTraversal(
+      declarationSet = NULL;
+    }
+ 
++NameQualificationTraversal::~NameQualificationTraversal() 
++{
++  if (declarationSet) {
++    delete declarationSet;
++    declarationSet = NULL;
++  }
++  
++
++}
+ 
+ // DQ (5/28/2011): Added support to set the static global qualified name map in SgNode.
+ const std::map<SgNode*,std::string> &
+diff --git a/src/backend/unparser/nameQualificationSupport.h b/src/backend/unparser/nameQualificationSupport.h
+index a3c1db8..2f3a70a 100644
+--- a/src/backend/unparser/nameQualificationSupport.h
++++ b/src/backend/unparser/nameQualificationSupport.h
+@@ -196,7 +196,7 @@ class NameQualificationTraversal : public AstTopDownBottomUpProcessing<NameQuali
+      public:
+        // HiddenListTraversal();
+        // HiddenListTraversal(SgNode* root);
+-
++          ~NameQualificationTraversal();
+        // DQ (9/7/2014): Modified to handle template header map (for template declarations).
+           NameQualificationTraversal(std::map<SgNode*,std::string> & input_qualifiedNameMapForNames,
+                                      std::map<SgNode*,std::string> & input_qualifiedNameMapForTypes,
+diff --git a/src/frontend/SageIII/astPostProcessing/checkIsCompilerGeneratedFlag.C b/src/frontend/SageIII/astPostProcessing/checkIsCompilerGeneratedFlag.C
+index 8170dd5..57236d5 100644
+--- a/src/frontend/SageIII/astPostProcessing/checkIsCompilerGeneratedFlag.C
++++ b/src/frontend/SageIII/astPostProcessing/checkIsCompilerGeneratedFlag.C
+@@ -16,7 +16,9 @@ checkIsCompilerGeneratedFlag(SgNode *ast)
+             SgLocatedNode *located = isSgLocatedNode(node);
+             if (located) {
+                 fix(located, located->get_file_info());
+-                fix(located, located->generateMatchingFileInfo());
++                Sg_File_Info *new_info = located->generateMatchingFileInfo();
++                fix(located, new_info);
++                delete new_info;
+                 fix(located, located->get_startOfConstruct());
+                 fix(located, located->get_endOfConstruct());
+             }
+diff --git a/src/frontend/SageIII/astPostProcessing/checkIsFrontendSpecificFlag.C b/src/frontend/SageIII/astPostProcessing/checkIsFrontendSpecificFlag.C
+index e6305e9..38509dc 100644
+--- a/src/frontend/SageIII/astPostProcessing/checkIsFrontendSpecificFlag.C
++++ b/src/frontend/SageIII/astPostProcessing/checkIsFrontendSpecificFlag.C
+@@ -18,18 +18,20 @@ checkIsFrontendSpecificFlag(SgNode *ast)
+             SgLocatedNode *located = isSgLocatedNode(node);
+             if (located) {
+                 bool in_fes_ast = fes_ast!=NULL ||
+-                                  is_frontend_specific(located->get_file_info()) ||
+-                                  is_frontend_specific(located->generateMatchingFileInfo()) ||
++                                  is_frontend_specific(located->get_file_info());
++                Sg_File_Info *new_file_info = located->generateMatchingFileInfo();
++                in_fes_ast     |= is_frontend_specific(new_file_info) ||
+                                   is_frontend_specific(located->get_startOfConstruct()) ||
+                                   is_frontend_specific(located->get_endOfConstruct());
+                 if (in_fes_ast) {
+                     if (!fes_ast)
+                         fes_ast = node;
+                     fix(located, located->get_file_info());
+-                    fix(located, located->generateMatchingFileInfo());
++                    fix(located, new_file_info);
+                     fix(located, located->get_startOfConstruct());
+                     fix(located, located->get_endOfConstruct());
+                 }
++                delete new_file_info;
+             }
+         }
+ 
+diff --git a/src/frontend/SageIII/astPostProcessing/checkPhysicalSourcePosition.C b/src/frontend/SageIII/astPostProcessing/checkPhysicalSourcePosition.C
+index 2477a37..77484c3 100644
+--- a/src/frontend/SageIII/astPostProcessing/checkPhysicalSourcePosition.C
++++ b/src/frontend/SageIII/astPostProcessing/checkPhysicalSourcePosition.C
+@@ -19,7 +19,9 @@ checkPhysicalSourcePosition(SgNode *ast)
+                if (located)
+                   {
+                     check(located, located->get_file_info());
+-                    check(located, located->generateMatchingFileInfo());
++                    Sg_File_Info *new_info = located->generateMatchingFileInfo();
++                    check(located, new_info);
++                    delete new_info;
+                     check(located, located->get_startOfConstruct());
+                     check(located, located->get_endOfConstruct());
+                   }
+diff --git a/src/frontend/SageIII/astPostProcessing/fixupDeclarationScope.C b/src/frontend/SageIII/astPostProcessing/fixupDeclarationScope.C
+index 0c5b2f0..0571cfc 100644
+--- a/src/frontend/SageIII/astPostProcessing/fixupDeclarationScope.C
++++ b/src/frontend/SageIII/astPostProcessing/fixupDeclarationScope.C
+@@ -102,6 +102,7 @@ void fixupAstDeclarationScope( SgNode* node )
+ 
+                j++;
+              }
++          delete declarationSet;
+ 
+           i++;
+         }
+diff --git a/src/frontend/SageIII/astPostProcessing/fixupDefiningAndNondefiningDeclarations.C b/src/frontend/SageIII/astPostProcessing/fixupDefiningAndNondefiningDeclarations.C
+index 727f9f9..47b6a07 100644
+--- a/src/frontend/SageIII/astPostProcessing/fixupDefiningAndNondefiningDeclarations.C
++++ b/src/frontend/SageIII/astPostProcessing/fixupDefiningAndNondefiningDeclarations.C
+@@ -157,7 +157,8 @@ FixupAstDefiningAndNondefiningDeclarations::visit ( SgNode* node )
+                   {
+                     if (nondefiningClassDeclaration->get_fixupScope() == true)
+                        {
+-                         mfprintf(mlog[WARN])("nondefiningClassDeclaration = %p = %s = %s \n",
++                         if (SgProject::get_verbose() >= 3)
++                           mfprintf(mlog[WARN])("nondefiningClassDeclaration = %p = %s = %s \n",
+                               nondefiningClassDeclaration,
+                               nondefiningClassDeclaration->class_name().c_str(),
+                               SageInterface::get_name(nondefiningClassDeclaration).c_str());
+@@ -167,7 +168,8 @@ FixupAstDefiningAndNondefiningDeclarations::visit ( SgNode* node )
+ 
+                     if (nondefiningClassDeclaration->get_fixupScope() == true)
+                        {
+-                         mfprintf(mlog[WARN]) ("Error: nondefiningClassDeclaration = %p = %s get_fixupScope() == false \n",nondefiningClassDeclaration,nondefiningClassDeclaration->get_name().str());
++                         if (SgProject::get_verbose() >= 3)
++                           mfprintf(mlog[WARN]) ("Error: nondefiningClassDeclaration = %p = %s get_fixupScope() == false \n",nondefiningClassDeclaration,nondefiningClassDeclaration->get_name().str());
+                        }
+                     ROSE_ASSERT(nondefiningClassDeclaration->get_fixupScope() == false);
+                   }
+@@ -247,7 +249,8 @@ FixupAstDefiningAndNondefiningDeclarations::visit ( SgNode* node )
+                                  {
+ #if PRINT_DEVELOPER_WARNINGS
+                                 // Not sure if this is an error or not.
+-                                   mfprintf(mlog[WARN]) ("Warning: skipped insert of symbolToMove = %p = %s = %s into newScope = %p (symbolToMove already exists) \n",
++                                   if (SgProject::get_verbose() >= 3)
++                                     mfprintf(mlog[WARN]) ("Warning: skipped insert of symbolToMove = %p = %s = %s into newScope = %p (symbolToMove already exists) \n",
+                                         symbolToMove,symbolToMove->class_name().c_str(),symbolToMove->get_name().str(),definingScope);
+ #endif
+                                 // DQ (3/5/2007): Note that it is OK to have multiple references to a symbol, but
+@@ -285,7 +288,8 @@ FixupAstDefiningAndNondefiningDeclarations::visit ( SgNode* node )
+                  // DEBUG_SAGE_ACCESS_FUNCTIONS_ASSERTION in sage3.h indicate this is required.
+                     if (firstNondefiningDeclaration->get_scope() != NULL)
+                        {
+-                         mfprintf(mlog[WARN]) ("Note in FixupAstDefiningAndNondefiningDeclarations::visit(): overwriting firstNondefiningDeclaration = %p firstNondefiningDeclaration->get_scope() = %p with NULL before assignment to definingScope = %p \n",
++                         if (SgProject::get_verbose() >= 3)
++                           mfprintf(mlog[WARN]) ("Note in FixupAstDefiningAndNondefiningDeclarations::visit(): overwriting firstNondefiningDeclaration = %p firstNondefiningDeclaration->get_scope() = %p with NULL before assignment to definingScope = %p \n",
+                               firstNondefiningDeclaration,firstNondefiningDeclaration->get_scope(),definingScope);
+                          firstNondefiningDeclaration->set_scope(NULL);
+                        }
+@@ -346,7 +350,8 @@ FixupAstDefiningAndNondefiningDeclarations::visit ( SgNode* node )
+                            // templateClassInstantiation->set_parent(classType);
+                               if (templateClassInstantiation->get_parent() == NULL)
+                                  {
+-                                   mfprintf(mlog[WARN]) ("Resetting the parent of the templateClassInstantiation = %p = %s to its SgClassType \n",
++                                   if (SgProject::get_verbose() >= 3)
++                                     mfprintf(mlog[WARN]) ("Resetting the parent of the templateClassInstantiation = %p = %s to its SgClassType \n",
+                                         templateClassInstantiation,templateClassInstantiation->get_name().str());
+                                    templateClassInstantiation->set_parent(classType);
+                                  }
+@@ -354,7 +359,8 @@ FixupAstDefiningAndNondefiningDeclarations::visit ( SgNode* node )
+                                  {
+ #if 0
+                                 // DQ (12/22/2019): Comment out output spew from multiple files on the command line seeing the same class definitions (no longer shared across files).
+-                                   mfprintf(mlog[WARN]) ("templateClassInstantiation parent is already set, skip resetting it to SgClassType \n");
++                                   if (SgProject::get_verbose() >= 3)
++                                     mfprintf(mlog[WARN]) ("templateClassInstantiation parent is already set, skip resetting it to SgClassType \n");
+ #endif
+                                  }
+ 
+@@ -395,7 +401,8 @@ FixupAstDefiningAndNondefiningDeclarations::visit ( SgNode* node )
+                       // Make sure that the statement is in the list...
+                          if (std::find(statementList.begin(),statementList.end(),firstNondefiningDeclaration) == statementList.end())
+                             {
+-                              mfprintf(mlog[WARN]) ("##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = %p = %s not in child list of scope = %p = %s \n",
++                              if (SgProject::get_verbose() >= 3)
++                                mfprintf(mlog[WARN]) ("##### WARNING: in FixupAstDefiningAndNondefiningDeclarations::visit() statement = %p = %s not in child list of scope = %p = %s \n",
+                                    firstNondefiningDeclaration,firstNondefiningDeclaration->class_name().c_str(),
+                                    firstNondefiningDeclarationScope,firstNondefiningDeclarationScope->class_name().c_str());
+                               SgClassDeclaration* classDeclaration = isSgClassDeclaration(firstNondefiningDeclaration);
+@@ -505,15 +512,19 @@ FixupAstDefiningAndNondefiningDeclarations::visit ( SgNode* node )
+ 
+             // if (declaration->get_scope() != definingDeclaration->get_scope())
+                if (declaration->hasExplicitScope() == true && declaration->get_scope() != definingDeclaration->get_scope())
+-                  {
+-                    mfprintf(mlog[WARN]) ("declaration         = %p = %s \n",declaration,SageInterface::get_name(declaration).c_str());
+-                    mfprintf(mlog[WARN]) ("definingDeclaration = %p = %s \n",definingDeclaration,SageInterface::get_name(definingDeclaration).c_str());
+-                    mfprintf(mlog[WARN]) ("Error: declaration->get_scope() = %p definingDeclaration->get_scope() = %p \n",declaration->get_scope(),definingDeclaration->get_scope());
+-                    if (declaration->get_scope() != NULL)
+-                         mfprintf(mlog[WARN]) ("declaration->get_scope() = %s \n",declaration->get_scope()->class_name().c_str());
+-                    if (definingDeclaration->get_scope() != NULL)
+-                         mfprintf(mlog[WARN]) ("definingDeclaration->get_scope() = %s \n",definingDeclaration->get_scope()->class_name().c_str());
+-                  }
++               {
++                 if (SgProject::get_verbose() >= 3) {
++                   mfprintf(mlog[WARN]) ("declaration         = %p = %s \n",declaration,SageInterface::get_name(declaration).c_str());
++                   mfprintf(mlog[WARN]) ("definingDeclaration = %p = %s \n",definingDeclaration,SageInterface::get_name(definingDeclaration).c_str());
++                   mfprintf(mlog[WARN]) ("Error: declaration->get_scope() = %p definingDeclaration->get_scope() = %p \n",declaration->get_scope(),definingDeclaration->get_scope());
++                 }
++                 if (declaration->get_scope() != NULL)
++                   if (SgProject::get_verbose() >= 3)
++                     mfprintf(mlog[WARN]) ("declaration->get_scope() = %s \n",declaration->get_scope()->class_name().c_str());
++                 if (definingDeclaration->get_scope() != NULL)
++                   if (SgProject::get_verbose() >= 3)
++                     mfprintf(mlog[WARN]) ("definingDeclaration->get_scope() = %s \n",definingDeclaration->get_scope()->class_name().c_str());
++               }
+                ROSE_ASSERT(declaration->hasExplicitScope() == false || declaration->get_scope() == definingDeclaration->get_scope());
+ 
+                if (firstNondefiningDeclaration != NULL)
+@@ -536,7 +547,8 @@ FixupAstDefiningAndNondefiningDeclarations::visit ( SgNode* node )
+                     if (declaration->hasExplicitScope() == true)
+                        {
+ #if 1
+-                         mfprintf(mlog[WARN]) ("Resetting scope (declaration->hasExplicitScope() == true) of declaration = %p = %s old scope = %p = %s new scope = %p = %s \n",
++                         if (SgProject::get_verbose() >= 3)
++                           mfprintf(mlog[WARN]) ("Resetting scope (declaration->hasExplicitScope() == true) of declaration = %p = %s old scope = %p = %s new scope = %p = %s \n",
+                               declaration,declaration->class_name().c_str(),
+                               declaration->get_scope(),declaration->get_scope()->class_name().c_str(),
+                               firstNondefiningDeclaration->get_scope(),firstNondefiningDeclaration->get_scope()->class_name().c_str());
+diff --git a/src/frontend/SageIII/astPostProcessing/fixupFunctionDefaultArguments.C b/src/frontend/SageIII/astPostProcessing/fixupFunctionDefaultArguments.C
+index ac5aef0..8a8e795 100644
+--- a/src/frontend/SageIII/astPostProcessing/fixupFunctionDefaultArguments.C
++++ b/src/frontend/SageIII/astPostProcessing/fixupFunctionDefaultArguments.C
+@@ -206,6 +206,14 @@ FixupFunctionDefaultArguments::FixupFunctionDefaultArguments(SgSourceFile* file)
+    {
+    }
+ 
++FixupFunctionDefaultArguments::~FixupFunctionDefaultArguments() {
++  std::map<SgFunctionDeclaration*,SetStructure*>::iterator I = mapOfSetsOfFunctionDeclarations.begin();
++  while (I != mapOfSetsOfFunctionDeclarations.end()) {
++    delete I->second;
++    ++I;
++  }
++  mapOfSetsOfFunctionDeclarations.clear();
++}
+ 
+ FixupFunctionDefaultArgumentsInheritedAttribute
+ FixupFunctionDefaultArguments::evaluateInheritedAttribute ( SgNode* node, FixupFunctionDefaultArgumentsInheritedAttribute inheritedAttribute )
+diff --git a/src/frontend/SageIII/astPostProcessing/fixupFunctionDefaultArguments.h b/src/frontend/SageIII/astPostProcessing/fixupFunctionDefaultArguments.h
+index 774ac9d..e5e6e6b 100644
+--- a/src/frontend/SageIII/astPostProcessing/fixupFunctionDefaultArguments.h
++++ b/src/frontend/SageIII/astPostProcessing/fixupFunctionDefaultArguments.h
+@@ -30,7 +30,8 @@ class FixupFunctionDefaultArguments
+ 
+       //! Constructor to provide access to file's backend specific template instantiation options
+           FixupFunctionDefaultArguments(SgSourceFile* file);
+- 
++
++          virtual ~FixupFunctionDefaultArguments();
+       //! Required traversal function
+           FixupFunctionDefaultArgumentsInheritedAttribute
+                evaluateInheritedAttribute ( SgNode* node, FixupFunctionDefaultArgumentsInheritedAttribute inheritedAttribute );
+diff --git a/src/frontend/SageIII/astPostProcessing/resetParentPointers.C b/src/frontend/SageIII/astPostProcessing/resetParentPointers.C
+index e1a0a50..64566d5 100644
+--- a/src/frontend/SageIII/astPostProcessing/resetParentPointers.C
++++ b/src/frontend/SageIII/astPostProcessing/resetParentPointers.C
+@@ -179,13 +179,15 @@ ResetParentPointers::resetParentPointersInDeclaration (SgDeclarationStatement* d
+             // declaration (for the current object declared).  In this case set the parent to be 
+             // the parent passed in as a parameter to this function.
+ 
+-               printf ("In ResetParentPointers::resetParentPointersInDeclaration(): using the inputParent = %p = %s = %s as a parent for declaration \n",inputParent,inputParent->class_name().c_str(),SageInterface::get_name(inputParent).c_str());
++               if (SgProject::get_verbose() >= 3)
++                 printf ("In ResetParentPointers::resetParentPointersInDeclaration(): using the inputParent = %p = %s = %s as a parent for declaration \n",inputParent,inputParent->class_name().c_str(),SageInterface::get_name(inputParent).c_str());
+                parent = inputParent;
+              }
+ 
+           ROSE_ASSERT(parent != NULL);
+ #if DEBUG_PARENT_INITIALIZATION || 0
+-          printf ("parent of declaration = %p = %s = %s (defining or non-defining) is %p = %s \n",
++          if (SgProject::get_verbose() >= 3)
++            printf ("parent of declaration = %p = %s = %s (defining or non-defining) is %p = %s \n",
+                declaration,declaration->class_name().c_str(),SageInterface::get_name(declaration).c_str(),
+                parent,parent->class_name().c_str());
+ #endif
+@@ -228,14 +230,16 @@ ResetParentPointers::resetParentPointersInDeclaration (SgDeclarationStatement* d
+           if (nondefiningDeclaration != NULL && nondefiningDeclaration->get_parent() == NULL)
+              {
+ #if DEBUG_PARENT_INITIALIZATION
+-               printf ("AST Fixup: Setting parent of nondefiningDeclaration = %p = %s (to parent = %p = %s) \n",
++               if (SgProject::get_verbose() >= 3)
++                 printf ("AST Fixup: Setting parent of nondefiningDeclaration = %p = %s (to parent = %p = %s) \n",
+                     nondefiningDeclaration,nondefiningDeclaration->class_name().c_str(),
+                     parent,parent->class_name().c_str());
+ #endif
+                if (nondefiningDeclaration->get_parent() != NULL)
+                   {
+ #if DEBUG_PARENT_INITIALIZATION
+-                    printf ("Existing parent is already set to = %p = %s \n",
++                    if (SgProject::get_verbose() >= 3)
++                      printf ("Existing parent is already set to = %p = %s \n",
+                          nondefiningDeclaration->get_parent(),nondefiningDeclaration->get_parent()->class_name().c_str());
+                     nondefiningDeclaration->get_file_info()->display("Called from reset parent: nondefiningDeclaration");
+                     isSgLocatedNode(nondefiningDeclaration->get_parent())->get_file_info()->display("Called from reset parent: parent");
+@@ -256,7 +260,8 @@ ResetParentPointers::resetParentPointersInDeclaration (SgDeclarationStatement* d
+      if (declaration->get_parent() == NULL)
+         {
+ #if DEBUG_PARENT_INITIALIZATION
+-          printf ("AST Fixup: Setting parent of declaration = %p = %s (to parent = %p = %s) \n",
++          if (SgProject::get_verbose() >= 3)
++            printf ("AST Fixup: Setting parent of declaration = %p = %s (to parent = %p = %s) \n",
+                declaration,declaration->class_name().c_str(),
+                parent,parent->class_name().c_str());
+ #endif
+@@ -290,7 +295,8 @@ ResetParentPointers::resetParentPointersInDeclaration (SgDeclarationStatement* d
+                if (classDeclaration->get_definition()->get_parent() == NULL)
+                   {
+ #if DEBUG_PARENT_INITIALIZATION
+-                    printf ("Setting the parent of the class definition, since it has not yet been set. \n");
++                    if (SgProject::get_verbose() >= 3)
++                      printf ("Setting the parent of the class definition, since it has not yet been set. \n");
+ #endif
+                     classDeclaration->get_definition()->set_parent(classDeclaration);
+                   }
+@@ -363,7 +369,8 @@ ResetParentPointers::resetParentPointersInType (SgType* typeNode, SgNode* previo
+                if (declarationStatement->get_parent() == NULL)
+                   {
+ #if DEBUG_PARENT_INITIALIZATION
+-                    printf ("AST Fixup: in declarationStatement = %p = %s parent unset, set parent = %p = %s \n",
++                    if (SgProject::get_verbose() >= 3)
++                      printf ("AST Fixup: in declarationStatement = %p = %s parent unset, set parent = %p = %s \n",
+                               declarationStatement,declarationStatement->class_name().c_str(),
+                               previousNode,previousNode->class_name().c_str());
+ #endif
+@@ -385,7 +392,8 @@ ResetParentPointers::resetParentPointersInType (SgType* typeNode, SgNode* previo
+ #ifndef _MSC_VER
+ // DQ (11/28/2009): fatal error C1017: invalid integer constant expression
+ #if PRINT_SIDE_EFFECT_WARNINGS || DEBUG_PARENT_INITIALIZATION
+-                         printf ("Note: It would be better to set the parent of the class definition in the EDG/Sage connection (I think) \n");
++                         if (SgProject::get_verbose() >= 3)
++                           printf ("Note: It would be better to set the parent of the class definition in the EDG/Sage connection (I think) \n");
+ #endif
+ #endif
+                          if (classDeclaration->get_definingDeclaration() != NULL)
+@@ -578,6 +586,7 @@ ResetParentPointers::resetParentPointersInTemplateArgumentList ( const SgTemplat
+                                  }
+ 
+                               if (existingParent == NULL)
++                                if (SgProject::get_verbose() >= 3)
+                                  {
+                                    printf ("namedType   = %p = %s \n",namedType,namedType->class_name().c_str());
+                                    printf ("declaration = %p = %s \n",declaration,declaration->class_name().c_str());
+@@ -588,7 +597,8 @@ ResetParentPointers::resetParentPointersInTemplateArgumentList ( const SgTemplat
+                               if (existingParent != NULL)
+                                  {
+ #if DEBUG_PARENT_INITIALIZATION
+-                                   printf ("Setting parent of %p = %s to %p = %s \n",
++                                   if (SgProject::get_verbose() >= 3)
++                                     printf ("Setting parent of %p = %s to %p = %s \n",
+                                         declaration,declaration->class_name().c_str(),
+                                         existingParent,existingParent->class_name().c_str());
+ #endif
+@@ -605,8 +615,10 @@ ResetParentPointers::resetParentPointersInTemplateArgumentList ( const SgTemplat
+                                            {
+ // DQ (9/12/2014): Added more control over output of messages for release versions of ROSE.
+ #if PRINT_DEVELOPER_WARNINGS
+-                                             printf ("WARNING: In resetParentPointersInTemplateArgumentList(): commented out to compile ROSE using ROSE: assertion failing for: classDeclaration->get_definition() != NULL \n");
+-                                             printf ("--- classDeclaration = %p = %s = %s \n",classDeclaration,classDeclaration->class_name().c_str(),classDeclaration->get_name().str());
++                                             if (SgProject::get_verbose() >= 3) {
++                                               printf ("WARNING: In resetParentPointersInTemplateArgumentList(): commented out to compile ROSE using ROSE: assertion failing for: classDeclaration->get_definition() != NULL \n");
++                                               printf ("--- classDeclaration = %p = %s = %s \n",classDeclaration,classDeclaration->class_name().c_str(),classDeclaration->get_name().str());
++                                             }
+                                           // classDeclaration->get_file_info()->display("assertion failing for: classDeclaration->get_definition() != NULL: debug");
+ #endif
+                                            }
+@@ -618,7 +630,8 @@ ResetParentPointers::resetParentPointersInTemplateArgumentList ( const SgTemplat
+                                  }
+                                 else
+                                  {
+-                                   printf ("WARNING: In new EDG 4.x support I want to allow some paraents to be NULL. \n");
++                                   if (SgProject::get_verbose() >= 3)
++                                     printf ("WARNING: In new EDG 4.x support I want to allow some paraents to be NULL. \n");
+                                  }
+                             }
+ 
+@@ -656,7 +669,8 @@ ResetParentPointers::resetParentPointersInTemplateArgumentList ( const SgTemplat
+                          if (argumentExpression->get_parent() == NULL)
+                             {
+ #if DEBUG_PARENT_INITIALIZATION
+-                               printf ("Setting parent in SgTemplateArgument::nontype_argument = %p = %s \n",argumentExpression,argumentExpression->class_name().c_str());
++                               if (SgProject::get_verbose() >= 3)
++                                 printf ("Setting parent in SgTemplateArgument::nontype_argument = %p = %s \n",argumentExpression,argumentExpression->class_name().c_str());
+ #endif
+                               argumentExpression->set_parent(*i);
+                             }
+@@ -669,7 +683,8 @@ ResetParentPointers::resetParentPointersInTemplateArgumentList ( const SgTemplat
+                          if (argumentInitializedName->get_parent() == NULL)
+                             {
+ #if DEBUG_PARENT_INITIALIZATION
+-                               printf ("Setting parent in SgTemplateArgument::nontype_argument = %p = %s \n",argumentInitializedName,argumentInitializedName->class_name().c_str());
++                               if (SgProject::get_verbose() >= 3)
++                                  printf ("Setting parent in SgTemplateArgument::nontype_argument = %p = %s \n",argumentInitializedName,argumentInitializedName->class_name().c_str());
+ #endif
+                               argumentInitializedName->set_parent(*i);
+                             }
+@@ -937,7 +952,8 @@ ResetParentPointers::evaluateInheritedAttribute (
+                   }
+ #else
+ #if DEBUG_PARENT_INITIALIZATION
+-               printf ("AST Fixup: Setting parent of node = %p = %s (to parent = %p = %s) \n",
++               if (SgProject::get_verbose() >= 3)
++                 printf ("AST Fixup: Setting parent of node = %p = %s (to parent = %p = %s) \n",
+                     node,node->class_name().c_str(),
+                     inheritedAttribute.parentNode,inheritedAttribute.parentNode->class_name().c_str());
+ #endif
+@@ -965,7 +981,8 @@ ResetParentPointers::evaluateInheritedAttribute (
+                  // DQ (10/21/2004): This is relaxed to allow setting of parent pointers from manually constructed code!
+ #if STRICT_ERROR_CHECKING
+                  // Only SgProject and SgFile can be root nodes after EDG->SAGE translation
+-                    printf ("Warning: only SgProject and SgFile can be root nodes after EDG->SAGE translation \n");
++                    if (SgProject::get_verbose() >= 3)
++                      printf ("Warning: only SgProject and SgFile can be root nodes after EDG->SAGE translation \n");
+                     ROSE_ABORT();
+ #endif
+                   }
+@@ -1020,7 +1037,8 @@ ResetParentPointers::evaluateInheritedAttribute (
+                     if (templateDeclaration == NULL)
+                        {
+ #ifdef ROSE_DEBUG_NEW_EDG_ROSE_CONNECTION
+-                         printf ("WARNING: templateInstantiation->get_templateDeclaration() == NULL templateInstantiation = %p = %s \n",templateInstantiation,templateInstantiation->class_name().c_str());
++                         if (SgProject::get_verbose() >= 3)
++                           printf ("WARNING: templateInstantiation->get_templateDeclaration() == NULL templateInstantiation = %p = %s \n",templateInstantiation,templateInstantiation->class_name().c_str());
+ #endif
+                        }
+                  // DQ (5/3/2012): commented out for the new EDG 4.3 support.
+@@ -1085,7 +1103,8 @@ ResetParentPointers::evaluateInheritedAttribute (
+ 
+                     if (variableSymbol == NULL)
+                        {
+-                         printf ("WARNING: variableSymbol == NULL: variableRefExpression = %p \n",variableRefExpression);
++                         if (SgProject::get_verbose() >= 3)
++                           printf ("WARNING: variableSymbol == NULL: variableRefExpression = %p \n",variableRefExpression);
+                        }
+                     ROSE_ASSERT(variableSymbol != NULL);
+ 
+@@ -1112,9 +1131,10 @@ ResetParentPointers::evaluateInheritedAttribute (
+                            // Set the parent to be the SgVarRefExp (since setting it to the
+                            // symbol would not productive, because symbols can be shared!)
+ #if DEBUG_PARENT_INITIALIZATION
+-                              printf ("Setting parent of %p = %s to %p = %s \n",
+-                                   initializedName,initializedName->class_name().c_str(),
+-                                   variableRefExpression,variableRefExpression->class_name().c_str());
++                         if (SgProject::get_verbose() >= 3)
++                           printf ("Setting parent of %p = %s to %p = %s \n",
++                              initializedName,initializedName->class_name().c_str(),
++                              variableRefExpression,variableRefExpression->class_name().c_str());
+ #endif
+                               initializedName->set_parent(variableRefExpression);
+                             }
+@@ -1139,7 +1159,8 @@ ResetParentPointers::evaluateInheritedAttribute (
+                     if (initializedName->get_parent() == NULL)
+                        {
+ #if DEBUG_PARENT_INITIALIZATION
+-                         printf ("Warning Resetting the parent (previously NULL) of a SgInitializedName object! \n");
++                         if (SgProject::get_verbose() >= 3)
++                           printf ("Warning Resetting the parent (previously NULL) of a SgInitializedName object! \n");
+ #endif
+                          initializedName->set_parent(inheritedAttribute.parentNode);
+                        }
+@@ -1203,10 +1224,12 @@ ResetParentPointers::evaluateInheritedAttribute (
+                       // This can sometimes have a null parent (test2005_67.C) (for non-static member)
+                          if (previousInitializedName->get_parent() == NULL)
+                             {
+-                              printf ("Warning (previousInitializedName->get_parent() == NULL): initializedName = %p previousInitializedName = %p get_name() = %s \n",
++                              if (SgProject::get_verbose() >= 3)
++                                printf ("Warning (previousInitializedName->get_parent() == NULL): initializedName = %p previousInitializedName = %p get_name() = %s \n",
+                                       initializedName,previousInitializedName,previousInitializedName->get_name().str());
+                               ROSE_ASSERT(previousInitializedName->get_scope() != NULL);
+-                              printf ("--- previousInitializedName->get_scope() = %p = %s \n",
++                              if (SgProject::get_verbose() >= 3)
++                                printf ("--- previousInitializedName->get_scope() = %p = %s \n",
+                                       previousInitializedName->get_scope(),previousInitializedName->get_scope()->class_name().c_str());
+                             }
+                       // DQ (2/12/2011): Commented out to support generation of graph to debug test2011_08.C, this test codes 
+@@ -1230,7 +1253,8 @@ ResetParentPointers::evaluateInheritedAttribute (
+                     if (classDeclaration != NULL && classDeclaration->get_parent() == NULL)
+                        {
+ #if DEBUG_PARENT_INITIALIZATION
+-                         printf ("Setting parent of class declaration = %p found in SgInitializedName \n",classDeclaration);
++                         if (SgProject::get_verbose() >= 3)
++                           printf ("Setting parent of class declaration = %p found in SgInitializedName \n",classDeclaration);
+ #endif
+                          ROSE_ASSERT(classDeclaration->get_firstNondefiningDeclaration() != NULL);
+                          ROSE_ASSERT(classDeclaration->get_firstNondefiningDeclaration()->get_parent() != NULL);
+@@ -1271,7 +1295,8 @@ ResetParentPointers::evaluateInheritedAttribute (
+                               if (classDeclaration->get_parent() == NULL)
+                                  {
+ #if DEBUG_PARENT_INITIALIZATION
+-                                   printf ("Setting parent of class declaration found in return type of function \n");
++                                   if (SgProject::get_verbose() >= 3)
++                                     printf ("Setting parent of class declaration found in return type of function \n");
+ #endif
+                                    classDeclaration->set_parent(functionDeclaration);
+                                  }
+@@ -1287,8 +1312,10 @@ ResetParentPointers::evaluateInheritedAttribute (
+                                       {
+ // DQ (9/12/2014): Added more control over output of messages for release versions of ROSE.
+ #if PRINT_DEVELOPER_WARNINGS
+-                                        printf ("WARNING: In resetParentPointersInTemplateArgumentList(): commented out to compile ROSE using ROSE: assertion failing for: classDeclaration->get_definingDeclaration()->get_parent() != NULL \n");
+-                                        printf ("--- classDeclaration = %p = %s = %s \n",classDeclaration,classDeclaration->class_name().c_str(),classDeclaration->get_name().str());
++                                        if (SgProject::get_verbose() >= 3) {
++                                          printf ("WARNING: In resetParentPointersInTemplateArgumentList(): commented out to compile ROSE using ROSE: assertion failing for: classDeclaration->get_definingDeclaration()->get_parent() != NULL \n");
++                                          printf ("--- classDeclaration = %p = %s = %s \n",classDeclaration,classDeclaration->class_name().c_str(),classDeclaration->get_name().str());
++                                        }
+                                      // classDeclaration->get_file_info()->display("assertion failing for: classDeclaration->get_definingDeclaration()->get_parent() != NULL: debug");
+ #endif
+                                       }
+@@ -2081,14 +2108,16 @@ ResetParentPointersInMemoryPool::visit(SgNode* node)
+                       // DQ (6/24/2006): There should be a test that detects this scope problem!
+                          if (scope == NULL)
+                             {
+-                              printf ("Looking for the scope in the SgVariableSymbol through the definition (declaration = %p = %s = %s) \n",
++                              if (SgProject::get_verbose() >= 3)
++                                printf ("Looking for the scope in the SgVariableSymbol through the definition (declaration = %p = %s = %s) \n",
+                                    declaration,declaration->class_name().c_str(),SageInterface::get_name(declaration).c_str());
+                               ROSE_ASSERT(declaration->get_definition() != NULL);
+ 
+                               SgDeclarationStatement* declarationStatement = declaration->get_definition();
+                               ROSE_ASSERT(declarationStatement != NULL);
+                               ROSE_ASSERT(declarationStatement->get_scope() != NULL);
+-                              printf ("Looking for the scope in the SgVariableSymbol: declarationStatement = %p = %s \n",
++                              if (SgProject::get_verbose() >= 3)
++                                printf ("Looking for the scope in the SgVariableSymbol: declarationStatement = %p = %s \n",
+                                    declarationStatement,declarationStatement->class_name().c_str());
+                               scope = declarationStatement->get_scope();
+                               ROSE_ASSERT(scope != NULL);
+@@ -2143,7 +2172,8 @@ ResetParentPointersInMemoryPool::visit(SgNode* node)
+                             }
+                            else
+                             {
+-                              printf ("Support for testing fortran lables might be incomplete! \n");
++                              if (SgProject::get_verbose() >= 3)
++                                printf ("Support for testing fortran lables might be incomplete! \n");
+                               SgStatement* fortranStatement = tempSymbol->get_fortran_statement();
+                               ROSE_ASSERT(fortranStatement != NULL);
+                             }
+@@ -2281,7 +2311,8 @@ ResetParentPointersInMemoryPool::visit(SgNode* node)
+                       // DQ (3/3/2012): I think we might not need to have this test (or at least I want to debug this case using the AST Whole AST dot graph).
+                       // This is a problem (failing test) for test2006_01.C.
+ #ifdef ROSE_DEBUG_NEW_EDG_ROSE_CONNECTION
+-                         printf ("WARNING: In ResetParentPointersInMemoryPool::visit(declaration = %p = %s): test commented out for declaration->get_parent() != NULL \n",node,node->class_name().c_str());
++                         if (SgProject::get_verbose() >= 3)
++                           printf ("WARNING: In ResetParentPointersInMemoryPool::visit(declaration = %p = %s): test commented out for declaration->get_parent() != NULL \n",node,node->class_name().c_str());
+ #endif
+                       // ROSE_ASSERT(declaration->get_parent() != NULL);
+ #else
+@@ -2326,7 +2357,8 @@ ResetParentPointersInMemoryPool::visit(SgNode* node)
+                             }
+                          ROSE_ASSERT(nondefiningDeclaration != NULL);
+ #if PRINT_DEVELOPER_WARNINGS
+-                         printf ("Warning from ResetParentPointersInMemoryPool::visit(): parent == NULL for function name = %s definingDeclaration = %p nondefiningDeclaration = %p parent = %p \n",
++                         if (SgProject::get_verbose() >= 3)
++                           printf ("Warning from ResetParentPointersInMemoryPool::visit(): parent == NULL for function name = %s definingDeclaration = %p nondefiningDeclaration = %p parent = %p \n",
+                               functionDeclaration->get_name().str(),definingDeclaration,nondefiningDeclaration,nondefiningDeclaration->get_parent());
+ #endif
+                       // ROSE_ASSERT(nondefiningDeclaration->get_parent() != NULL);
+@@ -2339,7 +2371,8 @@ ResetParentPointersInMemoryPool::visit(SgNode* node)
+                                  {
+                                 // This happens in the case where a member function is used before it is declared (a case where the parent was not set in the EDG/SageIII translation).
+ #if PRINT_DEVELOPER_WARNINGS
+-                                   printf ("Setting the nondefiningDeclaration->get_parent() == NULL using definingDeclaration->get_parent() = %p \n",definingDeclaration->get_parent());
++                                   if (SgProject::get_verbose() >= 3)
++                                     printf ("Setting the nondefiningDeclaration->get_parent() == NULL using definingDeclaration->get_parent() = %p \n",definingDeclaration->get_parent());
+ #endif
+                                    ROSE_ASSERT(definingDeclaration->get_parent() != NULL);
+                                    nondefiningDeclaration->set_parent(definingDeclaration->get_parent());
+@@ -2349,8 +2382,9 @@ ResetParentPointersInMemoryPool::visit(SgNode* node)
+                        }
+ 
+                   if (locatedNode->get_parent()==NULL) 
+-                  {
+-                    SageInterface::dumpInfo(locatedNode,"ResetParentPointersInMemoryPool::visit() error: found a func dec without defining declaration and its non-defining declaration has no scope info. ");
++                  { 
++                    if (SgProject::get_verbose() >= 3)
++                      SageInterface::dumpInfo(locatedNode,"ResetParentPointersInMemoryPool::visit() error: found a func dec without defining declaration and its non-defining declaration has no scope info. ");
+                     ROSE_ASSERT(locatedNode->get_parent() != NULL);
+                   }
+                     break;
+@@ -2434,7 +2468,8 @@ ResetParentPointersInMemoryPool::visit(SgNode* node)
+                if (fileInfo->isCommentOrDirective() == false && fileInfo->isToken() == false)
+                   {
+ #if PRINT_DEVELOPER_WARNINGS
+-                    printf ("ResetParentPointersInMemoryPool::visit(): Valid fileInfo = %p has parent == NULL \n",fileInfo);
++                    if (SgProject::get_verbose() >= 3)
++                      printf ("ResetParentPointersInMemoryPool::visit(): Valid fileInfo = %p has parent == NULL \n",fileInfo);
+                  // fileInfo->display("ResetParentPointersInMemoryPool::visit(): fileInfo->get_parent() == NULL");
+ #endif
+                   }
+@@ -2505,7 +2540,8 @@ ResetParentPointersInMemoryPool::visit(SgNode* node)
+                   {
+                     if (support->get_parent() != NULL)
+                        {
+-                         printf ("##### ResetParentPointersInMemoryPool::visit(node = %p = %s) support->get_parent() != NULL \n",node,node->sage_class_name());
++                         if (SgProject::get_verbose() >= 3)
++                           printf ("##### ResetParentPointersInMemoryPool::visit(node = %p = %s) support->get_parent() != NULL \n",node,node->sage_class_name());
+                        }
+                     ROSE_ASSERT(support->get_parent() == NULL);
+                     break;
+diff --git a/src/frontend/SageIII/sageInterface/sageInterface.C b/src/frontend/SageIII/sageInterface/sageInterface.C
+index c6c69e1..b48c208 100644
+--- a/src/frontend/SageIII/sageInterface/sageInterface.C
++++ b/src/frontend/SageIII/sageInterface/sageInterface.C
+@@ -498,6 +498,16 @@ SageInterface::DeclarationSets::isLocatedInDefiningScope(SgDeclarationStatement*
+      return isDefinedInNamedScope;
+    }
+ 
++SageInterface::DeclarationSets::~DeclarationSets() {
++  std::map<SgDeclarationStatement*,std::set<SgDeclarationStatement*>* >::iterator i = declarationMap.begin();
++  while (i != declarationMap.end()) {
++    delete i->second;
++    ++i;
++  }
++  declarationMap.clear();
++}
++
++
+ SageInterface::DeclarationSets*
+ SageInterface::buildDeclarationSets(SgNode* n)
+    {
+@@ -1110,6 +1120,7 @@ SageInterface::set_name ( SgInitializedName *initializedNameNode, SgName new_nam
+           switch(parent_declaration->variantT())
+              {
+                case V_SgVariableDeclaration:
++               case V_SgFunctionParameterList:
+                   {
+                     if (isSgVariableSymbol((*it).second)!=NULL)
+                          found_it = it;
+@@ -10290,6 +10301,12 @@ void SageInterface::replaceExpression(SgExpression* oldExp, SgExpression* newExp
+       // For compiler generated code, this could happen.
+       // We can just ignore this function call since it will not appear in the final AST.
+       return;
++  } else if (isSgVarArgStartOp(parent)) {
++     SgVarArgStartOp *var_start_op = isSgVarArgStartOp(parent);
++     if (var_start_op->get_lhs_operand() == oldExp) var_start_op->set_lhs_operand(newExp);
++     else if (var_start_op->get_rhs_operand() == oldExp) var_start_op->set_rhs_operand(newExp);
++     else
++       ROSE_ASSERT(false);
+   }
+   else if ((parentExp=isSgExpression(parent)) != NULL) {
+     int worked = parentExp->replace_expression(oldExp, newExp);
+@@ -10451,11 +10468,20 @@ void SageInterface::removeAllOriginalExpressionTrees(SgNode* top) {
+ #endif
+ 
+ SgSwitchStatement* SageInterface::findEnclosingSwitch(SgStatement* s) {
++#if 0
+   while (s && !isSgSwitchStatement(s)) {
+     s = isSgStatement(s->get_parent());
+   }
+   ROSE_ASSERT (s);
+   return isSgSwitchStatement(s);
++#else
++  SgNode *curr = s;
++  while (curr && !isSgSwitchStatement(curr)) {
++    curr = curr->get_parent();
++  }
++  return isSgSwitchStatement(curr);
++#endif
++
+ }
+ 
+ //! Find enclosing OpenMP clause body statement from s. If s is already one, return it directly.
+@@ -10472,6 +10498,7 @@ SgOmpClauseBodyStatement* SageInterface::findEnclosingOmpClauseBodyStatement(SgS
+ 
+ SgScopeStatement* SageInterface::findEnclosingLoop(SgStatement* s, const std::string& label, bool stopOnSwitches) {
+   /* label can represent a fortran label or a java label provided as a label in a continue/break statement */
++#if 0
+   for (; s; s = isSgStatement(s->get_parent())) {
+     SgScopeStatement* sc = isSgScopeStatement(s);
+     // Need to check for empty label as for java we must detect the
+@@ -10524,6 +10551,62 @@ SgScopeStatement* SageInterface::findEnclosingLoop(SgStatement* s, const std::st
+       default: continue;
+     }
+   }
++#else
++  SgNode * curr = s;
++  while (curr) {
++    SgScopeStatement* sc = isSgScopeStatement(curr);
++    // Need to check for empty label as for java we must detect the
++        // innermost labeled statement and skip everything in between
++    switch (curr->variantT()) {
++      case V_SgDoWhileStmt: {
++          if (label.empty()) {
++                  return sc;
++          }
++          break;
++      }
++      case V_SgForStatement: {
++          if (label.empty()) {
++                  return sc;
++          }
++          break;
++      }
++      case V_SgFortranDo:
++      case V_SgFortranNonblockedDo: {
++        if (label.empty() ||
++                        label == isSgFortranDo(sc)->get_string_label()) {
++          return sc;
++        }
++        break;
++      }
++      case V_SgWhileStmt: {
++        if (label.empty() ||
++                        label == isSgWhileStmt(sc)->get_string_label()) {
++          return sc;
++        }
++        break;
++      }
++      case V_SgSwitchStatement: {
++        if (stopOnSwitches) return sc;
++        break;
++      }
++      case V_SgJavaForEachStatement: {
++          if (label.empty()) {
++                  return sc;
++          }
++          break;
++      }
++      case V_SgJavaLabelStatement: {
++          if (label.empty() ||
++                          label == isSgJavaLabelStatement(sc)->get_label().getString()) {
++            return sc;
++          }
++          break;
++      }
++      default: break;
++    }
++    curr = curr->get_parent();
++  }
++#endif
+   return NULL;
+ }
+ 
+@@ -11763,6 +11846,34 @@ bool SageInterface::isCanonicalDoLoop(SgFortranDo* loop,SgInitializedName** ivar
+       incr_var = isSgVarRefExp(SkipCasting(isSgUnaryOp(incr)->get_operand()));
+       stepast = buildIntVal(1); // will this dangling SgNode cause any problem?
+       break;
++    case V_SgAssignOp: 
++      {
++        //support i = i + 1, i = i - 1, etc
++        SgAssignOp * assign_op = (SgAssignOp *)incr;
++        incr_var = isSgVarRefExp(assign_op->get_lhs_operand_i());
++        if (!incr_var)
++          return false;;
++        SgBinaryOp * inc_assign_rhs = isSgBinaryOp(assign_op->get_rhs_operand_i());
++        if (!inc_assign_rhs || (!isSgAddOp(inc_assign_rhs) && !isSgSubtractOp(inc_assign_rhs)))
++          return false;;
++        SgVarRefExp * inc_assign_rhs_lhs = isSgVarRefExp(inc_assign_rhs->get_lhs_operand_i());
++        bool valid_incr = false;
++        if (inc_assign_rhs_lhs != NULL && inc_assign_rhs_lhs->get_symbol() == 
++                                          incr_var->get_symbol()) {
++          stepast = inc_assign_rhs->get_rhs_operand_i();
++          valid_incr = true;
++        } else if (isSgAddOp(inc_assign_rhs)) {
++          SgVarRefExp * inc_assign_rhs_rhs = isSgVarRefExp(inc_assign_rhs->get_rhs_operand_i());
++          if (inc_assign_rhs_rhs != NULL && inc_assign_rhs_rhs->get_symbol() == 
++                                            incr_var->get_symbol()) {
++            stepast = inc_assign_rhs->get_lhs_operand_i();
++            valid_incr = true;
++          }
++        }
++        if (!valid_incr)
++          return false;
++        break;
++      }
+     default:
+       return false;
+   }
+@@ -11961,8 +12072,9 @@ bool SageInterface::isCanonicalForLoop(SgNode* loop,SgInitializedName** ivar/*=N
+       incr_var=isSgVarRefExp(SkipCasting(isSgBinaryOp(incr)->get_lhs_operand()));
+       if(incr_var == NULL)
+         return false;
+-      SgAddOp* addOp=isSgAddOp(SkipCasting(isSgBinaryOp(incr)->get_rhs_operand()));
+-      SgSubtractOp* subtractOp=isSgSubtractOp(SkipCasting(isSgBinaryOp(incr)->get_rhs_operand()));
++      SgExpression *assign_rhs = isSgBinaryOp(incr)->get_rhs_operand();
++      SgAddOp* addOp=isSgAddOp(SkipCasting(assign_rhs));
++      SgSubtractOp* subtractOp=isSgSubtractOp(SkipCasting(assign_rhs));
+       SgBinaryOp* arithOp=0;
+       if(addOp)
+         arithOp=addOp;
+@@ -11993,12 +12105,13 @@ bool SageInterface::isCanonicalForLoop(SgNode* loop,SgInitializedName** ivar/*=N
+   if (incr_var->get_symbol() != ivarname->get_symbol_from_symbol_table ())
+     return false;
+ 
+-
++#if 0
+   // single entry and single exit?
+   // only for C for loop for now
+   // TODO: Fortran support later
+   if (fs && !isStructuredBlock(fs->get_loop_body()) )
+     return false;
++#endif
+ 
+   // return loop information if requested
+   if (ivar != NULL)
+@@ -15764,7 +15877,7 @@ SageInterface::movePreprocessingInfo (SgStatement* stmt_src,  SgStatement* stmt_
+      ROSE_ASSERT(stmt_src != NULL);
+      ROSE_ASSERT(stmt_dst != NULL);
+      AttachedPreprocessingInfoType* infoList = stmt_src->getAttachedPreprocessingInfo();
+-     AttachedPreprocessingInfoType* infoToRemoveList = new AttachedPreprocessingInfoType();
++     AttachedPreprocessingInfoType infoToRemoveList;
+ 
+ #if 0
+      printf ("In SageInterface::movePreprocessingInfo(): \n");
+@@ -15785,6 +15898,9 @@ SageInterface::movePreprocessingInfo (SgStatement* stmt_src,  SgStatement* stmt_
+                (info->getTypeOfDirective()==PreprocessingInfo::CplusplusStyleComment)||
+                (info->getTypeOfDirective()==PreprocessingInfo::FortranStyleComment)||
+                (info->getTypeOfDirective()==PreprocessingInfo::F90StyleComment)||
++               (info->getTypeOfDirective()==PreprocessingInfo::ClinkageSpecificationStart )||
++               (info->getTypeOfDirective()==PreprocessingInfo::ClinkageSpecificationEnd)||
++               (info->getTypeOfDirective()==PreprocessingInfo::CpreprocessorIncludeDeclaration )||
+                (info->getTypeOfDirective()==PreprocessingInfo::CpreprocessorIncludeDeclaration )||
+                (info->getTypeOfDirective()==PreprocessingInfo::CpreprocessorIncludeNextDeclaration )||
+                (info->getTypeOfDirective()==PreprocessingInfo::CpreprocessorDefineDeclaration )||
+@@ -15856,7 +15972,7 @@ SageInterface::movePreprocessingInfo (SgStatement* stmt_src,  SgStatement* stmt_
+ #endif
+                        }
+ 
+-                    (*infoToRemoveList).push_back(*i);
++                    infoToRemoveList.push_back(*i);
+                   }
+ 
+ #if 0
+@@ -15869,7 +15985,7 @@ SageInterface::movePreprocessingInfo (SgStatement* stmt_src,  SgStatement* stmt_
+                       else
+                          stmt_dst->addToAttachedPreprocessingInfo(info,PreprocessingInfo::after);
+ 
+-                    (*infoToRemoveList).push_back(*i);
++                    infoToRemoveList.push_back(*i);
+                   } // if src_position
+ #endif
+ 
+@@ -15881,7 +15997,7 @@ SageInterface::movePreprocessingInfo (SgStatement* stmt_src,  SgStatement* stmt_
+ 
+   // Remove the element from the list of comments at the current astNode
+      AttachedPreprocessingInfoType::iterator j;
+-     for (j = (*infoToRemoveList).begin(); j != (*infoToRemoveList).end(); j++)
++     for (j = infoToRemoveList.begin(); j != infoToRemoveList.end(); j++)
+           infoList->erase( find(infoList->begin(),infoList->end(),*j) );
+    }
+ 
+@@ -21168,7 +21284,7 @@ LivenessAnalysis * SageInterface::call_liveness_analysis(SgProject* project, boo
+   if (defuse==NULL)
+   {
+     ROSE_ASSERT(project != NULL);
+-    defuse = new DefUseAnalysis(project);
++    defuse = new DefUseAnalysis(project, debug);
+   }
+ 
+   ROSE_ASSERT(defuse != NULL);
+diff --git a/src/frontend/SageIII/sageInterface/sageInterface.h b/src/frontend/SageIII/sageInterface/sageInterface.h
+index 79388ce..5a0181e 100644
+--- a/src/frontend/SageIII/sageInterface/sageInterface.h
++++ b/src/frontend/SageIII/sageInterface/sageInterface.h
+@@ -94,8 +94,10 @@ namespace SageInterface
+ 
+                std::map<SgDeclarationStatement*,std::set<SgDeclarationStatement*>* > & getDeclarationMap();
+ 
++
+                bool isLocatedInDefiningScope(SgDeclarationStatement* decl);
+ 
++               ~DeclarationSets();
+         };
+ 
+   // DQ (4/3/2014): This constructs a data structure that holds analysis information about
+diff --git a/src/frontend/SageIII/sageInterface/sageInterface_type.C b/src/frontend/SageIII/sageInterface/sageInterface_type.C
+index f23ef46..7accb81 100644
+--- a/src/frontend/SageIII/sageInterface/sageInterface_type.C
++++ b/src/frontend/SageIII/sageInterface/sageInterface_type.C
+@@ -363,7 +363,8 @@ bool isPointerToNonConstType(SgType* type)
+     ROSE_ASSERT(t);
+     t = t->stripType(SgType::STRIP_MODIFIER_TYPE | SgType::STRIP_TYPEDEF_TYPE | SgType::STRIP_REFERENCE_TYPE);
+     VariantT vt = t->variantT();
+-    if (vt == V_SgPointerType)
++    if (vt == V_SgPointerType ||
++        vt == V_SgPointerMemberType)
+       return static_cast<SgPointerType *>(t)->get_base_type();
+     else if (vt == V_SgArrayType)
+       return static_cast<SgArrayType *>(t)->get_base_type();
+diff --git a/src/frontend/SageIII/sage_support/sage_support.cpp b/src/frontend/SageIII/sage_support/sage_support.cpp
+index 658384d..d83edb8 100644
+--- a/src/frontend/SageIII/sage_support/sage_support.cpp
++++ b/src/frontend/SageIII/sage_support/sage_support.cpp
+@@ -6009,7 +6009,9 @@ SgSourceFile::build_C_and_Cxx_AST( vector<string> argv, vector<string> inputComm
+      int edg_main(int, char *[], SgSourceFile & sageFile );
+      int frontendErrorLevel = edg_main (c_cxx_argc, c_cxx_argv, *this);
+ #endif /* clang or edg */
+-
++     for (int c_cxx_i = 0; c_cxx_i != c_cxx_argc; ++c_cxx_i)
++       free(c_cxx_argv[c_cxx_i]);
++     free(c_cxx_argv);
+ #else
+   // DQ (2/21/2016): Added "error: " to allow this to be caught by the ROSE Matrix Testing.
+      int frontendErrorLevel = 99;
+diff --git a/src/frontend/SageIII/virtualCFG/memberFunctions.C b/src/frontend/SageIII/virtualCFG/memberFunctions.C
+index fd5b169..84d04c0 100644
+--- a/src/frontend/SageIII/virtualCFG/memberFunctions.C
++++ b/src/frontend/SageIII/virtualCFG/memberFunctions.C
+@@ -3638,7 +3638,8 @@ SgExpression::cfgFindChildIndex(SgNode* n) {
+    if (isSgBoolValExp(this) != NULL)
+       {
+         SgBoolValExp* value = isSgBoolValExp(this);
+-        printf ("value->get_value() = %s \n",value->get_value() ? "true" : "false");
++        if (SgProject::get_verbose() >= 3)
++          printf ("value->get_value() = %s \n",value->get_value() ? "true" : "false");
+         ROSE_ASSERT(value->get_originalExpressionTree() == NULL);
+ 
+         this->get_startOfConstruct()->display("SgExpression::cfgFindChildIndex() should never have a SgBoolValExp at this point: debug");
+@@ -4447,8 +4448,9 @@ SgTypeTraitBuiltinOperator::cfgOutEdges(unsigned int idx) {
+                                 makeEdge(CFGNode(this, idx), get_operand_expr()->cfgForBeginning(), result);
+                         else
+                                 makeEdge(CFGNode(this, idx), CFGNode(this, idx+1), result);
+-#else
+-                        printf ("In SgTypeTraitBuiltinFunctionCallExp::cfgOutEdges(%u): Almost all of the type trait builtin functions take types as arguments, but a few do not (not handled!) \n",idx);
++#else 
++                        if (SgProject::get_verbose() >= 3)
++                          printf ("In SgTypeTraitBuiltinFunctionCallExp::cfgOutEdges(%u): Almost all of the type trait builtin functions take types as arguments, but a few do not (not handled!) \n",idx);
+ #endif
+                         break;
+                 case 1:
+@@ -4474,7 +4476,8 @@ SgTypeTraitBuiltinOperator::cfgInEdges(unsigned int idx) {
+                         else
+                                 makeEdge(CFGNode(this, idx-1), CFGNode(this, idx), result);
+ #else
+-                        printf ("In SgTypeTraitBuiltinFunctionCallExp::cfgInEdges(%u): Almost all of the type trait builtin functions take types as arguments, but a few do not (not handled!) \n",idx);
++                        if (SgProject::get_verbose() >= 3)
++                          printf ("In SgTypeTraitBuiltinFunctionCallExp::cfgInEdges(%u): Almost all of the type trait builtin functions take types as arguments, but a few do not (not handled!) \n",idx);
+ #endif
+                         break;
+ 
+diff --git a/src/midend/astDiagnostics/AstPerformance.C b/src/midend/astDiagnostics/AstPerformance.C
+index 65caf97..0840ad9 100644
+--- a/src/midend/astDiagnostics/AstPerformance.C
++++ b/src/midend/astDiagnostics/AstPerformance.C
+@@ -280,6 +280,10 @@ AstPerformance::~AstPerformance()
+         {
+        // printf ("Skipped performance report generation to the performance file \n");
+         }
++     if (localData) {
++       delete localData;
++       localData = NULL;
++     }
+ 
+   // printf ("Leaving AstPerformance destructor ... \n");
+    }
+diff --git a/src/midend/astUtil/astInterface/AstInterface.h b/src/midend/astUtil/astInterface/AstInterface.h
+index 947d966..5bf84d1 100644
+--- a/src/midend/astUtil/astInterface/AstInterface.h
++++ b/src/midend/astUtil/astInterface/AstInterface.h
+@@ -24,7 +24,7 @@ class AstNodePtr {
+  public:
+   AstNodePtr(void* _repr=0) : repr(_repr) {}
+   AstNodePtr( const AstNodePtr& that) : repr(that.repr) {}
+-  ~AstNodePtr() {}
++  virtual ~AstNodePtr() {}
+   AstNodePtr& operator = (const AstNodePtr &that) 
+       { repr = that.repr; return *this; }
+   bool operator != (const AstNodePtr &that) const
+diff --git a/src/midend/programAnalysis/defUseAnalysis/DFAFilter.h b/src/midend/programAnalysis/defUseAnalysis/DFAFilter.h
+index 85f074e..6b6418b 100644
+--- a/src/midend/programAnalysis/defUseAnalysis/DFAFilter.h
++++ b/src/midend/programAnalysis/defUseAnalysis/DFAFilter.h
+@@ -12,14 +12,13 @@ struct IsDFAFilter
+   {
+     SgNode *n = cfgn.getNode();
+     // get rid of all beginning nodes
+-    if (!cfgn.isInteresting() && !(isSgFunctionCallExp(cfgn.getNode()) && cfgn.getIndex() >= 2))
++    if (!cfgn.isInteresting() && !(isSgFunctionCallExp(n) && cfgn.getIndex() >= 2))
+       return false;
+     if (isSgInitializedName(n) && cfgn.getIndex()>0)
+       //if (isSgInitializedName(n) && cfgn==n->cfgForEnd())
+       return false;
+     //    if (cfgn.getIndex()>0)
+     //  return false;
+-
+     return true;
+   }
+ };
+diff --git a/src/midend/programAnalysis/defUseAnalysis/DFAnalysis.h b/src/midend/programAnalysis/defUseAnalysis/DFAnalysis.h
+index 9021f8e..2f857d0 100644
+--- a/src/midend/programAnalysis/defUseAnalysis/DFAnalysis.h
++++ b/src/midend/programAnalysis/defUseAnalysis/DFAnalysis.h
+@@ -18,12 +18,13 @@ class DFAnalysis
+   virtual int run() = 0;
+   virtual int run(bool debug) = 0;
+   // request information from the DFA
+-  
++  typedef std::vector < std::pair <SgInitializedName* , SgNode*> > multitype; 
++  // typedef std::map<SgInitializedName*, std::set<SgNode*> > multitype; 
+   /** get the Definition multimap of a specific SgNode. */
+-  virtual std::vector < std::pair <SgInitializedName* , SgNode*> >  getDefMultiMapFor(SgNode* node)=0;
++  virtual multitype  getDefMultiMapFor(SgNode* node)=0;
+ 
+   /** get the Usage multimap of a specific SgNode. */
+-  virtual std::vector < std::pair <SgInitializedName* , SgNode*> >  getUseMultiMapFor(SgNode* node)=0;
++  virtual multitype   getUseMultiMapFor(SgNode* node)=0;
+   
+   /** get the vector of defining nodes for a specific node and a initializedName. */
+   virtual std::vector < SgNode* > getDefFor(SgNode* node, SgInitializedName* initName)=0;
+@@ -42,10 +43,10 @@ class DFAnalysis
+   virtual int getIntForSgNode(SgNode* node)=0;
+   virtual void dfaToDOT()=0;
+ 
+-  virtual std::map< SgNode* , std::vector < std::pair <SgInitializedName* , SgNode*> > > getDefMap()=0;
+-  virtual std::map< SgNode* , std::vector < std::pair <SgInitializedName* , SgNode*> > > getUseMap()=0;
+-  virtual void setMaps(std::map< SgNode* , std::vector < std::pair <SgInitializedName* , SgNode*> > > def,
+-                       std::map< SgNode* , std::vector < std::pair <SgInitializedName* , SgNode*> > > use)=0;
++  virtual std::map< SgNode* , multitype > getDefMap()=0;
++  virtual std::map< SgNode* , multitype > getUseMap()=0;
++  virtual void setMaps(std::map< SgNode* , multitype > def,
++                       std::map< SgNode* , multitype > use)=0;
+ 
+ };
+ 
+diff --git a/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysis.cpp b/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysis.cpp
+index eba5260..352d3b0 100644
+--- a/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysis.cpp
++++ b/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysis.cpp
+@@ -68,7 +68,18 @@ void DefUseAnalysis::addIDefElement(SgNode* sgNode,
+  *********************************************************/
+ void DefUseAnalysis::addDefElement(SgNode* sgNode, 
+                                 SgInitializedName* initName,
+-                                SgNode* defNode) { 
++                                SgNode* defNode) {
++  if (same_def_map.count(sgNode) > 0) {
++    SgNode* root = sgNode;
++    while (same_def_map.count(root) > 0) {
++      SgNode* curr = same_def_map[root];
++      reverse_same_def_map[curr].erase(root);
++      same_def_map.erase(root);
++      root = curr;
++    }
++    table[sgNode] = table[root];
++    def_changed.erase(sgNode);
++  }
+   addAnyElement(&table, sgNode, initName, defNode);
+ }
+ 
+@@ -78,6 +89,18 @@ void DefUseAnalysis::addDefElement(SgNode* sgNode,
+ void DefUseAnalysis::addUseElement(SgNode* sgNode, 
+                                 SgInitializedName* initName,
+                                 SgNode* defNode) { 
++  if (same_use_map.count(sgNode) > 0) {
++    SgNode* root = sgNode;
++    while (same_use_map.count(root) > 0) {
++      SgNode* curr = same_use_map[root];
++      reverse_same_use_map[curr].erase(root);
++      same_use_map.erase(root);
++      root = curr;
++    }
++    usetable[sgNode] = usetable[root];
++    use_changed.erase(sgNode);
++  }
++
+   addAnyElement(&usetable, sgNode, initName, defNode);
+ }
+ 
+@@ -111,6 +134,17 @@ bool DefUseAnalysismycond(std::pair<SgInitializedName*,SgNode* > n1, SgInitializ
+  *********************************************************/
+ void DefUseAnalysis::replaceElement(SgNode* sgNode, 
+                                     SgInitializedName* initName) {
++  if (same_def_map.count(sgNode) > 0) {
++    SgNode* root = sgNode;
++    while (same_def_map.count(root) > 0) {
++      SgNode* curr = same_def_map[root];
++      reverse_same_def_map[curr].erase(root);
++      same_def_map.erase(root);
++      root = curr;
++    }
++    table[sgNode] = table[root];
++    def_changed.erase(sgNode);
++  }
+   ROSE_ASSERT(initName);
+   // if the node is contained but not identical, then we overwrite it
+   // otherwise, we do nothing
+@@ -119,14 +153,16 @@ void DefUseAnalysis::replaceElement(SgNode* sgNode,
+ #pragma omp critical (DefUseAnalysisreplaceE1) 
+ #endif
+   {
+-    //table[sgNode].erase(initName);
+-    //    table[sgNode].insert(make_pair(initName,sgNode));
+-
++#if 0
++    table[sgNode].erase(initName);
++    table[sgNode][initName].insert(sgNode);
++#else
+     multitype& map = table[sgNode];
+     map.erase(std::remove_if(map.begin(), map.end(), boost::bind(boost::type<bool>(), DefUseAnalysismycond, _1, initName)), map.end());
+     //         table[sgNode].erase(it);
+ 
+-    table[sgNode].push_back(make_pair(initName,sgNode));
++    map.push_back(make_pair(initName,sgNode));
++#endif
+   }
+ }
+ 
+@@ -139,11 +175,23 @@ void DefUseAnalysis::clearUseOfElement(SgNode* sgNode,
+ #pragma omp critical (DefUseAnalysisclearUse) 
+ #endif
+   {
+-  //  usetable[sgNode].erase(initName);
+-
++  if (same_use_map.count(sgNode) > 0) {
++    SgNode* root = sgNode;
++    while (same_use_map.count(root) > 0) {
++      SgNode* curr = same_use_map[root];
++      reverse_same_use_map[curr].erase(root);
++      same_use_map.erase(root);
++      root = curr;
++    }
++    usetable[sgNode] = usetable[root];
++    use_changed.erase(sgNode);
++  }
++#if 0
++    usetable[sgNode].erase(initName);
++#else
+     multitype& map = usetable[sgNode];
+     map.erase(std::remove_if(map.begin(), map.end(), boost::bind(boost::type<bool>(), DefUseAnalysismycond, _1, initName)), map.end());
+-
++#endif
+   }
+ }
+ 
+@@ -151,14 +199,65 @@ void DefUseAnalysis::clearUseOfElement(SgNode* sgNode,
+  *  Union of two maps
+  *********************************************************/
+ void DefUseAnalysis::mapDefUnion(SgNode* before, SgNode* other, SgNode* sgNode) {
+-  mapAnyUnion(&table, before, other, sgNode);
++  SgNode* before_root = before;
++  while (same_def_map.count(before_root) > 0) 
++    before_root = same_def_map[before_root];
++  if (NULL == other && before_root != sgNode) {
++    def_changed[sgNode] = def_changed.count(before) <= 0 ? true :
++                          def_changed[before];
++    same_def_map[sgNode] = before_root;
++    reverse_same_def_map[before_root].insert(sgNode);
++    reverse_same_def_map.erase(sgNode);
++   
++  } else {
++    SgNode* other_root = other;
++    while (same_def_map.count(other_root) > 0)
++      other_root = same_def_map[other_root];
++    def_changed.erase(sgNode);
++    mapAnyUnion(&table, before_root, other_root, sgNode);
++  }
+ }
+ 
+ /**********************************************************
+  *  Union of two maps
+  *********************************************************/
+ void DefUseAnalysis::mapUseUnion(SgNode* before, SgNode* other, SgNode* sgNode) {
+-  mapAnyUnion(&usetable, before, other, sgNode);
++  SgNode *before_root = before;
++  SgNode *other_root = other;
++  while (same_use_map.count(before_root) > 0) 
++    before_root = same_use_map[before_root];
++  if (NULL == other && before_root != sgNode) {
++    use_changed[sgNode] = use_changed.count(before) <= 0 ? true :
++                          use_changed[before];
++    same_use_map[sgNode] = before_root;
++    reverse_same_use_map[before_root].insert(sgNode);
++    reverse_same_use_map.erase(sgNode);
++  } else {
++    while (same_use_map.count(other_root) > 0)
++      other_root = same_use_map[other_root];
++    use_changed.erase(sgNode);
++    mapAnyUnion(&usetable, before_root, other_root, sgNode);
++  }
++}
++
++bool DefUseAnalysis::isInScope(SgNode *node, SgScopeStatement *scope) {
++  if (isSgFunctionDefinition(scope) ||
++      isSgFunctionDeclaration(scope) ||
++      isSgGlobal(scope)) 
++    return true;
++  pair<SgNode *, SgScopeStatement*> one_pair(node, scope); 
++  if (isinscope_cache.count(one_pair) > 0)
++    return isinscope_cache[one_pair];
++  bool res = false;
++  SgNode* curr_node = node;
++  while (curr_node) {
++    if (curr_node == scope) {
++      res = true; break;
++    }
++    curr_node = curr_node->get_parent();
++  }
++  isinscope_cache[one_pair] = res;
++  return res;
+ }
+ 
+ /**********************************************************
+@@ -178,6 +277,7 @@ void DefUseAnalysis::mapAnyUnion(tabletype* tabl, SgNode* before, SgNode* other,
+ #if ROSE_GCC_OMP
+ #pragma omp critical (DefUseAnalysismapUse)
+ #endif
++#if 0
+   if (!beforeFound) {
+     if (!otherFound)
+       (*tabl)[sgNode].clear(); // both before and other nodes have empty sets
+@@ -189,14 +289,148 @@ void DefUseAnalysis::mapAnyUnion(tabletype* tabl, SgNode* before, SgNode* other,
+     else {  // both has a set, perform the actual union operation : insert two sets into a single set
+       const multitype& multiA  = (*tabl)[before];
+       const multitype& multiB  = (*tabl)[other];
++#if 1
+       std::set<std::pair<SgInitializedName*, SgNode*> > s_before(multiA.begin(), multiA.end());
+        ROSE_ASSERT (s_before.size() == (*tabl)[before].size());
+ 
+       s_before.insert(multiB.begin(), multiB.end());
+       multitype multiC(s_before.begin(), s_before.end());
++#else
++      multitype multiC = multiA;
++      for (multitype::const_iterator i = multiB.begin(); i != multiB.end();
++          ++i) {
++        SgInitializedName * sgInitName = i->first;
++        const std::set<SgNode*> &sgnode_set = i->second;
++        multiC[sgInitName].insert(sgnode_set.begin(), sgnode_set.end());
++      }
++#endif
+       (*tabl)[sgNode].swap(multiC);
++
++      
++    }
++#else
++  std::set<std::pair<SgInitializedName*, SgNode*> > s_before;
++  if (beforeFound) {
++    const multitype & multiA = (*tabl)[before];
++    for (multitype::const_iterator elem = multiA.begin(); elem != multiA.end(); ++elem) {
++      if (!isInScope(sgNode, (*elem).first->get_scope()))
++        continue;
++      s_before.insert(*elem);
++    }
++  } 
++  if (otherFound) {
++    const multitype& multiB  = (*tabl)[other];
++    for (multitype::const_iterator elem = multiB.begin(); elem != multiB.end(); ++elem) {
++      if (!isInScope(sgNode, (*elem).first->get_scope()))
++        continue;
++      s_before.insert(*elem);
++    }
++  }
++
++  if ((*tabl).find(sgNode) != (*tabl).end()) {
++    const multitype &oldtable = (*tabl)[sgNode];
++    s_before.insert(oldtable.begin(), oldtable.end());
++  }
++
++  multitype multiC(s_before.begin(), s_before.end());
++  (*tabl)[sgNode].swap(multiC);
++#endif
++}
++
++/**********************************************************
++ *  Union of multiple maps
++ *********************************************************/
++void DefUseAnalysis::mapDefUnion(const std::vector<SgNode*> &all_before_nodes_, SgNode* sgNode) {
++  SgNode *before = NULL;
++  SgNode *other = NULL;
++  std::vector<SgNode*> all_before_nodes;
++  def_changed.erase(sgNode);
++  for (size_t i = 0; i < all_before_nodes_.size(); ++i) {
++    SgNode* node = all_before_nodes_[i];
++    while (same_def_map.count(node) > 0)
++      node = same_def_map[node];
++    all_before_nodes.push_back(node);
++  }
++  if (all_before_nodes.size() > 0)
++    before = all_before_nodes[0];
++  if (all_before_nodes.size() > 1)
++    other = all_before_nodes[1];
++  if (all_before_nodes.size() <= 2)
++    mapAnyUnion(&table, before, other, sgNode);
++  else
++    mapAnyUnion(&table, all_before_nodes, sgNode);
++}
++
++/**********************************************************
++ *  Union of multiple maps
++ *********************************************************/
++void DefUseAnalysis::mapUseUnion(const std::vector<SgNode*> &all_before_nodes_, SgNode* sgNode) {
++  SgNode *before = NULL;
++  SgNode *other = NULL;
++  use_changed.erase(sgNode);
++  std::vector<SgNode*> all_before_nodes;
++  for (size_t i = 0; i < all_before_nodes_.size(); ++i) {
++    SgNode* node = all_before_nodes_[i];
++    while (same_use_map.count(node) > 0)
++      node = same_use_map[node];
++    all_before_nodes.push_back(node);
++  }
++  if (all_before_nodes.size() > 0)
++    before = all_before_nodes[0];
++  if (all_before_nodes.size() > 1)
++    other = all_before_nodes[1];
++  if (all_before_nodes.size() <= 2)
++    mapAnyUnion(&usetable, before, other, sgNode);
++  else
++    mapAnyUnion(&usetable, all_before_nodes, sgNode);
++
++}
++
++/**********************************************************
++ *  Union of multiple maps
++ *********************************************************/
++void DefUseAnalysis::mapAnyUnion(tabletype* tabl, 
++        std::vector<SgNode*>  &all_before_nodes, SgNode* sgNode) {
++  
++  addID(sgNode);
++
++#if ROSE_GCC_OMP
++#pragma omp critical (DefUseAnalysismapUse)
++#endif
++#if 1
++  std::set<std::pair<SgInitializedName*, SgNode*> > s_before;
++  for (size_t i = 0; i != all_before_nodes.size(); ++i) {
++    SgNode *before = all_before_nodes[i];
++    if ((*tabl).find(before) != (*tabl).end()) {
++      const multitype& multiA  = (*tabl)[before];
++      for (multitype::const_iterator elem = multiA.begin(); elem != multiA.end(); ++elem) {
++        if (!isInScope(sgNode, (*elem).first->get_scope()))
++          continue;
++        s_before.insert(*elem);
++      }
++    }
++  }
++  if ((*tabl).find(sgNode) != (*tabl).end()) {
++    const multitype& oldtable = (*tabl)[sgNode];
++    s_before.insert(oldtable.begin(), oldtable.end());
++  }
++   
++  multitype multiC(s_before.begin(), s_before.end());
++#else
++  multitype multiC;
++  for (size_t i = 0; i != all_before_nodes.size(); ++i) {
++    SgNode *node = all_before_nodes[i];
++    if ((*tabl).find(node) != (*tabl).end()) {
++      const multitype &multiA = (*tabl)[node];
++      for (multitype::const_iterator j = multiA.begin(); j != multiA.end(); ++j) {
++        SgInitializedName *sgInitName = j->first;
++        const std::set<SgNode*> &sgnode_set = j->second;
++        multiC[sgInitName].insert(sgnode_set.begin(), sgnode_set.end());
++      }
+     }
+   }
++#endif
++  (*tabl)[sgNode].swap(multiC);
+ }
+ 
+ /**********************************************************
+@@ -261,20 +495,20 @@ void DefUseAnalysis::printMultiMap(const multitype* multi) {
+  *  print out the table containing all nodes
+  *********************************************************/
+ void DefUseAnalysis::printDefMap() {
+-  printAnyMap(&table);
++  printAnyMap(&table, reverse_same_def_map);
+ }
+ 
+ /**********************************************************
+  *  print out the table containing all nodes
+  *********************************************************/
+ void DefUseAnalysis::printUseMap() {
+-  printAnyMap(&usetable);
++  printAnyMap(&usetable, reverse_same_use_map);
+ }
+ 
+ /**********************************************************
+  *  print out the table containing all nodes
+  *********************************************************/
+-void DefUseAnalysis::printAnyMap(tabletype* tabl) {
++void DefUseAnalysis::printAnyMap(tabletype* tabl, const std::map<SgNode*, std::set<SgNode*> > &reverse_same_map) {
+   int pos = 0;
+   cout << "\n **************** MAP ************************** " << endl;
+   for (tabletype::const_iterator i = tabl->begin(); i != tabl->end(); ++i) {  
+@@ -286,6 +520,17 @@ void DefUseAnalysis::printAnyMap(tabletype* tabl) {
+     int theNode = getIntForSgNode(sgNode);
+     cout<<"........................."<<endl;
+     cout << pos << ": " << ToString(theNode) << " var: " << name <<" " <<sgNode <<endl;
++    cout << "@line=" << sgNode->get_startOfConstruct()->get_line()<<", col=" <<sgNode->get_startOfConstruct()->get_col() << endl; 
++    cout << "duplicated: " << endl;
++    if (reverse_same_map.count(sgNode) > 0) {
++      const std::set<SgNode*> &childs = reverse_same_map.find(sgNode)->second;
++      for (std::set<SgNode*>::const_iterator ii = childs.begin(); ii != childs.end(); ++ii) {
++        SgNode* node = *ii;
++        string name = getInitName(node);
++        cout << " var: " << name <<" " <<node <<endl;
++        cout << "@line=" << node->get_startOfConstruct()->get_line()<<", col=" <<node->get_startOfConstruct()->get_col() << endl; 
++      }
++    }
+     printMultiMap(&multi);
+   }
+ }
+@@ -394,7 +639,9 @@ std::vector < SgNode* > DefUseAnalysis::getAnyFor(const multitype* multi, SgInit
+   vector < SgNode*> defNodes;
+   defNodes.clear();
+   //multitype multi = getDefUseFor(node);
++  typedef multitype::const_iterator iterator;
+   if (multi->size()>0) {
++#if 1
+     multitype::const_iterator i = multi->begin();
+     for (; i!=multi->end();++i) {
+       SgInitializedName* initNameMM = isSgInitializedName(i->first);
+@@ -404,6 +651,13 @@ std::vector < SgNode* > DefUseAnalysis::getAnyFor(const multitype* multi, SgInit
+         defNodes.push_back(thenode);
+       }
+     }
++
++#else
++   iterator ret =  multi->find(initName);
++   if (ret != multi->end()) {
++     defNodes.insert(defNodes.end(), ret->second.begin(), ret->second.end());
++   }
++#endif
+   }
+   return defNodes;
+ }
+@@ -412,26 +666,42 @@ std::vector < SgNode* > DefUseAnalysis::getAnyFor(const multitype* multi, SgInit
+  * return multimap to user
+  * for any given node, return all definitions 
+  *****************************************/
+-std::vector <std::pair < SgInitializedName* , SgNode*> > DefUseAnalysis::getDefMultiMapFor(SgNode* node) {
++DefUseAnalysis::multitype DefUseAnalysis::getDefMultiMapFor(SgNode* node) {
++  while (same_def_map.count(node) > 0)
++    node = same_def_map[node];
+   multitype multi;
+   if (searchMap(&table, node)==true) {
+     // multimap is contained
+     multi = table[node];
+   }
+-  return multi;
++  multitype res;
++  for (multitype::const_iterator elem = multi.begin(); elem != multi.end(); ++elem) {
++    if (!isInScope(node, (*elem).first->get_scope())) 
++        continue;
++    res.push_back(*elem);
++  }
++  return res;
+ }
+ 
+ /******************************************
+  * return multimap to user
+  * for any given node, return all definitions 
+  *****************************************/
+-std::vector <std::pair < SgInitializedName* , SgNode*> > DefUseAnalysis::getUseMultiMapFor(SgNode* node) {
++DefUseAnalysis::multitype DefUseAnalysis::getUseMultiMapFor(SgNode* node) {
++  while (same_use_map.count(node) > 0)
++    node = same_use_map[node];
+   multitype multi;
+   if (searchMap(&usetable, node)==true) {
+     // multimap is contained
+     multi = usetable[node];
+   }
+-  return multi;
++  multitype res;
++  for (multitype::const_iterator elem = multi.begin(); elem != multi.end(); ++elem) {
++    if (!isInScope(node, (*elem).first->get_scope())) 
++        continue;
++    res.push_back(*elem);
++  }
++  return res;
+ }
+ 
+ /******************************************
+@@ -481,7 +751,6 @@ bool  DefUseAnalysis::start_traversal_of_functions() {
+ 
+   nrOfNodesVisited = 0;
+   dfaFunctions.clear();
+-
+   // Traverse through each FunctionDefinition and check for DefUse
+   Rose_STL_Container<SgNode*> functions = NodeQuery::querySubTree(project, V_SgFunctionDefinition); 
+   DefUseAnalysisPF* defuse_perfunc = new DefUseAnalysisPF(DEBUG_MODE, this);
+@@ -515,7 +784,8 @@ DefUseAnalysis::start_traversal_of_one_function(SgFunctionDefinition* proc) {
+ 
+   nrOfNodesVisited = 0;
+   bool abortme=false;
+-  DefUseAnalysisPF*  defuse_perfunc = new DefUseAnalysisPF(false, this);
++  isinscope_cache.clear();
++  DefUseAnalysisPF*  defuse_perfunc = new DefUseAnalysisPF(DEBUG_MODE, this);
+ 
+ // DQ (12/10/2016): Eliminating a warning that we want to be an error: -Werror=unused-but-set-variable.
+ // FilteredCFGNode <IsDFAFilter> rem_source = defuse_perfunc->run(proc,abortme);
+@@ -525,6 +795,7 @@ DefUseAnalysis::start_traversal_of_one_function(SgFunctionDefinition* proc) {
+ 
+   //cout << " nodes visited: " << nrOfNodesVisited << " ......... function " << proc->get_declaration()->get_name().str() << endl; 
+   
++  delete defuse_perfunc; 
+   return nrOfNodesVisited;
+ }
+ 
+@@ -558,7 +829,7 @@ int DefUseAnalysis::run() {
+   vizzhelp.clear();
+ 
+   clock_t start = clock();
+-  find_all_global_variables();
++  // find_all_global_variables();
+   // traverse through all functions and for each function doWorklist
+   aborted=start_traversal_of_functions();
+   clock_t ends = clock();
+@@ -575,3 +846,57 @@ int DefUseAnalysis::run() {
+     return 1;
+    return 0;
+ }
++
++bool DefUseAnalysis::checkRootChanged(SgNode* node, const std::map<SgNode*, bool> &changed_map) {
++  bool Changed = false;
++  if (same_def_map.count(node) > 0) {
++    SgNode* root_def_node = same_def_map[node];
++    if (changed_map.count(root_def_node) > 0)
++      Changed |= changed_map.find(root_def_node)->second;
++  }
++  if (same_use_map.count(node) > 0) {
++    SgNode* root_use_node = same_use_map[node];
++    if (changed_map.count(root_use_node) > 0)
++      Changed |= changed_map.find(root_use_node)->second;
++  }
++  return Changed;
++}
++
++void DefUseAnalysis::notifyChildrenChanged(SgNode* node, std::map<SgNode*, bool> &changed_map) {
++  if (reverse_same_def_map.count(node) > 0) {
++    def_changed[node] = true;
++    std::set<SgNode*> &children  = reverse_same_def_map[node];
++    for (std::set<SgNode*>::iterator I = children.begin(); I != children.end(); ++I)
++      changed_map[*I] = true;
++  }
++  if (reverse_same_use_map.count(node) > 0) {
++    use_changed[node] = true;
++    std::set<SgNode*> &children  = reverse_same_use_map[node];
++    for (std::set<SgNode*>::iterator I = children.begin(); I != children.end(); ++I)
++      changed_map[*I] = true;
++  }
++}
++
++bool DefUseAnalysis::isDefChanged(SgNode* node, bool &valid) {
++  if (def_changed.count(node)<= 0) {
++    return false;
++  }
++  valid = true;
++  return def_changed[node];
++}
++
++bool DefUseAnalysis::isUseChanged(SgNode* node, bool &valid) {
++  if (use_changed.count(node) <= 0)
++    return false;
++  valid = true;
++  return  use_changed[node];
++}
++
++void DefUseAnalysis::updateRootStatus(SgNode* node, bool changed) {
++  if (reverse_same_def_map.count(node) > 0) {
++    def_changed[node] = changed;
++  }
++  if (reverse_same_use_map.count(node) > 0) {
++    use_changed[node] = changed;
++  }
++}
+diff --git a/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysis.h b/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysis.h
+index 5e65056..de0a21b 100644
+--- a/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysis.h
++++ b/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysis.h
+@@ -67,9 +67,11 @@ class ROSE_DLL_API DefUseAnalysis : public DFAnalysis, Support {
+ 
+   // def-use-specific --------------------
+   typedef std::vector < std::pair<SgInitializedName* , SgNode*> > multitype;
+-  //  typedef std::multimap < SgInitializedName* , SgNode* > multitype;
++  //typedef std::map < SgInitializedName* , std::set<SgNode*> > multitype;
+ 
+   typedef std::map< SgNode* , multitype > tabletype;
++
++
+   // typedef std::map< SgNode* , int > convtype;
+ // CH (4/9/2010): Use boost::unordered instead  
+ //#ifdef _MSC_VER
+@@ -90,6 +92,16 @@ class ROSE_DLL_API DefUseAnalysis : public DFAnalysis, Support {
+   // the main table of all entries
+   tabletype table;   // definition table
+   tabletype usetable;  // use table
++
++  // the map to merge duplicated nodes
++  std::map< SgNode*, SgNode*> same_def_map; // child -> root
++  std::map< SgNode*, SgNode*> same_use_map; // child -> root
++  std::map< SgNode*, std::set<SgNode*> > reverse_same_def_map; // root->children
++  std::map< SgNode*, std::set<SgNode*> > reverse_same_use_map; // root->children
++  std::map< SgNode*, bool> def_changed;
++  std::map< SgNode*, bool> use_changed;
++  typedef rose_hash::unordered_map<std::pair<SgNode*, SgScopeStatement*>, bool> isinscopetype;
++  isinscopetype isinscope_cache;
+   // table for indirect definitions
+   //ideftype idefTable;
+   // the helper table for visualization
+@@ -102,12 +114,15 @@ class ROSE_DLL_API DefUseAnalysis : public DFAnalysis, Support {
+ 
+   void addAnyElement(tabletype* tabl, SgNode* sgNode, SgInitializedName* initName, SgNode* defNode);
+   void mapAnyUnion(tabletype* tabl, SgNode* before, SgNode* other, SgNode* current); // current = before Union other
+-  void printAnyMap(tabletype* tabl);
++  void mapAnyUnion(tabletype* tabl, std::vector<SgNode*> &all_before_nodes, SgNode* current);
++  void printAnyMap(tabletype* tabl, const std::map<SgNode*, std::set<SgNode*> > &);
+ 
++  bool isInScope(SgNode* node, SgScopeStatement* scope);
+ 
+  public:
+-  DefUseAnalysis(SgProject* proj): project(proj), 
+-    DEBUG_MODE(false), DEBUG_MODE_EXTRA(false){
++  DefUseAnalysis(SgProject* proj, bool debug = false): project(proj), 
++    DEBUG_MODE(debug), DEBUG_MODE_EXTRA(false){
++    find_all_global_variables();
+     //visualizationEnabled=true;
+     //table.clear();
+     //usetable.clear();
+@@ -154,6 +169,8 @@ class ROSE_DLL_API DefUseAnalysis : public DFAnalysis, Support {
+   void replaceElement(SgNode* sgNode, SgInitializedName* initName);
+   void mapDefUnion(SgNode* before, SgNode* other, SgNode* current);
+   void mapUseUnion(SgNode* before, SgNode* other, SgNode* current);
++  void mapDefUnion(const std::vector<SgNode*> &all_before_nodes, SgNode* current);
++  void mapUseUnion(const std::vector<SgNode*> &all_before_nodes, SgNode* current);
+ 
+   void clearUseOfElement(SgNode* sgNode, SgInitializedName* initName);
+ 
+@@ -186,6 +203,13 @@ class ROSE_DLL_API DefUseAnalysis : public DFAnalysis, Support {
+    //   vizzhelp.clear();
+    //sgNodeCounter=1;
+   }
++  
++  void notifyChildrenChanged(SgNode* node, std::map<SgNode*, bool> &changed_map); 
++  void updateRootStatus(SgNode* node, bool changed); 
++  bool checkRootChanged(SgNode* node, const std::map<SgNode*, bool>& changed_map);
++
++  bool isUseChanged(SgNode *node, bool &valid);
++  bool isDefChanged(SgNode *node, bool &valid);
+ };
+ 
+ #endif
+diff --git a/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysisAbstract.cpp b/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysisAbstract.cpp
+index b5da558..367597a 100644
+--- a/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysisAbstract.cpp
++++ b/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysisAbstract.cpp
+@@ -33,16 +33,27 @@ bool DefUseAnalysisAbstract::searchVector(vector <filteredCFGNodeType> done,
+ bool DefUseAnalysisAbstract::isDoubleExactEntry(const multitype* multi, 
+                                           SgInitializedName* name, SgNode* sgNode) {
+   bool isCurrentValueContained=false;
++#if 1
+   multitype::const_iterator i = multi->begin();    
+   //SgNode* sgNodeMM = NULL;
+   for (; i != multi->end(); ++i) {
+     SgInitializedName* initNameMM = (*i).first;
+     SgNode* sgnodeMM = (*i).second;
+-    if (initNameMM==name && sgnodeMM==sgNode)
++    if (initNameMM==name && sgnodeMM==sgNode) {
+       isCurrentValueContained=true;
++      break;
++    }
+     // cout << " comparing -  map: " << initNameMM << " vs. search: " << initName <<
+     //  "   result euqal? " << resBool(isCurrentValueContained) << endl;
+   } 
++#else 
++  multitype::const_iterator ret = multi->find(name);
++  if (ret != multi->end()) {
++    const std::set<SgNode*> &sgnodeMM_set = ret->second;
++    if (sgnodeMM_set.find(sgNode) != sgnodeMM_set.end())
++      isCurrentValueContained = true;
++  }
++#endif
+   return isCurrentValueContained;
+ }
+ 
+@@ -50,17 +61,24 @@ bool DefUseAnalysisAbstract::isDoubleExactEntry(const multitype* multi,
+  *  Search for the value for a certain key in the multimap
+  *********************************************************/
+ bool DefUseAnalysisAbstract::searchMulti(const multitype* multi, SgInitializedName* initName) {
++#if 1
+   bool isCurrentValueContained=false;
+   multitype::const_iterator i = multi->begin();    
+   //SgNode* sgNodeMM = NULL;
+   for (; i != multi->end(); ++i) {
+     SgInitializedName* initNameMM = (*i).first;
+-    if (initNameMM==initName)
++    if (initNameMM==initName) {
+       isCurrentValueContained=true;
++      break;
++    }
+     // cout << " comparing -  map: " << initNameMM << " vs. search: " << initName <<
+     //  "   result euqal? " << resBool(isCurrentValueContained) << endl;
+   } 
+   return isCurrentValueContained;
++
++#else
++  return multi->find(initName) != multi->end();
++#endif
+ }
+ 
+ 
+diff --git a/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysisAbstract.h b/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysisAbstract.h
+index 53af1f3..9ceb0dc 100644
+--- a/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysisAbstract.h
++++ b/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysisAbstract.h
+@@ -71,6 +71,20 @@ class DefUseAnalysisAbstract : public Support {
+     return otherNode;
+   }
+ 
++  template <typename T>
++    void getAllInNode(T cfgNode, std::vector<SgNode*> &vec_in_node){
++    std::vector<filteredCFGEdgeType > in_edges = cfgNode.inEdges();
++    for (std::vector<filteredCFGEdgeType >::const_iterator i = in_edges.begin(); i != in_edges.end(); ++i) {
++      filteredCFGEdgeType filterEdge = *i;
++      T filterNode = filterEdge.source();
++      vec_in_node.push_back(filterNode.getNode());
++    }  
++    if (DEBUG_MODE_EXTRA)
++      std::cout << "getAllInNode:: " 
++                << "  size of in: " << in_edges.size() << std::endl;
++    return;
++  }
++
+   /**********************************************************
+    *  get the incoming node of a cfg edge: only get the last one?
+    *********************************************************/
+@@ -85,6 +99,18 @@ class DefUseAnalysisAbstract : public Support {
+     return node;
+   }
+ 
++  template <typename T>
++    SgNode* getCFGSuccNode(T cfgNode){
++    SgNode* node = NULL;
++    std::vector<filteredCFGEdgeType > out_edges = cfgNode.outEdges();
++    for (std::vector<filteredCFGEdgeType >::const_iterator i = out_edges.begin(); i != out_edges.end(); ++i) {
++      filteredCFGEdgeType filterEdge = *i;
++      node = filterEdge.source().getNode();
++    }  
++    return node;
++  }
++
++
+   /**********************************************************
+    *  print the values of a vector
+    *********************************************************/
+diff --git a/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysis_perFunction.cpp b/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysis_perFunction.cpp
+index 25d0296..56b7451 100644
+--- a/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysis_perFunction.cpp
++++ b/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysis_perFunction.cpp
+@@ -19,7 +19,7 @@ using namespace std;
+  *********************************************************/
+ bool DefUseAnalysisPF::makeSureThatTheDefIsInTable(SgInitializedName* initName) {
+   bool addedNode = false;
+-  vector<pair<SgInitializedName*, SgNode*> > mymap = dfa->getDefMultiMapFor(
++  multitype mymap = dfa->getDefMultiMapFor(
+                                                                             initName);
+   if (mymap.size() == 0) {
+     dfa->addDefElement(initName, initName, initName);
+@@ -40,7 +40,7 @@ bool DefUseAnalysisPF::makeSureThatTheDefIsInTable(SgInitializedName* initName)
+  *********************************************************/
+ bool DefUseAnalysisPF::makeSureThatTheUseIsInTable(SgInitializedName* initName) {
+   bool addedNode = false;
+-  vector<pair<SgInitializedName*, SgNode*> > mymap = dfa->getUseMultiMapFor(
++  multitype mymap = dfa->getUseMultiMapFor(
+                                                                             initName);
+   if (mymap.size() == 0) {
+     dfa->addUseElement(initName, initName, initName);
+@@ -61,32 +61,50 @@ bool DefUseAnalysisPF::makeSureThatTheUseIsInTable(SgInitializedName* initName)
+  * until the first split (2 inedges) or root.
+  *********************************************************/
+ template<typename T>
+-bool DefUseAnalysisPF::hasANodeAboveCurrentChanged(T source) {
++bool DefUseAnalysisPF::hasANodeAboveCurrentChanged(T source, set<SgNode*> &visited) {
+   bool changed = false;
+   // go cfg back until split or root
+   // check nodeChangeMap if a all nodes have changed.
+   // if any has changed return true.
++  SgNode* sourceNode = source.getNode();
++  if (visited.count(sourceNode))
++    return changed;
++  visited.insert(sourceNode);
+   vector<FilteredCFGEdge<IsDFAFilter> > in_edges = source.inEdges();
+-  if (in_edges.size() == 1) {
+-    FilteredCFGEdge<IsDFAFilter> filterEdge = in_edges[0];
++  //if (in_edges.size() != 1) return changed;
++  for (size_t i = 0; i != in_edges.size(); ++i) {
++    FilteredCFGEdge<IsDFAFilter> filterEdge = in_edges[i];
+     FilteredCFGNode<IsDFAFilter> filterNode = filterEdge.source();
+     SgNode* sgNode = filterNode.getNode();
+     ROSE_ASSERT(sgNode);
+     bool changedInTable = nodeChangedMap[sgNode];
+     if (DEBUG_MODE)
+-      cout << " >>> backward CFG : visiting node : " << sgNode << " "
++      cout << " >>> backward CFG : visiting node : " << sgNode->unparseToCompleteString() << " "
+            << sgNode->class_name() << "  changed : " << changedInTable
+            << endl;
+     if (changedInTable) {
+       return true;
+     } else {
+-      changed = hasANodeAboveCurrentChanged(filterNode);
++      changed |= hasANodeAboveCurrentChanged(filterNode, visited);
+     }
+   }
+   return changed;
+ 
+ }
+ 
++template<typename T>
++bool DefUseAnalysisPF::hasANodeIntheScopeChanged(T source) {
++  // recursive all the sub stree to  
++  // check nodeChangeMap if a node has changed.
++  // if any has changed return true.
++  SgNode* sourceNode = source.getNode();
++  vector<SgNode*> sub_nodes = NodeQuery::querySubTree(sourceNode, V_SgNode);
++  for (int i = 0; i != sub_nodes.size(); ++i)
++    if (nodeChangedMap[sub_nodes[i]])
++      return true;
++  return false;
++}
++
+ /**********************************************************
+  *  Build CFG for each function and do DefUse analysis
+  *  This is the main analysis function. Return true if the OUT[n] is changed?
+@@ -145,6 +163,12 @@ bool DefUseAnalysisPF::defuse(T cfgNode, bool *unhandled) {
+         //isUse=true;
+         break;
+       }
++      case V_SgAddressOfOp: { // conservatively analysis
++        isDefinition = true; 
++        dont_replace = true; //may redefine
++        //isUse=true;
++        break;
++      }
+       default: {
+         isDefinition = false;
+         //isUse=true;
+@@ -165,13 +189,13 @@ bool DefUseAnalysisPF::defuse(T cfgNode, bool *unhandled) {
+     SgBinaryOp* binary = isSgBinaryOp(sgNode);
+     SgExpression* l_expr = binary->get_lhs_operand();
+     SgVarRefExp* varRefExp = isSgVarRefExp(l_expr);
+-#if 1
++#if 0
+     SgPntrArrRefExp* varPntrRefExp = isSgPntrArrRefExp(l_expr);
+ #endif
+     if (DEBUG_MODE)
+       cout << " **********  BINARY OP. " << binary << endl;
+     if (varRefExp
+-#if 1
++#if 0
+         || varPntrRefExp
+ #endif
+         ) {
+@@ -187,7 +211,7 @@ bool DefUseAnalysisPF::defuse(T cfgNode, bool *unhandled) {
+                << "  name: " << initName << "  varRefExp: "
+                << varRefExp << endl;
+       }
+-#if 1
++#if 0
+       else if (varPntrRefExp) {
+         while (isSgPntrArrRefExp(varPntrRefExp->get_lhs_operand())) {
+           varPntrRefExp = isSgPntrArrRefExp(
+@@ -237,7 +261,8 @@ bool DefUseAnalysisPF::defuse(T cfgNode, bool *unhandled) {
+           cout << " BINARY OP: " << initName->get_qualified_name().str()
+                << "  name: " << initName << "  varRefExp: " << varRefExp << endl;
+       }
+-#endif
++#else
++#endif      
+       ROSE_ASSERT(initName);
+       ROSE_ASSERT(binary);
+       switch(binary->variantT()) {
+@@ -249,6 +274,7 @@ bool DefUseAnalysisPF::defuse(T cfgNode, bool *unhandled) {
+       case V_SgRshiftAssignOp:
+       case V_SgXorAssignOp:
+       case V_SgAndAssignOp:
++      case V_SgIorAssignOp:
+       case V_SgMinusAssignOp:
+       case V_SgPlusAssignOp: {
+         isDefinition=true;
+@@ -259,6 +285,7 @@ bool DefUseAnalysisPF::defuse(T cfgNode, bool *unhandled) {
+           cout << " **** reached default. no action taken. " << endl;
+         isDefinition=false;
+         //isUse=true;
++        dont_handle = true;
+         break;
+       }
+       }
+@@ -283,26 +310,68 @@ bool DefUseAnalysisPF::defuse(T cfgNode, bool *unhandled) {
+       //isUse = false;
+       isDefinition=true;
+     } else if (isSgExprListExp(l_expr)) {
+-      SgExprListExp* listexp = isSgExprListExp(l_expr);
+-      Rose_STL_Container<SgNode *> exprs =
+-        listexp->get_traversalSuccessorContainer();
++      dont_handle = true;
+       if (DEBUG_MODE)
+-        cout << " DefuseAnalysis:: unhandled condition : SgExprListExp ...  size: " << exprs.size() <<
++        cout << " DefuseAnalysis:: unhandled condition : SgExprListExp ...  " <<
+           "  file : " << l_expr->get_file_info()->get_filenameString() <<
+           "  line : " << l_expr->get_file_info()->get_line() << endl;
+-      return false;
+     } else {
++      dont_handle = true;
+       if (DEBUG_MODE)
+         cout << " DefuseAnalysis:: unhandled condition - AssignInitializer ... "
+-             << "  AssignInitializer - l_expr : " << l_expr->class_name() << "  file : " << l_expr->get_file_info()->get_filenameString()
+-             << "  line : " << l_expr->get_file_info()->get_line() << endl;
++          << "  AssignInitializer - l_expr : " << l_expr->class_name() << "  file : " << l_expr->get_file_info()->get_filenameString()
++          << "  line : " << l_expr->get_file_info()->get_line() << endl;
+       if (DEBUG_MODE)
+         cout << " unparse : " << l_expr->unparseToCompleteString() << endl;
+-      return false;
+       //      exit(0);
+     }
+   }
+-
++  else if (isSgAggregateInitializer(sgNode)) {
++    if (DEBUG_MODE)
++      cout << " **********  AGGREGATEINITIALIZER " << endl;
++    SgNode* l_expr = isSgAggregateInitializer(sgNode)->get_parent();
++    ROSE_ASSERT(l_expr);
++    if (isSgInitializedName(l_expr)) {
++      initName =isSgInitializedName(l_expr);
++      if (DEBUG_MODE)
++        cout << " **********  AGGREGATEINITIALIZER: " << isSgAggregateInitializer(sgNode) << endl;
++      // if left side is not a varrefexp
++      //isUse = false;
++      isDefinition=true;
++    } else {
++      if (DEBUG_MODE)
++        cout << " DefuseAnalysis:: unhandled condition - AggregateInitializer ... "
++             << "  AggregateInitializer - l_expr : " << l_expr->class_name() << "  file : " << l_expr->get_file_info()->get_filenameString()
++             << "  line : " << l_expr->get_file_info()->get_line() << endl;
++      //if (DEBUG_MODE)
++      //  cout << " unparse : " << l_expr->unparseToCompleteString() << endl;
++      dont_handle = true;
++      //      exit(0);
++    }
++  }
++  else if (isSgConstructorInitializer(sgNode)) {
++    if (DEBUG_MODE)
++      cout << " **********  CONSTRUCTORINITIALIZER " << endl;
++    SgNode* l_expr = isSgConstructorInitializer(sgNode)->get_parent();
++    ROSE_ASSERT(l_expr);
++    if (isSgInitializedName(l_expr)) {
++      initName =isSgInitializedName(l_expr);
++      if (DEBUG_MODE)
++        cout << " **********  CONSTRUCTORINITIALIZER: " << isSgConstructorInitializer(sgNode) << endl;
++      // if left side is not a varrefexp
++      //isUse = false;
++      isDefinition=true;
++    } else {
++      if (DEBUG_MODE)
++        cout << " DefuseAnalysis:: unhandled condition - ConstructorInitializer ... "
++             << "  ConstructorInitializer - l_expr : " << l_expr->class_name() << "  file : " << l_expr->get_file_info()->get_filenameString()
++             << "  line : " << l_expr->get_file_info()->get_line() << endl;
++      //if (DEBUG_MODE)
++      //  cout << " unparse : " << l_expr->unparseToCompleteString() << endl;
++      dont_handle = true;
++      //      exit(0);
++    }
++  }
+   else if (isSgInitializedName(sgNode)) {
+     initName =isSgInitializedName(sgNode);
+     if (DEBUG_MODE)
+@@ -345,6 +414,7 @@ bool DefUseAnalysisPF::defuse(T cfgNode, bool *unhandled) {
+         (isSgAssignOp(parentsparent) && (isSgAssignOp(parentsparent)->get_lhs_operand()==array))))
+         {
+       // definition .. dont handle
++      *unhandled = true;
+     } else {
+       // usage
+       isUsage =true;
+@@ -355,25 +425,90 @@ bool DefUseAnalysisPF::defuse(T cfgNode, bool *unhandled) {
+ 
+   else if (isSgFunctionCallExp(sgNode)) {
+     SgFunctionCallExp* fcallExp = isSgFunctionCallExp(sgNode);
++    SgFunctionDeclaration* funcDecl = fcallExp->getAssociatedFunctionDeclaration();
++    SgExpression *call_expr = fcallExp->get_function();
++    bool isHandled=false;
++    bool changedTable=false;
++    SgNode* tmpBefore= sgNodeBefore;
++    if (isSgDotExp(call_expr) || isSgArrowExp(call_expr)) {
++      bool donot_replace = true;
++      bool may_defined = false;
++      if (funcDecl) {
++        SgMemberFunctionType * memfunctype = isSgMemberFunctionType(funcDecl->get_type());
++        if (memfunctype && !memfunctype->isConstFunc())  {
++          donot_replace = false;
++          may_defined = true;
++        }
++      } else 
++        may_defined = true;
++      if (may_defined) {
++        SgInitializedName *class_obj = NULL;
++        SgNode *lhs_op = isSgBinaryOp(call_expr)->get_lhs_operand();
++        if (SgVarRefExp *var_ref = isSgVarRefExp(lhs_op)) {
++          class_obj = var_ref->get_symbol()->get_declaration();
++        }
++        if (class_obj) {
++          //FIXME: enhance analysis to improve accurate for 'donot_replace'
++          changedTable = performUseAndDefinition(sgNode, class_obj, false, true /*isDefinition*/,
++              tmpBefore, false /*donot_replace */, cfgNode);
++          tmpBefore = sgNode;
++          if (changedTable) {
++            if (DEBUG_MODE)
++              cout << "TableChanged" << endl;
++          }
++          isHandled = true;
++        }
++      }
++    }
+     isDefinition=false;
+     //isUse=false;
+     if (DEBUG_MODE)
+       cout << " **********  FUNCTIONCALL. " << fcallExp << endl;
+     SgExprListExp* exprList = fcallExp->get_args();
+     SgExpressionPtrList& list = exprList->get_expressions();
+-    bool isHandled=false;
+     if (list.size()==0)
+       dont_handle=true;
+     else {
+       int counter=0;
+       SgExpressionPtrList::iterator i;
+-      SgNode* tmpBefore= sgNodeBefore;
+-      for (i = list.begin(); i != list.end(); ++i) {
++      int index = 0;
++      int arg_size = -1;
++      if (funcDecl) 
++        arg_size = funcDecl->get_args().size();
++      for (i = list.begin(); i != list.end(); ++i, ++index) {
+         SgExpression* expr = *i;
+         counter++;
+         bool hit = false;
+-        if (isSgCastExp(expr))
++        SgNode* param = NULL;
++        if (index < arg_size)
++          param = funcDecl->get_args()[index];
++        bool may_redefine = false;
++        if (param) {
++          SgInitializedName* param_init = isSgInitializedName(param);
++          if (param_init) {
++            SgType *type = param_init->get_type();
++            if (isSgPointerType(type) || isSgReferenceType(type) ||
++                isSgArrayType(type))
++              may_redefine = true;
++          }
++        }
++        while (isSgCastExp(expr))
+           expr = resolveCast(expr);
++#if 0
++        if (isSgAddressOfOp(expr)) {
++          if (DEBUG_MODE)
++            cout << counter << " AddressOfOp::: expr found in param: << " << expr->class_name() << endl;
++          expr = isSgAddressOfOp(expr)->get_operand();
++          ROSE_ASSERT(expr);
++          may_redefine = true;
++        }
++        if (isSgPntrArrRefExp(expr)) {
++          while (isSgPntrArrRefExp(expr)) {
++            expr = isSgPntrArrRefExp(expr)->get_lhs_operand();
++          }
++        }
++
++#endif
+         if (isSgVarRefExp(expr)) {
+           SgVarRefExp* varRefExp = isSgVarRefExp(expr);
+           initName = varRefExp->get_symbol()->get_declaration();
+@@ -381,23 +516,11 @@ bool DefUseAnalysisPF::defuse(T cfgNode, bool *unhandled) {
+             cout << counter <<" VarRefExp::: expr found in param: << " << expr->class_name() <<
+               "  initName: " << initName->get_qualified_name().str() << endl;
+           //isUse=true;
+-        } else if (isSgAddressOfOp(expr)) {
+-          if (DEBUG_MODE)
+-            cout << counter << " AddressOfOp::: expr found in param: << " << expr->class_name() << endl;
+-          SgNode* node = isSgAddressOfOp(expr)->get_operand();
+-          ROSE_ASSERT(node);
+-          if (isSgVarRefExp(node)) {
+-            SgVarRefExp* varRefExp = isSgVarRefExp(node);
+-            initName = varRefExp->get_symbol()->get_declaration();
+-            if (DEBUG_MODE)
+-              cout << "   --> hit : definition changes conservatively. " <<
+-                "  initName: " << initName->get_qualified_name().str() << endl;
+-            // we want to add this node to the current set
+-            //isUse=true;
+-            // but we do not want it to be replaced
++          if (may_redefine) {
+             dont_replace=true;
+             hit = true;
+-          }
++          } else
++            hit = false;
+         } else {
+           if (DEBUG_MODE)
+             cout <<counter << " PARAMETER in FUNC NOT HANDLED YET:: expr found in param: << " << expr->class_name() << endl;
+@@ -407,8 +530,8 @@ bool DefUseAnalysisPF::defuse(T cfgNode, bool *unhandled) {
+         // e.g. MPI_SEND_WORLD
+         if (hit) {
+           isDefinition=true;
+-          bool changedTable= performUseAndDefinition(sgNode, initName, false, isDefinition,
+-                                                     tmpBefore, dont_replace, cfgNode);
++          changedTable= performUseAndDefinition(sgNode, initName, false, isDefinition,
++              tmpBefore, dont_replace, cfgNode);
+           if (changedTable) {
+             if (DEBUG_MODE)
+               cout << "TableChanged" << endl;
+@@ -429,7 +552,7 @@ bool DefUseAnalysisPF::defuse(T cfgNode, bool *unhandled) {
+         // we assume that the table has changed.
+         if (DEBUG_MODE) 
+           cout << "  isHandled is true, assuming the table has changed.  ???" <<endl;
+-        return true;
++        return changedTable;
+       }
+       if (DEBUG_MODE)
+         cout << " Checking of Parameters done: done_handle: " << resBool(dont_handle) <<endl;
+@@ -452,22 +575,8 @@ bool DefUseAnalysisPF::defuse(T cfgNode, bool *unhandled) {
+ 
+     if (funcEntry) {
+       dfa->addID(sgNode);
+-      vector <SgInitializedName* >:: iterator it = globals.begin();
+-      SgInitializedName* otherIn = NULL;
+-      for (; it != globals.end(); ++it) {
+-        SgInitializedName* initNameTmp = *it;
+-        ROSE_ASSERT(initNameTmp);
+-        // union of global var with current node (function)
+-        if (otherIn == NULL) {
+-          dfa->mapDefUnion(initNameTmp, NULL, sgNode);
+-        } else {
+-          dfa->mapDefUnion(initNameTmp, otherIn, sgNode);
+-        }
+-        otherIn = initNameTmp;
+-
+-        if (DEBUG_MODE)
+-          cout << "\n >> %%%%% handling globalvar: " << initNameTmp->get_qualified_name().str() << endl;
+-      }
++      // union of global var with current node (function)
++      dfa->mapDefUnion(vector<SgNode*>(globals.begin(), globals.end()), sgNode);
+       return true;
+     } else {
+       dont_handle=true;
+@@ -483,17 +592,29 @@ bool DefUseAnalysisPF::defuse(T cfgNode, bool *unhandled) {
+     // then we do want to mark it as handled.
+     if (isSgWhileStmt(sgNode) || isSgForStatement(sgNode)
+         || isSgDoWhileStmt(sgNode)) {
+-      if (breakPointForWhileNode==NULL) {
+-        breakPointForWhileNode=sgNode;
++      if (breakPointForWhileNode.count(sgNode) <= 0) {
++        //breakPointForWhileNode = sgNode;
++        breakPointForWhileNode.insert(sgNode);
+         breakPointForWhile++;
+         if (DEBUG_MODE)
+           cout << ">>> Setting Breakpoint : " << sgNode->class_name() << " " <<sgNode << " " << breakPointForWhile <<endl;
+-      } else if (sgNode==breakPointForWhileNode) {
++      
++      } 
++      //else if (sgNode==breakPointForWhileNode) 
++      else
++      {
+         // reaching the breakPoint for a second time
+         // check if any node above this node up to the branch or root has changed
+         breakPointForWhile++;
+-        bool hasAnyNodeAboveChanged = hasANodeAboveCurrentChanged(cfgNode);
+-        if (hasAnyNodeAboveChanged==false) {
++#if 0
++        set<SgNode*> visited;
++        bool hasAnyNodeAboveChanged = hasANodeAboveCurrentChanged(cfgNode, visited);
++        if (hasAnyNodeAboveChanged==false) 
++#else
++        bool hasAnyNodeIntheScopeChanged = hasANodeIntheScopeChanged(cfgNode);
++        if (hasAnyNodeIntheScopeChanged == false) 
++#endif
++        {
+           // need to break this loop
+           // add current node to doNotVisitMap
+           doNotVisitMap.insert(sgNode);
+@@ -502,14 +623,15 @@ bool DefUseAnalysisPF::defuse(T cfgNode, bool *unhandled) {
+         if (DEBUG_MODE)
+           cout << ">>> Inc Breakpoint : " << sgNode->class_name() << " " <<sgNode << " " << breakPointForWhile <<endl;
+         *unhandled = false;
+-        breakPointForWhileNode=NULL;
++        //breakPointForWhileNode=NULL;
++        breakPointForWhileNode.erase(sgNode);
+         breakPointForWhile=0;
+         if (DEBUG_MODE)
+           cout << ">>> Resetting Breakpoint : " << sgNode->class_name() << " " <<sgNode << " " << breakPointForWhile <<endl;
+-      } else {
++      } /*else {
+         if (DEBUG_MODE)
+           cout << ">>> Skipping unhandled node ... " << endl;
+-      }
++      }*/
+     }
+   }
+ 
+@@ -524,9 +646,10 @@ bool DefUseAnalysisPF::defuse(T cfgNode, bool *unhandled) {
+     }
+     dfa->addID(sgNode);
+     *unhandled = true;
+-    handleDefCopy(sgNode, cfgNode.inEdges().size(), sgNodeBefore, cfgNode);
+-    handleUseCopy(sgNode, cfgNode.inEdges().size(), sgNodeBefore, cfgNode);
+-    return false;
++    bool Changed = false;
++    Changed |= handleDefCopy(sgNode, cfgNode.inEdges().size(), sgNodeBefore, cfgNode);
++    Changed |= handleUseCopy(sgNode, cfgNode.inEdges().size(), sgNodeBefore, cfgNode);
++    return Changed;
+   }
+ 
+   // If the node is a verRefExp but has not initName, then it means
+@@ -576,24 +699,23 @@ bool DefUseAnalysisPF::performUseAndDefinition(SgNode* sgNode,
+ 
+   ROSE_ASSERT(initName);
+ 
+-  if (DEBUG_MODE)
+-    cout << "  ----- Copy Def Info. " << sgNode << " : " << sgNode->class_name()
+-         << " : " << initName->get_qualified_name().str() << endl;
+-  multitype oldTable = dfa->getDefMultiMapFor(sgNode);
+-  handleDefCopy(sgNode, cfgNode.inEdges().size(), sgNodeBefore, cfgNode);
+-  multitype newTable = dfa->getDefMultiMapFor(sgNode);
+-  // did the copying change anything ?
+-  changedTableEntry = checkElementsForChange(&oldTable, &newTable);
+-
+-  if (DEBUG_MODE)
+-    cout << "  ----- CHANGED TABLE after copying ? "
+-         << resBool(changedTableEntry) << endl;
++  if (!isDefinition) {
++    if (DEBUG_MODE)
++      cout << "  ----- IS USE. " << sgNode << " : " << sgNode->class_name()
++           << " : " << initName->get_qualified_name().str() << endl;
++    changedTableEntry |= handleDefCopy(sgNode, cfgNode.inEdges().size(), sgNodeBefore, cfgNode);
+ 
+-  if (DEBUG_MODE)
+-    cout << "  ----- Copy Use Info. " <<endl; 
+-  
+-  handleUseCopy(sgNode, cfgNode.inEdges().size(), sgNodeBefore, cfgNode);
++    if (DEBUG_MODE)
++      cout << "  ----- CHANGED TABLE after copying ? "
++           << resBool(changedTableEntry) << endl;
+ 
++    if (DEBUG_MODE)
++      cout << "  ----- Copy Use Info. " <<endl; 
++    changedTableEntry |= handleUseCopy(sgNode, cfgNode.inEdges().size(), sgNodeBefore, cfgNode);
++    if (DEBUG_MODE)
++      cout << "  ----- CHANGED TABLE after copying ? "
++           << resBool(changedTableEntry) << endl;
++  }
+   if (isUsage) {
+     // tracking the use table
+     multitype mmUse = dfa->getUseMultiMapFor(sgNode);
+@@ -623,24 +745,36 @@ bool DefUseAnalysisPF::performUseAndDefinition(SgNode* sgNode,
+         // if we have only one in-edge, then we overwrite the value
+         // add this as a new entry to the table
+         dfa->mapDefUnion(sgNodeBefore, NULL, sgNode);
+-        dfa->addDefElement(sgNode, initName, initName);
++        multitype mm = dfa->getDefMultiMapFor(sgNode);
++        if (isDoubleExactEntry(&mm, initName, initName) == false)
++          dfa->addDefElement(sgNode, initName, initName);
+         if (DEBUG_MODE)
+           cout
+             << "  ----- globalvar: changed table (one incoming) entry to "
+             << sgNode << endl;
+-      } else {
++      } else if (nrOfInEdges == 2) {
+         // union of the current new Node with the previous CFG Node
+         SgNode* otherInNode = getOtherInNode(cfgNode, sgNodeBefore);
+         ROSE_ASSERT(otherInNode);
+         dfa->mapDefUnion(sgNodeBefore, otherInNode, sgNode);
+-        dfa->addDefElement(sgNode, initName, initName);
++        multitype mm = dfa->getDefMultiMapFor(sgNode);
++        if (isDoubleExactEntry(&mm, initName, initName) == false)
++          dfa->addDefElement(sgNode, initName, initName);
+         if (DEBUG_MODE)
+           cout
+             << "  ----- globalvar: changed table (multi incoming) entry to "
+             << sgNode << " .. otherNode: " << otherInNode
+             << endl;
++      } else {
++        std::vector<SgNode*> allInNode;
++        getAllInNode(cfgNode, allInNode);
++        ROSE_ASSERT(allInNode.size() == nrOfInEdges);
++        dfa->mapDefUnion(allInNode, sgNode);
++        multitype mm = dfa->getDefMultiMapFor(sgNode);
++        if (isDoubleExactEntry(&mm, initName, initName) == false)
++          dfa->addDefElement(sgNode, initName, initName);
+       }
+-      //changedTableEntry = true;
++      changedTableEntry = true;
+       if (DEBUG_MODE) {
+         cout << " GLOBALCINTAINED : printDEFMAP : " << endl;
+         //dfa->printDefMap();
+@@ -661,9 +795,9 @@ bool DefUseAnalysisPF::performUseAndDefinition(SgNode* sgNode,
+   if (isDefinition) {
+     handleUseCopy(sgNode, cfgNode.inEdges().size(), sgNodeBefore, cfgNode);
+     dfa->clearUseOfElement(sgNode, initName);
+-
++#if 0
+     bool isCurrentValueContained = false;
+-    multitype mul = dfa->getDefMultiMapFor(initName);
++    multitype mul = dfa->getDefMultiMapFor(sgNode);
+     //multitype mul = dfa->getDefUseFor(sgNode);
+     if (mul.size() > 0) {
+       isCurrentValueContained = searchMulti(&mul, initName);
+@@ -700,24 +834,37 @@ bool DefUseAnalysisPF::performUseAndDefinition(SgNode* sgNode,
+         // if we have only one in-edge, then we overwrite the value
+         // add this as a new entry to the table
+         dfa->mapDefUnion(sgNodeBefore, NULL, sgNode);
+-        dfa->addDefElement(sgNode, initName, sgNode);
++        multitype mm = dfa->getDefMultiMapFor(sgNode);
++        if (isDoubleExactEntry(&mm, initName, sgNode) == false)
++          dfa->addDefElement(sgNode, initName, sgNode);
+         if (DEBUG_MODE)
+           cout << "  ----- changed table (one incoming) entry to "
+                << sgNode << endl;
+-      } else {
++      } else if (nrOfInEdges == 2) {
+         // union of the current new Node with the previous CFG Node
+         SgNode* otherInNode = getOtherInNode(cfgNode, sgNodeBefore);
+         ROSE_ASSERT(otherInNode);
+         dfa->mapDefUnion(sgNodeBefore, otherInNode, sgNode);
+-        dfa->addDefElement(sgNode, initName, sgNode);
++        multitype mm = dfa->getDefMultiMapFor(sgNode);
++        if (isDoubleExactEntry(&mm, initName, sgNode) == false)
++          dfa->addDefElement(sgNode, initName, sgNode);
+         if (DEBUG_MODE)
+           cout << "  ----- changed table (multi incoming) entry to "
+                << sgNode << " .. otherNode: " << otherInNode
+                << endl;
++      } else {
++        std::vector<SgNode*> allInNode;
++        getAllInNode(cfgNode, allInNode);
++        dfa->mapDefUnion(allInNode, sgNode);
++        multitype mm = dfa->getDefMultiMapFor(sgNode);
++        if (isDoubleExactEntry(&mm, initName, sgNode) == false)
++          dfa->addDefElement(sgNode, initName, sgNode);
+       }
+       changedTableEntry = true;
+ 
+-    } else {
++    } else 
++#endif
++    {
+       if (DEBUG_MODE)
+         cout << "  ----- Definition EXISTS : "
+              << initName->get_qualified_name().str()
+@@ -746,6 +893,7 @@ bool DefUseAnalysisPF::performUseAndDefinition(SgNode* sgNode,
+           multitype mul = dfa->getDefUseFor(sgNode);
+           if (isDoubleExactEntry(&mul, initName, sgNode)==false) {
+           dfa->addElement(sgNode, initName, sgNode);
++          }
+         */
+         multitype mm = dfa->getDefMultiMapFor(sgNode);
+         if (dont_replace == true) {
+@@ -753,13 +901,17 @@ bool DefUseAnalysisPF::performUseAndDefinition(SgNode* sgNode,
+             dfa->addDefElement(sgNode, initName, sgNode);
+         } else
+           dfa->replaceElement(sgNode, initName);
+-        mm = dfa->getDefMultiMapFor(sgNode);
+-        /*/ ---
+-          cout << " !!!!!!!!!!!!!! newTable " << dfa->getIntForSgNode(sgNode) << endl;
+-          multitype mm2 = dfa->getDefUseFor(sgNode);
+-          dfa->printMultiMap(&mm2);
++        bool valid_query = false;
++        changedTableEntry |= dfa->isDefChanged(sgNode, valid_query);
++        if (!valid_query) {
++          mm = dfa->getDefMultiMapFor(sgNode);
++          /*/ ---
++            cout << " !!!!!!!!!!!!!! newTable " << dfa->getIntForSgNode(sgNode) << endl;
++            multitype mm2 = dfa->getDefUseFor(sgNode);
++            dfa->printMultiMap(&mm2);
+           // -- */
+-        changedTableEntry = checkElementsForChange(&oldTable, &(mm));
++          changedTableEntry |= checkElementsForChange(&oldTable, &(mm));
++        }
+         if (DEBUG_MODE)
+           cout << "  ----- changed table (one incoming)  "
+                << resBool(changedTableEntry) << "  dont_replace: "
+@@ -770,7 +922,7 @@ bool DefUseAnalysisPF::performUseAndDefinition(SgNode* sgNode,
+           dfa->printMultiMap(&mm3);
+           // -- */
+ 
+-      } else {
++      } else if (nrOfInEdges == 2) {
+         // otherwise, it we have more than one in-edge, we union the maps
+         SgNode* otherInNode = getOtherInNode(cfgNode, sgNodeBefore);
+         ROSE_ASSERT(otherInNode);
+@@ -778,21 +930,52 @@ bool DefUseAnalysisPF::performUseAndDefinition(SgNode* sgNode,
+         dfa->mapDefUnion(sgNodeBefore, otherInNode, sgNode);
+         // if the value contained is the same, replace it
+         // otherwise add it
+-        if (isDoubleExactEntry(&oldTable, initName, sgNode) == false) {
+-          // important case: if the decision node (2 inedges) is
+-          // changing the value as well, handle special
++        if (dont_replace) {
++          if (isDoubleExactEntry(&oldTable, initName, sgNode) == false) {
++            // important case: if the decision node (2 inedges) is
++            // changing the value as well, handle special
++            dfa->addDefElement(sgNode, initName, sgNode);
++            //cout << ">>> addElement" << endl;
++            //changedTableEntry = true;
++            //breakPointForWhileNode = NULL;
++            breakPointForWhile = 0;
++          }
++        } else {
+           dfa->replaceElement(sgNode, initName);
+-          //cout << ">>> addElement" << endl;
+-          changedTableEntry = false;
+-          breakPointForWhileNode = NULL;
+-          breakPointForWhile = 0;
++          //cout << ">>> replaceElement" << endl;i
++        }
++
++        multitype mm = dfa->getDefMultiMapFor(sgNode);
++        changedTableEntry |= checkElementsForChange(&oldTable,
++                                                       &(mm));
++
++        if (DEBUG_MODE)
++          cout << "  ----- changed table (multi incoming)  "
++               << resBool(changedTableEntry) << endl;
++      } else {
++        // otherwise, it we have more than one in-edge, we union the maps
++        std::vector<SgNode*> allInNode;
++        getAllInNode(cfgNode, allInNode);
++        multitype oldTable = dfa->getDefMultiMapFor(sgNode);
++        dfa->mapDefUnion(allInNode, sgNode);
++        // if the value contained is the same, replace it
++        // otherwise add it
++        if (dont_replace) {
++          if (isDoubleExactEntry(&oldTable, initName, sgNode) == false) {
++            // important case: if the decision node (2 inedges) is
++            // changing the value as well, handle special
++            dfa->addDefElement(sgNode, initName, sgNode);
++            //cout << ">>> addElement" << endl;
++            //changedTableEntry = true;
++            //breakPointForWhileNode = NULL;
++            breakPointForWhile = 0;
++          } 
+         } else {
+           dfa->replaceElement(sgNode, initName);
+           //cout << ">>> replaceElement" << endl;
+-          multitype mm = dfa->getDefMultiMapFor(sgNode);
+-          changedTableEntry = checkElementsForChange(&oldTable,
+-                                                       &(mm));
+         }
++        multitype mm = dfa->getDefMultiMapFor(sgNode);
++        changedTableEntry |= checkElementsForChange(&oldTable, &mm);
+ 
+         if (DEBUG_MODE)
+           cout << "  ----- changed table (multi incoming)  "
+@@ -815,7 +998,7 @@ bool DefUseAnalysisPF::performUseAndDefinition(SgNode* sgNode,
+ /**********************************************************
+  * plain copy of the table
+  *********************************************************/
+-void DefUseAnalysisPF::handleDefCopy(SgNode* sgNode, int nrOfInEdges,
++bool DefUseAnalysisPF::handleDefCopy(SgNode* sgNode, int nrOfInEdges,
+                                      SgNode* sgNodeBefore, filteredCFGNodeType cfgNode) {
+   multitype oldTable = dfa->getDefMultiMapFor(sgNode);
+   if (DEBUG_MODE) {
+@@ -829,7 +1012,11 @@ void DefUseAnalysisPF::handleDefCopy(SgNode* sgNode, int nrOfInEdges,
+       cout << "\t DEFCOPY: Only one incoming EDGE " << sgNode << endl;
+     dfa->mapDefUnion(sgNodeBefore, NULL, sgNode);
+     //  replaceElement(sgNode, initName);
+-  } else {
++    bool valid_query = false;
++    bool changed = dfa->isDefChanged(sgNode, valid_query);
++    if (valid_query)
++      return changed;
++  } else if (nrOfInEdges == 2) {
+     if (DEBUG_MODE)
+       cout << "\t DEFCOPY: "<< nrOfInEdges  << "incoming EDGEs " << sgNode << endl;
+     // otherwise, it we have more than one in-edge, we union the maps
+@@ -837,18 +1024,27 @@ void DefUseAnalysisPF::handleDefCopy(SgNode* sgNode, int nrOfInEdges,
+     ROSE_ASSERT(otherInNode);
+     dfa->mapDefUnion(sgNodeBefore, otherInNode, sgNode);
+     //replaceElement(sgNode, initName);
++  } else {
++    if (DEBUG_MODE)
++      cout << " ---- DEFCOPY: many EDGEs " << sgNode << endl;
++    // otherwise, it we have more than one in-edge, we union the maps
++    std::vector<SgNode*> allInNode;
++    getAllInNode(cfgNode, allInNode);
++    dfa->mapDefUnion(allInNode, sgNode);
+   }
++  multitype newTable = dfa->getDefMultiMapFor(sgNode);
+   if (DEBUG_MODE) {
+     cout << " DEFMAP AFTER UNION of OUT[pred]: " << endl;
+     //dfa->printDefMap();
+     dfa->printMultiMap (dfa->getDefMultiMapFor(sgNode));
+   }
++  return checkElementsForChange(&oldTable, &newTable);
+ }
+ 
+ /**********************************************************
+  * plain copy of the table
+  *********************************************************/
+-void DefUseAnalysisPF::handleUseCopy(SgNode* sgNode, int nrOfInEdges,
++bool DefUseAnalysisPF::handleUseCopy(SgNode* sgNode, int nrOfInEdges,
+                                      SgNode* sgNodeBefore, filteredCFGNodeType cfgNode) {
+   multitype oldTable = dfa->getUseMultiMapFor(sgNode);
+   if (DEBUG_MODE) {
+@@ -864,7 +1060,11 @@ void DefUseAnalysisPF::handleUseCopy(SgNode* sgNode, int nrOfInEdges,
+     
+     dfa->mapUseUnion(sgNodeBefore, NULL, sgNode);
+     //  replaceElement(sgNode, initName);
+-  } else {
++    bool valid_query = false;
++    bool changed = dfa->isUseChanged(sgNode, valid_query);
++    if (valid_query)
++      return changed;
++  } else if (nrOfInEdges == 2) {
+     if (DEBUG_MODE)
+       cout << "\t USECOPY: "<<nrOfInEdges<<" EDGEs " << sgNode << endl;
+     // otherwise, it we have more than one in-edge, we union the maps
+@@ -872,12 +1072,22 @@ void DefUseAnalysisPF::handleUseCopy(SgNode* sgNode, int nrOfInEdges,
+     ROSE_ASSERT(otherInNode);
+     dfa->mapUseUnion(sgNodeBefore, otherInNode, sgNode);
+     //replaceElement(sgNode, initName);
++  } else {
++    if (DEBUG_MODE)
++      cout << " ---- USECOPY: many EDGEs " << sgNode << endl;
++    // otherwise, it we have more than one in-edge, we union the maps
++    std::vector<SgNode*> allInNode;
++    getAllInNode(cfgNode, allInNode);
++    dfa->mapUseUnion(allInNode, sgNode);
++    //replaceElement(sgNode, initName);
+   }
+   if (DEBUG_MODE) {
+     cout << " USEMAP AFTER UNION of OUT[pred]: " << endl;
+     //dfa->printUseMap();
+     dfa->printMultiMap (dfa->getUseMultiMapFor(sgNode));
+   }
++  multitype newTable = dfa->getUseMultiMapFor(sgNode);
++  return checkElementsForChange(&oldTable, &newTable);
+ }
+ 
+ /**********************************************************
+@@ -891,13 +1101,14 @@ int DefUseAnalysisPF::getNumberOfNodesVisited() {
+ static void initList(
+         vector<FilteredCFGNode<IsDFAFilter> >& worklist,
+         vector<FilteredCFGNode<IsDFAFilter> > &debug_path,
+-        FilteredCFGNode<IsDFAFilter> source) {
++        FilteredCFGNode<IsDFAFilter> source, bool DEBUG_MODE) {
+     // stop condition: if the source node is already inside of the list, stop
+     if (find(worklist.begin(), worklist.end(), source) != worklist.end())
+         return;
+     else // otherwise push it
+     {
+         worklist.push_back(source);
++       if (DEBUG_MODE)
+         debug_path.push_back(source);
+     }
+ 
+@@ -910,7 +1121,7 @@ static void initList(
+         // Obtain the out Node
+         FilteredCFGNode<IsDFAFilter> filterNode = filterEdge.target();
+         // process the child node      
+-        initList(worklist, debug_path, filterNode);
++        initList(worklist, debug_path, filterNode, DEBUG_MODE);
+         //            debug_path.push_back(filterNode);
+     }
+ 
+@@ -922,7 +1133,8 @@ FilteredCFGNode<IsDFAFilter> DefUseAnalysisPF::run(
+                                                    SgFunctionDefinition* funcDecl, bool& abortme) {
+   // filter functions -- to only functions in analyzed file
+   nrOfNodesVisitedPF = 0;
+-  breakPointForWhileNode = NULL;
++  //breakPointForWhileNode = NULL;
++  breakPointForWhileNode.clear();
+   breakPointForWhile = 0;
+   // clear those maps for each function run
+   doNotVisitMap.clear();
+@@ -934,7 +1146,6 @@ FilteredCFGNode<IsDFAFilter> DefUseAnalysisPF::run(
+   
+   // maintain counters to detect infinite looping, only for debugging
+   // static std::map <SgNode*, int> counters; 
+-
+   if (funcName == "") {
+     FilteredCFGNode<IsDFAFilter> empty(CFGNode(NULL, 0));
+     return empty;
+@@ -969,10 +1180,11 @@ FilteredCFGNode<IsDFAFilter> DefUseAnalysisPF::run(
+   debug_path.push_back(source);
+ #else
+   // using the classic way to init the worklist: putting all CFG nodes into it
+-  initList (worklist, debug_path, source);
++  initList (worklist, debug_path, source, DEBUG_MODE);
+ #endif   
+   bool valueHasChanged = false;
+   bool unhandledNode = false;
++  bool valueHasChangedLastIteration = false;
+   while (!worklist.empty()) {
+     source = worklist.front();
+     worklist.erase(worklist.begin());
+@@ -984,11 +1196,14 @@ FilteredCFGNode<IsDFAFilter> DefUseAnalysisPF::run(
+     if (doNotVisitMap.find(next) != doNotVisitMap.end()) //Visited or not
+       continue;
+     
+-    multitype oldDefTable = dfa->getDefMultiMapFor(next);
+-    multitype oldUseTable = dfa->getUseMultiMapFor(next);
++    //multitype oldDefTable = dfa->getDefMultiMapFor(next);
++    //multitype oldUseTable = dfa->getUseMultiMapFor(next);
+     //Transfer function here
+     valueHasChanged = defuse(source, &unhandledNode);
+-    nodeChangedMap[source.getNode()] = valueHasChanged;
++    dfa->updateRootStatus(next, valueHasChanged);
++    if (nodeChangedMap.count(next) > 0)
++      valueHasChangedLastIteration = nodeChangedMap[next];
++    nodeChangedMap[next] = valueHasChanged;
+     // do follow-up nodes
+     // get nodes of outgoing edges and pushback (if not already contained)
+     if (DEBUG_MODE) {
+@@ -1013,19 +1228,20 @@ FilteredCFGNode<IsDFAFilter> DefUseAnalysisPF::run(
+     }
+ #endif
+     
+-    multitype newDefTable = dfa->getDefMultiMapFor(next);
+-    multitype newUseTable = dfa->getUseMultiMapFor(next);
+-    
+-    // Use the classic condition: if either def or use info. is changed?
+-    bool defChanged= checkElementsForChange(&oldDefTable, &newDefTable); 
+-    bool useChanged = checkElementsForChange(&oldUseTable, &newUseTable); 
+-    if (defChanged || useChanged)
++    //multitype newDefTable = dfa->getDefMultiMapFor(next);
++    //multitype newUseTable = dfa->getUseMultiMapFor(next);
++    //
++    //// Use the classic condition: if either def or use info. is changed?
++    //bool defChanged= checkElementsForChange(&oldDefTable, &newDefTable); 
++    //bool useChanged = checkElementsForChange(&oldUseTable, &newUseTable); 
++    //if (defChanged || useChanged || valueHasChangedLastIteration)
++    if (valueHasChanged || valueHasChangedLastIteration)
+     //if (valueHasChanged || unhandledNode) 
+     {
+         if (DEBUG_MODE) {
+             cout<<"---------------->>>trying to add outgoing nodes due to: "<<endl;
+-           cout<<"DefMap changed?" << defChanged <<endl; 
+-           cout<<"UseMap changed?" << useChanged <<endl; 
++           //cout<<"DefMap changed?" << defChanged <<endl; 
++           //cout<<"UseMap changed?" << useChanged <<endl; 
+         }
+ #if 0        
+         if (counters[next] >= 1000) {
+@@ -1047,7 +1263,8 @@ FilteredCFGNode<IsDFAFilter> DefUseAnalysisPF::run(
+         if (find(worklist.begin(), worklist.end(), filterNode)
+             == worklist.end()) {
+           worklist.push_back(filterNode);
+-          debug_path.push_back(filterNode);
++          if (DEBUG_MODE)
++            debug_path.push_back(filterNode);
+         }
+       }
+       if (DEBUG_MODE)
+@@ -1059,9 +1276,10 @@ FilteredCFGNode<IsDFAFilter> DefUseAnalysisPF::run(
+           cout<<"---------------->>>No need for adding outgoing nodes since no changes to use or def map "<<endl;
+     }
+   }
+-  if (DEBUG_MODE)
++  if (DEBUG_MODE) {
+     cout << " Elements in Table: " << dfa->getDefSize() << endl;
+-  nrOfNodesVisitedPF = debug_path.size();
++    nrOfNodesVisitedPF = debug_path.size();
++  }
+ 
+   if (DEBUG_MODE) {
+     cout << " Exiting function " << funcName << endl;
+diff --git a/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysis_perFunction.h b/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysis_perFunction.h
+index 85f6454..6dcc979 100644
+--- a/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysis_perFunction.h
++++ b/src/midend/programAnalysis/defUseAnalysis/DefUseAnalysis_perFunction.h
+@@ -7,6 +7,7 @@
+ #ifndef __DefUseAnalysisPF_HXX_LOADED__
+ #define __DefUseAnalysisPF_HXX_LOADED__
+ #include <string>
++#include <set>
+ 
+ #include "DefUseAnalysisAbstract.h"
+ 
+@@ -18,7 +19,10 @@ class DefUseAnalysisPF : public DefUseAnalysisAbstract {
+   bool makeSureThatTheDefIsInTable(SgInitializedName* initName);
+ 
+   template <typename T>
+-    bool hasANodeAboveCurrentChanged(T cfgNode);
++    bool hasANodeAboveCurrentChanged(T cfgNode, std::set<SgNode*> &visited);
++
++  template <typename T>
++    bool hasANodeIntheScopeChanged(T cfgNode);
+ 
+   template <typename T> 
+     bool performUseAndDefinition(SgNode* sgNode, SgInitializedName* initName,
+@@ -28,15 +32,15 @@ class DefUseAnalysisPF : public DefUseAnalysisAbstract {
+ 
+ 
+   // def-use-sepcific ------------------
+-  void handleDefCopy(SgNode* sgNode, int nrOfInEdges, SgNode* sgNodeBefore, 
++  bool handleDefCopy(SgNode* sgNode, int nrOfInEdges, SgNode* sgNodeBefore, 
+                      filteredCFGNodeType cfgNode);
+-  void handleUseCopy(SgNode* sgNode, int nrOfInEdges, SgNode* sgNodeBefore, 
++  bool handleUseCopy(SgNode* sgNode, int nrOfInEdges, SgNode* sgNodeBefore, 
+                      filteredCFGNodeType cfgNode);
+   template <typename T> bool defuse(T cfgNode, bool *unhandled);
+ 
+   int nrOfNodesVisitedPF;
+   int breakPointForWhile;
+-  SgNode* breakPointForWhileNode;
++  std::set<SgNode*>  breakPointForWhileNode;
+   
+  public:
+   DefUseAnalysisPF(bool debug, DefUseAnalysis* dfa_p){
+@@ -44,7 +48,8 @@ class DefUseAnalysisPF : public DefUseAnalysisAbstract {
+     DEBUG_MODE_EXTRA=false;
+     dfa=dfa_p;
+     breakPointForWhile=0;
+-    breakPointForWhileNode=NULL;
++    //breakPointForWhileNode=NULL;
++    breakPointForWhileNode.clear();
+   };
+   virtual ~DefUseAnalysisPF(){};
+   FilteredCFGNode < IsDFAFilter > run(SgFunctionDefinition* function, bool& abortme);
+diff --git a/src/midend/programAnalysis/defUseAnalysis/GlobalVarAnalysis.cpp b/src/midend/programAnalysis/defUseAnalysis/GlobalVarAnalysis.cpp
+index 2532068..a0c8f54 100644
+--- a/src/midend/programAnalysis/defUseAnalysis/GlobalVarAnalysis.cpp
++++ b/src/midend/programAnalysis/defUseAnalysis/GlobalVarAnalysis.cpp
+@@ -44,12 +44,15 @@ bool GlobalVarAnalysis::isGlobalVar(SgInitializedName* initName) {
+ vector<SgInitializedName*> GlobalVarAnalysis::run() {
+   vector<SgInitializedName*> globalVars;
+   globalVars.clear();
+-  
++  set<SgInitializedName*> visited; 
+   Rose_STL_Container<SgNode*> initNames = NodeQuery::querySubTree(project, V_SgInitializedName);
+   for (Rose_STL_Container<SgNode*>::const_iterator i = initNames.begin(); i != initNames.end(); ++i) {
+     SgInitializedName* iName = isSgInitializedName(*i);
+     if (isFromLibrary(iName))
+       continue;
++    if (visited.count(iName) > 0)
++      continue;
++    visited.insert(iName);
+     bool global = isGlobalVar(iName);
+     if (global) {
+       globalVars.push_back(iName);
+diff --git a/src/midend/programAnalysis/defUseAnalysis/LivenessAnalysis.cpp b/src/midend/programAnalysis/defUseAnalysis/LivenessAnalysis.cpp
+index d6564a6..3dcafbd 100644
+--- a/src/midend/programAnalysis/defUseAnalysis/LivenessAnalysis.cpp
++++ b/src/midend/programAnalysis/defUseAnalysis/LivenessAnalysis.cpp
+@@ -224,23 +224,24 @@ bool LivenessAnalysis::defuse(T cfgNode, bool *unhandled) {
+         else
+                 visited[sgNode]++;
+         // remember the Node the comes before
+-#if 0
++#if 1
+         SgNode* sgNodeBefore = getCFGPredNode(cfgNode);
+-        if (forwardAlgo) {
++        if (!forwardAlgo) {
+                 sgNodeBefore = getCFGSuccNode(cfgNode);
+         }
+ #endif
+ 
+         // Determine if the in_edges have been visited before
+         // Have we been here before, if not, unhandled is true
+-        if (forwardAlgo) {
++        if (!forwardAlgo) {
+                 vector<FilteredCFGEdge<IsDFAFilter> > in_edgesCFG = cfgNode.outEdges();
+                 for (vector<FilteredCFGEdge<IsDFAFilter> >::const_iterator i =
+                                 in_edgesCFG.begin(); i != in_edgesCFG.end(); ++i) {
+                         FilteredCFGEdge<IsDFAFilter> filterEdge = *i;
+                         FilteredCFGNode<IsDFAFilter> filterNode = filterEdge.target();
+                         SgNode* sgNode2 = filterNode.getNode();
+-                        if (visited.find(sgNode2) == visited.end())
++                        //if (visited.find(sgNode2) == visited.end())
++                        if (nodeChangedMap[sgNode2])
+                                 *unhandled = true;
+                 }
+         } else {
+@@ -250,16 +251,16 @@ bool LivenessAnalysis::defuse(T cfgNode, bool *unhandled) {
+                         FilteredCFGEdge<IsDFAFilter> filterEdge = *i;
+                         FilteredCFGNode<IsDFAFilter> filterNode = filterEdge.source();
+                         SgNode* sgNode2 = filterNode.getNode();
+-                        if (visited.find(sgNode2) == visited.end())
++                        //if (visited.find(sgNode2) == visited.end())
++                        if (nodeChangedMap[sgNode2])
+                                 *unhandled = true;
+                 }
+         }
+         bool has_changed = false;
+         if (DEBUG_MODE) {
+-                cout
+-                                << "\n\n------------------------------------------------------------------\ncurrent Node: "
+-                                << sgNode << endl;
+-                //"  previous Node : " << sgNodeBefore << endl;
++                cout << "\n\n------------------------------------------------------------------\ncurrent Node: "
++                           << (sgNode ? sgNode->unparseToString() : "") << endl;
++                cout << "  previous Node : " << (sgNodeBefore ? sgNodeBefore->unparseToString() : "") << endl;
+                 printInAndOut(sgNode);
+         }
+ 
+@@ -318,7 +319,16 @@ bool LivenessAnalysis::defuse(T cfgNode, bool *unhandled) {
+                         cout << "  initName : " << initName->get_name().str() << endl;
+                 cout << " Doing out = " << endl;
+         }
+-
++#if 0
++        std::vector<SgInitializedName*> outOLD;
++        {
++                std::map<SgNode*, std::vector<SgInitializedName*> >::const_iterator
++                                it_out = out.find(sgNode);
++                if (it_out != out.end()) {
++                        outOLD = out[sgNode];
++                }
++        }
++#endif
+         // ****************************************************************************
+         // do the algo for variable liveness : OUT[n]
+         // OUT (SgNode) = {}
+@@ -349,6 +359,24 @@ bool LivenessAnalysis::defuse(T cfgNode, bool *unhandled) {
+                 std::sort(out[sgNode].begin(), out[sgNode].end(),
+                                 sort_using_greater_than);
+         }
++#if 0
++        // Has Out[n] changed?
++        std::map<SgNode*, std::vector<SgInitializedName*> >::const_iterator it_out =
++                        out.find(sgNode);
++        //if (it_out != out.end() && outOLD.size() > 0) {
++        if (it_out != out.end()) {
++                // compare the oldIN and the newIN and see if out[n] has changed
++                bool equal = false;
++                
++                if (out[sgNode].size() == outOLD.size())
++                {
++                    equal = std::equal(out[sgNode].begin(), out[sgNode].end(), outOLD.begin());
++                }
++                if (!equal)
++                        has_changed = true;
++        }
++#endif
++
+         // ****************************************************************************
+ 
+ 
+@@ -556,7 +584,8 @@ bool LivenessAnalysis::defuse(T cfgNode, bool *unhandled) {
+         // Has in[n] changed?
+         std::map<SgNode*, std::vector<SgInitializedName*> >::const_iterator it_in =
+                         in.find(sgNode);
+-        if (it_in != in.end() && inOLD.size() > 0) {
++        //if (it_in != in.end() && inOLD.size() > 0) {
++        if (it_in != in.end()) {
+                 // compare the oldIN and the newIN and see if in[n] has changed
+                 bool equal = false;
+                 
+@@ -686,7 +715,7 @@ FilteredCFGNode<IsDFAFilter> LivenessAnalysis::run(
+                 }
+                 if (valueHasChanged || unhandledNode) {
+                         vector<FilteredCFGEdge<IsDFAFilter> > in_edges;
+-                        if (forwardAlgo)
++                        if (!forwardAlgo)
+                                 in_edges = source.inEdges();
+                         else
+                                 // default :
+@@ -695,7 +724,7 @@ FilteredCFGNode<IsDFAFilter> LivenessAnalysis::run(
+                                         in_edges.begin(); i != in_edges.end(); ++i) {
+                                 FilteredCFGEdge<IsDFAFilter> filterEdge = *i;
+                                 FilteredCFGNode<IsDFAFilter> filterNode = filterEdge.target();
+-                                if (forwardAlgo)
++                                if (!forwardAlgo)
+                                         filterNode = filterEdge.source();
+                                 if (find(worklist.begin(), worklist.end(), filterNode)
+                                                 == worklist.end()) {
+@@ -807,12 +836,14 @@ Support::getFullName(SgFunctionDefinition* functionDef)
+     ::std::string fullName = functionDeclaration->get_qualified_name().str();
+ 
+     if ((fullName.find("std::") != std::string::npos) ||
+-        (fullName.find("__") != std::string::npos) ||
++        //(fullName.find("__") != std::string::npos) ||
++        (fullName.find("__") == 0) ||
+         (fullName.find("operator") != std::string::npos)
+         ) return ""; // Explicitly ignore all nodes in the ::std namespace
+ 
+     std::string filename = getFileNameString(functionDeclaration->get_file_info()->get_filename());
+-    if ((filename.find("/usr/") != std::string::npos)
++    if ((filename.find("/usr/") != std::string::npos) ||
++        (filename.find("g++_HEADERS") != std::string::npos)
+         ) return ""; // Explicitly ignore all nodes in the ::std namespace
+     fullName = fullName+getAppName(functionDeclaration);
+     return fullName;
+diff --git a/src/midend/programAnalysis/defUseAnalysis/dfaToDot.cpp b/src/midend/programAnalysis/defUseAnalysis/dfaToDot.cpp
+index 5193b26..9cc5499 100644
+--- a/src/midend/programAnalysis/defUseAnalysis/dfaToDot.cpp
++++ b/src/midend/programAnalysis/defUseAnalysis/dfaToDot.cpp
+@@ -87,24 +87,47 @@ std::string ToString(T t) {
+ 
+     if (live==NULL) {
+       typedef std::vector < std::pair < SgInitializedName* , SgNode*>  > multitype;
+-      std::vector < std::pair <SgInitializedName*, SgNode*> > multi = dfa->getDefMultiMapFor(n);
++      //typedef std::map < SgInitializedName* , std::set<SgNode*> >   multitype;
++      multitype  multi = dfa->getDefMultiMapFor(n);
+       for (multitype::const_iterator j = multi.begin(); j != multi.end(); ++j) {
+         SgInitializedName* sgInitMM = (*j).first;
+         string name = sgInitMM->get_qualified_name().str() ;
++#if 1
+         SgNode* sgNodeMM = (*j).second;
+         string temp = "DEF: " +name + " ( " + ToString(dfa->getIntForSgNode(sgInitMM)) +
+           " )  - " + ToString(dfa->getIntForSgNode(sgNodeMM)) + " \n";
+         retStr += temp;
++#else
++        const set<SgNode*> &sgNodeMM_set = (*j).second;
++        for (std::set<SgNode*>::const_iterator i = sgNodeMM_set.begin();
++            i != sgNodeMM_set.end(); ++i) {
++          SgNode* sgNodeMM = *i;
++          string temp = "DEF: " +name + " ( " + ToString(dfa->getIntForSgNode(sgInitMM)) +
++            " )  - " + ToString(dfa->getIntForSgNode(sgNodeMM)) + " \n";
++          retStr += temp;
++        }
++#endif
+       }
+ 
+       multi = dfa->getUseMultiMapFor(n);
+       for (multitype::const_iterator j = multi.begin(); j != multi.end(); ++j) {
+         SgInitializedName* sgInitMM = (*j).first;
+         string name = sgInitMM->get_qualified_name().str() ;
++#if 1
+         SgNode* sgNodeMM = (*j).second;
+         string temp = "USE: " +name + " ( " + ToString(dfa->getIntForSgNode(sgInitMM)) +
+           " )  - " + ToString(dfa->getIntForSgNode(sgNodeMM)) + " \n";
+         retStr += temp;
++#else
++        const std::set<SgNode*> &sgNodeMM_set = (*j).second;
++        for (std::set<SgNode*>::const_iterator i = sgNodeMM_set.begin(); i != sgNodeMM_set.end();
++            ++i) {
++          SgNode* sgNodeMM = *i;
++          string temp = "USE: " +name + " ( " + ToString(dfa->getIntForSgNode(sgInitMM)) +
++            " )  - " + ToString(dfa->getIntForSgNode(sgNodeMM)) + " \n";
++          retStr += temp;
++        }
++#endif
+       }
+     } else {
+       ROSE_ASSERT(n);
+@@ -132,26 +155,52 @@ std::string ToString(T t) {
+       retStr = outS+"\n";
+ 
+       typedef std::vector < std::pair < SgInitializedName* , SgNode*>  > multitype;
+-      std::vector < std::pair <SgInitializedName*, SgNode*> > multi = dfa->getDefMultiMapFor(n);
++      // typedef std::map < SgInitializedName* , std::set<SgNode*> >   multitype;
++      multitype multi = dfa->getDefMultiMapFor(n);
+       for (multitype::const_iterator j = multi.begin(); j != multi.end(); ++j) {
+         SgInitializedName* sgInitMM = (*j).first;
+         string name = sgInitMM->get_qualified_name().str() ;
++#if 1
+         SgNode* sgNodeMM = (*j).second;
+         string temp = "DEF: " +name + " ( " + ToString(dfa->getIntForSgNode(sgInitMM)) +
+           " )  - " + ToString(dfa->getIntForSgNode(sgNodeMM)) + " \n";
+         if (sgNodeMM==n)
+           retStr += temp;
++#else
++        const std::set<SgNode*> &sgNodeMM_set = (*j).second;
++        for (std::set<SgNode*>::const_iterator i = sgNodeMM_set.begin();
++            i != sgNodeMM_set.end(); ++i) {
++          SgNode *sgNodeMM = *i;
++          string temp = "DEF: " +name + " ( " + ToString(dfa->getIntForSgNode(sgInitMM)) +
++            " )  - " + ToString(dfa->getIntForSgNode(sgNodeMM)) + " \n";
++          if (sgNodeMM==n)
++            retStr += temp;
++        }
++#endif
+       }
+ 
+       multi = dfa->getUseMultiMapFor(n);
+       for (multitype::const_iterator j = multi.begin(); j != multi.end(); ++j) {
+         SgInitializedName* sgInitMM = (*j).first;
+         string name = sgInitMM->get_qualified_name().str() ;
++#if 1
+         SgNode* sgNodeMM = (*j).second;
+         string temp = "USE: " +name + " ( " + ToString(dfa->getIntForSgNode(sgInitMM)) +
+           " )  - " + ToString(dfa->getIntForSgNode(sgNodeMM)) + " \n";
+         if (sgNodeMM==n)
+           retStr += temp;
++#else
++        const set<SgNode*> &sgNodeMM_set = (*j).second;
++        for (std::set<SgNode*>::const_iterator i = sgNodeMM_set.begin();
++             i !=  sgNodeMM_set.end(); ++i) {
++          SgNode *sgNodeMM = *i;
++          string temp = "USE: " +name + " ( " + ToString(dfa->getIntForSgNode(sgInitMM)) +
++            " )  - " + ToString(dfa->getIntForSgNode(sgNodeMM)) + " \n";
++          if (sgNodeMM==n)
++            retStr += temp;
++        }
++
++#endif
+       }
+ 
+     }
+diff --git a/tutorial/defuseAnalysis.C b/tutorial/defuseAnalysis.C
+index 69a59c2..c24c617 100644
+--- a/tutorial/defuseAnalysis.C
++++ b/tutorial/defuseAnalysis.C
+@@ -11,7 +11,6 @@ int main( int argc, char * argv[] )
+ 
+   vector<string> argvList(argv, argv + argc);
+   SgProject* project = frontend(argvList);
+-
+   // Call the Def-Use Analysis
+   DFAnalysis* defuse = new DefUseAnalysis(project);
+   bool debug = false;
+diff --git a/tutorial/reductionRecognition.C b/tutorial/reductionRecognition.C
+index af3554f..8fe1d1d 100644
+--- a/tutorial/reductionRecognition.C
++++ b/tutorial/reductionRecognition.C
+@@ -36,7 +36,6 @@ int main(int argc, char * argv[])
+     std::pair <SgInitializedName*, OmpSupport::omp_construct_enum> item = *iter;
+     cout<<"\t variable: "<<item.first->unparseToString()<<"\t operation:"<<OmpSupport::toString(item.second)<<endl;;
+   }
+-
+   return backend(project);
+ #else
+   std::cerr <<"C preprocessor is not supported in this version of ROSE\n";
+-- 
+1.8.3.1
+

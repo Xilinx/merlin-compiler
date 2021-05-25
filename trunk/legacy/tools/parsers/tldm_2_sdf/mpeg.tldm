@@ -1,0 +1,67 @@
+
+< > :: ( mpeg_top ) // top level task, single instance
+{
+    // iteration domain: <iteration_domain_name: iterators> { constraints_on_iterators; };
+    <macroblock_set:f,mby,mbx> { 0 .LE f; f .LT 300; 0 .LE mby; mby .LT 36 ; 0 .LE mbx .LT 45 ;};
+    <pixel_set:f,y,x>          { 0 .LE f; f .LT 300; 0 .LE y  ; y   .LT 576; 0 .LE x   .LT 720;};
+    <bitstream_set:f,byte_pos> { 0 .LE f; f .LT 300; 0 .LE byte_pos; bype_pos .LT 1000000; };
+    <frame_set: f>             { 0 .LE f; f .LT 300; };
+
+    // data definition:  <iteration_domain>::[type data_set_name];
+    <bitstream_set>::[byte stream_data];
+    <macroblock_set>::[mb_pixel idct_data];
+    <macroblock_set>::[mb_pixel dequant_data];
+    <macroblock_set>::[mb_pixel row2col_data];
+    <macroblock_set>::[mb_pixel cc_data];
+    <macroblock_set>::[mb_pixel mc_data];
+    <macroblock_set>::[mb_pixel tu_data];
+    <macroblock_set>::[mb_pixel text_data];
+    <macroblock_set>::[mb_pixel comp_data];
+    <macroblock_set>::[mb_pixel yuv_data];
+    <macroblock_set>::[mb_pixel rgb_data];
+    <pixel_set>::[byte recframe_data];
+   
+    // task definition: <iteration_domain>::(task_name);
+    <macroblock_set>::(parser) { rp_factor(1); };
+    <macroblock_set>::(dequant) { rp_factor(6); };
+    <macroblock_set>::(idct_row) { rp_factor(6); };
+    <macroblock_set>::(idct_col) { rp_factor(6); };
+    <macroblock_set>::(cc_mc) { rp_factor(1); };
+    <macroblock_set>::(tu) { rp_factor(1); };
+    // <macroblock_set>::(disp) { rp_factor(1); };
+    <frame_set>::(INPUT);
+    <macroblock_set>::(OUTPUT);
+
+    // I/O specification: [input_data_set: index] -> (task_name: index) -> [output_data_set: index];
+    (INPUT: f) -> [stream_data: f, ..] { port_type(fifo); rate(1); };
+
+    [stream_data: f, ..] { port_type(fifo); rate(1); } -> (parser: f, mby, mbx) -> 
+        [idct_data: f, mby, mbx] { port_type(fifo); rate(6); },
+        [cc_data: f, mby, mbx] { port_type(fifo); rate(1); },
+        [mc_data: f, mby, mbx] { port_type(fifo); rate(1); },
+        [tu_data: f, mby, mbx] { port_type(fifo); rate(1); };
+
+    [idct_data: f, mby, mbx] { port_type(fifo); rate(1);} -> (dequant: f, mby, mbx) -> 
+    	[dequant_data: f, mby, mbx] { port_type(fifo); rate(1); };
+    [dequant_data: f, mby, mbx] { port_type(fifo); rate(1); } -> (idct_row: f, mby, mbx) -> 
+    	[row2col_data: f, mby, mbx] { port_type(fifo); rate(1); };
+    [row2col_data: f, mby, mbx] { port_type(fifo); rate(1);} -> (idct_col: f, mby, mbx) -> 
+    	[text_data: f, mby, mbx] { port_type(fifo); rate(1); };
+
+    [cc_data: f, mby, mbx] { port_type(fifo); rate(1); },
+    [mc_data: f, mby, mbx] { port_type(fifo); rate(1); },
+    [recframe_data: f-1, .., ..]{ port_type(bus); rate(1); } -> (cc_mc: f, mby, mbx) -> 
+    	[comp_data: f, mby, mbx] { port_type(fifo); rate(1); };
+    
+    [tu_data: f, mby, mbx] { port_type(fifo); rate(6); },
+    [text_data: f, mby, mbx] { port_type(fifo); rate(1); },
+    [comp_data: f, mby, mbx] { port_type(fifo); rate(1); }-> (tu: f, mby, mbx) -> 
+    	[yuv_data: f, mby, mbx] { port_type(fifo); rate(1); },
+        [recframe: f, mby*16..mby*16+15, mbx*16..mbx*16+15] { port_type(bus); rate(1); };
+
+    [yuv_data: f, mby, mbx] { port_type(fifo); rate(1); } -> (OUTPUT: f, mby, mbx);
+
+//    [yuv_data: f, mby, mbx] -> (disp: f, mby, mbx) -> [rgb_data: f, mby, mbx];
+//    [rgb_data: f, mby, mbx] -> (OUTPUT: f, mby, mbx);
+};
+

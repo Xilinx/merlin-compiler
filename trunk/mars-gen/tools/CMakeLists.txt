@@ -1,0 +1,7 @@
+ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/mars_perl")
+ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/mars_flow")
+ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/mars_test")
+ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/msg_report")
+ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/mcheck")
+ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/mrefactor")
+ add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/merlin_core")

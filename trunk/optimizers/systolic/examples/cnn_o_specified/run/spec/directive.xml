@@ -1,0 +1,12 @@
+<directives>
+
+<platform_name>a10gx_es3</platform_name><part_name>10ax115s2f45i2sges</part_name><arch_name>arria10</arch_name>
+
+<systolic_array>on</systolic_array>
+
+<impl_num>1</impl_num>
+
+<implementation_tool>aocl</implementation_tool>
+
+</directives>
+

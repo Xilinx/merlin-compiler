@@ -1,0 +1,13 @@
+<configuration>
+    <param name="scalar_one">asdf</param>
+	<param_array name="array_one">
+		<item>arr_a</item>
+		<item>arr_b</item>
+	</param_array>
+    <param_tree name="item_one">
+        <cost>123</cost>
+        <value>4343</value>
+        <force_arr0 name="a">123</force_arr0>
+        <force_arr0 name="b">1234</force_arr0>
+    </param_tree>
+</configuration>

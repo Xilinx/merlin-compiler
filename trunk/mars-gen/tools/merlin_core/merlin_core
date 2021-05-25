@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+#!/bin/python
+# -*- coding:utf-8 -*-
+import os
+import argparse
+import sys
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--flow", required=True, help="opt/report")
+    parser.add_argument("--args", required=True, help="original arguments")
+    args = parser.parse_args()
+    #print(args.flow)
+    #print(args.args)
+    merlin_home = os.environ.get('MERLIN_COMPILER_HOME', '.')
+    args_file = ".merlin_core_args"
+    with open(args_file, 'r') as f:
+        content = f.read()
+        #print("content = ")
+        #print(content)
+    #print(merlin_home)
+    if args.flow == "opt":
+        perl_cmd = "mars_perl"
+        file_path = merlin_home + "/mars-gen/scripts/merlin_flow/merlin_flow_opt.pl"
+        #perl_args = args.args
+        perl_args = content
+        cmd = perl_cmd + " " + file_path + " " + perl_args
+        #print("opt flow")
+        #print("cmd = " + cmd)
+        os.system(cmd)
+    elif args.flow == "report":
+        report_cmd = "msg_report"
+        #report_args = args.args
+        report_args = content
+        cmd = report_cmd + " " + report_args
+        #print("report flow")
+        #print("cmd = " + cmd)
+        os.system(cmd)
+    sys.exit(0)

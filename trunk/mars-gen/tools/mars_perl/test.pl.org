@@ -1,0 +1,9 @@
+
+
+$home = $ENV{'ESLOPT_HOME'};
+$in = $ARGV[0];
+
+system ("echo $home");
+print "input is $in\n";
+
+

@@ -1,0 +1,34 @@
+---
+Checks:          'clang-analyzer-*, bugprone-*'
+WarningsAsErrors: ''
+HeaderFilterRegex: 'rose.h, RoseAst.h'
+AnalyzeTemporaryDtors: false
+FormatStyle:    google
+User:            youxiang
+CheckOptions:
+  - key:             cert-dcl16-c.NewSuffixes
+    value:           'L;LL;LU;LLU'
+  - key:             cppcoreguidelines-non-private-member-variables-in-classes.IgnoreClassesWithAllMemberVariablesBeingPu
+    value:           '1'
+  - key:             google-readability-braces-around-statements.ShortStatementLines
+    value:           '1'
+  - key:             google-readability-function-size.StatementThreshold
+    value:           '800'
+  - key:             google-readability-namespace-comments.ShortNamespaceLines
+    value:           '10'
+  - key:             google-readability-namespace-comments.SpacesBeforeComments
+    value:           '2'
+  - key:             modernize-loop-convert.MaxCopySize
+    value:           '16'
+  - key:             modernize-loop-convert.MinConfidence
+    value:           reasonable
+  - key:             modernize-loop-convert.NamingStyle
+    value:           CamelCase
+  - key:             modernize-pass-by-value.IncludeStyle
+    value:           google
+  - key:             modernize-replace-auto-ptr.IncludeStyle
+    value:           google
+  - key:             modernize-use-nullptr.NullMacros
+    value:           'NULL'
+...
+

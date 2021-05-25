@@ -1,0 +1,8 @@
+
+<directives>
+<clock_period>5ns</clock_period>
+<platform_name>xilinx:adm-pcie-ku3:2ddr:3.3</platform_name><part_name>xcku060-ffva1156-2-e</part_name><arch_name>ultra_kintex7</arch_name>
+<implementation_tool > sdaccel </implementation_tool>
+<report_time>on</report_time>
+</directives>
+

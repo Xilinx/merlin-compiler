@@ -1,0 +1,40 @@
+
+<platform_info>
+
+    <platform name = "baidu_kintex7">
+	<ram> 1910 </ram>
+	<dsp> 1920 </dsp>
+	<ff>  597200 </ff>
+	<lut> 298600 </lut>
+	<ram_unit> 18K </ram_unit>
+	<dsp_unit> 25*18 </dsp_unit>
+    </platform>
+
+    <platform name = "alphadata_pcie7v3">
+	<ram> 2940 </ram>
+	<dsp> 3600 </dsp>
+	<ff>  866400 </ff>
+	<lut> 433200 </lut>
+	<ram_unit> 18K </ram_unit>
+	<dsp_unit> 25*18 </dsp_unit>
+    </platform>
+    
+    <platform name = "alphadata_pcieku3">
+	<ram> 2160 </ram>
+	<dsp> 2760 </dsp>
+	<ff>  663360 </ff>
+	<lut> 331680 </lut>
+	<ram_unit> 18K </ram_unit>
+	<dsp_unit> 25*18 </dsp_unit>
+    </platform>
+ 
+    <platform name = "de5net_a7">
+	<ram> 2560 </ram>
+	<dsp> 512 </dsp>
+	<ff>  0 </ff>
+	<lut> 0 </lut>
+	<ram_unit> 20K </ram_unit>
+	<dsp_unit> 18*18 </dsp_unit>
+    </platform>
+ 
+</platform_info>

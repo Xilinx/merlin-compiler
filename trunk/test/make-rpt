@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# this script wraps around 'make' and ignore exit status
+# it tracks the exit status with a file *.error and *.timeout
+
+target=$1
+dir=$2
+
+# set a timeout for 4000 seconds
+timeout 4000 make $target -C $dir -j
+
+# check return value
+ret=$?
+if [ $ret -ne 0 ]; then
+  # if make case fails generate report
+  touch ${dir}.error
+  if [ $ret -eq 124 ]; then
+    touch ${dir}.timeout
+  fi
+fi
+
+# this script always return success
+exit 0

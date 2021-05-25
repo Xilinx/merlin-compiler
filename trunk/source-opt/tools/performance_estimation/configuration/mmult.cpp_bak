@@ -1,0 +1,97 @@
+//  #include <autopilot_tech.h>
+#include <assert.h>
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include "ap_int.h"
+
+typedef ap_uint<512> uint512;
+typedef ap_uint<48> uint48;
+
+void datacopy(uint512 *inout, int number, int length, int read_en, int write_en,
+              int stride) {
+  uint512 buff[2048];
+
+  for (int i = 0; i < number; i++) {
+    int offset = (stride == 0)
+                     ? ((static_cast<uint48>(i) * static_cast<uint48>(length)) %
+                        (1 << 30))
+                     : static_cast<uint48>(length) % (1 << 30);
+
+    if (read_en != 0) {
+      if (stride == 0) {
+        memcpy(static_cast<void *>(buff),
+               reinterpret_cast<void *>(inout + offset),
+               length * sizeof(uint512));
+      } else {
+        for (int j = 0; j < length; j++) {
+          buff[j] = inout[offset + j * stride];
+        }
+      }
+    }
+
+    if (write_en != 0) {
+      if (stride == 0) {
+        memcpy(static_cast<void *>(inout + offset),
+               reinterpret_cast<void *>(buff), length * sizeof(uint512));
+      } else {
+        for (int j = 0; j < length; j++) {
+          inout[offset + j * stride] = buff[j];
+        }
+      }
+    }
+  }
+}
+
+extern "C" {
+
+void mmult(uint512 *inout0, uint512 *inout1, uint512 *inout2, uint512 *inout3,
+           int number, int length, int read_en, int write_en, int stride) {
+//  #pragma AP resource core=AXI4LiteS metadata="-bus_bundle slv0" variable =
+//  return
+//
+//  #pragma AP interface ap_bus port=input
+//  #pragma AP interface ap_bus port=output
+//  #pragma AP resource core=AXI4M variable = output
+//  #pragma AP resource core=AXI4M variable = input
+//  #pragma AP interface ap_fifo port = fromProcessor
+//  #pragma AP resource core=FSL variable = fromProcessor
+#pragma HLS INTERFACE m_axi port = inout0 offset = slave bundle =              \
+    gmem0  //  num_write_outstanding=32 num_read_outstanding=32
+           //  max_write_burst_length=256 max_read_burst_length=256
+#pragma HLS INTERFACE m_axi port = inout1 offset = slave bundle =              \
+    gmem1  //  num_write_outstanding=32 num_read_outstanding=32
+           //  max_write_burst_length=256 max_read_burst_length=256
+#pragma HLS INTERFACE m_axi port = inout2 offset = slave bundle =              \
+    gmem2  //  num_write_outstanding=32 num_read_outstanding=32
+           //  max_write_burst_length=256 max_read_burst_length=256
+#pragma HLS INTERFACE m_axi port = inout3 offset = slave bundle =              \
+    gmem3  //  num_write_outstanding=32 num_read_outstanding=32
+           //  max_write_burst_length=256 max_read_burst_length=256
+//  #pragma HLS INTERFACE m_axi port=output offset=slave bundle=gmem
+//  #pragma HLS INTERFACE s_axilite port=a bundle=control
+#pragma HLS INTERFACE s_axilite port = inout0 bundle = control
+#pragma HLS INTERFACE s_axilite port = inout1 bundle = control
+#pragma HLS INTERFACE s_axilite port = inout2 bundle = control
+#pragma HLS INTERFACE s_axilite port = inout3 bundle = control
+#pragma HLS INTERFACE s_axilite port = number bundle = control
+#pragma HLS INTERFACE s_axilite port = length bundle = control
+#pragma HLS INTERFACE s_axilite port = read_en bundle = control
+#pragma HLS INTERFACE s_axilite port = write_en bundle = control
+#pragma HLS INTERFACE s_axilite port = stride bundle = control
+#pragma HLS INTERFACE s_axilite port = return bundle = control
+
+  //  assert(length < 32768);
+
+  datacopy(inout0, number, length, (read_en >> 0) & 0x1, (write_en >> 0) & 0x1,
+           stride);
+  datacopy(inout1, number, length, (read_en >> 1) & 0x1, (write_en >> 1) & 0x1,
+           stride);
+  datacopy(inout2, number, length, (read_en >> 2) & 0x1, (write_en >> 2) & 0x1,
+           stride);
+  datacopy(inout3, number, length, (read_en >> 3) & 0x1, (write_en >> 3) & 0x1,
+           stride);
+}
+}

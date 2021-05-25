@@ -1,0 +1,88 @@
+#!/bin/bash
+script_dir=$(cd "$( dirname "$(realpath ${BASH_SOURCE[0]})" )" && pwd)
+source $script_dir/../common/link.sh
+
+image=merlin:latest
+
+options="$options -u $(id -u):$(id -g)"
+
+cmd="$@"
+
+for include in `cat .mount_include` ; do
+  check_symbolic ${include:2}
+done
+
+# handle license
+# NOTE: only port@host format is supported
+options="$options -v $script_dir/../license:/opt/merlin/license"
+options="$options -e LM_LICENSE_FILE=$LM_LICENSE_FILE:/opt/merlin/license/license.lic"
+options="$options -e FALCONLM_LICENSE_FILE=$FALCONLM_LICENSE_FILE"
+options="$options -e MERLIN_AUTO_DEVICE_XILINX=$MERLIN_AUTO_DEVICE_XILINX"
+options="$options -e MERLIN_AUTO_DEVICE_INTEL=$MERLIN_AUTO_DEVICE_INTEL"
+
+for path in LM_LICENSE_FILE \
+           FALCONLM_LICENSE_FILE \
+           XILINXD_LICENSE_FILE \
+           MERLIN_AUTO_DEVICE_XILINX \
+           MERLIN_AUTO_DEVICE_INTEL ; do
+  values="${!path}"
+  for v in $(echo $values | tr ":" "\n") ; do
+    if valid $v; then
+      check_symbolic $v
+    fi
+  done
+done
+
+# find mountpoint for pwd
+function get_base {
+  local dir="$1";
+  while [ ! $(dirname $dir) = "/" ]; do
+    dir=$(dirname $dir);
+    if mountpoint $dir &> /dev/null; then
+      break;
+    fi;
+  done;
+  echo $dir;
+}
+
+declare -A illegal_base
+illegal_base["/bin"]=1
+illegal_base["/dev"]=1
+illegal_base["/etc"]=1
+illegal_base["/lib"]=1
+illegal_base["/lib64"]=1
+illegal_base["/media"]=1
+illegal_base["/mnt"]=1
+illegal_base["/opt"]=1
+illegal_base["/proc"]=1
+illegal_base["/root"]=1
+illegal_base["/run"]=1  
+illegal_base["/sbin"]=1  
+illegal_base["/srv"]=1  
+illegal_base["/sys"]=1  
+illegal_base["/usr"]=1  
+illegal_base["/var"]=1
+
+base_dir=$(get_base $PWD)
+if [ ${illegal_base[$base_dir]+abc} ]; then
+  echo "[merlin-cmd] ERROR: running Merlin under a system path: $PWD"
+  exit 1
+fi
+check_symbolic $base_dir shallow
+
+for path in `print_mount` ; do
+  if [ ${illegal_base[$path]} ] ; then
+    echo "[merlin-cmd] ERROR: license files and tools under a system path: $path"
+    exit 1
+  else
+    options="$options -v $path:$path"
+  fi
+done
+
+docker run \
+    $options \
+    -w="$PWD" \
+    -e "WITH_DOCKER=1" \
+    --rm \
+    $image \
+    merlin_core $cmd

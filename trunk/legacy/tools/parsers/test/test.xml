@@ -1,0 +1,308 @@
+<system>
+    <test/>
+    <test1 />
+	<!-- ************************ -->
+	<!-- Computational Components -->
+	<!-- ************************ -->
+	<component name="microblaze">
+        <test name="i"/>
+        <test name="i" />
+		<type>"Computation"</type>
+		<parameters>
+			<iram_size>"64K"</iram_size>
+			<dram_size>"64K"</dram_size>
+		</parameters>
+		<port dir="in" name="fifo_in" type="connect_type1">""</port>
+		<port dir="out" name="fifo_out" type="connect_type1">""</port>
+		<port dir="inout" name="data_inout" type="connect_axi">""</port>
+		<mapping>
+			<task_list>
+				<task name="*">""</task>
+			</task_list>
+		</mapping>
+		<implementation name="parser_sw_imp0" task="parser">
+			<generator>"perl ./scripts/hw_gen.pl ./task1_imp2"</generator>
+			<report>"./task1_imp2/report.xml"</report>
+			<regenerate>"false"</regenerate>
+			<metrics>
+				<best_lat>"121"</best_lat>
+				<aver_lat>"121"</aver_lat>
+				<worst_lat>"121"</worst_lat>
+				<num_BRAM>"0"</num_BRAM>
+				<num_DSP>"0"</num_DSP>
+				<num_FF>"0"</num_FF>
+				<num_LUT>"0"</num_LUT>
+				<power>"?"</power>
+			</metrics>
+		</implementation>
+		<implementation name="dequant_sw_imp0" task="dequant">
+			<generator>"perl ./scripts/hw_gen.pl ./task1_imp2"</generator>
+			<report>"./task1_imp2/report.xml"</report>
+			<regenerate>"false"</regenerate>
+			<metrics>
+				<best_lat>"50356"</best_lat>
+				<aver_lat>"50356"</aver_lat>
+				<worst_lat>"50356"</worst_lat>
+				<num_BRAM>"0"</num_BRAM>
+				<num_DSP>"0"</num_DSP>
+				<num_FF>"0"</num_FF>
+				<num_LUT>"0"</num_LUT>
+				<power>"?"</power>
+			</metrics>
+		</implementation>
+		<implementation name="idct_row_sw_imp0" task="idct_row">
+			<generator>"perl ./scripts/hw_gen.pl ./task1_imp2"</generator>
+			<report>"./task1_imp2/report.xml"</report>
+			<regenerate>"false"</regenerate>
+			<metrics>
+				<best_lat>"156323"</best_lat>
+				<aver_lat>"156323"</aver_lat>
+				<worst_lat>"156323"</worst_lat>
+				<num_BRAM>"0"</num_BRAM>
+				<num_DSP>"0"</num_DSP>
+				<num_FF>"0"</num_FF>
+				<num_LUT>"0"</num_LUT>
+				<power>"?"</power>
+			</metrics>
+		</implementation>
+		<implementation name="idct_col_sw_imp0" task="idct_col">
+			<generator>"perl ./scripts/hw_gen.pl ./task1_imp2"</generator>
+			<report>"./task1_imp2/report.xml"</report>
+			<regenerate>"false"</regenerate>
+			<metrics>
+				<best_lat>"184684"</best_lat>
+				<aver_lat>"184684"</aver_lat>
+				<worst_lat>"184684"</worst_lat>
+				<num_BRAM>"0"</num_BRAM>
+				<num_DSP>"0"</num_DSP>
+				<num_FF>"0"</num_FF>
+				<num_LUT>"0"</num_LUT>
+				<power>"?"</power>
+			</metrics>
+		</implementation>
+		<implementation name="cc_mc_sw_imp0" task="cc_mc">
+			<generator>"perl ./scripts/hw_gen.pl ./task1_imp2"</generator>
+			<report>"./task1_imp2/report.xml"</report>
+			<regenerate>"false"</regenerate>
+			<metrics>
+				<best_lat>"170"</best_lat>
+				<aver_lat>"170"</aver_lat>
+				<worst_lat>"170"</worst_lat>
+				<num_BRAM>"0"</num_BRAM>
+				<num_DSP>"0"</num_DSP>
+				<num_FF>"0"</num_FF>
+				<num_LUT>"0"</num_LUT>
+				<power>"?"</power>
+			</metrics>
+		</implementation>
+		<implementation name="tu_sw_imp0" task="tu">
+			<generator>"perl ./scripts/hw_gen.pl ./task1_imp2"</generator>
+			<report>"./task1_imp2/report.xml"</report>
+			<regenerate>"false"</regenerate>
+			<metrics>
+				<best_lat>"24180"</best_lat>
+				<aver_lat>"24180"</aver_lat>
+				<worst_lat>"24180"</worst_lat>
+				<num_BRAM>"0"</num_BRAM>
+				<num_DSP>"0"</num_DSP>
+				<num_FF>"0"</num_FF>
+				<num_LUT>"0"</num_LUT>
+				<power>"?"</power>
+			</metrics>
+		</implementation>
+	</component>
+	<component name="dequantAcc">
+		<type>"Accelerator"</type>
+		<implementation name="dequant_hw_imp0" task="dequant">
+			<generator>"perl ../../../scripts/hw_gen.pl ./src/dequant dequant"</generator>
+			<report>"./src/dequant/report.xml"</report>
+			<pcore>"./src/dequant/pcores"</pcore>
+			<metrics>
+				<best_lat>"211"</best_lat>
+				<aver_lat>"240"</aver_lat>
+				<worst_lat>"283"</worst_lat>
+				<num_BRAM>"10"</num_BRAM>
+				<num_DSP>"3"</num_DSP>
+				<num_FF>"1171"</num_FF>
+				<num_LUT>"2290"</num_LUT>
+				<power>"345"</power>
+			</metrics>
+		</implementation>
+	</component>
+	<component name="parserAcc">
+		<type>"Accelerator"</type>
+		<implementation name="parser_hw_imp0" task="parser">
+			<generator>"perl ../../../scripts/hw_gen.pl ./src/parser parser"</generator>
+			<report>"./src/parser/report.xml"</report>
+			<pcore>"./src/parser/pcores"</pcore>
+			<metrics>
+				<best_lat>"210"</best_lat>
+				<aver_lat>"1084"</aver_lat>
+				<worst_lat>"2653"</worst_lat>
+				<num_BRAM>"33"</num_BRAM>
+				<num_DSP>"1"</num_DSP>
+				<num_FF>"1139"</num_FF>
+				<num_LUT>"2823"</num_LUT>
+				<power>"397"</power>
+			</metrics>
+			<regenerate>"false"</regenerate>
+		</implementation>
+	</component>
+	<component name="idct_colAcc">
+		<type>"Accelerator"</type>
+		<implementation name="idct_col_hw_imp0" task="idct_col">
+			<generator>"perl ../../../scripts/hw_gen.pl ./src/BlockIDCT_Col idct_col"</generator>
+			<report>"./src/BlockIDCT_Col/report.xml"</report>
+			<pcore>"./src/BlockIDCT_Col/pcores"</pcore>
+			<metrics>
+				<best_lat>"357"</best_lat>
+				<aver_lat>"357"</aver_lat>
+				<worst_lat>"357"</worst_lat>
+				<num_BRAM>"9"</num_BRAM>
+				<num_DSP>"8"</num_DSP>
+				<num_FF>"833"</num_FF>
+				<num_LUT>"663"</num_LUT>
+				<power>"149"</power>
+			</metrics>
+			<regenerate>"false"</regenerate>
+		</implementation>
+	</component>
+	<component name="idct_rowAcc">
+		<type>"Accelerator"</type>
+		<implementation name="idct_row_hw_imp0" task="idct_row">
+			<generator>"perl ../../../scripts/hw_gen.pl ./src/BlockIDCT_Row idct_row"</generator>
+			<report>"./src/BlockIDCT_Row/report.xml"</report>
+			<pcore>"./src/BlockIDCT_Row/pcores"</pcore>
+			<metrics>
+				<best_lat>"181"</best_lat>
+				<aver_lat>"181"</aver_lat>
+				<worst_lat>"181"</worst_lat>
+				<num_BRAM>"8"</num_BRAM>
+				<num_DSP>"8"</num_DSP>
+				<num_FF>"615"</num_FF>
+				<num_LUT>"209"</num_LUT>
+				<power>"80"</power>
+			</metrics>
+			<regenerate>"false"</regenerate>
+		</implementation>
+	</component>
+	<component base_addr="0xbde00000" name="cc_mcAcc">
+		<type>"Accelerator"</type>
+		<base_addr>
+			<port name="recFrame">"0xbde00000"</port>
+		</base_addr>
+		<implementation name="cc_mc_hw_imp0" task="cc_mc">
+			<generator>"perl ../../../scripts/hw_gen.pl ./src/cc_mc cc_mc"</generator>
+			<report>"./src/cc_mc/report.xml"</report>
+			<pcore>"./src/cc_mc/pcores"</pcore>
+			<metrics>
+				<best_lat>"8"</best_lat>
+				<aver_lat>"1875"</aver_lat>
+				<worst_lat>"5443"</worst_lat>
+				<num_BRAM>"12"</num_BRAM>
+				<num_DSP>"4"</num_DSP>
+				<num_FF>"526"</num_FF>
+				<num_LUT>"1134"</num_LUT>
+				<power>"269"</power>
+			</metrics>
+			<regenerate>"false"</regenerate>
+		</implementation>
+	</component>
+	<component base_addr="0xbdf00000" name="tuAcc">
+		<type>"Accelerator"</type>
+		<base_addr>
+			<port name="recFrame">"0xbdf00000"</port>
+		</base_addr>
+		<implementation name="tu_hw_imp0" task="tu">
+			<generator>"perl ../../../scripts/hw_gen.pl ./src/tu tu"</generator>
+			<report>"./src/tu/report.xml"</report>
+			<pcore>"./src/tu/pcores"</pcore>
+			<metrics>
+				<best_lat>"499"</best_lat>
+				<aver_lat>"1021"</aver_lat>
+				<worst_lat>"1291"</worst_lat>
+				<num_BRAM>"1"</num_BRAM>
+				<num_DSP>"2"</num_DSP>
+				<num_FF>"310"</num_FF>
+				<num_LUT>"381"</num_LUT>
+				<power>"69"</power>
+			</metrics>
+			<regenerate>"false"</regenerate>
+		</implementation>
+	</component>
+	<!-- ******************* -->
+	<!-- Storage  Components -->
+	<!-- ******************* -->
+	<component name="SRAM">
+		<type>"Storage"</type>
+		<port dir="in" name="data_in" type="connect_axi">""</port>
+		<port dir="out" name="data_out" type="connect_axi">""</port>
+	</component>
+	<component name="DRAM">
+		<type>"Storage"</type>
+		<port dir="in" name="data_in" type="connect_axi">""</port>
+		<port dir="out" name="data_out" type="connect_axi">""</port>
+	</component>
+	<!-- ************************ -->
+	<!-- Communication Components -->
+	<!-- ************************ -->
+	<component name="axi_bus">
+		<type>"Communication"</type>
+		<port count="0.." dir="in" name="masterW" type="connect_axi">""</port>
+		<port count="0.." dir="out" name="masterR" type="connect_axi">""</port>
+		<port count="0.." dir="inout" name="slave" type="connect_axi">""</port>
+		<paths>
+			<path>
+				<from>"masterW"</from>
+				<to>"slave"</to>
+			</path>
+			<path>
+				<from>"slave"</from>
+				<to>"masterR"</to>
+			</path>
+		</paths>
+	</component>
+	<component name="fsl_fifo">
+		<type>"Communication"</type>
+		<port dir="in" name="data_in" type="connect_axi">""</port>
+		<port dir="out" name="data_out" type="connect_axi">""</port>
+	</component>
+	<!-- *************************** -->
+	<!-- Interconnection Constraints -->
+	<!-- *************************** -->
+	<connect_type name="connect_fifo">
+		<!-- FSL bus -->
+		<in>"FSL_slave"</in>
+		<out>"FSL_master"</out>
+		<connect_rules>
+			<connect s="in" t="out">""</connect>
+		</connect_rules>
+	</connect_type>
+	<connect_type name="connect_axi">
+		<!-- AXI bus -->
+		<in>"AXI_slave"</in>
+		<out>"AXI_master"</out>
+		<inout>"AXI_masterslave"</inout>
+		<connect_rules>
+			<connect s="in" t="out">""</connect>
+			<connect s="in" t="inout">""</connect>
+			<connect s="inout" t="out">""</connect>
+			<connect s="inout" t="inout">""</connect>
+		</connect_rules>
+	</connect_type>
+	<!-- ********************************* -->
+	<!-- Platform Architecture Constraints -->
+	<!-- ********************************* -->
+	<platform name="system">
+		<instance component="microblaze" count="1" name="mb">""</instance>
+		<instance component="parserAcc" count="0..1" name="parserAcc">""</instance>
+		<instance component="dequantAcc" count="0..1" name="dequantAcc">""</instance>
+		<instance component="idct_rowAcc" count="0..1" name="idct_rowAcc">""</instance>
+		<instance component="idct_colAcc" count="0..1" name="idct_colAcc">""</instance>
+		<instance component="cc_mcAcc" count="0..1" name="cc_mcAcc">""</instance>
+		<instance component="tuAcc" count="0..1" name="tuAcc">""</instance>
+		<instance component="connect_axi" count="1" name="connect_axi0">""</instance>
+		<instance component="fsl_fifo" count="*" name="fsl_fifo">""</instance>
+		<instance component="DRAM" count="1" name="dram">""</instance>
+	</platform>
+</system>

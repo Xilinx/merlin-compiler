@@ -1,0 +1,50 @@
+
+To add a platform:
+
+1. create a folder in trunk/mars-gen/scripts, the folder name the same as implementation_tool in directive.xml file,
+   for example ,sdaccel
+
+2. in the folder, there need to Makefile to do every thing which have platform dependent.
+   here is the options which needed in Makefile:
+
+###################################################################
+preprocess:
+    @do some preprocess for Merlin generated code, including merlin library and host code
+kernel_gen:
+    @do some kernel code transformation for specific platform
+lib_gen:
+    @generate merlin opencl library, this may need platform specific library
+    @generate bin/ directory
+host :
+    @generate host program
+    @generate in current directory
+sim_config: 
+    @generate configuration file for software simulation
+    @generate in current directory
+    if passed, generate sim_pass.o
+exec_sim: 
+    @execute simulation with host program, library and software simulation configuration file
+    @generate in current directory
+hw_sim: 
+    @generate configuration file for hardware simlation
+    @generate in current directory
+    if passed, generate hw_sim_pass.o
+hw_sim_config: 
+    @execute simulation with host program, library and hardware simulation configuration file
+    @generate in current directory
+hls:  
+    @run estimation flow
+    @generate merlin.rpt in current directory
+    if passed, generate estimate_pass.o
+bit: impl 
+impl:
+    @generate on board configuretion file
+    @generate in current directory
+    if passed, generate impl_pass.o
+exec:
+    @need a run.pl file to run on baord, use remote_exec.pl to run on remote server
+	cp ${MERLIN_COMPILER_HOME}/mars-gen/scripts/xxx/run.pl fpga_run/
+	mars_perl ${MERLIN_COMPILER_HOME}/mars-gen/scripts/merlin_flow/remote_exec.pl 'perl run.pl $(HOST_ARGS)' -server $(SERVER) -copy -ldir ./fpga_run;	
+clean :
+
+###################################################################

@@ -1,0 +1,13 @@
+Prequest environment:
+1. python >= 3.6.8
+2. cmake >= 3.19.0
+
+How to build:
+1. in merlin_setting.sh, change MERLIN_COMPILER_HOME to your absolute path
+2. source merlin_setting.sh
+3. cd trunk/build;
+4. cmake3 -DCMAKE_BUILD_TYPE=Release ..;
+5. make -j;
+
+How to run:
+run "merlincc -h", follow the help message

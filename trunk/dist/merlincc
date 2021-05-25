@@ -1,0 +1,10 @@
+#!/bin/bash
+script_dir=$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)
+
+#$script_dir/merlin-cmd merlincc $@
+run_script=.mrun.sh
+echo "#/bin/bash" > $run_script
+echo "merlincc $@" >> $run_script
+chmod +x $run_script
+$script_dir/merlin-cmd ./$run_script $@
+trap "rm -f $run_script" SIGINT SIGTERM EXIT ERR SIGTSTP

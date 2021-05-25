@@ -1,0 +1,57 @@
+<directives>
+
+<!-- design constraints -->
+<throughput>"100"</throughput>   <!-- iteration_per_second -->
+<!-- 
+<bfifo_unit_size>"32768"</bfifo_unit_size>
+<bfifo_depth_factor>"2"</bfifo_depth_factor>
+<platform_name>"zed"</platform_name><part_name>"xc7z020clg484-1"</part_name><arch_name>"zynq"</arch_name>
+<platform_name>"vc707"</platform_name><part_name>"xc7vx485tffg1761-2"</part_name><arch_name>"virtex7"</arch_name>
+<platform_name>"kc705"</platform_name><part_name>"xc7k325tffg900-2"</part_name><arch_name>"kintex7"</arch_name>
+<platform_name>"ml605"</platform_name><part_name>"xc6vlx240tff1156-1"</part_name><arch_name>"virtex6lx"</arch_name>
+<platform_name>"convey_hc1ex"</platform_name><part_name>"xc6vlx760ff1760-1"</part_name><arch_name>"virtex6lx"</arch_name>
+<platform_name>"vc709"</platform_name><part_name>"xc7vx690tffg1761-2"</part_name><arch_name>"virtex7"</arch_name>
+<platform_name>"zc706"</platform_name><part_name>"xc7z045ffg900-2"</part_name><arch_name>"zynq"</arch_name>
+<platform_name>"vc707"</platform_name><part_name>"xc7vx485tffg1761-2"</part_name><arch_name>"virtex7"</arch_name>
+-->
+<clock_period>"10.0ns"</clock_period>
+<platform_name>"alphadata_pcie7v3"</platform_name><part_name>"xc7vx690tffg1761-2"</part_name><arch_name>"virtex7"</arch_name>
+<utilization_threshold>"0.8"</utilization_threshold>
+
+
+
+<!-- optimization schemes -->
+<optimization_target>performance</optimization_target>
+<data_reuse         > on </data_reuse>
+<block_streaming    > on </block_streaming>
+<module_selection   > off </module_selection>
+<module_duplication > on</module_duplication>
+ 
+<!-- compiler-->
+<!--
+<c_language>cpp</c_language>
+-->
+<c_language>c</c_language>
+
+
+<!-- design flow -->
+<elaboration   > c_cpp </elaboration>
+<optimization  > on  </optimization>
+<analysis      > on    </analysis>
+<assembly      > on   </assembly>
+<low_level_syn > on   </low_level_syn>
+<low_level_sim > off  </low_level_sim>
+<testing      >  on   </testing>
+<testing_run_ref> off </testing_run_ref>
+<testing_run_xmd> off </testing_run_xmd>
+<testing_run_sim> off </testing_run_sim>
+<testing_run_pci> on </testing_run_pci>
+<testing_run_convey> off </testing_run_convey>
+
+
+
+<!-- misc -->
+<interactive_mode> off </interactive_mode>
+<simulation_model> bfm </simulation_model>
+
+</directives>

@@ -1,0 +1,7 @@
+<project name="run">
+  <source_file_set>
+    <file type="cpp">../src/cnn_auto.cpp</file>
+  </source_file_set>
+  <aux_file_set />
+  <spec_file>../run/spec/directive.xml</spec_file>
+</project>

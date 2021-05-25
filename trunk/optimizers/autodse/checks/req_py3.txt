@@ -1,0 +1,15 @@
+# This file is only for testing DSE Python code with Python 3
+# The reason to have a separate requirement package file is that
+# sqlite used in OpenTuner does not support Python 3 and should be
+# upgraded to sqlite3. As a result, this file should be removed
+# after we achieve fully Python 3 compaitble.
+typing
+gnuplotlib
+argparse>=1.2.1
+fn>=0.2.12
+numpy>=1.8.2
+#pysqlite>=2.6.3
+#SQLAlchemy>=0.8.2
+#networkx>=1.9
+scipy>=0.13.3
+scikit-learn>=0.19.2

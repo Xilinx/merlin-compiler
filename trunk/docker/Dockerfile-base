@@ -1,0 +1,17 @@
+FROM centos:7
+MAINTAINER Jin.Tian tianj@facon-computing.com
+LABEL Version "0.1"
+
+# merlin root folder
+WORKDIR /opt/merlin
+
+# add merlin dependencies
+COPY rose     source-opt/lib/rose
+COPY gcc4.9.4 source-opt/lib/gcc4.9.4
+COPY clang    source-opt/lib/clang
+COPY boost_1_67    source-opt/lib/boost_1_67
+
+# install DSE dependencies
+COPY opentuner/requirements.txt opentuner-requirements.txt
+COPY merlin-base_dockerscript-${HOSTNAME}.sh merlin-base_dockerfile.sh
+RUN bash merlin-base_dockerfile.sh

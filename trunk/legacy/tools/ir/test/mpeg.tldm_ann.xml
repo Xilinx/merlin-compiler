@@ -1,0 +1,636 @@
+<system>
+	<task_def name="top">
+		<comment>"// top level task, single instance"</comment>
+		<comment>"// iteration domain: <iteration_domain_name: iterators> { constraints_on_iterators; };"</comment>
+		<iteration_domain_def name="macroblock_set">
+			<vector>
+				<identifier>"f"</identifier>
+				<identifier>"mby"</identifier>
+				<identifier>"mbx"</identifier>
+			</vector>
+			<expression opcode="<=">
+				<integer>"0"</integer>
+				<identifier>"f"</identifier>
+			</expression>
+			<expression opcode="<">
+				<identifier>"f"</identifier>
+				<integer>"300"</integer>
+			</expression>
+			<expression opcode="<=">
+				<integer>"0"</integer>
+				<identifier>"mby"</identifier>
+			</expression>
+			<expression opcode="<">
+				<identifier>"mby"</identifier>
+				<integer>"36"</integer>
+			</expression>
+			<expression opcode="<">
+				<expression opcode="<=">
+					<integer>"0"</integer>
+					<identifier>"mbx"</identifier>
+				</expression>
+				<integer>"45"</integer>
+			</expression>
+		</iteration_domain_def>
+		<iteration_domain_def name="pixel_set">
+			<vector>
+				<identifier>"f"</identifier>
+				<identifier>"y"</identifier>
+				<identifier>"x"</identifier>
+			</vector>
+			<expression opcode="<=">
+				<integer>"0"</integer>
+				<identifier>"f"</identifier>
+			</expression>
+			<expression opcode="<">
+				<identifier>"f"</identifier>
+				<integer>"300"</integer>
+			</expression>
+			<expression opcode="<=">
+				<integer>"0"</integer>
+				<identifier>"y"</identifier>
+			</expression>
+			<expression opcode="<">
+				<identifier>"y"</identifier>
+				<integer>"576"</integer>
+			</expression>
+			<expression opcode="<">
+				<expression opcode="<=">
+					<integer>"0"</integer>
+					<identifier>"x"</identifier>
+				</expression>
+				<integer>"720"</integer>
+			</expression>
+		</iteration_domain_def>
+		<iteration_domain_def name="bitstream_set">
+			<vector>
+				<identifier>"f"</identifier>
+				<identifier>"byte_pos"</identifier>
+			</vector>
+			<expression opcode="<=">
+				<integer>"0"</integer>
+				<identifier>"f"</identifier>
+			</expression>
+			<expression opcode="<">
+				<identifier>"f"</identifier>
+				<integer>"300"</integer>
+			</expression>
+			<expression opcode="<=">
+				<integer>"0"</integer>
+				<identifier>"byte_pos"</identifier>
+			</expression>
+			<expression opcode="<">
+				<identifier>"bype_pos"</identifier>
+				<integer>"1000000"</integer>
+			</expression>
+		</iteration_domain_def>
+		<iteration_domain_def name="frame_set">
+			<vector>
+				<identifier>"f"</identifier>
+			</vector>
+			<expression opcode="<=">
+				<integer>"0"</integer>
+				<identifier>"f"</identifier>
+			</expression>
+			<expression opcode="<">
+				<identifier>"f"</identifier>
+				<integer>"300"</integer>
+			</expression>
+		</iteration_domain_def>
+		<comment>"// data definition:  <iteration_domain>::[type data_set_name];"</comment>
+		<data_def name="stream_fifo">
+			<domain_ref name="bitstream_set">""</domain_ref>
+			<data_type>"byte"</data_type>
+		</data_def>
+		<data_def name="idct_fifo">
+			<domain_ref name="macroblock_set">""</domain_ref>
+			<data_type>"mb_pixel"</data_type>
+		</data_def>
+		<data_def name="dequant_fifo">
+			<domain_ref name="macroblock_set">""</domain_ref>
+			<data_type>"mb_pixel"</data_type>
+		</data_def>
+		<data_def name="row2col_fifo">
+			<domain_ref name="macroblock_set">""</domain_ref>
+			<data_type>"mb_pixel"</data_type>
+		</data_def>
+		<data_def name="cc_fifo">
+			<domain_ref name="macroblock_set">""</domain_ref>
+			<data_type>"mb_pixel"</data_type>
+		</data_def>
+		<data_def name="mc_fifo">
+			<domain_ref name="macroblock_set">""</domain_ref>
+			<data_type>"mb_pixel"</data_type>
+		</data_def>
+		<data_def name="tu_fifo">
+			<domain_ref name="macroblock_set">""</domain_ref>
+			<data_type>"mb_pixel"</data_type>
+		</data_def>
+		<data_def name="text_fifo">
+			<domain_ref name="macroblock_set">""</domain_ref>
+			<data_type>"mb_pixel"</data_type>
+		</data_def>
+		<data_def name="comp_fifo">
+			<domain_ref name="macroblock_set">""</domain_ref>
+			<data_type>"mb_pixel"</data_type>
+		</data_def>
+		<data_def name="recframe_data">
+			<domain_ref name="pixel_set">""</domain_ref>
+			<data_type>"byte"</data_type>
+		</data_def>
+		<comment>"// task definition: <iteration_domain>::(task_name);"</comment>
+		<comment>"//<macroblock_set>::(parser@parser_sw_imp0) { dup_factor(1); }     ;"</comment>
+		<comment>"//<macroblock_set>::(dequant)	 { rate(6); } ;"</comment>
+		<comment>"//<macroblock_set>::(idct_row) { rate(6); } ;"</comment>
+		<comment>"//<macroblock_set>::(idct_col) { rate(6); } ;"</comment>
+		<comment>"//<macroblock_set>::(cc_mc@cc_mc_hw_imp0)   { dup_factor(1); }    ;"</comment>
+		<comment>"//<macroblock_set>::(tu)             ;"</comment>
+		<task_def name="INPUT">
+			<domain_ref name="frame_set">""</domain_ref>
+		</task_def>
+		<task_def name="OUTPUT">
+			<domain_ref name="frame_set">""</domain_ref>
+		</task_def>
+		<task_def name="parser" position="parser_sw_imp0">
+			<domain_ref name="macroblock_set">""</domain_ref>
+			<attribute name="dup_factor">
+				<integer>"1"</integer>
+			</attribute>
+		</task_def>
+		<task_def name="dequant" position="dequant_hw_imp0">
+			<domain_ref name="macroblock_set">""</domain_ref>
+			<attribute name="rate">
+				<integer>"6"</integer>
+			</attribute>
+			<attribute name="dup_factor">
+				<integer>"1"</integer>
+			</attribute>
+		</task_def>
+		<task_def name="idct_row" position="idct_row_hw_imp0">
+			<domain_ref name="macroblock_set">""</domain_ref>
+			<attribute name="rate">
+				<integer>"6"</integer>
+			</attribute>
+			<attribute name="dup_factor">
+				<integer>"1"</integer>
+			</attribute>
+		</task_def>
+		<task_def name="idct_col" position="idct_col_hw_imp0">
+			<domain_ref name="macroblock_set">""</domain_ref>
+			<attribute name="rate">
+				<integer>"6"</integer>
+			</attribute>
+			<attribute name="dup_factor">
+				<integer>"1"</integer>
+			</attribute>
+		</task_def>
+		<task_def name="cc_mc" position="cc_mc_hw_imp0">
+			<domain_ref name="macroblock_set">""</domain_ref>
+			<attribute name="dup_factor">
+				<integer>"1"</integer>
+			</attribute>
+		</task_def>
+		<task_def name="tu" position="tu_hw_imp0">
+			<domain_ref name="macroblock_set">""</domain_ref>
+			<attribute name="dup_factor">
+				<integer>"1"</integer>
+			</attribute>
+		</task_def>
+		<comment>"// I/O specification: [input_data_set: index] -> (task_name: index) -> [output_data_set: index];"</comment>
+		<connect_list>
+			<connect>
+				<data_ref name="stream_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<expression opcode="range">
+							<negative_infinite>""</negative_infinite>
+							<positive_infinite>""</positive_infinite>
+						</expression>
+					</vector>
+				</data_ref>
+				<task_ref name="INPUT">
+					<vector>
+						<identifier>"f"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"out"</direction>
+			</connect>
+		</connect_list>
+		<connect_list>
+			<connect>
+				<data_ref name="stream_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<expression opcode="range">
+							<negative_infinite>""</negative_infinite>
+							<positive_infinite>""</positive_infinite>
+						</expression>
+					</vector>
+				</data_ref>
+				<task_ref name="parser">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"in"</direction>
+			</connect>
+			<connect>
+				<data_ref name="idct_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+					<attribute name="unit_size">
+						<integer>"5"</integer>
+					</attribute>
+					<attribute name="monitor">
+						<integer>"1"</integer>
+					</attribute>
+				</data_ref>
+				<task_ref name="parser">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"out"</direction>
+			</connect>
+			<connect>
+				<data_ref name="cc_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</data_ref>
+				<task_ref name="parser">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"out"</direction>
+			</connect>
+			<connect>
+				<data_ref name="mc_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</data_ref>
+				<task_ref name="parser">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"out"</direction>
+			</connect>
+			<connect>
+				<data_ref name="tu_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+					<attribute name="unit_size">
+						<integer>"7"</integer>
+					</attribute>
+				</data_ref>
+				<task_ref name="parser">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"out"</direction>
+			</connect>
+		</connect_list>
+		<connect_list>
+			<connect>
+				<data_ref name="idct_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+					<attribute name="unit_size">
+						<integer>"5"</integer>
+					</attribute>
+				</data_ref>
+				<task_ref name="dequant">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"in"</direction>
+			</connect>
+			<connect>
+				<data_ref name="dequant_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+					<attribute name="unit_size">
+						<integer>"65"</integer>
+					</attribute>
+				</data_ref>
+				<task_ref name="dequant">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"out"</direction>
+			</connect>
+		</connect_list>
+		<connect_list>
+			<connect>
+				<data_ref name="dequant_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+					<attribute name="unit_size">
+						<integer>"65"</integer>
+					</attribute>
+				</data_ref>
+				<task_ref name="idct_row">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"in"</direction>
+			</connect>
+			<connect>
+				<data_ref name="row2col_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+					<attribute name="unit_size">
+						<integer>"65"</integer>
+					</attribute>
+				</data_ref>
+				<task_ref name="idct_row">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"out"</direction>
+			</connect>
+		</connect_list>
+		<connect_list>
+			<connect>
+				<data_ref name="row2col_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+					<attribute name="unit_size">
+						<integer>"65"</integer>
+					</attribute>
+				</data_ref>
+				<task_ref name="idct_col">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"in"</direction>
+			</connect>
+			<connect>
+				<data_ref name="text_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+					<attribute name="unit_size">
+						<integer>"192"</integer>
+					</attribute>
+				</data_ref>
+				<task_ref name="idct_col">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"out"</direction>
+			</connect>
+		</connect_list>
+		<connect_list>
+			<connect>
+				<data_ref name="cc_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</data_ref>
+				<task_ref name="cc_mc">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"in"</direction>
+			</connect>
+			<connect>
+				<data_ref name="mc_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</data_ref>
+				<task_ref name="cc_mc">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"in"</direction>
+			</connect>
+			<connect>
+				<data_ref name="recframe_data">
+					<vector>
+						<expression opcode="-">
+							<identifier>"f"</identifier>
+							<integer>"1"</integer>
+						</expression>
+						<expression opcode="range">
+							<negative_infinite>""</negative_infinite>
+							<positive_infinite>""</positive_infinite>
+						</expression>
+						<expression opcode="range">
+							<negative_infinite>""</negative_infinite>
+							<positive_infinite>""</positive_infinite>
+						</expression>
+					</vector>
+					<attribute name="port_id">
+						<identifier>"recFrame"</identifier>
+					</attribute>
+					<attribute name="port_type">
+						<identifier>"bus"</identifier>
+					</attribute>
+				</data_ref>
+				<task_ref name="cc_mc">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"in"</direction>
+			</connect>
+			<connect>
+				<data_ref name="comp_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</data_ref>
+				<task_ref name="cc_mc">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"out"</direction>
+			</connect>
+		</connect_list>
+		<connect_list>
+			<connect>
+				<data_ref name="tu_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+					<attribute name="unit_size">
+						<integer>"7"</integer>
+					</attribute>
+				</data_ref>
+				<task_ref name="tu">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"in"</direction>
+			</connect>
+			<connect>
+				<data_ref name="text_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+					<attribute name="unit_size">
+						<integer>"192"</integer>
+					</attribute>
+				</data_ref>
+				<task_ref name="tu">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"in"</direction>
+			</connect>
+			<connect>
+				<data_ref name="comp_fifo">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</data_ref>
+				<task_ref name="tu">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"in"</direction>
+			</connect>
+			<connect>
+				<data_ref name="recframe_data">
+					<vector>
+						<identifier>"f"</identifier>
+						<expression opcode="range">
+							<expression opcode="*">
+								<identifier>"mby"</identifier>
+								<integer>"16"</integer>
+							</expression>
+							<expression opcode="+">
+								<expression opcode="*">
+									<identifier>"mby"</identifier>
+									<integer>"16"</integer>
+								</expression>
+								<integer>"15"</integer>
+							</expression>
+						</expression>
+						<expression opcode="range">
+							<expression opcode="*">
+								<identifier>"mbx"</identifier>
+								<integer>"16"</integer>
+							</expression>
+							<expression opcode="+">
+								<expression opcode="*">
+									<identifier>"mbx"</identifier>
+									<integer>"16"</integer>
+								</expression>
+								<integer>"15"</integer>
+							</expression>
+						</expression>
+					</vector>
+					<attribute name="port_id">
+						<identifier>"recFrame"</identifier>
+					</attribute>
+					<attribute name="port_type">
+						<identifier>"bus"</identifier>
+					</attribute>
+				</data_ref>
+				<task_ref name="tu">
+					<vector>
+						<identifier>"f"</identifier>
+						<identifier>"mby"</identifier>
+						<identifier>"mbx"</identifier>
+					</vector>
+				</task_ref>
+				<direction>"out"</direction>
+			</connect>
+		</connect_list>
+		<comment>"//    [recframe_data: f, .., ..] { port_type(bus); } -> (OUTPUT: f) ;"</comment>
+	</task_def>
+</system>

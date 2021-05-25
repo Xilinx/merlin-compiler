@@ -1,0 +1,9 @@
+{
+    "xilinx:adm-pcie-ku3:2ddr-xpr:4.0": {
+        "RBW_GBs": "10.311830",
+        "WBW_GBs": "9.689922",
+        "RLat_ns": "410.924194",
+        "WLat_ns": "299.716949",
+        "RandLat_ns": "53.010464"
+    }
+}

@@ -1,0 +1,93 @@
+pipeline {
+  agent {
+    label "master"
+  }
+  stages {
+    stage ("cpplint clang-tidy unit-test regression") {
+      parallel {
+        stage ('regression') {
+          agent {
+            label "worker"
+          }
+          steps {
+            script {
+              dir("trunk/build") {
+                sh """source /curr/software/util/modules-tcl/init/bash && \
+                      module load merlin_build/new && \
+                      rm -rf * && \
+                      cmake3 -GNinja -DCMAKE_BUILD_TYPE=Release .. && \
+                      ninja && \
+                      export LM_LICENSE_FILE=1900@fcs:2100@fcs:2300@fcs: && \
+                      (../docker/docker-run.sh ../test/run-test.sh regression || \
+                      ../docker/docker-run.sh ../test/run-test.sh regression-failed)"""
+              }
+            }
+            script {
+              dir("trunk/build") {
+                sh "rm -rf *"
+              }   
+            } 
+          }
+        }
+        stage ('cpplint clang-tidy unit-test xfopencv-test') {
+          agent {
+            label "worker"
+          }
+          steps {
+            script {
+              dir("trunk/cpplint") {
+                sh """export MERLIN_COMPILER_HOME=`pwd`/.. && python3 run.py"""
+              }
+            }
+            script {
+              dir("trunk/clang-tidy") {
+                sh """source /curr/software/util/modules-tcl/init/bash && \
+                      module load merlin_build/new && \
+                      export MERLIN_COMPILER_HOME=`pwd`/../ && \
+                      python3 run.py"""
+              }
+            }
+            script {
+              dir("trunk/build") {
+                sh """source /curr/software/util/modules-tcl/init/bash && \
+                      module load merlin_build/new && \
+                      rm -rf * && \
+                      cmake3 -GNinja -DCMAKE_BUILD_TYPE=Release .. && \
+                      ninja"""
+              }
+            }
+            script {
+              dir("trunk/build") {
+                sh """source /curr/software/util/modules-tcl/init/bash && \
+                      module load merlin_build/new && \
+                      rm -rf * && \
+                      cmake3 -GNinja -DCMAKE_BUILD_TYPE=Release .. && \
+                      ninja && \
+                      module purge && \
+                      export LM_LICENSE_FILE=1900@fcs:2100@fcs:2300@fcs: && \
+                      (../docker/docker-run.sh ../test/run-test.sh unit_test || \
+                      ../docker/docker-run.sh ../test/run-test.sh unit_test-failed)"""
+              }
+            }
+            script {
+              dir("trunk/build") {
+                sh """ rm -rf ../merlin_benchmark && \
+                       git clone git@github.com:falcon-computing/merlin_benchmark.git ../merlin_benchmark && \
+                       source /curr/software/util/modules-tcl/init/bash && \
+                       module purge && \
+                       export LM_LICENSE_FILE=1900@fcs:2100@fcs:2300@fcs: && \
+                       (../docker/docker-run.sh ../test/run-test.sh xfopencv || \
+                        ../docker/docker-run.sh ../test/run-test.sh xfopencv-failed) """
+              }
+            }
+            script {
+              dir("trunk/build") {
+                sh "rm -rf *"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+<directives>
+
+<!-- design constraints -->
+<throughput>"100"</throughput>   <!-- iteration_per_second -->
+<!-- 
+<platform_name>"zed"</platform_name><part_name>"xc7z020clg484-1"</part_name><arch_name>"zynq"</arch_name>
+<platform_name>"ml605"</platform_name><part_name>"xc6vlx240tff1156-1"</part_name><arch_name>"virtex6lx"</arch_name>
+<platform_name>"vc707"</platform_name><part_name>"xc7vx485tffg1761-2"</part_name><arch_name>"virtex7"</arch_name>
+<opencl_kernel_type> c </opencl_kernel_type>
+-->
+<clock_period>"10.0ns"</clock_period>
+<platform_name>"alphadata_pcie7v3"</platform_name><part_name>"xc7vx690tffg1761-2"</part_name><arch_name>"virtex7"</arch_name>
+<utilization_threshold>"0.8"</utilization_threshold>
+
+
+
+<!-- optimization schemes -->
+<optimization_target>performance</optimization_target>
+<data_reuse         > on </data_reuse>
+<block_streaming    > on </block_streaming>
+<module_selection   > off </module_selection>
+<module_duplication > off</module_duplication>
+ 
+
+<!-- design flow -->
+<elaboration   > c_cpp </elaboration>
+<optimization  > on  </optimization>
+<analysis      > on    </analysis>
+<assembly      > on   </assembly>
+<low_level_syn > off </low_level_syn>
+<low_level_sim > off </low_level_sim>
+<testing      >  on   </testing>
+<testing_run_ref> on </testing_run_ref>
+<testing_run_opt> on </testing_run_opt>
+<testing_run_alg> on </testing_run_alg>
+<testing_run_verif> off </testing_run_verif>
+<testing_run_bit> off</testing_run_bit>
+
+
+
+<!-- misc -->
+<interactive_mode> off </interactive_mode>
+<simulation_model> bfm </simulation_model>
+<opencl_kernel_type> xil_c </opencl_kernel_type>
+<!--
+<opencl_kernel_type> opencl </opencl_kernel_type>
+-->
+
+</directives>

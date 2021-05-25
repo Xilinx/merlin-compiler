@@ -1,0 +1,61 @@
+
+< > :: ( idct_top ) // top level task, single instance
+{
+	// Domain definition
+	<task_domain:block,i>    { 0 .LE block; block .LT 3600; 0 .LE i; i .LT 8; };
+  <pixel_domain:block,x,y> { 0 .LE block; block .LT 3600; 0 .LE x; x .LT 8; 0 .LE y; y .LT 8; }; 
+	
+	
+	// Data definition
+	<pixel_domain> 		:: [float coeff@DRAM ];
+	<pixel_domain> 		:: [float coeff@accIDCTRow ];
+	<pixel_domain> 		:: [float row2col@accIDCTRow ];
+	<pixel_domain> 		:: [float row2col@accIDCTCol ];
+	<pixel_domain> 		:: [float text@accIDCTCol ];
+	<pixel_domain> 		:: [float text@DRAM ];
+
+	// Task definition
+	<task_domain>::(idct_row@accIDCTRow : block, i) { body_id(BlockRow); port_id(block, 2); port_id(i, 3); order(block, i); };
+	<task_domain>::(idct_col@accIDCTCol) { body_id(BlockCol);             };  // default no index argument, default ordering by domain
+
+	<pixel_domain> 		:: (CH_coeff@DRAM_accIDCTRow)           { translate_type(dma); };
+	<pixel_domain> 		:: (CH_text@accIDCTRow_DRAM)            { translate_type(dma); };
+	<pixel_domain> 		:: (CH_row2col@accIDCTRow_accIDCTCol : it, x, y)   { translate_type(dma); order(it, y, x); };
+
+	// IO definition
+	(INPUT : ) -> [ coeff@DRAM: .., .., ..];
+    [ text@DRAM : .., .., ..] -> (OUTPUT : );
+    
+    [ coeff@DRAM : block, x, y ] 
+      -> ( CH_coeff@DRAM_accIDCTRow : block, x, y) -> 
+    [ coeff@accIDCTRow: block, x, y ] ;
+
+    [ coeff@accIDCTRow : it + x, ..,  ii ] { port_id(dequant_fifo, 0); params(0 .LE x, x .LE 100); } 
+      -> ( idct_row@accIDCTRow : it, ii) -> 
+    [ row2col@accIDCTRow: it, .., ii ] { port_id(row2col_fifo, 1); }; 
+
+    [ row2col@accIDCTRow: block, x, y ] 
+      -> ( CH_row2col@accIDCTRow_accIDCTCol : block, x, y) -> 
+    [ row2col@accIDCTCol: block, x, y ] ;
+
+    [ row2col@accIDCTCol: it, i, .. ] { port_id(row2col_fifo, 0); address_map(it, i, ii, ii); } 
+      -> ( idct_col@accIDCTCol : it, i) -> 
+    [ text@accIDCTCol   : it, i, .. ] { port_id(text_fifo, 1); address_map(it, i, ii, ii); }; 
+
+    [ text@accIDCTCol: block, x, y ] 
+      -> ( CH_text@accIDCTRow_DRAM : block, x, y) -> 
+    [ text@DRAM : block, x, y ] ; 
+
+	// Dependence definition
+    //(CH_coeff : it, x, y)   => (CH_coeff :it, y, x) ;   // => (...) is the lexigraphic order, or status
+    //(idct_row : it, i )     => (idct_row :it, i);
+    //(CH_row2col : it, x, y) => (CH_row2col : it, y, x) ;
+
+    (CH_coeff : it, 7, i) -> (idct_row : it, i);
+    (idct_row : it, i .SUB 0, 2 ) -> (CH_coeff : it, 0, i) ;   // \-\ is minus by lexicographic ordering
+
+    (idct_row : it, i ) -> (CH_row2col : it, 0, i) ;
+    (CH_row2col : it, 7, i .SUB 0, 0, 2) -> (idct_row : it, i);
+
+};
+

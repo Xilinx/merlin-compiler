@@ -1,0 +1,6 @@
+{
+    "ds_bitwidth_opt": "on",
+    "ds_pipeline": "on",
+    "ds_tiling": "on",
+    "ds_loop_parallel": "on"
+}

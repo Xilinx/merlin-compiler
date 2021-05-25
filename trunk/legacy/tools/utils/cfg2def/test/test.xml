@@ -1,0 +1,21 @@
+<configuration>
+    <param name="param0">"asdf"</param>
+	<param_array name="hw_module_list">
+		<item>"dequant"</item>
+	</param_array>
+	<param_array name="pcore_dir_list">
+		<item>".././src/dequant/pcores"</item>
+	</param_array>
+    <param_tree name="tree0">
+        <opt>
+            <a>""</a>
+            <b>""</b>
+        </opt>
+    </param_tree>
+    <param_tree name="tree1">
+        <opt>
+            <a>""</a>
+            <b>""</b>
+        </opt>
+    </param_tree>
+</configuration>

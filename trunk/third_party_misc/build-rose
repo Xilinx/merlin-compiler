@@ -1,0 +1,51 @@
+#!/bin/bash
+
+#FIXME
+readonly WITH_DEBUG=false
+readonly SOURCE=/space/scratch/garyb/SCM/rose
+readonly DEST=/space/scratch/garyb
+readonly GCC_ROOT=/curr/software/merlin-deps/gcc4.9.4
+
+function tag
+{
+    ( cd ${SOURCE}; git describe --tags )
+}
+
+function init_directory
+{
+    if [ -d "$1" ]; then
+        rm -rf "$1"
+    fi
+    mkdir -p $1
+}
+
+function build
+{
+    SCRATCH=${SOURCE}/scratch
+    init_directory ${SCRATCH}
+    INSTALL=${DEST}/rose_$(tag)
+    init_directory ${INSTALL}
+
+    cd ${SOURCE}
+    ./build
+
+    cd ${SCRATCH}
+    CC=${GCC_ROOT}/bin/gcc \
+    CXX=${GCC_ROOT}/bin/g++ \
+    ${SOURCE}/configure \
+      `if ${WITH_DEBUG}; then echo "--with-C_DEBUG --with-CXX_DEBUG"; fi` \
+      --prefix=${INSTALL} \
+      --enable-languages=c,c++ \
+      --with-boost=/curr/software/merlin-deps/boost_1_67 \
+      --without-java
+    read -p "Suspend to manually put EDG binary into scratch/src/frontend/CxxFrontend? (y/n) "
+    if [ ${REPLY} = "y" ]; then
+        PS1="(Exit to continue) " bash -i
+    fi
+
+    cores=$(( $(nproc) >> 1 ))
+    make -j${cores}
+    make install -j${cores}
+}
+
+build
