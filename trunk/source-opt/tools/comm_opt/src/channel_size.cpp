@@ -281,7 +281,6 @@ int check_parallel_bits(CMarsIrV2 *mars_ir, CMarsEdge *edge, int *is_parallel) {
 int assign_node_scheduling(CMarsIrV2 *mars_ir, bool detect_shared_memory) {
   cout << "Assign Node Scheduling" << endl;
 
-  //  defined in coarse_pipeline_altera
   assign_schedule_for_marsIR_nodes(mars_ir, detect_shared_memory);
 
   return 0;

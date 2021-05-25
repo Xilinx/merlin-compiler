@@ -21,7 +21,7 @@
 
 //  ******************************************************************************************//
 //  module           :   false_data_dependency
-//  description      :   solve false data dependency problem for altera to
+//  description      :   solve false data dependency problem 
 //  improve performance
 //  input            :   code with += false data dependency code
 //  output           :   code with channel to work around false data dependency
@@ -645,7 +645,7 @@ void gen_one_channel(CMarsAST_IF *codegen, void *ref_w, void *ref_r,
 
   //  gen channel read
   string rd_channel_func =
-      "read_channel_altera_" + channel_name + "__merlinalterafuncend";
+      "read_channel_hidden_" + channel_name + "__merlinhiddenfuncend";
   vector<void *> rd_param_list;
   void *channel_rd_exp = codegen->CreateVariableRef(channel_name_decl);
   if (parallel_bit != 0) {
@@ -678,7 +678,7 @@ void gen_one_channel(CMarsAST_IF *codegen, void *ref_w, void *ref_r,
 
   //  gen channel write
   string wr_channel_func =
-      "write_channel_altera_" + channel_name + "__merlinalterafuncend";
+      "write_channel_hidden_" + channel_name + "__merlinhiddenfuncend";
   vector<void *> wr_param_list;
   void *channel_wr_exp = codegen->CreateVariableRef(channel_name_decl);
   if (parallel_bit != 0) {

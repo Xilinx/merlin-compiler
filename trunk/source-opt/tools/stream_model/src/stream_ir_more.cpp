@@ -696,7 +696,6 @@ void CStreamIR::ConcurrentCodeGeneration(
     const vector<void *> &top_kernels,
     map<void *, vector<void *>> *kernel_autokernel) {
   set<void *> processed_globals;
-  //  Create Intel channel variables
   for (auto fifo : m_fifos) {
     CodeGeneration_channel(fifo, &processed_globals);
   }
@@ -722,7 +721,7 @@ void CStreamIR::CodeGeneration_channel(CStreamChannel *fifo,
   void *global = m_ast->GetGlobal(var_decl);
   if (processed_global->count(global) <= 0) {
     void *channel_pragma = m_ast->CreatePragma(
-        "OPENCL EXTENSION cl_altera_channels : enable", global);
+        "OPENCL EXTENSION cl_hidden_channels : enable", global);
     m_ast->PrependChild(global, channel_pragma);
     processed_global->insert(global);
   }
@@ -761,9 +760,9 @@ void CStreamIR::CodeGeneration_channel(CStreamChannel *fifo,
   m_ast->AddDirectives("\n#endif\n", channel_name_decl, 0);
   void *channel_base_type = nullptr;
   string wr_channel_func =
-      "write_channel_altera_" + channel_name + "__merlinalterafuncend";
+      "write_channel_hidden_" + channel_name + "__merlinhiddenfuncend";
   string rd_channel_func =
-      "read_channel_altera_" + channel_name + "__merlinalterafuncend";
+      "read_channel_hidden_" + channel_name + "__merlinhiddenfuncend";
   std::reverse(vec_refs.begin(), vec_refs.end());
   for (auto ref : vec_refs) {
     void *func_call = m_ast->TraceUpToFuncCall(ref);
@@ -1534,7 +1533,7 @@ void CStreamIR::InsertChannelExtension(void *decl,
   void *global = m_ast->GetGlobal(decl);
   if (processed_global->count(global) <= 0) {
     void *channel_pragma = m_ast->CreatePragma(
-        "OPENCL EXTENSION cl_intel_channels : enable", global);
+        "OPENCL EXTENSION cl_hidden_channels : enable", global);
     m_ast->PrependChild(global, channel_pragma);
     processed_global->insert(global);
   }
@@ -1602,7 +1601,7 @@ void CStreamIR::InsertChannelReadWrite() {
           // 2.3 create channel call by C exp
           string channel_name = m_ast->UnparseToString(init);
           wr_channel_func =
-              "write_channel_altera_" + channel_name + "__merlinalterafuncend";
+              "write_channel_hidden_" + channel_name + "__merlinhiddenfuncend";
           void *curr_scope = m_ast->TraceUpToScope(channel_node);
           void *func_wr_call = m_ast->CreateFuncCall(
               wr_channel_func, m_ast->GetTypeByString("void"), param_list_write,
@@ -1615,7 +1614,7 @@ void CStreamIR::InsertChannelReadWrite() {
           // 2.4 create channel call by C exp
           string channel_name = m_ast->UnparseToString(init);
           rd_channel_func =
-              "read_channel_altera_" + channel_name + "__merlinalterafuncend";
+              "read_channel_hidden_" + channel_name + "__merlinhiddenfuncend";
           void *curr_scope = m_ast->TraceUpToScope(channel_node);
           void *func_rd_call = m_ast->CreateFuncCall(
               rd_channel_func, m_ast->GetTypeByString("void"), param_list_read,

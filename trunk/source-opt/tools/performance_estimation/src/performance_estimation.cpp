@@ -52,32 +52,7 @@ int64_t GetUnrollFactorFromVendorPragma(CSageCodeGen *codegen, void *loop,
   int64_t trip_count = 0;
   int64_t CurrentLoopTC = 0;
   codegen->get_loop_trip_count(loop, &trip_count, &CurrentLoopTC);
-  if (Tool == "aocl") {
-    void *pre_stmt;
-    void *label = codegen->GetParent(loop);
-    if (codegen->IsLabelStatement(label) != 0) {
-      pre_stmt = codegen->GetPreviousStmt(label);
-    } else {
-      pre_stmt = codegen->GetPreviousStmt(loop);
-    }
-    if (codegen->IsPragmaDecl(pre_stmt) != 0) {
-      string pragma_s = codegen->GetPragmaString(pre_stmt);
-      vector<string> v_s = str_split(pragma_s, ' ');
-      if (!v_s.empty()) {
-        if (v_s[0] != "unroll") {
-          return 1;
-        }
-        if (v_s.size() == 1) {
-          factor = trip_count;
-        } else if (v_s.size() == 2) {
-          factor = atoi(v_s[1].c_str());
-        } else {
-          factor = trip_count;
-        }
-        return factor;
-      }
-    }
-  } else if (Tool == "sdaccel") {
+  if (Tool == "sdaccel") {
     void *body = codegen->GetLoopBody(loop);
     vector<void *> stmts = codegen->GetChildStmts(body);
     if (!stmts.empty()) {
@@ -660,9 +635,6 @@ void CPerfEstBlock::ReadAnnotatedReportHelper(
         }
       }
     }
-    if (this->TCStatic <= 0 && this->Tool == "aocl") {
-      this->TCStatic = 1;
-    }
     PRESTP("EST", "----Final TC = " << this->TCStatic);
 
     //  Processing flatten
@@ -688,12 +660,6 @@ void CPerfEstBlock::ReadAnnotatedReportHelper(
     //  UnrollFactor processing, For xilinx, just keep the same now
     PRESTP("EST", "----Checking unroll factor...");
     if (AnnRpt[TopoID]["unrolled"].empty()) {
-      if (this->Tool == "aocl") {
-        this->UnrollFactor =
-            GetUnrollFactorFromVendorPragma(codegen, AstPtr, this->Tool);
-        //        GetUnrollFactorFromVendorPragma(codegen, AstPtr, this->Tool,
-        //                                        this->UnrollFactor);
-      }
     } else if (AnnRpt[TopoID]["unrolled"] == "yes") {
       if (!AnnRpt[TopoID]["unroll-factor"].empty()) {
         this->UnrollFactor =
@@ -776,12 +742,6 @@ void CPerfEstBlock::ReadAnnotatedReportHelper(
                                        << this->BurstWidth);
 
     PRESTP("EST", "----Checking vendor latnecy...");
-    if (this->Tool == "aocl") {
-      if (!AnnRpt[TopoID]["intel-latency"].empty()) {
-        this->VendorLatency =
-            ParseString2LongLong(AnnRpt[TopoID]["intel-latency"]);
-      }
-    }
     if (this->Tool == "sdaccel") {
       if (!AnnRpt[TopoID]["iteration-latency"].empty()) {
         this->VendorLatency =
@@ -1596,18 +1556,8 @@ bool PostProcessForOutput(CSageCodeGen *codegen, string OutputJson,
 map<string, string> GetExecFlow(CSageCodeGen *codegen, string Tool,
                                 string AnnRptPath) {
   map<string, string> TopoIDExecMap;
-  if (Tool == "aocl") {
-    //  if serial execution, then blocks run in serial
-    TopoIDExecMap =
-        ReadAnnotatedReportKeyValue(codegen, AnnRptPath, "serially_execution");
-    //  if divergent loop, then blocks run in serial
-    map<string, string> TempMap =
-        ReadAnnotatedReportKeyValue(codegen, AnnRptPath, "divergent_loop");
-    TopoIDExecMap.insert(TempMap.begin(), TempMap.end());
-  } else {
-    TopoIDExecMap =
-        ReadAnnotatedReportKeyValue(codegen, AnnRptPath, "serially_execution");
-  }
+  TopoIDExecMap =
+      ReadAnnotatedReportKeyValue(codegen, AnnRptPath, "serially_execution");
   return TopoIDExecMap;
 }
 

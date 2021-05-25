@@ -37,8 +37,7 @@
 #include "program_analysis.h"
 // using namespace MarsProgramAnalysis;
 // using namespace MerlinStreamModel;
-static int tool_type = 0;   //  1=aocl
-static int naive_aocl = 0;  //  1=aocl
+static int tool_type = 0;   
 static int count_memcpy = 0;
 static int pcie_merge = 1;
 
@@ -54,7 +53,6 @@ map<string, set<string>> kname2fifo;
 
 int header_gen(CSageCodeGen *codegen, void *sg_scope, int debug_gen);
 
-//  in altera_preprocess.cpp
 extern int handle_single_assignment(CSageCodeGen *codegen, void *sg_array1,
                                     const vector<void *> &sg_idx1,
                                     const vector<size_t> &dim1, void *sg_array2,
@@ -186,59 +184,6 @@ static int add_global_attribute_to_pntr_ref_by_ref(CSageCodeGen *codegen,
     curr_exp = parent;
   }
   return ret;
-}
-
-static int altera_remove_assert_top(CSageCodeGen *codegen, void *func,
-                                    set<void *> *p_visited) {
-  if (p_visited->count(func) > 0) {
-    return 0;
-  }
-  p_visited->insert(func);
-  vector<void *> vec_assert;
-  int ret = 0;
-  codegen->GetNodesByType(func, "preorder", "SgFunctionCallExp", &vec_assert);
-  for (auto &call : vec_assert) {
-    if (codegen->IsAssertFailCall(call)) {
-      void *call_stmt = codegen->TraceUpToStatement(call);
-      if (call_stmt != nullptr) {
-        ret = 1;
-        codegen->RemoveStmt(call_stmt);
-      }
-    }
-  }
-
-  vector<void *> vec_calls;
-  codegen->GetNodesByType(func, "preorder", "SgFunctionCallExp", &vec_calls);
-  for (auto &call : vec_calls) {
-    void *func_decl = codegen->GetFuncDeclByCall(call);
-    if (func_decl == nullptr) {
-      continue;
-    }
-    ret |= altera_remove_assert_top(codegen, func_decl, p_visited);
-  }
-  return ret;
-}
-
-static int remove_assert_top(CSageCodeGen *codegen, void *pTopFunc) {
-  printf("    Enter remove assert...\n");
-
-  vector<void *> vecTopKernels = get_all_tasks(codegen, pTopFunc);
-  bool LocalChanged = false;
-  bool Changed = true;
-  set<void *> visited_funcs;
-
-  while (true) {
-    LocalChanged = false;
-    visited_funcs.clear();
-    for (auto &func : vecTopKernels) {
-      LocalChanged |= altera_remove_assert_top(codegen, func, &visited_funcs);
-    }
-    Changed |= LocalChanged;
-    if (!LocalChanged) {
-      break;
-    }
-  }
-  return static_cast<int>(Changed);
 }
 
 void graph_block_removal(CSageCodeGen *codegen, void *pTopFunc,
@@ -1454,41 +1399,6 @@ void opencl_kernel_declaration_gen(CSageCodeGen *codegen, void *pTopFunc) {
     assert(func);
     void *body = codegen->GetFuncBody(func);
     assert(func && body);
-    if (naive_aocl == 1) {
-      void *return_type = codegen->GetFuncReturnType(func);
-      string return_type_string = codegen->UnparseToString(return_type);
-
-      //  //////////////////////////  /
-      //  FIXME: ZP: 20151223
-      //  Diagnose: if changing the return type of one kernel function,
-      //  the type is also changed for the other kernel functions
-      //  I did a workaround here, to be investigated more
-      //  if (return_type_string.find("__kernel") != -1) continue; //  FIXED:
-      //  ZP: deleted 20160202
-      //  //////////////////////////  /
-      //  printf("[Han Debug][opencl_gen.cpp]return_type_string = %s
-      //  %08x\n",return_type_string.c_str(), func);
-      string opencl_return_type = "__kernel " + return_type_string;
-      //  printf("[Han Debug][opencl_gen.cpp]opencl_return_type =
-      //  %s\n",opencl_return_type.c_str());
-#if 1
-      codegen->RegisterType(opencl_return_type);
-      codegen->SetFuncReturnType(func,
-                                 codegen->GetTypeByString(opencl_return_type));
-#else
-      SgTypedefDeclaration *sg_typedef = SageBuilder::buildTypedefDeclaration(
-          opencl_return_type,
-          static_cast<SgType *>(codegen->GetTypeByString("int"), )
-              isSgScopeStatement(
-                  static_cast<SgNode *>((codegen->GetGlobal()))));
-      codegen->SetFuncReturnType(func, sg_typedef->get_type());
-#endif
-
-      //  void * return_type1 = codegen->GetFuncReturnType(func);
-      //  string return_type_string1 = codegen->UnparseToString(return_type1);
-      //  printf("[Han Debug][opencl_gen.cpp]opencl_return_type_new =
-      //  %s\n",return_type_string1.c_str());
-    }
 
     for (idx = 0; idx < codegen->GetFuncParamNum(func); idx++) {
       //  printf("[Han Debug][opencl_gen.cpp]Enter GetFuncParamNum\n");
@@ -3106,75 +3016,6 @@ void add_global(CSageCodeGen *codegen, void *pTopFunc,
   }
 }
 
-void kernel_top_generation(CSageCodeGen *codegen, void *pTopFunc) {
-  string kernel_top_file = "kernel_top.cl";
-  remove(kernel_top_file.c_str());
-  //  void * kernel_top = codegen->CreateSourceFile(kernel_top_file);
-
-  string channel_string;
-  channel_string = "#pragma OPENCL EXTENSION cl_altera_channels : enable\n";
-  //  codegen->AddHeader(channel_string, kernel_top);
-  string cmd = "echo '" + channel_string + "' >> " + kernel_top_file;
-  system(cmd.c_str());
-
-  size_t i;
-  vector<string> vec_file_name;
-  vector<pair<void *, string>> vecTldmPragmas;
-  codegen->TraverseSimple(pTopFunc, "preorder", GetTLDMInfo_withPointer4,
-                          &vecTldmPragmas);
-  //  printf("number = %d\n\n\n",vecTldmPragmas.size());
-
-  //  add channel definition
-  for (i = 0; i < vecTldmPragmas.size(); i++) {
-    string sFilter;
-    string sCmd;
-    map<string, pair<vector<string>, vector<string>>> mapParams;
-    tldm_pragma_parse_whole(vecTldmPragmas[i].second, &sFilter, &sCmd,
-                            &mapParams);
-
-    if ("channel" == sFilter) {
-      string pragma_channel = vecTldmPragmas[i].second + "\n";
-      printf("pragma = %s\n", pragma_channel.c_str());
-      //  codegen->AddHeader(pragma_channel, kernel_top);
-      string cmd = "echo '" + pragma_channel + "' >> " + kernel_top_file;
-      system(cmd.c_str());
-    }
-  }
-
-  //  add file include
-  for (i = 0; i < vecTldmPragmas.size(); i++) {
-    string sFilter;
-    string sCmd;
-    map<string, pair<vector<string>, vector<string>>> mapParams;
-    tldm_pragma_parse_whole(vecTldmPragmas[i].second, &sFilter, &sCmd,
-                            &mapParams);
-    //  printf("Enter func_inline_top sFilter %s\n",sFilter.c_str());
-    //  printf("Enter func_inline_top sCmd %s\n",sCmd.c_str());
-
-    if ("cmost" != sFilter && "ACCEL" != sFilter) {
-      continue;
-    }
-    if ("kernel" != sCmd) {
-      continue;
-    }
-    void *func_decl = codegen->GetNextStmt(vecTldmPragmas[i].first);
-    vec_file_name.push_back(codegen->GetFuncName(func_decl));
-  }
-  for (size_t j = 0; j < vec_file_name.size(); j++) {
-    string include_file = "#include \"" + vec_file_name[j] + ".cl\"";
-    //  codegen->AddHeader(include_file, kernel_top);
-    string cmd = "echo '" + include_file + "' >> " + kernel_top_file;
-    system(cmd.c_str());
-  }
-
-  //  add other necessary string
-  string another_string;
-  another_string = "#define __assert_fail(x,y,z,w) 0";
-  //  codegen->AddHeader(another_string, kernel_top);
-  cmd = "echo '" + another_string + "' >> " + kernel_top_file;
-  system(cmd.c_str());
-}
-
 //  This function is declared in array_linearize.cpp
 int replace_memcpy_with_opencl_in_lib_wrapper(CSageCodeGen *codegen,
                                               void *pTopFunc,
@@ -3583,61 +3424,6 @@ int replace_memcpy_with_for_loop_in_function(CSageCodeGen *codegen,
   return static_cast<int>(Changed);
 }
 
-static int altera_function_uniquify_top(CSageCodeGen *codegen,
-                                        void *func_call) {
-  void *func_decl = codegen->GetFuncDeclByCall(func_call, 1);
-  if (func_decl == nullptr) {
-    return 0;
-  }
-  size_t i;
-  vector<void *> vec_calls;
-  codegen->GetFuncCallsFromDecl(func_decl, nullptr, &vec_calls);
-  int ret = 0;
-  for (i = 0; i < vec_calls.size(); ++i) {
-    void *one_call = vec_calls[i];
-    if (one_call == func_call) {
-      continue;
-    }
-    string new_func_name = codegen->GetFuncName(func_decl) + "_" + my_itoa(i);
-    codegen->get_valid_global_name(codegen->GetScope(func_decl), new_func_name);
-    void *new_func_decl = codegen->CloneFuncDecl(
-        func_decl, codegen->GetScope(func_decl), new_func_name, true);
-    codegen->InsertStmt(new_func_decl, func_decl);
-    vector<void *> vec_args;
-    for (int j = 0; j < codegen->GetFuncCallParamNum(one_call); ++j) {
-      vec_args.push_back(
-          codegen->CopyExp(codegen->GetFuncCallParam(one_call, j)));
-    }
-    void *new_call = codegen->CreateFuncCall(new_func_decl, vec_args, one_call);
-    codegen->ReplaceExp(one_call, new_call);
-    setFuncDeclUserCodeScopeId(codegen, new_func_decl, new_call);
-    ret = 1;
-  }
-  codegen->GetNodesByType(func_decl, "preorder", "SgFunctionCallExp",
-                          &vec_calls);
-  for (i = 0; i < vec_calls.size(); i++) {
-    ret |= altera_function_uniquify_top(codegen, vec_calls[i]);
-  }
-  return ret;
-}
-
-int function_uniquify_top(CSageCodeGen *codegen, void *pTopFunc,
-                          const CInputOptions &options) {
-  printf("    Enter function uniquify...\n");
-
-  auto top_kernels = get_all_tasks(codegen, pTopFunc);
-  int ret = 0;
-  for (auto sg_kernel : top_kernels) {
-    vector<void *> vecCalls;
-    codegen->GetNodesByType(sg_kernel, "preorder", "SgFunctionCallExp",
-                            &vecCalls);
-    for (size_t i = 0; i < vecCalls.size(); i++) {
-      ret |= altera_function_uniquify_top(codegen, vecCalls[i]);
-    }
-  }
-  return ret;
-}
-
 void bool2char(CSageCodeGen *codegen, void *pTopFunc) {
   printf("\n\nEnter bool2char...\n");
   auto kernels = get_all_tasks(codegen, pTopFunc);
@@ -3691,15 +3477,6 @@ int opencl_gen(CSageCodeGen *codegen, void *pTopFunc, CInputOptions options,
     return 1;
   }
 
-  //    printf("\n\nprinting impl_tool:\n\n");
-  if ("aocl" == options.get_option_key_value("-a", "impl_tool")) {
-    tool_type = 1;
-  }
-  if ("on" == options.get_option_key_value("-a", "naive") ||
-      "baseline" == options.get_option_key_value("-a", "naive") ||
-      "standard" == options.get_option_key_value("-a", "effort")) {
-    naive_aocl = 1;
-  }
   if ("off" == options.get_option_key_value("-a", "pcie_merge")) {
     pcie_merge = 0;
   }
@@ -3729,17 +3506,6 @@ int opencl_gen(CSageCodeGen *codegen, void *pTopFunc, CInputOptions options,
   //  2017.03.07
   remove_access_range_intrinsic(codegen, pTopFunc);
 
-  if (tool_type == 1) {
-    remove_assert_top(codegen, pTopFunc);
-    //  2016.10.2 Youxiang
-    //  add __constant attribute for pointer alias to constant global variable
-    add_const_attribute_top(codegen, pTopFunc);
-    //  2016.09.30 youxiang
-    remove_const_global(codegen, pTopFunc);
-    //  20170908 youxiang
-    function_uniquify_top(codegen, pTopFunc, options);
-  }
-
   //    if (tool_type != 1) bool2char(codegen, pTopFunc);
   //  2016.02.08 Han
   //    if (tool_type == 1) const_replace(codegen, pTopFunc);
@@ -3757,31 +3523,6 @@ int opencl_gen(CSageCodeGen *codegen, void *pTopFunc, CInputOptions options,
 
   //  2015.11.13 ZP
   fix_time_h_system_call(codegen, pTopFunc);
-
-  //  2016.02.04 Han
-  if (naive_aocl == 1 && tool_type == 1) {
-    insert_global_attribute_top(codegen, pTopFunc, options);
-  }
-
-  if (naive_aocl == 0 && tool_type == 1) {
-    add_global(codegen, pTopFunc, options);
-  }
-
-  //  2016.07.07
-  if (tool_type == 1) {
-    change_register_top(codegen, pTopFunc);
-  }
-
-  if (standard_flow && tool_type == 1) {
-    auto kernels = get_all_tasks(codegen, pTopFunc);
-    CStreamIR stream_ir(codegen);
-    stream_ir.ParseStreamModel();
-    stream_ir.ConcurrentCodeGeneration(kernels);
-  }
-
-  if (naive_aocl == 0 && tool_type == 1) {
-    kernel_top_generation(codegen, pTopFunc);
-  }
 
   //  2017.03.22
   if (0 == tool_type) {

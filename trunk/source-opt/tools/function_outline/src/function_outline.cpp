@@ -483,12 +483,6 @@ int function_outline_top(CSageCodeGen *codegen, void *pTopFunc,
       //  add access intrinsic declaration
       codegen->AddDirectives("\n#include \"cmost.h\"\n", new_func_decl);
 
-      FILE *fp = fopen("altera_const.cl", "r");
-      if (fp != NULL) {
-        fclose(fp);
-        string include_const = "\n//#include \"altera_const.cl\"\n";
-        codegen->AddDirectives(include_const, new_func_decl);
-      }
       FILE *fp1 = fopen("merlin_typedef.h", "r");
       if (fp1 != NULL) {
         fclose(fp1);

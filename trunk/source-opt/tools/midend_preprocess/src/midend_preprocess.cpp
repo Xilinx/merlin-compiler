@@ -28,7 +28,6 @@
 #include "mars_message.h"
 #include "program_analysis.h"
 #include "rose.h"
-#include "altera_preprocess.h"
 #include "comm_opt.h"
 #include "function_inline.h"
 #include "postwrap_process.h"
