@@ -46,8 +46,6 @@ set_target_properties(mars_opt_org PROPERTIES
 
 target_link_libraries(mars_opt_org
   AddPragmaKernel
-  AlteraPreprocess
-  AlteraPostprocess
   ArrayDelinearize
   ArrayLinearize
   AutoFuncInline 

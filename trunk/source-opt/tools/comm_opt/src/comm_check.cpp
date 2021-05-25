@@ -95,40 +95,6 @@ bool check_node(CMarsNode *node, map<void *, mark_struct> *loop2mark,
       }
     }
   }
-#if 0
-        for (auto &stmt : node->get_stmts()) {
-            //  3.1 check whether there are sub for-loops
-            //  in which there is communication
-            vector<void*> vec_loop;
-            ast->GetNodesByType(stmt, "preorder", "SgForStatement", &vec_loop);
-            for (auto &loop : vec_loop) {
-                CMarsLoop *loop_info = mars_ir->get_loop_info(loop);
-                if (loop_info->is_complete_unroll()) continue;
-                vector<void*> vec_refs;
-                ast->GetNodesByType(stmt, "preorder", "SgVarRefExp", &vec_refs);
-                bool has_communication = false;
-                for (auto &ref : vec_refs) {
-                    void *var_init = ast->GetVariableInitializedName(ref);
-                    if (ports.count(var_init) > 0) {
-                        has_communication = true;
-                        break;
-                    }
-                }
-                if (!has_communication) continue;
-
-                string file_name = ast->GetFileInfo_filename(stmt, true);
-                int line_num = ast->GetFileInfo_line(stmt);
-                string msg = "Statement \'" + ast->UnparseToString(stmt)
-                    + "\' (" + file_name +
-                    ":" + my_itoa(line_num) + ") which has subloops"
-                    " cannot be supported in"
-                    " altera normal flow\n";
-
-                dump_critical_message("COMCK", "WARNING", msg, 203);
-                return false;
-            }
-        }
-#endif
   if (pre_check) {
     //  3.2 check whether there are do-while/while loops in which there is
     //  communication
@@ -158,12 +124,6 @@ bool check_node(CMarsNode *node, map<void *, mark_struct> *loop2mark,
 
         string file_name = ast->GetFileInfo_filename(stmt, 1);
         int line_num = ast->GetFileInfo_line(stmt);
-        //                string msg = "Statement \'" +
-        //                ast->UnparseToString(stmt)
-        //                    + "\' (" + file_name +
-        //                    ":" + my_itoa(line_num) + ") which has
-        //  while/do-while loops"                     " cannot be supported in"
-        //  " altera normal flow\n";
 
         string loop_info = "'" + ast->UnparseToString(stmt) + "' (" +
                            file_name + ":" + my_itoa(line_num) + ")";
@@ -365,7 +325,6 @@ int comm_check_top(CSageCodeGen *codegen, void *pTopFunc,
     valid &= check_node(node, &loop2mark, &mars_ir, false);
   }
   if (!valid) {
-    system("touch merlin_altera_naive.log");
     return 0;
   }
   return 1;

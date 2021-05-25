@@ -14,8 +14,6 @@ add_subdirectory(mars_opt)
 
 # add all dependent projects
 add_subdirectory(add_pragma_kernel)
-add_subdirectory(altera_postprocess)
-add_subdirectory(altera_preprocess)
 add_subdirectory(array_linearize)
 add_subdirectory(array_delinearize)
 add_subdirectory(auto_dim_interchange)

@@ -54,7 +54,30 @@ static int count_return = 0;
 
 //  map<pair<string, string>, void*> global_var;
 
-extern int is_host_function(CSageCodeGen *codegen, void *func);
+int is_host_function(CSageCodeGen *codegen, void *func) {
+  //  check whether there is task pragma in the function body
+  void *func_body = codegen->GetFuncBody(func);
+  //  remove unused function declaration without body
+  if (func_body == nullptr) {
+    return 0;
+  }
+  vector<void *> vec_pragmas;
+  codegen->GetNodesByType(func_body, "preorder", "SgPragmaDeclaration",
+                          &vec_pragmas);
+  for (auto pragma : vec_pragmas) {
+    SgPragmaDeclaration *decl =
+        isSgPragmaDeclaration(static_cast<SgNode *>(pragma));
+    assert(decl);
+    CAnalPragma ana_pragma(codegen);
+    bool invalid;
+    if (ana_pragma.PragmasFrontendProcessing(decl, &invalid, false)) {
+      if (ana_pragma.is_task()) {
+        return 1;
+      }
+    }
+  }
+  return 0;
+}
 
 int func_inline(CSageCodeGen *codegen, void *func_call, enum effort curr_flow,
                 bool transform, bool report) {
@@ -123,7 +146,6 @@ int func_inline(CSageCodeGen *codegen, void *func_call, enum effort curr_flow,
           msg +=
               ". The design flow will switch to low effort mode automatically";
           dump_critical_message(FUCIN_WARNING_1(call_info, true));
-          system("touch merlin_altera_naive.log");
         }
       }
       return 0;
@@ -161,7 +183,6 @@ int func_inline(CSageCodeGen *codegen, void *func_call, enum effort curr_flow,
           msg +=
               ". The design flow will switch to low effort mode automatically";
           dump_critical_message(FUCIN_WARNING_2(call_info, true));
-          system("touch merlin_altera_naive.log");
         }
 #endif
         }
@@ -190,7 +211,6 @@ int func_inline(CSageCodeGen *codegen, void *func_call, enum effort curr_flow,
           msg +=
               ". The design flow will switch to low effort mode automatically";
           dump_critical_message(FUCIN_WARNING_3(call_info, true));
-          system("touch merlin_altera_naive.log");
         }
       }
       return 0;

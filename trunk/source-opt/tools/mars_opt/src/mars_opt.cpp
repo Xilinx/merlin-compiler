@@ -280,11 +280,6 @@ void init_pass_func_table() {
                       const CInputOptions &options);
   g_pass_func_table["loop_tiling"] = loop_tiling_top;
 #endif
-#ifdef HAS_ALTERA_PREPROCESS
-  int altera_preprocess_top(CSageCodeGen * codegen, void *pTopFunc,
-                            const CInputOptions &options);
-  g_pass_func_table["altera_preprocess"] = altera_preprocess_top;
-#endif
 #ifdef HAS_MIDEND_PREPROCESS
   int midend_preprocess_top(CSageCodeGen * codegen, void *pTopFunc,
                             const CInputOptions &options);
@@ -312,11 +307,6 @@ void init_pass_func_table() {
   int comm_dead_remove_top(CSageCodeGen * codegen, void *pTopFunc,
                            const CInputOptions &options);
   g_pass_func_table["comm_dead_remove"] = comm_dead_remove_top;
-#endif
-#ifdef HAS_ALTERA_POSTPROCESS
-  int altera_postprocess_top(CSageCodeGen * codegen, void *pTopFunc,
-                             const CInputOptions &options);
-  g_pass_func_table["altera_postprocess"] = altera_postprocess_top;
 #endif
 #ifdef HAS_MEMORY_REDUCE
   int memory_reduce_top(CSageCodeGen * codegen, void *pTopFunc,

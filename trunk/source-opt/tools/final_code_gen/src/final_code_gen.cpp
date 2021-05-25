@@ -76,6 +76,7 @@ using MerlinStreamModel::CStreamIR;
 //  using namespace SageBuilder;
 //  Temp use global variable to save effort
 bool pure_kernel_flow = false;
+static int count_memcpy = 0;
 
 extern int check_kernel_argument_number(CSageCodeGen *codegen,
                                         vector<void *> vec_kernels,
@@ -548,12 +549,36 @@ int replace_memcpy_with_opencl_in_lib_wrapper(CSageCodeGen *codegen,
   }
   return 0;
 }
-extern int handle_single_assignment(CSageCodeGen *codegen, void *sg_array1,
-                                    const vector<void *> &sg_idx1,
-                                    void *sg_array2,
-                                    const vector<void *> &sg_idx2,
-                                    void *sg_length, int type_size,
-                                    void *func_call);
+
+int handle_single_assignment(CSageCodeGen *codegen, void *sg_array1,
+                             const vector<void *> &sg_idx1, void *sg_array2,
+                             const vector<void *> &sg_idx2, void *sg_length,
+                             int type_size, void *func_call) {
+  CMarsExpression length(sg_length, codegen, func_call);
+  if (length.IsConstant() == 0) {
+    return 0;
+  }
+  int64_t c_length = length.GetConstant() / type_size;
+  if (c_length != 1) {
+    return 0;
+  }
+  void *pntr1 = codegen->CreateVariableRef(sg_array1);
+  for (auto sg_idx : sg_idx1) {
+    pntr1 =
+        codegen->CreateExp(V_SgPntrArrRefExp, pntr1, codegen->CopyExp(sg_idx));
+  }
+
+  void *pntr2 = codegen->CreateVariableRef(sg_array2);
+  for (auto sg_idx : sg_idx2) {
+    pntr2 =
+        codegen->CreateExp(V_SgPntrArrRefExp, pntr2, codegen->CopyExp(sg_idx));
+  }
+
+  void *single_assign_expr = codegen->CreateExp(V_SgAssignOp, pntr1, pntr2);
+  codegen->ReplaceExp(func_call, single_assign_expr);
+  count_memcpy++;
+  return 1;
+}
 
 string stmt_return_0() { return "\treturn 0;\n"; }
 string head_opencl_kernel_buffer() {
@@ -3183,7 +3208,7 @@ static int remove_dead_pragma(CSageCodeGen *codegen, void *pTopFunc) {
   return ret;
 }
 
-static int altera_function_uniquify_top(CSageCodeGen *codegen, void *func_decl,
+static int function_uniquify(CSageCodeGen *codegen, void *func_decl,
                                         CMarsIr *mars_ir, set<void *> kernels,
                                         set<void *> *visited_funcs) {
   if ((*visited_funcs).count(func_decl) > 0) {
@@ -3314,7 +3339,7 @@ static int altera_function_uniquify_top(CSageCodeGen *codegen, void *func_decl,
     vec_sub_funcs.push_back(sub_func);
   }
   for (auto sub_func : vec_sub_funcs) {
-    ret |= altera_function_uniquify_top(codegen, sub_func, mars_ir, kernels,
+    ret |= function_uniquify(codegen, sub_func, mars_ir, kernels,
                                         visited_funcs);
   }
   //  ALGOPP("FIN", "TIME for function " << printNodeInfo(codegen, func_call));
@@ -3338,7 +3363,7 @@ int function_uniquify_top(CSageCodeGen *codegen, void *pTopFunc,
   //  codegen->reset_func_decl_cache();
   //  codegen->reset_func_call_cache();
   for (auto sg_kernel : vec_kernels) {
-    ret |= altera_function_uniquify_top(codegen, sg_kernel, &mars_ir, kernels,
+    ret |= function_uniquify(codegen, sg_kernel, &mars_ir, kernels,
                                         &visited_funcs);
   }
   return ret;
@@ -3550,120 +3575,6 @@ static void shorten_function_name_top(CSageCodeGen *codegen, void *pTopFunc,
   vector<string> exist_name;
   check_and_short_function_name(codegen, pTopFunc, vec_kernels, exist_name);
 }
-/*
-static void    kernel_top_generation(CSageCodeGen * codegen, void * pTopFunc) {
-    string kernel_top_file = "kernel_top.cl";
-    remove(kernel_top_file.c_str());
-    string channel_string;
-    channel_string = "#pragma OPENCL EXTENSION cl_altera_channels : enable\n";
-    string cmd = "echo '" + channel_string + "' >> " + kernel_top_file;
-    system(cmd.c_str());
-
-    size_t i;
-    vector<string> vec_file_name;
-    vector<pair<void*, string> > vecTldmPragmas;
-    codegen->TraverseSimple(pTopFunc, "preorder", GetTLDMInfo_withPointer4,
-&vecTldmPragmas);
-    //  add channel definition
-    for (i = 0; i < vecTldmPragmas.size(); i++)
-    {
-        string sFilter, sCmd;
-        map<string, pair<vector<string>, vector<string> > > mapParams;
-        tldm_pragma_parse_whole(vecTldmPragmas[i].second, sFilter, sCmd,
-mapParams);
-
-        if ("channel" == sFilter) {
-            string pragma_channel = vecTldmPragmas[i].second + "\n";
-            printf("pragma = %s\n",pragma_channel.c_str());
-            string cmd = "echo '" + pragma_channel + "' >> " + kernel_top_file;
-            system(cmd.c_str());
-        }
-    }
-    //  add file include
-    for (i = 0; i < vecTldmPragmas.size(); i++)
-    {
-        string sFilter, sCmd;
-        map<string, pair<vector<string>, vector<string> > > mapParams;
-        tldm_pragma_parse_whole(vecTldmPragmas[i].second, sFilter, sCmd,
-mapParams);
-
-        if ("cmost" != sFilter and "ACCEL" != sFilter) {
-            continue;
-        }
-        if ("kernel" != sCmd){
-            continue;
-        }
-        void * func_decl = codegen->GetNextStmt(vecTldmPragmas[i].first);
-        vec_file_name.push_back(codegen->GetFuncName(func_decl));
-    }
-    for(size_t j=0; j<vec_file_name.size(); j++) {
-        string include_file = "#include \"" + vec_file_name[j] + ".cl\"";
-        string cmd = "echo '" + include_file + "' >> " + kernel_top_file;
-        system(cmd.c_str());
-    }
-    //  add other necessary string
-    string another_string;
-    another_string = "#define __assert_fail(x,y,z,w) 0";
-    cmd = "echo '" + another_string  + "' >> " + kernel_top_file;
-    system(cmd.c_str());
-}
-*/
-//  static void ReplaceMemcpyByBruteForce(CSageCodeGen *codegen, void *expr) {
-//  if (!codegen->IsFunctionCall(expr))
-//    return;
-//
-//  string func_name = codegen->GetFuncNameByCall(expr);
-//  if (func_name != "memcpy")
-//    return;
-//
-//  void *memcpy_stmt = codegen->TraceUpToStatement(expr);
-//  if (!codegen->IsExprStatement(memcpy_stmt))
-//    return;
-//  void *scope = codegen->GetGlobal(memcpy_stmt);
-//
-//  vector<void *> args = codegen->GetFuncCallParamList(expr);
-//  assert(args.size() == 3 && "invalid memcpy arg number");
-//
-//  void *iter_init_exp = codegen->CreateConst(0);
-//  //  int __memcpy_br_iter_ = 0;
-//  string iter_name = "__memcpy_br_iter";
-//  void *for_init =
-//      codegen->CreateVariableDecl("int", iter_name, iter_init_exp, scope);
-//  //  merlin_memcpy_iter_i < N
-//  void *for_cond_var = codegen->CreateVariableRef(for_init, scope);
-//  void *for_cond_bound = codegen->CopyExp(args[2]);
-//  void *for_cond_exp =
-//      codegen->CreateExp(V_SgLessThanOp, for_cond_var, for_cond_bound);
-//  void *for_cond_stmt = codegen->CreateStmt(V_SgExprStatement, for_cond_exp);
-//
-//  //  merlin_memcpy_iter_i++
-//  void *for_inc_var = codegen->CreateVariableRef(for_init, scope);
-//  void *for_inc = codegen->CreateExp(V_SgPlusPlusOp, for_inc_var);
-//
-//  //  *((char*)pdst + i) = *((char*)psrc + i);
-//  void *dst_arg = codegen->CopyExp(args[0]);
-//  void *dst_cast = codegen->CreateCastExp(dst_arg, "char *");
-//  void *dst_iter_var = codegen->CreateVariableRef(for_init, scope);
-//  void *dst_add_iter = codegen->CreateExp(V_SgAddOp, dst_cast, dst_iter_var);
-//  void *dst_deref = codegen->CreateExp(V_SgPointerDerefExp, dst_add_iter);
-//
-//  void *src_arg = codegen->CopyExp(args[1]);
-//  void *src_cast = codegen->CreateCastExp(src_arg, "char *");
-//  void *src_iter_var = codegen->CreateVariableRef(for_init, scope);
-//  void *src_add_iter = codegen->CreateExp(V_SgAddOp, src_cast, src_iter_var);
-//  void *src_deref = codegen->CreateExp(V_SgPointerDerefExp, src_add_iter);
-//
-//  void *replace_exp = codegen->CreateExp(V_SgAssignOp, dst_deref, src_deref);
-//  void *replace_stmt = codegen->CreateStmt(V_SgExprStatement, replace_exp);
-//  void *for_bb = codegen->CreateBasicBlock(replace_stmt);
-//
-//  //  finish for statement
-//  void *for_stmt =
-//      codegen->CreateForLoop(for_init, for_cond_stmt, for_inc, for_bb);
-//
-//  //  replace
-//  codegen->ReplaceStmt(memcpy_stmt, for_stmt);
-//  }
 
 void ReplaceMemcpyByBruteForce(CSageCodeGen *codegen, void *expr) {
   if (codegen->IsFunctionCall(expr) == 0) {

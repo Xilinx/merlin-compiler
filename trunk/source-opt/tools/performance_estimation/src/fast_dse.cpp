@@ -509,7 +509,7 @@ bool CheckIfFullyFilled(const vector<FastDseBlock *> &BlockList, string Tool) {
           cout << "value = " << OneBlock->UF << endl;
         }
       }
-      if (OneAttribute == D_IL && Tool != "aocl") {
+      if (OneAttribute == D_IL) {
         if (OneBlock->IL < 1) {
           //  If fully unrolled, then no need IL
           if (OneBlock->UF != OneBlock->TC) {
@@ -518,18 +518,6 @@ bool CheckIfFullyFilled(const vector<FastDseBlock *> &BlockList, string Tool) {
           }
         } else {
           cout << "value = " << OneBlock->IL << endl;
-        }
-      }
-      //  if changed loop not exist in org.json, then will be 0 and invalid
-      if (OneAttribute == D_ILI && Tool == "aocl") {
-        if (OneBlock->ILI < 1) {
-          //  If fully unrolled, then no need IL
-          if (OneBlock->UF != OneBlock->TC) {
-            cout << "Error ILI number " << OneBlock->ILI << endl;
-            fully_filled = false;
-          }
-        } else {
-          cout << "value = " << OneBlock->ILI << endl;
         }
       }
     }

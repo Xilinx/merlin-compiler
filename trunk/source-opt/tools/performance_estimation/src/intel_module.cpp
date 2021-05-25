@@ -386,8 +386,8 @@ void CPerfEstBlock::AddChildBlock_AOCL(
                                   &func_calls);
           for (auto call : func_calls) {
             string call_name = codegen->GetFuncNameByCall(call);
-            if (call_name.substr(0, 19) != "read_channel_altera" &&
-                call_name.substr(0, 20) != "write_channel_altera") {
+            if (call_name.substr(0, 19) != "read_channel_hidden" &&
+                call_name.substr(0, 20) != "write_channel_hidden") {
               printf("call = %s\n", call_name.c_str());
               void *true_auto_decl = codegen->GetFuncDeclByName(call_name);
               PRESTP("EST", " Create a auto kernel block: "
@@ -1151,22 +1151,7 @@ void CPerfEstBlock::ReScheduleByDataflow(
 void CPerfEstBlock::ComputeStaticCyclesForLoop(
     CSageCodeGen *codegen, const vector<CPerfEstBlock *> &AllBlockList) {
   //  For intel if memory burst loop. set II=1. IL=1
-  if (this->Tool == "aocl") {
-    if (this->Burst == 1) {
-      PRESTP("EST", " Find memory burst loop, set II=1, IL=1.");
-      this->HaveMemoryBurstChild = true;
-      this->II = 1;
-      this->IL = 1;
-    }
-    //  all parent have burst child if current have
-    if (this->HaveMemoryBurstChild) {
-      Parent->HaveMemoryBurstChild = true;
-    }
-    //  if not burst loop and pipeline loop, use vendor latency
-    if (!this->HaveMemoryBurstChild && this->Pipelined) {
-      this->IL = this->VendorLatency;
-    }
-  } else {
+  {
     //  If pipeline loop or flatten to pipeline loop or innermost loop,
     //  we directly use vendor loop iteration latency
     if (this->VendorLatency > this->IL) {
@@ -1428,9 +1413,6 @@ void CPerfEstBlock::ComputeGlueCyclesForLoop(
         this->GlueLatency = 0;
       }
     }
-  } else if (this->Tool == "aocl" && !(this->DataUpdated)) {
-    this->GlueLatencyIteration = 0;
-    this->GlueLatency = 0;
   }
 }
 
@@ -2521,8 +2503,8 @@ map<void *, int64_t> GetChannelMapForAutoRunKernel(CSageCodeGen *codegen,
                           &func_calls);
   for (auto call : func_calls) {
     string call_name = codegen->GetFuncNameByCall(call);
-    if (call_name.substr(0, 19) == "read_channel_altera" ||
-        call_name.substr(0, 20) == "write_channel_altera") {
+    if (call_name.substr(0, 19) == "read_channel_hidden" ||
+        call_name.substr(0, 20) == "write_channel_hidden") {
       PRESTP("EST", " Find a channel access: " << codegen->_p(call, 30));
       //  get channel depth
       int64_t channel_depth = GetChannelDepth(codegen, func_decl, call);
@@ -2575,8 +2557,8 @@ map<void *, int64_t> GetChannelMapForAutoRunKernelWrapper(CSageCodeGen *codegen,
       for (auto call : channel_calls) {
         PRESTP("EST", " call = " << codegen->_p(call, 130));
         string call_name = codegen->GetFuncNameByCall(call);
-        if (call_name.substr(0, 19) == "read_channel_altera" ||
-            call_name.substr(0, 20) == "write_channel_altera") {
+        if (call_name.substr(0, 19) == "read_channel_hidden" ||
+            call_name.substr(0, 20) == "write_channel_hidden") {
           PRESTP("EST", " Find a channel access: " << codegen->_p(call, 30));
           //  get channel depth
           int64_t channel_depth = GetChannelDepth(codegen, port_decl, call);

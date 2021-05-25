@@ -124,16 +124,8 @@ if HAS_LOOP_TILING
 include ../../loop_tiling/makefile.inc
 endif 
 
-if HAS_ALTERA_PREPROCESS
-include ../../altera_preprocess/makefile.inc
-endif 
-
 if HAS_COMM_OPT
 include ../../comm_opt/makefile.inc
-endif 
-
-if HAS_ALTERA_POSTPROCESS
-include ../../altera_postprocess/makefile.inc
 endif 
 
 if HAS_MEMORY_REDUCE

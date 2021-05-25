@@ -38,7 +38,6 @@
 #include "rose.h"
 #include "math.h"
 
-#include "altera_preprocess.h"
 #include "array_delinearize.h"
 #include "comm_opt.h"
 #include "function_inline.h"
@@ -80,6 +79,122 @@ extern int local_static_replace_top(CSageCodeGen *codegen, void *pTopFunc);
 extern int constant_propagation_top(CSageCodeGen *codegen, void *pTopFunc,
                                     const CInputOptions &option,
                                     bool assert_generation);
+
+int kernel_file_list_gen(CSageCodeGen *codegen, void *pTopFunc, int tool = 0) {
+  printf("    Enter kernel_file_list_gen...\n");
+  string kernel_list_file = "__merlin_kernel_list.h";
+  if (test_file_for_read(kernel_list_file) != 0) {
+#ifdef PROJ_DEBUG
+    cerr << "file " << kernel_list_file << " has existed.\n";
+#endif
+    return 0;
+  }
+  {
+    string cmd = "rm -rf " + kernel_list_file;
+    system(cmd.c_str());
+  }
+  FILE *fp = fopen(kernel_list_file.c_str(), "w");
+  size_t i;
+  vector<pair<void *, string>> vecTldmPragmas;
+  codegen->TraverseSimple(pTopFunc, "preorder", GetTLDMInfo_withPointer4,
+                          &vecTldmPragmas);
+  set<string> set_strings;
+  //  printf("number = %d\n",vecTldmPragmas.size());
+  for (i = 0; i < vecTldmPragmas.size(); i++) {
+    string sFilter;
+    string sCmd;
+    map<string, pair<vector<string>, vector<string>>> mapParams;
+    tldm_pragma_parse_whole(vecTldmPragmas[i].second, &sFilter, &sCmd,
+                            &mapParams);
+    //  printf("Enter func_inline_top sFilter %s\n\n\n",sFilter.c_str());
+    //  printf("Enter func_inline_top sCmd %s\n\n\n",sCmd.c_str());
+    boost::algorithm::to_upper(sFilter);
+    boost::algorithm::to_upper(sCmd);
+
+    if (CMOST_PRAGMA != sFilter && ACCEL_PRAGMA != sFilter &&
+        TLDM_PRAGMA != sFilter) {
+      continue;
+    }
+    if (CMOST_KERNEL != sCmd) {
+      continue;
+    }
+
+    void *sg_kernel = nullptr;
+    if (CMOST_TASK == sCmd) {
+      void *sg_kernel_call = codegen->find_kernel_call(vecTldmPragmas[i].first);
+      assert(sg_kernel_call);
+      void *sg_task = sg_kernel_call;
+      sg_kernel = codegen->GetFuncDeclByCall(sg_task);
+    } else if (CMOST_KERNEL == sCmd) {
+      void *next_stmt = codegen->GetNextStmt(vecTldmPragmas[i].first);
+      if (codegen->IsFunctionDeclaration(next_stmt) != 0) {
+        sg_kernel = next_stmt;
+      } else if (codegen->IsExprStatement(next_stmt) != 0) {
+        void *sg_call = codegen->GetFuncCallInStmt(next_stmt);
+        sg_kernel = codegen->GetFuncDeclByCall(sg_call);
+        //  } else {
+        //    string msg = "Did not get a function declaration right after
+        //    pragma:\n"; msg += "#pragma " + vecTldmPragmas[i].second;
+        //    dump_critical_message("KWRAP", "ERROR", msg, 301, 1);
+        //    throw std::exception();
+      }
+    }
+    if (sg_kernel == nullptr) {
+      continue;
+    }
+
+    string func_name = codegen->GetFuncName(sg_kernel);
+    string user_kernel_name;
+    if (!mapParams["name"].first.empty()) {
+      user_kernel_name = mapParams["name"].first[0];
+    } else {
+      user_kernel_name = func_name;
+    }
+    string top_file_name = codegen->get_file(sg_kernel);
+    string add_string = "//  " + top_file_name + "\n";
+    set<string> set_files;
+    if (tool == 1) {
+      set_files.insert(top_file_name);
+    } else {
+      set_strings.insert(add_string);
+    }
+    SetVector<void *> sub_decls;
+    SetVector<void *> sub_calls;
+    codegen->GetSubFuncDeclsRecursively(sg_kernel, &sub_decls, &sub_calls);
+    for (auto sub_decl : sub_decls) {
+      if (codegen->GetFuncBody(sub_decl) == nullptr) {
+        continue;
+      }
+      string sub_func_name = codegen->GetFuncName(sub_decl);
+      string sub_file_name = codegen->get_file(sub_decl);
+      string add_string = "//  " + sub_file_name + "\n";
+      if (tool == 1) {
+        set_files.insert(sub_file_name);
+      } else {
+        set_strings.insert(add_string);
+      }
+    }
+    if (tool == 1) {
+      string add_string = "//  " + func_name + "=";
+      for (auto one_file : set_files) {
+        add_string += one_file + " ";
+      }
+      add_string += "\n";
+      set_strings.insert(add_string);
+    }
+  }
+  for (auto add_string : set_strings) {
+    //  printf("func_name = %s\n",top_file_name.c_str());
+    fprintf(fp, "%s", add_string.c_str());
+    //  printf("func call size = %d\n",vecCalls.size());
+
+    //  for (size_t i=0; i < vecCalls.size(); i++) {
+    //    check_single_file(codegen, vecCalls[i], top_file_name);
+    //  }
+  }
+  fclose(fp);
+  return 1;
+}
 
 vector<void *> get_top_kernels(CSageCodeGen *codegen, void *pTopFunc) {
   vector<pair<void *, string>> vecTldmPragmas;

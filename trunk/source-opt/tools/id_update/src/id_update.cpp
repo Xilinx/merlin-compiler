@@ -453,7 +453,7 @@ void setFuncDeclUserCodeScopeId(CSageCodeGen *ast, void *funcDecl,
 }
 
 bool isGeneratedByMerlin(string filename) {
-  vector<string> generated = {"cmost.h", "altera_const.h",
+  vector<string> generated = {"cmost.h", 
                               "rose_edg_required_macros_and_functions.h"};
 
   for (auto &file : generated) {
