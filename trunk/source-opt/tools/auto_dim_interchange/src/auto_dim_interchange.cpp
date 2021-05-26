@@ -2633,8 +2633,7 @@ int CAutoDimInterchange::run(void *kernel) {
 }
 
 //  Goal
-//  - Interchange the parallel array dims into low dimensions so that Intel can
-//  achieve
+//  - Interchange the parallel array dims into low dimensions to achieve
 //    desired II in pipelining/parallelization
 //  Function
 //  1. Detect the arrays and their dimensions that has parallel loop iterators
