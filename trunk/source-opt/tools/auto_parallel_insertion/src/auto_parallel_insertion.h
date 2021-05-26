@@ -232,9 +232,6 @@ class AutoParallel {
       : codegen(codegen_), pTopFunc(pTopFunc_), options(options_) {
     mars_ir_v2.build_mars_ir(codegen, pTopFunc);
     mars_ir.get_mars_ir(codegen, pTopFunc, options, true, false, true, true);
-    if ("aocl" == options.get_option_key_value("-a", "impl_tool")) {
-      mAltera_flow = true;
-    }
     if ("sdaccel" == options.get_option_key_value("-a", "impl_tool")) {
       mXilinx_flow = true;
     }
@@ -272,7 +269,6 @@ class AutoParallel {
   CInputOptions options;
   CMarsIr mars_ir;
   CMarsIrV2 mars_ir_v2;
-  bool mAltera_flow;
   bool mXilinx_flow;
 
   shared_ptr<LoopInfoBuilder> loop_info_builder;
