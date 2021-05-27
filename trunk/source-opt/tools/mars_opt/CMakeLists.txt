@@ -25,7 +25,7 @@ add_executable(mars_opt_org
 set_target_properties(mars_opt_org PROPERTIES
     LINKER_LANGUAGE CXX
     COMPILE_FLAGS "-DLINUX_COMMANDS -DHAS_DS_MARK \
-    -DHAS_SYSTOLIC_FRONTEND -DHAS_SYSTOLIC_EXTRACT -DHAS_DS_LOOP_PARALLEL \
+    -DHAS_DS_LOOP_PARALLEL \
     -DHAS_LOOP_PARALLEL -DHAS_MARS_IR \
     -DHAS_STREAM_IR -DHAS_MEMORY_BURST -DHAS_LOWER_CPP \
     -DHAS_DEPENDENCY_RESOLVE \
@@ -37,7 +37,7 @@ set_target_properties(mars_opt_org PROPERTIES
     -DHAS_AUTO_DIM_INTERCHANGE \
     -DHAS_KERNEL_WRAPPER -DHAS_KERNEL_PRAGMA_GEN \
     -DHAS_LOOP_TILING -DHAS_ALTERA_PREPROCESS \
-    -DHAS_MEMORY_REDUCE -DHAS_MIDEND_PREPROCESS -DHAS_ALTERA_POSTPROCESS \
+    -DHAS_MIDEND_PREPROCESS -DHAS_ALTERA_POSTPROCESS \
     -DHAS_STRUCT_DECOMPOSE  -DHAS_COMM_OPT  -DHAS_ARRAY_LINEARIZE \
     -DHAS_KERNEL_SEPARATE -DHAS_POSTWRAP_PROCESS -DHAS_MEMORY_PARTITION \
     -DHAS_PERFORMANCE_ESTIMATION -DHAS_GEN_TOKEN_ID -DHAS_GEN_HIERARCHY \
@@ -93,8 +93,6 @@ target_link_libraries(mars_opt_org
   MemoryPartition
   ChannelPartition
   MidendPreprocess
-  MemoryReduce
-  # MsgTest
   DependencyResolve
   StreamPrefetch
   PerformanceEstimation
@@ -110,8 +108,6 @@ target_link_libraries(mars_opt_org
   StructDecompose
   StructuralFuncInline
   SynthesisCheck
-  SystolicExtract
-  SystolicFrontend
   LineBuffer
   mars_rose
   mars_opt_utils

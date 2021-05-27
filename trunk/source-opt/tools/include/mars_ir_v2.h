@@ -37,7 +37,6 @@
 enum effort { LOW = 0, STANDARD = 1, MEDIUM = 2, HIGH = 3 };
 enum tool_type {
   XILINX_SDX = 0,
-  INTEL_SDK = 1,
 };
 class CMarsIrV2 {
   std::set<void *> mKernelTops;  //  top level user kernel function declaration
@@ -45,7 +44,6 @@ class CMarsIrV2 {
       mKernel2Pragma;  //  the task pragma associated with the kernel if any
   std::set<void *>
       mAllKernelFuncs;  //  all the kernel functions and kernel subfunctions
-  std::set<void *> mAlteraChannels;
   std::set<void *> mSharedPorts;
   std::vector<CMarsNode *> mIrNodes;  //  MarsIR nodes
   std::map<pair<void *, bool>, map<void *, bool>> m_port_is_bus;
@@ -115,7 +113,6 @@ class CMarsIrV2 {
 
   bool is_shared_port(void *sg_init_name);
 
-  bool is_altera_channel(void *port);
 
   std::set<void *> get_all_shared_ports() { return mSharedPorts; }
 
@@ -217,8 +214,6 @@ class CMarsIrV2 {
 
   void remove_all_pragmas();
 
-  void convert_false_dep_pragmas(tool_type tt);
-
   bool remove_writeonly_shared_local_ports();
 
   //  ZP: 20160910
@@ -277,7 +272,6 @@ class CMarsIrV2 {
     return mIrEdges[node0][node1][port];
   }
 
-  void collect_altera_channels(const std::vector<void *> &all_funcs);
 
   bool check_identical_indices(const std::set<void *> &refs);
 

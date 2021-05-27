@@ -28,12 +28,11 @@
 #include "program_analysis.h"
 int analysis_delinearize(CSageCodeGen *ast, void *array_init, int dim,
                          std::vector<size_t> *dim_split_steps,
-                         std::map<void *, size_t> *mapAlias2BStep,
-                         bool altera_flow);
+                         std::map<void *, size_t> *mapAlias2BStep);
 int analysis_delinearize(CSageCodeGen *ast, void *array_init, int dim,
                          std::vector<size_t> *dim_split_steps,
                          std::map<void *, size_t> *mapAlias2BStep,
-                         bool altera_flow, bool *is_simple, void *offset,
+                         bool *is_simple, void *offset,
                          void *scope);
 void analysis_delinearize_postproc_alias_offset(
     CSageCodeGen *ast, void *array_init, int dim_idx, void *scope,

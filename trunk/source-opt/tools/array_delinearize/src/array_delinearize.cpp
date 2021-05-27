@@ -92,12 +92,11 @@ template <typename T> void print(vector<T> vec, string leadingStr) {
 
 int analysis_delinearize(CSageCodeGen *ast, void *array_init, int dim,
                          vector<size_t> *dim_split_steps,
-                         map<void *, size_t> *mapAlias2BStep,
-                         bool altera_flow) {
+                         map<void *, size_t> *mapAlias2BStep) {
   CMarsExpression offset(ast, 0);
   bool is_simple = true;
   return analysis_delinearize(ast, array_init, dim, dim_split_steps,
-                              mapAlias2BStep, altera_flow, &is_simple, &offset,
+                              mapAlias2BStep, &is_simple, &offset,
                               nullptr);
 }
 
@@ -108,7 +107,7 @@ int analysis_delinearize(CSageCodeGen *ast, void *array_init, int dim,
 //         e.g. dim_split_steps (1, 8, 256) -> array dim [org_size/256][32][8]
 int analysis_delinearize(CSageCodeGen *ast, void *array_init, int dim,
                          vector<size_t> *dim_split_steps,
-                         map<void *, size_t> *mapAlias2BStep, bool altera_flow,
+                         map<void *, size_t> *mapAlias2BStep,
                          bool *is_simple, void *offset, void *scope) {
   DEFINE_START_END;
   STEMP(start);
@@ -148,10 +147,6 @@ int analysis_delinearize(CSageCodeGen *ast, void *array_init, int dim,
     }
 
     org_dim_size = tt_size[type_dim - 1 - dim_idx_org];
-
-    //  ZP: 20170309, I comment it out for unification
-    //  if (!altera_flow && tt_size[0] < 64)
-    //  return 0; //  DO NOT convert for small arrays
 
     DEL_ALGO("type_dim: " + my_itoa(type_dim));
     for (auto ele : tt_size) {
@@ -1635,66 +1630,12 @@ int local_array_delinearization(CSageCodeGen *codegen, void *pTopFunc,
   if (!options.get_option_key_value("-a", "naive_hls").empty()) {
     return 0;
   }
-  bool xilinx_flow = false;
-  if ("sdaccel" != options.get_option_key_value("-a", "impl_tool")) {
-    xilinx_flow = true;
-  }
 
   size_t j;
   map<void *, int> map_array;  //  the array to transform
 
   //  1. get the arrays to transform
   //
-#if 0
-  //  Array of interests:
-  //  a. it is local declared (not func_arg or global var)
-  //  b0. Xilinx: it has reference in the loops with pragma
-  //  b1. Altera: it has reference in the kernel (wider than Xilinx)
-  CMarsIr::iterator it;
-  for (it = mars_ir.ir_list.begin(); it != mars_ir.ir_list.end(); ++it) {
-    CMirNodeSet new_MirNodeSet = *it;
-    for (int i = 0; i < new_MirNodeSet.size(); i++) {
-      CMirNode *new_node = new_MirNodeSet[i];
-
-      //  ZP: 20170310: do not differentiate Xilinx and Altera
-      if (all_nodes_set.count(new_node) <= 0)
-        continue;
-
-      //  if (!altera_flow && !new_node->has_opt_pragmas())
-      //    continue;
-      //
-      //  //ZP: 20170307: host function needs to be excluded from the mars_ir
-      //  //( v2 has excluded host functions)
-      //  if (altera_flow && all_nodes_set.count(new_node) <= 0)
-      //    continue;
-      void *scope = new_node->ref;
-
-      int nLine = codegen->GetFileInfo_line(codegen->_pa(scope));
-      string sFile = codegen->GetFileInfo_filename(codegen->_pa(scope), 1);
-#if PROJDEBUG
-      cout << "  ---- Loop [" << sFile << ":" << nLine << "] "
-        << codegen->_p(codegen->_pa(scope)) << endl;
-#endif
-      vector<void *> vec_ref;
-      codegen->GetNodesByType(scope, "preorder", "SgVarRefExp", &vec_ref);
-      for (j = 0; j < vec_ref.size(); j++) {
-        void *sg_ref = vec_ref[j];
-        void *sg_array = codegen->GetVariableInitializedName(sg_ref);
-        if (codegen->IsLocalInitName(sg_array) &&
-            codegen->IsArrayType(codegen->GetTypebyVar(sg_array))) {
-          void *curr_func = codegen->TraceUpByTypeCompatible(
-              sg_array, V_SgFunctionDeclaration);
-          map<void *, bool> res;
-          if (curr_func &&
-              !mars_ir.any_trace_is_bus(codegen, curr_func, sg_array,
-                &res)) {
-            map_array[sg_array] = 1;
-          }
-        }
-      }
-    }
-  }
-#endif
 
   CMarsIrV2 mars_ir;
   mars_ir.build_mars_ir(codegen, pTopFunc);
@@ -1740,7 +1681,7 @@ int local_array_delinearization(CSageCodeGen *codegen, void *pTopFunc,
       map<void *, size_t> mapAlias2BStep;
 
       analysis_delinearize(codegen, one_array, dimIdx, &dim_split_steps,
-                           &mapAlias2BStep, xilinx_flow);
+                           &mapAlias2BStep);
       if (apply_delinearize(codegen, one_array, dimIdx, dim_split_steps,
                             &mapAlias2BStep) == 0) {
         continue;

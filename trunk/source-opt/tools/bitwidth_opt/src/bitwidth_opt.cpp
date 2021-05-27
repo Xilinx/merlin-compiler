@@ -34,18 +34,7 @@ extern int auto_coalescing_preproces_top(CSageCodeGen *codegen, void *pTopFunc,
                                          const CInputOptions &options);
 
 int bitwidth_opt_top(CSageCodeGen *codegen, void *pTopFunc,
-                     const CInputOptions &options) {
-  string tool_type = options.get_option_key_value("-a", "impl_tool");
-  if (tool_type == "aocl") {
-    MemoryCoalescingIntel btwopt(codegen, pTopFunc, options);
-    auto_coalescing_preproces_top(codegen, pTopFunc, options);
-    return static_cast<int>(btwopt.run());
-  }
-
-  if (tool_type == "sdaccel") {
-    MemoryCoalescingXilinx btwopt(codegen, pTopFunc, options);
-    return static_cast<int>(btwopt.run());
-  }
-
-  return 0;
+    const CInputOptions &options) {
+  MemoryCoalescingXilinx btwopt(codegen, pTopFunc, options);
+  return static_cast<int>(btwopt.run());
 }

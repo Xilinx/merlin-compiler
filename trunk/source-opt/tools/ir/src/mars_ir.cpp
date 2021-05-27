@@ -98,7 +98,7 @@ bool CMarsIr::is_bus_port(CSageCodeGen *codegen, void *func_decl,
   // have MM interfaces) 3) for both 1) and 2), we need to consider some ports
   // with interface pragmas 4) for non m_axi ports, we shouldn't do burst,
   // streaming, or coalescing
-  if (m_flow == XILINX_SDX || m_flow == INTEL_AOCL) {
+  if (m_flow == XILINX_SDX) {
     if (!interface.empty()) {
       for (auto one_interface : interface) {
         if (HLS_GLOBAL_MEM_MODE.count(one_interface) > 0 ||
@@ -138,9 +138,7 @@ void CMarsIr::get_mars_ir(CSageCodeGen *codegen, void *pTopFunc,
   clear();
 
   string tool_type = options.get_option_key_value("-a", "impl_tool");
-  if (tool_type == "aocl") {
-    m_flow = INTEL_AOCL;
-  } else if (tool_type == "sdaccel") {
+  if (tool_type == "sdaccel") {
     string tool_version = options.get_option_key_value("-a", "tool_version");
     if (tool_version == "vivado_hls" || tool_version == "vitis_hls")
       m_flow = XILINX_HLS;

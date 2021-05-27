@@ -510,8 +510,6 @@ void CMarsIrV2::build_node_info(const set<void *> &unrolled_loops,
   //  4. set SSST flag for each edge
   update_ssst_flag_for_all_edges();
 
-  //  5. collect all the altera channels
-  collect_altera_channels(topo_funcs);
 }
 
 bool CMarsIrV2::every_trace_is_bus(void *target_arr, void *pos) {
@@ -557,37 +555,6 @@ bool CMarsIrV2::any_trace_is_bus(void *target_arr, void *pos) {
   }
   //  To be conservative, we do not know whether it is connected to bus port
   return true;
-}
-
-//  bool CMarsIrV2::is_altera_channel(void *port) {
-//  return mAlteraChannels.count(port) > 0;
-//  }
-
-void CMarsIrV2::collect_altera_channels(const vector<void *> &all_funcs) {
-  assert(m_ast);
-  for (auto func : all_funcs) {
-    void *func_body = m_ast->GetFuncBody(func);
-    if (func_body == nullptr) {
-      continue;
-    }
-    vector<void *> vec_refs;
-    m_ast->GetNodesByType_int(func_body, "preorder", V_SgVarRefExp, &vec_refs);
-    for (auto &ref : vec_refs) {
-      void *sg_pntr = nullptr;
-      void *var_init = nullptr;
-      int pointer_dim = 0;
-      vector<void *> sg_indexes;
-      m_ast->parse_pntr_ref_by_array_ref(ref, &var_init, &sg_pntr, &sg_indexes,
-                                         &pointer_dim, ref);
-      if (sg_pntr == nullptr) {
-        continue;
-      }
-      if ((m_ast->is_altera_channel_read(sg_pntr) != 0) ||
-          (m_ast->is_altera_channel_write(sg_pntr) != 0)) {
-        mAlteraChannels.insert(var_init);
-      }
-    }
-  }
 }
 
 CMarsIrV2::~CMarsIrV2() {
@@ -1451,9 +1418,7 @@ void CMarsIrV2::get_top_loop_info(
       for (auto &port : shared_ports) {
         if (is_kernel_port(port)) {
           (*top_loop_2_ports)[loop0][port] = true;
-        } else if (mAlteraChannels.count(port) <= 0) {
-          (*top_loop_2_ports)[loop0][port] = false;
-        }
+        } 
       }
       for (auto &port : orig_ports) {
         if (is_kernel_port(port)) {
@@ -2707,34 +2672,6 @@ bool CMarsIrV2::is_flatten_loop(void *loop, const set<void *> &unrolled_loops) {
     }
   }
   return true;
-}
-
-void CMarsIrV2::convert_false_dep_pragmas(tool_type tt) {
-  if (INTEL_SDK == tt) {
-    for (auto pragma : mPragmas) {
-      CAnalPragma ana_pragma(m_ast);
-      bool errout;
-      ana_pragma.PragmasFrontendProcessing(pragma, &errout, false);
-      if (!ana_pragma.is_false_dep()) {
-        continue;
-      }
-      void *loop = m_ast->TraceUpToForStatement(pragma);
-      if (loop == nullptr) {
-        continue;
-      }
-      string var_list = ana_pragma.get_attribute(CMOST_variable);
-      if (var_list.empty()) {
-        continue;
-      }
-      string pragma_str = "ivdep array (" + var_list + ")";
-      void *new_pragma =
-          m_ast->CreatePragma(pragma_str, m_ast->TraceUpToBasicBlock(loop));
-      m_ast->InsertStmt(new_pragma, loop);
-    }
-  } else {
-    fprintf(stderr, "Please enhance to support other platform");
-    assert(0);
-  }
 }
 
 void CMarsIrV2::collect_all_kernel_nodes() {

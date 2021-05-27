@@ -84,7 +84,7 @@ bool isCompilerGenerated(CSageCodeGen *ast, SgNode *node) {
 }
 
 bool isSkippedIncludeFile(string filename) {
-  vector<string> skippedLibs = {"cmost.h", "altera_const.h",
+  vector<string> skippedLibs = {"cmost.h", 
                                 "rose_edg_required_macros_and_functions.h"};
 
   string sFilename = getSimpleFilename(filename);

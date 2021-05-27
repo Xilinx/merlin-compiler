@@ -60,7 +60,6 @@ class MemoryBurst {
   long double mLiftingRatio;
   bool mNaive_tag;
   bool mMemcpy_inline;
-  bool mAltera_flow;
   bool m_report_out_of_resource;
   enum effort mEffort;
   size_t m_length_threshold;
@@ -92,7 +91,7 @@ class MemoryBurst {
   MemoryBurst(CSageCodeGen *codegen, void *pTopFunc,
               const CInputOptions &options, bool report)
       : m_ast(codegen), mTopFunc(pTopFunc), mOptions(options),
-        mNaive_tag(false), mMemcpy_inline(false), mAltera_flow(false),
+        mNaive_tag(false), mMemcpy_inline(false),
         m_report_out_of_resource(!report), mEffort(STANDARD),
         m_length_threshold(1024),
         m_wide_bus_length_lower_threshold(WIDE_BUS_LENGTH_THRESHOLD),
@@ -294,8 +293,6 @@ class MemoryBurst {
 
   bool check_identical_indices_within_single_node(void *port, void *scope,
                                                   bool report);
-
-  bool check_coarse_grained_write_only(void *port, void *scope);
 
   void update_mars_ir(void *port, void *scope);
 

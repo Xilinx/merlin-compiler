@@ -103,16 +103,6 @@ void init_pass_func_table() {
                      const CInputOptions &options);
   g_pass_func_table["data_reuse"] = data_reuse_top;
 #endif
-#ifdef HAS_SYSTOLIC_FRONTEND
-  int systolic_frontend_top(CSageCodeGen * codegen, void *pTopFunc,
-                            const CInputOptions &options);
-  g_pass_func_table["systolic_frontend"] = systolic_frontend_top;
-#endif
-#ifdef HAS_SYSTOLIC_EXTRACT
-  int systolic_extract_top(CSageCodeGen * codegen, void *pTopFunc,
-                           const CInputOptions &options);
-  g_pass_func_table["systolic_extract"] = systolic_extract_top;
-#endif
 #ifdef HAS_DS_LOOP_PARALLEL
   int ds_loop_parallel_top(CSageCodeGen * codegen, void *pTopFunc,
                            const CInputOptions &options);
@@ -307,11 +297,6 @@ void init_pass_func_table() {
   int comm_dead_remove_top(CSageCodeGen * codegen, void *pTopFunc,
                            const CInputOptions &options);
   g_pass_func_table["comm_dead_remove"] = comm_dead_remove_top;
-#endif
-#ifdef HAS_MEMORY_REDUCE
-  int memory_reduce_top(CSageCodeGen * codegen, void *pTopFunc,
-                        const CInputOptions &options);
-  g_pass_func_table["memory_reduce"] = memory_reduce_top;
 #endif
 #ifdef HAS_STRUCT_DECOMPOSE
   int struct_decompose_top(CSageCodeGen * codegen, void *pTopFunc,

@@ -2856,48 +2856,7 @@ bool CSageCodeGen::is_xilinx_channel_access(void *call, string member_name,
   return false;
 }
 
-int CSageCodeGen::is_altera_channel_read(void *ref) {
-  int param_index = GetFuncCallParamIndex(ref);
-  if (-1 == param_index) {
-    return 0;
-  }
-  void *sg_call = TraceUpToFuncCall(ref);
-  if (sg_call == nullptr) {
-    return 0;
-  }
-  if (0 == GetFuncNameByCall(sg_call).find("read_channel_altera")) {
-    return 1;
-  }
-  return 0;
-}
 
-int CSageCodeGen::is_altera_channel_write(void *ref) {
-  int param_index = GetFuncCallParamIndex(ref);
-  if (-1 == param_index) {
-    return 0;
-  }
-  void *sg_call = TraceUpToFuncCall(ref);
-  if (sg_call == nullptr) {
-    return 0;
-  }
-  if (0 == GetFuncNameByCall(sg_call).find("write_channel_altera") &&
-      param_index == 0) {
-    return 1;
-  }
-  return 0;
-}
-
-int CSageCodeGen::is_altera_channel_call(void *call) {
-  if (IsFunctionCall(call) == 0) {
-    return 0;
-  }
-  string func_name = GetFuncNameByCall(call);
-  if (func_name.find("read_channel_altera") == 0 ||
-      func_name.find("write_channel_altera") == 0) {
-    return 1;
-  }
-  return 0;
-}
 
 int CSageCodeGen::is_merlin_channel_call(void *call) {
   if (IsFunctionCall(call) == 0) {
@@ -6613,9 +6572,6 @@ void CSageCodeGen::get_all_func_path_in_scope_int(
 
   for (size_t i = 0; i < vec_calls.size(); i++) {
     void *sg_call = vec_calls[i];
-    if (is_altera_channel_call(sg_call) != 0) {
-      continue;
-    }
     void *sg_decl = GetFuncDeclByCall(sg_call);
     void *sg_body = GetFuncBody(sg_decl);
     if ((sg_decl != nullptr) && (sg_body != nullptr)) {
@@ -22532,7 +22488,7 @@ void CSageCodeGen::GetPointerInStruct(void *struct_type,
 
 int CSageCodeGen::ContainsUnSupportedType(void *sg_type_,
                                           void **unsupported_type,
-                                          string *reason, bool intel_flow,
+                                          string *reason,
                                           bool is_return, string *string_type,
                                           bool has_array_pointer_parent) {
   void *sg_type = GetOrigTypeByTypedef(sg_type_, true);
@@ -22609,7 +22565,7 @@ int CSageCodeGen::ContainsUnSupportedType(void *sg_type_,
 
       if (var_type != nullptr) {
         if (ContainsUnSupportedType(var_type, unsupported_type, reason,
-                                    intel_flow, is_return, string_type,
+                                    is_return, string_type,
                                     has_array_pointer_parent) != 0) {
           *unsupported_type = member;
           return 1;
@@ -22630,8 +22586,7 @@ int CSageCodeGen::ContainsUnSupportedType(void *sg_type_,
     }
     return 0;
   }
-  if (((IsIntegerType(base_type) != 0) &&
-       (!intel_flow || (IsGeneralLongLongType(base_type) == 0))) ||
+  if ((IsIntegerType(base_type) != 0) ||
       (IsFloatType(base_type) != 0) || (IsXilinxAPFixedType(base_type) != 0) ||
       (IsXilinxAPIntType(base_type) != 0) || IsComplexType(base_type) != 0) {
     return 0;
@@ -22655,8 +22610,6 @@ int CSageCodeGen::ContainsUnSupportedType(void *sg_type_,
     *reason = "union type";
   } else if (IsVoidType(base_type) != 0) {
     *reason = "void type";
-  } else if (IsGeneralLongLongType(base_type) != 0 && intel_flow) {
-    *reason = "long long type not supported by OpenCL standard";
   } else if (IsEnumType(base_type) != 0 && is_return) {
     *reason = "enum type";
   } else if (IsEnumType(base_type) != 0 &&
@@ -22921,192 +22874,9 @@ int CSageCodeGen::IsFunctionDefinition(void *sg_node) {
       isSgFunctionDefinition(static_cast<SgNode *>(sg_node)) != 0);
 }
 
-vector<string> CSageCodeGen::GetOpenCLName(bool is_intel) {
+vector<string> CSageCodeGen::GetOpenCLName() {
   vector<string> OpenCLNameConflict;
-  if (is_intel) {
-    OpenCLNameConflict = {"char2",
-                          "uchar2",
-                          "short2",
-                          "ushort2",
-                          "int2",
-                          "uint2",
-                          "long2",
-                          "ulong2",
-                          "float2",
-                          "char4",
-                          "uchar4",
-                          "short4",
-                          "ushort4",
-                          "int4",
-                          "uint4",
-                          "long4",
-                          "ulong4",
-                          "float4",
-                          "char8",
-                          "uchar8",
-                          "short8",
-                          "ushort8",
-                          "int8",
-                          "uint8",
-                          "long8",
-                          "ulong8",
-                          "float8",
-                          "char16",
-                          "uchar16",
-                          "short16",
-                          "ushort16",
-                          "int16",
-                          "uint16",
-                          "long16",
-                          "ulong16",
-                          "float16",
-                          "cl_char2",
-                          "cl_uchar2",
-                          "cl_short2",
-                          "cl_ushort2",
-                          "cl_int2",
-                          "cl_uint2",
-                          "cl_long2",
-                          "cl_ulong2",
-                          "cl_float2",
-                          "cl_char4",
-                          "cl_uchar4",
-                          "cl_short4",
-                          "cl_ushort4",
-                          "cl_int4",
-                          "cl_uint4",
-                          "cl_long4",
-                          "cl_ulong4",
-                          "cl_float4",
-                          "cl_char8",
-                          "cl_uchar8",
-                          "cl_short8",
-                          "cl_ushort8",
-                          "cl_int8",
-                          "cl_uint8",
-                          "cl_long8",
-                          "cl_ulong8",
-                          "cl_float8",
-                          "cl_char16",
-                          "cl_uchar16",
-                          "cl_short16",
-                          "cl_ushort16",
-                          "cl_int16",
-                          "cl_uint16",
-                          "cl_long16",
-                          "cl_ulong16",
-                          "cl_float16",
-                          "image2d_t",
-                          "image3d_t",
-                          "sampler_t",
-                          "event_t",
-                          "bool2",
-                          "bool4",
-                          "bool8",
-                          "bool16",
-                          "double2",
-                          "double4",
-                          "double8",
-                          "double16",
-                          "half",
-                          "half2",
-                          "half4",
-                          "half8",
-                          "half16",
-                          "quad",
-                          "quad2",
-                          "quad4",
-                          "quad8",
-                          "quad16",
-                          "complex half",
-                          "complex half2",
-                          "complex half4",
-                          "complex half8",
-                          "complex half16",
-                          "complex float",
-                          "complex float2",
-                          "complex float4",
-                          "complex float8",
-                          "complex float16",
-                          "complex double",
-                          "complex double2",
-                          "complex double4",
-                          "complex double8",
-                          "complex double16",
-                          "complex quad",
-                          "complex quad2",
-                          "complex quad4",
-                          "complex quad8",
-                          "complex quad16",
-                          "imaginary half",
-                          "imaginary half2",
-                          "imaginary half4",
-                          "imaginary half8",
-                          "imaginary half16",
-                          "imaginary float",
-                          "imaginary float2",
-                          "imaginary float4",
-                          "imaginary float8",
-                          "imaginary float16",
-                          "imaginary double",
-                          "imaginary double2",
-                          "imaginary double4",
-                          "imaginary double8",
-                          "imaginary double16",
-                          "imaginary quad",
-                          "imaginary quad2",
-                          "imaginary quad4",
-                          "imaginary quad8",
-                          "imaginary quad16",
-                          "float2x2",
-                          "float2x4",
-                          "float2x8",
-                          "float2x16",
-                          "float4x2",
-                          "float4x4",
-                          "float4x8",
-                          "float4x16",
-                          "float8x2",
-                          "float8x4",
-                          "float8x8",
-                          "float8x16",
-                          "float16x2",
-                          "float16x4",
-                          "float16x8",
-                          "float16x16",
-                          "double2x2",
-                          "double2x4",
-                          "double2x8",
-                          "double2x16",
-                          "double4x2",
-                          "double4x4",
-                          "double4x8",
-                          "double4x16",
-                          "double8x2",
-                          "double8x4",
-                          "double8x8",
-                          "double8x16",
-                          "double16x2",
-                          "double16x4",
-                          "double16x8",
-                          "double16x16",
-                          "uint64_t",
-                          "long long",
-                          "long long2",
-                          "long long4",
-                          "long long8",
-                          "long long16",
-                          "unsigned long long2",
-                          "unsigned long long4",
-                          "unsigned long long8",
-                          "unsigned long long16",
-                          "long double2",
-                          "long double4",
-                          "long double8",
-                          "long double16"};
-  } else {
-    OpenCLNameConflict = {"long double"};
-  }
+  OpenCLNameConflict = {"long double"};
   return OpenCLNameConflict;
 }
 

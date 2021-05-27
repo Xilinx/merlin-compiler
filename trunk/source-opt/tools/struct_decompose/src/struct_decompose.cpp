@@ -31,7 +31,6 @@
 #include "xml_parser.h"
 #define MERLIN_ASSIGN_PREFIX "merlin_assign_"
 #define MERLIN_DECOMPOSE_SUFFIX "merlin_decompose"
-#define ALTERA_ARGUMENTS_LIMITATION 128
 #undef DEBUG
 #define DISABLE_DEBUG 1
 #if DISABLE_DEBUG
@@ -1810,16 +1809,6 @@ void *StructDecompose::removeUnusedParameters(void *func_decl) {
       total_num_arg++;
     }
   }
-  if (mTopKernel.count(func_decl) > 0) {
-    if (mIntel_flow && total_num_arg > ALTERA_ARGUMENTS_LIMITATION) {
-      string limit_msg = my_itoa(ALTERA_ARGUMENTS_LIMITATION);
-      string curr_args = "Current number of final arguments is " +
-                         my_itoa(total_num_arg) + ".\n";
-      dump_critical_message(DISAG_ERROR_3(limit_msg, curr_args));
-      mErrorOut = true;
-    }
-  }
-
   if (!has_dead_arg) {
     for (auto &&[old_arg, new_arg] : orgArg2newArg) {
       m_ast->DeleteNode(new_arg);

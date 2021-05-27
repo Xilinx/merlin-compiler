@@ -1,7 +1,6 @@
 add_library(MemoryBurst
     "${CMAKE_CURRENT_SOURCE_DIR}/src/memory_burst.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/src/memory_burst_cg.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/src/memory_burst_cg_v2.cpp"
 )
 
 set_target_properties(MemoryBurst PROPERTIES

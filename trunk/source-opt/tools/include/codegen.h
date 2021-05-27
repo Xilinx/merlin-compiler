@@ -303,7 +303,7 @@ class CSageCodeGen {
   void *GetOriginalNode(void *sg_node);
   /********* VARIABLE *****************/
   /**** Get variable info *****/
-  std::vector<std::string> GetOpenCLName(bool is_intel = false);
+  std::vector<std::string> GetOpenCLName();
   void *GetVariableSymbol(void *sg_var_ref_);  //  NOT SUGGESTED, needreview
   void *GetVariableInitializedName(void *sg_var_ref_decl) const;
   void *GetVariableDefinition(void *decl_, void *name_ = nullptr);
@@ -509,9 +509,6 @@ class CSageCodeGen {
   bool is_xilinx_channel_read(void *call, void **ref);
   bool is_xilinx_channel_write(void *call, void **ref);
   bool is_xilinx_channel_access(void *call, string member_name, void **ref);
-  int is_altera_channel_read(void *ref);
-  int is_altera_channel_write(void *ref);
-  int is_altera_channel_call(void *call);
   int is_merlin_channel_read(void *ref);
   int is_merlin_channel_write(void *ref);
   int is_merlin_channel_call(void *call);
@@ -841,7 +838,7 @@ class CSageCodeGen {
 
   void GetPointerInStruct(void *struct_type, vector<void *> *vec_pointer);
   int ContainsUnSupportedType(void *sg_type_, void **unsupported_type,
-                              std::string *reason, bool intel_flow,
+                              std::string *reason,
                               bool is_return = false,
                               std::string *string_type = nullptr,
                               bool has_array_pointer_parent = false);

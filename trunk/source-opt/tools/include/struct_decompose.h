@@ -74,8 +74,6 @@ class StructDecompose {
   //  decomposed fields
   std::map<void *, std::vector<void *>> mVar2Members;
   bool mErrorOut;
-  bool mXilinx_flow;
-  bool mIntel_flow;
   bool m_aligned_struct_decomp;
   bool mOpenCL_flow;
   std::set<std::string> mCheckedIdentifier;
@@ -97,25 +95,19 @@ class StructDecompose {
   StructDecompose(CSageCodeGen *codegen, void *pTopFunc,
                   const CInputOptions &option)
       : m_ast(codegen), mTopFunc(pTopFunc), mOptions(option),
-        mCheckDimensionSize(true) {
-    mXilinx_flow = option.get_option_key_value("-a", "impl_tool") == "sdaccel";
-    mIntel_flow = option.get_option_key_value("-a", "impl_tool") == "aocl";
-    if (mIntel_flow) {
-      mOpenCL_flow = true;
-    } else {
-      string tool_version = option.get_option_key_value("-a", "tool_version");
-      if (tool_version == "vivado_hls" || tool_version == "vitis_hls") {
-        mOpenCL_flow = false;
-      } else {
-        mOpenCL_flow = true;
+      mCheckDimensionSize(true) {
+        string tool_version = option.get_option_key_value("-a", "tool_version");
+        if (tool_version == "vivado_hls" || tool_version == "vitis_hls") {
+          mOpenCL_flow = false;
+        } else {
+          mOpenCL_flow = true;
+        }
+        m_aligned_struct_decomp =
+          option.get_option_key_value("-a", "aligned_struct_decomp") != "off";
+        if (option.get_option_key_value("-a", "ignore_unknown_dim") != "")
+          mCheckDimensionSize = false;
+        init();
       }
-    }
-    m_aligned_struct_decomp =
-        option.get_option_key_value("-a", "aligned_struct_decomp") != "off";
-    if (option.get_option_key_value("-a", "ignore_unknown_dim") != "")
-      mCheckDimensionSize = false;
-    init();
-  }
 
   void init();
 
@@ -267,18 +259,16 @@ class StructDecompose {
 
   bool donotDecomposeCompoundType(void *base_type) {
     std::string class_type = m_ast->GetTypeNameByType(base_type, true);
-    if (mXilinx_flow) {
-      if (class_type.find("ap_int") == 0 || class_type.find("ap_uint") == 0 ||
-          class_type.find("ap_fixed") == 0 ||
-          class_type.find("ap_ufixed") == 0 || class_type.find("hls::") == 0 ||
-          class_type.find("complex") == 0 ||
-          class_type.find("std::complex") == 0)
-        return true;
-      if (!class_type.empty() &&
-          m_ast->IsStructureWithAlignedScalarData(base_type) &&
-          !m_aligned_struct_decomp)
-        return true;
-    }
+    if (class_type.find("ap_int") == 0 || class_type.find("ap_uint") == 0 ||
+        class_type.find("ap_fixed") == 0 ||
+        class_type.find("ap_ufixed") == 0 || class_type.find("hls::") == 0 ||
+        class_type.find("complex") == 0 ||
+        class_type.find("std::complex") == 0)
+      return true;
+    if (!class_type.empty() &&
+        m_ast->IsStructureWithAlignedScalarData(base_type) &&
+        !m_aligned_struct_decomp)
+      return true;
 
     if (class_type.find("merlin_stream") != std::string::npos)
       return true;

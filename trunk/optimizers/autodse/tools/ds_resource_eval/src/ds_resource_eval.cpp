@@ -46,22 +46,13 @@ extern int ds_resource_eval_top_intel(CSageCodeGen *m_ast, void *pTopFunc);
 extern int ds_resource_eval_top_xilinx(CSageCodeGen *m_ast, void *pTopFunc);
 
 int ds_resource_eval_top(CSageCodeGen *m_ast, void *pTopFunc,
-                         const CInputOptions &options) {
+    const CInputOptions &options) {
   cout << "==============================================" << endl;
 
-  if ("aocl" == options.get_option_key_value("-a", "impl_tool")) {
-    cout << "-----=# INTEL Resource Evaluation Start#=-----\n";
-    cout << "==============================================" << endl;
-    ds_resource_eval_top_intel(m_ast, pTopFunc);
+  cout << "-----=# XILINX Resource Evaluation Start#=----\n";
+  cout << "==============================================" << endl;
+  ds_resource_eval_top_xilinx(m_ast, pTopFunc);
 
-  } else if ("sdaccel" == options.get_option_key_value("-a", "impl_tool")) {
-    cout << "-----=# XILINX Resource Evaluation Start#=----\n";
-    cout << "==============================================" << endl;
-    ds_resource_eval_top_xilinx(m_ast, pTopFunc);
-
-  } else {
-    printf("ERROR: Unrecognized implementation tool\n");
-  }
   cout << "============================================" << endl;
   cout << "--------=# Resource Evaluation End#=--------\n";
   cout << "============================================" << endl;

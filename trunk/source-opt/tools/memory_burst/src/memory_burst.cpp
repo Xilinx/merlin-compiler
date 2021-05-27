@@ -253,14 +253,6 @@ bool MemoryBurst::run() {
   //  Bug 1585
   detect_user_burst();
 
-  string tool_flow = mOptions.get_option_key_value("-a", "impl_tool");
-  if (tool_flow == "aocl") {
-    mAltera_flow = true;
-  }
-  if (mAltera_flow && mEffort > STANDARD) {
-    return process_coarse_grained_top_v2();
-  }
-
   //  1. first try to infer coarse grained burst
   process_coarse_grained_top();
 
@@ -1872,32 +1864,8 @@ bool MemoryBurst::auto_cache_for_coalescing() {
   //  build Mars IR v2
   mMars_ir_v2.build_mars_ir(m_ast, mTopFunc, false, false);
 
-  string tool_flow = mOptions.get_option_key_value("-a", "impl_tool");
-  if (tool_flow == "aocl") {
-    mAltera_flow = true;
-  }
-  //  reset mSingleBufferSize for each vendor tools
-  if (mAltera_flow) {
-    size_t threshold = INTEL_DEFAULT_REGISTER_THRESHOLD;
-    if (!mOptions.get_option_key_value("-a", "auto_register_size_threshold")
-             .empty()) {
-      threshold = my_atoi(
-          mOptions.get_option_key_value("-a", "auto_register_size_threshold"));
-    }
-    if (threshold == 0) {
-      threshold = INTEL_DEFAULT_REGISTER_THRESHOLD;
-    }
-
-    if (threshold >
-        INTEL_MAX_REGISTER_THRESHOLD) {  //  the requirement from AOCL
-      threshold = INTEL_MAX_REGISTER_THRESHOLD;
-    }
-
-    mSingleBufferSize = threshold / 8;
-  } else {
-    //  For xilinx, we use 16 x 512bits as the threshold
-    mSingleBufferSize = 512 / 8 * 16;
-  }
+  //  For xilinx, we use 16 x 512bits as the threshold
+  mSingleBufferSize = 512 / 8 * 16;
   process_fine_grained_top();
 
   std::cout << "============================================" << std::endl;

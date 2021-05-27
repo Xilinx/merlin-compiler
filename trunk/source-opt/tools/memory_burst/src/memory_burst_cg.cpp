@@ -517,7 +517,7 @@ int MemoryBurst::cg_check_delinearize_availability(void *sg_scope,
   map<void *, size_t> mapAlias2BStep;
   bool is_simple = true;
   int ret = analysis_delinearize(m_ast, sg_array, 0, &dim_split_steps,
-                                 &mapAlias2BStep, true, &is_simple, &me_start,
+                                 &mapAlias2BStep, &is_simple, &me_start,
                                  sg_scope);
   if (is_simple) {
     return 1;
@@ -830,10 +830,6 @@ bool MemoryBurst::cg_get_merged_access_range(void *sg_scope, void *sg_array,
     vector<CMarsRangeExpr> vec_mr = mar.GetRangeExprRead();
     assert(vec_mr.size() == 1);  //  FIXME: assume 1-D only
     *mr_merged = vec_mr[0];
-    if (!check_coarse_grained_write_only(sg_array, sg_scope) ||
-        (mar.has_write() == 0)) {
-      *read_write |= READ_FLAG;
-    }
   }
   if (mar.has_write() != 0) {
     assert(mar.GetRangeExprWrite().size() == 1);
@@ -1014,38 +1010,6 @@ bool MemoryBurst::process_coarse_grained_top() {
       continue;
     }
 
-    //  Youxiang: 20180608 for Intel flow, we need to check whether the port is
-    //  streamable
-    if (mAltera_flow) {
-      void *loop_body = nullptr;
-      if (m_ast->IsForStatement(curr_scope) != 0) {
-        loop_body = m_ast->GetLoopBody(curr_scope);
-      }
-      if (loop_body != nullptr) {
-        MerlinStreamModel::CStreamIR stream_ir(m_ast, mOptions, &mMars_ir,
-                                               &mMars_ir_v2);
-        vector<CMerlinMessage> vec_msg;
-        if (stream_ir.CheckStreamPortSeparability(loop_body, &vec_msg) == 0) {
-          cout << "StreamPort is not generated: in scope "
-               << m_ast->_up(loop_body, 30) << endl;
-          string warn_info;
-          for (auto msg : vec_msg) {
-            warn_info += "  " + msg.get_message() + "\n";
-            cout << "-- " << msg.get_message() << endl;
-          }
-          warn_info = warn_info.substr(0, warn_info.size() - 1);
-          dump_critical_message(CGPAR_WARNING_14(scope_info, warn_info), 0,
-                                m_ast, curr_scope);
-          map<string, string> message;
-          message["coarse_grained_parallel"] = "off";
-          message["coarse_grained_parallel_off_reason"] =
-              "Ports access cannot be streamed";
-          insertMessage(m_ast, curr_scope, message);
-          remove_parallel_pragma(m_ast, node);
-          valid = false;
-        }
-      }
-    }
     if (valid) {
       for (auto curr_array : vec_arrays) {
         Changed |=
@@ -1359,8 +1323,7 @@ bool MemoryBurst::process_coarse_grained_top() {
         continue;
       }
 
-      if (mMars_ir.is_fine_grained_scope(m_ast, scope_to_lift) &&
-          !mAltera_flow) {
+      if (mMars_ir.is_fine_grained_scope(m_ast, scope_to_lift)) {
         void *sg_loop = m_ast->GetEnclosingNode("ForLoop", scope_to_lift);
         string qorMergeMode = getQoRMergeMode(m_ast, sg_loop);
         if (qorMergeMode != "tail") {
@@ -2332,16 +2295,6 @@ bool MemoryBurst::cg_transform_burst_for_parallel(
       void *sg_test = m_ast->GetLoopTest(sg_loop);
       void *sg_incr = m_ast->GetLoopIncrementExpr(sg_loop);
       sg_loop_body = m_ast->CreateBasicBlock();
-#if 0
-      //  unroll the loop
-      string unroll_pragma_s = std::string(HLS_PRAGMA) + " " + HLS_UNROLL;
-      if (mAltera_flow) {
-        unroll_pragma_s = std::string(ACCEL_PRAGMA) + " " + CMOST_PARALLEL +
-          " " + CMOST_complete + " " + CMOST_SKIP;
-      }
-      void *unroll_pragma = m_ast->CreatePragma(unroll_pragma_s, sg_loop_body);
-      m_ast->AppendChild(sg_loop_body, unroll_pragma);
-#endif
       // MR1620 bind the loop into interface port
       sg_loop_copy = m_ast->CreateForLoop(
           m_ast->CopyStmt(sg_init), m_ast->CopyStmt(sg_test),

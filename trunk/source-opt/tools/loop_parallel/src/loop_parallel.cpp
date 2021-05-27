@@ -561,7 +561,6 @@ int LoopParallel::parse_pragma_intel() {
     }
   }
 
-  mMars_ir_v2.convert_false_dep_pragmas(INTEL_SDK);
   mMars_ir_v2.build_mars_ir(m_ast, mTopFunc, false, false);
   mMars_ir_v2.remove_all_pragmas();
 

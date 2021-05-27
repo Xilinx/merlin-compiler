@@ -157,7 +157,7 @@ bool InputChecker::CheckOpenclConflictName() {
   printf("    Enter check opencl conflict name...\n\n");
   bool is_intel = mAltera_flow;
   int ret = 0;
-  vector<string> OpenCLNameConflict = codegen->GetOpenCLName(is_intel);
+  vector<string> OpenCLNameConflict = codegen->GetOpenCLName();
   //  Check all function name and argument name
   vector<void *> all_decls;
   codegen->GetNodesByType_compatible(nullptr, "SgFunctionDeclaration",
@@ -496,8 +496,7 @@ void InputChecker::CheckKernelArgument(void *pKernelTop) {
     }
     void *unsupported_type = nullptr;
     string reason;
-    if (codegen->ContainsUnSupportedType(sg_type, &unsupported_type, &reason,
-                                         mAltera_flow) != 0) {
+    if (codegen->ContainsUnSupportedType(sg_type, &unsupported_type, &reason) != 0) {
       string detail =
           "Top function argument \'" + codegen->UnparseToString(arg) + "' " +
           getUserCodeFileLocation(codegen, arg, true) + " with type \'" +
@@ -531,7 +530,7 @@ void InputChecker::CheckKernelArgument(void *pKernelTop) {
   string reason;
   string string_type;
   if (codegen->ContainsUnSupportedType(sg_type, &unsupported_type, &reason,
-                                       mAltera_flow, true, &string_type) != 0) {
+                                       true, &string_type) != 0) {
     string msg = "Cannot support the kernel interface port:";
     if (string_type == "") {
       string_type = codegen->UnparseToString(unsupported_type);

@@ -74,8 +74,6 @@ extern int check_const_array_size(CSageCodeGen *codegen, void *TopFunc);
 
 extern void GetTLDMInfo_withPointer4(void *sg_node, void *pArg);
 
-extern int local_static_replace_top(CSageCodeGen *codegen, void *pTopFunc);
-
 extern int constant_propagation_top(CSageCodeGen *codegen, void *pTopFunc,
                                     const CInputOptions &option,
                                     bool assert_generation);
@@ -262,14 +260,8 @@ void PreProcess::init() {
     mNaive_tag = true;
     cout << "[MARS-PARALLEL-MSG] Naive HLS mode.\n";
   }
-  if ("aocl" == mOptions.get_option_key_value("-a", "impl_tool")) {
-    mAltera_flow = true;
-    cout << "[MARS-PARALLEL-MSG] Enable altera flow mode.\n";
-  }
-  if ("sdaccel" == mOptions.get_option_key_value("-a", "impl_tool")) {
     mXilinx_flow = true;
     cout << "[MARS-PARALLEL-MSG] Enable xilinx flow mode.\n";
-  }
   if ("on" == mOptions.get_option_key_value("-a", "pure_kernel")) {
     mPure_kernel = true;
     cout << "[MARS-PARALLEL-MSG] Enable pure kernel mode.\n";
@@ -337,33 +329,11 @@ bool PreProcess::run() {
 
   //  mValid &= check_address_of_port_array(m_ast, mTopFunc);
 
-  if (mAltera_flow) {
-    if (mEffort > STANDARD) {
-      //  Yuxin: 2016Nov18
-      check_func_inline_legality(m_ast, mTopFunc);
-    }
-  }
-
   RemoveKernelFunDeclStaticModifier();
   //  //////////////////////////////////////////  /
   //  2. Checkers for C++ syntax in kernel
   //  //////////////////////////////////////////  /
   //  check_valid_top(m_ast, mTopFunc);
-  if (!mNaive_tag && mAltera_flow) {
-    if (mEffort > STANDARD) {
-      remove_dummy_return_top(m_ast, mTopFunc);
-    }
-  }
-
-  //  string tool = "Intel";
-  //  if (mAltera_flow) {
-  //    tool = "Intel";
-  //  } else {
-  //    tool = "Xilinx";
-  //  }
-  //  check_kernel_argument_number_top(m_ast, mTopFunc, tool);
-  //  check_kernel_argument_top(m_ast, mTopFunc);
-
   build_mars_ir_v2(false);
 
   //  checkMemberFunction();
@@ -375,7 +345,6 @@ bool PreProcess::run() {
   //    PostCheckLocalVariableWithNonConstantDimension();
   //  }
   //
-  //  check_opencl_conflict_name(m_ast, mTopFunc, mAltera_flow);
 
   if (!mNaive_tag) {
     map<void *, string> loop2file;
@@ -423,25 +392,6 @@ bool PreProcess::run() {
   Changed |= processPragma(false);
 
   Changed |= postprocessing();
-
-  if (mAltera_flow) {
-    Changed |= local_static_replace_top(m_ast, mTopFunc);
-  }
-
-  if (mAltera_flow) {
-    if (Changed) {
-      m_ast->init_defuse_range_analysis();
-    }
-    if (mEffort >= MEDIUM) {
-      build_mars_ir_v2(true);
-      check_empty_kernel();
-      check_multiple_nodes();
-      //  Yuxin: 2016Nov18
-      check_single_linear_index(m_ast, mTopFunc);
-      check_identical_indices(m_ast, mTopFunc);
-      check_comm_pre(m_ast, mTopFunc);
-    }
-  }
 
   if (!mNaive_tag) {
     parse_aggregate_init();
@@ -786,21 +736,7 @@ bool PreProcess::preprocessing() {
           m_ast->AddComment("Original: #pragma " + pragmaString,
                             m_ast->GetScope(decl));
           m_ast->RemoveStmt(decl);
-        } else if (mAltera_flow) {
-          if (ana_pragma.is_parallel()) {
-            if (!ana_pragma.get_attribute(CMOST_flatten_option).empty()) {
-              unrolled_loop2pragma[loop] = decl;
-            } else {
-              vector<void *> sub_loops;
-              m_ast->GetNodesByType_int(m_ast->GetLoopBody(loop), "preorder",
-                                        V_SgForStatement, &sub_loops);
-              unrolled_loops.insert(sub_loops.begin(), sub_loops.end());
-            }
-            if (!ana_pragma.get_attribute(CMOST_exclusive_option).empty()) {
-              unrolled_loops.insert(loop);
-            }
-          }
-        }
+        } 
       }
     }
     Changed |= m_ast->simplify_pointer_access(file);
@@ -845,49 +781,6 @@ bool PreProcess::preprocessing() {
   }
 
   mValid &= !errorOut;
-
-  //  check coarse grained paralleled loop
-  //  for altera flow
-  if (mAltera_flow && mEffort >= MEDIUM) {
-    vector<void *> coarse_grained_unroll_loops;
-    for (auto &loop_info : unrolled_loop2pragma) {
-      void *loop = loop_info.first;
-
-      vector<void *> sub_loops;
-      m_ast->GetNodesByType_int(m_ast->GetLoopBody(loop), "preorder",
-                                V_SgForStatement, &sub_loops);
-      bool has_sub_loop = false;
-      for (auto &sub_loop : sub_loops) {
-        if (unrolled_loops.count(sub_loop) <= 0) {
-          has_sub_loop = true;
-          break;
-        }
-      }
-      if (has_sub_loop) {
-        coarse_grained_unroll_loops.push_back(loop);
-      }
-    }
-    for (auto &loop : coarse_grained_unroll_loops) {
-      void *decl = unrolled_loop2pragma[loop];
-
-      string pragmaString = m_ast->GetPragmaString(decl);
-      string loop_label = m_ast->get_internal_loop_label(loop);
-
-      std::ostringstream oss;
-      oss << "\"" << pragmaString
-          << "\" " + getUserCodeFileLocation(m_ast, decl, true);
-      string pragma_info = oss.str();
-      oss.str("");
-      oss.clear();
-      oss << "\'" << loop_label << "\' "
-          << getUserCodeFileLocation(m_ast, loop, true);
-      string loop_info = oss.str();
-      dump_critical_message(PROCS_WARNING_8(pragma_info, loop_info));
-      m_ast->AddComment("Original: #pragma " + pragmaString,
-                        m_ast->GetScope(decl));
-      m_ast->RemoveStmt(decl);
-    }
-  }
 
   return Changed;
 }
@@ -1090,16 +983,6 @@ void PreProcess::checkNonCanonicalLoop(map<void *, string> *p_loop2file,
     //  rest non-canonical loops
 
     if (!ret1) {
-      //  FIXME: meta locationt info does not work for non-canonical loop, Yuxin
-      //  Nov 30
-      string loop_info = "\'" + str_loop + "' " + str_loc;
-      bool is_switch = false;
-      if (mAltera_flow && mEffort > STANDARD) {
-        is_switch = true;
-        system("touch merlin_altera_naive.log");
-      }
-
-      dump_critical_message(PROCS_WARNING_2(loop_info, is_switch));
     } else {
       bool has_loop_bound_spec = false;
       Rose_STL_Container<SgNode *> pragmaStmts = NodeQuery::querySubTree(
@@ -1193,16 +1076,6 @@ int PreProcess::remove_dummy_return_top(CSageCodeGen *codegen, void *pTopFunc) {
         codegen->RemoveChild(ret_stmt);
       }
     }
-    if (local_has_real_return && mEffort > STANDARD && mAltera_flow) {
-      string function_string =
-          "\'" + codegen->DemangleName(codegen->GetFuncName(func)) + "\' " +
-          getUserCodeFileLocation(m_ast, func, true);
-
-      dump_critical_message(PROCS_WARNING_10(function_string));
-    }
-  }
-  if (has_real_return) {
-    system("touch merlin_altera_naive.log");
   }
   return 0;
 }
@@ -1287,9 +1160,6 @@ void PreProcess::check_multiple_nodes() {
       break;
     }
   }
-  if (switch_low) {
-    system("touch merlin_altera_naive.log");
-  }
 }
 
 void PreProcess::check_func_inline_legality(CSageCodeGen *codegen,
@@ -1358,133 +1228,7 @@ int check_const_array_size(CSageCodeGen *codegen, void *pTopFunc) {
   return 0;
 }
 
-void PreProcess::check_single_linear_index(CSageCodeGen *codegen,
-                                           void *pTopFunc) {
-  printf("    Enter check wether if an array can be liniearized...\n\n");
 
-  //  Yuxin Nov 22 2016: just check shared port indices, host-if not included
-  //  Host interface will be check after memory burst
-
-  map<void *, int> map_array;  //  the array to transform
-
-  int node_num = mMars_ir_v2.size();
-
-  //  1. get the arrays to transform
-  for (int j = 0; j < node_num; ++j) {
-    CMarsNode *node = mMars_ir_v2.get_node(j);
-    auto s_ports = mMars_ir_v2.get_shared_ports(node);
-    for (auto &port : s_ports) {
-      if (codegen->IsLocalInitName(port) != 0) {
-        map_array[port] = 1;
-      }
-    }
-  }
-
-  //  2. transform each
-  map<void *, int>::iterator it1;
-  for (it1 = map_array.begin(); it1 != map_array.end(); it1++) {
-    void *one_array = it1->first;
-    vector<size_t> dim_split_steps;
-    map<void *, size_t> mapAlias2BStep;
-    bool is_simple = true;
-    CMarsExpression zero(codegen, 0L);
-    //  Offset by default is 0, for an index after burst might be a variable
-    int delinearized = analysis_delinearize(
-        codegen, one_array, 0, &dim_split_steps, &mapAlias2BStep, mAltera_flow,
-        &is_simple, &zero, nullptr);
-    if (!is_simple && (delinearized != 0)) {
-      map<void *, vector<CMarsExpression>> mapIndex2Delinear;
-      vector<size_t> new_array_dims;
-      delinearized = apply_delinearize(
-          codegen, one_array, 0, dim_split_steps, &mapAlias2BStep, true,
-          &is_simple, &zero, nullptr, &mapIndex2Delinear, &new_array_dims);
-      is_simple &= delinearized;
-    }
-    bool is_linear = true;
-    if (is_simple) {
-#if PROJDEBUG
-      cout << "==> simple form array: " << codegen->_p(one_array) << endl;
-#endif
-      continue;
-    }
-    if ((dim_split_steps.empty()) || (dim_split_steps.empty())) {
-      is_linear = false;
-    }
-
-    if (!is_linear && mEffort > STANDARD) {
-      string var_name = "'" + codegen->UnparseToString(one_array) + "'";
-      string var_info =
-          var_name + " " + getUserCodeFileLocation(m_ast, one_array, true);
-
-      dump_critical_message(PROCS_WARNING_26(var_info));
-      system("touch merlin_altera_naive.log");
-    }
-  }
-}
-
-void PreProcess::check_identical_indices(CSageCodeGen *codegen,
-                                         void *pTopFunc) {
-  printf("    Enter check identical indices in the loop kernels...\n\n");
-
-  int node_num = mMars_ir_v2.size();
-  map<string, int> id2msg;
-
-  for (int j = 0; j < node_num; ++j) {
-    CMarsNode *node = mMars_ir_v2.get_node(j);
-    auto ports = mMars_ir_v2.get_shared_ports(node);
-    for (auto &port : ports) {
-      set<void *> refs = node->get_port_references(port);
-      bool is_identical =
-          mMars_ir_v2.check_identical_indices_without_simple_type(refs);
-      if (!is_identical && mEffort > STANDARD) {
-        auto loops = node->get_loops();
-        string port_info = "'" + m_ast->UnparseToString(port) + "'";
-        if (!loops.empty()) {
-          void *sg_loop = loops[loops.size() - 1];
-          string str_loop = m_ast->UnparseToString(sg_loop).substr(0, 20);
-          string loop_id = codegen->get_internal_loop_label(sg_loop);
-          string loop_info = "loop '" + str_loop + "' (" + loop_id + ")" + " " +
-                             getUserCodeFileLocation(m_ast, sg_loop, true);
-          if (id2msg.find(loop_id) == id2msg.end()) {
-            dump_critical_message(PROCS_WARNING_23(port_info, loop_info));
-            id2msg[loop_id] = 1;
-            system("touch merlin_altera_naive.log");
-          }
-        } else {
-          auto stmts = node->get_stmts();
-          if (stmts.empty()) {
-            continue;
-          }
-          void *sg_stmt1 = stmts[stmts.size() - 1];
-          void *sg_stmt0 = stmts[0];
-          string str_stmt0 = m_ast->UnparseToString(sg_stmt0).substr(0, 20);
-          string str_stmt1 = m_ast->UnparseToString(sg_stmt1).substr(0, 20);
-          string stmt_info =
-              "statements '" + str_stmt0 + "' to '" + str_stmt1 + "'";
-          dump_critical_message(PROCS_WARNING_23(port_info, stmt_info));
-          system("touch merlin_altera_naive.log");
-        }
-      }
-    }
-  }
-}
-
-int PreProcess::check_comm_pre(CSageCodeGen *codegen, void *pTopFunc) {
-  printf("    Enter communication pre check ...\n\n");
-
-  int node_num = mMars_ir_v2.size();
-  bool valid = true;
-  map<void *, MarsCommOpt::mark_struct> loop2mark;
-  for (int j = 0; j < node_num; ++j) {
-    CMarsNode *node = mMars_ir_v2.get_node(j);
-    valid &= check_node(node, &loop2mark, &mMars_ir_v2, true);
-  }
-  if (!valid) {
-    system("touch merlin_altera_naive.log");
-    return 0;
-  }
-  return 1;
-}
 
 int local_static_replace(CSageCodeGen *codegen, void *func_decl,
                          set<void *> *visited) {
@@ -1598,29 +1342,9 @@ int local_static_replace(CSageCodeGen *codegen, void *func_decl,
   return static_cast<int>(Changed);
 }
 
-int local_static_replace_top(CSageCodeGen *codegen, void *pTopFunc) {
-  cout << "\n====== Local static replace ========>\n";
-
-  vector<void *> kernels = get_top_kernels(codegen, pTopFunc);
-
-  //    cout << "[print kernel:]" << kernels.size() << endl;
-
-  bool Changed = false;
-  set<void *> visited_funcs;
-  for (auto kernel_decl : kernels) {
-    if (visited_funcs.count(kernel_decl) > 0) {
-      continue;
-    }
-    visited_funcs.insert(kernel_decl);
-    Changed |= local_static_replace(codegen, kernel_decl, &visited_funcs);
-  }
-  return static_cast<int>(Changed);
-}
-
 void PreProcess::check_empty_kernel() {
   bool empty = mMars_ir_v2.get_all_nodes().empty();
   if (empty) {
-    mValidAltera = false;
     dump_critical_message(PROCS_ERROR_40);
   }
 }
@@ -1721,8 +1445,7 @@ void PreProcess::check_range_analysis() {
 }
 
 void PreProcess::check_result() {
-  if (!mValid || (mAltera_flow && !mValidAltera) ||
-      (mXilinx_flow && !mValidXilinx)) {
+  if (!mValid || (mXilinx_flow && !mValidXilinx)) {
     throw std::exception();
   }
 }

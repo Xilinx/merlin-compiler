@@ -63,21 +63,21 @@ void CMarsNode::update_reference() {
     if (loop_init != nullptr) {
       vector<void *> sub_refs;
       m_ast->GetNodesByType_int(loop_init, "preorder", V_SgVarRefExp,
-                                &sub_refs);
+          &sub_refs);
       all_refs.insert(sub_refs.begin(), sub_refs.end());
     }
     void *loop_test = m_ast->GetLoopTest(loop);
     if (loop_test != nullptr) {
       vector<void *> sub_refs;
       m_ast->GetNodesByType_int(loop_test, "preorder", V_SgVarRefExp,
-                                &sub_refs);
+          &sub_refs);
       all_refs.insert(sub_refs.begin(), sub_refs.end());
     }
     void *loop_incr = m_ast->GetLoopIncrementExpr(loop);
     if (loop_incr != nullptr) {
       vector<void *> sub_refs;
       m_ast->GetNodesByType_int(loop_incr, "preorder", V_SgVarRefExp,
-                                &sub_refs);
+          &sub_refs);
       all_refs.insert(sub_refs.begin(), sub_refs.end());
     }
   }
@@ -105,7 +105,7 @@ void CMarsNode::update_reference() {
     int pointer_dim = 0;
     vector<void *> sg_indexes;
     m_ast->parse_pntr_ref_by_array_ref(var_ref, &var_init, &sg_pntr,
-                                       &sg_indexes, &pointer_dim, var_ref);
+        &sg_indexes, &pointer_dim, var_ref);
     //  filter loop iterators
     //  if (m_ast->GetLoopFromIteratorByPos(var_init, var_ref, 1) != nullptr)
     if (m_ast->GetLoopFromIteratorByPos(var_init, var_ref) != nullptr) {
@@ -116,18 +116,10 @@ void CMarsNode::update_reference() {
       var_init = top_var_init;
     }
     mPorts.insert(var_init);
-    if (m_ast->is_altera_channel_write(sg_pntr) != 0) {
-      mPort2AccessType[var_init] =
-          static_cast<access_type>(mPort2AccessType[var_init] | WRITE);
-    } else if (m_ast->is_altera_channel_read(sg_pntr) != 0) {
-      mPort2AccessType[var_init] =
-          static_cast<access_type>(mPort2AccessType[var_init] | READ);
-    } else {
-      mPort2AccessType[var_init] = static_cast<access_type>(
-          mPort2AccessType[var_init] |
-          (m_ast->has_write_conservative(sg_pntr) != 0 ? WRITE : 0) |
-          (m_ast->has_read_conservative(sg_pntr) != 0 ? READ : 0));
-    }
+    mPort2AccessType[var_init] = static_cast<access_type>(
+        mPort2AccessType[var_init] |
+        (m_ast->has_write_conservative(sg_pntr) != 0 ? WRITE : 0) |
+        (m_ast->has_read_conservative(sg_pntr) != 0 ? READ : 0));
     mPort2Pntr[var_init].insert(sg_pntr);
     mPort2Refs[var_init].insert(var_ref);
   }
@@ -459,75 +451,6 @@ set<void *> CMarsNode::get_common_ports(CMarsNode *other) {
     if (!is_real_shared_port(other, port)) {
       continue;
     }
-#if 0
-        //  FIXME: we only handle scalar variables
-        auto type = m_ast->GetTypebyVar(port);
-        if (!m_ast->IsScalarType(type)) {
-            res.insert(port);
-            continue;
-        }
-        auto ref0 = get_port_references(port);
-        auto ref1 = other->get_port_references(port);
-        bool included = false;
-        for (auto &ref : ref0) {
-            if (m_ast->is_altera_channel_read(ref) ||
-                    m_ast->is_altera_channel_write(ref)) {
-                included = true;
-                break;
-            }
-            if (!m_ast->has_read_conservative(ref)) continue;
-            //  check whether read ref defs are included in other node
-            vector<void*> vec_def = m_ast->GetVarDefbyPosition(port, ref);
-            if (vec_def.size() == 0) {
-                included = true;
-                break;
-            }
-            for (auto &def : vec_def) {
-                vector<void*> vec_refs;
-                m_ast->GetNodesByType_int(
-                    def, "preorder", V_SgVarRefExp, &vec_refs);
-                for (auto &def_ref : vec_refs) {
-                    if (m_ast->GetVariableInitializedName(def_ref) == port &&
-                            ref0.count(def_ref) <= 0 &&
-                            ref1.count(def_ref) > 0) {
-                        included = true;
-                        break;
-                    }
-                }
-                if (included) break;
-            }
-        }
-        if (included) {
-            res.insert(port);
-            continue;
-        }
-        for (auto &ref : ref1) {
-            if (!m_ast->has_read_conservative(ref)) continue;
-            vector<void*> vec_def = m_ast->GetVarDefbyPosition(port, ref);
-            if (vec_def.size() == 0) {
-                included = true;
-                break;
-            }
-            for (auto &def : vec_def) {
-                vector<void*> vec_refs;
-                m_ast->GetNodesByType_int(
-                    def, "preorder", V_SgVarRefExp, &vec_refs);
-                for (auto &def_ref : vec_refs) {
-                    if (m_ast->GetVariableInitializedName(def_ref) == port &&
-                            ref0.count(def_ref) > 0 &&
-                            ref1.count(def_ref) <= 0) {
-                        included = true;
-                        break;
-                    }
-                }
-                if (included) break;
-            }
-        }
-        if (included) {
-            res.insert(port);
-            continue;
-        }
-#endif
     res.insert(port);
   }
   return res;
@@ -759,40 +682,6 @@ void CMarsNode::remove_all_statements(bool keep_assert_stmt) {
   }
   mStmts = vec_stmts;
 }
-#if 0
-vector<CMarsRangeExpr> CMarsNode::get_port_access_union(void * port) {
-    auto refs = get_port_refs(port);
-    CMarsAST_IF *ast = get_ast();
-
-    vector<CMarsRangeExpr> range;
-    if (ast->IsScalarType(ast->GetTypebyVar(port)))
-      return range;
-    vector<void*> vec_pos(refs.begin(), refs.end());
-    void *common_scope = ast->GetCommonScope(vec_pos);
-    if (common_scope) {
-      vector<void*> vec_refs;
-      ast->get_ref_in_scope(port, common_scope, &vec_refs);
-      set<void*> all_refs(vec_refs.begin(), vec_refs.end());
-      if (all_refs == refs) {
-        CMarsArrayRangeInScope acc(
-            port, ast, common_scope, get_user_kernel(), false, false);
-        if (acc.has_read())
-          range = RangeUnioninVector(range, acc.GetRangeExprRead());
-        if (acc.has_write())
-          range = RangeUnioninVector(range, acc.GetRangeExprWrite());
-        return range;
-      }
-    }
-    for (auto ref : refs) {
-        CMarsArrayRangeInScope acc(ref, ast, get_user_kernel(), false, false);
-        vector<CMarsRangeExpr> one_range = acc.has_read() ?
-              acc.GetRangeExprRead() : acc.GetRangeExprWrite();
-
-        range = RangeUnioninVector(range, one_range);
-    }
-    return range;
-}
-#endif
 
 int get_sync_level_from_schedule(CMarsScheduleVector sch0,
                                  CMarsScheduleVector sch1) {

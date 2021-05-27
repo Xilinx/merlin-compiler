@@ -6,6 +6,4 @@ include_directories(
   "${ROSE_ROOT_DIR}/include/rose"
   "${RAPIDJSON_ROOT_DIR}")
 
-add_subdirectory(systolic/tools/systolic_extract)
-add_subdirectory(systolic/tools/systolic_frontend)
 add_subdirectory(autodse)

@@ -680,7 +680,7 @@ int LineBuffer::check_delinearize_availability(
     vector<size_t> *delinear_arr_size) {
   map<void *, size_t> mapAlias2BStep;
   int ret = analysis_delinearize(m_ast, sg_array, 0, dim_split_steps,
-                                 &mapAlias2BStep, true);
+                                 &mapAlias2BStep);
   if (ret != 0) {
     check_only_delinearize(m_ast, sg_array, 0, *dim_split_steps,
                            &mapAlias2BStep, mapIndex2Delinear,

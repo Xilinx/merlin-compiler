@@ -35,7 +35,7 @@ typedef std::map<SgInitializedName *, vector<SgPragmaDeclaration *>>
 
 class CMarsIr {
  public:
-  enum flow_type { XILINX_HLS = 1, XILINX_SDX = 2, INTEL_AOCL = 3 };
+  enum flow_type { XILINX_HLS = 1, XILINX_SDX = 2};
 
  private:
   set<void *> kernel_decl;
