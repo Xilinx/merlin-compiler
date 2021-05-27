@@ -26,7 +26,6 @@
 //  #include "rose.h"
 #include "mars_message.h"
 #include "mars_opt.h"
-#include "memory_coalescing_intel.h"
 #include "memory_coalescing_xilinx.h"
 #include "program_analysis.h"
 
