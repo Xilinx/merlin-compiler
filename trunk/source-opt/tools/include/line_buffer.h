@@ -46,7 +46,6 @@ class LineBuffer {
 
   size_t mSingleBufferSize;  //  option from memory burst
   size_t mWindowSize;
-  bool mAltera_flow;
   bool mXilinx_flow;
   bool m_analysis;
   map<void *, int64_t> loop_ub_cache;
@@ -58,7 +57,7 @@ class LineBuffer {
   LineBuffer(CSageCodeGen *codegen, void *pTopFunc,
              const CInputOptions &options, bool analysis_only)
       : m_ast(codegen), mTopFunc(pTopFunc), mOptions(options),
-        mAltera_flow(false), mXilinx_flow(false), m_analysis(analysis_only) {
+        mXilinx_flow(false), m_analysis(analysis_only) {
     init();
   }
   void init();

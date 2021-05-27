@@ -593,12 +593,7 @@
                 "arrays in loop " +                                            \
                     (x))
 
-#define AUREG_WARNING_1(x)                                                     \
-  AUREG_WARNING(                                                               \
-      1, "Warning: auto register allocation is disabled,\n"                    \
-         "\t because aocl does not allow register size larger than 8192.\n"    \
-         "\t Please use a smaller value for 'auto_register_size_threshold'(" + \
-             (x) + ")")
+#define AUREG_WARNING_1(x)
 
 //  ////////////////////////////////////////////  /
 //  General Warning Messages
@@ -654,17 +649,8 @@
                                                             //  Warning?
 
 //  Vendor tool warning
-#define DISAG_WARNING_1(x, y)                                                  \
-  DISAG_WARNING(1, "Intel SDK cannot support more than " + (x) +               \
-                       " arguments.\n" + (y) +                                 \
-                       "Please try to pack struct/class members to reduce "    \
-                       "the number of the kernel interface variables")
-#define GLOBL_WARNING_1(x, y)                                                  \
-  GLOBL_WARNING(                                                               \
-      1, "Intel SDK cannot support more than " + (x) + " arguments.\n" + (y) + \
-             "Please try to change global variables into local variables or "  \
-             "merge multiple scalar global variables into a single array "     \
-             "global variable")
+#define DISAG_WARNING_1(x, y)
+#define GLOBL_WARNING_1(x, y)
 #define WDBUS_WARNING_1                                                        \
   WDBUS_WARNING(                                                               \
       1,                                                                       \
@@ -701,11 +687,7 @@
                         " because of unsupported subloops (such as while, "    \
                         "do-while and memcpy)")
 #define PROCS_WARNING_32(x, y, z)
-#define PROCS_WARNING_33(x)                                                    \
-  PROCS_WARNING(33,                                                            \
-                "Ignoring pragma " + (x) +                                     \
-                    " because Intel SDK cannot support a false dependence "    \
-                    "pragma for a specified non-pointer variable")
+#define PROCS_WARNING_33(x)
 #define PROCS_WARNING_34(x)                                                    \
   PROCS_WARNING(34, "Ignoring pragma " + (x) +                                 \
                         " because Xilinx tool cannot support a false "         \
@@ -1328,11 +1310,7 @@
              "\n Hint: complex pointer re-interpretation is not supported. " + \
              "Please rewrite")
 #define DISAG_ERROR_2(x) DISAG_ERROR(2, (x) + " is not decomposed")
-#define DISAG_ERROR_3(x, y)                                                    \
-  DISAG_ERROR(3, "Intel SDK cannot support more than " + (x) +                 \
-                     " arguments.\n" + (y) +                                   \
-                     "Please try to pack struct/class members to reduce the "  \
-                     "number of the kernel interface variables")
+#define DISAG_ERROR_3(x, y)
 #define DISAG_ERROR_4(x) DISAG_ERROR(4, "Depth " + (x) + " is not supported")
 
 #define DISAG_ERROR_5(x, y)                                                    \

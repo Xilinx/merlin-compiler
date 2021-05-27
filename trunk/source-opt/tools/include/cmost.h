@@ -46,7 +46,6 @@ int cmost_malloc_2d(void ***a, const char *filename, int unit_size, size_t d0,
                     size_t d1);
 int cmost_malloc_3d(void ****a, const char *filename, int unit_size, size_t d0,
                     size_t d1, size_t d2);
-int altera_malloc(void **a, const char *filename, int unit_size, size_t d0);
 
 int cmost_free_1d(void *a);
 int cmost_free_2d(void **a);

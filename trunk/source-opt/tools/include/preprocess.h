@@ -48,10 +48,8 @@ class PreProcess {
  private:
   bool mNaive_tag;
   bool mAuto_fg_tag;
-  bool mAltera_flow;
   bool mXilinx_flow;
   bool mPure_kernel;
-  bool mValidAltera;
   bool mValidXilinx;
   bool mValid;
   enum effort mEffort;
@@ -61,8 +59,8 @@ class PreProcess {
   PreProcess(CSageCodeGen *codegen, void *pTopFunc,
              const CInputOptions &options)
       : m_ast(codegen), mTopFunc(pTopFunc), mOptions(options),
-        mNaive_tag(false), mAuto_fg_tag(false), mAltera_flow(false),
-        mXilinx_flow(false), mPure_kernel(false), mValidAltera(true),
+        mNaive_tag(false), mAuto_fg_tag(false),
+        mXilinx_flow(false), mPure_kernel(false),
         mValidXilinx(true), mValid(true), mEffort(MEDIUM) {
     init();
   }
@@ -148,10 +146,6 @@ class PreProcess {
 
   void check_kernel_argument(CSageCodeGen *codegen, void *pKernelTop);
 
-  int altera_check_kernel_file_limitation(CSageCodeGen *codegen,
-                                          void *kernel_func, void *sub_func,
-                                          std::set<void *> *p_visited,
-                                          vector<string> *p_res);
   int check_kernel_file_limitation(CSageCodeGen *codegen, void *pKernelTop);
 
   void check_valid_top(CSageCodeGen *codegen, void *func,
@@ -176,8 +170,6 @@ class PreProcess {
   void parse_aggregate_init();
 
   int memcpy_check(void *func_call);
-
-  int altera_memcpy_check_top(void *func_call);
 
   int memcpy_check_top();
 

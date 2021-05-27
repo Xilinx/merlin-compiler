@@ -56,14 +56,14 @@ class InputChecker {
   InputChecker(CSageCodeGen *codegen_, void *pTopFunc_,
                const CInputOptions &options_)
       : codegen(codegen_), pTopFunc(pTopFunc_), options(options_),
-        mAltera_flow(false), mXilinx_flow(false), mHls_flow(false),
-        mValidAltera(true), mValid(true) {
+        mXilinx_flow(false), mHls_flow(false),
+        mValid(true) {
     mPure_kernel = false;
     init();
   }
   InputChecker(CSageCodeGen *codegen_, void *pTopFunc_)
-      : codegen(codegen_), pTopFunc(pTopFunc_), mAltera_flow(false),
-        mXilinx_flow(false), mHls_flow(false), mValidAltera(true),
+      : codegen(codegen_), pTopFunc(pTopFunc_),
+        mXilinx_flow(false), mHls_flow(false),
         mValid(true) {
     mPure_kernel = false;
   }
@@ -109,10 +109,8 @@ class InputChecker {
   CInputOptions options;
   CMarsIr mMars_ir;
   CMarsIrV2 mMars_ir_v2;
-  bool mAltera_flow;
   bool mXilinx_flow;
   bool mHls_flow;
-  bool mValidAltera;
   // bool mValidXilinx;
   bool mValid;
   unordered_map<string, string> def_directive_map_;

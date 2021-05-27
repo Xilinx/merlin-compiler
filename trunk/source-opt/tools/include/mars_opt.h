@@ -54,13 +54,8 @@ using std::vector;
 #define MAX_SIZE_THRESHOLD (1LL << 32)
 #define MAX_CONST_BYTE (1024 * 1024)
 #define XILINX_ARG_LIMITATION 256
-#define INTEL_ARG_LIMITATION 256
 #define WARNING_ARG_LIMITATION 16
 #define XILINX_ARG_SCALAR_LIMITATOIN 16
-#define INTEL_DEFAULT_REGISTER_THRESHOLD                                       \
-  512  // 64bytes for array in single work-item kernel
-#define INTEL_MAX_REGISTER_THRESHOLD                                           \
-  8192  // 1Kbytes for array in multiple work-item kernel
 #define MERLIN_SMALL_TRIP_COUNT_THRESHOLD 16
 #define MAX_PASS_LENGTH 100
 #define WIDE_BUS_LENGTH_THRESHOLD 128
