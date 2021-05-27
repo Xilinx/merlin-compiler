@@ -51,7 +51,7 @@ void InputChecker::InputChecker::PreCheck() {
 }
 
 void InputChecker::check_result() {
-  if (!mValid || (mAltera_flow && !mValidAltera)) {
+  if (!mValid) {
     throw std::exception();
   }
 }
@@ -77,10 +77,6 @@ void InputChecker::init() {
   //   mNaive_tag = true;
   //   cout << "[MARS-PARALLEL-MSG] Naive HLS mode.\n";
   // }
-  if ("aocl" == options.get_option_key_value("-a", "impl_tool")) {
-    mAltera_flow = true;
-    cout << "[MARS-PARALLEL-MSG] Enable altera flow mode.\n";
-  }
   if ("sdaccel" == options.get_option_key_value("-a", "impl_tool")) {
     mXilinx_flow = true;
     mHls_flow = false;
@@ -155,7 +151,6 @@ void InputChecker::CheckRangeAnalysis() {
 
 bool InputChecker::CheckOpenclConflictName() {
   printf("    Enter check opencl conflict name...\n\n");
-  bool is_intel = mAltera_flow;
   int ret = 0;
   vector<string> OpenCLNameConflict = codegen->GetOpenCLName();
   //  Check all function name and argument name
@@ -239,18 +234,6 @@ bool InputChecker::CheckOpenclConflictName() {
   all_decls.clear();
   vector<void *> vec_exp;
   codegen->GetNodesByType_compatible(nullptr, "SgExpression", &vec_exp);
-  for (auto exp : vec_exp) {
-    if (codegen->IsFromInputFile(exp) != 0 ||
-        codegen->get_file(exp) == MERLIN_TYPE_DEFINE) {
-      void *base_type = codegen->GetBaseType(codegen->GetTypeByExp(exp), false);
-      if (codegen->IsGeneralLongLongType(base_type) != 0 && is_intel) {
-        string msg = "\'" + codegen->UnparseToString(exp) + "\' " +
-                     getUserCodeFileLocation(codegen, exp, true);
-        dump_critical_message(SYNCHK_ERROR_5(msg));
-        ret = 1;
-      }
-    }
-  }
   if (ret == 1) {
     throw std::exception();
   }
@@ -455,12 +438,7 @@ void InputChecker::CheckMemberFunction() {
       }
       string func_info = "'" + codegen->GetFuncName(func_decl, true) + "' " +
                          getUserCodeFileLocation(codegen, func_decl, true);
-      if (mAltera_flow) {
-        dump_critical_message(SYNCHK_ERROR_11(func_info));
-        mValidAltera = false;
-      } else {
-        dump_critical_message(SYNCHK_WARNING_4(func_info));
-      }
+      dump_critical_message(SYNCHK_WARNING_4(func_info));
     }
   }
 }
@@ -559,11 +537,7 @@ int InputChecker::CheckKernelArgumentNumber(vector<void *> vec_kernels,
                                             string tool) {
   int ret = 0;
   int arg_limitation = 16;
-  if (tool == "Intel" || tool == "aocl") {
-    arg_limitation = INTEL_ARG_LIMITATION;
-  } else {
-    arg_limitation = XILINX_ARG_LIMITATION;
-  }
+  arg_limitation = XILINX_ARG_LIMITATION;
   for (auto kernel : vec_kernels) {
     int count_scalar = 0;
     if (codegen->IsFunctionDeclaration(kernel) != 0) {
@@ -574,14 +548,6 @@ int InputChecker::CheckKernelArgumentNumber(vector<void *> vec_kernels,
         dump_critical_message(SYNCHK_ERROR_14(msg, std::to_string(number),
                                               std::to_string(arg_limitation)));
         ret = 1;
-      }
-      if (number > WARNING_ARG_LIMITATION &&
-          (tool == "Intel" || tool == "aocl")) {
-        string msg = codegen->UnparseToString(kernel);
-        msg += getUserCodeFileLocation(codegen, kernel, true);
-        dump_critical_message(
-            SYNCHK_WARNING_5(msg, std::to_string(number),
-                             std::to_string(WARNING_ARG_LIMITATION)));
       }
       auto port_list = codegen->GetFuncParams(kernel);
       for (auto sg_port : port_list) {
@@ -612,24 +578,13 @@ int InputChecker::CheckKernelArgumentNumber(vector<void *> vec_kernels,
 
 int InputChecker::CheckKernelArgumentNumberTop() {
   printf("    Enter check kernel argument number...\n");
-  string tool = "Intel";
-  if (mAltera_flow) {
-    tool = "Intel";
-  } else {
-    tool = "Xilinx";
-  }
+  string tool = "Xilinx";
   vector<void *> vec_kernels = GetTopKernels();
   CheckKernelArgumentNumber(vec_kernels, tool);
   return 0;
 }
 
 void InputChecker::CheckValidTop(void *func, set<void *> *p_visited, int top) {
-  static const string intel_supported_builtin_func[] = {
-      "__assert_fail", "__builtin_inff",
-      // #define INTEL_FLOW
-      // #include "builtin.list"
-      // #undef INTEL_FLOW
-  };
   static const string xilinx_supported_builtin_func[] = {
       "__assert_fail",
       "__builtin_inff",
@@ -640,14 +595,6 @@ void InputChecker::CheckValidTop(void *func, set<void *> *p_visited, int top) {
 
   if (p_visited->count(func) > 0) {
     return;
-  }
-  static set<string> intel_supported_builtin_func_set;
-  static int init_intel_set = 0;
-  if (init_intel_set == 0) {
-    for (auto builtin_func : intel_supported_builtin_func) {
-      intel_supported_builtin_func_set.insert(builtin_func);
-    }
-    init_intel_set = 1;
   }
 
   static set<string> xilinx_supported_builtin_func_set;
@@ -680,7 +627,6 @@ void InputChecker::CheckValidTop(void *func, set<void *> *p_visited, int top) {
       string loc = getUserCodeFileLocation(codegen, goto_stmt, true);
       dump_critical_message(SYNCHK_WARNING_6(loc));
     }
-    system("touch merlin_altera_naive.log");
   }
 
   vector<void *> vec_calls;
@@ -703,10 +649,6 @@ void InputChecker::CheckValidTop(void *func, set<void *> *p_visited, int top) {
           func_name.find("merlin_stream_init") != string::npos ||
           func_name.find("merlin_stream_read") != string::npos ||
           func_name.find("merlin_stream_write") != string::npos) {
-        continue;
-      }
-      if (mAltera_flow &&
-          intel_supported_builtin_func_set.count(func_name) > 0) {
         continue;
       }
       void *decl = codegen->GetFuncDeclByCall(call, 0);
