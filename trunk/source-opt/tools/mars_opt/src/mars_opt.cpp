@@ -364,16 +364,6 @@ void init_pass_func_table() {
                            const CInputOptions &options);
   g_pass_func_table["postwrap_process"] = postwrap_process_top;
 #endif
-// #ifdef HAS_MEMORY_PARTITION
-//   int memory_partition_top(CSageCodeGen * codegen, void *pTopFunc,
-//                            const CInputOptions &options);
-//   g_pass_func_table["memory_partition"] = memory_partition_top;
-// #endif
-#ifdef HAS_CHANNEL_PARTITION
-  int channel_partition_top(CSageCodeGen * codegen, void *pTopFunc,
-                            const CInputOptions &options);
-  g_pass_func_table["channel_partition"] = channel_partition_top;
-#endif
 #ifdef HAS_PERFORMANCE_ESTIMATION
   int performance_estimation_top(CSageCodeGen * codegen, void *pTopFunc,
                                  const CInputOptions &options);

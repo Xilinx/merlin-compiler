@@ -36,7 +36,7 @@ install(TARGETS AutoParallelInsertion ARCHIVE DESTINATION lib)
 #    -DHAS_KERNEL_SEPARATE -DHAS_POSTWRAP_PROCESS -DHAS_MEMORY_PARTITION \
 #    -DHAS_PERFORMANCE_ESTIMATION -DHAS_GEN_TOKEN_ID -DHAS_GEN_HIERARCHY \
 #    -DHAS_ADD_PRAGMA_KERNEL -DHAS_FINAL_CODE_GEN -DHAS_DS_SCOPE -DHAS_DS_RESOURCE_EVAL -DHAS_DS_TILING \
-#    -DHAS_DS_SKELETON_EXTRACT -DHAS_LINE_BUFFER -DHAS_CHANNEL_PARTITION ")
+#    -DHAS_DS_SKELETON_EXTRACT -DHAS_LINE_BUFFER ")
 #
 #target_link_libraries(auto_parallel_insertion_test 
 #  gtest_main
@@ -84,7 +84,6 @@ install(TARGETS AutoParallelInsertion ARCHIVE DESTINATION lib)
 #  LowerSeparate
 #  MemoryBurst
 #  MemoryPartition
-#  ChannelPartition
 #  MidendPreprocess
 #  MemoryReduce
 #  # MsgTest

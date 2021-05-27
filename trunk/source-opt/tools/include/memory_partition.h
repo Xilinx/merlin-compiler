@@ -116,7 +116,6 @@ class MemoryPartition {
   CMarsIrV2 *mMars_ir_v2;
 
   // Mode options
-  bool mAltera_flow;
   bool mXilinx_flow;
   int m_reshape_threshold;
   int m_heuristic_threshold;
@@ -126,9 +125,6 @@ class MemoryPartition {
   // Final decisions
   std::map<void *, std::map<int, int>> m_partitions;
   std::map<CMirNode *, bool> m_actions;  // Xilinx use only
-  std::set<void *> m_registers;          // Intel use only
-  std::map<void *, std::map<std::string, std::string>>
-      m_attributes;  // Intel use only
 
   // Temp results and caching data
   std::map<CMirNode *, std::map<void *, std::map<int, int>>> tmp_factors;
@@ -152,7 +148,7 @@ class MemoryPartition {
                   const CInputOptions &options, CMarsIr *mars_ir,
                   CMarsIrV2 *mars_ir_v2)
       : m_ast(codegen), mTopFunc(pTopFunc), mOptions(options),
-        mMars_ir(mars_ir), mMars_ir_v2(mars_ir_v2), mAltera_flow(false),
+        mMars_ir(mars_ir), mMars_ir_v2(mars_ir_v2),
         mXilinx_flow(false) {
     init();
   }
@@ -162,8 +158,6 @@ class MemoryPartition {
   std::map<CMirNode *, bool> get_node_actions() { return m_actions; }
   std::map<void *, std::map<int, int>> get_partitions() { return m_partitions; }
   void set_registers(std::set<void *> registers) {
-    for (auto reg : registers)
-      m_registers.insert(reg);
   }
 
   void partition_analysis();
@@ -173,11 +167,6 @@ class MemoryPartition {
   // Xilinx flow
   void insert_partition_xilinx();
   void partition_transform_xilinx();
-
-  // Intel flow
-  void insert_partition_intel();
-  void partition_evaluate_intel();
-  void partition_transform_intel();
 
   void reportPartitionMessage();
   void delete_existing_pragma();
@@ -238,7 +227,6 @@ class MemoryPartition {
   // User message
   void reportThresholdFactor(CMirNode *node, void *arr, int dim);
   void reportSuboptimalFGPIP(CMirNode *node, void *arr);
-  void reportSuboptimalMemIntel(void *arr_init);
 
   // Debug print
   void print_partition(const std::map<void *, std::map<int, int>> &partitions);

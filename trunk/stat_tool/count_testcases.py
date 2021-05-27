@@ -19,7 +19,6 @@ groups_with_dot_ref = [
   'array_linearize',
   'auto_parallel_insertion',
   'bitwidth_opt',
-  'channel_partition',
   'coarse_parallel',
   'coarse_pipeline',
   'comm_opt',

@@ -614,30 +614,6 @@ void remove_pragma_before_clone(CSageCodeGen *codegen, void *inner_body,
   }
 }
 
-void stop_unroll_outer_loop_for_intel(CSageCodeGen *codegen,
-                                      const vector<void *> &loop2stopfgpip,
-                                      const string &tool_type,
-                                      bool pragma_in_loop) {
-  if (tool_type == "aocl") {
-    for (auto loop : loop2stopfgpip) {
-      const string parallel_pragma_aocl = std::string(ACCEL_PRAGMA) + " " +
-                                          CMOST_PARALLEL + " FACTOR=1 " +
-                                          CMOST_SKIP;
-      //  const string parallel_pragma_aocl = "unroll 1";
-      if (!pragma_in_loop) {
-        codegen->InsertStmt(
-            codegen->CreatePragma(parallel_pragma_aocl,
-                                  codegen->TraceUpToBasicBlock(loop)),
-            loop);
-      } else {
-        void *loop_body = codegen->GetLoopBody(loop);
-        codegen->PrependChild(
-            loop_body, codegen->CreatePragma(parallel_pragma_aocl, loop_body));
-      }
-    }
-  }
-}
-
 void apply_parallel_in_new_sub_loop(
     CSageCodeGen *codegen,
     const vector<tuple<void *, bool, CAnalPragma>> &vec_sub_loops,
@@ -1125,11 +1101,6 @@ int loop_tiling_top(CSageCodeGen *codegen, void *pTopFunc,
 
     Changed = true;
   }
-
-  //  Yuxin: May 20 2018
-  //  Stop the outter loop from auto unroll by AOCL
-  stop_unroll_outer_loop_for_intel(codegen, loop2stopfgpip, tool_type,
-                                   pragma_in_loop);
 
   //  release memory
   for (auto loop_pragma : loop2pragma) {

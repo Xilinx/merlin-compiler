@@ -51,9 +51,6 @@ void add_loop_tripcount_pragma(CSageCodeGen *codegen, void *pTopFunc,
 
 int reduction_general_top(CSageCodeGen *codegen, void *pTopFunc,
                           const CInputOptions &options) {
-  //  Yuxin: Aug 27 2018
-  //  Reduction is turned on for Intel flow
-  //
   reduction_general(codegen, pTopFunc, options);
   return 0;
 }

@@ -39,11 +39,8 @@ class LoopParallel {
   CMarsIrV2 mMars_ir_v2;
 
   // Mode options
-  bool mAltera_flow;
   bool mXilinx_flow;
   bool mNaive;
-  bool mAutoReg;
-  bool mIvdep;
   bool mDepResolve;
   bool mLoopFlatten;
   bool mAutoPartition;
@@ -54,8 +51,7 @@ class LoopParallel {
   LoopParallel(CSageCodeGen *codegen, void *pTopFunc,
                const CInputOptions &options)
       : m_ast(codegen), mTopFunc(pTopFunc), mOptions(options),
-        mAltera_flow(false), mXilinx_flow(false), mNaive(false), mAutoReg(true),
-        mIvdep(false), mDepResolve(true), mLoopFlatten(true),
+        mXilinx_flow(false), mNaive(false), mDepResolve(true), mLoopFlatten(true),
         mAutoPartition(true), mDefaultII(0) {
     init();
   }
@@ -75,10 +71,6 @@ class LoopParallel {
                        std::map<void *, std::map<int, int>> array_partitions);
   void insert_unroll(CMirNode *bNode);
 
-  // Intel flow
-  int loop_parallel_intel_top();
-  int parse_pragma_intel();
-
  protected:
   void
   check_dependency_msg(CMirNode *bNode, string *msg_dep,
@@ -97,21 +89,10 @@ void check_false_dependency_xilinx(CSageCodeGen *codegen, void *sg_pragma,
                                    void *target_var);
 void check_false_dependency_xilinx(CSageCodeGen *codegen, void *pTopFunc,
                                    const CInputOptions &options);
-void check_false_dependency_intel(CSageCodeGen *codegen, void *pTopFunc,
-                                  const CInputOptions &options);
-bool check_false_dependency_intel(CSageCodeGen *codegen, void *sg_pragma,
-                                  void *target_var, bool check_all = false);
 
 // Loop tripcount process
 void add_loop_tripcount_pragma(CSageCodeGen *codegen, void *pTopFunc,
                                CMarsIr *mars_ir);
-
-// auto register and auto ivdep
-int intel_auto_ivdep_top(CSageCodeGen *codegen, void *pTopFunc,
-                         const CInputOptions &options);
-int intel_auto_register_top(CSageCodeGen *codegen, void *pTopFunc,
-                            const CInputOptions &options,
-                            set<void *> *registers);
 int convert_attribute_pragma_to_type(CSageCodeGen *codegen, void *pTopFunc,
                                      const CInputOptions &options);
 

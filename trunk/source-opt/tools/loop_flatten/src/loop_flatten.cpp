@@ -394,11 +394,6 @@ int loop_flatten_one_level(CSageCodeGen *codegen, void *sg_loop,
 
   codegen->AppendChild(sg_bb, new_for_loop);
   *new_loop = new_for_loop;
-  //   void *orig_bb = codegen->GetParent(sg_upper_loop);
-  //    if (codegen->IsBasicBlock(orig_bb) && codegen->GetChildStmtNum(orig_bb)
-  //    == 1)
-  //      codegen->ReplaceStmt(orig_bb, sg_bb);
-  //    else
   codegen->ReplaceStmt(sg_upper_loop, sg_bb);
 
   map<string, string> msg_map;
