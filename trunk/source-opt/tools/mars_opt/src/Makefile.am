@@ -174,10 +174,6 @@ if HAS_MEMORY_PARTITION
 include ../../memory_partition/makefile.inc
 endif 
 
-if HAS_CHANNEL_PARTITION
-include ../../channel_partition/makefile.inc
-endif 
-
 if HAS_MIDEND_PREPROCESS
 include ../../midend_preprocess/makefile.inc
 endif

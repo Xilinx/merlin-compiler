@@ -21,8 +21,6 @@
 
 #include <iostream>
 #include <string>
-// FIXME: check loop step==1
-//
 #include "array_delinearize.h"
 #include "id_update.h"
 #include "line_buffer.h"
@@ -38,8 +36,7 @@
 int line_buffer_top(CSageCodeGen *codegen, void *pTopFunc,
                     const CInputOptions &options) {
   string tool_flow = options.get_option_key_value("-a", "impl_tool");
-  if ((tool_flow != "aocl") &&
-      (options.get_option_key_value("-a", "stream_prefetch") != "off")) {
+  if ((options.get_option_key_value("-a", "stream_prefetch") != "off")) {
     // check whether some ports can be applied streaming. If so,
     // generate __merlin_streaming_range() before line buffer code generation
     StreamPrefetchXilinx stream_analysis(codegen, pTopFunc, options, true);
@@ -53,10 +50,6 @@ int line_buffer_top(CSageCodeGen *codegen, void *pTopFunc,
 }
 
 void LineBuffer::init() {
-  if ("aocl" == mOptions.get_option_key_value("-a", "impl_tool")) {
-    mAltera_flow = true;
-    cout << "[MARS-PARALLEL-MSG] Enable altera flow mode.\n";
-  }
   if ("sdaccel" == mOptions.get_option_key_value("-a", "impl_tool")) {
     mXilinx_flow = true;
     cout << "[MARS-PARALLEL-MSG] Enable xilinx flow mode.\n";

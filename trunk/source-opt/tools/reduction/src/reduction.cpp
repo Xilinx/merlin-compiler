@@ -32,84 +32,13 @@
 using MarsProgramAnalysis::CMarsAccess;
 using MarsProgramAnalysis::CMarsExpression;
 #define USED_CODE_IN_COVERAGE_TEST 0
-#if USED_CODE_IN_COVERAGE_TEST
-void Reduction_altera(CSageCodeGen *codegen, void *pTopFunc,
-                      const CInputOptions &options);
-#endif
+
 int reduction_top(CSageCodeGen *codegen, void *pTopFunc,
                   const CInputOptions &options) {
-#if USED_CODE_IN_COVERAGE_TEST
-  //  No more in use
-  if (options.get_option_key_value("-a", "altera") == "altera") {
-    Reduction_altera(codegen, pTopFunc, options);
-    return 0;
-  }
-#endif
   reduction_run(codegen, pTopFunc, options);
   return 0;
 }
 
-#if USED_CODE_IN_COVERAGE_TEST
-
-void *simplify_index_in_exp(CSageCodeGen *codegen, void *pntr) {
-  CMarsAccess ma(pntr, codegen, nullptr);
-  void *array = ma.GetArray();
-  vector<void *> new_indices;
-  vector<CMarsExpression> old_indices = ma.GetIndexes();
-  for (auto &me : old_indices) {
-    new_indices.push_back(me.get_expr_from_coeff());
-  }
-  return codegen->CreateArrayRef(codegen->CreateVariableRef(array),
-                                 new_indices);
-}
-
-void *replace_variables_in_scope(CSageCodeGen *codegen, void *sg_scope,
-                                 const map<void *, void *> &mapIter) {
-  void *new_scope = nullptr;
-  if (codegen->IsStatement(sg_scope))
-    new_scope = codegen->CopyStmt(sg_scope);
-  else if (codegen->IsExpression(sg_scope))
-    new_scope = codegen->CopyExp(sg_scope);
-  else
-    return nullptr;
-
-  vector<void *> vec_refs;
-  codegen->GetNodesByType(new_scope, "preorder", "SgVarRefExp", &vec_refs);
-  for (auto &ref : vec_refs) {
-    void *var_init = codegen->GetVariableInitializedName(ref);
-    auto new_var_iter = mapIter.find(var_init);
-    if (new_var_iter == mapIter.end())
-      continue;
-    void *new_ref = nullptr;
-    if (codegen->IsInitName(new_var_iter->second))
-      new_ref = codegen->CreateVariableRef((*new_var_iter).second);
-    else if (codegen->IsExpression(new_var_iter->second))
-      new_ref = codegen->CopyExp((*new_var_iter).second);
-    if (new_ref)
-      codegen->ReplaceExp(ref, new_ref);
-    if (codegen->IsVarRefExp(new_scope))
-      return new_ref;
-  }
-  return new_scope;
-}
-
-void get_unrelated_loops(CSageCodeGen *codegen, void *sg_ref, void *sg_pos,
-                         const vector<void *> &all_loops,
-                         vector<void *> *unrelated_loops) {
-  for (auto loop : all_loops) {
-    void *iter = codegen->GetLoopIterator(loop);
-    vector<void *> refs;
-    codegen->get_ref_in_scope(iter, sg_ref, &refs);
-    if (refs.size() == 0)
-      unrelated_loops->push_back(loop);
-  }
-}
-
-void get_unrelated_loops(CSageCodeGen *codegen, vector<void *> sg_ref,
-                         void *sg_pos, const vector<void *> &all_loops,
-                         vector<void *> *unrelated_loops) {
-  get_unrelated_loops(codegen, sg_ref[0], sg_pos, all_loops, unrelated_loops);
-}
 
 //  A simple version of block-based reduction
 //
@@ -138,315 +67,6 @@ void get_unrelated_loops(CSageCodeGen *codegen, vector<void *> sg_ref,
 //  5. parallelized loops are perfectly nested
 //  6. the index of the pntr's of the array reduciton referneces need be the
 //  same
-void Reduction_altera(CSageCodeGen *codegen, void *pTopFunc,
-                      const CInputOptions &options) {
-  cout << "Hello Reduction for Altera" << endl;
-
-  vector<void *> vec_pragmas;
-  codegen->GetNodesByType(pTopFunc, "preorder", "SgPragmaDeclaration",
-                          &vec_pragmas);
-
-  vector<void *> vec_reduce_stmt;
-  for (auto pragma : vec_pragmas) {
-    string str_pragma = codegen->GetPragmaString(pragma);
-    if (str_pragma.find("ACCEL reduction") == 0 ||
-        str_pragma.find("ACCEL REDUCTION") == 0) {
-      cout << "Pragma : " << str_pragma << endl;
-
-      void *sg_reduce_stmt = codegen->GetNextStmt(pragma);
-      assert(sg_reduce_stmt);
-
-      vec_reduce_stmt.push_back(sg_reduce_stmt);
-    }
-  }
-
-  for (auto reduce_stmt : vec_reduce_stmt) {
-    //  1. preparation
-    //  1.1. Find the "reduction" pragma, the statement follow the pragma is to
-    //  be reduced 1.2. Find the scope of parallelization (the outermost
-    //  parallelized loop) 1.3. Find the external variables (the reduction
-    //  results) 1.4. Find the assignments to the external variables 1.5. create
-    //  a map between exteranl reference and private reference
-    cout << "reduce: " << codegen->_p(reduce_stmt) << endl;
-    void *func_decl = codegen->TraceUpToFuncDecl(reduce_stmt);
-    void *func_body = codegen->GetFuncBody(func_decl);
-    vector<void *> parallel_loops;  //  inverse order: inner loop first
-    {
-      void *sg_curr = codegen->TraceUpToForStatement(reduce_stmt);
-      while (sg_curr) {
-        void *sg_before = codegen->GetPreviousStmt(sg_curr);
-        if (!codegen->IsPragmaDecl(sg_before))
-          break;
-        cout << "before: " << codegen->_p(sg_before) << endl;
-        CAnalPragma ana_pragma(codegen);
-        bool errorOut;
-        if (!ana_pragma.PragmasFrontendProcessing(sg_before, &errorOut,
-                                                  false) ||
-            !ana_pragma.is_parallel() ||
-            ana_pragma.get_attribute(CMOST_complete) == "")
-          break;
-
-        parallel_loops.push_back(sg_curr);
-
-        cout << "Add a loop: " << codegen->_p(sg_curr) << endl;
-
-        sg_curr = codegen->TraceUpToForStatement(codegen->GetParent(sg_curr));
-      }
-    }
-
-    if (!parallel_loops.size())
-      return;
-
-    void *outermost_loop = parallel_loops[parallel_loops.size() - 1];
-    void *insert_after_pos = outermost_loop;
-    void *insert_before_pos = codegen->GetPreviousStmt(outermost_loop);
-
-    map<void *, void *> mapE2P;    //  external to private
-    map<void *, void *> mapE2ref;  //  external to private
-    {
-      //  vector<void*> vec_refs;
-      //  codegen->GetNodesByType(reduce_stmt, "preorder",  "SgVarRefExp",
-      //  &vec_refs);
-
-      //  find assign statement
-      //  assumption: external_var = (+=) private
-
-      vector<void *> vec_assign;
-      codegen->GetNodesByType(reduce_stmt, "preorder", "SgAssignOp",
-                              &vec_assign);
-      if (vec_assign.size() == 0) {
-        codegen->GetNodesByType(reduce_stmt, "preorder", "SgPlusAssignOp",
-                                &vec_assign);
-      }
-
-      for (auto assign : vec_assign) {
-        void *left = codegen->GetExpLeftOperand(assign);
-        void *right = codegen->GetExpRightOperand(assign);
-        right = codegen->RemoveCast(right);
-
-        vector<void *> indexes;
-        void *sg_array;
-        codegen->parse_pntr_ref_new(left, &sg_array, &indexes);
-        void *sg_private = nullptr;
-
-        //  ZP: FIXME: This replacement is NOT complete
-        //            not only the right of assign, but also the references in
-        //            the if-condition needs to be replaced In general, no pntr
-        //            is allowed in private variables
-        if (!codegen->IsVarRefExp(right)) {
-          //  FIXME: to do moveable test
-          string tmp_var = "__rdc_tmp";
-          codegen->get_valid_local_name(func_decl, &tmp_var);
-          void *tmp_decl = codegen->CreateVariableDecl(
-              codegen->GetTypeByExp(right), tmp_var, nullptr, func_body);
-          codegen->PrependChild(func_body, tmp_decl, true);
-          void *new_assign_stmt = codegen->CreateStmt(
-              V_SgAssignStatement, codegen->CreateVariableRef(tmp_decl),
-              codegen->CopyExp(right));
-          codegen->InsertStmt(new_assign_stmt, reduce_stmt);
-          sg_private = codegen->GetVariableInitializedName(tmp_decl);
-          codegen->ReplaceExp(right, codegen->CreateVariableRef(tmp_decl));
-        } else {
-          sg_private = codegen->GetVariableInitializedName(right);
-        }
-        mapE2P[sg_array] = sg_private;
-        mapE2ref[sg_array] = simplify_index_in_exp(codegen, left);
-        codegen->ReplaceExp(left, mapE2ref[sg_array]);
-
-        cout << "MAP: " << codegen->UnparseToString(sg_array) << ":"
-             << codegen->_p(mapE2ref[sg_array]) << "->"
-             << codegen->UnparseToString(sg_private) << endl;
-      }
-    }
-
-    map<void *, void *> mapE2init;  //  external to init expression
-    {
-      void *sg_scope = codegen->TraceUpToFuncDecl(reduce_stmt);
-
-      vector<void *> vec_assign;
-      codegen->GetNodesByType(sg_scope, "preorder", "SgAssignOp", &vec_assign);
-      if (vec_assign.size() == 0) {
-        codegen->GetNodesByType(sg_scope, "preorder", "SgPlusAssignOp",
-                                &vec_assign);
-      }
-
-      {
-        codegen->GetNodesByType(sg_scope, "preorder", "SgAssignInitializer",
-                                &vec_assign);
-      }
-
-      for (auto assign : vec_assign) {
-        if (codegen->is_located_in_scope_simple(assign, reduce_stmt))
-          continue;
-        cout << "find init \n";
-        void *left = nullptr;
-        void *right = nullptr;
-
-        void *sg_array = nullptr;
-
-        int is_initializer = codegen->IsAssignInitializer(assign);
-
-        if (!is_initializer) {
-          left = codegen->GetExpLeftOperand(assign);
-          right = codegen->GetExpRightOperand(assign);
-          vector<void *> indexes;
-          codegen->parse_pntr_ref_new(left, &sg_array, &indexes);
-        } else {
-          sg_array =
-              codegen->TraceUpByTypeCompatible(assign, V_SgInitializedName);
-          if (!sg_array)
-            continue;
-          right = codegen->GetInitializerOperand(assign);
-        }
-        right = codegen->RemoveCast(right);
-
-        if (mapE2P.find(sg_array) != mapE2P.end()) {
-          mapE2init[sg_array] = codegen->CopyExp(right);
-
-#if PROJDEBUG
-          cout << "Find an init: " << codegen->UnparseToString(sg_array)
-               << " = " << codegen->_p(right) << endl;
-#endif
-        }
-      }
-    }
-
-    //  2. create declaration
-    //  2.1 copy the declaration of the external varialbes to internal, just
-    //  before the parallel scope
-    map<void *, void *> mapE2new;
-    map<void *, void *> mapE2new_ref;
-    {
-      void *insert_scope = codegen->GetScope(insert_before_pos);
-
-      for (auto sg_pair : mapE2P) {
-        void *sg_array = sg_pair.first;
-#if PROJDEBUG
-        cout << "add declaration:  " << codegen->UnparseToString(sg_array)
-             << endl;
-#endif
-
-        void *sg_type = codegen->GetTypebyVar(sg_array);
-        string str_var = codegen->UnparseToString(sg_array);
-        void *new_decl = codegen->CreateVariableDecl(sg_type, str_var + "_rdc",
-                                                     nullptr, insert_scope);
-        codegen->InsertStmt(new_decl, insert_before_pos);
-
-        mapE2new[sg_array] = codegen->GetVariableInitializedName(new_decl);
-
-        {
-          void *sg_ref = codegen->CopyExp(mapE2ref[sg_array]);
-          mapE2new_ref[sg_array] =
-              replace_variables_in_scope(codegen, sg_ref, mapE2new);
-        }
-      }
-    }
-
-    //  3. create initilization
-    {
-      for (auto sg_pair : mapE2P) {
-        void *sg_array = sg_pair.first;
-        void *sg_ref = mapE2ref[sg_array];
-
-        if (!sg_ref)
-          continue;
-        //  if (mapE2init.find(sg_array) == mapE2init.end()) continue;
-        //  void * sg_init_value = mapE2init[sg_array];
-        void *sg_init_value = nullptr;
-        if (mapE2init.find(sg_array) != mapE2init.end() &&
-            codegen->IsValueExp(
-                mapE2init[sg_array]))  // ZP: 20170106 //  only induct the
-                                       //  constant initial value
-          sg_init_value = codegen->CopyExp(mapE2init[sg_array]);
-        else
-          sg_init_value = codegen->CreateConst(0);
-
-        //  3.1 get indexes
-        vector<void *> indexes;
-        void *sg_array1;
-        codegen->parse_pntr_ref_new(sg_ref, &sg_array1, &indexes);
-        assert(sg_array == sg_array1);
-
-        //  3.2 find the loops that do not exists in the index
-        vector<void *> unrelated_loops;
-        get_unrelated_loops(codegen, sg_ref, reduce_stmt, parallel_loops,
-                            &unrelated_loops);
-
-        //  3.3 create and insert the loop
-        void *new_body = nullptr;
-        map<void *, void *> mapIter;
-        {
-          copy_and_insert_for_loop_excluding_loops(codegen, outermost_loop,
-                                                   unrelated_loops, mapIter,
-                                                   new_body, insert_before_pos);
-        }
-
-        //  3.4 replace the refernece expression
-        void *sg_new_ref = mapE2new_ref[sg_array];
-        sg_new_ref = replace_variables_in_scope(codegen, sg_new_ref, mapIter);
-
-        //  3.5 create and insert the init assignement
-        void *sg_init_stmt = codegen->CreateStmt(
-            V_SgExprStatement,
-            codegen->CreateExp(V_SgAssignOp, sg_new_ref,
-                               codegen->CopyExp(sg_init_value)));
-        if (!new_body)
-          codegen->InsertStmt(sg_init_stmt, insert_before_pos);
-        else
-          codegen->AppendChild(new_body, sg_init_stmt);
-      }
-    }
-
-    //
-    //
-    //  4. final reduction
-    //  4.1 copy the reduce stmt to just after the parallel loop
-    //  4.1 replace the private references in the copied reduce stmt with the
-    //  new interval variables
-    {
-      map<void *, void *> mapReduceVar;
-      vector<void *> vec_refs;
-
-      for (auto pair : mapE2P) {
-        void *sg_private = pair.second;
-        void *sg_array = pair.first;
-        void *sg_ref = mapE2new_ref[sg_array];
-
-        mapReduceVar[sg_private] = sg_ref;
-
-        vec_refs.push_back(sg_ref);
-      }
-
-      void *new_reduce_stmt =
-          replace_variables_in_scope(codegen, reduce_stmt, mapReduceVar);
-
-      //  4.2 find the loops that do not exists in the index
-      vector<void *> unrelated_loops;
-      get_unrelated_loops(codegen, vec_refs, reduce_stmt, parallel_loops,
-                          &unrelated_loops);
-
-      //  4.3 create and insert the loop
-      void *new_body = nullptr;
-      map<void *, void *> mapIter;
-      {
-        copy_and_insert_for_loop_excluding_loops(
-            codegen, outermost_loop, unrelated_loops, mapIter, new_body,
-            insert_after_pos, false);
-      }
-
-      codegen->AppendChild(new_body, new_reduce_stmt);
-    }
-
-    //  5. update reduce stmt
-    //  5.1 replace the external variable reference with new internal variables
-    {
-      void *new_reduce_stmt =
-          replace_variables_in_scope(codegen, reduce_stmt, mapE2new);
-      codegen->ReplaceStmt(reduce_stmt, new_reduce_stmt);
-    }
-  }
-}
-#endif
 
 void reduction_run(CSageCodeGen *codegen, void *pTopFunc,
                    const CInputOptions &options) {
@@ -1130,8 +750,6 @@ bool build_reduction(CSageCodeGen *codegen, CMirNode *bNode, CMirNode *cNode,
       }
     }
   }
-  void *parent_loop =
-      codegen->TraceUpToForStatement(codegen->GetParent(loop_nest[0]));
   int reduct_level = loop_is_reduct.size();
 
   vector<size_t>
@@ -1341,11 +959,8 @@ bool build_reduction(CSageCodeGen *codegen, CMirNode *bNode, CMirNode *cNode,
     SgVariableDeclaration *new_buf =
         static_cast<SgVariableDeclaration *>(codegen->CreateVariableDecl(
             arr_type, bufname_str, nullptr, indexScope));
-    //        cout << "[debug2]:" << codegen->_p(new_buf) <<endl;   //  WARN:
-    //        adding
     //  this line will cause crash in EDG
     codegen->InsertStmt(new_buf, sg_location);
-    //    codegen->AppendChild(sg_bb, new_buf);
     new_decl.push_back(new_buf);
 
     if (scheme_1_enabled != 0) {
@@ -1511,7 +1126,6 @@ bool build_reduction(CSageCodeGen *codegen, CMirNode *bNode, CMirNode *cNode,
       l++;
     }
   }
-  //    codegen->InsertStmt(sg_bb, for_init_map.begin()->second);
 
   //  ////////////////////////////////////////////////////////////////////////////////
   //  / 3.2 Build initialization statement
@@ -1853,18 +1467,6 @@ bool build_reduction(CSageCodeGen *codegen, CMirNode *bNode, CMirNode *cNode,
       }
     }
   }
-
-  //         codegen->AppendChild(sg_bb,
-  //  (SgStatement*)codegen->CopyStmt(for_init_map.begin()->second));
-  //        SgLabelStatement *sg_label_0 =
-  //            isSgLabelStatement((SgNode
-  //  *)codegen->GetPreviousStmt(insertLoop));         if (sg_label_0) {
-  //            codegen->AppendChild(sg_bb,
-  //  (SgStatement*)codegen->CopyStmt(sg_label_0));
-  //        }
-  //        codegen->AppendChild(sg_bb,
-  //  (SgStatement*)codegen->CopyStmt(insertLoop));
-
   for (size_t t = 0; t < vec_post_loops.size(); t++) {
     codegen->InsertAfterStmt(vec_post_loops[t], insertLoop);
     vector<void *> vec_assign;
@@ -1875,36 +1477,7 @@ bool build_reduction(CSageCodeGen *codegen, CMirNode *bNode, CMirNode *cNode,
           isSgPlusAssignOp(static_cast<SgNode *>(it))->get_lhs_operand();
       rdc_buf->insert(arr_pntr_ref);
     }
-    //    codegen->AppendChild(sg_bb, vec_post_loops[t]);
   }
-  /*
-          size_t stmt_idx = -1;
-          if (codegen->GetEnclosingNode("ForLoop",
-     for_init_map.begin()->second)) { void *sg_loop =
-     codegen->GetEnclosingNode("ForLoop", for_init_map.begin()->second);
-     stmt_idx = codegen->GetChildStmtIdx(sg_loop, for_init_map.begin()->second);
-          }
-              if (scheme_1_enabled && !stmt_idx) {
-                  SgStatementPtrList &stmt_lst =
-                  isSgBasicBlock(static_cast<SgNode
-     *>(sg_bb)->getStatementList()); for (int i = 0; i < stmt_lst.size(); i++) {
-                  codegen->InsertStmt(stmt_lst[i],
-     for_init_map.begin()->second);
-          //  insertStatementBefore(stmt_lst[i], for_init_map.begin()->second);
-          }
-          } else
-          codegen->InsertStmt(sg_bb, for_init_map.begin()->second);*/
-
-#if 0
-        codegen->RemoveStmt(for_init_map.begin()->second);
-        if (sg_label_0) {
-            cout << "Remove label: " << codegen->_p(sg_label_0) << endl;
-            codegen->RemoveStmt(sg_label_0);
-        }
-        codegen->RemoveStmt(insertLoop);
-#endif
-  cout << "parent: " << codegen->_p(parent_loop) << endl;
-  //    codegen->RemoveStmt(for_map.begin()->second);
 
   //  ////////////////////////////////////////////////////////////////////////////////
   //  / 6 Handling reduction functions
@@ -1953,12 +1526,6 @@ void reportUnCanonicalLoop(CSageCodeGen *codegen, void *loop) {
   if (str_ref.length() > 20) {
     str_ref = str_ref.substr(0, 20) + " ...";
   }
-#if 0
-        string msg = "Stoping reduction analysis in loop '" + str_ref + "' (" +
-            sFile + ":" + my_itoa(nVarLine) +
-            ") because it is not canonical loop.\n";
-        cout << msg << endl;
-#endif
   string op_info =
       "'" + str_ref + "' " + getUserCodeFileLocation(codegen, loop, true);
   dump_critical_message(REDUC_WARNING_3(op_info));
@@ -2106,13 +1673,6 @@ void reportLoopLowerBound(CSageCodeGen *codegen, void *loop) {
   if (str_ref.length() > 20) {
     str_ref = str_ref.substr(0, 20) + " ...";
   }
-#if 0
-        string msg = "Stoping reduction analysis in loop '" + str_ref + "' (" +
-            sFile + ":" + my_itoa(nVarLine) + "):\nbecause it uses the "
-            "outer loop's iterator in "
-            "loop bound expression.\n";
-        cout << msg << endl;
-#endif
   string op_info =
       "'" + str_ref + "' " + getUserCodeFileLocation(codegen, loop, true);
   dump_critical_message(REDUC_WARNING_4(op_info));

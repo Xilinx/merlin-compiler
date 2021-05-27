@@ -34,10 +34,6 @@ using std::unordered_map;
 using std::unordered_set;
 
 void MemoryPartition::init() {
-  if ("aocl" == mOptions.get_option_key_value("-a", "impl_tool")) {
-    mAltera_flow = true;
-    cout << "[MARS-PARALLEL-MSG] Intel flow mode.\n";
-  }
   if ("sdaccel" == mOptions.get_option_key_value("-a", "impl_tool")) {
     mXilinx_flow = true;
     cout << "[MARS-PARALLEL-MSG] Xilinx flow mode.\n";
@@ -75,7 +71,6 @@ void MemoryPartition::init() {
   }
   m_partitions.clear();
   m_actions.clear();
-  m_registers.clear();
   has_out_of_bound = false;
 }
 
@@ -83,9 +78,6 @@ bool MemoryPartition::run() {
   cout << "===============================================" << endl;
   cout << "=========>  Memory Partition Optimization Start\n";
 
-  if (mAltera_flow) {
-    insert_partition_intel();
-  }
   if (mXilinx_flow) {
     insert_partition_xilinx();
   }
@@ -117,9 +109,6 @@ void MemoryPartition::partition_analysis() {
   mMars_ir->get_topological_order_nodes(&vec_nodes);
   for (size_t j = 0; j < vec_nodes.size(); j++) {
     CMirNode *new_node = vec_nodes[j];
-    if (!new_node->is_fine_grain && mAltera_flow) {
-      continue;
-    }
     if (new_node->is_while && new_node->has_parallel() &&
         new_node->is_complete_unroll()) {
       continue;
@@ -203,9 +192,6 @@ int MemoryPartition::partition_analysis_node(CMirNode *loop_node) {
   loop_node->set_full_access_table_v2(m_ast);
   for (auto pList : loop_node->full_access_table_v2) {
     void *arr_init = pList.first;
-    if (mAltera_flow && m_registers.count(arr_init) > 0) {
-      continue;
-    }
     if (stream_ir.is_fifo(arr_init)) {
       continue;
     }
@@ -329,11 +315,8 @@ void MemoryPartition::partition_merge() {
       continue;
     }
 
-    int ret = choose_factor(cache_var_size[var], v.second, &m_factors,
+    choose_factor(cache_var_size[var], v.second, &m_factors,
                             &prior_factors[var]);
-    if ((ret == 0) && mAltera_flow) {
-      reportSuboptimalMemIntel(var);
-    }
     m_partitions[var] = m_factors;
   }
 
@@ -923,183 +906,6 @@ void MemoryPartition::index_transform(CMirNode *bNode) {
   }
 }
 
-void MemoryPartition::insert_partition_intel() {
-  partition_analysis();
-  partition_merge();
-  partition_evaluate_intel();
-  partition_transform_intel();
-}
-
-// Yuxin: 20190605 explore the array implement design space for Intel flow
-// evaluate according to partition patterns
-void MemoryPartition::partition_evaluate_intel() {
-  cout << "\n\n =====> Intel partition evaluation...\n";
-  for (auto it : m_partitions) {
-    void *var = it.first;
-    if (m_registers.count(var) > 0) {
-      cout << "==> variable " << m_ast->_up(var)
-           << " is implemented in registers\n";
-      continue;
-    }
-
-    cout << "++ variable attributes: " << m_ast->_up(var) << endl;
-    int type_bit =
-        m_ast->get_bitwidth_from_type(cache_var_base_type[var], false);
-    map<int, int> result_factor = it.second;
-    vector<int> local_factor;
-    map<string, string> local_attribute;
-    vector<size_t> local_size = cache_var_size[var];
-    int local_dim = cache_var_dim[var];
-    int consecutive_dim = local_dim - 1;
-    int reshape_dim = local_dim - 1;
-
-    for (int i = 0; i < local_dim; i++) {
-      if (result_factor.count(i) > 0) {
-        local_factor.push_back(result_factor[i]);
-      } else {
-        local_factor.push_back(1);
-      }
-      cout << "dim: " << i << ",factor:" << local_factor[i] << endl;
-    }
-
-    // Step 1: check consecutive partitioning
-    for (int i = local_dim - 1; i >= 0; i--) {
-      if (local_factor[i] == 0) {
-        consecutive_dim--;
-      } else {
-        break;
-      }
-    }
-
-    // Step 2: set the attribute bankwidth
-    {
-      size_t t_bankwidth = type_bit;
-      bool exceed_threshold = false;
-      for (int i = local_dim - 1; i >= 0; i--) {
-        size_t curr_bankwidth = 1;
-        if (local_factor[i] == 0) {
-          curr_bankwidth = local_size[i];
-        } else {
-          curr_bankwidth = local_factor[i];
-        }
-        if (t_bankwidth * curr_bankwidth > m_reshape_threshold) {
-          reshape_dim = i + 1;
-          exceed_threshold = true;
-          reportSuboptimalMemIntel(var);
-          break;
-        }
-        t_bankwidth *= curr_bankwidth;
-        if (consecutive_dim == i) {
-          reshape_dim = i;
-          break;
-        }
-      }
-      if (exceed_threshold) {
-        reportSuboptimalMemIntel(var);
-      } else {
-        if (!isPo2(t_bankwidth)) {
-          reportSuboptimalMemIntel(var);
-          cout << "     Third party tool decision!!\n";
-          continue;
-        }
-        // The bankwidth attribute is in byte
-        local_attribute["bankwidth"] = my_itoa(t_bankwidth / 8);
-      }
-    }
-
-    // Step 3: set the attribute bank_bits
-    {
-      // Count the rest partition factors
-      int count = 0;
-      int partition_dim;
-      for (int i = reshape_dim - 1; i >= 0; i--) {
-        if (local_factor[i] != 1) {
-          count++;
-          partition_dim = i;
-        }
-      }
-      if (count == 0) {
-        cout << "No other partitions\n";
-      } else if (count == 1) {
-        int t_dim = partition_dim;
-        int t_bank = local_factor[t_dim];
-        if (t_bank == 0) {
-          t_bank = local_size[t_dim];
-        }
-        while (!isPo2(t_bank)) {
-          t_bank++;
-        }
-        size_t low_bits = 1;
-        for (int i = t_dim + 1; i < local_dim; i++) {
-          low_bits *= local_size[i];
-        }
-        if (!isPo2(low_bits)) {
-          reportSuboptimalMemIntel(var);
-        } else {
-          int base_bits = 0;
-          while (low_bits > 1) {
-            low_bits = low_bits >> 1;
-            base_bits++;
-          }
-          int base_step = 0;
-          while (t_bank > 1) {
-            t_bank = t_bank >> 1;
-            base_step++;
-          }
-          vector<string> bits;
-          string bits_str;
-          for (int i = 0; i < base_step; i++) {
-            bits.push_back(my_itoa(base_bits));
-            base_bits++;
-          }
-          for (int i = base_step - 1; i >= 0; i--) {
-            bits_str += bits[i];
-            if (i != 0) {
-              bits_str += ",";
-            }
-          }
-          local_attribute["bank_bits"] = bits_str;
-        }
-      } else {
-        reportSuboptimalMemIntel(var);
-      }
-    }
-    m_attributes[var] = local_attribute;
-    for (auto att : local_attribute) {
-      cout << "     " << att.first << " : " << att.second << endl;
-    }
-  }
-}
-
-void MemoryPartition::partition_transform_intel() {
-  cout << "\n\n ######Partition transform...\n";
-  for (auto it : m_attributes) {
-    void *var = it.first;
-    if (m_ast->IsArgumentInitName(var) != 0) {
-      continue;
-    }
-    map<string, string> local_attribute = it.second;
-    if (!local_attribute.empty()) {
-      string pragma_str = "ACCEL attribute variable=" + m_ast->_up(var);
-      void *var_decl = m_ast->GetVariableDecl(var);
-      string att_str;
-      for (auto pair : local_attribute) {
-        string name_str = pair.first;
-        string val_str = pair.second;
-        if (name_str == "singlepump") {
-          att_str += " " + name_str;
-        } else {
-          att_str += " " + name_str + "=" + val_str;
-        }
-      }
-      pragma_str += att_str;
-      void *pragma =
-          m_ast->CreatePragma(pragma_str, m_ast->GetParent(var_decl));
-      m_ast->InsertStmt(pragma, var_decl);
-    }
-  }
-}
-
 int choose_factor(std::vector<size_t> arr_size,
                   const std::vector<std::map<int, int>> &o_factors,
                   std::map<int, int> *m_factors,
@@ -1138,8 +944,6 @@ int choose_factor(std::vector<size_t> arr_size,
     }
     // Yuxin: Jun.13.2019
     // Merge the partition factors, choose the biggest one
-    // For Intel flow, we will report warning if the chosen factor cannot be
-    // divded by any other factors
     int a = factors[0];
     if (a > 0) {
       for (size_t ii = 1; ii < factors.size(); ii++) {
@@ -1232,13 +1036,6 @@ void MemoryPartition::reportSuboptimalFGPIP(CMirNode *node, void *arr) {
   string loop_info = "\'" + str_label + "\' " + " (" + sFileName + ")";
   dump_critical_message(FGPIP_WARNING_13(loop_info, array_info), 0, m_ast,
                         sg_loop);
-}
-
-void MemoryPartition::reportSuboptimalMemIntel(void *arr_init) {
-  string var_str = m_ast->_up(arr_init);
-  string var_info =
-      "\'" + var_str + "\' " + getUserCodeFileLocation(m_ast, arr_init, true);
-  dump_critical_message(FGPIP_WARNING_20(var_info));
 }
 
 void MemoryPartition::print_partition(

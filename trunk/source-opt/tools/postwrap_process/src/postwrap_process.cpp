@@ -64,13 +64,7 @@ int postwrap_process_top(CSageCodeGen *codegen, void *pTopFunc,
 
   typedef_spread_top(codegen, pTopFunc, options);
   string tool_type = options.get_option_key_value("-a", "impl_tool");
-
-  //  Yuxin: 20161012, reference replace only for altera flow
-  if (options.get_option_key_value("-a", "global_convert").empty() &&
-      tool_type == "aocl") {
-    reference_replace_top(codegen, pTopFunc, options);
-  }
-
+ 
   if (options.get_option_key_value("-a", "global_convert").empty()) {
     return_replace_top(codegen, pTopFunc, options);
   }
@@ -1370,7 +1364,6 @@ int global_variable_conversion_checker(CSageCodeGen *codegen, void *pTopFunc,
   CSageCodeGen *ast = codegen;
   bool errorOut = false;
   string tool_type = options.get_option_key_value("-a", "impl_tool");
-  bool intel_flow = "aocl" == tool_type;
   vector<void *> kernels = mars_ir.get_top_kernels();
   for (auto kernel : kernels) {
     //  1. find all the non-constant global variables used in kernel (because
@@ -1416,30 +1409,7 @@ int global_variable_conversion_checker(CSageCodeGen *codegen, void *pTopFunc,
         errorOut = true;
       }
     }
-    //  6. check the number of arguments
-    if (intel_flow) {
-      //  FIXME: need to calculate the decomposed number
-      int num_global = s_global.size();
-      int num_argument = ast->GetFuncParamNum(kernel);
-      if (num_global + num_argument > ALTERA_ARGUMENTS_LIMITATION) {
-        string limit_msg = my_itoa(ALTERA_ARGUMENTS_LIMITATION);
-        string msg = "Altera SDK cannot support more than " + limit_msg +
-                     " arguments.\n";
-        string curr_args = "Current number of final arguments is " +
-                           my_itoa(num_global + num_argument) + " (" +
-                           my_itoa(num_argument) + " (original arguments) + " +
-                           my_itoa(num_global) +
-                           " (original global variables)).\n";
-        msg += curr_args;
-        msg += "Please try to change global variables into local variables or ";
-        msg += "merge multiple scalar global variables into a single array "
-               "global variable";
-        dump_critical_message(GLOBL_WARNING_1(limit_msg, curr_args), 0);
-#if PROJDEBUG
-        cout << "ERROR: " << msg << endl;
-#endif
-      }
-    }
+
     //  7. check whether global variables contain unsupported types
     //  Is this check redundant?
     for (auto g_var : s_global) {
@@ -1460,7 +1430,7 @@ int global_variable_conversion_checker(CSageCodeGen *codegen, void *pTopFunc,
       void *unsupported_type = nullptr;
       string reason;
       if (ast->ContainsUnSupportedType(var_type, &unsupported_type, &reason,
-                                       intel_flow) != 0) {
+                                       false) != 0) {
         string msg = "Cannot support kernel interface port:";
         string detail = "global variable \'" + ast->UnparseToString(g_var) +
                         "' " + getUserCodeFileLocation(ast, g_var, true) +

@@ -76,7 +76,6 @@ our @EXPORT = qw($begin
         $xml_bus_length_threshold
         $xml_lift_fine_grained_cache
         $xml_memory_partition
-        $xml_channel_partition
         $xml_partition_xilinx_threshold
         $xml_partition_heuristic_threshold
         $xml_bitwidth_opt
@@ -274,7 +273,6 @@ our (   $begin,
         $xml_bus_length_threshold           ,
         $xml_lift_fine_grained_cache        ,
         $xml_memory_partition               ,
-        $xml_channel_partition              ,
         $xml_partition_xilinx_threshold     ,
         $xml_partition_heuristic_threshold  ,
         $xml_bitwidth_opt                   ,
@@ -472,7 +470,6 @@ $xml_memory_coalescing              = get_value_from_xml("memory_coalescing",   
 $xml_bus_length_threshold           = get_value_from_xml("bus_length_threshold",            "$directive");
 $xml_lift_fine_grained_cache        = get_value_from_xml("lift_fine_grained_cache",         "$directive");
 $xml_memory_partition               = get_value_from_xml("memory_partition",                "$directive");
-$xml_channel_partition              = get_value_from_xml("channel_partition",                "$directive");
 $xml_partition_xilinx_threshold     = get_value_from_xml("partition_xilinx_threshold",      "$directive");
 $xml_partition_heuristic_threshold  = get_value_from_xml("partition_heuristic_threshold",   "$directive");
 $xml_bitwidth_opt                   = get_value_from_xml("biwidth_opt",                     "$directive");
