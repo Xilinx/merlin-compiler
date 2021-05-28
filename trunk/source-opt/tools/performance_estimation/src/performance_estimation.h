@@ -262,7 +262,7 @@ class CPerfEstBlock {
   bool PureBlock = true;
   bool UnrollFailed = false;
   bool IsDead = false;
-  bool IsAlteraMemoryCoalescing = false;
+  bool IsHiddenMemoryCoalescing = false;
   bool Pipelined = false;
   bool IsFlatten = false;
   bool IsFlattenToPipeline = false;

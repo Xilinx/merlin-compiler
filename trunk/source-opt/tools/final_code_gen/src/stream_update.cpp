@@ -34,7 +34,7 @@ void StreamingUpdate(CSageCodeGen *codegen, void *pTopFunc,
   printf("---------------------\n");
   printf("-----STREAMING_UPDATE\n");
   printf("---------------------\n");
-  if (impl_tool == "aocl") {
+  if (impl_tool == "hidden") {
     CMarsIr mars_ir;
     mars_ir.get_mars_ir(codegen, pTopFunc, options);
     CMarsIrV2 mars_ir_v2;

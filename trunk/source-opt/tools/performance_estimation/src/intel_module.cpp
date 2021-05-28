@@ -1150,7 +1150,6 @@ void CPerfEstBlock::ReScheduleByDataflow(
 //  ************************************************************
 void CPerfEstBlock::ComputeStaticCyclesForLoop(
     CSageCodeGen *codegen, const vector<CPerfEstBlock *> &AllBlockList) {
-  //  For intel if memory burst loop. set II=1. IL=1
   {
     //  If pipeline loop or flatten to pipeline loop or innermost loop,
     //  we directly use vendor loop iteration latency
@@ -2428,7 +2427,6 @@ void CPerfEstBlock::UpdateBurstCycles(
        << ", Burst var ref cycles = " << BurstVarRefCycles << endl;
   //  FIXME TMP FIX, when Xilinx, top kernel only have on kernel,
   //  no need to calculate, set burst = 0
-  //  for intel, this may have several kernels, still need to calculate
   if (this->Tool == "sdaccel" && this->Type == TOPKERNEL) {
     ChildBurstCyclesSum = 0;
     BurstVarRefCycles = 0;

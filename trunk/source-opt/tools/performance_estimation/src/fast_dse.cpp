@@ -29,7 +29,7 @@
 #define STEP3JSON "step3.json"
 #define STEP4JSON "step4.json"
 #define D_IL "iteration-latency"
-#define D_ILI "intel-latency"
+#define D_ILI "hidden-latency"
 #define D_UF "unroll-factor"
 #define D_UN "unrolled"
 #define D_TC "trip-count"
@@ -232,15 +232,12 @@ int UpdateRequireDataWithOrgData(CSageCodeGen *codegen,
                 OneBlock->IL = 1;
               }
             }
-            //  If intel iteration latency, we use org data if possible
             if (OneAttribute == D_ILI) {
               OneBlock->ILI = atoi((iter2->second).c_str());
               if (OneBlock->ILI < 1) {
-                cout << "Find intel iteration latency < 1." << endl;
                 OneBlock->ILI = 1;
               }
             }
-            //  If intel iteration latency, we use org data if possible
             if (OneAttribute == D_TC) {
               void *loop = OneBlock->AstPtr;
               int64_t TC_org = atoi((iter2->second).c_str());

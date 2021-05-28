@@ -110,7 +110,7 @@
 "cosh",
 "tanh",
 #ifdef INTEL_FLOW
-/********* Altera Extended Math Functions ******/
+/********* Hidden Extended Math Functions ******/
 "sinpif",
 "sinpi",
 "cospif",

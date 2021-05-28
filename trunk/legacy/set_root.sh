@@ -30,4 +30,3 @@ source $MERLIN_COMPILER_HOME/set_env/set_env.sh
 
 export FCSRT_HOME=$MERLIN_COMPILER_HOME/runtime/dist
 
-source $MERLIN_COMPILER_HOME/set_env/set_altera.sh

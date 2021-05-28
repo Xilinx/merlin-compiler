@@ -128,13 +128,7 @@ int kernel_wrapper_top(CSageCodeGen *codegen, void *pTopFunc,
   string kernel_die;
   void *head_file;
   string tool_type;
-  if ("aocl" == options.get_option_key_value("-a", "impl_tool")) {
-    tool_type = "aocl";
-  } else if ("sdaccel" == options.get_option_key_value("-a", "impl_tool")) {
-    tool_type = "sdaccel";
-  } else {
-    tool_type = "aocl";
-  }
+  tool_type = "sdaccel";
   size_t i;
   vector<pair<void *, string>> vecTldmPragmas;
 

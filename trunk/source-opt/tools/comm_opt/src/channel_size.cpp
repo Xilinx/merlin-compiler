@@ -135,7 +135,7 @@ int assign_channel_size(CMarsIrV2 *mars_ir) {
       channel_size = 1;
     }
 
-    //  ZP: fix for Altera device feature: to guarantee performance, channel
+    //  ZP: fix for hidden device feature: to guarantee performance, channel
     //  size need to be no less than 32
     if (channel_size < 32) {
       channel_size = 32;

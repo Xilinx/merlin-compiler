@@ -890,7 +890,6 @@ map<string, string> ReadAnnotatedReportKeyValue(CSageCodeGen *codegen,
 
 //  ************************************************************
 //  Read all external memory parameter
-//  FIXME did not do this for intel
 //  ************************************************************
 ExtMemParam ReadExtMemParam(string ExtMemParamPath) {
   ExtMemParam ExtMemParamData;
@@ -1550,7 +1549,6 @@ bool PostProcessForOutput(CSageCodeGen *codegen, string OutputJson,
 }
 
 //  get execution flow from json file
-//  for intel, it comes from vendor in the begining
 //  for xilinx, first time all assume serial execution,
 //     after first hls, will analyze the block parallel or serial
 map<string, string> GetExecFlow(CSageCodeGen *codegen, string Tool,
