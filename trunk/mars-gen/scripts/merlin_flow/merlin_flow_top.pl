@@ -160,14 +160,7 @@ if (not -e "$prj_implement/$prj_export") {
     run_command "echo $xml_include_path > .mount_include";
     run_command "echo $project_file $flow_type \'$original_arg\' > .merlin_core_args";
     if($xml_evaluate eq "") {$xml_evaluate = "off";}
-    run_command "merlin_license $xml_impl_tool $xml_evaluate \"--flow opt --args .merlin_core_args\"";
-    if(-e ".license_check_pass") {
-        # license check pass
-        run_command "rm -rf .license_check_pass";
-    } else {
-        printf($MSG_E_3080);
-        exit;
-    }
+    run_command "merlin_driver $xml_impl_tool $xml_evaluate \"--flow opt --args .merlin_core_args\"";
     check_error("$prj_implement/$prj_code_transform");
     my $final_code_dir = "$prj_implement/$prj_opencl/$prj_final_code_gen";
     check_error("$final_code_dir");

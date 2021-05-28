@@ -249,14 +249,7 @@ sub gen_merlin_rpt {
         run_command "echo $xml_include_path > $report_merlin/.mount_include";
         run_command "echo $msg_report_args > $report_merlin/.merlin_core_args";
         if($xml_evaluate eq "") {$xml_evaluate = "off";}
-        run_command "cd $report_merlin; merlin_license $xml_impl_tool $xml_evaluate \"--flow report --args .merlin_core_args\" > performace_estimate.log 2>&1";
-        if(-e "$report_merlin/.license_check_pass") {
-            # license check pass
-            run_command "rm -rf $report_merlin/.license_check_pass";
-        } else {
-            printf($MSG_E_3080);
-            exit;
-        }
+        run_command "cd $report_merlin; merlin_driver $xml_impl_tool $xml_evaluate \"--flow report --args .merlin_core_args\" > performace_estimate.log 2>&1";
         #my $ret = run_command "mars_python -O ${MERLIN_COMPILER_HOME}/mars-gen/scripts/msg_report/msg_report.py " . $msg_report_args;
         # collect all message together 
         my $msg_report_log = "$report_merlin/message_report.log";

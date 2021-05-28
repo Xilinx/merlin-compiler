@@ -536,7 +536,7 @@ sub do_hls {
 }
 
 #---------------------------------------------------------------------------------------------#
-# software simulation(For Xilinx and Intel)
+# software simulation(For Xilinx)
 # hardware simulation(Only for Xilinx)
 #---------------------------------------------------------------------------------------------#
 sub do_sim {
@@ -589,9 +589,7 @@ sub do_bit{
         my $prefix = "";
         if ($output_file eq "") {
             system "cp -r $merlincc_prj/run/pkg/$impl_file .";
-            if($impl_file =~ /(.*)\.aocx/) {
-                $prefix = $1;
-            } elsif($impl_file =~ /(.*)\.xclbin/) {
+            if($impl_file =~ /(.*)\.xclbin/) {
                 $prefix = $1;
             }
         } else {
@@ -617,7 +615,6 @@ sub do_bit{
 sub is_illegal_extension {
     my ($name) = @_;
     if ($name =~ /.*\.mco$/)    { return 1; }
-    if ($name =~ /.*\.aocx$/)   { return 1; }
     if ($name =~ /.*\.xclbin$/) { return 1; }
 }
 
@@ -626,7 +623,6 @@ sub rstrip_illegal_extension {
     my $ret = $name;
     while (is_illegal_extension($ret)) {
         if ($ret =~ /(.*)\.mco$/)       { $ret = $1; }
-        if ($ret =~ /(.*)\.aocx$/)      { $ret = $1; }
         if ($ret =~ /(.*)\.xclbin$/)    { $ret = $1; }
     }
     return $ret;
@@ -1974,65 +1970,6 @@ sub get_xocc_version {
     return '';
 }
 
-#---------------------------------------------------------------------------------------------#
-# get aoc version
-#---------------------------------------------------------------------------------------------#
-sub get_aoc_version {
-    my $version_str = `aoc --version`;
-    if ($version_str =~ /Version (\S+) Build/) {
-        return $1;
-    }
-    return '';
-}
-
-#---------------------------------------------------------------------------------------------#
-# check aoc environment
-#---------------------------------------------------------------------------------------------#
-sub check_aoc  {
-    my $failed_flag = 0;
-    printf_and_append($merlin_log, $MSG_I_1010);
-    my $path = `which aoc >/dev/null 2>&1 >.log_tmp`;
-    $path = `cat .log_tmp`;
-    chomp($path);
-    if($path !~ /\S+/) {
-        printf_and_append($merlin_log, $MSG_E_3020);
-        $failed_flag = 1;
-    } else {
-        printf_and_append($merlin_log, "${MSG_I_1011}${path}\n");
-        if($path =~ /^(.*)\/bin\/aoc/) {
-            my $aoc_path = $1;
-            $ENV{'INTELFPGAOCLSDKROOT'} = $aoc_path;
-        }
-    }
-    printf_and_append($merlin_log, $MSG_I_1012);
-    $path = `which quartus >/dev/null 2>&1 >.log_tmp`;
-    $path = `cat .log_tmp`;
-    chomp($path);
-    if($path !~ /\S+/) {
-        printf_and_append($merlin_log, $MSG_E_3021);
-        $failed_flag = 1;
-    } else {
-        printf_and_append($merlin_log, "${MSG_I_1013}${path}\n");
-    }
-    printf_and_append($merlin_log, $MSG_I_1014);
-    $path = $ENV{'AOCL_BOARD_PACKAGE_ROOT'};
-    if($path !~ /\S+/) {
-        printf_and_append($merlin_log, $MSG_E_3022);
-        $failed_flag = 1;
-    } elsif(not -e $path) {
-        printf_and_append($merlin_log, "${MSG_E_3066}${path}\n");
-        $failed_flag = 1;
-    } elsif(-e $path and not -e "$path/board_env.xml") {
-        printf_and_append($merlin_log, "${MSG_E_3066}${path}\n");
-        $failed_flag = 1;
-    } else {
-        printf_and_append($merlin_log, "${MSG_I_1015}${path}\n");
-    }
-    if($failed_flag eq 1) {
-        return 0;
-    }
-    return 1;
-}
 
 #---------------------------------------------------------------------------------------------#
 # check vendor environment
@@ -2442,7 +2379,7 @@ sub get_help_info {
     $help_info .= "    Specify output file name without file extension. The appropriate extension\n";
     $help_info .= "    will be added automatically per the other options used.\n";
     $help_info .= "    With '-c' option, file extension will be '.mco'\n";
-    $help_info .= "    Otherwise, file extension will be '.aocx' (Intel) or '.xclbin' (Xilinx)\n";
+    $help_info .= "    Otherwise, file extension will be '.xclbin' (Xilinx)\n";
     $help_info .= "\n";
     $help_info .= "-march=<sw_emu> \n";
     $help_info .= "    Specify the compilation target architecture.\n";
@@ -2493,11 +2430,11 @@ sub get_help_info {
     $help_info .= "Examples:\n";
     $help_info .= "    # Generate an <file>.mco file\n";
     $help_info .= "    merlincc -c mykernel.cpp -o mykernel --platform=vitis::xxxxx\n";
-    $help_info .= "    # Generate kernel simulation binary <file>.< aocx|xclbin >\n";
+    $help_info .= "    # Generate kernel simulation binary <file>.<xclbin >\n";
     $help_info .= "    merlincc mykernel.mco -march=sw_emu -o mykernel_swemu --platform=vitis::xxxxx\n";
     $help_info .= "    # Generate resource estimate\n";
     $help_info .= "    merlincc mykernel.mco --report=estimate --platform=vitis::xxxxx\n";
-    $help_info .= "    # Generate kernel hardware binary <file>.< aocx|xclbin >\n";
+    $help_info .= "    # Generate kernel hardware binary <file>.<xclbin >\n";
     $help_info .= "    merlincc mykernel.mco -o mykernel --platform=vitis::xxxxx\n";
     $help_info .= "\n";
     return $help_info;

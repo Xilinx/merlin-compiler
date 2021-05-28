@@ -283,13 +283,8 @@ if ($pass_name eq "none") {
         my $info = `cat .gcc_check_log`;
         if($info =~ " error:") {
             print "$info\n";
-            my $flow_name = "Intel";
-            if ($xml_impl_tool eq "sdaccel") {
-                $flow_name = "Xilinx";
-                print_error_msg($MSG_E_3057); 
-            } else {
-                print_error_msg($MSG_E_3057); 
-            }
+            $flow_name = "Xilinx";
+            print_error_msg($MSG_E_3057); 
             exit;
         }
     }

@@ -19,35 +19,32 @@
 // under the License.
 
 
+/*************************************************************************
+    > File Name: merlin_driver.cpp
+    > Author:
+    > Mail:
+    > Created Time: Sat 29 Feb 2020 01:13:55 AM EST
+ ************************************************************************/
 
-#ifndef TRUNK_MARS_GEN_TOOLS_MARS_FLOW_LICENSE_H_
-#define TRUNK_MARS_GEN_TOOLS_MARS_FLOW_LICENSE_H_
-typedef enum {
-  FALCON_XILINX = 0,
-  FALCON_ALTERA,
-  FALCON_CUSTOM,
-  FALCON_RT,
-  FALCON_DNA,
-  FALCON_INT,
-  FALCON_FCZIP,
-  FALCON_EVAL
-} Feature;
+#include <unistd.h>
+#include <iostream>
+#include <string>
+#include <vector>
+#include "stdio.h"
+#include "stdlib.h"
+#include "string.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-// initialize licensing. only need to call once
-int fc_license_init();
-// cleanup licensing. only need to call once
-int fc_license_cleanup();
-// Check out a feature. It will error out if checkout fails
-// If verbose != 0, will generate a message
-int fc_license_checkout(int feature, int verbose);
-// Check in a feature.
-int fc_license_checkin(int feature);
-// not defined yet.
-int fc_license_exist(int feature);
-#ifdef __cplusplus
-};
-#endif
-#endif  // TRUNK_MARS_GEN_TOOLS_MARS_FLOW_LICENSE_H_
+using std::string;
+
+
+int main(int argc, char **argv) {
+  if (argc < 3) {
+    return 0;
+  }
+  string tool = argv[1];
+  string evaluate = argv[2];
+  string commandline = argv[3];
+  commandline = "merlin_core " + commandline;
+  system(commandline.c_str());
+  return 1;
+}

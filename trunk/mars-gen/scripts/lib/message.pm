@@ -17,7 +17,6 @@ my $support = "support\@falcon-computing.com";
 # for each message
 # 000~199 : Merlin related message
 # 200~339 : Xilinx related message
-# 400~559 : Intel related message
 # 600~779 : Msg_report related message
 # 800-899 : DSE related message
 use Exporter 'import';
@@ -271,12 +270,6 @@ sub MSG_I_1007 {
 }
 $MSG_I_1008 = "$INFO: [$MODULE-1008] Checking Xilinx xocc ...\n";
 $MSG_I_1009 = "$INFO: [$MODULE-1009] Found Xilinx xocc ";
-$MSG_I_1010 = "$INFO: [$MODULE-1010] Checking Intel aoc ...\n";
-$MSG_I_1011 = "$INFO: [$MODULE-1011] Found Intel aoc ";
-$MSG_I_1012 = "$INFO: [$MODULE-1012] Checking Intel quartus ...\n";
-$MSG_I_1013 = "$INFO: [$MODULE-1013] Found Intel quartus ";
-$MSG_I_1014 = "$INFO: [$MODULE-1014] Checking Intel AOCL_BOARD_PACKAGE_ROOT ...\n";
-$MSG_I_1015 = "$INFO: [$MODULE-1015] Found Intel AOCL_BOARD_PACKAGE_ROOT ";
 sub MSG_I_1016 {
     print_log "$INFO: [$MODULE-1016] Please execute \'merlincc\' to check legal input argument format.\n";
 }
@@ -337,9 +330,6 @@ $MSG_I_1036 = "$INFO: [$MODULE-1036] Kernel optimization";
 $MSG_I_1037 = "$INFO: [$MODULE-1037] Code generation";
 sub MSG_I_1038 {
     print_log "$INFO: [$MODULE-1038] Xilinx support platform:\n";
-}
-sub MSG_I_1039 {
-    print_log "$INFO: [$MODULE-1039] Intel support platform:\n";
 }
 sub MSG_I_1040 {
     print "\n$INFO: [$MODULE-1040] Compilation finished successfully.\n";
@@ -457,9 +447,6 @@ sub MSG_E_3018 {
     print "$ERROR: [$MODULE-3018] $_[0] .\n";
 }
 $MSG_E_3019 = "$ERROR: [$MODULE-3019] Did not find Xilinx xocc, Please set PATH point to xocc directory.\n";
-$MSG_E_3020 = "$ERROR: [$MODULE-3020] Did not find Intel aoc, Please set Intel aoc environment correctly.\n";
-$MSG_E_3021 = "$ERROR: [$MODULE-3021] Did not find Intel quartus, Please set Intel quartus environment correctly.\n";
-$MSG_E_3022 = "$ERROR: [$MODULE-3022] Did not find Intel AOCL_BOARD_PACKAGE_ROOT, Please set Intel AOCL_BOARD_PACKAGE_ROOT environment correctly.\n";
 sub MSG_E_3023 {
     print_log "$ERROR: [$MODULE-3023] Do not support multiple optimization effort. $_[0] conflict.\n";
 }
@@ -587,7 +574,6 @@ sub MSG_E_3064 {
 sub MSG_E_3065 {
     print_log "$ERROR: [$MODULE-3065] Did not find tar. Please use command \'yum install -y tar\' to install.\n";
 }
-$MSG_E_3066 = "$ERROR: [$MODULE-3066] Intel environment \'AOCL_BOARD_PACKAGE_ROOT\' not set correctly:\n";
 sub MSG_E_3067 {
     print_log "$ERROR: [$MODULE-3067] Did not find lsb_release. Please use command \'yum install redhat-lsb-core\' to install.\n";
 }

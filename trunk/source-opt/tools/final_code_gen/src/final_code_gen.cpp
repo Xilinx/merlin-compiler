@@ -73,8 +73,6 @@ extern vector<string> get_unique_interface_attribute(
 extern int convert_attribute_pragma_to_type(CSageCodeGen *codegen,
                                             void *pTopFunc,
                                             const CInputOptions &options);
-extern bool check_opencl_conflict_name(CSageCodeGen *codegen, void *TopFunc,
-                                       bool is_intel);
 
 // legalize kernel name
 // 1. "__" => "_"

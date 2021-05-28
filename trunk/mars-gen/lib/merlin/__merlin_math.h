@@ -115,11 +115,6 @@ long rotate(long __v, long __i);
 long sub_sat(long __x, long __y);
 int popcount(int __x);
 
-//#if defined(ALTERA_CL)
-//#if !defined(HLS_EMULATION) && !defined(HLS_COSIMULATION)
-// FPGA, remap to current internal OpenCL names
-// extern "C" {
-
 /********** Supported float builtins ********/
 
 /********** Classification ******************/
@@ -538,74 +533,4 @@ double tanh(double __x);
 #define atanh(__x) __undefined_builtin
 
 /********* Extended Math Functions ******/
-#ifdef __ALTERA_EXTENDED_MATH_H__
 
-// float __acl__sinpif(float __x);
-//#define sinpif(__x) __acl__sinpif(__x)
-float sinpif(float __x);
-// double __acl__sinpifd(double __x);
-//#define sinpi(__x) __acl__sinpifd(__x)
-double sinpi(double __x);
-
-// float __acl__cospif(float __x);
-//#define cospif(__x) __acl__cospif(__x)
-float cospif(float __x);
-// double __acl__cospifd(double __x);
-//#define cospi(__x) __acl__cospifd(__x)
-double cospi(double __x);
-
-// float __acl__tanpif(float __x);
-//#define tanpif(__x) __acl__tanpif(__x)
-float tanpif(float __x);
-
-// float __acl__asinpif(float __x);
-//#define asinpif(__x) __acl__asinpif(__x)
-float asinpif(float __x);
-// double __acl__asinpifd(double __x);
-//#define asinpi(__x) __acl__asinpifd(__x)
-double asinpi(double __x);
-
-// float __acl__acospif(float __x);
-//#define acospif(__x) __acl__acospif(__x)
-float acospif(float __x);
-// double __acl__acospifd(double __x);
-//#define acospi(__x) __acl__acospifd(__x)
-double acospi(double __x);
-
-// float __acl__atanpif(float __x);
-//#define atanpif(__x) __acl__atanpif(__x)
-float atanpif(float __x);
-// double __acl__atanpifd(double __x);
-//#define atanpi(__x) __acl__atanpifd(__x)
-double atanpi(double __x);
-
-#endif // #ifdef  __ALTERA_EXTENDED_MATH_H__
-//}
-
-//#else // !defined(HLS_EMULATION) && !defined(HLS_COSIMULATION)
-
-#ifdef __ALTERA_EXTENDED_MATH_H__
-
-#define sinpif(__x) (sinf((__x) * (float)M_PI))
-#define sinpi(__x) (sin((__x) * (double)M_PI))
-
-#define cospif(__x) (cosf((__x) * (float)M_PI))
-#define cospi(__x) (cos((__x) * (double)M_PI))
-
-#define tanpif(__x) (tanf((__x) * (float)M_PI))
-#define tanpi(__x) (tan((__x) * (double)M_PI))
-
-#define asinpif(__x) (asinf(__x) / (float)M_PI)
-#define asinpi(__x) (asin(__x) / (double)M_PI)
-
-#define acospif(__x) (acosf(__x) / (float)M_PI)
-#define acospi(__x) (acos(__x) / (double)M_PI)
-
-#define atanpif(__x) (atanf(__x) / (float)M_PI)
-#define atanpi(__x) (atan(__x) / (double)M_PI)
-
-#endif // #ifdef  __ALTERA_EXTENDED_MATH_H__
-
-//#endif // !defined(HLS_EMULATION) && !defined(HLS_COSIMULATION)
-//#endif // ALTERA_CL
-//#endif //__HLS_MATH_H__

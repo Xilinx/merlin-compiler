@@ -133,12 +133,12 @@ set_target_properties(merlinprof PROPERTIES
 
 link_directories( 
     "${CMAKE_CURRENT_SOURCE_DIR}"
-    "${ESLOPT_TOP}/../flexlm")
+    ) 
 
-add_executable(merlin_license
-    "${CMAKE_CURRENT_SOURCE_DIR}/merlin_license.cpp")
+add_executable(merlin_driver
+    "${CMAKE_CURRENT_SOURCE_DIR}/merlin_driver.cpp")
 
-target_link_libraries(merlin_license
+target_link_libraries(merlin_driver
     dl
     pthread)
 

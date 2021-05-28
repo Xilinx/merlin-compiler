@@ -630,13 +630,6 @@ int opencl_wait_event(cl_event event) {
 int opencl_release_event(cl_event event) {
   int err;
   err = clReleaseEvent(event);
-  // Intel release kernel event have issues, return error, but release can
-  // success
-  //  if (err != CL_SUCCESS) {
-  //    printf("Error: Failed to release event!\n");
-  //    printf("Error: code %i\n", err);
-  //    exit(EXIT_FAILURE);
-  //  }
   return err;
 }
 

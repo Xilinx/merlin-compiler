@@ -27,15 +27,10 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "unistd.h"
-#include "license.h"
-#define CHECKED_LICENSE ".merlin_flow_checked_license"
 
 using std::string;
 
 int main(int argc, char **argv) {
-  // checking license
-  //  Feature feature = FALCON_CUSTOM;
-  //  bool need_check_license = true;
 
   string str_prj;
   int i = 1;
@@ -51,19 +46,6 @@ int main(int argc, char **argv) {
   string feature_s;
   for (; i < argc; i++) {
     str_args += string(argv[i]) + " ";
-    //    if (string(argv[i]) == "xilinx" || string(argv[i]) == "sdaccel") {
-    //      feature = FALCON_XILINX;
-    //      feature_s = "XILINX";
-    //    } else if (string(argv[i]) == "custom") {
-    //      feature = FALCON_CUSTOM;
-    //      feature_s = "CUSTOM";
-    //    } else {
-    //      feature = FALCON_CUSTOM;
-    //      feature_s = "CUSTOM";
-    //    }
-    //    if (string(argv[i]) == "syncheck") {
-    //      need_check_license = false;
-    //    }
   }
 
   string timer_rpt_prefix;
@@ -104,52 +86,7 @@ int main(int argc, char **argv) {
       cmd += "date >> " + timer_rpt_prefix + ".merlin_flow_end.o;";
     }
   }
-  //
-  //  bool merlin_flow_checked_license = false;
-  //  //  string flag_file = CHECKED_LICENSE;
-  //  //  if (FILE *file = fopen(flag_file.c_str(), "r")) {
-  //  //    merlin_flow_checked_license = true;
-  //  //    fclose(file);
-  //  //  }
-  //  bool no_env_set = true;
-  //  //  char *checkout_env = getenv("FALCON_LICENSE_CHECKEOUT");
-  //  //  if (checkout_env) {
-  //  //    if (strcmp(checkout_env, "CHECKOUT") == 0) {
-  //  //        no_env_set = false;
-  //  //    }
-  //  //  }
-  //  bool merlin_dse = false;
-  //  char *dse_env = getenv("MERLIN_DSE");
-  //  if (dse_env != nullptr) {
-  //    if (strcmp(dse_env, "ON") == 0) {
-  //      merlin_dse = true;
-  //    }
-  //  }
-  //  if (need_check_license && no_env_set && !merlin_flow_checked_license &&
-  //      !merlin_dse) {
-  //    printf("INFO: [MERCC-1005] Checking license.\n");
-  //    fflush(stdout);
-  //    fc_license_init();
-  //    int ret = fc_license_checkout(feature, 0);
-  //    if (ret != 0) {
-  //      return ret;
-  //    }
-  //    char fstring[100] = {'\0'};
-  //    feature2string(feature, fstring);
-  //    printf("INFO: [MERCC-1007] Feature %s checked out.\n", fstring);
-  //    fflush(stdout);
-  //
-  //    setenv("FALCON_LICENSE_CHECKEOUT", "CHECKOUT", 1);
-  //    //    string cmd = "touch " + flag_file;
-  //    //    system(cmd.c_str());
-  //  }
   int ret = 0;
   ret = system(cmd.c_str());
-  //  if (need_check_license && no_env_set && !merlin_flow_checked_license &&
-  //      !merlin_dse) {
-  //    fc_license_checkin(feature);
-  //    fc_license_cleanup();
-  //    setenv("FALCON_LICENSE_CHECKEOUT", "CHECKIN", 1);
-  //  }
   return ret;
 }

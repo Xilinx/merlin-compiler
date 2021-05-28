@@ -66,8 +66,6 @@ extern int check_kernel_argument_number(CSageCodeGen *codegen,
                                         string tool);
 int check_kernel_argument_number_top(CSageCodeGen *codegen, void *pTopFunc,
                                      string tool);
-extern bool check_opencl_conflict_name(CSageCodeGen *codegen, void *TopFunc,
-                                       bool is_intel);
 //  bool check_uniquify_function(CSageCodeGen *codegen, void *TopFunc);
 bool check_kernel_name(CSageCodeGen *codegen, void *TopFunc, bool pure_kernel);
 extern int check_const_array_size(CSageCodeGen *codegen, void *TopFunc);
