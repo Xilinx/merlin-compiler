@@ -1,13 +1,19 @@
-Prequest environment:
+Prequest dependency environment:
 1. python >= 3.6.8
 2. cmake >= 3.19.0
+3. boost >= 1.67
+4. clang >= 7.0.0
+5. gcc >= 4.9.4
+6. llvm >= 7.0.0
+
 
 How to build:
 1. in merlin_setting.sh, change MERLIN_COMPILER_HOME to your absolute path
-2. source merlin_setting.sh
-3. cd trunk/build;
-4. cmake3 -DCMAKE_BUILD_TYPE=Release ..;
-5. make -j;
+2. set dependency environment path in merlin_setting.sh, like boost, clang ,gcc ,llvm
+3. source merlin_setting.sh
+4. cd trunk/build;
+5. cmake3 -DCMAKE_BUILD_TYPE=Release ..;
+6. make -j;
 
 How to run:
 run "merlincc -h", follow the help message
