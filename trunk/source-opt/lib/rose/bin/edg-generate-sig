@@ -1,0 +1,113 @@
+#!/bin/bash
+
+# Run this script with "--help" to see nicely formatted info; or just read the perldoc here...
+:<<=cut
+
+=head1 NAME
+
+edg-generate-sig - generate or find an EDG binary tarball version number
+
+=head1 SYNOPSIS
+
+edg-generate-sig TOP_SRCDIR TOP_BLDDIR
+
+=head1 DESCRIPTION
+
+End users do not generally have licenses for EDG source code. Therefore, the ROSE team compiles an EDG binary library
+for most ROSE public releases.  EDG binary version numbers are based upon the ROSE version number but only needs to be
+incremented when a change is made that will modify the binary file.
+
+=head1 AUTHORS
+
+Robb Matzke.
+Nathan Pinnow.
+
+Copyright Lawrence Livermore National Security
+
+Licensed under Revised BSD License (see COPYRIGHT file at the top of the ROSE source tree)
+
+=cut
+#------------------------------------------------------------------------------------------------------------------------
+
+myname="${0##*/}"
+mydir="${0%$myname}"
+myname="${myname-edg-generate-sig}"
+
+help () {
+    LESS="$LESS -R"
+    (pod2man $0 |nroff -man || pod2text $0 || sed -ne '/^=pod/,/^=cut/p' $0) 2>/dev/null | ${PAGER-less}
+}
+
+# Parse command-line switches
+do_dump=
+while [ "$#" -gt 0 ]; do
+    case "$1" in
+	--help|-h|-\?) help; exit 0 ;;
+	--dump) do_dump=yes; shift ;;
+	-*) echo "$myname: unrecognized switch: $1" >&2; exit 1 ;;
+	*) break
+    esac
+done
+
+if [ "$#" -ne 2 ]; then
+    echo "usage: $myname TOP_SRCDIR TOP_BLDDIR" >&2
+    echo "       for details, see: $0 --help" >&2
+    exit 1;
+fi
+
+ROSE_SRC="$1"
+ROSE_BLD="$2"
+
+# These are the ROSETTA-generated files on which the EDG binary tarball depends
+EDG_GENERATED_DEPENDENCIES=("$ROSE_BLD/src/frontend/SageIII/Cxx_Grammar.h"
+			    "$ROSE_BLD/src/frontend/SageIII/AstQueryMemoryPool.h"
+			    "$ROSE_BLD/src/frontend/SageIII/Cxx_GrammarTreeTraversalAccessEnums.h"
+			    "$ROSE_BLD/src/frontend/SageIII/Cxx_GrammarMemoryPoolSupport.h"
+			    "$ROSE_BLD/src/frontend/SageIII/AST_FILE_IO.h"
+			    "$ROSE_BLD/src/frontend/SageIII/StorageClasses.h")
+
+#------------------------------------------------------------------------------------------------------------------------
+# Make sure ROSE source and build directories exist and that they look reasonable.
+check_directories() {
+    if [ ! -d "$ROSE_SRC/." ]; then
+	echo "$myname: ROSE source directory not found: $ROSE_SRC" >&2
+	exit 1
+    fi
+    if [ ! -d "$ROSE_SRC/scripts" ]; then
+	echo "$myname: doesn't seem to be the top of the ROSE source tree: $ROSE_SRC" >&2
+	exit 1
+    fi
+    if [ ! -d "$ROSE_BLD/." ]; then
+	echo "$myname: ROSE build directory not found: $ROSE_BLD" >&2
+	exit 1
+    fi
+    if [ ! -d "$ROSE_BLD/src/frontend/SageIII" ]; then
+	echo "$myname: doesn't seem to be the top of the ROSE build tree: $ROSE_BLD" >&2
+	exit 1
+    fi
+}
+
+#------------------------------------------------------------------------------------------------------------------------
+# Generate the SHA1 hash by for the source files (some generated) on which EDG depends.
+generate_edg_hash() {
+    local sha1sum_exe=`which sha1sum`
+
+    if [ -f "$ROSE_SRC/src/frontend/CxxFrontend/EDG_VERSION" ] ; then
+        EDG_VERSION=$(cat "$ROSE_SRC/src/frontend/CxxFrontend/EDG_VERSION")
+        if [ "x$EDG_VERSION" == "x" ] ; then
+            echo "Error: EDG_VERSION file empty"
+            exit 1
+        fi
+    else
+        echo "Error: $ROSE_SRC/src/frontend/CxxFrontend/EDG_VERSION does not exist"
+        exit 1
+    fi
+
+    echo "5.$EDG_VERSION"		# this is version 5 of edg dependency hashing
+}
+
+#------------------------------------------------------------------------------------------------------------------------
+
+check_directories
+generate_edg_hash
+exit 0
