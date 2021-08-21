@@ -2,7 +2,7 @@ Prequest dependency environment:
 1. python >= 3.6.8
 2. cmake >= 3.19.0
 3. boost >= 1.67
-4. clang >= 7.0.0
+4. clang == 6.0.0
 5. gcc >= 4.9.4
 6. llvm >= 7.0.0
 
