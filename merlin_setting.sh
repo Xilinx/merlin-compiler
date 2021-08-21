@@ -1,7 +1,7 @@
 #######################################
 # Merlin 
 #######################################
-export MERLIN_COMPILER_HOME=/home/hhu/WORK/Merlin_Compiler/trunk
+export MERLIN_COMPILER_HOME=/wrk/xsjhdnobkup1/youxiang/Merlin_Compiler_Simple
 
 export MERLIN_PATH=$MERLIN_COMPILER_HOME/source-opt/lib/
 export llvm_path=$MERLIN_PATH/llvm7.0.0

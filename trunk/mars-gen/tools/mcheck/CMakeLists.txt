@@ -43,5 +43,7 @@ target_link_libraries(mcheck
 	${Boost_LIBRARIES}
 	${CMAKE_DL_LIBS} 
 	${CMAKE_THREAD_LIBS_INIT}
-	m)
+	m
+  z
+  tinfo)
 
