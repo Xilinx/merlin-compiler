@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.10)
 macro(LoadEnv var desc)
 if(DEFINED ENV{${var}})
   set(${var} "$ENV{${var}}")
-  message(STATUS "Found ${desc} environment at ${var}")
+  message(STATUS "Found ${desc} environment at ${var}, which is $ENV{${var}}")
 elseif(DEFINED ${var})
   # support passing this variable from commandline with '-D'
   message(STATUS "Found ${desc} environment at ${var}")

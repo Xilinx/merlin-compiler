@@ -13,33 +13,33 @@ link_directories(${CLANG_ROOT_DIR}/lib)
 add_executable(mrefactor mrefactor.cpp)
 
 target_link_libraries(mrefactor
-	clangTooling
-	clangBasic
-	clangASTMatchers
-	clangFrontend
-	clangAST
-	clangParse
-	LLVMMCParser
-	clangSerialization
-	clangSema
-	clangEdit
-	clangAnalysis
-	LLVMBitReader
-	LLVMProfileData
-	clangDriver
-	clangFormat
-	clangToolingCore
-	clangAST
-	clangRewrite
-	clangLex
-	clangBasic
-	LLVMCore
-	LLVMBinaryFormat
-	LLVMMC
-	LLVMOption
-	LLVMSupport
-	LLVMDemangle
-	LLVMSupport
+  ${CLANG_ROOT_DIR}/lib/libclangTooling.a
+  ${CLANG_ROOT_DIR}/lib/libclangBasic.a
+  ${CLANG_ROOT_DIR}/lib/libclangASTMatchers.a
+  ${CLANG_ROOT_DIR}/lib/libclangFrontend.a
+  ${CLANG_ROOT_DIR}/lib/libclangAST.a
+  ${CLANG_ROOT_DIR}/lib/libclangParse.a
+  ${CLANG_ROOT_DIR}/lib/libLLVMMCParser.a
+  ${CLANG_ROOT_DIR}/lib/libclangSerialization.a
+  ${CLANG_ROOT_DIR}/lib/libclangSema.a
+  ${CLANG_ROOT_DIR}/lib/libclangEdit.a
+  ${CLANG_ROOT_DIR}/lib/libclangAnalysis.a
+  ${CLANG_ROOT_DIR}/lib/libLLVMBitReader.a
+  ${CLANG_ROOT_DIR}/lib/libLLVMProfileData.a
+  ${CLANG_ROOT_DIR}/lib/libclangDriver.a
+  ${CLANG_ROOT_DIR}/lib/libclangFormat.a
+  ${CLANG_ROOT_DIR}/lib/libclangToolingCore.a
+  ${CLANG_ROOT_DIR}/lib/libclangAST.a
+  ${CLANG_ROOT_DIR}/lib/libclangRewrite.a
+  ${CLANG_ROOT_DIR}/lib/libclangLex.a
+  ${CLANG_ROOT_DIR}/lib/libclangBasic.a
+  ${CLANG_ROOT_DIR}/lib/libLLVMCore.a
+  ${CLANG_ROOT_DIR}/lib/libLLVMBinaryFormat.a
+  ${CLANG_ROOT_DIR}/lib/libLLVMMC.a
+  ${CLANG_ROOT_DIR}/lib/libLLVMOption.a
+  ${CLANG_ROOT_DIR}/lib/libLLVMSupport.a
+  ${CLANG_ROOT_DIR}/lib/libLLVMDemangle.a
+  ${CLANG_ROOT_DIR}/lib/libLLVMSupport.a
 	${Boost_LIBRARIES}
 	${CMAKE_DL_LIBS} 
 	${CMAKE_THREAD_LIBS_INIT}

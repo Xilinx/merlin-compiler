@@ -16,7 +16,7 @@ if [ -z "$WITH_DOCKER" ]; then
     export LD_LIBRARY_PATH=$MERLIN_COMPILER_HOME/source-opt/lib/boost_1_53_0/lib:$LD_LIBRARY_PATH
   fi
   export LD_LIBRARY_PATH=$MERLIN_COMPILER_HOME/source-opt/lib/rose/lib:$LD_LIBRARY_PATH
-  export LD_LIBRARY_PATH=$MERLIN_COMPILER_HOME/source-opt/lib/boost_1_67/lib:$LD_LIBRARY_PATH
+  export LD_LIBRARY_PATH=$MERLIN_COMPILER_HOME/source-opt/lib/boost1.67.0/lib:$LD_LIBRARY_PATH
   export LD_LIBRARY_PATH=$MERLIN_COMPILER_HOME/source-opt/lib/gcc4.9.4/lib64:$LD_LIBRARY_PATH
 fi
 
