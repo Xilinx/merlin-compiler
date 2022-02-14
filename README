@@ -8,12 +8,13 @@ Prequest dependency environment:
 
 
 How to build:
-1. in merlin_setting.sh, change MERLIN_COMPILER_HOME to your absolute path
-2. set dependency environment path in merlin_setting.sh, like boost, clang ,gcc ,llvm
-3. source merlin_setting.sh
-4. cd trunk/build;
-5. cmake3 -DCMAKE_BUILD_TYPE=Release ..;
-6. make -j;
+1. In merlin_setting.sh, change MERLIN_COMPILER_HOME to your absolute path
+2. Download gcc4.9.4 to $gcc_path specified in merlin_settings.sh and compile, add built library path to LD_LIBRARY_PATH in merlin_setting.sh
+3. Download llvm6.0.0, clang 6.0.0, boost1.67.0 to the path specified in merlin_settings.sh, and compile all the packages with gcc4.9.4 built in step 2
+4. source merlin_setting.sh
+5. cd trunk/build;
+6. cmake3 -DCMAKE_BUILD_TYPE=Release ..;
+7. make -j;
 
 How to run:
 run "merlincc -h", follow the help message
