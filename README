@@ -1,3 +1,6 @@
+OS:
+CentOS 7.4
+
 Prequest dependency environment:
 1. python >= 3.6.8
 2. cmake >= 3.19.0
