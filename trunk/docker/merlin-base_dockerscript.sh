@@ -11,7 +11,7 @@ yum install -y protobuf protobuf-devel
 yum install -y ocl-icd ocl-icd-devel
 
 # install python3 for dse and aocl 19.1
-yum install -y https://centos7.iuscommunity.org/ius-release.rpm
+yum install -y https://repo.ius.io/ius-release-el7.rpm
 yum install -y python36u python36u-pip
 rm -rf /usr/bin/python3
 ln -s /usr/bin/python3.6 /usr/bin/python3
