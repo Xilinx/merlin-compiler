@@ -1,0 +1,42 @@
+#include "memcpy_16_1d.h"
+#define SIZE_1 64
+#include "memcpy_16_2d.h"
+#undef SIZE_1
+#include "memcpy_16.h"
+#include<string.h>
+//1d dimension
+extern int __merlin_include__GB_memcpy_16_h_2;
+extern int __merlin_include__GB_memcpy_16_2d_h_1;
+extern int __merlin_include__GB_memcpy_16_1d_h_0;
+#pragma ACCEL kernel
+
+void top(int *a,merlin_uint_16 *b,unsigned int *c,float *d,double *f,signed short *g)
+{
+  
+#pragma HLS DATA_PACK VARIABLE=b
+  int a_buf[1000];
+  memcpy(a_buf,a,sizeof(int ) * 1000);
+  char b_buf[100][64];
+  
+#pragma  HLS array_partition  variable=b_buf cyclic factor = 2 dim=2
+  memcpy_wide_bus_read_char_2d_64_16(b_buf,0,0,(merlin_uint_16 *)b,0 * 1,sizeof(char ) * ((unsigned long )100) * ((unsigned long )64),6400L);
+  unsigned int c_buf[100][200][16];
+  memcpy(c_buf[0][0],c,sizeof(unsigned int ) * 100 * 200 * 16);
+  float d_buf[100][200][300][16];
+  memcpy(d_buf[0][0][0],d,sizeof(float ) * 100 * 200 * 300 * 16);
+  double f_buf[100][200];
+  memcpy(f_buf[0],f,sizeof(double ) * 100 * 200);
+  signed short g_buf[2000];
+  memcpy(g_buf,g,sizeof(signed short ) * 2000);
+}
+
+int main()
+{
+  int *a;
+  char *b;
+  unsigned int *c;
+  float *d;
+  double *f;
+  signed short *g;
+  top(a,(merlin_uint_16 *)b,c,d,f,g);
+}

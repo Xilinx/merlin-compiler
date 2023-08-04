@@ -1,0 +1,158 @@
+#include <string.h> 
+#include "cmost.h"
+#include "stencil.h"
+static void __merlin_dummy_0();
+static void __merlin_dummy_kernel_pragma();
+// Original: #pragma ACCEL kernel name="stencil"
+
+void stencil_kernel_L_1_1_para(int filter_buf_0[3][3],int r0_sub,int r0,int sol_buf_0[20][640],int orig_buf_0[22][640])
+// Original: #pragma ACCEL parallel
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+  
+#pragma HLS inline off
+  for (int rr = 0; rr < 20; rr++) {
+    int r = (r0 * 16 + r0_sub) * 20 + rr;
+    if (r < 1280 - 2) {
+      int orig_buf[4][4];
+// added for shifting register
+      for (int k1 = 0; k1 < 3; k1++) {
+        
+#pragma ACCEL PIPELINE
+        for (int k2 = 0; k2 < 4; k2++) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          orig_buf[k1][k2] = orig_buf_0[rr + k1][k2];
+        }
+      }
+      for (int c = 0; c < 640 - 2; c++) 
+// Original: #pragma ACCEL pipeline flatten
+{
+        
+#pragma ACCEL PIPELINE II=1
+        int temp;
+        int mul;
+        temp = ((int )0);
+        for (int k1 = 0; k1 < 3; k1++) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          for (int k2 = 0; k2 < 3; k2++) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+//orig[(r+k1)*col_size + c+k2];
+            mul = filter_buf_0[k1][k2] * orig_buf[k1][k2];
+            temp += mul;
+          }
+        }
+        sol_buf_0[rr][c] = temp;
+// added for shifting register
+        for (int k1 = 0; k1 < 3; k1++) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          for (int k2 = 0; k2 < 3; k2++) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            orig_buf[k1][k2] = orig_buf[k1][1 + k2];
+          }
+          if (c < 640 - 4) {
+            orig_buf[k1][3] = orig_buf_0[rr + k1][4 + c];
+          }
+        }
+      }
+      sol_buf_0[rr][638] = 0;
+      sol_buf_0[rr][639] = 0;
+    }
+     else {
+      for (int c = 0; c < 640; c++) {
+        
+#pragma ACCEL PIPELINE
+        sol_buf_0[rr][c] = 0;
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void stencil_kernel(int orig[819200],int sol[819200],int filter[9])
+{
+  int _memcpy_i2_1;
+  int _memcpy_i2_0;
+  int _memcpy_i1_2;
+  int _memcpy_i1_1;
+  int _memcpy_i1_0;
+  int _memcpy_i0_1;
+  int _memcpy_i0_0;
+  int filter_buf_0[16][3][3];
+  
+#pragma HLS array_partition variable=filter_buf_0 dim=1 complete
+  __merlin_access_range(filter,0,8UL);
+  __merlin_access_range(sol,0,819199UL);
+  __merlin_access_range(orig,0,819199UL);
+  
+#pragma ACCEL interface variable=filter depth=9 max_depth=9
+  
+#pragma ACCEL interface variable=sol depth=819200 max_depth=819200
+  
+#pragma ACCEL interface variable=orig depth=819200 max_depth=819200
+  int r0_sub;
+{
+    int r0_sub;
+    for (r0_sub = 0; r0_sub < 16; ++r0_sub) {
+      for (_memcpy_i2_1 = 0; _memcpy_i2_1 < 3; ++_memcpy_i2_1) {
+        
+#pragma HLS COALESCING_WIDTH=288
+        
+#pragma ACCEL PARALLEL SKIP COMPLETE
+        for (_memcpy_i2_0 = 0; _memcpy_i2_0 < 3; ++_memcpy_i2_0) {
+          
+#pragma ACCEL PARALLEL SKIP COMPLETE
+          filter_buf_0[r0_sub][_memcpy_i2_1][_memcpy_i2_0] = filter[0 + ((0 * 3 + _memcpy_i2_1) * 3 + _memcpy_i2_0)];
+        }
+      }
+    }
+  }
+  for (int r0 = 0; r0 < 4LL; r0++) {
+    int sol_buf_0[16][20][640];
+    
+#pragma HLS array_partition variable=sol_buf_0 dim=1 complete
+    int orig_buf_0[16][22][640];
+    
+#pragma HLS array_partition variable=orig_buf_0 dim=1 complete
+{
+      int r0_sub;
+      for (r0_sub = 0; r0_sub < 16; ++r0_sub) {
+        for (_memcpy_i0_1 = 0; _memcpy_i0_1 < 22; ++_memcpy_i0_1) {
+          
+#pragma HLS COALESCING_WIDTH=512
+          for (_memcpy_i0_0 = 0; _memcpy_i0_0 < 640; ++_memcpy_i0_0) {
+            
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+            orig_buf_0[r0_sub][_memcpy_i0_1][_memcpy_i0_0] = orig[r0 * 204800 + r0_sub * 12800 + ((0 * 22 + _memcpy_i0_1) * 640 + _memcpy_i0_0)];
+          }
+        }
+      }
+    }
+    for (r0_sub = 0; r0_sub < 16; ++r0_sub) 
+// Original: #pragma ACCEL parallel
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+      
+#pragma HLS unroll complete
+      stencil_kernel_L_1_1_para(filter_buf_0[r0_sub],r0_sub,r0,sol_buf_0[r0_sub],orig_buf_0[r0_sub]);
+    }
+{
+      for (_memcpy_i1_2 = 0; _memcpy_i1_2 < 16; ++_memcpy_i1_2) {
+        
+#pragma HLS COALESCING_WIDTH=512
+        for (_memcpy_i1_1 = 0; _memcpy_i1_1 < 20; ++_memcpy_i1_1) {
+          for (_memcpy_i1_0 = 0; _memcpy_i1_0 < 640; ++_memcpy_i1_0) {
+            
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+            sol[r0 * 204800 + (((0 * 16 + _memcpy_i1_2) * 20 + _memcpy_i1_1) * 640 + _memcpy_i1_0)] = sol_buf_0[_memcpy_i1_2][_memcpy_i1_1][_memcpy_i1_0];
+          }
+        }
+      }
+    }
+  }
+}
+#define TS_R 20

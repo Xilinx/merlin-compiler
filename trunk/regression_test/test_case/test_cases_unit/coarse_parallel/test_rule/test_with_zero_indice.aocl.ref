@@ -1,0 +1,140 @@
+#include "merlin_stream.h" 
+extern int __merlin_include__GB_merlin_stream_h_0;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=32 NODE=msm_node_0 PORT=msm_port_inc_msm_node_0_0 
+merlin_stream ch_inc_3;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=4096 NODE=msm_node_0 PORT=msm_port_a_buf_msm_node_0_0 
+merlin_stream ch_a_buf_2;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=4096 NODE=msm_node_0 PORT=msm_port_b_buf_msm_node_0_0 
+merlin_stream ch_b_buf_1;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=4096 NODE=msm_node_0 PORT=msm_port_c_buf_msm_node_0_0 
+merlin_stream ch_c_buf_0;
+/****************************************************************************/
+// vec_add_kernel.cpp
+// Copyright (C) 2017 Xilinx, Inc. - All rights reserved.
+/****************************************************************************/
+#include <string.h>
+#define VEC_SIZE 200000
+
+void msm_node_0(int c_buf[4][1],int b_buf[4][1],int a_buf[4][1],int inc,int jj)
+{
+  int _jj;
+  int inc_sn_tmp_0;
+  int _inc;
+  merlin_stream_read(&ch_inc_3,&inc_sn_tmp_0);
+  _inc = inc_sn_tmp_0;
+  for (int _t_l1 = 0; _t_l1 < 4096; _t_l1++) {
+    int a_buf_sn_tmp_0;
+    int b_buf_sn_tmp_0;
+    int c_buf_sn_tmp_0;
+    merlin_stream_read(&ch_b_buf_1,&b_buf_sn_tmp_0);
+    merlin_stream_read(&ch_a_buf_2,&a_buf_sn_tmp_0);
+    c_buf_sn_tmp_0 = a_buf_sn_tmp_0 + b_buf_sn_tmp_0 + _inc + _t_l1;
+    merlin_stream_write(&ch_c_buf_0,&c_buf_sn_tmp_0);
+  }
+}
+
+void msm_port_c_buf_msm_node_0_0(int c_buf[4][1],int jj)
+{
+  int _jj;
+  _jj = jj;
+  for (int _t_l1 = 0; _t_l1 < 4096; _t_l1++) {
+    int c_buf_sp_tmp_0;
+    merlin_stream_read(&ch_c_buf_0,&c_buf_sp_tmp_0);
+    c_buf[_jj][0] = c_buf_sp_tmp_0;
+  }
+}
+
+void msm_port_b_buf_msm_node_0_0(int b_buf[4][1],int jj)
+{
+  int _jj;
+  _jj = jj;
+  for (int _t_l1 = 0; _t_l1 < 4096; _t_l1++) {
+    int b_buf_sp_tmp_0;
+    b_buf_sp_tmp_0 = b_buf[_jj][0];
+    merlin_stream_write(&ch_b_buf_1,&b_buf_sp_tmp_0);
+  }
+}
+
+void msm_port_a_buf_msm_node_0_0(int a_buf[4][1],int jj)
+{
+  int _jj;
+  _jj = jj;
+  for (int _t_l1 = 0; _t_l1 < 4096; _t_l1++) {
+    int a_buf_sp_tmp_0;
+    a_buf_sp_tmp_0 = a_buf[_jj][0];
+    merlin_stream_write(&ch_a_buf_2,&a_buf_sp_tmp_0);
+  }
+}
+
+void msm_port_inc_msm_node_0_0(int inc)
+{
+  int inc_sp_tmp_0;
+  int _inc;
+  inc_sp_tmp_0 = inc;
+  merlin_stream_write(&ch_inc_3,&inc_sp_tmp_0);
+  _inc = inc;
+  _inc;
+}
+
+void msm_port_jj_msm_node_0_0(int jj)
+{
+  int _jj;
+  _jj = jj;
+  _jj;
+}
+#pragma ACCEL kernel
+
+void vec_add_kernel(int a[200000],int b[200000],int c[200000],int inc)
+{
+  int j;
+  int jj;
+  for (j = 0; j < 200000 / 4; j++) {
+    int a_buf[4][1];
+    int b_buf[4][1];
+    int c_buf[4][1];
+    memcpy(a_buf[0],(&a[j * 4]),sizeof(int ) * 4);
+    memcpy(b_buf[0],(&b[j * 4]),sizeof(int ) * 4);
+    for (jj = 0; jj < 4; ++jj) {
+      
+#pragma ACCEL parallel
+      merlin_stream_init(&ch_c_buf_0,4,4);
+{
+        merlin_stream_init(&ch_b_buf_1,4,4);
+        
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=2 NODE=msm_node_0 VARIABLE=b_buf 
+        msm_port_b_buf_msm_node_0_0(b_buf,jj);
+      }
+{
+        merlin_stream_init(&ch_a_buf_2,4,4);
+        
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=2 NODE=msm_node_0 VARIABLE=a_buf 
+        msm_port_a_buf_msm_node_0_0(a_buf,jj);
+      }
+{
+        merlin_stream_init(&ch_inc_3,1,4);
+        
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=0 NODE=msm_node_0 VARIABLE=inc 
+        msm_port_inc_msm_node_0_0(inc);
+      }
+{
+        
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=0 NODE=msm_node_0 VARIABLE=jj 
+        msm_port_jj_msm_node_0_0(jj);
+      }
+// Original pragma: ACCEL STREAM_NODE 
+      
+#pragma ACCEL STREAM_NODE PARALLEL_FACTOR=4 
+      msm_node_0(c_buf,b_buf,a_buf,inc,jj);
+      merlin_stream_reset(&ch_inc_3);
+      merlin_stream_reset(&ch_a_buf_2);
+      merlin_stream_reset(&ch_b_buf_1);
+{
+        
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=write DIM_NUM=2 NODE=msm_node_0 VARIABLE=c_buf 
+        msm_port_c_buf_msm_node_0_0(c_buf,jj);
+        merlin_stream_reset(&ch_c_buf_0);
+      }
+    }
+    memcpy(b_buf[0],(&b[j * 4]),sizeof(int ) * 4);
+  }
+}

@@ -1,0 +1,19 @@
+INFO: [BURST-101] Memory burst inferred: variable 'c' (vec_add_kernel.c:8) in scope (vec_add_kernel.c:17)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'c' (vec_add_kernel.c:8) in scope (vec_add_kernel.c:17).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (vec_add_kernel.c:8) in scope (vec_add_kernel.c:17)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (vec_add_kernel.c:8) in scope (vec_add_kernel.c:17).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (vec_add_kernel.c:8) in scope (vec_add_kernel.c:17)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (vec_add_kernel.c:8) in scope (vec_add_kernel.c:17).
+  Reason: short burst length = 4 bytes
+
+INFO: [FGPIP-103] Loop 'j'  (vec_add_kernel.c:17) is pipelined

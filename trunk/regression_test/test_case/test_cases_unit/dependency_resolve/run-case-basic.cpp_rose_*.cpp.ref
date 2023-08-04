@@ -1,0 +1,165 @@
+#include <math.h>
+extern int __merlin_include__GB_math_h_0;
+
+void simple_float()
+{
+  int i;
+  float x;
+  int __merlin_mul_assign_reduce_1 = 0;
+  float __merlin_mul_assign_reduce_2 = x;
+  for ((i = 0 , x = __merlin_mul_assign_reduce_2 * pow((float )8,(double )(__merlin_mul_assign_reduce_1 + 1))); i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    ++__merlin_mul_assign_reduce_1;
+  }
+  int __merlin_mul_assign_reduce_3 = 0;
+  float __merlin_mul_assign_reduce_4 = x;
+  for (i = 0; i < 100 && (x = __merlin_mul_assign_reduce_4 * pow((float )8,(double )(__merlin_mul_assign_reduce_3 + 1))); ++i) {
+    
+#pragma ACCEL pipeline
+    ++__merlin_mul_assign_reduce_3;
+  }
+  int __merlin_mul_assign_reduce_5 = 0;
+  float __merlin_mul_assign_reduce_6 = x;
+  for (i = 0; i < 100; (++i , x = __merlin_mul_assign_reduce_6 * pow((float )8,(double )(__merlin_mul_assign_reduce_5 + 1)))) {
+    
+#pragma ACCEL pipeline
+    ++__merlin_mul_assign_reduce_5;
+  }
+  int __merlin_mul_assign_reduce_7 = 0;
+  float __merlin_mul_assign_reduce_8 = x;
+  for (i = 0; i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    x = __merlin_mul_assign_reduce_8 * pow((float )8,(double )(__merlin_mul_assign_reduce_7 + 1));
+    ++__merlin_mul_assign_reduce_7;
+  }
+  int __merlin_mul_assign_reduce_9 = 0;
+  float __merlin_mul_assign_reduce_10 = x;
+  for (i = 0; i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    x = __merlin_mul_assign_reduce_10 * pow(x,(double )(__merlin_mul_assign_reduce_9 + 1));
+    ++__merlin_mul_assign_reduce_9;
+  }
+  int __merlin_mul_assign_reduce_11 = 0;
+  float __merlin_mul_assign_reduce_12 = x;
+  for (i = 0; i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    x = __merlin_mul_assign_reduce_12 * pow((float )8,(double )(__merlin_mul_assign_reduce_11 + 1));
+    ++__merlin_mul_assign_reduce_11;
+  }
+  while(1){
+    
+#pragma ACCEL pipeline
+    x *= 8;
+  }
+  while((x *= 8)){
+    
+#pragma ACCEL pipeline
+  }
+}
+
+void simple_double()
+{
+  int i;
+  double x;
+  int __merlin_mul_assign_reduce_13 = 0;
+  double __merlin_mul_assign_reduce_14 = x;
+  for ((i = 0 , x = __merlin_mul_assign_reduce_14 * pow((double )8,(double )(__merlin_mul_assign_reduce_13 + 1))); i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    ++__merlin_mul_assign_reduce_13;
+  }
+  int __merlin_mul_assign_reduce_15 = 0;
+  double __merlin_mul_assign_reduce_16 = x;
+  for (i = 0; i < 100 && (x = __merlin_mul_assign_reduce_16 * pow((double )8,(double )(__merlin_mul_assign_reduce_15 + 1))); ++i) {
+    
+#pragma ACCEL pipeline
+    ++__merlin_mul_assign_reduce_15;
+  }
+  int __merlin_mul_assign_reduce_17 = 0;
+  double __merlin_mul_assign_reduce_18 = x;
+  for (i = 0; i < 100; (++i , x = __merlin_mul_assign_reduce_18 * pow((double )8,(double )(__merlin_mul_assign_reduce_17 + 1)))) {
+    
+#pragma ACCEL pipeline
+    ++__merlin_mul_assign_reduce_17;
+  }
+  int __merlin_mul_assign_reduce_19 = 0;
+  double __merlin_mul_assign_reduce_20 = x;
+  for (i = 0; i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    x = __merlin_mul_assign_reduce_20 * pow((double )8,(double )(__merlin_mul_assign_reduce_19 + 1));
+    ++__merlin_mul_assign_reduce_19;
+  }
+  while(1){
+    
+#pragma ACCEL pipeline
+    x *= 8;
+  }
+  while((x *= 8)){
+    
+#pragma ACCEL pipeline
+  }
+}
+
+double f(double x,double y)
+{
+  return x + y;
+}
+
+void complicated()
+{
+  int i;
+  double x;
+  double y;
+  double z;
+  int __merlin_mul_assign_reduce_21 = 0;
+  double __merlin_mul_assign_reduce_22 = x;
+  for ((i = 0 , x = __merlin_mul_assign_reduce_22 * pow(y + z + f(y,z),(double )(__merlin_mul_assign_reduce_21 + 1))); i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    ++__merlin_mul_assign_reduce_21;
+  }
+  int __merlin_mul_assign_reduce_23 = 0;
+  double __merlin_mul_assign_reduce_24 = x;
+  for (i = 0; i < 100 && (x = __merlin_mul_assign_reduce_24 * pow(y + z + f(y,z),(double )(__merlin_mul_assign_reduce_23 + 1))); ++i) {
+    
+#pragma ACCEL pipeline
+    ++__merlin_mul_assign_reduce_23;
+  }
+  int __merlin_mul_assign_reduce_25 = 0;
+  double __merlin_mul_assign_reduce_26 = x;
+  for (i = 0; i < 100; (++i , x = __merlin_mul_assign_reduce_26 * pow(y + z + f(y,z),(double )(__merlin_mul_assign_reduce_25 + 1)))) {
+    
+#pragma ACCEL pipeline
+    ++__merlin_mul_assign_reduce_25;
+  }
+  int __merlin_mul_assign_reduce_27 = 0;
+  double __merlin_mul_assign_reduce_28 = x;
+  for (i = 0; i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    x = __merlin_mul_assign_reduce_28 * pow(y + z + f(y,z),(double )(__merlin_mul_assign_reduce_27 + 1));
+    ++__merlin_mul_assign_reduce_27;
+  }
+  while(1){
+    
+#pragma ACCEL pipeline
+    x *= y + z + f(y,z);
+  }
+  while((x *= y + z + f(y,z))){
+    
+#pragma ACCEL pipeline
+  }
+}
+#pragma ACCEL kernel
+
+void g()
+{
+  simple_float();
+  simple_double();
+  complicated();
+}

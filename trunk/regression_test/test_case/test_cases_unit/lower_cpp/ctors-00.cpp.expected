@@ -1,0 +1,192 @@
+// Constructor tests.
+// Inline ctor decls.
+
+struct ::A 
+{
+}
+;
+
+void p_ZN1AC2Ev(struct A *this_)
+{
+}
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+// Initializer lists.
+
+struct ::B 
+{
+  unsigned int u;
+}
+;
+
+void p_ZN1BC2Ev(struct B *this_)
+{
+  this_ -> u = ((unsigned int )21);
+}
+
+void p_ZN1BC2Ej(struct B *this_,unsigned int u)
+{
+  this_ -> u = u;
+}
+
+void p_ZN1BC2Ejb(struct B *this_,unsigned int u_,bool )
+{
+  this_ -> u = u_ + ((unsigned int )42);
+}
+static void __merlin_dummy_SgClassDeclaration_struct_B_();
+// Field initializers. Summary of semantics:
+// http://www.stroustrup.com/C++11FAQ.html#member-init
+
+struct ::C 
+{
+  unsigned int u;
+  char bob;
+}
+;
+
+void p_ZN1CC2Ej(struct C *this_,unsigned int u)
+{
+  this_ -> u = u;
+  this_ -> bob += 1;
+}
+
+void p_ZN1CC2Ev(struct C *this_)
+{
+  this_ -> u = ((unsigned int )42);
+  this_ -> bob += 1;
+}
+
+void p_ZN1CC2Eb(struct C *this_,bool b)
+{
+  this_ -> u = ((unsigned int )168);
+  this_ -> bob = ((char )b);
+  this_ -> bob += 1;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_C_();
+// Out-of-line decls.
+
+struct ::D 
+{
+  unsigned int u;
+}
+;
+void p_ZN1DC2Ev(struct D *this_);
+void p_ZN1DC2Ej(struct D *this_,unsigned int u);
+
+void p_ZN1D1fEv(struct D *this_)
+{
+}
+
+void p_ZN1DC2Ev(struct D *this_)
+{
+  this_ -> u = ((unsigned int )12);
+}
+
+void p_ZN1DC2Ej(struct D *this_,unsigned int u)
+{
+  this_ -> u = u;
+  p_ZN1D1fEv(this_);
+}
+static void __merlin_dummy_SgClassDeclaration_struct_D_();
+static void __merlin_dummy_SgMemberFunctionDeclaration_void_D_();
+static void __merlin_dummy_SgMemberFunctionDeclaration_void_D_uns_();
+// Recursive ctor calls.
+
+struct ::E 
+{
+  struct D d;
+}
+;
+
+void p_ZN1EC2Ej(struct E *this_,unsigned int u)
+{
+  p_ZN1DC2Ej(&this_ -> d,u);
+  p_ZN1D1fEv(&this_ -> d);
+}
+static void __merlin_dummy_SgClassDeclaration_struct_E_();
+extern "C" { int puts(const char *); }
+// Const member init.
+
+struct ::F 
+{
+  unsigned int u;
+  char m_c;
+  const char *p;
+  const char *c_p;
+  struct E e;
+}
+;
+
+void p_ZN1FC2Ec(struct F *this_,char c)
+{
+  this_ -> m_c = c;
+  this_ -> p = &this_ -> m_c;
+  this_ -> c_p = &this_ -> m_c;
+  p_ZN1EC2Ej(&this_ -> e,(unsigned int )c);
+  puts("F constructed.\n");
+}
+
+void p_ZN1F1fEPKc(struct F *this_,const char *c)
+{
+}
+
+void p_ZN1F4callEv(struct F *this_)
+{
+  p_ZN1F1fEPKc(this_,this_ -> p);
+}
+
+void p_ZN1F2ffEKPKc(struct F *this_,const char *const c_p)
+{
+}
+
+void p_ZN1F6call_cEv(struct F *this_)
+{
+  p_ZN1F2ffEKPKc(this_,this_ -> c_p);
+}
+static void __merlin_dummy_SgClassDeclaration_struct_F_();
+
+struct G 
+{
+}
+;
+
+struct F make_f()
+{
+  struct G g;
+  struct D d;
+  p_ZN1DC2Ev(&d);
+  ;
+  struct E e;
+  p_ZN1EC2Ej(&e,(unsigned int )46);
+  ;
+  struct F temp;
+  p_ZN1FC2Ec(&temp,(char )94);
+  return temp;
+}
+// TODO: Support placement new expressions.
+// void placement_new() {
+//    static char space[256];
+//    F *f = new (space) F(29);
+// }
+// Anonymous decls.
+
+unsigned int anonymous_decl()
+{
+  struct E temp;
+  p_ZN1EC2Ej(&temp,(unsigned int )23);
+  return (temp) . d . u;
+}
+#pragma ACCEL kernel
+
+int main()
+{
+  struct A a;
+  ;
+  struct B b;
+  p_ZN1BC2Ev(&b);
+  ;
+  struct C c;
+  p_ZN1CC2Ev(&c);
+  ;
+  make_f();
+  anonymous_decl();
+}

@@ -1,0 +1,28 @@
+#include<hls_stream.h>
+
+void sub_0(class hls::stream< int  > &a,class hls::stream< int  > &tmp)
+{
+}
+
+void sub_1(class hls::stream< int  > &tmp,class hls::stream< int  > &a)
+{
+}
+
+void sub(class hls::stream< int  > &a,class hls::stream< int  > &b)
+{
+  
+#pragma HLS inline
+  class hls::stream< int  > local_channel;
+  
+#pragma HLS stream variable=local_channel
+  sub_0(a,local_channel);
+  sub_1(local_channel,b);
+}
+#pragma ACCEL kernel
+
+void top(class hls::stream< int  > &a,class hls::stream< int  > &b)
+{
+  
+#pragma hls dataflow
+  sub(a,b);
+}

@@ -1,0 +1,5 @@
+test:
+	rm -rf err.log
+	touch err.log
+	merlincc -c *.c -device=aocl::a10gx_es3 -std=c99
+	if [ -d "merlincc_export" ]; then echo "pass"; else echo "test3 fail_opencl" >> err.log; fi

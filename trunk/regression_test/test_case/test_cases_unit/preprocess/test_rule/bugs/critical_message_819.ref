@@ -1,0 +1,2 @@
+
+WARNING: [PROCS-210] Function 'func_loop' (test_range_1.c:4) with the return statements in the middle of the function body is not supported

@@ -1,0 +1,27 @@
+
+struct ::A 
+{
+  int data;
+}
+;
+
+void p_ZN1A4incrEv(struct A *this_)
+{
+  this_ -> data++;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+void p_Z1fI1AE1A(struct A a);
+
+void p_Z1fI1AE1A(struct A a)
+{
+  p_ZN1A4incrEv(&a);
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+#pragma ACCEL kernel
+
+int main()
+{
+  struct A a;
+// implicit instantiation.
+  p_Z1fI1AE1A(a);
+}

@@ -1,0 +1,29 @@
+#define n 100
+#pragma ACCEL kernel
+
+void func_top_0(int *c)
+{
+  
+#pragma ACCEL INTERFACE VARIABLE=c DEPTH=1000 BURST_OFF
+  int sum = 0;
+  int slide_wind_0[55];
+  for (int i = -52L; i < 46L; i++) {{
+      int tmp_wind_0;
+      int i_0;
+      for (i_0 = 1L; i_0 <= 54L; ++i_0) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        slide_wind_0[i_0 + -1] = slide_wind_0[i_0];
+      }
+      tmp_wind_0 = c[i + -1L + -1L + 54L];
+      slide_wind_0[54L] = tmp_wind_0;
+    }
+    if (i + -1L >= 1L && i + -1L <= 44L) {
+      for (int j = 0; j < 50; j++) {
+        for (int k = 0; k < 4; k++) {
+          sum = slide_wind_0[k + j] + slide_wind_0[k + j + 2L];
+        }
+      }
+    }
+  }
+}

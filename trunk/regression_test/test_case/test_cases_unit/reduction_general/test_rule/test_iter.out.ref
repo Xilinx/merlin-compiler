@@ -1,0 +1,36 @@
+#define VEC_SIZE 10000
+#define VEC_DIM_SIZE 100
+#pragma ACCEL kernel
+
+void vec_add_kernel(int *a,int *b,int *c,int N)
+{
+  int sum = 0;
+  int j_sub1;
+  for (int j = 0; j < 1000; j++) {
+    
+#pragma ACCEL PIPELINE
+    for (int j_sub = 0; j_sub < 10; (++j_sub , sum += 1)) {
+      
+#pragma ACCEL PARALLEL
+      sum += a[j * 10 + j_sub];
+    }
+  }
+  for (int j = 0; j < 1000; j++) {
+    
+#pragma ACCEL PIPELINE
+    for (j_sub1 = 0; j_sub1 < 10; j_sub1 += 1) {
+      
+#pragma ACCEL PARALLEL
+      sum += a[j * 10 + j_sub1];
+    }
+  }
+  for (int j = 0; j < 1000; j++) {
+    
+#pragma ACCEL PIPELINE
+    for (j_sub1 = 0; j_sub1 > 10; j_sub1 -= N) {
+      
+#pragma ACCEL PARALLEL
+      sum += a[j * 10 + j_sub1];
+    }
+  }
+}

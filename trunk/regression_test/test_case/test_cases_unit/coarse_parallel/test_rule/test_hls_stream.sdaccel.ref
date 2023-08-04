@@ -1,0 +1,52 @@
+#include <string.h> 
+#include <hls_stream.h>
+#define TILE_FACTOR 100
+#define UNROLL_FACTOR 5
+
+void top_L_0_0_para_sub(class hls::stream< int  > *a,int c_buf_0[20][100],int b_buf_0[20][100],int jj)
+// Original: #pragma ACCEL parallel
+{
+  
+#pragma HLS inline off
+  int j0;
+  int k;
+  for (j0 = 0; j0 < 100 / 5; ++j0) {
+    for (k = 0; k < 100; ++k) {
+      c_buf_0[j0][k] = a[0] . read() + b_buf_0[j0][k];
+    }
+  }
+}
+
+void top_L_0_0_para(class hls::stream< int  > a[5],int c_buf_0[5][20][100],int b_buf_0[5][20][100])
+{
+  
+#pragma HLS inline off
+  int jj;
+  for (jj = 0; jj < 5; ++jj) {
+    
+#pragma HLS unroll complete
+    top_L_0_0_para_sub(&a[jj],c_buf_0[jj],b_buf_0[jj],jj);
+  }
+}
+#pragma ACCEL kernel
+
+void top(class hls::stream< int  > a[5],int *b,int *c)
+{
+  
+#pragma HLS array_partition variable=a dim=1 complete
+  for (int i = 0; i < 10000 / 100; ++i) {
+    int c_buf_0[5][20][100];
+    
+#pragma HLS array_partition variable=c_buf_0 dim=1 complete
+    int b_buf_0[5][20][100];
+    
+#pragma HLS array_partition variable=b_buf_0 dim=1 complete
+    memcpy((void *)(&b_buf_0[0][0][0]),(const void *)(&b[i * 10000]),sizeof(int ) * 10000);
+    top_L_0_0_para(a,c_buf_0,b_buf_0);
+    for (int jj = 0; jj < 5; ++jj) 
+// Original: #pragma ACCEL parallel
+{
+    }
+    memcpy((void *)(&c[i * 10000]),(const void *)(&c_buf_0[0][0][0]),sizeof(int ) * 10000);
+  }
+}

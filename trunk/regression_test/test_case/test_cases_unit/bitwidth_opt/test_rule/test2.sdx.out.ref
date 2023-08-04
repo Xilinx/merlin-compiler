@@ -1,0 +1,43 @@
+#include "memcpy_512_1d.h"
+#include "memcpy_512.h"
+#include<string.h>
+extern int __merlin_include__GB_memcpy_512_h_1;
+extern int __merlin_include__GB_memcpy_512_1d_h_0;
+
+void func1_sub(ap_uint<512> *a,int a_buf[1000],int k)
+{
+  
+#pragma  HLS array_partition  variable=a_buf cyclic factor = 16 dim=1
+  memcpy_wide_bus_read_int_512(a_buf,(ap_uint<512> *)a,k * 4,sizeof(int ) * ((unsigned long )1000),1000L);
+}
+
+void func2_sub(ap_uint<512> *a,int a_buf[1000])
+{
+  
+#pragma  HLS array_partition  variable=a_buf cyclic factor = 16 dim=1
+  memcpy_wide_bus_write_int_512((ap_uint<512> *)a,&a_buf[2],4 * 0,sizeof(int ) * ((unsigned long )980),980L);
+}
+extern "C" {
+#pragma ACCEL kernel
+
+void func1_kernel(ap_uint<512> *a,ap_uint<512> *b,int k)
+{
+  
+#pragma HLS DATA_PACK VARIABLE=b
+  
+#pragma HLS DATA_PACK VARIABLE=a
+  int a_buf[1000];
+  func1_sub(a,a_buf,k);
+  func2_sub(b,a_buf);
+}
+}
+
+int main()
+{
+  int *a;
+  int *b;
+  int *c;
+  int k;
+  func1_kernel((ap_uint<512> *)a,(ap_uint<512> *)b,k);
+  return 0;
+}

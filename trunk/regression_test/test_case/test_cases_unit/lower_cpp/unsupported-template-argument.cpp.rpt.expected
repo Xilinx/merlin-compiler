@@ -1,0 +1,2 @@
+
+ERROR: [LWCPP-301] unknown template argument is not supported: template<> class XXX< YYY , long > {}; (unsupported-template-argument.cpp:0)

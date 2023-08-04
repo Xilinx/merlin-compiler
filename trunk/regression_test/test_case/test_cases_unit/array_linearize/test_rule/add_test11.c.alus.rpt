@@ -1,0 +1,6 @@
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'b' (add_test11.c:4)
+
+ERROR: [INFTF-302] Kernel and all the functions used in a kernel  cannot be declared in the header file, if it contains multiple dimension parameters
+    Function name  : void top(int ** a,int ** b) {...}
+    File location  : (add_test11.h:1)

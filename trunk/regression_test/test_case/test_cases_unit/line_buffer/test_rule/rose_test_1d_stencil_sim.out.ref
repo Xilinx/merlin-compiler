@@ -1,0 +1,43 @@
+#include<stdio.h>
+#include<string.h>
+#include"header.h"
+#pragma ACCEL kernel
+
+void func_top_1(float *merlin_in)
+{
+  
+#pragma ACCEL interface variable=merlin_in depth=100,100 max_depth=100,100 BURST_OFF
+  for (int i = 0; i < 100; i++) {
+    float slide_wind_0[5];
+    for (int j = -4L; j < 100 - 5 + 1; j++) {{
+        float tmp_wind_0;
+        int j_0;
+        for (j_0 = 1L; j_0 <= 4L; ++j_0) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0[j_0 + -1] = slide_wind_0[j_0];
+        }
+        tmp_wind_0 = merlin_in[(0L + i * 1L) * 100L + (j + 0L + 4L) * 1L];
+        slide_wind_0[4L] = tmp_wind_0;
+      }
+      if (j >= 0L && j <= 95L) {
+        for (int q = 0; q < 5; q++) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          float tmp = slide_wind_0[q];
+          printf("%d, %d, %d : %f\n",i,j,q,(double )tmp);
+        }
+      }
+    }
+  }
+}
+float c[10000];
+
+int main()
+{
+  for (size_t i = 0; i < 10000; i++) {
+    c[i] = i;
+  }
+  func_top_1(c);
+  return 0;
+}

@@ -1,0 +1,3 @@
+
+ERROR: [GLOBL-305] Uninitialized constant global variable 'extern const int a;' (vec_add.cpp:1)
+ is not supported

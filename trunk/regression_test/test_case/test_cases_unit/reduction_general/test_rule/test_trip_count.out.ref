@@ -1,0 +1,225 @@
+#include<assert.h>
+#pragma ACCEL kernel
+
+void add_kernel1(int *m,int data[512][512],int size)
+{
+  
+#pragma ACCEL interface variable=m depth=1
+  
+#pragma ACCEL interface variable=data depth=512,512
+  int tmp = 0;
+  for (int j = 0; j < size; j++) {
+    for (int i = j + 1; i < 512; i++) {
+      
+#pragma HLS LOOP_TRIPCOUNT max=511
+      int _tmp_rdc[64];
+{
+        for (int k_sub = 0; k_sub < 64; ++k_sub) 
+// Original: #pragma ACCEL parallel factor=64
+// Original: #pragma ACCEL reduction variable=tmp
+{
+          
+#pragma ACCEL PARALLEL COMPLETE
+          
+#pragma ACCEL ARRAY_PARTITION OFF
+          _tmp_rdc[k_sub] = 0;
+        }
+      }
+      for (int k = 0; k < j / 64L; k++) 
+// Original: #pragma ACCEL parallel factor=64
+// Original: #pragma ACCEL reduction variable=tmp
+{
+        
+#pragma ACCEL PIPELINE AUTO
+        for (int k_sub = 0; k_sub < 64; ++k_sub) 
+// Original: #pragma ACCEL parallel factor=64
+// Original: #pragma ACCEL reduction variable=tmp
+{
+          
+#pragma ACCEL PARALLEL
+          _tmp_rdc[k_sub] += data[i][k * 64 + k_sub] * data[j][k * 64 + k_sub];
+        }
+      }
+{
+        for (int k_sub = 0; k_sub < 64; ++k_sub) 
+// Original: #pragma ACCEL parallel factor=64
+// Original: #pragma ACCEL reduction variable=tmp
+{
+          
+#pragma ACCEL ARRAY_PARTITION OFF
+          
+#pragma ACCEL PARALLEL COMPLETE
+          tmp += _tmp_rdc[k_sub];
+        }
+      }
+{
+        for (int k = j / 64 * 64; k < j; k++) 
+// Original: #pragma ACCEL parallel factor=64
+// Original: #pragma ACCEL reduction variable=tmp
+{
+          
+#pragma ACCEL PIPELINE AUTO
+          
+#pragma HLS LOOP_TRIPCOUNT max=63
+          tmp += data[i][k] * data[j][k];
+        }
+      }
+    }
+  }
+   *m = tmp;
+}
+#pragma ACCEL kernel
+
+void add_kernel2(int *m,int data[512][512],int size)
+{
+  
+#pragma ACCEL interface variable=m depth=1
+  
+#pragma ACCEL interface variable=data depth=512,512
+  int tmp = 0;
+  for (int j = 0; j < 512; j++) {
+    for (int i = j + 1; i < 512; i++) {
+      
+#pragma HLS LOOP_TRIPCOUNT max=511
+      int _tmp_rdc[64];
+{
+        for (int k_sub = 0; k_sub < 64; ++k_sub) 
+// Original: #pragma ACCEL parallel factor=64
+// Original: #pragma ACCEL reduction variable=tmp
+{
+          
+#pragma ACCEL PARALLEL COMPLETE
+          
+#pragma ACCEL ARRAY_PARTITION OFF
+          _tmp_rdc[k_sub] = 0;
+        }
+      }
+      for (int k = 0; k < j / 64L; k++) 
+// Original: #pragma ACCEL parallel factor=64
+// Original: #pragma ACCEL reduction variable=tmp
+{
+        
+#pragma ACCEL PIPELINE AUTO
+        
+#pragma HLS LOOP_TRIPCOUNT max=7
+        for (int k_sub = 0; k_sub < 64; ++k_sub) 
+// Original: #pragma ACCEL parallel factor=64
+// Original: #pragma ACCEL reduction variable=tmp
+{
+          
+#pragma ACCEL PARALLEL
+          _tmp_rdc[k_sub] += data[i][k * 64 + k_sub] * data[j][k * 64 + k_sub];
+        }
+      }
+{
+        for (int k_sub = 0; k_sub < 64; ++k_sub) 
+// Original: #pragma ACCEL parallel factor=64
+// Original: #pragma ACCEL reduction variable=tmp
+{
+          
+#pragma ACCEL ARRAY_PARTITION OFF
+          
+#pragma ACCEL PARALLEL COMPLETE
+          tmp += _tmp_rdc[k_sub];
+        }
+      }
+{
+        for (int k = j / 64 * 64; k < j; k++) 
+// Original: #pragma ACCEL parallel factor=64
+// Original: #pragma ACCEL reduction variable=tmp
+{
+          
+#pragma ACCEL PIPELINE AUTO
+          
+#pragma HLS LOOP_TRIPCOUNT max=63
+          tmp += data[i][k] * data[j][k];
+        }
+      }
+    }
+  }
+   *m = tmp;
+}
+#pragma ACCEL kernel
+
+void add_kernel3(int *m,int data[512][512],int size)
+{
+  
+#pragma ACCEL interface variable=m depth=1
+  
+#pragma ACCEL interface variable=data depth=512,512
+  int tmp = 0;
+  int _tmp_rdc[64];
+{
+    for (int k_sub = 0; k_sub < 64; ++k_sub) 
+// Original: #pragma ACCEL parallel factor=64
+// Original: #pragma ACCEL reduction variable=tmp
+{
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      _tmp_rdc[k_sub] = 0;
+    }
+  }
+  for (int j = 0; j < 512; j++) {
+    for (int i = j + 1; i < 512; i++) {
+      
+#pragma HLS LOOP_TRIPCOUNT max=511
+      for (int k = 0; k < 8; k++) 
+// Original: #pragma ACCEL parallel factor=64
+// Original: #pragma ACCEL reduction variable=tmp
+{
+        
+#pragma ACCEL PIPELINE AUTO
+        for (int k_sub = 0; k_sub < 64; ++k_sub) 
+// Original: #pragma ACCEL parallel factor=64
+// Original: #pragma ACCEL reduction variable=tmp
+{
+          
+#pragma ACCEL PARALLEL
+          if (k * 64 + k_sub < j) {
+            _tmp_rdc[k_sub] += data[i][k * 64 + k_sub] * data[j][k * 64 + k_sub];
+          }
+        }
+      }
+    }
+  }
+{
+    for (int k_sub = 0; k_sub < 64; ++k_sub) 
+// Original: #pragma ACCEL parallel factor=64
+// Original: #pragma ACCEL reduction variable=tmp
+{
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      
+#pragma ACCEL PARALLEL COMPLETE
+      tmp += _tmp_rdc[k_sub];
+    }
+  }
+   *m = tmp;
+}
+#pragma ACCEL kernel
+
+void add_kernel4(int *m,int data[512][512],int size)
+{
+  
+#pragma ACCEL interface variable=m depth=1
+  
+#pragma ACCEL interface variable=data depth=512,512
+  int tmp = 0;
+  for (int j = 0; j < size; j++) 
+// Original: #pragma ACCEL pipeline
+// Original: #pragma ACCEL reduction variable=tmp
+{
+    
+#pragma ACCEL PIPELINE
+    for (int k = 0; k < j; k++) 
+// Original: #pragma ACCEL parallel
+{
+      
+#pragma ACCEL PARALLEL COMPLETE
+      tmp += data[j][k];
+    }
+  }
+   *m = tmp;
+}

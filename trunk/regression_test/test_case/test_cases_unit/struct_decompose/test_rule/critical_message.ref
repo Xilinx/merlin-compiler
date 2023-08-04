@@ -1,0 +1,74 @@
+
+ERROR: [DISAG-301] Cannot decompose global port 'work2' (unsupported_initializer.c:6) with unsupported reference or initializer: 
+unsupported initializer: .lock =(spinlock_t ){(0)}
+
+ Hint: complex pointer re-interpretation is not supported. Please rewrite
+
+ERROR: [DISAG-301] Cannot decompose local variable 'work' (unsupported_initializer.c:11) with unsupported reference or initializer: 
+unsupported initializer: .lock =(spinlock_t ){(0)}
+
+ Hint: complex pointer re-interpretation is not supported. Please rewrite
+
+ERROR: [DISAG-302] statement 'count +=((class Student *)temp) -> id;' (transformation:0) which contains unsupported type cast: '((class Student *)temp)' is not supported
+
+ERROR: [DISAG-302] statement 'count +=((struct student *)temp) -> id;' (transformation:0) which contains unsupported type cast: '((struct student *)temp)' is not supported
+
+ERROR: [DISAG-301] Cannot decompose interface port 'a' (test_pointer_cast2.cpp:10) with unsupported reference or initializer: 
+unsupported expression : a (test_pointer_cast2.cpp:21)
+
+ Hint: complex pointer re-interpretation is not supported. Please rewrite
+
+ERROR: [DISAG-301] Cannot decompose local variable 'p' (transformation:0) with unsupported reference or initializer: 
+unsupported initializer: (st *)(a -> a)
+
+ Hint: complex pointer re-interpretation is not supported. Please rewrite
+
+ERROR: [DISAG-302] global port 'head' (test_recursive.c:6) with unsupported type: 
+recursive type: struct st *next;
+ is not supported
+
+ERROR: [DISAG-302] local variable 'ptr' (test_recursive.c:17) with unsupported type: 
+recursive type: struct st *next;
+ is not supported
+
+ERROR: [DISAG-302] interface port 'a' (test_recursive.c:9) with unsupported type: 
+recursive type: struct st *next;
+ is not supported
+
+ERROR: [MDARR-305] Cannot determine some of the dimension sizes of the interface variable 'a' (test_unsupported_depth.c:7) of type 'st *'.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=a depth=?
+
+ERROR: [MDARR-305] Cannot determine some of the dimension sizes of the interface variable 'a_a' (test_unsupported_depth.c:2) of type 'int *'.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=a->a depth=?
+
+ERROR: [INFTF-301] Kernel and all the functions used in a kernel cannot be declared in the header file, if it contains struct parameters
+    Function name  : void call_f4(struct f4 l_f4) {...}
+    File location  : (head.h:5)
+
+ERROR: [DISAG-301] Cannot decompose interface port 'a' (test_mem_call.cpp:10) with unsupported reference or initializer: 
+non-field access : a -> inc (test_mem_call.cpp:12)
+
+ Hint: complex pointer re-interpretation is not supported. Please rewrite
+
+ERROR: [DISAG-301] Cannot decompose interface port 'b' (test_mem_call.cpp:10) with unsupported reference or initializer: 
+non-field access : b . inc (test_mem_call.cpp:13)
+
+ Hint: complex pointer re-interpretation is not supported. Please rewrite
+
+ERROR: [MDARR-305] Cannot determine some of the dimension sizes of the interface variable 'a' (test_missing_depth.c:7) of type 'st *'.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=a depth=?
+
+ERROR: [MDARR-305] Cannot determine some of the dimension sizes of the interface variable 'a_a' (test_missing_depth.c:2) of type 'int *'.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=a->a depth=?
+
+ERROR: [DISAG-302] interface port 'f_a' (transformation:0) with unsupported type: 
+void type: void
+ is not supported
+
+ERROR: [DISAG-303] Intel SDK cannot support more than 128 arguments.
+Current number of final arguments is 144.
+Please try to pack struct/class members to reduce the number of the kernel interface variables

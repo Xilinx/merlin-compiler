@@ -1,0 +1,196 @@
+#include <string.h>
+#include "logistic.h"
+
+void shift_left(float regs[100])
+{
+  int i;
+  for (i = 0; i < 100 - 1; i++) {
+    regs[i] = regs[i + 1];
+  }
+}
+
+void recv_data(volatile float *global_data,unsigned int offset,float data[32][884])
+{
+  int _memcpy_i2_1;
+  int _memcpy_i2_0;
+  for (_memcpy_i2_1 = 0; _memcpy_i2_1 < 32; ++_memcpy_i2_1) {
+    
+#pragma HLS COALESCING_WIDTH=1664
+    for (_memcpy_i2_0 = 0; _memcpy_i2_0 < 884; ++_memcpy_i2_0) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=52
+      data[_memcpy_i2_1][_memcpy_i2_0] = global_data[offset + ((0 * 32 + _memcpy_i2_1) * 884 + _memcpy_i2_0)];
+    }
+  }
+}
+
+void compute1(float data[32][884],float weights[100][785],float result1[32][100])
+{
+  int i;
+  int j;
+  int k;
+  for (j = 0; j < 32; j++) {
+    
+#pragma ACCEL pipeline
+    for (k = 0; k < 100; k++) {
+      
+#pragma ACCEL parallel complete
+      result1[j][k] = weights[k][0];
+    }
+  }
+  STAGE1_D:
+  for (i = 0; i < 784; i++) {
+    STAGE1_n:
+    for (j = 0; j < 32; j++) {
+      STAGE1_L:
+{
+        
+#pragma ACCEL pipeline
+        for (k = 0; k < 100; k++) {
+          
+#pragma ACCEL parallel complete
+          result1[j][k] += weights[k][i + 1] * data[j][i + 100];
+        }
+      }
+    }
+  }
+}
+
+void compute2(float result1[32][100],float data[32][884],float result2[32][100])
+{
+  int j;
+  int k;
+  STAGE2_L:
+  for (k = 0; k < 100; k++) {
+    STAGE2_n:
+    for (j = 0; j < 32; j++) {
+      
+#pragma ACCEL pipeline
+      float temp = 1 + result1[j][k] * result1[j][k];
+      result2[j][k] = result1[j][k] / temp - (2.f * data[j][k] - 1.f) / sqrtf(temp);
+//result2[j][k] = 1.f/(1.f+expf(-result1[j][k]))-data[j][k];
+    }
+  }
+}
+
+void compute3(float result2[32][100],float data[32][884],float gradient[100][785])
+{
+  int i;
+  int j;
+  int k;
+  STAGE3_n:
+  for (j = 0; j < 32; j++) {
+    STAGE3_D:
+    for (i = 0; i < 784 + 1; i++) {
+      STAGE3_L:
+{
+        
+#pragma ACCEL pipeline
+        for (k = 0; k < 100; k++) {
+          
+#pragma ACCEL parallel complete
+          gradient[k][i] += result2[j][k] * ((i == 0?1.f : data[j][i - 1 + 100]));
+        }
+      }
+    }
+  }
+}
+
+void pipeline(int n_samples,volatile float *global_data,float weights[100][785],float gradient[100][785])
+{
+  int i;
+  int n_stage = n_samples / 32;
+  TOP_LOOP:
+  for (i = 0; i < n_stage; i++) {
+    
+#pragma HLS loop_tripcount max=1875
+    
+#pragma ACCEL pipeline
+    float data[32][884];
+    float result1[32][100];
+    float result2[32][100];
+    recv_data(global_data,(i * 32 * (784 + 100)),data);
+    compute1(data,weights,result1);
+    compute2(result1,data,result2);
+    compute3(result2,data,gradient);
+  }
+}
+#pragma ACCEL kernel
+
+void logistic_regression_kernel(int n_samples,float global_weights[78500],float global_data[53040000],float global_gradient[78500])
+{
+#ifdef ADD_IF
+#endif
+  float weights[100][785];
+  float gradient[100][785];
+  int i;
+  int j;
+  int k;
+  float regs[100];
+  float buffer[785];
+#if 0
+#else
+  for (i = 0; i < 100; i++) {
+    int j;
+    for (j = 0; j < 784 + 1; j++) {
+      gradient[i][j] = 0.f;
+    }
+  }
+  for (i = 0; i < 100; i++) {
+    long _memcpy_i_0;
+    for (_memcpy_i_0 = 0; _memcpy_i_0 < ((size_t )((784 + 1) * 4)) / 4; ++_memcpy_i_0) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=5
+      long total_offset1 = 0 * 785 + 0;
+      long total_offset2 = 0 * 78500 + (784 + 1) * i;
+      buffer[total_offset1 + _memcpy_i_0] = global_weights[total_offset2 + _memcpy_i_0];
+    }
+    for (j = 0; j < 784 + 1; j++) {
+      
+#pragma ACCEL pipeline
+      for (k = 0; k < 100; k++) {
+        
+#pragma ACCEL parallel complete
+        regs[k] = weights[k][j];
+      }
+      shift_left(regs);
+      for (k = 0; k < 100; k++) {
+        
+#pragma ACCEL parallel complete
+        weights[k][j] = regs[k];
+      }
+      weights[100 - 1][j] = buffer[j];
+    }
+  }
+#endif
+  pipeline(n_samples,global_data,weights,gradient);
+#if 0
+#else
+  for (i = 0; i < 100; i++) {
+    for (j = 0; j < 784 + 1; j++) {
+      
+#pragma ACCEL pipeline
+      buffer[j] = gradient[0][j];
+      for (k = 0; k < 100; k++) {
+        
+#pragma ACCEL parallel complete
+        regs[k] = gradient[k][j];
+      }
+      shift_left(regs);
+      for (k = 0; k < 100; k++) {
+        
+#pragma ACCEL parallel complete
+        gradient[k][j] = regs[k];
+      }
+    }
+    long _memcpy_i_1;
+    for (_memcpy_i_1 = 0; _memcpy_i_1 < ((size_t )((784 + 1) * 4)) / 4; ++_memcpy_i_1) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=5
+      long total_offset1 = 0 * 78500 + i * (784 + 1);
+      long total_offset2 = 0 * 785 + 0;
+      global_gradient[total_offset1 + _memcpy_i_1] = buffer[total_offset2 + _memcpy_i_1];
+    }
+  }
+#endif
+}

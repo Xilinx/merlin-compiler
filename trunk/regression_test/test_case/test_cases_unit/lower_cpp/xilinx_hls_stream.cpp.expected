@@ -1,0 +1,14 @@
+#include<hls_stream.h>
+#include<ap_int.h>
+
+void sub(class hls::stream< int  > &tmp)
+{
+}
+#pragma ACCEL kernel
+
+void top(class hls::stream< int  > &a,class hls::stream< ap_int< 10 >  > &b)
+{
+  b . write(a . read());
+  class hls::stream< int  > tmp;
+  sub(tmp);
+}

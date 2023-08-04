@@ -1,0 +1,19 @@
+int _ZN1a3valE = 5;
+namespace a
+{
+static void __merlin_dummy_SgVariableDeclaration_int_val_();
+}
+double _ZN1a4val2E = 3.14;
+namespace a
+{
+static void __merlin_dummy_SgVariableDeclaration_double_val_();
+}
+#pragma ACCEL kernel
+
+void k()
+{
+using a::val;
+using a::val2;
+_ZN1a3valE;
+_ZN1a4val2E;
+}

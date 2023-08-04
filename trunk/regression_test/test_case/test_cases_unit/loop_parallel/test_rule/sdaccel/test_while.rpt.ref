@@ -1,0 +1,4 @@
+
+WARNING: [FGPIP-213] Loop 'L_0'  (test_while.cpp:10) probably cannot be fully-pipelined as array 'aa' has an irregular access pattern and cannot be split into different sub-arrays.
+INFO: [FGPIP-103] Loop 'while(t > 1){#pragma'  (test_while.cpp:10) is pipelined
+INFO: [FGPIP-102] Loop 'L_1' (test_while.cpp:16) is fully parallelized

@@ -1,0 +1,12 @@
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: int [100] a (test_addressof_op_err.c:3)
+    Reference: a[0] =(&a); (test_addressof_op_err.c:4)
+    In function: void test(int [100] a,int b) {...} (test_addressof_op_err.c:3)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: int * b (test_addressof_op_err.c:9)
+    Reference: b++; (test_addressof_op_err.c:10)
+    In function: void test1(int [100] a,int * b) {...} (test_addressof_op_err.c:9)
+

@@ -1,0 +1,209 @@
+int __merlin_ivdep_c_buf_0_rn_rf3(float t[256][4][64]);
+int __merlin_ivdep_b_buf_0_0_rf1(float t[256][4][64]);
+int __merlin_ivdep_c_buf_0_rf0(float t[256][4][64]);
+#include "channel_def.h"
+#pragma channel float __ch_c_buf_0[64] __attribute__((depth(32)));
+typedef int __merlin_channel_typedef;
+#include <string.h> 
+#define VEC_SIZE 256 
+#define TILE  64
+#define aa(p, n) (a[(p)*VEC_SIZE + (n)])
+#define bb(p, n) (b[(p)*VEC_SIZE + (n)])
+#define cc(p, n) (c[(p)*VEC_SIZE + (n)])
+__merlin_channel_typedef __ch_c_buf_0[64];
+#include "channel_def.h"
+#pragma channel int __ch_token_0 __attribute__((depth(32)));
+typedef int __merlin_channel_typedef;
+__merlin_channel_typedef __ch_token_0;
+#include "channel_def.h"
+#pragma channel float __ch_b_buf_0_0[64] __attribute__((depth(32)));
+typedef int __merlin_channel_typedef;
+__merlin_channel_typedef __ch_b_buf_0_0[64];
+#include "channel_def.h"
+#pragma channel int __ch_token_1 __attribute__((depth(32)));
+typedef int __merlin_channel_typedef;
+__merlin_channel_typedef __ch_token_1;
+#include "channel_def.h"
+#pragma channel float __ch_a_buf_0_0 __attribute__((depth(32)));
+typedef int __merlin_channel_typedef;
+__merlin_channel_typedef __ch_a_buf_0_0;
+#include "channel_def.h"
+#pragma channel int __ch_token_2 __attribute__((depth(32)));
+typedef int __merlin_channel_typedef;
+__merlin_channel_typedef __ch_token_2;
+#include "channel_def.h"
+#pragma channel int __ch_token_3 __attribute__((depth(32)));
+typedef int __merlin_channel_typedef;
+__merlin_channel_typedef __ch_token_3;
+#include "channel_def.h"
+#pragma channel float __ch_c_buf_0_rn[64] __attribute__((depth(1024)));
+typedef int __merlin_channel_typedef;
+__merlin_channel_typedef __ch_c_buf_0_rn[64];
+#pragma ACCEL kernel
+
+void matmul_kernel(float *a,float *b,float *c)
+{
+  int dummy_token_3;
+// Token comes from node 3 and 4 for sync level 0
+  int token_3;
+  int dummy_token_2;
+// Token comes from node 2 and 4 for sync level 0
+  int token_2;
+  int dummy_token_1;
+// Token comes from node 1 and 4 for sync level 0
+  int token_1;
+  int dummy_token_0;
+// Token comes from node 0 and 4 for sync level 0
+  int token_0;
+  float c_buf_0_rn_rf3[256][4][64];
+  float a_buf_0_0_rf2_rd;
+  float b_buf_0_0_rf1[256][4][64];
+  float c_buf_0_rf0[256][4][64];
+  float c_buf_0_rn[256][4][64];
+  int _memcpy_i3_2;
+  int _memcpy_i3_1;
+  int _memcpy_i3_0;
+  int _memcpy_i2_1;
+  int _memcpy_i2_0;
+  int _memcpy_i1_2;
+  int _memcpy_i1_1;
+  int _memcpy_i1_0;
+  int _memcpy_i0_2;
+  int _memcpy_i0_1;
+  int _memcpy_i0_0;
+  float c_buf_0[256][4][64];
+  float b_buf_0_0[256][4][64];
+  float a_buf_0_0[256][256];
+  int i_0;
+  int j_0;
+  int k_0;
+  int j0_0;
+  int jj_0;
+  for (_memcpy_i0_2 = 0; _memcpy_i0_2 < 256; ++_memcpy_i0_2) {
+    for (_memcpy_i0_1 = 0; _memcpy_i0_1 < 4; ++_memcpy_i0_1) {
+      for (_memcpy_i0_0 = 0; _memcpy_i0_0 < 64; ++_memcpy_i0_0) {
+// Parallel pragma comes from SgInitializedName:c_buf_0
+        
+#pragma ACCEL parallel
+        write_channel_altera___ch_c_buf_0__merlinalterafuncend(__ch_c_buf_0[_memcpy_i0_0],c[0 + (((0 * 256 + _memcpy_i0_2) * 4 + _memcpy_i0_1) * 64 + _memcpy_i0_0)]);
+      }
+// Token gen: node 0 and 4 for sync level 0(forward)
+      if (_memcpy_i0_1 == 3 && _memcpy_i0_2 == 255) {
+        
+#pragma ACCEL mem_fence
+        write_channel_altera___ch_token_0__merlinalterafuncend(__ch_token_0,1);
+      }
+    }
+  }
+  for (_memcpy_i1_2 = 0; _memcpy_i1_2 < 256; ++_memcpy_i1_2) {
+    for (_memcpy_i1_1 = 0; _memcpy_i1_1 < 4; ++_memcpy_i1_1) {
+      for (_memcpy_i1_0 = 0; _memcpy_i1_0 < 64; ++_memcpy_i1_0) {
+// Parallel pragma comes from SgInitializedName:b_buf_0_0
+        
+#pragma ACCEL parallel
+        write_channel_altera___ch_b_buf_0_0__merlinalterafuncend(__ch_b_buf_0_0[_memcpy_i1_0],b[0 + (((0 * 256 + _memcpy_i1_2) * 4 + _memcpy_i1_1) * 64 + _memcpy_i1_0)]);
+      }
+// Token gen: node 1 and 4 for sync level 0(forward)
+      if (_memcpy_i1_1 == 3 && _memcpy_i1_2 == 255) {
+        
+#pragma ACCEL mem_fence
+        write_channel_altera___ch_token_1__merlinalterafuncend(__ch_token_1,1);
+      }
+    }
+  }
+  for (_memcpy_i2_1 = 0; _memcpy_i2_1 < 256; ++_memcpy_i2_1) {
+    for (_memcpy_i2_0 = 0; _memcpy_i2_0 < 256; ++_memcpy_i2_0) {
+      write_channel_altera___ch_a_buf_0_0__merlinalterafuncend(__ch_a_buf_0_0,a[0 + ((0 * 256 + _memcpy_i2_1) * 256 + _memcpy_i2_0)]);
+// Token gen: node 2 and 4 for sync level 0(forward)
+      if (_memcpy_i2_0 == 255 && _memcpy_i2_1 == 255) {
+        
+#pragma ACCEL mem_fence
+        write_channel_altera___ch_token_2__merlinalterafuncend(__ch_token_2,1);
+      }
+    }
+  }
+  for (k_0 = 0; k_0 < 256; k_0++) {
+    for (i_0 = 0; i_0 < 256; i_0++) {
+      for (j0_0 = 0; j0_0 < 256 / 64; j0_0++) 
+// Original: #pragma ACCEL pipeline flatten
+{
+        if (k_0 == 0) {
+          for (jj_0 = 0; jj_0 < 64; ++jj_0) {
+            
+#pragma ACCEL parallel
+            c_buf_0_rf0[i_0][j0_0][jj_0] = read_channel_altera___ch_c_buf_0__merlinalterafuncend(__ch_c_buf_0[jj_0]);
+          }
+        }
+        if (i_0 == 0) {
+          for (jj_0 = 0; jj_0 < 64; ++jj_0) {
+            
+#pragma ACCEL parallel
+            b_buf_0_0_rf1[k_0][j0_0][jj_0] = read_channel_altera___ch_b_buf_0_0__merlinalterafuncend(__ch_b_buf_0_0[jj_0]);
+          }
+        }
+        if (j0_0 == 0) {
+          a_buf_0_0_rf2_rd = read_channel_altera___ch_a_buf_0_0__merlinalterafuncend(__ch_a_buf_0_0);
+        }
+        
+#pragma ACCEL PIPELINE II=1
+        for (jj_0 = 0; jj_0 < 64; ++jj_0) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          j_0 = j0_0 * 64 + jj_0;
+          c_buf_0_rf0[i_0][j0_0][jj_0] += a_buf_0_0_rf2_rd * b_buf_0_0_rf1[k_0][j0_0][jj_0];
+          c_buf_0_rn_rf3[i_0][j0_0][jj_0] = c_buf_0_rf0[i_0][j0_0][jj_0];
+        }
+        if (k_0 == 255) {
+          for (jj_0 = 0; jj_0 < 64; ++jj_0) {
+            
+#pragma ACCEL parallel
+            write_channel_altera___ch_c_buf_0_rn__merlinalterafuncend(__ch_c_buf_0_rn[jj_0],c_buf_0_rn_rf3[i_0][j0_0][jj_0]);
+          }
+        }
+// Token gen: node 3 and 4 for sync level 0(forward)
+        if (j0_0 == 3 && i_0 == 255 && k_0 == 255) {
+          
+#pragma ACCEL mem_fence
+          write_channel_altera___ch_token_3__merlinalterafuncend(__ch_token_3,1);
+        }
+        __merlin_ivdep_c_buf_0_rf0(c_buf_0_rf0);
+        __merlin_ivdep_b_buf_0_0_rf1(b_buf_0_0_rf1);
+        __merlin_ivdep_c_buf_0_rn_rf3(c_buf_0_rn_rf3);
+      }
+    }
+  }
+  for (_memcpy_i3_2 = 0; _memcpy_i3_2 < 256; ++_memcpy_i3_2) {
+    for (_memcpy_i3_1 = 0; _memcpy_i3_1 < 4; ++_memcpy_i3_1) {
+// Token gen: node 0 and 4 for sync level 0(forward)
+      if (_memcpy_i3_1 == 0 && _memcpy_i3_2 == 0) {
+        dummy_token_0 = read_channel_altera___ch_token_0__merlinalterafuncend(__ch_token_0);
+        
+#pragma ACCEL mem_fence
+      }
+// Token gen: node 1 and 4 for sync level 0(forward)
+      if (_memcpy_i3_1 == 0 && _memcpy_i3_2 == 0) {
+        dummy_token_1 = read_channel_altera___ch_token_1__merlinalterafuncend(__ch_token_1);
+        
+#pragma ACCEL mem_fence
+      }
+// Token gen: node 2 and 4 for sync level 0(forward)
+      if (_memcpy_i3_1 == 0 && _memcpy_i3_2 == 0) {
+        dummy_token_2 = read_channel_altera___ch_token_2__merlinalterafuncend(__ch_token_2);
+        
+#pragma ACCEL mem_fence
+      }
+// Token gen: node 3 and 4 for sync level 0(forward)
+      if (_memcpy_i3_1 == 0 && _memcpy_i3_2 == 0) {
+        dummy_token_3 = read_channel_altera___ch_token_3__merlinalterafuncend(__ch_token_3);
+        
+#pragma ACCEL mem_fence
+      }
+      for (_memcpy_i3_0 = 0; _memcpy_i3_0 < 64; ++_memcpy_i3_0) {
+// Parallel pragma comes from SgInitializedName:c_buf_0_rn
+        
+#pragma ACCEL parallel
+        c[0 + (((0 * 256 + _memcpy_i3_2) * 4 + _memcpy_i3_1) * 64 + _memcpy_i3_0)] = read_channel_altera___ch_c_buf_0_rn__merlinalterafuncend(__ch_c_buf_0_rn[_memcpy_i3_0]);
+      }
+    }
+  }
+}

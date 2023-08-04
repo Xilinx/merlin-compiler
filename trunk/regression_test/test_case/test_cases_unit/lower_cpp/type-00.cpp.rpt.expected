@@ -1,0 +1,4 @@
+
+ERROR: [LWCPP-302] kernel cannot be overloaded: void top(double _Complex * a) {...} (type-00.cpp:3)
+
+ERROR: [LWCPP-302] kernel cannot be overloaded: void top(int * a) {...} (type-00.cpp:6)

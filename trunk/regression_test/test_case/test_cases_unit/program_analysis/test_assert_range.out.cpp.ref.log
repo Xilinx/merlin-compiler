@@ -1,0 +1,61 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i0 =(c + 1) / 4;i0 < 4;++i0) {...}
+[Loop i0] for(int i0 =(c + 1) / 4;i0 < 4;++i0) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i0 = 0;i0 < c;++i0) {...}
+[Loop i0] for(int i0 = 0;i0 < c;++i0) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i1 = 0;i1 < c;++i1) {...}
+[Loop i1] for(int i1 = 0;i1 < c;++i1) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i2 = 0;i2 < c;++i2) {...}
+[Loop i2] for(int i2 = 0;i2 < c;++i2) {...} [0..0]
+
+**** Test Variable Range **** 
+
+**** Test Expression Range **** 
+[Exp SgCastExp:(bool )0] 0
+[Range 0..0 (min(0x0L)...(max(0x0L))]
+[Exp SgCastExp:(bool )8] 1
+[Range 1..1 (min(0x1L)...(max(0x1L))]
+[Exp SgCastExp:(bool )(- 8)] 1
+[Range 1..1 (min(0x1L)...(max(0x1L))]
+[Exp SgCastExp:(bool )a] {(bool )a:SgCastExp (bool )a->1,0} : (bool )a..(bool )a
+[Range (bool )a..(bool )a (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgCastExp:(bool )b] {(bool )b:SgCastExp (bool )b->1,0} : (bool )b..(bool )b
+[Range (bool )b..(bool )b (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgCastExp:(bool )x] 1
+[Range 1..1 (min(0x1L)...(max(0x1L))]
+[Exp SgCastExp:(bool )y] 1
+[Range 1..1 (min(0x1L)...(max(0x1L))]
+[Exp SgLessThanOp:i0 < 4] {i0 < 4:SgLessThanOp i0 < 4->1,0} : i0 < 4..i0 < 4
+[Range i0 < 4..i0 < 4 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i0] {i0:SgForStatement i0->1,0} : (1 + c) / 4..3
+[Range (1 + c) / 4..3 (min(0x0L)...(max(0x3L))]
+[Exp SgLessThanOp:i0 < c] {i0 < c:SgLessThanOp i0 < c->1,0} : i0 < c..i0 < c
+[Range i0 < c..i0 < c (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i0] {i0:SgForStatement i0->1,0} : 0..-1L + c
+[Range 0..-1L + c (min(0x0L)...(max(0x62L))]
+[Exp SgCastExp:1] 1
+[Range 1..1 (min(0x1L)...(max(0x1L))]
+[Exp SgLessThanOp:i1 < c] {i1 < c:SgLessThanOp i1 < c->1,0} : i1 < c..i1 < c
+[Range i1 < c..i1 < c (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i1] {i1:SgForStatement i1->1,0} : 0..-1L + c
+[Range 0..-1L + c (min(0x0L)...(max(0xc6L))]
+[Exp SgCastExp:1] 1
+[Range 1..1 (min(0x1L)...(max(0x1L))]
+[Exp SgLessThanOp:i2 < c] {i2 < c:SgLessThanOp i2 < c->1,0} : i2 < c..i2 < c
+[Range i2 < c..i2 < c (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i2] {i2:SgForStatement i2->1,0} : 0..-1L + c
+[Range 0..-1L + c (min(0x0L)...(max(0x7fffffffffffffffL))]
+SgForStatement:for(int i0 =(c + 1) / 4;i0 < 4;++i0) {...}: TC = 0, TC_ub = 4
+SgForStatement:for(int i0 = 0;i0 < c;++i0) {...}: TC = 0, TC_ub = 99
+SgForStatement:for(int i1 = 0;i1 < c;++i1) {...}: TC = 0, TC_ub = 199
+SgForStatement:for(int i2 = 0;i2 < c;++i2) {...}: TC = ? , TC_ub = ?
+

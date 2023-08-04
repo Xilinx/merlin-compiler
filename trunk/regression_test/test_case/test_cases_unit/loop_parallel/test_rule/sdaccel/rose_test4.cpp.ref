@@ -1,0 +1,48 @@
+const int val[100] = {(0)};
+#pragma ACCEL kernel
+
+void func_top_0()
+{
+  
+#pragma HLS array_partition variable=val complete dim=1
+  int a[100][100];
+  
+#pragma HLS array_partition variable=a complete dim=2
+  int b[100][101];
+  
+#pragma HLS array_partition variable=b complete dim=2
+  
+#pragma HLS array_partition variable=b cyclic factor=16 dim=1
+  int k;
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    for (k = 0; k < 99; k++) {
+      for (j = 0; j < 99; j++) 
+// Original: #pragma ACCEL parallel complete
+{
+        
+#pragma HLS unroll
+        a[i][j] = b[k][j + 1] + b[k + 1][j] + val[j];
+      }
+    }
+  }
+  for (j = 0; j < 100; j++) {
+    for (k = 0; k < 20; k++) 
+// Original: #pragma ACCEL parallel factor = 5 priority = logic
+{
+      
+#pragma HLS unroll factor=5
+      a[i][j] = b[4 * k][j] + b[4 * k + 1][j + 1];
+    }
+  }
+  for (j = 0; j < 100; j++) {
+    for (k = 0; k < 20; k++) 
+// Original: #pragma ACCEL parallel factor = 5 priority = bram
+{
+      
+#pragma HLS unroll factor=5
+      a[i][j] = b[4 * k][j] + b[4 * k + 1][j + 1];
+    }
+  }
+}

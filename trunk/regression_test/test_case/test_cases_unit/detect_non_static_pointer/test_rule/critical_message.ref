@@ -1,0 +1,2 @@
+
+ERROR: [INFTF-309] Found non-static pointer 'ptr' (test_pointer_switch.c:11) (this pointer may refer to different memory locations)

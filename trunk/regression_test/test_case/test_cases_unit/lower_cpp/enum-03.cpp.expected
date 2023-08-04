@@ -1,0 +1,35 @@
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+static void __merlin_dummy_SgTemplateMemberFunctionDeclaration_em_5_();
+
+struct ::B_3_ 
+{
+}
+;
+enum _B_3_em_5 {MERLIN_MAX_ENUM_0=2L} ;
+void p_ZN4B_3_3fooIEEv(struct B_3_ *this_);
+
+void p_ZN4B_3_3fooIEEv(struct B_3_ *this_)
+{
+  enum _B_3_em_5 tmp = (enum _B_3_em_5 )2;
+}
+
+struct ::B_1_ 
+{
+}
+;
+enum _B_1_em_5 {MERLIN_MAX_ENUM_1=2L} ;
+void p_ZN4B_1_3fooIEEv(struct B_1_ *this_);
+
+void p_ZN4B_1_3fooIEEv(struct B_1_ *this_)
+{
+  enum _B_1_em_5 tmp = (enum _B_1_em_5 )2;
+}
+#pragma ACCEL kernel
+
+void top()
+{
+  struct B_3_ tmp5;
+  struct B_1_ tmp1;
+  p_ZN4B_3_3fooIEEv(&tmp5);
+  p_ZN4B_1_3fooIEEv(&tmp1);
+}

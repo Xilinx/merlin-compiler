@@ -1,0 +1,52 @@
+#include <string.h> 
+
+static int add_1(int a,int b)
+{
+  return a + b;
+}
+const int DIM2 = 4;
+#pragma ACCEL kernel
+
+void top_kernel(int aa[1][8],int bb[4],int *c)
+{
+  int bb_buf[4];
+  int c_buf[4];
+  
+#pragma ACCEL interface variable=aa depth=2,4 max_depth=2,4
+  
+#pragma ACCEL interface variable=bb depth=4 max_depth=4
+  
+#pragma ACCEL interface variable=c depth=4 max_depth=4
+  int i;
+  int tmp[4];
+  long _memcpy_i_1;
+  for (_memcpy_i_1 = 0; _memcpy_i_1 < sizeof(int ) * ((unsigned long )4) / 4; ++_memcpy_i_1) {
+    
+#pragma ACCEL PARALLEL SKIP COMPLETE
+    long total_offset1 = 0 * 4 + 0;
+    long total_offset2 = 0 * 4 + 0;
+    bb_buf[total_offset1 + _memcpy_i_1] = bb[total_offset2 + _memcpy_i_1];
+  }
+  for (i = 0; i < 4; ++i) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    long _memcpy_i_0;
+    for (_memcpy_i_0 = 0; _memcpy_i_0 < ((unsigned long )4) * ((unsigned long )4) / 4; ++_memcpy_i_0) {
+      
+#pragma ACCEL PARALLEL SKIP COMPLETE
+      long total_offset1 = 0 * 4 + 0;
+      long total_offset2 = 0 * 8 + 0;
+      tmp[total_offset1 + _memcpy_i_0] = aa[0][total_offset2 + _memcpy_i_0];
+    }
+    c_buf[i] = add_1(tmp[i],bb_buf[i]);
+  }
+  long _memcpy_i_2;
+  for (_memcpy_i_2 = 0; _memcpy_i_2 < sizeof(int ) * ((unsigned long )4) / 4; ++_memcpy_i_2) {
+    
+#pragma ACCEL PARALLEL SKIP COMPLETE
+    long total_offset1 = 0 * 0 + 0;
+    long total_offset2 = 0 * 4 + 0;
+    c[total_offset1 + _memcpy_i_2] = c_buf[total_offset2 + _memcpy_i_2];
+  }
+  return ;
+}

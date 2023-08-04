@@ -1,0 +1,409 @@
+{
+    "Performance Estimate": {
+        "comment": "TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per call", 
+        "note": {}, 
+        "pre_info": "", 
+        "table": {
+            "column0": [
+                "0", 
+                "Hierarchy", 
+                "TC", 
+                "AC", 
+                "CPC", 
+                "Detail"
+            ], 
+            "column0000000001": [
+                "0", 
+                "aes256_encrypt_ecb_kernel (aes.cpp:175)", 
+                "", 
+                "25260124 (100.0%)", 
+                "25260124", 
+                "?"
+            ], 
+            "column0000000002": [
+                "1", 
+                "auto memory burst for 'data'(read)", 
+                "", 
+                "2048 (  0.0%)", 
+                "2048", 
+                "-"
+            ], 
+            "column0000000003": [
+                "1", 
+                "loop i1 (aes.cpp:186)", 
+                "4096", 
+                "25260064 (100.0%)", 
+                "25260064", 
+                "loop tiled, flattened with loop i2 (aes.cpp:193), 2x parallelized"
+            ], 
+            "column0000000004": [
+                "2", 
+                "loop i2 (aes.cpp:193)", 
+                "4096", 
+                "-", 
+                "-", 
+                "flattened"
+            ], 
+            "column0000000005": [
+                "3", 
+                "aes256_encrypt_ecb (aes.cpp:196)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000006": [
+                "2", 
+                "auto memory burst for 'data'(write)", 
+                "", 
+                "4194304 ( 16.6%)", 
+                "2048", 
+                "-"
+            ], 
+            "column0000000007": [
+                "0", 
+                "aes256_encrypt_ecb (aes.cpp:140)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000008": [
+                "1", 
+                "loop ecb1 (aes.cpp:148)", 
+                "32", 
+                "-", 
+                "-", 
+                "32x parallelized"
+            ], 
+            "column0000000009": [
+                "1", 
+                "loop ecb2 (aes.cpp:151)", 
+                "7", 
+                "-", 
+                "-", 
+                "7x parallelized"
+            ], 
+            "column0000000010": [
+                "2", 
+                "aes_expandEncKey (aes.cpp:152)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000011": [
+                "1", 
+                "aes_addRoundKey_cpy (aes.cpp:156)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000012": [
+                "1", 
+                "loop ecb3 (aes.cpp:157)", 
+                "13", 
+                "-", 
+                "-", 
+                "13x parallelized"
+            ], 
+            "column0000000013": [
+                "2", 
+                "aes_subBytes (aes.cpp:159)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000014": [
+                "2", 
+                "aes_shiftRows (aes.cpp:160)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000015": [
+                "2", 
+                "aes_mixColumns (aes.cpp:161)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000016": [
+                "2", 
+                "aes_addRoundKey (aes.cpp:162)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000017": [
+                "2", 
+                "aes_expandEncKey (aes.cpp:164)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000018": [
+                "2", 
+                "aes_addRoundKey (aes.cpp:165)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000019": [
+                "1", 
+                "aes_subBytes (aes.cpp:168)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000020": [
+                "1", 
+                "aes_shiftRows (aes.cpp:169)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000021": [
+                "1", 
+                "aes_expandEncKey (aes.cpp:170)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000022": [
+                "1", 
+                "aes_addRoundKey (aes.cpp:171)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000023": [
+                "0", 
+                "aes_expandEncKey (aes.cpp:116)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000024": [
+                "1", 
+                "rj_sbox (aes.cpp:120)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000025": [
+                "1", 
+                "rj_sbox (aes.cpp:121)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000026": [
+                "1", 
+                "rj_sbox (aes.cpp:122)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000027": [
+                "1", 
+                "rj_sbox (aes.cpp:123)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000028": [
+                "1", 
+                "loop exp1 (aes.cpp:126)", 
+                "3", 
+                "-", 
+                "-", 
+                "3x parallelized"
+            ], 
+            "column0000000029": [
+                "1", 
+                "rj_sbox (aes.cpp:128)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000030": [
+                "1", 
+                "rj_sbox (aes.cpp:129)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000031": [
+                "1", 
+                "rj_sbox (aes.cpp:130)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000032": [
+                "1", 
+                "rj_sbox (aes.cpp:131)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000033": [
+                "1", 
+                "loop exp2 (aes.cpp:133)", 
+                "3", 
+                "-", 
+                "-", 
+                "3x parallelized"
+            ], 
+            "column0000000034": [
+                "0", 
+                "rj_sbox (aes.cpp:10)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000035": [
+                "0", 
+                "aes_addRoundKey_cpy (aes.cpp:80)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000036": [
+                "1", 
+                "loop cpkey (aes.cpp:85)", 
+                "16", 
+                "-", 
+                "-", 
+                "16x parallelized"
+            ], 
+            "column0000000037": [
+                "0", 
+                "aes_subBytes (aes.cpp:60)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000038": [
+                "1", 
+                "loop sub (aes.cpp:66)", 
+                "16", 
+                "-", 
+                "-", 
+                "16x parallelized"
+            ], 
+            "column0000000039": [
+                "2", 
+                "rj_sbox (aes.cpp:66)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000040": [
+                "0", 
+                "aes_shiftRows (aes.cpp:90)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000041": [
+                "0", 
+                "aes_mixColumns (aes.cpp:102)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000042": [
+                "1", 
+                "loop mix (aes.cpp:106)", 
+                "4", 
+                "-", 
+                "-", 
+                "4x parallelized"
+            ], 
+            "column0000000043": [
+                "2", 
+                "rj_xtime (aes.cpp:110)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000044": [
+                "2", 
+                "rj_xtime (aes.cpp:110)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000045": [
+                "2", 
+                "rj_xtime (aes.cpp:111)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000046": [
+                "2", 
+                "rj_xtime (aes.cpp:111)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000047": [
+                "0", 
+                "rj_xtime (aes.cpp:53)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000048": [
+                "0", 
+                "aes_addRoundKey (aes.cpp:70)", 
+                "", 
+                "-", 
+                "-", 
+                "inlined"
+            ], 
+            "column0000000049": [
+                "1", 
+                "loop addkey (aes.cpp:76)", 
+                "16", 
+                "-", 
+                "-", 
+                "16x parallelized"
+            ]
+        }
+    }
+}

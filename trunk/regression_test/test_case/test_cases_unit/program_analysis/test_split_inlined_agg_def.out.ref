@@ -1,0 +1,58 @@
+
+class A 
+{
+  private: int a;
+  
+
+  public: inline A()
+{
+  }
+}
+;
+class A g_a;
+
+class B 
+{
+  
+
+  private: class BB 
+{
+    private: int bb;
+    
+
+    public: inline BB()
+{
+    }
+  }
+;
+  private: class BB g_bb;
+  
+
+  public: inline B()
+{
+    (this) -> g_bb;
+  }
+}
+;
+class B g_b;
+
+struct st 
+{
+  
+
+  union X 
+{
+    int a;
+  }
+;
+  union X X;
+}
+;
+
+void top()
+{
+  struct st tmp;
+  g_a;
+  g_b;
+  class B b;
+}

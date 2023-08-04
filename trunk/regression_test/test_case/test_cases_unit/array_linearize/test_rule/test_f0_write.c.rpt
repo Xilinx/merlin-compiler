@@ -1,0 +1,10 @@
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'a' (test_f0_write.c:3)
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: int ** f0 (test_f0_write.c:12)
+    Reference: f0 += 2; (test_f0_write.c:14)
+    In function: void func(int **[1024] a,int ** b,int [3][5] c,int n) {...} (test_f0_write.c:3)
+
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'c' (test_f0_write.c:3)

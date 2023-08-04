@@ -1,0 +1,41 @@
+#include <string.h> 
+#include<assert.h>
+#define VEC_SIZE 1024
+#define TS 256
+#define aa(p, n) (a[(p)*VEC_SIZE + (n)])
+#define bb(p, n) (b[(p)*VEC_SIZE + (n)])
+#define cc(p, n) (c[(p)*VEC_SIZE + (n)])
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void matmul_kernel(float *a,float *b,float *c)
+{
+  int i;
+  int j;
+  int k;
+  int j0;
+  int jj;
+  for (k = 0; k < 1024; k++) {
+    float b_buf[1024];
+    float a_buf[1024];
+    memcpy((void *)(&a_buf[0]),(const void *)(&a[k * 1024]),sizeof(float ) * 1024);
+    memcpy((void *)(&b_buf[0]),(const void *)(&b[k * 1024]),sizeof(float ) * 1024);
+    for (i = 0; i < 1024; i++) {
+      float c_buf[1024];
+      memcpy((void *)(&c_buf[0]),(const void *)(&c[i * 1024]),sizeof(float ) * 1024);
+      for (j0 = 0; j0 < 1024 / 256; j0++) 
+// Original: #pragma ACCEL pipeline flatten
+{
+        
+#pragma ACCEL PIPELINE II=1
+        for (jj = 0; jj < 256; jj++) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          j = j0 * 256 + jj;
+          c_buf[j0 * 256 + jj] += a_buf[i] * b_buf[j0 * 256 + jj];
+        }
+      }
+      memcpy((void *)(&c[i * 1024]),(const void *)(&c_buf[0]),sizeof(float ) * 1024);
+    }
+  }
+}

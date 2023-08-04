@@ -1,0 +1,181 @@
+{
+    "X": {
+        "org_identifier": "X",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_3": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc) {...}\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc) {...}\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_3_2": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"SgFunctionDefinition:void vec_add_kernel(int a[100],int b[100],int c[100],int inc){#pragma ACCEL auto...\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDefinition:void vec_add_kernel(int a[100],int b[100],int c[100],int inc){#pragma ACCEL auto...\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_3_2_0": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 21,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 0,
+                "location": 0
+            },
+            {
+                "action": 0,
+                "location": 2
+            },
+            {
+                "action": 0,
+                "location": 4
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma ACCEL auto_register variable=b_buf_0\\nfrom: SgVariableDeclaration:int b_buf_0[7][16];\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma ACCEL auto_register variable=a_buf_0\\nfrom: SgVariableDeclaration:int a_buf_0[7][16];\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma ACCEL auto_register variable=c_buf_0\\nfrom: SgVariableDeclaration:int c_buf_0[7][16];\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{#pragma ACCEL auto_register variable=b_buf_0int b_buf_0[7][16];#pragma ACCEL au...\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_3_2_0_0": {
+        "org_identifier": "BuiltInloop_parallel_130",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 7894 for 140544127446424\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL auto_register variable=b_buf_0\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_3_2_0_2": {
+        "org_identifier": "BuiltInloop_parallel_261",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 7894 for 140544127447008\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL auto_register variable=a_buf_0\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_3_2_0_4": {
+        "org_identifier": "BuiltInloop_parallel_392",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 7894 for 140544127447592\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL auto_register variable=c_buf_0\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    }
+}

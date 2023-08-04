@@ -1,0 +1,24 @@
+
+ERROR: [MDARR-306] Complex access on multiple dimension array/pointer is not supported : 
+    Array: int ** b (test_invalid_standarise_pntr.cpp:1)
+    Reference: --b; (test_invalid_standarise_pntr.cpp:8)
+    In function: void sub(int ** b) {...} (test_invalid_standarise_pntr.cpp:1)
+
+
+ERROR: [MDARR-306] Complex access on multiple dimension array/pointer is not supported : 
+    Array: int ** b (test_invalid_standarise_pntr.cpp:1)
+    Reference: b--; (test_invalid_standarise_pntr.cpp:7)
+    In function: void sub(int ** b) {...} (test_invalid_standarise_pntr.cpp:1)
+
+
+ERROR: [MDARR-306] Complex access on multiple dimension array/pointer is not supported : 
+    Array: int ** b (test_invalid_standarise_pntr.cpp:1)
+    Reference: ++b; (test_invalid_standarise_pntr.cpp:3)
+    In function: void sub(int ** b) {...} (test_invalid_standarise_pntr.cpp:1)
+
+
+ERROR: [MDARR-306] Complex access on multiple dimension array/pointer is not supported : 
+    Array: int ** b (test_invalid_standarise_pntr.cpp:1)
+    Reference: b++; (test_invalid_standarise_pntr.cpp:2)
+    In function: void sub(int ** b) {...} (test_invalid_standarise_pntr.cpp:1)
+

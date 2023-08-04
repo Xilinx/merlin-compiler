@@ -1,0 +1,2 @@
+
+ERROR: [SEPAR-305] Cannot support template class: 'counter_cls < int > ' (vec_add.cpp:34)

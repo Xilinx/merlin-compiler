@@ -1,0 +1,12 @@
+typedef int a_integer;
+namespace a
+{
+static void __merlin_dummy_SgTypedefDeclaration_typedef_in_();
+}
+#pragma ACCEL kernel
+
+void k()
+{
+using namespace a;
+::a_integer i;
+}

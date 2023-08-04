@@ -1,0 +1,63 @@
+#include "merlin_stream.h" 
+extern int __merlin_include__GB_merlin_stream_h_0;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=32 NODE=vec_add PORT=msm_port_a2_vec_add_0 
+merlin_stream ch_a2_1;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=32 NODE=vec_add PORT=msm_port_a1_vec_add_0 
+merlin_stream ch_a1_0;
+#include "cmost.h"
+#include <string.h>
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static void __merlin_dummy_kernel_pragma();
+// Original: #pragma ACCEL kernel
+
+void msm_port_a1_vec_add_0(int a1[1024])
+{
+  for (int _i_l1 = 0; _i_l1 < 1024; ++_i_l1) {
+    int a1_sp_tmp_0;
+    a1_sp_tmp_0 = a1[_i_l1];
+    merlin_stream_write(&ch_a1_0,&a1_sp_tmp_0);
+  }
+}
+
+void msm_port_a2_vec_add_0(int a2[1024])
+{
+  for (int _i_l1 = 0; _i_l1 < 1024; ++_i_l1) {
+    int a2_sp_tmp_0;
+    merlin_stream_read(&ch_a2_1,&a2_sp_tmp_0);
+    a2[_i_l1] = a2_sp_tmp_0;
+  }
+}
+
+void vec_add(int s,int a1[1024],int a2[1024])
+{
+  merlin_stream_init(&ch_a2_1,1024,4);
+  merlin_stream_init(&ch_a1_0,1024,4);
+{
+    
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=1 NODE=vec_add VARIABLE=a1 
+    msm_port_a1_vec_add_0(a1);
+  }
+  __merlin_access_range(a2,0,1023UL);
+  __merlin_access_range(a1,0,1023UL);
+  
+#pragma ACCEL interface variable=a1 max_depth=1024 depth=1024 memory_burst=off
+  
+#pragma ACCEL interface variable=a2 max_depth=1024 depth=1024 memory_burst=off
+  int a1_buf[1024];
+  memcpy((void *)a1_buf,(const void *)a1,4 * ((unsigned long )1024));
+  for (int _i_l1 = 0; _i_l1 < 1024; ++_i_l1) {
+    int a2_sn_tmp_0;
+    int a1_sn_tmp_0;
+    merlin_stream_read(&ch_a1_0,&a1_sn_tmp_0);
+    a2_sn_tmp_0 = a1_buf[1023 - _i_l1] + a1_sn_tmp_0;
+    merlin_stream_write(&ch_a2_1,&a2_sn_tmp_0);
+  }
+  merlin_stream_reset(&ch_a1_0);
+{
+    
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=write DIM_NUM=1 NODE=vec_add VARIABLE=a2 
+    msm_port_a2_vec_add_0(a2);
+  }
+  merlin_stream_reset(&ch_a2_1);
+}

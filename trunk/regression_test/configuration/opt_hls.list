@@ -1,0 +1,15 @@
+matmul         org
+denoise        org
+segmentation   org
+namd           org
+smithwaterman  org
+idct           org
+blackschole    org
+dwt            org
+logistic_64    org
+twoNN          org
+vec_sum        org
+normal         org
+flann          org
+logistic_L10   org
+cnn            org

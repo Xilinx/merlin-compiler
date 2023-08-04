@@ -1,0 +1,75 @@
+[
+    {
+        "inline": "", 
+        "Target_FREQ": "300", 
+        "Estimate_FREQ": "300", 
+        "childs": [
+            {
+                "name": "i", 
+                "type": "loop", 
+                "childs": [
+                    {
+                        "name": "multiple_bits_writer", 
+                        "type": "callfunction", 
+                        "CYCLE_UNIT": 4598, 
+                        "function_id": "F_0_0_0_14", 
+                        "src_topo_id": "X_0_0_0_19_2_0_52_3_4_1_0_0_0"
+                    }
+                ], 
+                "trip-count": "1324", 
+                "CYCLE_UNIT": 6095696, 
+                "src_topo_id": "L_0_0_0_19_2_0_52"
+            }
+        ], 
+        "estimate": "2.433", 
+        "call_functions": [
+            {
+                "src_topo_id": "X_0_0_0_19_2_0_43_3_2_1_0_0_0", 
+                "type": "callfunction", 
+                "name": "multiple_bits_writer", 
+                "function_id": "F_0_0_0_14"
+            } 
+        ], 
+        "target": "3.33", 
+        "name": "encode", 
+        "src_topo_id": "F_0_0_0_19", 
+        "uncertainty": "0.90", 
+        "sub_functions": [
+            {
+                "inline": "", 
+                "childs": [
+                    {
+                        "name": "i", 
+                        "type": "loop", 
+                        "childs": [
+                            {
+                                "name": "bit_writer", 
+                                "type": "callfunction", 
+                                "CYCLE_UNIT": 15, 
+                                "function_id": "F_0_0_0_12", 
+                                "src_topo_id": "X_0_0_0_14_2_0_2_3_1_1_0_0_0"
+                            }
+                        ], 
+                        "trip-count": "255", 
+                        "CYCLE_UNIT": 4595, 
+                        "src_topo_id": "L_0_0_0_14_2_0_2"
+                    }
+                ], 
+                "call_functions": [
+                    {
+                        "src_topo_id": "X_0_0_0_14_2_0_2_3_1_1_0_0_0", 
+                        "type": "callfunction", 
+                        "name": "bit_writer", 
+                        "function_id": "F_0_0_0_12"
+                    }
+                ], 
+                "name": "multiple_bits_writer", 
+                "src_topo_id": "F_0_0_0_14", 
+                "CYCLE_UNIT": 4598, 
+                "type": "function"
+            } 
+        ], 
+        "CYCLE_UNIT": 7344821, 
+        "type": "kernel"
+    }
+]

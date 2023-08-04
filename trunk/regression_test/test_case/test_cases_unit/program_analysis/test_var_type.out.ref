@@ -1,0 +1,9 @@
+int g_a = 0;
+extern int e_a[10];
+int e_a[10] = {(0)};
+
+void func(int *a,int *b,int *c)
+{
+  int l_a = 10;
+   *c =  *a +  *b;
+}

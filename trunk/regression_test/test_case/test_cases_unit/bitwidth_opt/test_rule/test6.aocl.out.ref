@@ -1,0 +1,162 @@
+#include<string.h>
+//1d dimension
+#pragma ACCEL kernel
+
+void top(int *a,char *b,unsigned int *c,float *d)
+{
+  int _memcpy_i8_3;
+  int _memcpy_i8_2;
+  int _memcpy_i8_1;
+  int _memcpy_i8_0;
+  int _memcpy_i7_3;
+  int _memcpy_i7_2;
+  int _memcpy_i7_1;
+  int _memcpy_i7_0;
+  int _memcpy_i6_3;
+  int _memcpy_i6_2;
+  int _memcpy_i6_1;
+  int _memcpy_i6_0;
+  int _memcpy_i5_2;
+  int _memcpy_i5_1;
+  int _memcpy_i5_0;
+  int _memcpy_i4_2;
+  int _memcpy_i4_1;
+  int _memcpy_i4_0;
+  int _memcpy_i3_2;
+  int _memcpy_i3_1;
+  int _memcpy_i3_0;
+  int _memcpy_i2_1;
+  int _memcpy_i2_0;
+  int _memcpy_i1_1;
+  int _memcpy_i1_0;
+  int a_buf[1000];
+  long _memcpy_i_0;
+  for (_memcpy_i_0 = 0; _memcpy_i_0 < sizeof(int ) * ((unsigned long )1000) / 4; ++_memcpy_i_0) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=50
+    long total_offset1 = 0 * 1000 + 0;
+    long total_offset2 = 0 * 0 + 0;
+    a_buf[total_offset1 + _memcpy_i_0] = a[total_offset2 + _memcpy_i_0];
+  }
+  char b_buf[100][64];
+  for (_memcpy_i1_1 = 0; _memcpy_i1_1 < 100; ++_memcpy_i1_1) {
+    
+#pragma HLS COALESCING_WIDTH=512
+    for (_memcpy_i1_0 = 0; _memcpy_i1_0 < 64; ++_memcpy_i1_0) {
+      
+#pragma ACCEL PARALLEL SKIP COMPLETE
+      b_buf[_memcpy_i1_1][_memcpy_i1_0] = b[0 + ((0 * 100 + _memcpy_i1_1) * 64 + _memcpy_i1_0)];
+    }
+  }
+  unsigned int c_buf[100][200][16];
+  for (_memcpy_i3_2 = 0; _memcpy_i3_2 < 100; ++_memcpy_i3_2) {
+    
+#pragma HLS COALESCING_WIDTH=512
+    for (_memcpy_i3_1 = 0; _memcpy_i3_1 < 200; ++_memcpy_i3_1) {
+      for (_memcpy_i3_0 = 0; _memcpy_i3_0 < 16; ++_memcpy_i3_0) {
+        
+#pragma ACCEL PARALLEL SKIP COMPLETE
+        c_buf[_memcpy_i3_2][_memcpy_i3_1][_memcpy_i3_0] = c[0 + (((0 * 100 + _memcpy_i3_2) * 200 + _memcpy_i3_1) * 16 + _memcpy_i3_0)];
+      }
+    }
+  }
+  float d_buf[100][200][300][16];
+  for (_memcpy_i6_3 = 0; _memcpy_i6_3 < 100; ++_memcpy_i6_3) {
+    
+#pragma HLS COALESCING_WIDTH=512
+    for (_memcpy_i6_2 = 0; _memcpy_i6_2 < 200; ++_memcpy_i6_2) {
+      for (_memcpy_i6_1 = 0; _memcpy_i6_1 < 300; ++_memcpy_i6_1) {
+        for (_memcpy_i6_0 = 0; _memcpy_i6_0 < 16; ++_memcpy_i6_0) {
+          
+#pragma ACCEL PARALLEL SKIP COMPLETE
+          d_buf[_memcpy_i6_3][_memcpy_i6_2][_memcpy_i6_1][_memcpy_i6_0] = d[0 + ((((0 * 100 + _memcpy_i6_3) * 200 + _memcpy_i6_2) * 300 + _memcpy_i6_1) * 16 + _memcpy_i6_0)];
+        }
+      }
+    }
+  }
+  char b_buf_1[9][160];
+  for (_memcpy_i2_1 = 0; _memcpy_i2_1 < 9; ++_memcpy_i2_1) {
+    
+#pragma HLS COALESCING_WIDTH=320
+    for (_memcpy_i2_0 = 0; _memcpy_i2_0 < 160; ++_memcpy_i2_0) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=40
+      b_buf_1[_memcpy_i2_1][_memcpy_i2_0] = b[0 + ((0 * 9 + _memcpy_i2_1) * 160 + _memcpy_i2_0)];
+    }
+  }
+  unsigned int c_buf_1[1100][4][2];
+  for (_memcpy_i4_2 = 0; _memcpy_i4_2 < 1100; ++_memcpy_i4_2) {
+    
+#pragma HLS COALESCING_WIDTH=512
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=2
+    for (_memcpy_i4_1 = 0; _memcpy_i4_1 < 4; ++_memcpy_i4_1) {
+      
+#pragma ACCEL PARALLEL SKIP COMPLETE
+      for (_memcpy_i4_0 = 0; _memcpy_i4_0 < 2; ++_memcpy_i4_0) {
+        
+#pragma ACCEL PARALLEL SKIP COMPLETE
+        c_buf_1[_memcpy_i4_2][_memcpy_i4_1][_memcpy_i4_0] = c[0 + (((0 * 1100 + _memcpy_i4_2) * 4 + _memcpy_i4_1) * 2 + _memcpy_i4_0)];
+      }
+    }
+  }
+  float d_buf_1[340][2][2][2];
+  for (_memcpy_i7_3 = 0; _memcpy_i7_3 < 340; ++_memcpy_i7_3) {
+    
+#pragma HLS COALESCING_WIDTH=512
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=2
+    for (_memcpy_i7_2 = 0; _memcpy_i7_2 < 2; ++_memcpy_i7_2) {
+      
+#pragma ACCEL PARALLEL SKIP COMPLETE
+      for (_memcpy_i7_1 = 0; _memcpy_i7_1 < 2; ++_memcpy_i7_1) {
+        
+#pragma ACCEL PARALLEL SKIP COMPLETE
+        for (_memcpy_i7_0 = 0; _memcpy_i7_0 < 2; ++_memcpy_i7_0) {
+          
+#pragma ACCEL PARALLEL SKIP COMPLETE
+          d_buf_1[_memcpy_i7_3][_memcpy_i7_2][_memcpy_i7_1][_memcpy_i7_0] = d[0 + ((((0 * 340 + _memcpy_i7_3) * 2 + _memcpy_i7_2) * 2 + _memcpy_i7_1) * 2 + _memcpy_i7_0)];
+        }
+      }
+    }
+  }
+  unsigned int c_buf_2[11][16][4];
+  for (_memcpy_i5_2 = 0; _memcpy_i5_2 < 11; ++_memcpy_i5_2) {
+    
+#pragma HLS COALESCING_WIDTH=512
+    for (_memcpy_i5_1 = 0; _memcpy_i5_1 < 16; ++_memcpy_i5_1) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=4
+      for (_memcpy_i5_0 = 0; _memcpy_i5_0 < 4; ++_memcpy_i5_0) {
+        
+#pragma ACCEL PARALLEL SKIP COMPLETE
+        c_buf_2[_memcpy_i5_2][_memcpy_i5_1][_memcpy_i5_0] = c[0 + (((0 * 11 + _memcpy_i5_2) * 16 + _memcpy_i5_1) * 4 + _memcpy_i5_0)];
+      }
+    }
+  }
+  float d_buf_2[34][2][64][2];
+  for (_memcpy_i8_3 = 0; _memcpy_i8_3 < 34; ++_memcpy_i8_3) {
+    
+#pragma HLS COALESCING_WIDTH=512
+    for (_memcpy_i8_2 = 0; _memcpy_i8_2 < 2; ++_memcpy_i8_2) {
+      for (_memcpy_i8_1 = 0; _memcpy_i8_1 < 64; ++_memcpy_i8_1) {
+        
+#pragma ACCEL PARALLEL SKIP FACTOR=8
+        for (_memcpy_i8_0 = 0; _memcpy_i8_0 < 2; ++_memcpy_i8_0) {
+          
+#pragma ACCEL PARALLEL SKIP COMPLETE
+          d_buf_2[_memcpy_i8_3][_memcpy_i8_2][_memcpy_i8_1][_memcpy_i8_0] = d[0 + ((((0 * 34 + _memcpy_i8_3) * 2 + _memcpy_i8_2) * 64 + _memcpy_i8_1) * 2 + _memcpy_i8_0)];
+        }
+      }
+    }
+  }
+}
+
+int main()
+{
+  int *a;
+  char *b;
+  unsigned int *c;
+  float *d;
+  top(a,b,c,d);
+}

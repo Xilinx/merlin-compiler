@@ -1,0 +1,218 @@
+// 1. loop structure
+// 2. function structure
+// 3. access pattern
+// 4. pragma modes
+#pragma ACCEL kernel
+
+void func_top_0_0(int *a)
+{
+  int i;
+  for (i = 0; i < 100; i += 2) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    a[i] += i;
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_0(int *a,int *b)
+{
+  int _rdc_tmp;
+  int i;
+  int j;
+  int a_buf[100];
+  for (j = 0; j < 100; ++j) {
+    int a_buf_rdc[100];
+    
+#pragma ACCEL PARALLEL
+    for (i = 0; i < 100; i++) {
+      a_buf_rdc[i] = 0;
+    }
+    
+#pragma ACCEL PARALLEL COMPLETE
+    for (i = 0; i < 100; i++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL REDUCTION
+      _rdc_tmp = b[i];
+      a_buf_rdc[i] += _rdc_tmp;
+    }
+    
+#pragma ACCEL PARALLEL
+    for (i = 0; i < 100; i++) {
+      a_buf[i] += a_buf_rdc[i];
+    }
+    func_top_0_0(a_buf);
+    for (i = 100; i >= 0; --i) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[i] += a_buf[i];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_0_1(int *a,int *b)
+{
+  int _rdc_tmp;
+  int i;
+  int j;
+  int a_buf[100];
+  for (i = 0; i < 100; i++) {
+    int a_buf_rdc[100];
+{
+      a_buf_rdc[i] = 0;
+    }
+    
+#pragma ACCEL PARALLEL COMPLETE
+    for (j = 0; j < 100; ++j) {
+      
+#pragma ACCEL REDUCTION
+      _rdc_tmp = b[i];
+      a_buf_rdc[i] += _rdc_tmp;
+    }
+{
+      a_buf[i] += a_buf_rdc[i];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_0_2(int *a,int *b)
+{
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    int a_buf[100];
+    for (j = 0; j < 100; ++j) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL REDUCTION
+      a_buf[i] += b[i];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_0_3(int *a,int *b)
+{
+  int k;
+  int i;
+  int j;
+  for (j = 0; j < 100; ++j) {
+    int a_buf[100];
+    for (k = 0; k < 100; ++k) {
+      
+#pragma ACCEL PIPELINE
+//FIXME:
+      for (i = 0; i < 100; i++) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        
+#pragma ACCEL REDUCTION
+        a_buf[i] += b[i];
+      }
+    }
+    for (i = 100; i >= 0; --i) 
+      a[i] += a_buf[i];
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_1(int *a,int *b)
+{
+  int i;
+  int j;
+  for (j = 0; j < 100; ++j) {
+    
+#pragma ACCEL PIPELINE
+    for (i = 0; i < 100; i++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL REDUCTION
+      a[j] += b[100 * i + j];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_2(int *a,int *b)
+{
+  int i;
+  int j;
+  for (j = 0; j < 100; ++j) {
+    
+#pragma ACCEL PIPELINE
+    for (i = 0; i < 100; i++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL reduction
+      a[j] += b[100 * i + j];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_3(int a,int *b)
+{
+  int k;
+  int i;
+  int j;
+  for (j = 0; j < 100; ++j) {
+    for (k = 0; k < 100; ++k) {
+      for (i = 0; i < 100; i++) {
+        
+#pragma ACCEL PIPELINE
+        
+#pragma ACCEL REDUCTION
+        a += b[i + 100 * k + j];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_4(int a,int *b,int *c)
+{
+  int k;
+  int i;
+  int j;
+  for (j = 0; j < 100; ++j) {
+    
+#pragma ACCEL PIPELINE
+    for (k = 0; k < 100; ++k) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      for (i = 0; i < 100; i++) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        
+#pragma ACCEL REDUCTION
+        a += b[i + 100 * k + j];
+      }
+    }
+    c[j] = a;
+  }
+}
+
+int main()
+{
+  int a;
+  int *aa;
+  int *b;
+  int *c;
+  func_top_0(aa,b);
+  func_top_0_1(aa,b);
+  func_top_0_2(aa,b);
+  func_top_0_3(aa,b);
+  func_top_1(aa,b);
+  func_top_2(aa,b);
+  func_top_3(a,b);
+  func_top_4(a,b,c);
+}

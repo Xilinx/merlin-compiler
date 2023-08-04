@@ -1,0 +1,167 @@
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+
+int sub(int *a)
+{
+  int a_buf[10];
+  int sum = 0;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 10);
+  for (int i = 0; i < 10; ++i) {
+    sum += a_buf[i];
+    a_buf[i]++;
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10);
+  return sum;
+}
+#pragma ACCEL kernel
+
+int top(int *a)
+{
+// should not infer burst here because of return statements
+  return sub(a);
+}
+#pragma ACCEL kernel
+
+void top_2(int *a)
+{
+// should not infer burst because of return statements
+  for (int i = 0; i < 100; ++i) {
+    if (i == 2) {
+      return ;
+    }
+    a[i]++;
+  }
+}
+#pragma ACCEL kernel
+
+void top_3(int *a)
+{
+  for (int i = 0; i < 100; ++i) {
+    int a_buf[100];
+// should not infer burst here because of break statements
+    if (i == 2) {
+      break; 
+    }
+    memcpy((void *)(&a_buf[0]),(const void *)(&a[i * 100000]),sizeof(int ) * 100);
+    for (int j = 0; j < 100; ++j) {
+      a_buf[j]++;
+    }
+    memcpy((void *)(&a[i * 100000]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+  }
+}
+#pragma ACCEL kernel
+
+void top_4(int *a)
+{
+  for (int i = 0; i < 100; ++i) {
+    int a_buf[100];
+// should not infer burst here because of continue statements
+    if (i == 2) {
+      continue; 
+    }
+    memcpy((void *)(&a_buf[0]),(const void *)(&a[i * 100000]),sizeof(int ) * 100);
+    for (int j = 0; j < 100; ++j) {
+      a_buf[j]++;
+    }
+    memcpy((void *)(&a[i * 100000]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+  }
+}
+#pragma ACCEL kernel
+
+void top_5(int *a)
+{
+  for (int i = 0; i < 100; ++i) {
+    int a_buf[100];
+    memcpy((void *)(&a_buf[0]),(const void *)(&a[i * 100000]),sizeof(int ) * 100);
+// can infer burst here because of local jump
+    if (i == 2) {
+      goto L1;
+    }
+    L1:
+    for (int j = 0; j < 100; ++j) {
+      a_buf[j]++;
+    }
+    memcpy((void *)(&a[i * 100000]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+  }
+}
+#pragma ACCEL kernel
+
+void top_6(int *a)
+{
+  for (int i = 0; i < 100; ++i) {
+    int a_buf[100];
+// cannot infer burst here because of global jump
+    if (i == 2) {
+      goto L1;
+    }
+    memcpy((void *)(&a_buf[0]),(const void *)(&a[i * 100000]),sizeof(int ) * 100);
+    for (int j = 0; j < 100; ++j) {
+      a_buf[j]++;
+    }
+    memcpy((void *)(&a[i * 100000]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+  }
+  L1:
+  return ;
+}
+#pragma ACCEL kernel
+
+void top_7(int *a)
+{
+  for (int j = 0; j < 100; ++j) {
+    for (int i = 0; i < 100; ++i) {
+// cannot infer burst here because of global jump
+      if (i == 2) {
+        continue; 
+      }
+      a[i * 100000 + j]++;
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void top_8(int *a)
+{
+  for (int j = 0; j < 100; ++j) {
+    for (int i = 0; i < 100; ++i) {
+// cannot infer burst here because of global jump
+      if (i == 2) {
+        break; 
+      }
+      a[i * 100000 + j]++;
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void top_9(int *a)
+{
+  for (int j = 0; j < 100; ++j) {
+    int a_buf[100];
+    memcpy((void *)(&a_buf[0]),(const void *)(&a[j * 100000]),sizeof(int ) * 100);
+    for (int i = 0; i < 100; ++i) {
+// cannot infer burst here because of global jump
+      if (i == 2) {
+        continue; 
+      }
+      a_buf[i]++;
+    }
+    memcpy((void *)(&a[j * 100000]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+  }
+}
+#pragma ACCEL kernel
+
+void top_10(int *a)
+{
+  for (int j = 0; j < 100; ++j) {
+    int a_buf[100];
+    memcpy((void *)(&a_buf[0]),(const void *)(&a[j * 100000]),sizeof(int ) * 100);
+    for (int i = 0; i < 100; ++i) {
+// cannot infer burst here because of global jump
+      if (i == 2) {
+        break; 
+      }
+      a_buf[i]++;
+    }
+    memcpy((void *)(&a[j * 100000]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+  }
+}

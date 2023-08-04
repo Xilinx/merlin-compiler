@@ -1,0 +1,12 @@
+
+#ifndef __MERLIN_TYPE_DEFINE_H__
+
+#define __MERLIN_TYPE_DEFINE_H__
+struct HideDef {int x;};
+struct LS {int x;};
+struct Foo {int x;volatile int x1;int y;};
+struct Common {int x;int y;};
+struct Bar {struct Foo foo;struct Common common;int x;};
+struct INT {int x;};
+
+#endif

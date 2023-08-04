@@ -1,0 +1,85 @@
+#define HS 256
+#define WS 1024
+#define FW 4
+#define FH 4
+#pragma ACCEL kernel
+
+void conv1d(float in[256][1024],float filter[4][4],float out[253][1021])
+{
+  
+#pragma ACCEL interface VARIABLE=in BURST_OFF
+  float LineBuffer_in0[1024];
+  float LineBuffer_in1[1024];
+  float LineBuffer_in2[1024];
+  float slide_wind_0[4][4];
+  for (int i = -3L; i < 256 - 4 + 1; i++) 
+    for (int j = -3L; j < 1024 - 4 + 1; j++) {{
+        int i_2;
+        int i_1;
+        float tmp_wind_0[4];
+        int j_0;
+        int i_0;
+        for (i_0 = 0L; i_0 <= 3L; ++i_0) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          for (j_0 = 1L; j_0 <= 3L; ++j_0) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            slide_wind_0[i_0][j_0 + -1] = slide_wind_0[i_0][j_0];
+          }
+        }
+        for (i_1 = 0; i_1 <= 3L; ++i_1) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          if (i_1 == 0L) {
+            tmp_wind_0[i_1] = LineBuffer_in0[j - 0L + 3L];
+          }
+           else {
+            if (i_1 == 1L) {
+              tmp_wind_0[i_1] = LineBuffer_in1[j - 0L + 3L];
+            }
+             else {
+              if (i_1 == 2L) {
+                tmp_wind_0[i_1] = LineBuffer_in2[j - 0L + 3L];
+              }
+            }
+          }
+        }
+        tmp_wind_0[3UL] = in[i + 0L + 3L][j + 0L + 3L];
+        for (i_2 = 0; i_2 <= 3L; ++i_2) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0[i_2][3L] = tmp_wind_0[i_2];
+        }
+{
+          int i_3;
+          float tmp_in;
+          for (i_3 = 0; i_3 <= 2UL; ++i_3) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            tmp_in = tmp_wind_0[i_3 + 1];
+            if (i_3 == 0L) {
+              LineBuffer_in0[j - 0L + 3L] = tmp_in;
+            }
+             else {
+              if (i_3 == 1L) {
+                LineBuffer_in1[j - 0L + 3L] = tmp_in;
+              }
+               else {
+                if (i_3 == 2L) {
+                  LineBuffer_in2[j - 0L + 3L] = tmp_in;
+                }
+              }
+            }
+          }
+        }
+      }
+      if (i >= 0L && i <= 252L && j >= 0L && j <= 1020L) {
+        float tmp = 0.0f;
+        for (int p = 0; p < 4; p++) 
+          for (int q = 0; q < 4; q++) 
+            tmp += slide_wind_0[p][q] * filter[p][q];
+        out[i][j] = tmp;
+      }
+    }
+}

@@ -1,0 +1,53 @@
+#include<ap_int.h>
+#pragma ACCEL kernel
+
+void func_top_0()
+{
+  int a[100];
+  int b[100];
+  int i;
+  for (int cc = 0; cc < 1; cc++) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    for (int jj = 0; jj < 1 << 0; jj++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[i] = b[i];
+    }
+  }
+  for (int cc = 0; cc < 1; cc++) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    for (int jj = 0; jj < 1 << 0; jj++) 
+// Original: #pragma ACCEL parallel complete
+{
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[i] = b[i];
+    }
+  }
+  for (int cc = 0; cc < 1; cc++) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    for (int jj = 0; jj < 64; jj++) 
+// Original: #pragma ACCEL parallel complete
+{
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[i] = b[i];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_1()
+{
+  int sum;
+  for (int i = 0; i < 3; i += 3) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    sum = 0;
+  }
+  for (int i = 0; i < 3; i += 3) {
+  }
+}

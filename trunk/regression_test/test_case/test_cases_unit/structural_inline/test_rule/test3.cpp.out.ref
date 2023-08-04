@@ -1,0 +1,108 @@
+
+void foo1()
+{
+  int tmp;
+  for (int i = 0; i < 10; i++) {
+    tmp++;
+  }
+}
+
+void foo2()
+{
+  int tmp;
+  for (int i = 0; i < 10; i++) {
+    
+#pragma HLS unroll
+    tmp++;
+  }
+}
+
+int foo3(int tmp)
+{
+  for (int i = 0; i < 10; i++) {
+    tmp++;
+  }
+  return tmp;
+}
+
+int foo4(int tmp)
+{
+  for (int i = 0; i < 10; i++) {
+    
+#pragma HLS unroll
+    tmp++;
+  }
+  return tmp;
+}
+
+void foo5()
+{
+  foo2();
+}
+
+void func_top_0_df()
+{
+  
+#pragma HLS dataflow
+  foo1();
+  foo2();
+}
+
+void foo9()
+{
+  for (int i = 0; i < 100; i++) {
+    i++;
+  }
+}
+
+void foo8()
+{
+  foo9();
+}
+
+void foo7()
+{
+  int tmp;
+  tmp++;
+}
+
+void foo6()
+{
+  foo7();
+}
+
+void foo12()
+{
+  int tmp;
+  tmp++;
+}
+
+void foo11()
+{
+  foo12();
+  int i = 0;
+  while(i < 10){
+    
+#pragma ACCEL loop_tripcount max=50
+    
+#pragma HLS unroll
+    i++;
+  }
+}
+
+void foo10()
+{
+  foo11();
+  foo12();
+  for (int i = 0; i < 10; i++) {
+    i++;
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_2()
+{
+  foo10();
+  foo11();
+  foo12();
+}

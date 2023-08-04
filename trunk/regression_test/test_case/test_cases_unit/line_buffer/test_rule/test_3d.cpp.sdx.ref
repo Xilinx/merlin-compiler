@@ -1,0 +1,82 @@
+/* (previously processed: ignoring self-referential macro declaration) macro name = c */ 
+#pragma ACCEL kernel
+
+void func_top_1(int *c)
+{
+  
+#pragma ACCEL interface variable=c max_depth=32768 depth=32768
+  int sum;
+  for (int i = 0; i < 32; i++) {
+    for (int j = 0; j < 32; j++) {
+      for (int k = 0; k < 32; k++) {
+        
+#pragma ACCEL pipeline
+        if (i >= 1 && i <= 30 && j >= 1 && j <= 30 && k >= 1 && k <= 30) 
+          sum += c[(i + 1) * 32 * 32 + j * 32 + (k + 1)] + c[(i - 1) * 32 * 32 + j * 32 + (k + 1)] + c[i * 32 * 32 + j * 32 + (k - 1)] + c[i * 32 * 32 + j * 32 + (k + 1)];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_2(int c[32][32][32])
+{
+  int sum;
+  for (int i = 0; i < 32; i++) {
+    for (int j = 0; j < 32; j++) {
+      for (int k = 0; k < 32; k++) {
+        
+#pragma ACCEL pipeline
+        if (i >= 1 && i <= 30 && j >= 1 && j <= 30 && k >= 1 && k <= 30) 
+          sum += c[i + 1][j][k + 1] + c[i - 1][j][k - 1] + c[i][j][k - 1] + c[i][j][k + 1];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_3(int c[32][32][32])
+{
+  
+#pragma ACCEL interface variable=c max_depth=32768 depth=32768 BURST_OFF
+  int sum;
+  int slide_wind_0[2];
+  for (int i = -1; i < 32; i++) {
+    for (int j = 0; j < 32; j++) {
+      for (int k = 0; k < 32; k++) {
+        
+#pragma ACCEL pipeline
+{
+          int tmp_wind_0;
+          int i_0;
+          for (i_0 = 1L; i_0 <= 1L; ++i_0) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            slide_wind_0[i_0 + -1] = slide_wind_0[i_0];
+          }
+          tmp_wind_0 = c[i + 0L + 1L];
+          slide_wind_0[1L] = tmp_wind_0;
+        }
+        if (i >= 1L && i <= 30L) {
+          if (i >= 1 && i <= 30 && j >= 1 && j <= 30 && k >= 1 && k <= 30) 
+            sum += slide_wind_0[1L] + slide_wind_0[1L];
+        }
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_4(int c[514][514][514],int cc[514][514])
+{
+  int sum;
+  for (int i = 1; i < 513; i++) {
+    for (int j = 1; j < 513; j++) {
+      for (int k = 1; k < 513; k++) {
+        
+#pragma ACCEL pipeline
+        sum += c[i][j][k] + c[i][j + 1][k] + c[i][j - 1][k] + c[i + 1][j][k] + c[i - 1][j][k] + c[i][j][k - 1] + c[i][j][k + 1];
+      }
+    }
+  }
+}

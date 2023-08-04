@@ -1,0 +1,40 @@
+#include "merlin_type_define.h"
+extern int __merlin_include__GB_merlin_type_define_h_0;
+
+static void p_ZN1SC2Ev_1(struct S *this_)
+{
+  this_ -> x = 168;
+}
+
+static bool p_Z2ffPi_1(int *p)
+{
+  return false;
+}
+
+static bool p_Z2ffPKi_1(const int *p)
+{
+  return true;
+}
+#pragma ACCEL kernel
+
+int f()
+{
+  struct S i;
+  p_ZN1SC2Ev_1(&i);
+  ;
+  i . z;
+  p_Z2ffPi_1(i . p);
+  p_Z2ffPKi_1(i . cp);
+  struct S s;
+  p_ZN1SC2Ev_1(&s);
+  ;
+  const struct S (*ci0)[100][100];
+  const struct S (*ci1[100])[100];
+  const struct S *ci2[100][100];
+  const struct S (*c0)[100][100];
+  const struct S (*c1[100])[100];
+  const struct S *c2[100][100];
+  const struct S (*&cr0)[100][100] = c0;
+  const struct S (*(&cr1)[100])[100] = c1;
+  const struct S *(&cr2)[100][100] = c2;
+}

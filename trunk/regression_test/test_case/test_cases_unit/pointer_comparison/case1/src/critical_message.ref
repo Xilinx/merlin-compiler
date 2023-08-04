@@ -1,0 +1,38 @@
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'a' (vec_add_kernel.cpp:8).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'a == 0L' (vec_add_kernel.cpp:9).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'psrc' (vec_add_kernel.cpp:15).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'pdst != 0L' (vec_add_kernel.cpp:17).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'psrc > pdst' (vec_add_kernel.cpp:19).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'psrc < pdst' (vec_add_kernel.cpp:21).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'psrc <= pdst' (vec_add_kernel.cpp:23).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'psrc >= pdst' (vec_add_kernel.cpp:25).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'psrc == pdst' (vec_add_kernel.cpp:27).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'pdst' (vec_add_kernel.cpp:29).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'psrc' (vec_add_kernel.cpp:31).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'pdst' (vec_add_kernel.cpp:34).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'flag1 = pdst' (vec_add_kernel.cpp:39).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'pdst' (vec_add_kernel.cpp:39).
+
+ERROR: [SYNCHK-336] Pointer comparison detected '(bool )pdst' (vec_add_kernel.cpp:43).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'd' (vec_add_kernel.cpp:48).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'd' (vec_add_kernel.cpp:49).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'a' (vec_add_kernel.cpp:52).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'a != 0' (vec_add_kernel.cpp:53).

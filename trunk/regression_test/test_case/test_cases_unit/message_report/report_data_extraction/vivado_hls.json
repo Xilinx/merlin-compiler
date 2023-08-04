@@ -1,0 +1,399 @@
+{
+    "A,74": {
+        "cyclic-factor": "4", 
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 538, 
+        "name": "mars_kernel_0_2_data_buf_0_0_0", 
+        "partition": "yes", 
+        "partition_dim": "2"
+    }, 
+    "A,75": {
+        "cyclic-factor": "4", 
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 550, 
+        "name": "mars_kernel_0_2_data_buf_0_0_1", 
+        "partition": "yes", 
+        "partition_dim": "2"
+    }, 
+    "A,76": {
+        "cyclic-factor": "4", 
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 562, 
+        "name": "mars_kernel_0_2_data_buf_0_0_2", 
+        "partition": "yes", 
+        "partition_dim": "2"
+    }, 
+    "F,1": {
+        "inline": "yes", 
+        "name": "merlin_get_range_512"
+    }, 
+    "F,10": {
+        "inline": "yes", 
+        "name": "memcpy_wide_bus_write_char_3d_4096_16_512"
+    }, 
+    "F,11": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,12": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,13": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,14": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,15": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,16": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,17": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,18": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,19": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,2": {
+        "inline": "yes", 
+        "name": "merlin_get_range_512"
+    }, 
+    "F,20": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,21": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,22": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,23": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,24": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,25": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,26": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,27": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,28": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,29": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,3": {
+        "inline": "yes", 
+        "name": "merlin_get_range_512"
+    }, 
+    "F,30": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,31": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,32": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,33": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,34": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,35": {
+        "inline": "yes", 
+        "name": "rj_sbox"
+    }, 
+    "F,36": {
+        "inline": "yes", 
+        "name": "aes_expandEncKey"
+    }, 
+    "F,37": {
+        "inline": "yes", 
+        "name": "aes_addRoundKey_cpy"
+    }, 
+    "F,38": {
+        "inline": "yes", 
+        "name": "aes_subBytes"
+    }, 
+    "F,39": {
+        "inline": "yes", 
+        "name": "aes_subBytes"
+    }, 
+    "F,4": {
+        "inline": "yes", 
+        "name": "memcpy_wide_bus_read_char_3d_4096_16_512"
+    }, 
+    "F,40": {
+        "inline": "yes", 
+        "name": "aes_shiftRows"
+    }, 
+    "F,41": {
+        "inline": "yes", 
+        "name": "aes_shiftRows"
+    }, 
+    "F,42": {
+        "inline": "yes", 
+        "name": "rj_xtime"
+    }, 
+    "F,43": {
+        "inline": "yes", 
+        "name": "rj_xtime"
+    }, 
+    "F,44": {
+        "inline": "yes", 
+        "name": "rj_xtime"
+    }, 
+    "F,45": {
+        "inline": "yes", 
+        "name": "rj_xtime"
+    }, 
+    "F,46": {
+        "inline": "yes", 
+        "name": "aes_mixColumns"
+    }, 
+    "F,47": {
+        "inline": "yes", 
+        "name": "aes_addRoundKey"
+    }, 
+    "F,48": {
+        "inline": "yes", 
+        "name": "aes_addRoundKey"
+    }, 
+    "F,49": {
+        "inline": "yes", 
+        "name": "aes_addRoundKey"
+    }, 
+    "F,5": {
+        "inline": "yes", 
+        "name": "merlin_set_range_512"
+    }, 
+    "F,50": {
+        "inline": "yes", 
+        "name": "aes_expandEncKey_1"
+    }, 
+    "F,51": {
+        "inline": "yes", 
+        "name": "aes_expandEncKey_2"
+    }, 
+    "F,52": {
+        "inline": "yes", 
+        "name": "aes256_encrypt_ecb"
+    }, 
+    "F,6": {
+        "inline": "yes", 
+        "name": "merlin_set_range_512"
+    }, 
+    "F,7": {
+        "inline": "yes", 
+        "name": "merlin_set_range_512"
+    }, 
+    "F,8": {
+        "inline": "yes", 
+        "name": "merlin_set_range_512"
+    }, 
+    "F,9": {
+        "inline": "yes", 
+        "name": "merlin_set_range_512"
+    }, 
+    "L,53": {
+        "filename": "mars_wide_bus_3d.h", 
+        "line": 70, 
+        "name": "Loop-1", 
+        "unrolled": "yes"
+    }, 
+    "L,54": {
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 523, 
+        "name": "merlinL4", 
+        "unroll-factor": "2", 
+        "unrolled": "yes"
+    }, 
+    "L,55": {
+        "filename": "mars_wide_bus_3d.h", 
+        "line": 233, 
+        "name": "Loop-1.1", 
+        "unroll-factor": "4", 
+        "unrolled": "yes"
+    }, 
+    "L,56": {
+        "filename": "mars_wide_bus_3d.h", 
+        "line": 235, 
+        "name": "Loop-1.1.1", 
+        "unroll-factor": "16", 
+        "unrolled": "yes"
+    }, 
+    "L,57": {
+        "filename": "mars_wide_bus_3d.h", 
+        "line": 70, 
+        "name": "Loop-1", 
+        "unroll-factor": "0", 
+        "unrolled": "yes"
+    }, 
+    "L,58": {
+        "filename": "mars_wide_bus_3d.h", 
+        "line": 101, 
+        "name": "Loop-2.1", 
+        "unroll-factor": "4", 
+        "unrolled": "yes"
+    }, 
+    "L,59": {
+        "filename": "mars_wide_bus_3d.h", 
+        "line": 103, 
+        "name": "Loop-2.1.1", 
+        "unroll-factor": "16", 
+        "unrolled": "yes"
+    }, 
+    "L,60": {
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 406, 
+        "name": "merlinL1", 
+        "unroll-factor": "2", 
+        "unrolled": "yes"
+    }, 
+    "L,61": {
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 321, 
+        "name": "ecb1", 
+        "unroll-factor": "32", 
+        "unrolled": "yes"
+    }, 
+    "L,62": {
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 333, 
+        "name": "ecb2", 
+        "unroll-factor": "7", 
+        "unrolled": "yes"
+    }, 
+    "L,63": {
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 130, 
+        "name": "exp1", 
+        "unroll-factor": "3", 
+        "unrolled": "yes"
+    }, 
+    "L,64": {
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 148, 
+        "name": "exp2", 
+        "unroll-factor": "3", 
+        "unrolled": "yes"
+    }, 
+    "L,65": {
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 169, 
+        "name": "cpkey", 
+        "unroll-factor": "16", 
+        "unrolled": "yes"
+    }, 
+    "L,66": {
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 348, 
+        "name": "ecb3", 
+        "unroll-factor": "13", 
+        "unrolled": "yes"
+    }, 
+    "L,67": {
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 192, 
+        "name": "sub", 
+        "unroll-factor": "16", 
+        "unrolled": "yes"
+    }, 
+    "L,68": {
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 259, 
+        "name": "mix", 
+        "unroll-factor": "4", 
+        "unrolled": "yes"
+    }, 
+    "L,69": {
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 290, 
+        "name": "addkey", 
+        "unroll-factor": "16", 
+        "unrolled": "yes"
+    }, 
+    "L,70": {
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 42, 
+        "name": "exp10", 
+        "unroll-factor": "3", 
+        "unrolled": "yes"
+    }, 
+    "L,71": {
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 60, 
+        "name": "exp20", 
+        "unroll-factor": "3", 
+        "unrolled": "yes"
+    }, 
+    "L,72": {
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 86, 
+        "name": "exp11", 
+        "unroll-factor": "3", 
+        "unrolled": "yes"
+    }, 
+    "L,73": {
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 104, 
+        "name": "exp21", 
+        "unroll-factor": "3", 
+        "unrolled": "yes"
+    },
+    "L,74": {
+        "line": 104, 
+        "unroll-factor": "3", 
+        "unrolled": "yes"
+    },
+    "L,75": {
+        "filename": "__merlinkernel_aes256_encrypt_ecb_kernel.cpp", 
+        "line": 104, 
+        "unroll-factor": "3",
+        "test_attr":"0",
+        "unrolled": "yes"
+    },
+    "L,76": {
+        "filename": "test.h", 
+        "line": 104, 
+        "unroll-factor": "3",
+        "test_attr":"0",
+        "unrolled": "yes"
+    }
+}

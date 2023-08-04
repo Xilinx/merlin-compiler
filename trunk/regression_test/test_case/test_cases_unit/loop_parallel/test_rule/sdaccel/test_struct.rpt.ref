@@ -1,0 +1,6 @@
+INFO: [FGPIP-102] Loop 'round_counter' (test_struct.cpp:18) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_struct.cpp:31) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_struct.cpp:40) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_struct.cpp:46) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_struct.cpp:48) is fully parallelized
+INFO: [FGPIP-102] Loop 'k' (test_struct.cpp:53) is fully parallelized

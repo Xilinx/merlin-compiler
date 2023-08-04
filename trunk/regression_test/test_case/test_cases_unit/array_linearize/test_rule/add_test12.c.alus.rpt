@@ -1,0 +1,9 @@
+
+ERROR: [INFTF-304] Incorrect pragma : #pragma ACCEL interface variable=a depth=b (add_test12.c:3)
+    depth defined as variable, so the max_depth must be set
+Example : #pragma ACCEL interface variable=a depth=b max_depth=?
+
+
+WARNING: [MDARR-201] OpenCL host library generation is disabled because some of the dimension sizes of the interface variable 'a' (add_test12.c:2) of type 'int *' is not determined.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=a max_depth=?

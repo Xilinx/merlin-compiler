@@ -1,0 +1,45 @@
+
+struct ::ns_A 
+{
+  int a[10];
+}
+;
+const int _ZN2ns2FCE = 10;
+
+void p_ZN2ns1AC2Ev(struct ns_A *this_)
+{
+// the following 'a' should be updated into "this_->a"
+  
+#pragma HLS array_patition variable=this_->a factor=_ZN2ns2FCE dim=1
+  this_ -> a[0] = 1;
+}
+
+int p_ZN2ns1A3getEi(struct ns_A *this_,int i)
+{
+  return this_ -> a[i];
+}
+
+void p_ZN2ns1A3setEii(struct ns_A *this_,int i,int val)
+{
+  this_ -> a[i] = val;
+}
+namespace ns
+{
+static void __merlin_dummy_SgVariableDeclaration_const_int_();
+static void __merlin_dummy_SgEnumDeclaration_enum_ano_();
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+}
+enum _ram_type {RAM_1P_BRAM=0} ;
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+// do not replace enumerator if its declaration is in the global scope
+#pragma HLS interface variable=a core=RAM_1P_BRAM
+struct ns_A tmp;
+p_ZN2ns1AC2Ev(&tmp);
+;
+for (int i = 0; i < 10; ++i) {
+p_ZN2ns1A3setEii(&tmp,i,a[i]);
+}
+}

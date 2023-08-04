@@ -1,0 +1,2137 @@
+{
+    "X": {
+        "org_identifier": "X",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 0,
+                "location": 1
+            },
+            {
+                "action": 0,
+                "location": 1
+            },
+            {
+                "action": 0,
+                "location": 3
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert file: __merlin_api_list.cpp\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert file: __merlinwrapper_vec_add_kernel.cpp\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert file: __merlinhead_kernel_top.cpp\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_0": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_0_0": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 0,
+                "location": 1
+            },
+            {
+                "action": 1,
+                "location": 2
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Insert: SgFunctionDeclaration:void __merlin_dummy_kernel_pragma() {...}\\nfrom: SgPragmaDeclaration:#pragma ACCEL kernel\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Delete: SgPragmaDeclaration:#pragma ACCEL kernel\\nfrom: top level nodes, do not unparse.\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_0_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_94",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9109 for 139674873232528\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_kernel_pragma() {...}\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_0_0_1_0": {
+        "org_identifier": "BuiltInkernel_wrapper_93",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8723 for 139674854487888\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_2",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 4,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8019 for 139674876736448\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 9,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 0,
+                "location": 0
+            },
+            {
+                "action": 0,
+                "location": 1
+            },
+            {
+                "action": 0,
+                "location": 2
+            },
+            {
+                "action": 0,
+                "location": 3
+            },
+            {
+                "action": 0,
+                "location": 4
+            },
+            {
+                "action": 0,
+                "location": 5
+            },
+            {
+                "action": 0,
+                "location": 6
+            },
+            {
+                "action": 0,
+                "location": 2
+            },
+            {
+                "action": 0,
+                "location": 3
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Insert: SgFunctionDeclaration:void __merlin_dummy_431() {...}\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgFunctionDeclaration:void vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc) {...}\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgFunctionDeclaration:void __merlinwrapper_vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc)...\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgFunctionDeclaration:void __merlin_vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc) {...}\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgFunctionDeclaration:void __merlin_write_buffer_vec_add_kernel(int [100] a,int [100] b,int [100] c,in...\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgFunctionDeclaration:void __merlin_read_buffer_vec_add_kernel(int [100] a,int [100] b,int [100] c,int...\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgFunctionDeclaration:void __merlin_execute_vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc...\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgVariableDeclaration:extern int __merlin_include__LB___merlinhead_kernel_top_h_0;\\nfrom: SgFunctionDeclaration:void vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc) {...}\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgVariableDeclaration:extern int __merlin_include__LE___merlinhead_kernel_top_h_0;\\nfrom: SgFunctionDeclaration:void __merlinwrapper_vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc)...\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_0": {
+        "org_identifier": "BuiltInkernel_wrapper_4",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9109 for 139674872784528\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_431() {...}\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_0_0": {
+        "org_identifier": "BuiltInkernel_wrapper_3",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8723 for 139674853963488\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_50",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9147 for 139674872785528\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc) {...}\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_1_0": {
+        "org_identifier": "BuiltInkernel_wrapper_49",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 4,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8723 for 139674853964088\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:int [100] a,int [100] b,int [100] c,int inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_1_0_0": {
+        "org_identifier": "BuiltInkernel_wrapper_5",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852899528\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_1_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_16",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852903136\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_1_0_2": {
+        "org_identifier": "BuiltInkernel_wrapper_27",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852906744\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_1_0_3": {
+        "org_identifier": "BuiltInkernel_wrapper_38",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852910352\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_2": {
+        "org_identifier": "BuiltInkernel_wrapper_61",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 2,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9400 for 139674859692712\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:extern int __merlin_include__LB___merlinhead_kernel_top_h_0;\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_3": {
+        "org_identifier": "BuiltInkernel_wrapper_62",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 2,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9400 for 139674859693376\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:extern int __merlin_include__LE___merlinhead_kernel_top_h_0;\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_4": {
+        "org_identifier": "BuiltInkernel_wrapper_52",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9139 for 139674872787528\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlinwrapper_vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc)...\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_4_0": {
+        "org_identifier": "BuiltInkernel_wrapper_51",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 4,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8723 for 139674853964688\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:int [100] a,int [100] b,int [100] c,int inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_4_0_0": {
+        "org_identifier": "BuiltInkernel_wrapper_6",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852899856\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_4_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_17",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852903464\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_4_0_2": {
+        "org_identifier": "BuiltInkernel_wrapper_28",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852907072\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_4_0_3": {
+        "org_identifier": "BuiltInkernel_wrapper_39",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852910680\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_4_2": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"SgFunctionDefinition:void __merlinwrapper_vec_add_kernel(int a[100],int b[100],int c[100],int inc){ve...\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDefinition:void __merlinwrapper_vec_add_kernel(int a[100],int b[100],int c[100],int inc){#p...\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_4_2_0": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 0,
+                "location": 0
+            },
+            {
+                "action": 0,
+                "location": 0
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Insert: SgExprStatement:vec_add_kernel(a,b,c,inc);\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma ACCEL kernel\\nfrom: SgExprStatement:vec_add_kernel(a,b,c,inc);\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{#pragma ACCEL kernelvec_add_kernel(a,b,c,inc);}\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_4_2_0_0": {
+        "org_identifier": "BuiltInkernel_wrapper_0",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 7899 for 139674863258488\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL kernel\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_4_2_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_71",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10447 for 139674857058608\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:vec_add_kernel(a,b,c,inc);\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_4_2_0_1_0": {
+        "org_identifier": "BuiltInkernel_wrapper_70",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 2,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9274 for 46746928\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionCallExp:vec_add_kernel(a,b,c,inc)\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_4_2_0_1_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_69",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 4,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8784 for 45522336\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprListExp:a,b,c,inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_4_2_0_1_0_1_0": {
+        "org_identifier": "BuiltInkernel_wrapper_65",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9576 for 139674857477152\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgVarRefExp:a\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_4_2_0_1_0_1_1": {
+        "org_identifier": "BuiltInkernel_wrapper_66",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9576 for 139674857477256\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgVarRefExp:b\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_4_2_0_1_0_1_2": {
+        "org_identifier": "BuiltInkernel_wrapper_67",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9576 for 139674857477360\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgVarRefExp:c\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_4_2_0_1_0_1_3": {
+        "org_identifier": "BuiltInkernel_wrapper_68",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9576 for 139674857477464\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgVarRefExp:inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5": {
+        "org_identifier": "BuiltInkernel_wrapper_54",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9139 for 139674872789528\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc) {...}\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5_0": {
+        "org_identifier": "BuiltInkernel_wrapper_53",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 4,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8723 for 139674853965288\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:int [100] a,int [100] b,int [100] c,int inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5_0_0": {
+        "org_identifier": "BuiltInkernel_wrapper_7",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852900184\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_18",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852903792\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5_0_2": {
+        "org_identifier": "BuiltInkernel_wrapper_29",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852907400\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5_0_3": {
+        "org_identifier": "BuiltInkernel_wrapper_40",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852911008\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5_2": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"SgFunctionDefinition:void __merlin_vec_add_kernel(int a[100],int b[100],int c[100],int inc){__merlinw...\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDefinition:void __merlin_vec_add_kernel(int a[100],int b[100],int c[100],int inc){#pragma A...\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5_2_0": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 0,
+                "location": 0
+            },
+            {
+                "action": 0,
+                "location": 0
+            },
+            {
+                "action": 0,
+                "location": 0
+            },
+            {
+                "action": 0,
+                "location": 3
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Insert: SgExprStatement:__merlinwrapper_vec_add_kernel(a,b,c,inc);\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma ACCEL string __merlin_init_vec_add_kernel();\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma ACCEL string __merlin_check_opencl();\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma ACCEL string __merlin_release_vec_add_kernel();\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{#pragma ACCEL string __merlin_check_opencl();#pragma ACCEL string __merlin_init...\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5_2_0_0": {
+        "org_identifier": "BuiltInkernel_wrapper_80",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 7899 for 139674863259656\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL string __merlin_check_opencl();\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5_2_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_79",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 7899 for 139674863259072\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL string __merlin_init_vec_add_kernel();\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5_2_0_2": {
+        "org_identifier": "BuiltInkernel_wrapper_78",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10447 for 139674857058704\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:__merlinwrapper_vec_add_kernel(a,b,c,inc);\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5_2_0_2_0": {
+        "org_identifier": "BuiltInkernel_wrapper_77",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 2,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9274 for 46747040\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionCallExp:__merlinwrapper_vec_add_kernel(a,b,c,inc)\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5_2_0_2_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_76",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 4,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8784 for 45522440\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprListExp:a,b,c,inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5_2_0_2_0_1_0": {
+        "org_identifier": "BuiltInkernel_wrapper_72",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9576 for 139674857477568\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgVarRefExp:a\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5_2_0_2_0_1_1": {
+        "org_identifier": "BuiltInkernel_wrapper_73",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9576 for 139674857477672\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgVarRefExp:b\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5_2_0_2_0_1_2": {
+        "org_identifier": "BuiltInkernel_wrapper_74",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9576 for 139674857477776\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgVarRefExp:c\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5_2_0_2_0_1_3": {
+        "org_identifier": "BuiltInkernel_wrapper_75",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9576 for 139674857477880\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgVarRefExp:inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_5_2_0_3": {
+        "org_identifier": "BuiltInkernel_wrapper_81",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 7899 for 139674863260240\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL string __merlin_release_vec_add_kernel();\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_6": {
+        "org_identifier": "BuiltInkernel_wrapper_56",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9139 for 139674872791528\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_write_buffer_vec_add_kernel(int [100] a,int [100] b,int [100] c,in...\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_6_0": {
+        "org_identifier": "BuiltInkernel_wrapper_55",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 4,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8723 for 139674853965888\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:int [100] a,int [100] b,int [100] c,int inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_6_0_0": {
+        "org_identifier": "BuiltInkernel_wrapper_8",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852900512\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_6_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_19",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852904120\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_6_0_2": {
+        "org_identifier": "BuiltInkernel_wrapper_30",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852907728\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_6_0_3": {
+        "org_identifier": "BuiltInkernel_wrapper_41",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852911336\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_7": {
+        "org_identifier": "BuiltInkernel_wrapper_58",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9139 for 139674872793528\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_read_buffer_vec_add_kernel(int [100] a,int [100] b,int [100] c,int...\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_7_0": {
+        "org_identifier": "BuiltInkernel_wrapper_57",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 4,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8723 for 139674853966488\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:int [100] a,int [100] b,int [100] c,int inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_7_0_0": {
+        "org_identifier": "BuiltInkernel_wrapper_9",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852900840\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_7_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_20",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852904448\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_7_0_2": {
+        "org_identifier": "BuiltInkernel_wrapper_31",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852908056\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_7_0_3": {
+        "org_identifier": "BuiltInkernel_wrapper_42",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852911664\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_8": {
+        "org_identifier": "BuiltInkernel_wrapper_60",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9139 for 139674872795528\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_execute_vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc...\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_8_0": {
+        "org_identifier": "BuiltInkernel_wrapper_59",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 4,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8723 for 139674853967088\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:int [100] a,int [100] b,int [100] c,int inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_8_0_0": {
+        "org_identifier": "BuiltInkernel_wrapper_10",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852901168\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_8_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_21",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852904776\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_8_0_2": {
+        "org_identifier": "BuiltInkernel_wrapper_32",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852908384\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_1_0_8_0_3": {
+        "org_identifier": "BuiltInkernel_wrapper_43",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852911992\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_2": {
+        "org_identifier": "BuiltInkernel_wrapper_1",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 4,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8019 for 139674876735976\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3": {
+        "org_identifier": "BuiltInkernel_wrapper_82",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 4,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8019 for 139674876736920\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 5,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 0,
+                "location": 0
+            },
+            {
+                "action": 0,
+                "location": 1
+            },
+            {
+                "action": 0,
+                "location": 2
+            },
+            {
+                "action": 0,
+                "location": 3
+            },
+            {
+                "action": 0,
+                "location": 4
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Insert: SgFunctionDeclaration:void __merlinwrapper_vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc)...\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgFunctionDeclaration:void __merlin_write_buffer_vec_add_kernel(int [100] a,int [100] b,int [100] c,in...\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgFunctionDeclaration:void __merlin_read_buffer_vec_add_kernel(int [100] a,int [100] b,int [100] c,int...\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgFunctionDeclaration:void __merlin_execute_vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc...\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgFunctionDeclaration:void __merlin_vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc) {...}\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_0": {
+        "org_identifier": "BuiltInkernel_wrapper_84",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9147 for 139674873227528\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlinwrapper_vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc)...\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_0_0": {
+        "org_identifier": "BuiltInkernel_wrapper_83",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 4,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8723 for 139674854484888\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:int [100] a,int [100] b,int [100] c,int inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_0_0_0": {
+        "org_identifier": "BuiltInkernel_wrapper_11",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852901496\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_0_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_22",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852905104\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_0_0_2": {
+        "org_identifier": "BuiltInkernel_wrapper_33",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852908712\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_0_0_3": {
+        "org_identifier": "BuiltInkernel_wrapper_44",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852912320\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_86",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9147 for 139674873228528\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_write_buffer_vec_add_kernel(int [100] a,int [100] b,int [100] c,in...\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_1_0": {
+        "org_identifier": "BuiltInkernel_wrapper_85",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 4,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8723 for 139674854485488\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:int [100] a,int [100] b,int [100] c,int inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_1_0_0": {
+        "org_identifier": "BuiltInkernel_wrapper_12",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852901824\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_1_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_23",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852905432\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_1_0_2": {
+        "org_identifier": "BuiltInkernel_wrapper_34",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852909040\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_1_0_3": {
+        "org_identifier": "BuiltInkernel_wrapper_45",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852912648\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_2": {
+        "org_identifier": "BuiltInkernel_wrapper_88",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9147 for 139674873229528\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_read_buffer_vec_add_kernel(int [100] a,int [100] b,int [100] c,int...\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_2_0": {
+        "org_identifier": "BuiltInkernel_wrapper_87",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 4,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8723 for 139674854486088\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:int [100] a,int [100] b,int [100] c,int inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_2_0_0": {
+        "org_identifier": "BuiltInkernel_wrapper_13",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852902152\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_2_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_24",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852905760\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_2_0_2": {
+        "org_identifier": "BuiltInkernel_wrapper_35",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852909368\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_2_0_3": {
+        "org_identifier": "BuiltInkernel_wrapper_46",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852912976\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_3": {
+        "org_identifier": "BuiltInkernel_wrapper_90",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9147 for 139674873230528\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_execute_vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc...\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_3_0": {
+        "org_identifier": "BuiltInkernel_wrapper_89",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 4,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8723 for 139674854486688\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:int [100] a,int [100] b,int [100] c,int inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_3_0_0": {
+        "org_identifier": "BuiltInkernel_wrapper_14",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852902480\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_3_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_25",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852906088\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_3_0_2": {
+        "org_identifier": "BuiltInkernel_wrapper_36",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852909696\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_3_0_3": {
+        "org_identifier": "BuiltInkernel_wrapper_47",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852913304\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_4": {
+        "org_identifier": "BuiltInkernel_wrapper_92",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9147 for 139674873231528\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_vec_add_kernel(int [100] a,int [100] b,int [100] c,int inc) {...}\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_4_0": {
+        "org_identifier": "BuiltInkernel_wrapper_91",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 4,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8723 for 139674854487288\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:int [100] a,int [100] b,int [100] c,int inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_4_0_0": {
+        "org_identifier": "BuiltInkernel_wrapper_15",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852902808\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_4_0_1": {
+        "org_identifier": "BuiltInkernel_wrapper_26",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852906416\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_4_0_2": {
+        "org_identifier": "BuiltInkernel_wrapper_37",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852910024\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    },
+    "X_0_3_0_4_0_3": {
+        "org_identifier": "BuiltInkernel_wrapper_48",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8640 for 139674852913632\",\n    \"passname\": \"kernel_wrapper\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:inc\",\n    \"passname\": \"kernel_wrapper\"\n}"
+        ]
+    }
+}

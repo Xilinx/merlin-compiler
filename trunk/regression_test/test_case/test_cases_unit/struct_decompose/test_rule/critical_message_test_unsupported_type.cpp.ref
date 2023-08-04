@@ -1,0 +1,16 @@
+
+ERROR: [DISAG-302] interface port 'a' (test_unsupported_type.cpp:40) with unsupported type: 
+non-defined class type: class ::A
+ is not decomposed
+
+ERROR: [DISAG-302] interface port 'c' (test_unsupported_type.cpp:40) with unsupported type: 
+static class member: static int a;
+ is not decomposed
+
+ERROR: [DISAG-302] interface port 'd' (test_unsupported_type.cpp:40) with unsupported type: 
+bitfield decl: int :2;
+ is not decomposed
+
+ERROR: [DISAG-302] interface port 'f' (test_unsupported_type.cpp:40) with unsupported type: 
+void type: void
+ is not decomposed

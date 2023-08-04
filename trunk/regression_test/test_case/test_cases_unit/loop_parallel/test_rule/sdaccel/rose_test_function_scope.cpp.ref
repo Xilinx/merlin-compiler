@@ -1,0 +1,29 @@
+
+void sub_func(int a)
+{
+}
+#pragma ACCEL kernel
+
+void test(int input)
+{
+  
+#pragma HLS dataflow
+  int b[4];
+  
+#pragma HLS array_partition variable=b complete dim=1
+  sub_func(b[0]);
+{
+    sub_func(b[1]);
+    sub_func(b[2]);
+  }
+{
+    sub_func(b[3]);
+  }
+  for (int i = 0; i < 4; i++) 
+// Original: #pragma ACCEL pipeline
+{
+    
+#pragma HLS pipeline
+    sub_func(b[i]);
+  }
+}

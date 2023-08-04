@@ -1,0 +1,12 @@
+enum _a_color {MERLIN_MAX_ENUM_0=1L} ;
+namespace a
+{
+static void __merlin_dummy_SgEnumDeclaration_enum_color_();
+}
+#pragma ACCEL kernel
+
+void k()
+{
+using namespace a;
+enum _a_color c;
+}

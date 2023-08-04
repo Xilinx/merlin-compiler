@@ -1,0 +1,64 @@
+INFO: [REDUC-101] Applying reduction on operation 'c_2_0_buf[64 * k + j ...' (matmul_kernel_int.c:29)
+INFO: [REDUC-101] Applying reduction on operation 'c_2_0_buf[64 * k + j ...' (matmul_kernel_float.c:29)
+INFO: [REDUC-101] Applying reduction on operation 'sum += a[i + 100 * j ...' (vec_add_kernel_2.cpp:12)
+
+WARNING: [REDUC-202] Reduction on operation 'tmpval += x * inv_co ...' (idct_kernel_1.c:114) not applied: no benefit.
+Hint: using parallel factor to apply loop tiling may help trigger reduction optimization and enhance the performance. 
+
+WARNING: [REDUC-202] Reduction on operation 'tmpInt += x * inv_co ...' (idct_kernel_1.c:174) not applied: no benefit.
+Hint: using parallel factor to apply loop tiling may help trigger reduction optimization and enhance the performance. 
+INFO: [REDUC-101] Applying reduction on operation 'result1[j][k] += wei ...' (logistic_regression_kernel.c:43)
+INFO: [REDUC-102] Disabling automatic reduction in loop 'for(int kk = 0;kk <  ...' (gradient_1.cpp:157) because of multiple reduction operations:
+    loss += maxMargin_bu ... (gradient_1.cpp:170) 
+   output_loss_buffer + ... (gradient_1.cpp:173) 
+   Hint: try to group these operations into a reduction function
+INFO: [REDUC-101] Applying reduction on operation 'margin_buf[kk][i] += ...' (gradient_1.cpp:81)
+INFO: [REDUC-102] Disabling automatic reduction in loop 'for(int i = 0;i < 10 ...' (gradient_1.cpp:106) because of multiple reduction operations:
+    sum_buf[kk] += exp(- ... (gradient_1.cpp:112) 
+   sum_buf[kk] += exp(m ... (gradient_1.cpp:115) 
+   sum_buf[kk] += exp(m ... (gradient_1.cpp:119) 
+   Hint: try to group these operations into a reduction function
+INFO: [REDUC-102] Disabling automatic reduction in loop 'for(int kk = 0;kk <  ...' (gradient_2.cpp:157) because of multiple reduction operations:
+    loss += maxMargin_bu ... (gradient_2.cpp:170) 
+   output_loss_buffer + ... (gradient_2.cpp:173) 
+   Hint: try to group these operations into a reduction function
+INFO: [REDUC-101] Applying reduction on operation 'margin_buf[kk][i] += ...' (gradient_2.cpp:81)
+INFO: [REDUC-102] Disabling automatic reduction in loop 'for(int i = 0;i < 10 ...' (gradient_2.cpp:106) because of multiple reduction operations:
+    sum_buf[kk] += exp(- ... (gradient_2.cpp:112) 
+   sum_buf[kk] += exp(m ... (gradient_2.cpp:115) 
+   sum_buf[kk] += exp(m ... (gradient_2.cpp:119) 
+   Hint: try to group these operations into a reduction function
+
+WARNING: [REDUC-202] Reduction on operation 'output[i * 1024 + j] ...' (gradient_2.cpp:151) not applied: no benefit.
+Hint: using parallel factor to apply loop tiling may help trigger reduction optimization and enhance the performance. 
+
+ERROR: [PROCS-345] Kernel 'func_top_0_0' (test.c:8) which is called by another kernel 'func_top_0' ((test.c:15) is not supported
+
+WARNING: [REDUC-202] Reduction on operation 'a_buf[i] += b[i]' (test.c:42) not applied: no benefit.
+Hint: using parallel factor to apply loop tiling may help trigger reduction optimization and enhance the performance. 
+INFO: [REDUC-101] Applying reduction on operation 'a += b[i + 100 * k + ...' (test.c:127)
+INFO: [REDUC-101] Applying reduction on operation 'a += b[i + 100 * k + ...' (test.c:144)
+
+WARNING: [REDUC-204] Reduction in loop 'for(i = k;i < 100;i+ ...' (test.c:159) not applied: : it uses the outer loop's iterator in the loop bound expression.
+
+ERROR: [PROCS-326] Cannot find the reduction function '::printf' specified by the pragma  'ACCEL reduction' (test_err.c:14)
+
+WARNING: [REDUC-202] Reduction on operation 'sum += b[j_sub]' (test_illegal.cpp:24) not applied: no benefit.
+Hint: using parallel factor to apply loop tiling may help trigger reduction optimization and enhance the performance. 
+INFO: [REDUC-102] Disabling automatic reduction in loop 'for(j_sub = 0;j_sub  ...' (test_illegal.cpp:15) because of multiple reduction operations:
+    sum += a[j * 10 + j_ ... (test_illegal.cpp:18) 
+   sum1 += a[j * 10 + j ... (test_illegal.cpp:19) 
+   Hint: try to group these operations into a reduction function
+INFO: [REDUC-102] Disabling automatic reduction in loop 'for(j_sub = 0;j_sub  ...' (test_illegal.cpp:44) because of multiple reduction operations:
+    sum += a[j * 10 + j_ ... (test_illegal.cpp:47) 
+   sum1 += sum; (test_illegal.cpp:48) 
+   Hint: try to group these operations into a reduction function
+INFO: [REDUC-101] Applying reduction on operation 'sum_reduce_3d(force_ ...' (namd_kernel.cpp:2706)
+
+WARNING: [REDUC-202] Reduction on operation 'sum_reduce_3d(force_ ...' (transformation:0) not applied: no benefit.
+Hint: using parallel factor to apply loop tiling may help trigger reduction optimization and enhance the performance. 
+INFO: [REDUC-101] Applying reduction on operation 'reduce_func(local_di ...' (vec_add_kernel_flann.cpp:179)
+INFO: [REDUC-101] Applying reduction on operation 'reduce_func(local_di ...' (transformation:0)
+
+WARNING: [REDUC-202] Reduction on operation 'reduce_func(local_di ...' (transformation:0) not applied: no benefit.
+Hint: using parallel factor to apply loop tiling may help trigger reduction optimization and enhance the performance. 

@@ -1,0 +1,16 @@
+int p_ZN1a1fIiEEi(int x);
+
+int p_ZN1a1fIiEEi(int x)
+{
+  return x;
+}
+namespace a
+{
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+}
+#pragma ACCEL kernel
+
+void k()
+{
+p_ZN1a1fIiEEi(123);
+}

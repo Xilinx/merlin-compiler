@@ -1,0 +1,345 @@
+#include<string.h>
+#include "logistic.h"
+
+void shift_left(float regs[64])
+{
+  int i;
+  for (i = 0; i < 64 - 1; i++) {
+    
+#pragma ACCEL PIPELINE
+    regs[i] = regs[i + 1];
+  }
+}
+
+void recv_data(volatile float *global_data,unsigned int offset,float data[32][784 + 64])
+{
+  memcpy(( *data),((void *)(global_data + offset)),((64 + 784) * 32 * 4));
+}
+
+void compute1(float data[32][784 + 64],float weights[64][784 + 1],float result1[32][64])
+{
+  int i;
+  int j;
+  int k;
+  for (j = 0; j < 32; j++) 
+/* Original: #pragma ACCEL pipeline */
+{
+    for (k = 0; k < 64; k++) 
+/* Original: #pragma ACCEL parallel complete */
+{
+      
+#pragma ACCEL PIPELINE
+      result1[j][k] = weights[k][0];
+    }
+  }
+  STAGE1_D:
+  for (i = 0; i < 784; i++) {
+    STAGE1_n:
+    for (j = 0; j < 32; j++) 
+/* Original: #pragma ACCEL pipeline */
+{
+      STAGE1_L:
+{
+        for (k = 0; k < 64; k++) 
+/* Original: #pragma ACCEL parallel complete */
+{
+          
+#pragma ACCEL PIPELINE
+          result1[j][k] += weights[k][i + 1] * data[j][i + 64];
+        }
+      }
+    }
+  }
+}
+
+void compute2(float result1[32][64],float data[32][784 + 64],float result2[32][64])
+{
+  int j;
+  int k;
+  STAGE2_L:
+  for (k = 0; k < 64; k++) {
+    STAGE2_n:
+    for (j = 0; j < 32; j++) 
+/* Original: #pragma ACCEL pipeline */
+{
+      
+#pragma ACCEL PIPELINE
+      float temp = 1 + result1[j][k] * result1[j][k];
+      result2[j][k] = result1[j][k] / temp - (2.f * data[j][k] - 1.f) / sqrtf(temp);
+//result2[j][k] = 1.f/(1.f+expf(-result1[j][k]))-data[j][k];
+    }
+  }
+}
+
+void compute3(float result2[32][64],float data[32][784 + 64],float gradient[64][784 + 1])
+{
+  int i;
+  int j;
+  int k;
+  STAGE3_n:
+  for (j = 0; j < 32; j++) {
+    STAGE3_D:
+    for (i = 0; i < 784 + 1; i++) 
+/* Original: #pragma ACCEL pipeline */
+{
+      STAGE3_L:
+{
+        for (k = 0; k < 64; k++) 
+/* Original: #pragma ACCEL parallel complete */
+{
+          
+#pragma ACCEL PIPELINE
+          gradient[k][i] += result2[j][k] * ((i == 0?1.f : data[j][i - 1 + 64]));
+        }
+      }
+    }
+  }
+}
+
+void mars_kernel_1_4_0_node_0_stage_0(int i,int exec)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+  }
+}
+
+void mars_kernel_1_4_0_node_1_stage_0(int i,int exec,float data[32][784 + 64],volatile float *global_data)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    recv_data(global_data,((unsigned int )(i * 32 * (784 + 64))),data);
+  }
+}
+
+void mars_kernel_1_4_0_node_2_stage_1(int i,int exec,float data[32][784 + 64],float result1[32][64],float weights[64][784 + 1])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    compute1(data,weights,result1);
+  }
+}
+
+void mars_kernel_1_4_0_node_3_stage_2(int i,int exec,float data[32][784 + 64],float result1[32][64],float result2[32][64])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    compute2(result1,data,result2);
+  }
+}
+
+void mars_kernel_1_4_0_node_4_stage_3(int i,int exec,float data[32][784 + 64],float gradient[64][784 + 1],float result2[32][64])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    compute3(result2,data,gradient);
+  }
+}
+
+void mars_kernel_1_4_0_assign_data(float target[32][784 + 64],float orig[32][784 + 64])
+{
+  int i1;
+  int i0;
+  for (i0 = 0; i0 < 32; i0++) {
+    for (i1 = 0; i1 < 848; i1++) {
+      target[i0][i1] = orig[i0][i1];
+    }
+  }
+}
+
+void mars_kernel_1_4_0_assign_global_data(volatile float *target,volatile float *orig)
+{
+  int i0;
+  for (i0 = 0; i0 < 0; i0++) {
+    target[i0] = orig[i0];
+  }
+}
+
+void mars_kernel_1_4_0_assign_gradient(float target[64][784 + 1],float orig[64][784 + 1])
+{
+  int i1;
+  int i0;
+  for (i0 = 0; i0 < 64; i0++) {
+    for (i1 = 0; i1 < 785; i1++) {
+      target[i0][i1] = orig[i0][i1];
+    }
+  }
+}
+
+void mars_kernel_1_4_0_assign_result1(float target[32][64],float orig[32][64])
+{
+  int i1;
+  int i0;
+  for (i0 = 0; i0 < 32; i0++) {
+    for (i1 = 0; i1 < 64; i1++) {
+      
+#pragma ACCEL PIPELINE
+      target[i0][i1] = orig[i0][i1];
+    }
+  }
+}
+
+void mars_kernel_1_4_0_assign_result2(float target[32][64],float orig[32][64])
+{
+  int i1;
+  int i0;
+  for (i0 = 0; i0 < 32; i0++) {
+    for (i1 = 0; i1 < 64; i1++) {
+      
+#pragma ACCEL PIPELINE
+      target[i0][i1] = orig[i0][i1];
+    }
+  }
+}
+
+void mars_kernel_1_4_0_assign_weights(float target[64][784 + 1],float orig[64][784 + 1])
+{
+  int i1;
+  int i0;
+  for (i0 = 0; i0 < 64; i0++) {
+    for (i1 = 0; i1 < 785; i1++) {
+      target[i0][i1] = orig[i0][i1];
+    }
+  }
+}
+
+void mars_kernel_1_4_0(int mars_i,int mars_init,int mars_cond,float mars_data_0[32][784 + 64],float mars_data_1[32][784 + 64],float mars_data_2[32][784 + 64],float mars_data_3[32][784 + 64],volatile float *mars_global_data_0,float mars_gradient_3[64][784 + 1],float mars_result1_1[32][64],float mars_result1_2[32][64],float mars_result2_2[32][64],float mars_result2_3[32][64],float mars_weights_1[64][784 + 1])
+{
+  mars_kernel_1_4_0_node_0_stage_0(mars_i - 0,mars_i >= mars_init + 0 & mars_i < mars_cond + 0);
+  mars_kernel_1_4_0_node_1_stage_0(mars_i - 0,mars_i >= mars_init + 0 & mars_i < mars_cond + 0,mars_data_0,mars_global_data_0);
+  mars_kernel_1_4_0_node_2_stage_1(mars_i - 1,mars_i >= mars_init + 1 & mars_i < mars_cond + 1,mars_data_1,mars_result1_1,mars_weights_1);
+  mars_kernel_1_4_0_node_3_stage_2(mars_i - 2,mars_i >= mars_init + 2 & mars_i < mars_cond + 2,mars_data_2,mars_result1_2,mars_result2_2);
+  mars_kernel_1_4_0_node_4_stage_3(mars_i - 3,mars_i >= mars_init + 3 & mars_i < mars_cond + 3,mars_data_3,mars_gradient_3,mars_result2_3);
+}
+
+void pipeline(int n_samples,volatile float *global_data,float weights[64][784 + 1],float gradient[64][784 + 1])
+{
+  int i;
+  int n_stage = n_samples / 32;
+  int mars_count_1_4_0 = 0;
+  TOP_LOOP:
+  for (i = 0; i < n_stage + 3; i++) 
+/* Original: #pragma ACCEL pipeline */
+/* Original: #pragma ACCEL PIPELINE II=1 */
+{
+    
+#pragma HLS loop_tripcount max=1875
+    float data[32][784 + 64];
+    float result1[32][64];
+    float result2[32][64];
+    static float mars_kernel_1_4_0_result2_1[32][64];
+    static float mars_kernel_1_4_0_result2_0[32][64];
+    static float mars_kernel_1_4_0_result1_1[32][64];
+    static float mars_kernel_1_4_0_result1_0[32][64];
+    static float mars_kernel_1_4_0_data_3[32][784 + 64];
+    static float mars_kernel_1_4_0_data_2[32][784 + 64];
+    static float mars_kernel_1_4_0_data_1[32][784 + 64];
+    static float mars_kernel_1_4_0_data_0[32][784 + 64];
+//The function calls here are for auto_fg_opt testing only
+    mars_kernel_1_4_0_assign_result2(result2,mars_kernel_1_4_0_result2_1);
+    mars_kernel_1_4_0_assign_result2(result2,mars_kernel_1_4_0_result2_0);
+    mars_kernel_1_4_0_assign_result1(result1,mars_kernel_1_4_0_result1_1);
+    mars_kernel_1_4_0_assign_result1(result1,mars_kernel_1_4_0_result1_0);
+    if (mars_count_1_4_0 == 0) {
+      mars_kernel_1_4_0(i,0,n_stage,mars_kernel_1_4_0_data_0,mars_kernel_1_4_0_data_1,mars_kernel_1_4_0_data_2,mars_kernel_1_4_0_data_3,global_data,gradient,mars_kernel_1_4_0_result1_0,mars_kernel_1_4_0_result1_1,mars_kernel_1_4_0_result2_0,mars_kernel_1_4_0_result2_1,weights);
+    }
+     else {
+      if (mars_count_1_4_0 == 1) {
+        mars_kernel_1_4_0(i,0,n_stage,mars_kernel_1_4_0_data_3,mars_kernel_1_4_0_data_0,mars_kernel_1_4_0_data_1,mars_kernel_1_4_0_data_2,global_data,gradient,mars_kernel_1_4_0_result1_1,mars_kernel_1_4_0_result1_0,mars_kernel_1_4_0_result2_1,mars_kernel_1_4_0_result2_0,weights);
+      }
+       else {
+        if (mars_count_1_4_0 == 2) {
+          mars_kernel_1_4_0(i,0,n_stage,mars_kernel_1_4_0_data_2,mars_kernel_1_4_0_data_3,mars_kernel_1_4_0_data_0,mars_kernel_1_4_0_data_1,global_data,gradient,mars_kernel_1_4_0_result1_0,mars_kernel_1_4_0_result1_1,mars_kernel_1_4_0_result2_0,mars_kernel_1_4_0_result2_1,weights);
+        }
+         else {
+          if (mars_count_1_4_0 == 3) {
+            mars_kernel_1_4_0(i,0,n_stage,mars_kernel_1_4_0_data_1,mars_kernel_1_4_0_data_2,mars_kernel_1_4_0_data_3,mars_kernel_1_4_0_data_0,global_data,gradient,mars_kernel_1_4_0_result1_1,mars_kernel_1_4_0_result1_0,mars_kernel_1_4_0_result2_1,mars_kernel_1_4_0_result2_0,weights);
+          }
+        }
+      }
+    }
+    mars_count_1_4_0++;
+    if (mars_count_1_4_0 == 4) {
+      mars_count_1_4_0 = 0;
+    }
+  }
+}
+//void logistic_regression_kernel( int n_samples, float global_weights[WEIGHTS_SIZE], float global_data[DATA_SIZE], float global_gradient[WEIGHTS_SIZE] )
+
+void logistic_regression_kernel(int n_samples,float *global_weights,float *global_data,float *global_gradient)
+{
+#ifdef ADD_IF
+#endif
+  float weights[64][784 + 1];
+  float gradient[64][784 + 1];
+  int i;
+  int j;
+  int k;
+  float regs[64];
+  float buffer[785];
+#if 0
+#else
+  for (i = 0; i < 64; i++) {
+    int j;
+    for (j = 0; j < 784 + 1; j++) {
+      
+#pragma ACCEL PIPELINE
+      gradient[i][j] = 0.f;
+    }
+  }
+  for (i = 0; i < 64; i++) {
+    memcpy(((void *)buffer),((const void *)(global_weights + (784 + 1) * i)),((784 + 1) * 4));
+    for (j = 0; j < 784 + 1; j++) 
+/* Original: #pragma ACCEL pipeline */
+{
+      for (k = 0; k < 64; k++) 
+/* Original: #pragma ACCEL parallel complete */
+{
+        
+#pragma ACCEL PIPELINE
+        regs[k] = weights[k][j];
+      }
+      shift_left(regs);
+      for (k = 0; k < 64; k++) 
+/* Original: #pragma ACCEL parallel complete */
+{
+        
+#pragma ACCEL PIPELINE
+        weights[k][j] = regs[k];
+      }
+      weights[64 - 1][j] = buffer[j];
+    }
+  }
+#endif
+  pipeline(n_samples,global_data,weights,gradient);
+#if 0
+#else
+  for (i = 0; i < 64; i++) {
+    for (j = 0; j < 784 + 1; j++) 
+/* Original: #pragma ACCEL pipeline */
+{
+      buffer[j] = gradient[0][j];
+      for (k = 0; k < 64; k++) 
+/* Original: #pragma ACCEL parallel complete */
+{
+        
+#pragma ACCEL PIPELINE
+        regs[k] = gradient[k][j];
+      }
+      shift_left(regs);
+      for (k = 0; k < 64; k++) 
+/* Original: #pragma ACCEL parallel complete */
+{
+        
+#pragma ACCEL PIPELINE
+        gradient[k][j] = regs[k];
+      }
+    }
+    memcpy(((void *)(global_gradient + i * (784 + 1))),((const void *)buffer),((784 + 1) * 4));
+  }
+#endif
+}

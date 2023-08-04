@@ -1,0 +1,19 @@
+// Ensure that CMarsIrV2::is_used_by_kernel doesn't crash on an unknown node.
+namespace x
+{
+
+void f()
+{
+}
+}
+// namespace x
+// Some nodes that is_used_by_kernel will choke on include SgAsmStmts,
+// SgUsingDeclarationStatements. Note that these need to be in the global
+// scope to prevent early detection from kernel_separate's checker.
+using x::f;
+__asm__ ("rdtsc");
+#pragma ACCEL kernel
+
+void kern()
+{
+}

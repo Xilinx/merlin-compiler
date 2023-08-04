@@ -1,0 +1,112 @@
+{
+    "L,logistic_regression_kernel-L2": {
+        "II": "2", 
+        "iteration-latency": "11", 
+        "iteration-latency-min": "11", 
+        "latency-max": "110", 
+        "latency-min": "106", 
+        "name": "L2", 
+        "pipelined": "yes", 
+        "trip-count": "51"
+    }, 
+    "L,logistic_regression_kernel-L3": {
+        "II": "1", 
+        "iteration-latency": "8", 
+        "iteration-latency-min": "8", 
+        "latency-max": "55", 
+        "latency-min": "0", 
+        "name": "L3", 
+        "pipelined": "yes", 
+        "trip-count": "49"
+    }, 
+    "L,logistic_regression_kernel-merlinL10": {
+        "II": "1", 
+        "iteration-latency": "3", 
+        "iteration-latency-min": "3", 
+        "latency-max": "786", 
+        "latency-min": "786", 
+        "name": "merlinL10", 
+        "pipelined": "yes", 
+        "trip-count": "785"
+    }, 
+    "L,logistic_regression_kernel-merlinL11": {
+        "II": "-", 
+        "iteration-latency": "901", 
+        "iteration-latency-min": "897", 
+        "latency-max": "57664", 
+        "latency-min": "57408", 
+        "name": "merlinL11", 
+        "pipelined": "no", 
+        "trip-count": "64"
+    }, 
+    "L,logistic_regression_kernel-merlinL13_merlinL12": {
+        "II": "1", 
+        "iteration-latency": "1", 
+        "iteration-latency-min": "1", 
+        "latency-max": "50240", 
+        "latency-min": "50240", 
+        "name": "merlinL13_merlinL12", 
+        "pipelined": "yes", 
+        "trip-count": "50240"
+    }, 
+    "L,logistic_regression_kernel-merlinL6": {
+        "II": "1", 
+        "iteration-latency": "2", 
+        "iteration-latency-min": "2", 
+        "latency-max": "785", 
+        "latency-min": "785", 
+        "name": "merlinL6", 
+        "pipelined": "yes", 
+        "trip-count": "785"
+    }, 
+    "L,logistic_regression_kernel-merlinL7": {
+        "II": "-", 
+        "iteration-latency": "1057", 
+        "iteration-latency-min": "792", 
+        "latency-max": "67648", 
+        "latency-min": "50688", 
+        "name": "merlinL7", 
+        "pipelined": "no", 
+        "trip-count": "64"
+    }, 
+    "logistic_regression_kernel": {
+        "interval-max": "?", 
+        "interval-min": "158342", 
+        "latency-max": "?", 
+        "latency-min": "158342", 
+        "total-BRAM": 900, 
+        "total-DSP": 1518, 
+        "total-FF": 457772, 
+        "total-LUT": 934525, 
+        "total-URAM": 0, 
+        "util-BRAM": "16", 
+        "util-DSP": "12", 
+        "util-FF": "13", 
+        "util-LUT": "54", 
+        "util-URAM": "0"
+    }, 
+    "pipeline": {
+        "instance_name": "grp_pipeline_fu_10465", 
+        "interval-max": "?", 
+        "interval-min": "1", 
+        "latency-max": "?", 
+        "latency-min": "1", 
+        "module_name": "pipeline"
+    },
+    "logistic_regression_kernel_1": {
+        "instance_name": "test", 
+        "interval-max": "?", 
+        "interval-min": "1", 
+        "latency-max": "?", 
+        "latency-min": "1", 
+        "module_name": "logistic_regression_kernel_1"
+    },
+    "logistic_regression_kernel_entry": {
+        "instance_name": "test", 
+        "interval-max": "?", 
+        "interval-min": "1", 
+        "latency-max": "?", 
+        "latency-min": "1", 
+        "module_name": "logistic_regression_kernel_entry"
+    }
+}

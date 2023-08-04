@@ -1,0 +1,58 @@
+INFO: [FGPIP-103] Loop 'k'  (test_false_dependence_sdaccel.cpp:4) is pipelined
+INFO: [FGPIP-102] Loop 'k' (test_false_dependence_sdaccel.cpp:23) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_sdaccel.cpp:26) is fully parallelized
+INFO: [FGPIP-102] Loop 'k' (test_false_dependence_sdaccel.cpp:45) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_sdaccel.cpp:47) is fully parallelized
+INFO: [FGPIP-102] Loop 'k' (test_false_dependence_sdaccel.cpp:64) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_sdaccel.cpp:66) is fully parallelized
+INFO: [FGPIP-103] Loop 'k'  (test_false_dependence_sdaccel.cpp:82) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_sdaccel.cpp:85) is fully parallelized
+INFO: [FGPIP-103] Loop 'j'  (test_false_dependence_sdaccel.cpp:102) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (test_false_dependence_sdaccel.cpp:116) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (test_false_dependence_sdaccel.cpp:122) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (test_false_dependence_sdaccel.cpp:138) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (test_false_dependence_sdaccel.cpp:143) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (test_false_dependence_sdaccel.cpp:148) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (test_false_dependence_sdaccel.cpp:153) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_false_dependence_sdaccel.cpp:167) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_sdaccel.cpp:172) is fully parallelized
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a00' (test_false_dependence_sdaccel.cpp:170)
+ in loop 'i' (test_false_dependence_sdaccel.cpp:167)
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_sdaccel.cpp:134)
+ in loop 'j' (test_false_dependence_sdaccel.cpp:153)
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_sdaccel.cpp:134)
+ in loop 'j' (test_false_dependence_sdaccel.cpp:148)
+
+WARNING: [FGPIP-217] To apply dependency false pragma on variable 'b' (test_false_dependence_sdaccel.cpp:136) in loop 'j' (test_false_dependence_sdaccel.cpp:143) may result in an incorrect hardware implementation.
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'b' (test_false_dependence_sdaccel.cpp:136)
+ in loop 'j' (test_false_dependence_sdaccel.cpp:143)
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_sdaccel.cpp:134)
+ in loop 'j' (test_false_dependence_sdaccel.cpp:138)
+
+WARNING: [FGPIP-217] To apply dependency false pragma on variable 'a' (test_false_dependence_sdaccel.cpp:114) in loop 'j' (test_false_dependence_sdaccel.cpp:122) may result in an incorrect hardware implementation.
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_sdaccel.cpp:114)
+ in loop 'j' (test_false_dependence_sdaccel.cpp:122)
+
+WARNING: [FGPIP-217] To apply dependency false pragma on variable 'a' (test_false_dependence_sdaccel.cpp:114) in loop 'j' (test_false_dependence_sdaccel.cpp:116) may result in an incorrect hardware implementation.
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_sdaccel.cpp:114)
+ in loop 'j' (test_false_dependence_sdaccel.cpp:116)
+
+WARNING: [FGPIP-217] To apply dependency false pragma on variable 'bb' (test_false_dependence_sdaccel.cpp:95) in loop 'i' (test_false_dependence_sdaccel.cpp:98) may result in an incorrect hardware implementation.
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'bb' (test_false_dependence_sdaccel.cpp:95)
+ in loop 'i' (test_false_dependence_sdaccel.cpp:98)
+
+WARNING: [FGPIP-217] To apply dependency false pragma on variable 'a' (test_false_dependence_sdaccel.cpp:94) in loop 'i' (test_false_dependence_sdaccel.cpp:98) may result in an incorrect hardware implementation.
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_sdaccel.cpp:94)
+ in loop 'i' (test_false_dependence_sdaccel.cpp:98)
+
+WARNING: [PROCS-234] Ignoring pragma '#pragma ACCEL FALSE_DEPENDENCE VARIABLE = a_buf FORCE=off' (test_false_dependence_sdaccel.cpp:81) because cannot find the specified variable
+
+WARNING: [PROCS-234] Ignoring pragma '#pragma ACCEL FALSE_DEPENDENCE' (test_false_dependence_sdaccel.cpp:63) because Xilinx tool cannot support a false dependence pragma without a specified variable
+
+WARNING: [FGPIP-217] To apply dependency false pragma on variable 'a' (test_false_dependence_sdaccel.cpp:37) in loop 'i' (test_false_dependence_sdaccel.cpp:42) may result in an incorrect hardware implementation.
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_sdaccel.cpp:37)
+ in loop 'i' (test_false_dependence_sdaccel.cpp:42)
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_sdaccel.cpp:14)
+ in loop 'i' (test_false_dependence_sdaccel.cpp:20)
+
+WARNING: [PROCS-234] Ignoring pragma '#pragma ACCEL FALSE_DEPENDENCE VARIABLE=a' (test_false_dependence_sdaccel.cpp:7) because cannot find the specified variable

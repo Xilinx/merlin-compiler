@@ -1,0 +1,13 @@
+<message>
+	<element id="__merlin_test_id" location="__merlin_test_location"></element>
+	<element id="function:L0R__L1R" location="vec_add_kernel.c:2"></element>
+	<element id="local:L0R__L1Ri" location="vec_add_kernel.c:5"></element>
+	<element id="local:L0R__L1Rj" location="vec_add_kernel.c:5"></element>
+	<element id="local:L0R__L1Rtemp" location="vec_add_kernel.c:5"></element>
+	<element id="loop:L0R__L1RL_0" location="vec_add_kernel.c:6"></element>
+	<element id="loop:L0R__L1RL_0_0" location="vec_add_kernel.c:7"></element>
+	<element id="parameter:L0R__L1Ra" location="vec_add_kernel.c:2"></element>
+	<element id="parameter:L0R__L1Rburst_length" location="vec_add_kernel.c:2"></element>
+	<element id="parameter:L0R__L1Rburst_number" location="vec_add_kernel.c:2"></element>
+	<element id="parameter:L0R__L1Rout" location="vec_add_kernel.c:2"></element>
+</message>

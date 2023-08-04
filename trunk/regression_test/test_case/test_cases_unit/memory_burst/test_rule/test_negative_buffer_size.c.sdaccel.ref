@@ -1,0 +1,37 @@
+#include <string.h> 
+#include<assert.h>
+#include "cmost.h"
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+  int a_buf[100];
+  __merlin_access_range(a,0,99);
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 100);
+  for (int i = 0; i < 200; ++i) {
+    if (i * i < 100) {
+      a_buf[i]++;
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+
+void sub(int *a,int h)
+{
+  int a_5_0_buf[64];
+  for (int i = 0; i < h; ++i) {
+    a_5_0_buf[i] = i;
+  }
+{
+    memcpy((void *)(&a[0]),(const void *)(&a_5_0_buf[0]),sizeof(int ) * h);
+  }
+  a[h - 1] = 0;
+}
+#pragma ACCEL kernel
+
+void top2(int *a,int h)
+{
+  h <= 64?((void )0) : __assert_fail("h <=64","test_negative_buffer_size.c",20,__PRETTY_FUNCTION__);
+  sub(a,h);
+}

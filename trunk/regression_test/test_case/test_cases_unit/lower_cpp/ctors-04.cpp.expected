@@ -1,0 +1,29 @@
+// From tbaa-thread-sanitizer-equal_range.cpp from LLVM test-suite. Ensure that
+// nested ctors are lowered correctly.
+
+struct iterator 
+{
+  void *node;
+}
+;
+
+struct ::pair 
+{
+  struct iterator first;
+}
+;
+
+void p_ZN4pairC2ERK8iterator(struct pair *this_,const struct iterator &a)
+{
+  this_ -> first = a;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_pai_();
+#pragma ACCEL kernel name = "equal_range"
+
+void equal_range()
+{
+  struct iterator temp;
+  struct pair temp_0;
+  p_ZN4pairC2ERK8iterator(&temp_0,temp);
+  (void )(temp_0);
+}

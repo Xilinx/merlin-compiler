@@ -1,0 +1,86 @@
+Feature FAlCON_ALTERA checked out. 
+
+[INFO] Here we enter test_stream_ir_top() 
+
+[print topo:]5
+[print topo:]17
+[print topo:]5
+SpawnNodeFromAST -- {#pragma ACCEL spawnfor(int i ...
+-- Find a ref: b[j * 100 + i]
+-- ref_map:
+  SgPntrArrRefExp:b[_j * 100 + i]@msm_port_b_msm_node_0_0 -> SgPntrArrRefExp:b[j * 100 + i]@msm_node_0
+** Stream port generated: msm_port_b_msm_node_0_0(b,j);
+
+-- Find a ref: a[j * 100 + i]
+-- ref_map:
+  SgPntrArrRefExp:a[_j * 100 + i]@msm_port_a_msm_node_0_0 -> SgPntrArrRefExp:a[j * 100 + i]@msm_node_0
+** Stream port generated: msm_port_a_msm_node_0_0(a,j);
+
+-- ref_map:
+** Stream port generated: msm_port_j_msm_node_0_0(j);
+
+SpawnNodeFromAST -- {#pragma ACCEL spawnfor(int i ...
+-- Find a ref: b[i]
+-- ref_map:
+  SgPntrArrRefExp:b[i]@msm_port_b_msm_node_1_0 -> SgPntrArrRefExp:b[i]@msm_node_1
+** Stream port generated: msm_port_b_msm_node_1_0(b);
+
+-- Find a ref: a[i]
+-- ref_map:
+  SgPntrArrRefExp:a[i]@msm_port_a_msm_node_1_0 -> SgPntrArrRefExp:a[i]@msm_node_1
+** Stream port generated: msm_port_a_msm_node_1_0(a);
+
+SpawnNodeFromAST -- {#pragma ACCEL spawnfor(int i ...
+-- Find a ref: b_buf[j * 100 + i]
+-- ref_map:
+  SgPntrArrRefExp:b_buf[_j * 100 + i]@msm_port_b_buf_msm_node_2_0 -> SgPntrArrRefExp:b_buf[j * 100 + i]@msm_node_2
+** Stream port generated: msm_port_b_buf_msm_node_2_0(b_buf,j);
+
+-- Find a ref: a_buf[j * 100 + i]
+-- ref_map:
+  SgPntrArrRefExp:a_buf[_j * 100 + i]@msm_port_a_buf_msm_node_2_0 -> SgPntrArrRefExp:a_buf[j * 100 + i]@msm_node_2
+** Stream port generated: msm_port_a_buf_msm_node_2_0(a_buf,j);
+
+-- ref_map:
+** Stream port generated: msm_port_j_msm_node_2_0(j);
+
+SpawnNodeFromAST -- {#pragma ACCEL spawnfunc3(a_bu...
+--   step: a_buf(a_buf[j * 100 + i])->P_NULL:SgVarRefExp:a_buf
+-- induct: a_buf(a_buf[j * 100 + i])->P_NULL:SgVarRefExp:a_buf
+--   step: j(j * 100)->P_NULL:SgVarRefExp:j
+-- induct: j(j * 100)->P_NULL:SgVarRefExp:j
+--   step: a_buf(a_buf[j * 100 + i])->P_NULL:SgVarRefExp:a_buf
+-- induct: a_buf(a_buf[j * 100 + i])->P_NULL:SgVarRefExp:a_buf
+--   step: j(j * 100)->P_NULL:SgVarRefExp:j
+-- induct: j(j * 100)->P_NULL:SgVarRefExp:j
+-- Find a ref: a_buf
+-- Find a ref: a_buf[j * 100 + i]
+--   step: a_buf(a_buf[j * 100 + i])->P_NULL:SgVarRefExp:a_buf
+-- induct: a_buf(a_buf[j * 100 + i])->P_NULL:SgVarRefExp:a_buf
+--   step: j(j * 100)->P_NULL:SgVarRefExp:j
+-- induct: j(j * 100)->P_NULL:SgVarRefExp:j
+-- ref_map:
+  SgPntrArrRefExp:a_buf[_j * 100 + i]@msm_port_a_buf_msm_node_3_0 -> SgPntrArrRefExp:a_buf[j * 100 + i]@func3
+** Stream port generated: msm_port_a_buf_msm_node_3_0(a_buf,j);
+
+-- ref_map:
+  SgVarRefExp:j@msm_port_j_msm_node_3_0 -> SgVarRefExp:j@msm_node_3
+** Stream port generated: msm_port_j_msm_node_3_0(j);
+
+SpawnNodeFromAST -- {#pragma ACCEL spawnfunc4(a_bu...
+--   step: a(a[i])->P_NULL:SgPntrArrRefExp:a_buf[j]
+-- induct: a(a[i])->P_NULL:SgPntrArrRefExp:a_buf[j]
+--   step: a(a[i])->P_NULL:SgPntrArrRefExp:a_buf[j]
+-- induct: a(a[i])->P_NULL:SgPntrArrRefExp:a_buf[j]
+-- Find a ref: a_buf[j]
+-- Find a ref: a[i]
+--   step: a(a[i])->P_NULL:SgPntrArrRefExp:a_buf[j]
+-- induct: a(a[i])->P_NULL:SgPntrArrRefExp:a_buf[j]
+-- ref_map:
+  SgPntrArrRefExp:a_buf[_j][i]@msm_port_a_buf_msm_node_4_0 -> SgPntrArrRefExp:a[i]@func4
+** Stream port generated: msm_port_a_buf_msm_node_4_0(a_buf,j);
+
+-- ref_map:
+  SgVarRefExp:j@msm_port_j_msm_node_4_0 -> SgVarRefExp:j@msm_node_4
+** Stream port generated: msm_port_j_msm_node_4_0(j);
+

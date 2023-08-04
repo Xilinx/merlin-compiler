@@ -1,0 +1,11 @@
+<message>
+	<element id="__merlin_test_id" location="__merlin_test_location"></element>
+	<element id="function:L0R__L1R" location="__merlinkernel_vec_add_kernel.cpp:5"></element>
+	<element id="local:L0R__L1Rj" location="__merlinkernel_vec_add_kernel.cpp:13"></element>
+	<element id="loop:L0R__L1RL_0" location="__merlinkernel_vec_add_kernel.cpp:14"></element>
+	<element id="loop:L0R__L1RL_1" location="__merlinkernel_vec_add_kernel.cpp:18"></element>
+	<element id="parameter:L0R__L1Ra" location="__merlinkernel_vec_add_kernel.cpp:5"></element>
+	<element id="parameter:L0R__L1Rb" location="__merlinkernel_vec_add_kernel.cpp:5"></element>
+	<element id="parameter:L0R__L1Rc" location="__merlinkernel_vec_add_kernel.cpp:5"></element>
+	<element id="parameter:L0R__L1Rinc" location="__merlinkernel_vec_add_kernel.cpp:5"></element>
+</message>

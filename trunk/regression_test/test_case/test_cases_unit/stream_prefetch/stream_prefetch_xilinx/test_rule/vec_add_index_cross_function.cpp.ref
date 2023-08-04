@@ -1,0 +1,109 @@
+#include<hls_stream.h>
+#define FC 16
+extern int __merlin_include__GB_hls_stream_h_0;
+static hls::stream<int > __merlintop_a_ch[16];
+static hls::stream<int > __merlintop_b_ch[16];
+static hls::stream<int > __merlintop_c_ch[16];
+
+void sub(int *c,int *a,int *b,int i)
+{
+  for (int i0 = 0; i0 < 16; ++i0) {
+    
+#pragma ACCEL parallel
+    __merlintop_c_ch[i0] .  write ((__merlintop_a_ch[i0] .  read () + __merlintop_b_ch[i0] .  read ()));
+  }
+}
+
+void top_1(int *a,int *b,int *c)
+{
+  for (int i = 0; i < 10000 / 16; ++i) {
+    sub(c,a,b,i);
+  }
+}
+
+void __merlintop_a_streaming(int *a)
+{
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 625L; ++merlin_it_0) {
+    
+#pragma ACCEL pipeline
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 16; ++merlin_it_1) {
+      
+#pragma ACCEL parallel
+      int merlin_tmp_2;
+      merlin_tmp_2 = a[0 + merlin_it_0 * 16 + merlin_it_1];
+      __merlintop_a_ch[merlin_it_1] .  write (merlin_tmp_2);
+    }
+  }
+}
+
+void __merlintop_b_streaming(int *b)
+{
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 625L; ++merlin_it_0) {
+    
+#pragma ACCEL pipeline
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 16; ++merlin_it_1) {
+      
+#pragma ACCEL parallel
+      int merlin_tmp_2;
+      merlin_tmp_2 = b[0 + merlin_it_0 * 16 + merlin_it_1];
+      __merlintop_b_ch[merlin_it_1] .  write (merlin_tmp_2);
+    }
+  }
+}
+
+void __merlintop_c_streaming(int *c)
+{
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 625L; ++merlin_it_0) {
+    
+#pragma ACCEL pipeline
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 16; ++merlin_it_1) {
+      
+#pragma ACCEL parallel
+      int merlin_tmp_2;
+      merlin_tmp_2 = __merlintop_c_ch[merlin_it_1] .  read ();
+      c[0 + merlin_it_0 * 16 + merlin_it_1] = merlin_tmp_2;
+    }
+  }
+}
+
+void __merlintop_computation(int *a,int *b,int *c)
+{
+  
+#pragma HLS inline off
+  top_1(a,b,c);
+}
+#pragma ACCEL kernel
+
+void top(int *a,int *b,int *c)
+{
+  
+#pragma ACCEL interface variable=a depth=10000 BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=512
+  
+#pragma ACCEL interface variable=b depth=10000 BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=512
+  
+#pragma ACCEL interface variable=c depth=10000 BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=512
+  
+#pragma HLS dataflow
+  
+#pragma HLS stream variable=__merlintop_a_ch
+  __merlintop_a_streaming(a);
+  
+#pragma HLS stream variable=__merlintop_b_ch
+  __merlintop_b_streaming(b);
+  __merlintop_computation(0,0,0);
+  
+#pragma HLS stream variable=__merlintop_c_ch
+  __merlintop_c_streaming(c);
+}

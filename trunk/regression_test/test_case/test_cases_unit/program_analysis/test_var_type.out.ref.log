@@ -1,0 +1,10 @@
+Hello Program Analysis ... 
+**** Test Variable Type **** 
+[Var g_a] type=int : int g_a = 0;
+[Var e_a] type=int [10] : extern int e_a[10];
+[Var e_a] type=int [10] : int e_a[10] = {(0)};
+[Var a] type=int * : void func(int * a,int * b,int * c) {...}
+[Var b] type=int * : void func(int * a,int * b,int * c) {...}
+[Var c] type=int * : void func(int * a,int * b,int * c) {...}
+[Var l_a] type=int : int l_a = 10;
+

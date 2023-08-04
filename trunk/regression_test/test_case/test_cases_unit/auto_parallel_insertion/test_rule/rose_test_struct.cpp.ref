@@ -1,0 +1,40 @@
+
+struct st 
+{
+  int data[4];
+}
+;
+#pragma ACCEL kernel
+
+void func_top_0()
+{
+  struct st T1;
+  int i;
+  int j;
+  int k;
+  int sum = 0;
+  for (i = 0; i < 20000; i++) {
+    
+#pragma ACCEL PIPELINE AUTO
+    for (k = 0; k < 32; k++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      for (j = 0; j < 4; j++) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        T1 . data[j] = j;
+      }
+    }
+  }
+  for (j = 0; j < 4; j++) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    sum += T1 . data[j];
+  }
+  struct st T2;
+  for (j = 0; j < 4; j++) {
+    
+#pragma ACCEL PIPELINE AUTO
+    T2 . data[j] = sum;
+  }
+}

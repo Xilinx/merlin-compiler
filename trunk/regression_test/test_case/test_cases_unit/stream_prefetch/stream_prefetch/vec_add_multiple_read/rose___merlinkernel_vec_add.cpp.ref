@@ -1,0 +1,125 @@
+#include "merlin_stream.h" 
+extern int __merlin_include__GB_merlin_stream_h_0;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=32 NODE=vec_add PORT=msm_port_b_vec_add_0 
+merlin_stream ch_b_4;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=32 NODE=vec_add PORT=msm_port_a_vec_add_3 
+merlin_stream ch_a_3;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=32 NODE=vec_add PORT=msm_port_a_vec_add_2 
+merlin_stream ch_a_2;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=32 NODE=vec_add PORT=msm_port_a_vec_add_1 
+merlin_stream ch_a_1;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=32 NODE=vec_add PORT=msm_port_a_vec_add_0 
+merlin_stream ch_a_0;
+#include "cmost.h"
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static void __merlin_dummy_kernel_pragma();
+// Original: #pragma ACCEL kernel
+
+void msm_port_a_vec_add_0(int a[1024])
+{
+  for (int _i_l1 = 0; _i_l1 < 1024; ++_i_l1) {
+    int a_sp_tmp_0;
+    a_sp_tmp_0 = a[_i_l1];
+    merlin_stream_write(&ch_a_0,&a_sp_tmp_0);
+  }
+}
+
+void msm_port_a_vec_add_1(int a[1024])
+{
+  for (int _i_l1 = 0; _i_l1 < 1024; ++_i_l1) {
+    if (_i_l1 > 0) {
+      int a_sp_tmp_1;
+      a_sp_tmp_1 = a[_i_l1 - 1];
+      merlin_stream_write(&ch_a_1,&a_sp_tmp_1);
+    }
+  }
+}
+
+void msm_port_a_vec_add_2(int a[1024])
+{
+  for (int _i_l1 = 0; _i_l1 < 1024; ++_i_l1) {
+    if (_i_l1 < 1024 - 1) {
+      int a_sp_tmp_2;
+      a_sp_tmp_2 = a[_i_l1 + 1];
+      merlin_stream_write(&ch_a_2,&a_sp_tmp_2);
+    }
+  }
+}
+
+void msm_port_a_vec_add_3(int a[1024])
+{
+  for (int _i_l1 = 0; _i_l1 < 1024; ++_i_l1) {
+    int a_sp_tmp_3;
+    a_sp_tmp_3 = a[100];
+    merlin_stream_write(&ch_a_3,&a_sp_tmp_3);
+  }
+}
+
+void msm_port_b_vec_add_0(int b[1024])
+{
+  for (int _i_l1 = 0; _i_l1 < 1024; ++_i_l1) {
+    int b_sp_tmp_0;
+    merlin_stream_read(&ch_b_4,&b_sp_tmp_0);
+    b[_i_l1] = b_sp_tmp_0;
+  }
+}
+
+void vec_add(int a[1024],int b[1024])
+{
+  merlin_stream_init(&ch_b_4,1024,4);
+  merlin_stream_init(&ch_a_3,1024,4);
+  merlin_stream_init(&ch_a_2,1024,4);
+  merlin_stream_init(&ch_a_1,1024,4);
+  merlin_stream_init(&ch_a_0,1024,4);
+{
+    
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=1 NODE=vec_add VARIABLE=a 
+    msm_port_a_vec_add_0(a);
+    
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=1 NODE=vec_add VARIABLE=a 
+    msm_port_a_vec_add_1(a);
+    
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=1 NODE=vec_add VARIABLE=a 
+    msm_port_a_vec_add_2(a);
+    
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=1 NODE=vec_add VARIABLE=a 
+    msm_port_a_vec_add_3(a);
+  }
+  __merlin_access_range(b,0,1023UL);
+  __merlin_access_range(a,0,1023UL);
+  
+#pragma ACCEL interface variable=b max_depth=1024 depth=1024 memory_burst=off
+  
+#pragma ACCEL interface variable=a max_depth=1024 depth=1024 memory_burst=off
+  for (int _i_l1 = 0; _i_l1 < 1024; ++_i_l1) {
+    int b_sn_tmp_0;
+    int a_sn_tmp_3;
+    int a_sn_tmp_0;
+    merlin_stream_read(&ch_a_0,&a_sn_tmp_0);
+    int tmp = a_sn_tmp_0;
+    if (_i_l1 > 0) {
+      int a_sn_tmp_1;
+      merlin_stream_read(&ch_a_1,&a_sn_tmp_1);
+      tmp += a_sn_tmp_1;
+    }
+    if (_i_l1 < 1024 - 1) {
+      int a_sn_tmp_2;
+      merlin_stream_read(&ch_a_2,&a_sn_tmp_2);
+      tmp += a_sn_tmp_2;
+    }
+    merlin_stream_read(&ch_a_3,&a_sn_tmp_3);
+    tmp += a_sn_tmp_3;
+    b_sn_tmp_0 = tmp;
+    merlin_stream_write(&ch_b_4,&b_sn_tmp_0);
+  }
+  merlin_stream_reset(&ch_a_0);
+  merlin_stream_reset(&ch_a_1);
+  merlin_stream_reset(&ch_a_2);
+  merlin_stream_reset(&ch_a_3);
+{
+    
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=write DIM_NUM=1 NODE=vec_add VARIABLE=b 
+    msm_port_b_vec_add_0(b);
+  }
+  merlin_stream_reset(&ch_b_4);
+}

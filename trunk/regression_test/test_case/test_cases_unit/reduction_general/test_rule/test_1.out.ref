@@ -1,0 +1,58 @@
+#define VEC_SIZE 10000
+#define VEC_DIM_SIZE 100
+#pragma ACCEL kernel
+
+void vec_add_kernel(double distance[10],int centers[10][1000][10],int data[1000][10])
+{
+  int j;
+  int j_sub;
+  int sum = 0;
+  double _distance_rdc[10][10];
+{
+    int j_sub_0;
+    for (j_sub_0 = 0; j_sub_0 <= 9; ++j_sub_0) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      for (int k = 0; k < 10; k++) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        
+#pragma ACCEL ARRAY_PARTITION OFF
+        _distance_rdc[j_sub_0][k] = 0;
+      }
+    }
+  }
+  for (j = 0; j < 1000; j++) {
+    
+#pragma ACCEL pipeline
+    for (j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL PARALLEL
+      for (int k = 0; k < 10; k++) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        double diff;
+        diff = (centers[k][j][j_sub] - data[j][j_sub]);
+        _distance_rdc[j_sub][k] += diff * diff;
+      }
+    }
+  }
+{
+    int j_sub_1;
+    for (j_sub_1 = 0; j_sub_1 <= 9; ++j_sub_1) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      for (int k = 0; k < 10; k++) {
+        
+#pragma ACCEL ARRAY_PARTITION OFF
+        
+#pragma ACCEL PARALLEL COMPLETE
+        distance[k] += _distance_rdc[j_sub_1][k];
+      }
+    }
+  }
+}

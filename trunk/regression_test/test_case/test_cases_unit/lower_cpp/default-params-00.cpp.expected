@@ -1,0 +1,13 @@
+// Lower decls of and calls to functions with default parameters.
+
+unsigned int g(bool ,unsigned int h)
+{
+  return h;
+}
+#pragma accel kernel
+
+void kernel()
+{
+  g(false,(unsigned int )16384);
+  g(true,(unsigned int )0);
+}

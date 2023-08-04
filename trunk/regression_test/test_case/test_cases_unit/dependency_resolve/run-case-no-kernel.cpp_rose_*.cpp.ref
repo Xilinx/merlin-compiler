@@ -1,0 +1,9 @@
+
+float top()
+{
+  float x;
+  for (int i = 0; i < 100; ++i) {
+    x *= 2;
+  }
+  return x;
+}

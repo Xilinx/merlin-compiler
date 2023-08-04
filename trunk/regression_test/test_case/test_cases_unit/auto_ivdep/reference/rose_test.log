@@ -1,0 +1,97 @@
+ --- TEST IVDEP ---
+[Intel Auto False Dependence] started ... 
+ -- Find a FG-loop: (Ln:49) for(int i = 0;i < 1024;i++) {...}
+     -- test1_1_a: false dependence 
+ -- Find a FG-loop: (Ln:58) for(i = 0;i < 1024;i++) {...}
+ -- Find a FG-loop: (Ln:73) for(int i = 0;i < 1024;i++) {...}
+     -- test1_1_a4: false dependence 
+ -- Find a FG-loop: (Ln:81) for(int j = 0;j < 1024;j++) {...}
+     -- test1_1_b: false dependence 
+ -- Find a FG-loop: (Ln:92) for(int j = 0;j < 1024;j++) {...}
+     -- test1_1_c: false dependence 
+ -- Find a FG-loop: (Ln:101) for(int j = 0;j < 1024;j++) {...}
+     ++ test1_1_d: true dependence
+ -- Find a FG-loop: (Ln:112) for(int j = 0;j < 1024;j++) {...}
+     ++ test1_1_e: true dependence
+ -- Find a FG-loop: (Ln:119) for(int i = 0;i < 1024;i++) {...}
+     -- test1_1_f: false dependence 
+ -- Find a FG-loop: (Ln:122) for(int j = 0;j < 1024;j++) {...}
+     ++ test1_1_f: true dependence
+ -- Find a FG-loop: (Ln:132) for(int j = 0;j < 1024;j++) {...}
+     ++ test1_1_g: true dependence
+ -- Find a FG-loop: (Ln:137) for(int j = 0;j < 1024;j++) {...}
+     ++ test1_1_g: true dependence
+ -- Find a FG-loop: (Ln:148) for(int j = 0;j < 1024;j++) {...}
+     ++ test1_1_h: true dependence
+ -- Find a FG-loop: (Ln:159) for(int j = 0;j < 1024;j++) {...}
+     ++ test1_1_h1: true dependence
+ -- Find a FG-loop: (Ln:166) for(int i = 0;i < 1024;i++) {...}
+     -- test1_1_i: false dependence 
+ -- Find a FG-loop: (Ln:169) for(int j = 0;j < 1024;j++) {...}
+     -- test1_1_i: false dependence 
+ -- Find a FG-loop: (Ln:174) for(int j = 0;j < 1024;j++) {...}
+     -- test1_1_i: false dependence 
+ -- Find a FG-loop: (Ln:186) for(int i = 0;i < 1024;i++) {...}
+     -- test1_2_a: false dependence 
+ -- Find a FG-loop: (Ln:193) for(int i = 0;i < 1024;i++) {...}
+     -- test1_2_b: false dependence 
+ -- Find a FG-loop: (Ln:200) for(int i = 0;i < 1024;i++) {...}
+     -- test1_2_c: false dependence 
+ -- Find a FG-loop: (Ln:220) for(int j = 0;j < 1024;j++) {...}
+     -- sub1_3_c: false dependence 
+ -- Find a FG-loop: (Ln:231) for(int i = 0;i < 1024;i++) {...}
+     -- test1_3_a: false dependence 
+ -- Find a FG-loop: (Ln:238) for(int i = 0;i < 1024;i++) {...}
+     ++ test1_3_b: true dependence
+ -- Find a FG-loop: (Ln:245) for(int i = 0;i < 1024;i++) {...}
+     -- test1_3_c: false dependence 
+ -- Find a FG-loop: (Ln:256) for(int i = 0;i < 1024;i++) {...}
+ -- Find a FG-loop: (Ln:263) for(int i = 0;i < 1024;i++) {...}
+     -- test2_1_b: false dependence 
+ -- Find a FG-loop: (Ln:271) for(int i = 0;i < 1024;i++) {...}
+     -- test2_1_c1: false dependence 
+ -- Find a FG-loop: (Ln:278) for(int i = 0;i < 1024;i++) {...}
+     -- test2_1_d: false dependence 
+ -- Find a FG-loop: (Ln:291) for(int i = 0;i < 1024;i++) {...}
+     -- test2_2_a: false dependence 
+ -- Find a FG-loop: (Ln:298) for(int i = 0;i < 1024;i++) {...}
+     ++ test2_2_b: true dependence
+ -- Find a FG-loop: (Ln:305) for(int i = 0;i < 1024;i++) {...}
+     ++ test2_2_c: true dependence
+ -- Find a FG-loop: (Ln:312) for(int i = 0;i < 1024;i++) {...}
+     -- test2_2_d: false dependence 
+ -- Find a FG-loop: (Ln:320) for(int i = 0;i < 1024;i++) {...}
+     -- test2_2_e: false dependence 
+ -- Find a FG-loop: (Ln:328) for(int i = 0;i < 1024;i++) {...}
+     -- test2_2_f: false dependence 
+ -- Find a FG-loop: (Ln:345) for(int i = 0;i < 1024;i++) {...}
+     -- test2_3_a3: false dependence 
+ -- Find a FG-loop: (Ln:356) for(int i = 0;i < 1024;i++) {...}
+     -- test2_3_b2: false dependence 
+ -- Find a FG-loop: (Ln:364) for(int i = 0;i < 1024;i++) {...}
+     ++ test2_3_c1: true dependence
+     ++ test2_3_c3: true dependence
+ -- Find a FG-loop: (Ln:415) for(int i = 0;i < 1024;i++) {...}
+     -- test2_4_a: false dependence 
+ -- Find a FG-loop: (Ln:422) for(int i = 0;i < 1024;i++) {...}
+     -- test2_4_b: false dependence 
+ -- Find a FG-loop: (Ln:429) for(int i = 0;i < 1024;i++) {...}
+     -- test2_4_c: false dependence 
+ -- Find a FG-loop: (Ln:437) for(int i = 0;i < 1024;i++) {...}
+     ++ test2_4_d: true dependence
+ -- Find a FG-loop: (Ln:445) for(int i = 0;i < 1024;i++) {...}
+     -- test2_4_e: false dependence 
+ -- Find a FG-loop: (Ln:460) for(int i = 0;i < 1024;i++) {...}
+     -- test2_5_a: false dependence 
+ -- Find a FG-loop: (Ln:467) for(int i = 0;i < 1024;i++) {...}
+     -- test2_5_b: false dependence 
+ -- Find a FG-loop: (Ln:474) for(int i = 0;i < 1024;i++) {...}
+     ++ test2_5_c: true dependence
+ -- Find a FG-loop: (Ln:481) for(int i = 0;i < 1024;i++) {...}
+     ++ test2_5_d: true dependence
+ -- Find a FG-loop: (Ln:489) for(int i = 0;i < 1024;i++) {...}
+     ++ test2_5_e: true dependence
+ --- TEST IVDEP ---
+[Intel Auto False Dependence] started ... 
+ -- Find a FG-loop: (Ln:11) for(int i = 0;i < 16;i++) {...}
+     ++ test5_5_b: true dependence

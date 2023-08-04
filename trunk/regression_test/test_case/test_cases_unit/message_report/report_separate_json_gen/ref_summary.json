@@ -1,0 +1,46 @@
+{
+    "Summary": {
+        "comment": "",
+        "pre_info": [
+            "Date: 2019-11-18 08:06:31",
+            "Target Device: ",
+            "Target Frequency: 300MHz"
+        ],
+        "table": {
+            "column0": [
+                "0",
+                "Kernel",
+                "Cycles",
+                "LUT",
+                "FF",
+                "BRAM",
+                "DSP",
+                "URAM",
+                "Detail"
+            ],
+            "column0000000001": [
+                "-1",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            ],
+            "column0000000002": [
+                "0",
+                "foo (x:1)",
+                "?",
+                "?",
+                "?",
+                "?",
+                "?",
+                "?",
+                "?"
+            ]
+        },
+        "table_note": {}
+    }
+}

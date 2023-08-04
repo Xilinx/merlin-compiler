@@ -1,0 +1,14 @@
+
+%W [PROCS-203] Finding a loop 'for(i = 0;i < burst_' (vec_add_kernel.c:6) with unknown loop trip count. 
+
+
+%W [PROCS-203] Finding a loop 'for(j = 0;j < burst_' (vec_add_kernel.c:7) with unknown loop trip count. 
+
+%I [PROCS-102] Hint: you may specify the range of the variables in the loop bounds using 'assert'
+
+
+%W [BURST-204] Memory burst NOT inferred: variable 'a'. Reason: infinite burst length 
+  Hint:   set accurate bound for variables using 'assert'
+
+
+%W [CMOPT-205] The coarse-grained dataflow pipelining cannot be generated because 'temp_arr' is accessed for multiple times in a loop

@@ -1,0 +1,13 @@
+
+WARNING: [PROCS-224] Found multiple loops containing the accesses of an local array 'dotProduct' (svm_kernel.cpp:27).
+
+
+WARNING: [PROCS-225] Found more than one loop with the accesses of a port array 'output' (svm_kernel.cpp:17).
+   Hints: Coarse-grained pipelining requires one read-only or write-only loop for each port array.
+
+
+WARNING: [COMCK-204] The Communication on the shared port 'dotProduct' (svm_kernel.cpp) whose references are on either the loop 'L_0_1_0' (svm_kernel.cpp) or if condition cannot be supported.
+
+WARNING: [COMCK-205] Found a conditionally executed loop: 
+ 'L_0_1_0' (svm_kernel.cpp:54) 
+  Coarse-grained pipeline does not allow loop within if-statement

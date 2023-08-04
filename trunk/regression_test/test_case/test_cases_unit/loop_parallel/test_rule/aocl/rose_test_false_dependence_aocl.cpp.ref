@@ -1,0 +1,126 @@
+#pragma ACCEL kernel
+
+void func_top_0()
+{
+  int a[100][100];
+  int b[101][101];
+  int k;
+  int i;
+  int j;
+  
+#pragma ivdep array(a)
+  for (i = 0; i < 10; i++) 
+// Original: #pragma #pragma ACCEL FALSE_DEPENDENCE VARIABLE=a
+{
+    
+#pragma unroll
+    for (k = 0; k < 10; k++) {
+      
+#pragma unroll
+      for (j = 0; j < 100; j++) {
+        a[i][j] = b[i * k][j] + b[i * k + 1][j + 1];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_1()
+{
+  int a[100][100];
+  int b[101][101];
+  int k;
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) 
+// Original: #pragma ACCEL pipeline flatten
+// Original: #pragma #pragma ACCEL FALSE_DEPENDENCE VARIABLE=a
+{
+    
+#pragma unroll
+    for (k = 0; k < 10; k++) {
+      
+#pragma unroll
+      for (j = 0; j < 100; j++) {
+        a[k][j] += b[i * k][j] + b[i * k + 1][j + 1];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_2()
+{
+  int a[100][100];
+  int b[101][101];
+  int k;
+  int i;
+  int j;
+  
+#pragma ivdep
+  for (i = 0; i < 10; i++) 
+// Original: #pragma ACCEL parallel complete
+// Original: #pragma ACCEL pipeline_parallel flatten
+// Original: #pragma #pragma ACCEL FALSE_DEPENDENCE
+{
+    
+#pragma unroll
+    for (k = 0; k < 10; k++) {
+      
+#pragma unroll
+      for (j = 0; j < 100; j++) {
+        a[i][j] = b[i * k][j] + b[i * k + 1][j + 1];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_3()
+{
+  int a[100][100];
+  int b[101][101];
+  int k;
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) 
+// Original: #pragma ACCEL pipeline
+// Original: #pragma #pragma ACCEL FALSE_DEPENDENCE
+{
+    for (k = 0; k < 10; k++) 
+// Original: #pragma ACCEL pipeline flatten
+{
+      
+#pragma unroll
+      for (j = 0; j < 100; j++) {
+        a[k][j] += b[i * k][j] + b[i * k + 1][j + 1];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_4()
+{
+  int a[100][100];
+  
+#pragma ACCEL attribute variable=b bankwidth=8
+  int b[100][100];
+  int k;
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) 
+// Original: #pragma ACCEL parallel complete
+// Original: #pragma ACCEL pipeline
+// Original: #pragma #pragma ACCEL FALSE_DEPENDENCE
+{
+    for (k = 0; k < 100; k++) {
+      for (j = 0; j < 100; j++) 
+// Original: #pragma ACCEL pipeline flatten
+{
+        a[k][j] += b[i * k][j] + b[i * k + 1][j + 1];
+        b[k][j] += a[k][j];
+      }
+    }
+  }
+}

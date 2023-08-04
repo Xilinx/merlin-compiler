@@ -1,0 +1,45 @@
+#include <assert.h>
+#pragma ACCEL kernel
+
+void foo(int count,unsigned long count2)
+{
+  int a[10];
+  a[2] < 10?((void )0) : __assert_fail("a[2] < 10","test_assert_range_expr.c",5,__PRETTY_FUNCTION__);
+  int b[100];
+  for (int i = 0; i < a[2]; ++i) {
+    i;
+  }
+  for (int ii = 0; ii < a[2] / 3; ++ii) {
+    ii;
+    4 * ii;
+    4 * ii + 2;
+  }
+  count < 20?((void )0) : __assert_fail("count < 20","test_assert_range_expr.c",15,__PRETTY_FUNCTION__);
+  for (int i0 = 0; i0 < count / 3; ++i0) {
+    i0;
+    4 * i0;
+    4 * i0 + 2;
+  }
+  count2 < 20?((void )0) : __assert_fail("count2 < 20","test_assert_range_expr.c",21,__PRETTY_FUNCTION__);
+  for (int i1 = 0; i1 < count / 3; ++i1) {
+    i1;
+    4 * i1;
+    4 * i1 + 2;
+  }
+  a[2] - a[3] < 10?((void )0) : __assert_fail("a[2] - a[3] < 10","test_assert_range_expr.c",27,__PRETTY_FUNCTION__);
+  for (int j = 0; j < a[2] - a[3]; ++j) {
+    j;
+  }
+  a[3] + a[2] < 10?((void )0) : __assert_fail("a[3] + a[2] < 10","test_assert_range_expr.c",31,__PRETTY_FUNCTION__);
+  for (int k = 0; k < a[2] + a[3]; ++k) {
+    k;
+  }
+  count * count > 10?((void )0) : __assert_fail("count * count > 10","test_assert_range_expr.c",35,__PRETTY_FUNCTION__);
+  for (int k0 = count * count; k0 < 100; ++k0) {
+    k0;
+  }
+  for (int k1 = count * count - 2; k1 < a[2] + 10; ++k1) {
+    k1;
+  }
+  return ;
+}

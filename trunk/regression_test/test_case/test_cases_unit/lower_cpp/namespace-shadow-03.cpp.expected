@@ -1,0 +1,20 @@
+int val = 0;
+int _ZN1a3valE = 5;
+int p_ZN1a1fEv();
+
+int p_ZN1a1fEv()
+{
+  return _ZN1a3valE;
+}
+namespace a
+{
+static void __merlin_dummy_SgVariableDeclaration_int_val_();
+static void __merlin_dummy_SgFunctionDeclaration_int_a_f_();
+}
+static void __merlin_dummy_SgFunctionDeclaration_int_f_();
+#pragma ACCEL kernel
+
+void k()
+{
+p_ZN1a1fEv();
+}

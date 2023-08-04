@@ -1,0 +1,1 @@
+INFO: [FGPIP-103] Loop 'while(t > 0){#pragma'  (test_heuristic_invariant.cpp:9) is pipelined

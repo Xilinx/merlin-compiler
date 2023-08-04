@@ -1,0 +1,22 @@
+#include<assert.h>
+#include<string.h>
+#pragma ACCEL kernel
+
+void top(int *b,int *c)
+{
+  int b_buf[10];
+  memcpy(b_buf,b,sizeof(int ) * 10);
+  for (int i = 0; i < 10; ++i) {
+    for (int k = 0; k < 10; ++k) {
+      int index = b_buf[i];
+      index >= 0?(static_cast < void  >  (0)) : __assert_fail("index >= 0","test_var_in_scope.cpp",10,__PRETTY_FUNCTION__);
+{
+        for (int j = 0; j < 100; ++j) {
+          
+#pragma ACCEL parallel
+          c[index * 1000 + k * 100 + j] = j;
+        }
+      }
+    }
+  }
+}

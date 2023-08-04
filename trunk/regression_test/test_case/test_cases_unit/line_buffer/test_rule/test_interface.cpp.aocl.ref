@@ -1,0 +1,162 @@
+/* (previously processed: ignoring self-referential macro declaration) macro name = c */ 
+//#define b(n, m) (b[(n)*100 + (m)])
+/* (previously processed: ignoring self-referential macro declaration) macro name = bb */ 
+#pragma ACCEL kernel
+
+void func_top_0(int b[100][100],int *c,int bb[10000])
+{
+  
+#pragma ACCEL INTERFACE VARIABLE=c DEPTH=10000 BURST_OFF
+  
+#pragma ACCEL INTERFACE VARIABLE=b DEPTH=100,100 BURST_OFF
+  
+#pragma ACCEL INTERFACE VARIABLE=bb DEPTH=20000 BURST_OFF
+  int sum = 0;
+  int LineBuffer_c0[32];
+  int slide_wind_0[2][2];
+  for (int j = -1L; j < 31; j++) {
+    for (int k = -1L; k < 31; k++) {{
+        int j_2;
+        int j_1;
+        int tmp_wind_0[2];
+        int k_0;
+        int j_0;
+        for (j_0 = 0L; j_0 <= 1L; ++j_0) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          for (k_0 = 1L; k_0 <= 1L; ++k_0) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            slide_wind_0[j_0][k_0 + -1] = slide_wind_0[j_0][k_0];
+          }
+        }
+        for (j_1 = 0; j_1 <= 1L; ++j_1) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          if (j_1 == 0L) {
+            tmp_wind_0[j_1] = LineBuffer_c0[k - 0L + 1L];
+          }
+        }
+        tmp_wind_0[1UL] = c[(j + 0L + 1L) * 100L + (k + 0L + 1L) * 1L];
+        for (j_2 = 0; j_2 <= 1L; ++j_2) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0[j_2][1L] = tmp_wind_0[j_2];
+        }
+{
+          int j_3;
+          int tmp_c;
+          for (j_3 = 0; j_3 <= 0UL; ++j_3) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            tmp_c = tmp_wind_0[j_3 + 1];
+            if (j_3 == 0L) {
+              LineBuffer_c0[k - 0L + 1L] = tmp_c;
+            }
+          }
+        }
+      }
+      if (j >= 0L && j <= 30L && k >= 0L && k <= 30L) {
+        sum += slide_wind_0[0L][0L] + slide_wind_0[1L][1L];
+      }
+    }
+  }
+  int LineBuffer_b0[100];
+  int slide_wind_0_0[2][2];
+  for (int j = -1L; j < 99; j++) {
+    for (int k = -1L; k < 99; k++) {{
+        int j_6;
+        int j_5;
+        int tmp_wind_0_0[2];
+        int k_1;
+        int j_4;
+        for (j_4 = 0L; j_4 <= 1L; ++j_4) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          for (k_1 = 1L; k_1 <= 1L; ++k_1) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            slide_wind_0_0[j_4][k_1 + -1] = slide_wind_0_0[j_4][k_1];
+          }
+        }
+        for (j_5 = 0; j_5 <= 1L; ++j_5) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          if (j_5 == 0L) {
+            tmp_wind_0_0[j_5] = LineBuffer_b0[k - 0L + 1L];
+          }
+        }
+        tmp_wind_0_0[1UL] = b[j + 0L + 1L][k + 0L + 1L];
+        for (j_6 = 0; j_6 <= 1L; ++j_6) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0_0[j_6][1L] = tmp_wind_0_0[j_6];
+        }
+{
+          int j_7;
+          int tmp_b;
+          for (j_7 = 0; j_7 <= 0UL; ++j_7) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            tmp_b = tmp_wind_0_0[j_7 + 1];
+            if (j_7 == 0L) {
+              LineBuffer_b0[k - 0L + 1L] = tmp_b;
+            }
+          }
+        }
+      }
+      if (j >= 0L && j <= 98L && k >= 0L && k <= 98L) {
+        sum += slide_wind_0_0[0L][0L] + slide_wind_0_0[1L][1L];
+      }
+    }
+  }
+  int LineBuffer_bb0[100];
+  int slide_wind_0_1[2][2];
+  for (int j = -1L; j < 99; j++) {
+    for (int k = -1L; k < 99; k++) {{
+        int j_10;
+        int j_9;
+        int tmp_wind_0_1[2];
+        int k_2;
+        int j_8;
+        for (j_8 = 0L; j_8 <= 1L; ++j_8) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          for (k_2 = 1L; k_2 <= 1L; ++k_2) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            slide_wind_0_1[j_8][k_2 + -1] = slide_wind_0_1[j_8][k_2];
+          }
+        }
+        for (j_9 = 0; j_9 <= 1L; ++j_9) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          if (j_9 == 0L) {
+            tmp_wind_0_1[j_9] = LineBuffer_bb0[k - 0L + 1L];
+          }
+        }
+        tmp_wind_0_1[1UL] = bb[(j + 0L + 1L) * 100L + (k + 0L + 1L) * 1L];
+        for (j_10 = 0; j_10 <= 1L; ++j_10) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0_1[j_10][1L] = tmp_wind_0_1[j_10];
+        }
+{
+          int j_11;
+          int tmp_bb;
+          for (j_11 = 0; j_11 <= 0UL; ++j_11) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            tmp_bb = tmp_wind_0_1[j_11 + 1];
+            if (j_11 == 0L) {
+              LineBuffer_bb0[k - 0L + 1L] = tmp_bb;
+            }
+          }
+        }
+      }
+      if (j >= 0L && j <= 98L && k >= 0L && k <= 98L) {
+        sum += slide_wind_0_1[0L][0L] + slide_wind_0_1[1L][1L];
+      }
+    }
+  }
+}

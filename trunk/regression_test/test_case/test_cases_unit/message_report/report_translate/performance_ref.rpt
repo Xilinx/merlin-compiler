@@ -1,0 +1,58 @@
+
+================================================================================
+Performance Estimate(TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per call)
+================================================================================
+
++--------------------------------------------+----+-----------------+--------+-----------------------------------------------------------------+
+|                 Hierarchy                  | TC |       AC        |  CPC   |                             Detail                              |
++--------------------------------------------+----+-----------------+--------+-----------------------------------------------------------------+
+|aes256_encrypt_ecb_kernel (aes.cpp:175)     |    |25260124 (100.0%)|25260124|?                                                                |
+|    auto memory burst for 'data'(read)      |    |    2048 (  0.0%)|    2048|-                                                                |
+|    loop i1 (aes.cpp:186)                   |4096|25260064 (100.0%)|25260064|loop tiled, flattened with loop i2 (aes.cpp:193), 2x parallelized|
+|        loop i2 (aes.cpp:193)               |4096|                -|       -|flattened                                                        |
+|            aes256_encrypt_ecb (aes.cpp:196)|    |                -|       -|inlined                                                          |
+|        auto memory burst for 'data'(write) |    | 4194304 ( 16.6%)|    2048|-                                                                |
+|aes256_encrypt_ecb (aes.cpp:140)            |    |                -|       -|inlined                                                          |
+|    loop ecb1 (aes.cpp:148)                 |  32|                -|       -|32x parallelized                                                 |
+|    loop ecb2 (aes.cpp:151)                 |   7|                -|       -|7x parallelized                                                  |
+|        aes_expandEncKey (aes.cpp:152)      |    |                -|       -|inlined                                                          |
+|    aes_addRoundKey_cpy (aes.cpp:156)       |    |                -|       -|inlined                                                          |
+|    loop ecb3 (aes.cpp:157)                 |  13|                -|       -|13x parallelized                                                 |
+|        aes_subBytes (aes.cpp:159)          |    |                -|       -|inlined                                                          |
+|        aes_shiftRows (aes.cpp:160)         |    |                -|       -|inlined                                                          |
+|        aes_mixColumns (aes.cpp:161)        |    |                -|       -|inlined                                                          |
+|        aes_addRoundKey (aes.cpp:162)       |    |                -|       -|inlined                                                          |
+|        aes_expandEncKey (aes.cpp:164)      |    |                -|       -|inlined                                                          |
+|        aes_addRoundKey (aes.cpp:165)       |    |                -|       -|inlined                                                          |
+|    aes_subBytes (aes.cpp:168)              |    |                -|       -|inlined                                                          |
+|    aes_shiftRows (aes.cpp:169)             |    |                -|       -|inlined                                                          |
+|    aes_expandEncKey (aes.cpp:170)          |    |                -|       -|inlined                                                          |
+|    aes_addRoundKey (aes.cpp:171)           |    |                -|       -|inlined                                                          |
+|aes_expandEncKey (aes.cpp:116)              |    |                -|       -|inlined                                                          |
+|    rj_sbox (aes.cpp:120)                   |    |                -|       -|inlined                                                          |
+|    rj_sbox (aes.cpp:121)                   |    |                -|       -|inlined                                                          |
+|    rj_sbox (aes.cpp:122)                   |    |                -|       -|inlined                                                          |
+|    rj_sbox (aes.cpp:123)                   |    |                -|       -|inlined                                                          |
+|    loop exp1 (aes.cpp:126)                 |   3|                -|       -|3x parallelized                                                  |
+|    rj_sbox (aes.cpp:128)                   |    |                -|       -|inlined                                                          |
+|    rj_sbox (aes.cpp:129)                   |    |                -|       -|inlined                                                          |
+|    rj_sbox (aes.cpp:130)                   |    |                -|       -|inlined                                                          |
+|    rj_sbox (aes.cpp:131)                   |    |                -|       -|inlined                                                          |
+|    loop exp2 (aes.cpp:133)                 |   3|                -|       -|3x parallelized                                                  |
+|rj_sbox (aes.cpp:10)                        |    |                -|       -|inlined                                                          |
+|aes_addRoundKey_cpy (aes.cpp:80)            |    |                -|       -|inlined                                                          |
+|    loop cpkey (aes.cpp:85)                 |  16|                -|       -|16x parallelized                                                 |
+|aes_subBytes (aes.cpp:60)                   |    |                -|       -|inlined                                                          |
+|    loop sub (aes.cpp:66)                   |  16|                -|       -|16x parallelized                                                 |
+|        rj_sbox (aes.cpp:66)                |    |                -|       -|inlined                                                          |
+|aes_shiftRows (aes.cpp:90)                  |    |                -|       -|inlined                                                          |
+|aes_mixColumns (aes.cpp:102)                |    |                -|       -|inlined                                                          |
+|    loop mix (aes.cpp:106)                  |   4|                -|       -|4x parallelized                                                  |
+|        rj_xtime (aes.cpp:110)              |    |                -|       -|inlined                                                          |
+|        rj_xtime (aes.cpp:110)              |    |                -|       -|inlined                                                          |
+|        rj_xtime (aes.cpp:111)              |    |                -|       -|inlined                                                          |
+|        rj_xtime (aes.cpp:111)              |    |                -|       -|inlined                                                          |
+|rj_xtime (aes.cpp:53)                       |    |                -|       -|inlined                                                          |
+|aes_addRoundKey (aes.cpp:70)                |    |                -|       -|inlined                                                          |
+|    loop addkey (aes.cpp:76)                |  16|                -|       -|16x parallelized                                                 |
++--------------------------------------------+----+-----------------+--------+-----------------------------------------------------------------+

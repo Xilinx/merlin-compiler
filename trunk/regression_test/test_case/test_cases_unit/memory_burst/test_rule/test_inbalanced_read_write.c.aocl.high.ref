@@ -1,0 +1,45 @@
+// 1. loop structure
+// 2. function structure
+// 3. access pattern
+// 4. pragma modes
+#pragma ACCEL kernel
+
+void func_top_0(int *a,int *b)
+{
+  int i;
+  for (i = 0; i < 100; i += 2) {
+    
+#pragma ACCEL pipeline_parallel factor = 10
+    a[i] = b[i] + 1;
+  }
+  b[2] = 0;
+}
+#pragma ACCEL kernel
+
+void func_top_1(int *a,int *b)
+{
+  int i;
+  for (i = 0; i < 100; i += 2) {
+    
+#pragma ACCEL pipeline
+    a[i] = b[i];
+    if (i > 50) 
+      b[i]++;
+  }
+}
+
+int main()
+{
+  int *a;
+  int *b;
+  int *c;
+  int *aa;
+  int *bb;
+  int *cc;
+  int a_s;
+  int b_s;
+  int c_s;
+  func_top_0(a,b);
+  func_top_1(a,b);
+  return 0;
+}

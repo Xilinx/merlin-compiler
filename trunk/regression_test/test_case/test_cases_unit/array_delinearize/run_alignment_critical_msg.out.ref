@@ -1,0 +1,6 @@
+
+WARNING: [PROCS-240] Found unaligned memcpy on 'arr' (test_alignment.cpp:52)
+ Hint: Please consider a copying size that aligns source buffer size of memcpy
+
+WARNING: [PROCS-240] Found unaligned memcpy on 'arr' (test_alignment.cpp:81)
+ Hint: Please consider a copying size that aligns source buffer size of memcpy

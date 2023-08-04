@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<clock_period>5ns</clock_period>                            //clock
+<platform_name>alphadata_pcie7v3</platform_name>
+<part_name>xc7vx690tffg1761-2</part_name>
+<arch_name>virtex7</arch_name>
+<platform_name>alphadata_pcieku3</platform_name>
+<part_name>xcku060-ffva1156-2-e</part_name>
+<arch_name>ultra_kintex7</arch_name>
+<platform_name>baidu_kintex7</platform_name>
+<part_name>xc7k480tiffg1156-2L</part_name>
+<arch_name>kintex7</arch_name>
+<platform_name>baidu_kintex7</platform_name>
+<part_name>xc7k480tiffg1156-1</part_name>
+<arch_name>kintex7</arch_name>
+
+<pipeline_parallel> on </pipeline_parallel>                 
+<memory_burst     > on </memory_burst>                      
+<bitwidth_opt     > on </bitwidth_opt>
+<reduction_opt    > on </reduction_opt>
+<pcie_transfer_opt> on </pcie_transfer_opt>                 
+<coarse_grained_pipeline> on </coarse_grained_pipeline>     
+<naive_hls> off </naive_hls>
+<aggressive_opt_for_c>off</aggressive_opt_for_c>
+<aggressive_opt_for_cpp>off</aggressive_opt_for_cpp>
+
+<high_level_synthesis> off </high_level_synthesis>          
+<simulation>           off </simulation>                    
+<implementation>       off </implementation>                
+<normal>on</normal>                                         //on off default = on conflit with kenel
+<kernel>off</kernel>                                        //on off default = off conflit with normal
+<testing        > off </testing>                            
+<testing_run_ref> on </testing_run_ref>                     
+<testing_run_opt> on </testing_run_opt>                     
+<testing_run_sim> on </testing_run_sim>                     
+<testing_run_bit> on </testing_run_bit>                     
+<implementation_tool > built-in </implementation_tool>      //built-in sdaccel default = built-in
+<case_type>custom</case_type>
+<case_directory>custom</case_directory>
+<case_list>./local_case.list</case_list>
+<case>all</case>
+<regression_test>on</regression_test>
+-->
+<configs> 
+
+  <config>
+      <name>full</name>
+      <case_type>org</case_type>
+      <case>all</case>
+      <flow>bit</flow>
+      <platform_name>baidu_kintex7</platform_name>
+      <part_name>xc7k480tiffg1156-2L</part_name>
+      <arch_name>kintex7</arch_name>
+  </config>  
+
+  <config>
+      <name>pipe_off</name>
+      <case_type>org</case_type>
+      <case>all</case>
+      <flow>bit</flow>
+      <platform_name>baidu_kintex7</platform_name>
+      <part_name>xc7k480tiffg1156-2L</part_name>
+      <arch_name>kintex7</arch_name>
+      <pipeline_parallel> off </pipeline_parallel>                 
+  </config>  
+
+  <config>
+      <name>burst_off</name>
+      <case_type>org</case_type>
+      <case>all</case>
+      <flow>bit</flow>
+      <platform_name>baidu_kintex7</platform_name>
+      <part_name>xc7k480tiffg1156-2L</part_name>
+      <arch_name>kintex7</arch_name>
+      <memory_burst     > off </memory_burst>                      
+  </config>  
+
+  <config>
+      <name>bitwidth_off</name>
+      <case_type>org</case_type>
+      <case>all</case>
+      <flow>bit</flow>
+      <platform_name>baidu_kintex7</platform_name>
+      <part_name>xc7k480tiffg1156-2L</part_name> 
+      <arch_name>kintex7</arch_name>
+      <bitwidth_opt     > off </bitwidth_opt>
+  </config>  
+
+  <config>
+      <name>reduction_off</name>
+      <case_type>org</case_type>
+      <case>all</case>
+      <flow>bit</flow>
+      <platform_name>baidu_kintex7</platform_name>
+      <part_name>xc7k480tiffg1156-2L</part_name>
+      <arch_name>kintex7</arch_name>
+      <reduction_opt    > off </reduction_opt>
+  </config>  
+
+  <config>
+      <name>pcie_off</name>
+      <case_type>org</case_type>
+      <case>all</case>
+      <flow>bit</flow>
+      <platform_name>baidu_kintex7</platform_name>
+      <part_name>xc7k480tiffg1156-2L</part_name>
+      <arch_name>kintex7</arch_name>
+      <pcie_transfer_opt> off </pcie_transfer_opt>                 
+  </config>  
+
+  <config>
+      <name>coarse_off</name>
+      <case_type>org</case_type>
+      <case>all</case>
+      <flow>bit</flow>
+      <platform_name>baidu_kintex7</platform_name>
+      <part_name>xc7k480tiffg1156-2L</part_name>
+      <arch_name>kintex7</arch_name>
+      <coarse_grained_pipeline> off </coarse_grained_pipeline>     
+  </config>  
+
+  <config>
+      <name>naive_on</name>
+      <case_type>org</case_type>
+      <case>all</case>
+      <flow>bit</flow>
+      <platform_name>baidu_kintex7</platform_name>
+      <part_name>xc7k480tiffg1156-2L</part_name>
+      <arch_name>kintex7</arch_name>
+      <naive_hls> on </naive_hls>
+  </config>  
+
+</configs>

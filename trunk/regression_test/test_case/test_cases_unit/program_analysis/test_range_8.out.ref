@@ -1,0 +1,19 @@
+
+void func(int M,int N,int *a)
+{
+  int i;
+  int j;
+  int k;
+  int offset;
+  int addr;
+  int MM = M;
+  int NN = N;
+  for (k = 0; k < N; ++k) {
+    offset = k + MM * NN;
+    for (i = 0; i <= 100; i++) {
+      addr = offset * 64;
+      for (j = 0; j <= 100; j++) 
+        a[addr + i * 100 + j] = i;
+    }
+  }
+}

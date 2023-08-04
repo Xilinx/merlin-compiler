@@ -1,0 +1,7 @@
+aes	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_opt_xilinx/aes
+#kmp	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_opt_xilinx/kmp
+nw	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_opt_xilinx/nw
+spmv	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_opt_xilinx/spmv
+stencil-2d	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_opt_xilinx/stencil-2d
+gemm-blocked	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_opt_xilinx/gemm-blocked
+viterbi	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_opt_xilinx/viterbi

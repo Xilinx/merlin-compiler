@@ -1,0 +1,87 @@
+[
+  {
+    "B": {
+      "default": 32, 
+      "deps": {}, 
+      "id": "B", 
+      "options": "[32,64,128,256,512]", 
+      "scope": [
+        "F_0_0_0_3"
+      ]
+    }, 
+    "I": {
+      "default": "flatten", 
+      "deps": {}, 
+      "id": "I", 
+      "options": "['flatten']", 
+      "order": "0 if v!=\"flatten\" else 1", 
+      "order_var": "v", 
+      "scope": [
+        "L_0_0_0_3_2_0_13"
+      ]
+    }, 
+    "P0": {
+      "default": 1, 
+      "deps": {
+        "I": "flatten"
+      }, 
+      "id": "P0", 
+      "options": "[2**x for x in range(0, 10) if x==0 or I != \"flatten\"]", 
+      "scope": [
+        "L_0_0_0_3_2_0_13_3_1", 
+        "L_0_0_0_2_2_0_2"
+      ]
+    }, 
+    "P1": {
+      "default": "\"1\"", 
+      "deps": {}, 
+      "id": "P1", 
+      "options": "[str(2**x) for x in range(0, 10)]", 
+      "scope": [
+        "L_0_0_0_3_2_0_14_3_1_3_1"
+      ]
+    }, 
+    "P2": {
+      "default": 1, 
+      "deps": {}, 
+      "id": "P2", 
+      "options": "range(1, 10)", 
+      "scope": [
+        "L_0_0_0_3_2_0_14_3_1_3_1_3_1_1_0"
+      ]
+    }, 
+    "T0": {
+      "default": 1, 
+      "deps": {
+        "T1": 1
+      }, 
+      "id": "T0", 
+      "options": "[1, 2, 4, 8, 16, 32, 64, 128, 256]", 
+      "order": "0 if v <= 256 else 1 if v <= 512 else 2", 
+      "order_var": "v", 
+      "scope": [
+        "L_0_0_0_3_2_0_14"
+      ]
+    }, 
+    "T1": {
+      "default": 1, 
+      "deps": {
+        "T0": 1
+      }, 
+      "id": "T1", 
+      "options": "[2**x for x in range(0, 10) if T0 == 1]", 
+      "scope": [
+        "L_0_0_0_3_2_0_14_3_1"
+      ]
+    }
+  }, 
+  {
+    "B": 32, 
+    "I": "flatten", 
+    "P0": 1, 
+    "P1": "\"1\"", 
+    "P2": 1, 
+    "T0": 1, 
+    "T1": 1
+  }
+]

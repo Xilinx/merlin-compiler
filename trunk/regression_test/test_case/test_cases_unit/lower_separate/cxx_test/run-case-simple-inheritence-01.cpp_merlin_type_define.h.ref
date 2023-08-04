@@ -1,0 +1,9 @@
+
+#ifndef __MERLIN_TYPE_DEFINE_H__
+
+#define __MERLIN_TYPE_DEFINE_H__
+struct A {int a;};
+struct B {struct A A;int b;};
+struct C {struct A A;int c;};
+
+#endif

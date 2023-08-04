@@ -1,0 +1,24 @@
+
+ERROR: [SEPAR-318] Cannot support global variable in task scope: 
+ a(vec_add.cpp:1)
+
+ERROR: [SEPAR-318] Cannot support global variable in task scope: 
+ b(vec_add.cpp:2)
+
+ERROR: [SEPAR-318] Cannot support global variable in task scope: 
+ c(vec_add.cpp:3)
+
+ERROR: [SEPAR-318] Cannot support global variable in task scope: 
+ d(vec_add.cpp:4)
+
+ERROR: [SEPAR-318] Cannot support global variable in task scope: 
+ f(vec_add.cpp:5)
+
+ERROR: [SEPAR-318] Cannot support global variable in task scope: 
+ g(vec_add.cpp:7)
+
+ERROR: [SEPAR-318] Cannot support global variable in task scope: 
+ h(vec_add.cpp:8)
+
+ERROR: [SEPAR-318] Cannot support global variable in task scope: 
+ i(vec_add.cpp:10)

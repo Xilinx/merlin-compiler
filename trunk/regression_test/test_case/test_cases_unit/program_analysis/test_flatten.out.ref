@@ -1,0 +1,67 @@
+#include <string.h>
+#pragma ACCEL kernel
+
+void test(int *argv,int n)
+{
+  double a[1024][1024][1024];
+  int i;
+  int j;
+  int k;
+  int l;
+  int m;
+  m = argv[1];
+{
+    a;
+  }
+{
+    long _j_i;
+    j = argv[1];
+    i = 1;
+// Flattened for(j = m;j < n;j++) {...}
+// Flattened for(i = 1;i < 33;i++) {...}
+    for (_j_i = argv[1] * 32; _j_i <= n * 32 - 1; ++_j_i) {
+      
+#pragma ACCEL pipeline
+      for (k = 0; k < 1024; k++) {
+        m + n;
+        a[i + m + 6][n][j + n + 1];
+      }
+{
+        ++i;
+        if (i > 32) {
+          ++j;
+          if (j <= -1 + n) 
+            i = 1;
+        }
+      }
+    }
+  }
+{
+    int j;
+    int i;
+    long _j_i;
+    j = argv[1];
+    i = 1;
+// Flattened for(int j = m;j < n;j++) {...}
+// Flattened for(int i = 1;i < 33;i++) {...}
+    for (_j_i = argv[1] * 32; _j_i <= n * 32 - 1; ++_j_i) {
+      
+#pragma ACCEL pipeline
+{
+        ++i;
+        if (i > 32) {
+          ++j;
+          if (j <= -1 + n) 
+            i = 1;
+        }
+      }
+    }
+  }
+//return 1;
+}
+
+int main(int *arg,int n)
+{
+  test(arg,n);
+  return 0;
+}

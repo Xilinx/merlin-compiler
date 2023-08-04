@@ -1,0 +1,80 @@
+
+WARNING: [PROCS-205] Ignoring pragma "ACCEL parallel factor = 10" (pragma.cpp:588) because it can only be applied to a for-loop
+
+WARNING: [PROCS-205] Ignoring pragma "ACCEL parallel factor = 10" (pragma.cpp:614) because it can only be applied to a for-loop
+
+WARNING: [PROCS-205] Ignoring pragma "ACCEL tiling factor = 10" (pragma.cpp:641) because it can only be applied to a for-loop
+
+WARNING: [PROCS-216] Found an unknown pragma: ACCEL pipeline_parallel factor = 10 (pragma.cpp:14)
+
+WARNING: [PROCS-216] Found an unknown pragma: ACCEL pipeline_parallel factor = 10 flatten (pragma.cpp:44)
+
+WARNING: [PROCS-202] Found a non-canonical loop 'while(k < 100){i = 0' (pragma.cpp:590) which may affect the quality of the result
+
+WARNING: [PROCS-202] Found a non-canonical loop 'while(k < 100){i = 0' (pragma.cpp:616) which may affect the quality of the result
+
+WARNING: [PROCS-202] Found a non-canonical loop 'while(k < 100){i = 0' (pragma.cpp:643) which may affect the quality of the result
+
+WARNING: [PROCS-202] Found a non-canonical loop 'while(i < 100){j = 0' (pragma.cpp:593) which may affect the quality of the result
+
+WARNING: [PROCS-202] Found a non-canonical loop 'while(i < 100){j = 0' (pragma.cpp:619) which may affect the quality of the result
+
+WARNING: [PROCS-202] Found a non-canonical loop 'while(i < 100){j = 0' (pragma.cpp:646) which may affect the quality of the result
+
+WARNING: [PROCS-202] Found a non-canonical loop 'while(j < 100){a[i][' (pragma.cpp:596) which may affect the quality of the result
+
+WARNING: [PROCS-202] Found a non-canonical loop 'while(j < 100){a[i][' (pragma.cpp:622) which may affect the quality of the result
+
+WARNING: [PROCS-202] Found a non-canonical loop 'while(j < 100){a[i][' (pragma.cpp:649) which may affect the quality of the result
+
+WARNING: [PROCS-205] Ignoring pragma "ACCEL parallel complete" (pragma2.cpp:109) because it can only be applied to a for-loop
+
+WARNING: [PROCS-205] Ignoring pragma "ACCEL parallel complete" (pragma2.cpp:111) because it can only be applied to a for-loop
+
+WARNING: [PROCS-216] Found an unknown pragma: ACCEL pipeline_parallel flatten (pragma2.cpp:49)
+
+WARNING: [PROCS-202] Found a non-canonical loop 'while(i < 10){do {su' (pragma2.cpp:110) which may affect the quality of the result
+
+WARNING: [PROCS-202] Found a non-canonical loop 'while(i < 10){do {k+' (pragma2.cpp:118) which may affect the quality of the result
+
+WARNING: [PROCS-202] Found a non-canonical loop 'do {sum++;j++;}while' (pragma2.cpp:112) which may affect the quality of the result
+
+WARNING: [PROCS-202] Found a non-canonical loop 'do {k++;j++;}while(j' (pragma2.cpp:119) which may affect the quality of the result
+
+WARNING: [PROCS-231] Cannot flatten loop 'while(i < 10){do {k+' (pragma2.cpp:118) because of unsupported subloops (such as while, do-while and memcpy)
+
+WARNING: [PROCS-236] Cannot parallel loop 'do {k++;j++;}while(j' (pragma2.cpp:119) because of unsupported loop types (such as while, do-while)
+
+ERROR: [PROCS-363] Found an invalid INTERFACE pragma: ACCEL interface variable=a depth=a_le (pragma4.cpp:25).
+  Diagnosis information: 
+  Invalid value for attribute 'DEPTH' = 'a_le'.
+  Hint: only support variable, constant and macro in pragma clause
+
+ERROR: [PROCS-363] Found an invalid TILING pragma: ACCEL tiling factor=4 parallel_factor=8 (pragma7.cpp:5).
+  Diagnosis information: 
+ Invalid attribute value for 'PARALLEL_FACTOR' (8)
+ Because attribute value for 'FACTOR' (4) cannot be divided by it
+
+ERROR: [PROCS-363] Found an invalid TILING pragma: ACCEL tiling factor=auto (pragma7.cpp:6).
+  Diagnosis information: 
+  Invalid value for attribute 'FACTOR' = 'auto'.
+  Hint: use auto{...} to specify design space, or remove this pragma and change to fully-automated DSE mode
+
+ERROR: [PROCS-363] Found an invalid AUTO pragma: ACCEL auto{options: T=["tile", "parallel"]; default:"tile"} factor=4 (pragma7.cpp:7).
+  Diagnosis information: 
+    Unsupport "AUTO" as the pragma type
+
+WARNING: [PROCS-205] Ignoring pragma "ACCEL parallel flatten facotr=10" (pragma_invalid.cpp:17) because it can only be applied to a for-loop
+
+ERROR: [PROCS-363] Found an invalid PARALLEL pragma: ACCEL parallel factor=complete (pragma_invalid.cpp:11).
+  Diagnosis information: 
+  Invalid value for attribute 'FACTOR' = 'complete'.
+  Hint: only support variable, constant and macro in pragma clause
+
+WARNING: [PROCS-202] Found a non-canonical loop 'while(k < 100){i = 0' (pragma_invalid.cpp:19) which may affect the quality of the result
+
+WARNING: [PROCS-202] Found a non-canonical loop 'while(i < 100){j = 0' (pragma_invalid.cpp:22) which may affect the quality of the result
+
+WARNING: [PROCS-202] Found a non-canonical loop 'while(j < 100){a[i][' (pragma_invalid.cpp:25) which may affect the quality of the result
+
+WARNING: [PROCS-201] Ignoring all pragmas in the header file (t.h:7)

@@ -1,0 +1,14 @@
+
+ERROR: [PROCS-363] Found an invalid PIPELINE pragma: ACCEL pipeline flatten reduction=sum scheme=cyclic (t.cpp:7).
+  Diagnosis information: 
+  Invalid value for attribute 'SCHEME' = 'cyclic'.
+  Hint: did you mean the attribute 'reduction_scheme'?
+
+
+ERROR: [PROCS-363] Found an invalid PARALLEL pragma: ACCEL parallel factor=5 reduction_scheme=bloc (t.cpp:14).
+  Diagnosis information: 
+ Please use 'REDUCTION' to mark the target reduction variable
+ Invalid attribute value for 'REDUCTION_SCHEME' (bloc)
+   Hint: valid value for 'REDUCTION_SCHEME' is block/cyclic/auto
+
+WARNING: [PROCS-216] Found an unknown pragma: ACCEL false_dependency variable=aa (t1.cpp:9)

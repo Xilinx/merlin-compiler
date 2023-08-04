@@ -1,0 +1,2 @@
+INFO: [FGPIP-105] Loop 'j' (test1.cpp:13) is parallelized with a factor of 5
+INFO: [FGPIP-105] Loop 'j' (test1.cpp:27) is parallelized with a factor of 4

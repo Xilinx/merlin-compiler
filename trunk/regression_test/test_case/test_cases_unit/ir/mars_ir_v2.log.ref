@@ -1,0 +1,60 @@
+[print] top loop info
+Loop : for(j = 1;j < 64;j++) {...}
+  port : b, 1
+Loop : for(i = 0;i < 64;++i) {...}
+  port : b, 1
+Loop : for(j = 1;j < 64;j++) {...}
+  port : b, 1
+Loop : for(i = 0;i < 64;++i) {...}
+  port : b, 1
+node0:
+(sync point, pipeline stage) = (1,0) SgForStatement:for(j = 1;j < 64;j++) {...}
+  (sync point, pipeline stage) = (0,0) SgForStatement:for(i = 1;i < 64;i++) {...}
+    (sync point = 0) {
+      Ports: (SgInitializedName:b, writeonly)
+      SgExprStatement:b[j][i] =(a[j + 1][i] + a[j - 1][i] + a[j][i + 1] + a[j][i - 1]) / 4;
+    }
+
+sub loop: SgForStatement:for(j = 1;j < 64;j++) {...}
+sub loop: SgForStatement:for(i = 0;i < 64;++i) {...}
+0 ... has sub loops
+1 ... has sub loops
+node1:
+(sync point, pipeline stage) = (2,0) SgForStatement:for(i = 0;i < 64;++i) {...}
+  (sync point = 0) {
+    Ports: (SgInitializedName:b, writeonly)
+    SgExprStatement:b[i][i] = 0;
+  }
+
+sub loop: SgForStatement:for(j = 1;j < 64;j++) {...}
+sub loop: SgForStatement:for(i = 0;i < 64;++i) {...}
+0 ... has sub loops
+1 ... has sub loops
+node2:
+(sync point, pipeline stage) = (1,0) SgForStatement:for(j = 1;j < 64;j++) {...}
+  (sync point, pipeline stage) = (0,0) SgForStatement:for(i = 1;i < 64;i++) {...}
+    (sync point = 0) {
+      Ports: (SgInitializedName:b, writeonly)
+      SgExprStatement:b[j][i] =(a[j + 1][i] + a[j - 1][i] + a[j][i + 1] + a[j][i - 1]) / 4;
+    }
+
+sub loop: SgForStatement:for(j = 1;j < 64;j++) {...}
+sub loop: SgForStatement:for(i = 0;i < 64;++i) {...}
+2 ... has sub loops
+3 ... has sub loops
+node3:
+(sync point, pipeline stage) = (2,0) SgForStatement:for(i = 0;i < 64;++i) {...}
+  (sync point = 0) {
+    Ports: (SgInitializedName:b, writeonly)
+    SgExprStatement:b[i][i] = 0;
+  }
+
+sub loop: SgForStatement:for(j = 1;j < 64;j++) {...}
+sub loop: SgForStatement:for(i = 0;i < 64;++i) {...}
+2 ... has sub loops
+3 ... has sub loops
+node 0 ... remove_all_statements
+node 1 ... remove_all_statements
+node 2 ... remove_all_statements
+node 3 ... remove_all_statements
+[TESTING] Total file number is: 4

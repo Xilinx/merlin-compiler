@@ -1,0 +1,192 @@
+// ifelse
+#pragma ACCEL kernel
+
+void func_top_6()
+{
+  
+#pragma ACCEL attribute variable=a bankwidth=4
+  int a[100][100];
+  
+#pragma ACCEL attribute variable=b bankwidth=32
+  int b[100][100];
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    
+#pragma unroll 10
+    for (j = 0; j < 100; j++) {
+      if (a[0][0]) {
+        a[i][j] = b[i][j];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_6_1(int cond)
+{
+  
+#pragma ACCEL attribute variable=a bankwidth=32
+  int a[100][100];
+  
+#pragma ACCEL attribute variable=b bankwidth=32
+  int b[100][100];
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    
+#pragma unroll 10
+    for (j = 0; j < 100; j++) {
+      if (cond) {
+        a[i][j] = b[i][j];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_7()
+{
+  int a[100][100];
+  int b[100][100];
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    if (a[0][0]) {
+      
+#pragma unroll
+      for (j = 0; j < 100; j++) {
+        a[i][j] = b[i][j];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_8(int cond)
+{
+  int a[100][100];
+  int b[100][100];
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    if (cond) {
+      
+#pragma unroll
+      for (j = 0; j < 100; j++) {
+        a[i][j] = b[i][j];
+      }
+    }
+  }
+}
+// sub function
+
+void sub_0(int a[100][100],int b[100][100])
+{
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    if (a[0][0]) {
+      
+#pragma unroll 10
+      for (j = 0; j < 100; j++) {
+        a[i][j] = b[i][j];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_9()
+{
+  
+#pragma ACCEL attribute variable=a bankwidth=32
+  int a[100][100];
+  
+#pragma ACCEL attribute variable=b bankwidth=32
+  int b[100][100];
+  sub_0(a,b);
+}
+#pragma ACCEL kernel
+
+void func_top_10(int *min)
+{
+  
+#pragma ACCEL attribute variable=dst bankwidth=128
+  int dst[1024];
+  int n_sub_0;
+  
+#pragma unroll
+  for (n_sub_0 = 0; n_sub_0 < 64; ++n_sub_0) {
+     *min = dst[n_sub_0];
+    if (n_sub_0 > 0) {
+      if ( *min <= dst[- 1 + n_sub_0]) {
+         *min =  *min;
+      }
+       else {
+         *min = dst[- 1 + n_sub_0];
+      }
+    }
+    if (n_sub_0 < 63) {
+      if ( *min <= dst[1 + n_sub_0]) {
+         *min =  *min;
+      }
+       else {
+         *min = dst[1 + n_sub_0];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_11(int qlen)
+{
+  
+#pragma ACCEL attribute variable=eh_e bankwidth=8
+  int eh_e[32][2];
+  
+#pragma ACCEL attribute variable=eh_h bankwidth=4
+  int eh_h[64];
+  int j;
+  int j_sub;
+  for (j = 0; j < 18; j++) {
+    
+#pragma unroll
+    for (j_sub = 0; j_sub < 2; ++j_sub) {
+      if (j * 2 + j_sub < qlen) {
+        int h;
+        int M = eh_h[j * 2 + j_sub];
+        int e = eh_e[j][j_sub];
+        if (M > e) {
+          h = M;
+        }
+         else {
+          h = e;
+        }
+        eh_e[j][j_sub] = h;
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_12(int var)
+{
+  
+#pragma ACCEL attribute variable=a bankwidth=32
+  int a[100][64];
+  
+#pragma ACCEL attribute variable=b bankwidth=32
+  int b[100][64];
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    
+#pragma unroll
+    for (j = 0; j < 8; j++) {
+      if (j < var) {
+        a[i][8 * j] = b[i][8 * j];
+      }
+    }
+  }
+}

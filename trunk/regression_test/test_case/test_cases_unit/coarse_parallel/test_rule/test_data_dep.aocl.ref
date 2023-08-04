@@ -1,0 +1,52 @@
+#include <string.h> 
+#define FACTOR 100
+
+void func(int *a,int *b,int *c)
+{
+//int i;
+  for (int i0 = 0; i0 < 10; ++i0) {
+    for (int ii = 0; ii < 10; ++ii) {
+      
+#pragma ACCEL parallel
+      int i = i0 * 10 + ii;
+      c[i] = a[i] + b[i];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void top(int *a,int *b,int *c)
+{
+  for (int i = 0; i < 10000 / 100; ++i) {
+    int c_buf_0[100][100];
+    int b_buf_0[100][100];
+    int a_buf_0[100][100];
+{
+      for (int j = 0; j < 100; ++j) {
+        
+#pragma HLS UNROLL
+        memcpy(a_buf_0[j],(const void *)(&a[i * 10000 + j * 100]),sizeof(int ) * 100);
+      }
+    }
+{
+      for (int j = 0; j < 100; ++j) {
+        
+#pragma HLS UNROLL
+        memcpy(b_buf_0[j],(const void *)(&b[i * 10000 + j * 100]),sizeof(int ) * 100);
+      }
+    }
+    for (int j = 0; j < 100; ++j) 
+// Original: #pragma ACCEL parallel
+{
+      int offset = i * 100 + j;
+      func(a_buf_0[0],b_buf_0[j],c_buf_0[0]);
+    }
+{
+      for (int j = 0; j < 100; ++j) {
+        
+#pragma HLS UNROLL
+        memcpy((void *)(&c[i * 10000 + j * 100]),c_buf_0[j],sizeof(int ) * 100);
+      }
+    }
+  }
+}

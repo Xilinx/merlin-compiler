@@ -1,0 +1,52 @@
+================================================================================
+Kernel : mykernel(member_function_class.cpp:30)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+orig            32       (member_function_class.cpp:30)[1]
+cpy             512      (member_function_class.cpp:30) memory burst and coalescing 
+len             32       (member_function_class.cpp:30) scalar
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++------------------------------------------------------+------+------+------+------+------+------+------+-----------------+
+|                      hierarchy                       |  TC  |  AC  | CPC  | LUT  |  FF  | BRAM | DSP  |     comment     |
++------------------------------------------------------+------+------+------+------+------+------+------+-----------------+
+|mykernel (member_function_class.cpp:30)               |      |   ???|   ???|  3.09|  1.70|  3.52|  0.00|kernel           |
+|    DoProcess (member_function_class.cpp:34)          |      |   ???|   ???|      |      |      |      |inlined          |
+|    DoProcess (member_function_class.cpp:36)          |      |   ???|   ???|  1.66|  1.06|  0.00|  0.00|                 |
+|    loop i (member_function_class.cpp:38)             |  2048|  2156|  2156|      |      |      |      |fully pipelined  |
+|    auto memory burst write and coalescing for 'cpy'  |      |   294|   294|      |      |      |      |                 |
+|DoProcess (member_function_class.cpp:6)               |      |   ???|   ???|      |      |      |      |inlined          |
+|    loop i (member_function_class.cpp:8)              |      |   ???|   ???|      |      |      |      |fully pipelined  |
++------------------------------------------------------+------+------+------+------+------+------+------+-----------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++--------------------------------------------------+--------+
+|                       Name                       | Cycles |
++--------------------------------------------------+--------+
+|  mykernel:loop i (member_function_class.cpp:38)  |  2156  |
+| auto memory burst (member_function_class.cpp:30) |  294   |
++--------------------------------------------------+--------+
+
++-----------------------------------------+------+------+------+------+
+|                  Name                   | BRAM | DSP  |  FF  | LUT  |
++-----------------------------------------+------+------+------+------+
+| mykernel (member_function_class.cpp:30) | 3.52 | 0.00 | 0.64 | 1.43 |
++-----------------------------------------+------+------+------+------+
+[1] Memory burst NOT inferred: variable 'buf' (member_function_class.cpp:13)
+  Reason: the bound of the access range is not recognized (0..-1 + len exact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+
+

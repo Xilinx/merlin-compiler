@@ -1,0 +1,211 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(i = 0;;i ++ ) {...}
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(i = 0;;) {...}
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(;i<100;i ++ ) {...}
+Non-canonicalizable 
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(;;i ++ ) {...}
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(i = 0;;) {...}
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(;i<100;) {...}
+Non-canonicalizable 
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(;;) {...}
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for((i = 0 , j = 0);i<8;( ++ j , i+=2)) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(class ap_uint< 10 > k(0), m(0);k<8;( ++ m) , k+=2) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(class ap_uint< 10 > k(0), m(0);k<1 << 4;( ++ m) , k ++ ) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 10;i>0;-- i) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(class ap_uint< 10 > k(0);k<8;k = k+2) {...}
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void func_loop() {...}
+  SgFunctionDeclaration int main() {...}
+  SgBasicBlock {c[i] = a[i] + b[i];if(i<100) break;}
+  SgForStatement for(i = 0;;i ++ ) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];i ++ ;}
+  SgForStatement for(i = 0;;) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];}
+  SgForStatement for(;i<100;i ++ ) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];if(i<100) break;}
+  SgForStatement for(;;i ++ ) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];if(i<100) break;i ++ ;}
+  SgForStatement for(i = 0;;) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];i ++ ;}
+  SgForStatement for(;i<100;) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];if(i<100) break;i ++ ;}
+  SgForStatement for(;;) {...}
+  SgBasicBlock {class ap_int< 10 > _in_i = 0L + 2L * i;a[_in_i . operator long()] =((int )(_in_i . operator long()));b[_in_i . operator long()] =((int )(j . operator unsigned long()));++ j;}
+  SgForStatement for(i = 0;i <= 3L;i++) {...}
+  SgBasicBlock {class ap_uint< 10 > _in_l_k = 0L + 2L * _l_k;a[(long )(_in_l_k . operator unsigned long())] =((int )(_in_l_k . operator unsigned long()));b[(long )(_in_l_k . operator unsigned long())] =((int )(_l_m . operator unsigned long()));++ _l_m;}
+  SgForStatement for(_l_k = 0;_l_k <= 3L;_l_k++) {...}
+  SgBasicBlock {a[(long )(_l_k_0 . operator unsigned long())] =((int )(_l_k_0 . operator unsigned long()));b[(long )(_l_k_0 . operator unsigned long())] =((int )(_l_m_0 . operator unsigned long()));++ _l_m_0;}
+  SgForStatement for(_l_k_0 = 0;_l_k_0 <= 15;++_l_k_0) {...}
+  SgBasicBlock {class ap_int< 10 > _in_i_0 = 10L + -1 * i;a[_in_i_0] =(_in_i_0);}
+  SgForStatement for(i = 0;i <= 9L;i++) {...}
+  SgBasicBlock {a[(k)] =(k);}
+  SgForStatement for(class ap_uint< 10 > k(0);k<8;k = k+2) {...}
+
+Arrays: 
+  int [10] a
+  int [10] b
+  int [10] c
+  int [100][100] aa
+  int [100][100] bb
+  int [100][100] cc
+  int * a
+  int * b
+  int * c
+  float [100][100] aa_f
+  float [100][100] bb_f
+  float [100][100] cc_f
+  float * a_f
+  float * b_f
+  float * c_f
+
+Ranges: 
+  SgFunctionDeclaration void func_loop() {...}
+    int [10] a :  R[0..9 inexact] W[0..15 exact]
+    intersect: 0..9 inexact
+    union: 0..15 exact
+    int [10] b :  R[0..9 inexact] W[0..15 exact]
+    intersect: 0..9 inexact
+    union: 0..15 exact
+    int [10] c :  W[0..9 inexact]
+  SgFunctionDeclaration int main() {...}
+  SgBasicBlock {c[i] = a[i] + b[i];if(i<100) break;}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(i = 0;;i ++ ) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {c[i] = a[i] + b[i];i ++ ;}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgForStatement for(i = 0;;) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {c[i] = a[i] + b[i];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(;i<100;i ++ ) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {c[i] = a[i] + b[i];if(i<100) break;}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(;;i ++ ) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {c[i] = a[i] + b[i];if(i<100) break;i ++ ;}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgForStatement for(i = 0;;) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {c[i] = a[i] + b[i];i ++ ;}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgForStatement for(;i<100;) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {c[i] = a[i] + b[i];if(i<100) break;i ++ ;}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgForStatement for(;;) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {class ap_int< 10 > _in_i = 0L + 2L * i;a[_in_i . operator long()] =((int )(_in_i . operator long()));b[_in_i . operator long()] =((int )(j . operator unsigned long()));++ j;}
+    int [10] a :  W[i * 2L..i * 2L exact]
+    int [10] b :  W[i * 2L..i * 2L exact]
+  SgForStatement for(i = 0;i <= 3L;i++) {...}
+    int [10] a :  W[0..6 inexact]
+    int [10] b :  W[0..6 inexact]
+  SgBasicBlock {class ap_uint< 10 > _in_l_k = 0L + 2L * _l_k;a[(long )(_in_l_k . operator unsigned long())] =((int )(_in_l_k . operator unsigned long()));b[(long )(_in_l_k . operator unsigned long())] =((int )(_l_m . operator unsigned long()));++ _l_m;}
+    int [10] a :  W[_l_k * 2L.._l_k * 2L exact]
+    int [10] b :  W[_l_k * 2L.._l_k * 2L exact]
+  SgForStatement for(_l_k = 0;_l_k <= 3L;_l_k++) {...}
+    int [10] a :  W[0..6 inexact]
+    int [10] b :  W[0..6 inexact]
+  SgBasicBlock {a[(long )(_l_k_0 . operator unsigned long())] =((int )(_l_k_0 . operator unsigned long()));b[(long )(_l_k_0 . operator unsigned long())] =((int )(_l_m_0 . operator unsigned long()));++ _l_m_0;}
+    int [10] a :  W[_l_k_0.._l_k_0 exact]
+    int [10] b :  W[_l_k_0.._l_k_0 exact]
+  SgForStatement for(_l_k_0 = 0;_l_k_0 <= 15;++_l_k_0) {...}
+    int [10] a :  W[0..15 exact]
+    int [10] b :  W[0..15 exact]
+  SgBasicBlock {class ap_int< 10 > _in_i_0 = 10L + -1 * i;a[_in_i_0] =(_in_i_0);}
+    int [10] a :  W[10L + -i..10L + -i exact]
+  SgForStatement for(i = 0;i <= 9L;i++) {...}
+    int [10] a :  W[1..10 exact]
+  SgBasicBlock {a[(k)] =(k);}
+    int [10] a :  W[k..k exact]
+  SgForStatement for(class ap_uint< 10 > k(0);k<8;k = k+2) {...}
+    int [10] a :  W[0..6 inexact]
+

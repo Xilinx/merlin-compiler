@@ -1,0 +1,668 @@
+#include "memcpy_512.h"
+#include <string.h> 
+/*
+ * normal-c.hpp
+ *
+ *      @date: May 22, 2015
+ *      @author: Yong-Dian Jian
+ *		@brief:
+ *
+ */
+#include "normal-c.h"
+#include <math.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+//std::numeric_limits<Scalar>::epsilon();
+static double epsilon = 2.220446e-16;
+////namespace gicp {
+/*********************************************************************************************************/
+
+void cross_v(const Scalar *x,const Scalar *y,Scalar *x_cross_y)
+{
+  x_cross_y[0] = x[1] * y[2] - x[2] * y[1];
+  x_cross_y[1] = x[2] * y[0] - x[0] * y[2];
+  x_cross_y[2] = x[0] * y[1] - x[1] * y[0];
+}
+/*********************************************************************************************************/
+
+Scalar squared_norm_v(Scalar *x)
+{
+//  Scalar a = x[0]*x[0];
+//  Scalar b = x[1]*x[1];
+//  Scalar c = x[2]*x[2];
+//  Scalar d = a+b;
+//  Scalar e = d+c;
+//
+//  return e; //reduce critical path
+  return x[0] * x[0] + x[1] * x[1] + x[2] * x[2];
+}
+/*********************************************************************************************************/
+
+void div_v(Scalar *x,Scalar a,Scalar *y)
+{
+  y[0] = x[0] / a;
+  y[1] = x[1] / a;
+  y[2] = x[2] / a;
+}
+/* Input:
+ * data is a buffer of length n*step (like a n by step matrix)
+ * n is the number of total points
+ * step is the number of elements per row
+ * indices is of length m where each number is the row index of interest
+ * origin is of length 3: indicating the location of sensor, the resulting normal has to face to the origin
+ *
+ * Output:
+ * covariance is of length 9, denoting a 3 by 3 covariance matrix
+ *
+ */
+
+void covariance_v(const Scalar *data,const int step,const int *indices,const int m,Scalar *cov)
+{
+// create the buffer on the stack which is much faster than using mat[indices[i]] and centroid as a buffer
+  Scalar accu[9] = {(0.0), (0.0), (0.0), (0.0), (0.0), (0.0), (0.0), (0.0), (0.0)};
+  int i;
+  for (i = 0; i < m; ++i) {
+    int idx = indices[i];
+    const Scalar *ptr = data + idx * step;
+    Scalar x =  *ptr;
+    Scalar y =  *(ptr + 1);
+    Scalar z =  *(ptr + 2);
+    accu[0] += x * x;
+    accu[1] += x * y;
+    accu[2] += x * z;
+    accu[3] += y * y;
+    accu[4] += y * z;
+    accu[5] += z * z;
+    accu[6] += x;
+    accu[7] += y;
+    accu[8] += z;
+  }
+  for (i = 0; i < 9; ++i) {
+    accu[i] /= m;
+  }
+  cov[0] = accu[0] - accu[6] * accu[6];
+  cov[1] = accu[1] - accu[6] * accu[7];
+  cov[2] = accu[2] - accu[6] * accu[8];
+  cov[4] = accu[3] - accu[7] * accu[7];
+  cov[5] = accu[4] - accu[7] * accu[8];
+  cov[8] = accu[5] - accu[8] * accu[8];
+  cov[3] = cov[1];
+  cov[6] = cov[2];
+  cov[7] = cov[5];
+}
+/*********************************************************************************************************/
+/** \brief Compute the roots of a quadratic polynom x^2 + b*x + c = 0
+ * \param[in] b linear parameter
+ * \param[in] c constant parameter
+ * \param[out] roots solutions of x^2 + b*x + c = 0
+ */
+
+void computeRoots2_v(const Scalar b,const Scalar c,Scalar *roots)
+{
+  roots[0] = 0.0;
+  Scalar d = b * b * 1.0 - 4.0 * c;
+// no real roots!!!! THIS SHOULD NOT HAPPEN!
+  if (d < 0.0) {
+    d = 0.0;
+  }
+  Scalar sd = sqrt(d);
+  roots[2] = ((Scalar )0.5) * (b + sd);
+  roots[1] = ((Scalar )0.5) * (b - sd);
+}
+/*********************************************************************************************************/
+/** \brief computes the roots of the characteristic polynomial of the input matrix m, which are the eigenvalues
+ * \param[in] m is of length 9, denoting a 3 by 3 matrix
+ * \param[out] roots is of length 3, denotes the eigenvalues of m
+ */
+
+static void swap(double *a,double *b)
+{
+  double tmp =  *a;
+   *a =  *b;
+   *b = tmp;
+}
+
+void computeRoots_v(const Scalar *m,Scalar *roots)
+{
+// The characteristic equation is x^3 - c2*x^2 + c1*x - c0 = 0.  The
+// eigenvalues are the roots to this equation, all guaranteed to be
+// real-valued, because the matrix is symmetric.
+// m is a 3 by 3 matrix in the following ordering
+// m(0) m(1) m(2)
+// m(3) m(4) m(5)
+// m(6) m(7) m(8)
+  Scalar c0 = m[0] * m[4] * m[8] + ((Scalar )2) * m[1] * m[2] * m[5] - m[0] * m[5] * m[5] - m[4] * m[2] * m[2] - m[8] * m[1] * m[1];
+  Scalar c1 = m[0] * m[4] - m[1] * m[1] + m[0] * m[8] - m[2] * m[2] + m[4] * m[8] - m[5] * m[5];
+  Scalar c2 = m[0] + m[4] + m[8];
+//if (fabs (c0) < std::numeric_limits<Scalar>::epsilon() )// one root is 0 -> quadratic equation
+// one root is 0 -> quadratic equation
+  if (fabs(c0) < epsilon) {
+    computeRoots2_v(c2,c1,roots);
+  }
+   else {
+    const Scalar s_inv3 = (Scalar )(1.0 / 3.0);
+    const Scalar s_sqrt3 = sqrt((Scalar )3.0);
+// Construct the parameters used in classifying the roots of the equation
+// and in solving the equation for the roots in closed form.
+    Scalar c2_over_3 = c2 * s_inv3;
+    Scalar a_over_3 = (c1 - c2 * c2_over_3) * s_inv3;
+    if (a_over_3 > ((Scalar )0)) {
+      a_over_3 = ((Scalar )0);
+    }
+    Scalar half_b = ((Scalar )0.5) * (c0 + c2_over_3 * (((Scalar )2) * c2_over_3 * c2_over_3 - c1));
+    Scalar q = half_b * half_b + a_over_3 * a_over_3 * a_over_3;
+    if (q > ((Scalar )0)) {
+      q = ((Scalar )0);
+    }
+// Compute the eigenvalues by solving for the roots of the polynomial.
+    Scalar rho = sqrt(-a_over_3);
+    Scalar theta = atan2((sqrt(-q)),half_b) * s_inv3;
+    Scalar cos_theta = cos(theta);
+    Scalar sin_theta = sin(theta);
+    roots[0] = c2_over_3 + ((Scalar )2) * rho * cos_theta;
+    roots[1] = c2_over_3 - rho * (cos_theta + s_sqrt3 * sin_theta);
+    roots[2] = c2_over_3 - rho * (cos_theta - s_sqrt3 * sin_theta);
+// Sort in increasing order.
+    if (roots[0] >= roots[1]) {
+      swap(&roots[0],&roots[1]);
+    }
+    if (roots[1] >= roots[2]) {
+      swap(&roots[1],&roots[2]);
+      if (roots[0] >= roots[1]) {
+        swap(&roots[0],&roots[1]);
+      }
+    }
+// eigenval for symetric positive semi-definite matrix can not be negative! Set it to 0
+    if (roots[0] <= 0) {
+      computeRoots2_v(c2,c1,roots);
+    }
+  }
+}
+/*********************************************************************************************************/
+/*
+ * Input:
+ * covariance is of length 9, denoting a 3 by 3 covariance matrix
+ *
+ * Output:
+ * v3 is of length 3, denoting the smallest eigenvector
+ * lambda is of length 1, denoting the smallest eigenvalue
+ */
+
+void eigen33_v(const Scalar *cov,Scalar *v3,Scalar *lambda3)
+{
+/* solve for plane equation */
+// Scale the matrix so its entries are in [-1,1].  The scaling is applied
+// only when at least one matrix entry has magnitude larger than 1.
+  int i;
+  Scalar scale = 0.0;
+  for (i = 0; i < 9; ++i) {
+    Scalar abs_value = fabs(cov[i]);
+    if (scale < abs_value) {
+      scale = abs_value;
+    }
+  }
+  if (scale < 1.0) {
+    scale = 1.0;
+  }
+  Scalar scaled_cov[9];
+  for (i = 0; i < 9; ++i) {
+    scaled_cov[i] = cov[i] / scale;
+  }
+  Scalar eigenvalues[3];
+  computeRoots_v(scaled_cov,eigenvalues);
+   *lambda3 = eigenvalues[0] * scale;
+/* subtract the diagonal by eigenvalue[0] */
+  scaled_cov[0] -= eigenvalues[0];
+  scaled_cov[4] -= eigenvalues[0];
+  scaled_cov[8] -= eigenvalues[0];
+  Scalar vec1[3];
+  Scalar vec2[3];
+  Scalar vec3[3];
+/* cross vector */
+  cross_v(scaled_cov,(scaled_cov + 3),vec1);
+  cross_v(scaled_cov,(scaled_cov + 6),vec2);
+  cross_v((scaled_cov + 3),(scaled_cov + 6),vec3);
+  Scalar len1 = squared_norm_v(vec1);
+  Scalar len2 = squared_norm_v(vec2);
+  Scalar len3 = squared_norm_v(vec3);
+  if (len1 >= len2 && len1 >= len3) {
+    div_v(vec1,(sqrt(len1)),v3);
+  }
+   else {
+    if (len2 >= len1 && len2 >= len3) {
+      div_v(vec2,(sqrt(len2)),v3);
+    }
+     else {
+      div_v(vec3,(sqrt(len3)),v3);
+    }
+  }
+}
+/*********************************************************************************************************/
+/* Input:
+ * data is a buffer of length n*step (like a n by step matrix)
+ * n is the number of total points
+ * step is the number of elements per row
+ * indices is of length m where each number is the row index of interest
+ * origin is of length 3: indicating the location of sensor, the resulting normal has to face to the origin
+ *
+ * Output:
+ * normal is of length 3: will store the result normal
+ */
+
+void mars_kernel_0_3_node_0_stage_0(int j0,int exec,class ap_uint< 512 > *indices,int indices_3_0_buf_0[500][36],int start)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    ::memcpy_wide_bus_read_int_2d(indices_3_0_buf_0,(size_t )0,(size_t )0,(class ap_uint< 512 > *)indices,((unsigned long )(0 + (start * 180000 + j0 * 18000))) * sizeof(int ),sizeof(int ) * ((unsigned long )18000));
+  }
+}
+
+void mars_kernel_0_3_node_1_stage_1(int j0,int exec,Scalar accu_0[9][1000],double data1_3_0_buf[90000],double data_3_0_buf[90000],int indices_3_0_buf_0[500][36],int start,int step)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int sub_start;
+    int i;
+    for (i = 0; i < 18; ++i) {
+      for (sub_start = 0; sub_start < 500; sub_start++) 
+// Original: #pragma ACCEL pipeline
+// Original: #pragma ACCEL PIPELINE II=1
+{
+        
+#pragma ACCEL PIPELINE II=1
+        int sub_start0 = sub_start * 2 + 0;
+        int sub_start1 = sub_start * 2 + 1;
+        int new_start0 = start * 10000 + sub_start0 + j0 * 1000;
+        int new_start1 = start * 10000 + sub_start1 + j0 * 1000;
+        int idx_step = indices_3_0_buf_0[sub_start][i] * step;
+        int idx_step1 = indices_3_0_buf_0[sub_start][18 + i] * step;
+        idx_step < 90000?((void )0) : __assert_fail("idx_step < 90000","normal_kernel.cpp",(unsigned int )327,__PRETTY_FUNCTION__);
+        idx_step1 < 90000?((void )0) : __assert_fail("idx_step1 < 90000","normal_kernel.cpp",(unsigned int )328,__PRETTY_FUNCTION__);
+        Scalar x = data_3_0_buf[0 + (idx_step + 0)];
+        Scalar y = data_3_0_buf[0 + (idx_step + 1)];
+        Scalar z = data_3_0_buf[0 + (idx_step + 2)];
+        Scalar x1 = data1_3_0_buf[0 + (idx_step1 + 0)];
+        Scalar y1 = data1_3_0_buf[0 + (idx_step1 + 1)];
+        Scalar z1 = data1_3_0_buf[0 + (idx_step1 + 2)];
+//if (1) // possible transformation
+//{
+//    int idx_step_div = idx_step/4;
+//    int idx_step_rem = idx_step%4;
+//    if (idx_step_rem == 0) {
+//        x = data_2_0_buf[4*idx_step_div+0];
+//        y = data_2_0_buf[4*idx_step_div+1];
+//        z = data_2_0_buf[4*idx_step_div+2];
+//    } else if (idx_step_rem == 1) {
+//        x = data_2_0_buf[4*idx_step_div+1];
+//        y = data_2_0_buf[4*idx_step_div+2];
+//        z = data_2_0_buf[4*idx_step_div+3];
+//    } else if (idx_step_rem == 2) {
+//        x = data_2_0_buf[4*idx_step_div+2];
+//        y = data_2_0_buf[4*idx_step_div+3];
+//        z = data_2_0_buf[4*idx_step_div+4];
+//    } else {
+//        x = data_2_0_buf[4*idx_step_div+3];
+//        y = data_2_0_buf[4*idx_step_div+4];
+//        z = data_2_0_buf[4*idx_step_div+5];
+//    }
+//}
+        if (i == 0) {
+//8cycles
+          accu_0[0][sub_start0] = x * x;
+          accu_0[1][sub_start0] = x * y;
+          accu_0[2][sub_start0] = x * z;
+          accu_0[3][sub_start0] = y * y;
+          accu_0[4][sub_start0] = y * z;
+          accu_0[5][sub_start0] = z * z;
+          accu_0[6][sub_start0] = x;
+          accu_0[7][sub_start0] = y;
+          accu_0[8][sub_start0] = z;
+        }
+         else {
+//8cycles
+          accu_0[0][sub_start0] += x * x;
+          accu_0[1][sub_start0] += x * y;
+          accu_0[2][sub_start0] += x * z;
+          accu_0[3][sub_start0] += y * y;
+          accu_0[4][sub_start0] += y * z;
+          accu_0[5][sub_start0] += z * z;
+          accu_0[6][sub_start0] += x;
+          accu_0[7][sub_start0] += y;
+          accu_0[8][sub_start0] += z;
+        }
+        if (i == 0) {
+//8cycles
+          accu_0[0][sub_start1] = x1 * x1;
+          accu_0[1][sub_start1] = x1 * y1;
+          accu_0[2][sub_start1] = x1 * z1;
+          accu_0[3][sub_start1] = y1 * y1;
+          accu_0[4][sub_start1] = y1 * z1;
+          accu_0[5][sub_start1] = z1 * z1;
+          accu_0[6][sub_start1] = x1;
+          accu_0[7][sub_start1] = y1;
+          accu_0[8][sub_start1] = z1;
+        }
+         else {
+//8cycles
+          accu_0[0][sub_start1] += x1 * x1;
+          accu_0[1][sub_start1] += x1 * y1;
+          accu_0[2][sub_start1] += x1 * z1;
+          accu_0[3][sub_start1] += y1 * y1;
+          accu_0[4][sub_start1] += y1 * z1;
+          accu_0[5][sub_start1] += z1 * z1;
+          accu_0[6][sub_start1] += x1;
+          accu_0[7][sub_start1] += y1;
+          accu_0[8][sub_start1] += z1;
+        }
+      }
+    }
+  }
+}
+
+void mars_kernel_0_3_node_2_stage_2(int j0,int exec,Scalar accu_0[9][1000],int n,double normal_t_4_0_buf[10][3000],double origin_t_4_0_buf[10][3000],Scalar ptr1,Scalar ptr2,Scalar ptr3,int start)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int i;
+    int sub_start;
+    for (sub_start = 0; sub_start < 1000; sub_start++) 
+// Original: #pragma ACCEL pipeline flatten II=9
+// Original: #pragma ACCEL PIPELINE II=9
+{
+      
+#pragma ACCEL PIPELINE II=9
+      int new_start = start * 10000 + sub_start + j0 * 1000;
+      double accu_local[9];
+      for (i = 0; i < n; ++i) 
+// Original: #pragma ACCEL parallel complete
+{
+        
+#pragma ACCEL PARALLEL COMPLETE
+        accu_local[i] = accu_0[i][sub_start] / ((double )18);
+      }
+//update_normal_t(accu, origin_t, normal_t);
+//ORIGINAL end
+{
+        double cov[9];
+        cov[0] = accu_local[0] - accu_local[6] * accu_local[6];
+        cov[1] = accu_local[1] - accu_local[6] * accu_local[7];
+        cov[2] = accu_local[2] - accu_local[6] * accu_local[8];
+        cov[4] = accu_local[3] - accu_local[7] * accu_local[7];
+        cov[5] = accu_local[4] - accu_local[7] * accu_local[8];
+        cov[8] = accu_local[5] - accu_local[8] * accu_local[8];
+        cov[3] = cov[1];
+        cov[6] = cov[2];
+        cov[7] = cov[5];
+//for (int j = 0; j < n; j++) {
+//  printf("HW======new_start = %d, cov[%d] = %e\n", new_start, j, cov[j]);
+//}
+////end
+// find the eigenvector of the smallest eigenvalue
+        double v3[3];
+        double lambda3;
+////   eigen33_v<Scalar>(cov, v3, &lambda3);
+////new_start:
+// solve for plane equation 
+// Scale the matrix so its entries are in [-1,1].  The scaling is applied
+// only when at least one matrix entry has magnitude larger than 1.
+        Scalar scale = 0.0;
+        for (i = 0; i < n; ++i) 
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+          
+#pragma ACCEL PARALLEL COMPLETE
+          Scalar abs_value = fabs(cov[i]);
+          if (scale < abs_value) {
+            scale = abs_value;
+          }
+        }
+/*should scale * scale*/
+        if (scale < 1.0) {
+/*should scale * scale*/
+          scale = 1.0;
+        }
+        Scalar scaled_cov[9];
+        for (i = 0; i < n; ++i) 
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+          
+#pragma ACCEL PARALLEL COMPLETE
+          scaled_cov[i] = cov[i] / scale;
+        }
+        Scalar eigenvalues[3];
+        Scalar c0 = scaled_cov[0] * scaled_cov[4] * scaled_cov[8] + ((Scalar )2) * scaled_cov[1] * scaled_cov[2] * scaled_cov[5] - scaled_cov[0] * scaled_cov[5] * scaled_cov[5] - scaled_cov[4] * scaled_cov[2] * scaled_cov[2] - scaled_cov[8] * scaled_cov[1] * scaled_cov[1];
+        Scalar c1 = scaled_cov[0] * scaled_cov[4] - scaled_cov[1] * scaled_cov[1] + scaled_cov[0] * scaled_cov[8] - scaled_cov[2] * scaled_cov[2] + scaled_cov[4] * scaled_cov[8] - scaled_cov[5] * scaled_cov[5];
+        Scalar c2 = scaled_cov[0] + scaled_cov[4] + scaled_cov[8];
+// one root is 0 -> quadratic equation
+        if (fabs(c0) < epsilon) {
+////computeRoots2_v (c2, c1, eigenvalues);
+////new_start:
+          eigenvalues[0] = ((Scalar )0);
+          Scalar d = (Scalar )(c2 * c2 - 4.0 * c1);
+// no real eigenvalues!!!! THIS SHOULD NOT HAPPEN!
+          if (d < 0.0) {
+            d = 0.0;
+          }
+          Scalar sd = sqrt(d);
+          eigenvalues[2] = ((Scalar )0.5) * (c2 + sd);
+          eigenvalues[1] = ((Scalar )0.5) * (c2 - sd);
+////end
+        }
+         else {
+          const Scalar s_inv3 = 1.0 / 3.0;
+          const Scalar s_sqrt3 = sqrt(3.0);
+// Construct the parameters used in classifying the eigenvalues of the equation
+// and in solving the equation for the eigenvalues in closed form.
+          Scalar c2_over_3 = c2 * s_inv3;
+          Scalar a_over_3 = (c1 - c2 * c2_over_3) * s_inv3;
+          if (a_over_3 > 0.0) {
+            a_over_3 = ((Scalar )0.0);
+          }
+          Scalar half_b = ((Scalar )0.5) * (c0 + c2_over_3 * (((Scalar )2) * c2_over_3 * c2_over_3 - c1));
+          Scalar q = half_b * half_b + a_over_3 * a_over_3 * a_over_3;
+          if (q > ((Scalar )0)) {
+            q = ((Scalar )0);
+          }
+// Compute the eigenvalues by solving for the eigenvalues of the polynomial.
+          Scalar rho = sqrt(-a_over_3);
+          Scalar theta = atan2((sqrt(-q)),half_b) * s_inv3;
+          Scalar cos_theta = cos(theta);
+          Scalar sin_theta = sin(theta);
+          eigenvalues[0] = c2_over_3 + 2.0 * rho * cos_theta;
+          eigenvalues[1] = c2_over_3 - rho * (cos_theta + s_sqrt3 * sin_theta);
+          eigenvalues[2] = c2_over_3 - rho * (cos_theta - s_sqrt3 * sin_theta);
+// Sort in increasing order.
+          if (eigenvalues[0] >= eigenvalues[1]) {
+            swap(&eigenvalues[0],&eigenvalues[1]);
+          }
+          if (eigenvalues[1] >= eigenvalues[2]) {
+            swap(&eigenvalues[1],&eigenvalues[2]);
+            if (eigenvalues[0] >= eigenvalues[1]) {
+              swap(&eigenvalues[0],&eigenvalues[1]);
+            }
+          }
+// eigenval for symetric positive semi-definite matrix can not be negative! Set it to 0
+          if (eigenvalues[0] <= ((double )0)) {
+////computeRoots2_v (c2, c1, eigenvalues);
+////new_start:
+            eigenvalues[0] = 0.0;
+            Scalar d = (Scalar )(c2 * c2 - 4.0 * c1);
+// no real eigenvalues!!!! THIS SHOULD NOT HAPPEN!
+            if (d < 0.0) {
+              d = 0.0;
+            }
+            Scalar sd = sqrt(d);
+            eigenvalues[2] = ((Scalar )0.5) * (c2 + sd);
+            eigenvalues[1] = ((Scalar )0.5) * (c2 - sd);
+////end
+          }
+        }
+////end: computeRoots_c
+        lambda3 = eigenvalues[0] * scale;
+//subtract the diagonal by eigenvalue[0] 
+        scaled_cov[0] -= eigenvalues[0];
+        scaled_cov[4] -= eigenvalues[0];
+        scaled_cov[8] -= eigenvalues[0];
+        Scalar vec1[3];
+        Scalar vec2[3];
+        Scalar vec3[3];
+// cross vector 
+        cross_v((const Scalar *)scaled_cov,(const Scalar *)(scaled_cov + 3),vec1);
+        cross_v((const Scalar *)scaled_cov,(const Scalar *)(scaled_cov + 6),vec2);
+        cross_v((const Scalar *)(scaled_cov + 3),(const Scalar *)(scaled_cov + 6),vec3);
+        double len1 = squared_norm_v(vec1);
+        double len2 = squared_norm_v(vec2);
+        double len3 = squared_norm_v(vec3);
+        int len12 = (int )(len1 >= len2);
+        int len13 = (int )(len1 >= len3);
+        int len21 = (int )(len2 >= len1);
+        int len23 = (int )(len2 >= len3);
+        if (((bool )len12) && ((bool )len13)) {
+          div_v(vec1,(sqrt(len1)),v3);
+        }
+         else {
+          if (((bool )len21) && ((bool )len23)) {
+            div_v(vec2,(sqrt(len2)),v3);
+          }
+           else {
+            div_v(vec3,(sqrt(len3)),v3);
+          }
+        }
+////end: eigen33_c
+        double d[3];
+//int result_index = new_start; 
+//int result_index = new_start; //start * TS + sub_start;
+        int result_index = start * 10000 + sub_start + j0 * 1000;
+////   const Scalar *ptr1 = data + indices[0]*step;
+        d[0] = origin_t_4_0_buf[j0][sub_start * 3] - ptr1;
+        d[1] = origin_t_4_0_buf[j0][1 + sub_start * 3] - ptr2;
+        d[2] = origin_t_4_0_buf[j0][2 + sub_start * 3] - ptr3;
+        double dot_product = v3[0] * d[0] + v3[1] * d[1] + v3[2] * d[2];
+        if (dot_product >= 0.0) {
+          normal_t_4_0_buf[j0][sub_start * 3] = v3[0];
+          normal_t_4_0_buf[j0][1 + sub_start * 3] = v3[1];
+          normal_t_4_0_buf[j0][2 + sub_start * 3] = v3[2];
+        }
+         else {
+          normal_t_4_0_buf[j0][sub_start * 3] = -v3[0];
+          normal_t_4_0_buf[j0][1 + sub_start * 3] = -v3[1];
+          normal_t_4_0_buf[j0][2 + sub_start * 3] = -v3[2];
+        }
+      }
+    }
+//SLOW_LOOP:            
+  }
+}
+
+void mars_kernel_0_3(int mars_j0,int mars_init,int mars_cond,Scalar mars_accu_0_1[9][1000],Scalar mars_accu_0_2[9][1000],double mars_data1_3_0_buf_1[90000],double mars_data_3_0_buf_1[90000],class ap_uint< 512 > *indices,int mars_indices_3_0_buf_0_0[500][36],int mars_indices_3_0_buf_0_1[500][36],int mars_n_2,double mars_normal_t_4_0_buf_2[10][3000],double mars_origin_t_4_0_buf_2[10][3000],Scalar mars_ptr1_2,Scalar mars_ptr2_2,Scalar mars_ptr3_2,int mars_start_0,int mars_start_1,int mars_start_2,int mars_step_1)
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_0_3_node_0_stage_0(mars_j0 - 0,(int )(mars_j0 >= mars_init + 0 & mars_j0 <= mars_cond + 0),indices,mars_indices_3_0_buf_0_0,mars_start_0);
+  mars_kernel_0_3_node_1_stage_1(mars_j0 - 1,(int )(mars_j0 >= mars_init + 1 & mars_j0 <= mars_cond + 1),mars_accu_0_1,mars_data1_3_0_buf_1,mars_data_3_0_buf_1,mars_indices_3_0_buf_0_1,mars_start_1,mars_step_1);
+  mars_kernel_0_3_node_2_stage_2(mars_j0 - 2,(int )(mars_j0 >= mars_init + 2 & mars_j0 <= mars_cond + 2),mars_accu_0_2,mars_n_2,mars_normal_t_4_0_buf_2,mars_origin_t_4_0_buf_2,mars_ptr1_2,mars_ptr2_2,mars_ptr3_2,mars_start_2);
+}
+
+void compute_normal_vector_v_core(class ap_uint< 512 > *data,class ap_uint< 512 > *data1,class ap_uint< 512 > *indices,class ap_uint< 512 > *origin_t,class ap_uint< 512 > *normal_t)
+{
+  static double origin_t_4_0_buf[10][3000];
+  static double normal_t_4_0_buf[10][3000];
+  static double data1_3_0_buf[90000];
+  static double data_3_0_buf[90000];
+  int i;
+  int j;
+  int step = 3;
+  ;
+//	indices_3_0_buf[0][0]=0;
+//printf("%d ", 0);
+  int next_idx = memcpy_wide_bus_single_read_int((class ap_uint< 512 > *)indices,0 * sizeof(int ));
+  Scalar ptr1 = memcpy_wide_bus_single_read_double((class ap_uint< 512 > *)data,(next_idx * step) * sizeof(double ));
+  Scalar ptr2 = memcpy_wide_bus_single_read_double((class ap_uint< 512 > *)data,(next_idx * step + 1) * sizeof(double ));
+  Scalar ptr3 = memcpy_wide_bus_single_read_double((class ap_uint< 512 > *)data,(next_idx * step + 2) * sizeof(double ));
+//bus_data_type data1[(BUFFER_LENGTH+bus_data_width-1)/bus_data_width];
+//    double data1[BUFFER_LENGTH];
+//#pragma HLS array_partition variable=data1 cyclic factor=24 dim=1
+//    memcpy(data1, data, sizeof(double) * BUFFER_LENGTH); 
+  int start;
+  int sub_start;
+  int j0;
+#define TS    (10000)     // total 64KB
+#define TS_10 (1000)     // total 64KB
+#define TS_10_2 (500)     // total 64KB
+  540000 % 18 == 0?((void )0) : __assert_fail("540000 % 18 == 0","normal_kernel.cpp",295,__PRETTY_FUNCTION__);
+  540000 / 18 % 10000 == 0?((void )0) : __assert_fail("540000 / 18 % (10000) == 0","normal_kernel.cpp",295,__PRETTY_FUNCTION__);
+  int n = 9;
+  ;
+  
+#pragma HLS array_partition variable=data_3_0_buf cyclic factor = 8 dim=1
+  memcpy_wide_bus_read_double(&data_3_0_buf[0],(class ap_uint< 512 > *)data,0 * sizeof(double ),sizeof(double ) * ((unsigned long )90000));
+  
+#pragma HLS array_partition variable=data1_3_0_buf cyclic factor = 8 dim=1
+  memcpy_wide_bus_read_double(&data1_3_0_buf[0],(class ap_uint< 512 > *)data1,0 * sizeof(double ),sizeof(double ) * ((unsigned long )90000));
+  for (start = 0; start < 540000 / 10000 / 18; start++) {
+    
+#pragma HLS array_partition variable=normal_t_4_0_buf cyclic factor = 8 dim=2
+    ::memcpy_wide_bus_read_double_2d(normal_t_4_0_buf,0,0,(class ap_uint< 512 > *)normal_t,(0 + start * 30000) * sizeof(double ),sizeof(double ) * ((unsigned long )30000));
+    
+#pragma HLS array_partition variable=origin_t_4_0_buf cyclic factor = 8 dim=2
+    ::memcpy_wide_bus_read_double_2d(origin_t_4_0_buf,0,0,(class ap_uint< 512 > *)origin_t,(0 + start * 30000) * sizeof(double ),sizeof(double ) * ((unsigned long )30000));
+    Scalar accu_0[9][1000];
+    Scalar accu1_0[9][1000];
+    int indices_3_0_buf_0[500][36];
+    int mars_count_0_3 = 0;
+    Scalar mars_kernel_0_3_accu_0_0[9][1000];
+    Scalar mars_kernel_0_3_accu_0_1[9][1000];
+    Scalar mars_kernel_0_3_accu_0_2[9][1000];
+    int mars_kernel_0_3_indices_3_0_buf_0_0[500][36];
+    
+#pragma HLS array_partition variable=mars_kernel_0_3_indices_3_0_buf_0_0 cyclic factor=16 dim=2
+    int mars_kernel_0_3_indices_3_0_buf_0_1[500][36];
+    
+#pragma HLS array_partition variable=mars_kernel_0_3_indices_3_0_buf_0_1 cyclic factor=16 dim=2
+    int mars_kernel_0_3_indices_3_0_buf_0_2[500][36];
+    
+#pragma HLS array_partition variable=mars_kernel_0_3_indices_3_0_buf_0_2 cyclic factor=16 dim=2
+    int mars_kernel_0_3_start_0 = start;
+    int mars_kernel_0_3_start_1 = start;
+    int mars_kernel_0_3_start_2 = start;
+    for (j0 = 0; j0 < 10 + 2; j0++) 
+// Original: #pragma ACCEL pipeline
+// Original: #pragma ACCEL PIPELINE II=1
+// Original: #pragma ACCEL PIPELINE II=1
+{
+      if (mars_count_0_3 == 0) 
+        mars_kernel_0_3(j0,0,9,mars_kernel_0_3_accu_0_0,mars_kernel_0_3_accu_0_1,data1_3_0_buf,data_3_0_buf,indices,mars_kernel_0_3_indices_3_0_buf_0_0,mars_kernel_0_3_indices_3_0_buf_0_1,n,normal_t_4_0_buf,origin_t_4_0_buf,ptr1,ptr2,ptr3,mars_kernel_0_3_start_0,mars_kernel_0_3_start_1,mars_kernel_0_3_start_2,step);
+       else if (mars_count_0_3 == 1) 
+        mars_kernel_0_3(j0,0,9,mars_kernel_0_3_accu_0_2,mars_kernel_0_3_accu_0_0,data1_3_0_buf,data_3_0_buf,indices,mars_kernel_0_3_indices_3_0_buf_0_2,mars_kernel_0_3_indices_3_0_buf_0_0,n,normal_t_4_0_buf,origin_t_4_0_buf,ptr1,ptr2,ptr3,mars_kernel_0_3_start_2,mars_kernel_0_3_start_0,mars_kernel_0_3_start_1,step);
+       else 
+        mars_kernel_0_3(j0,0,9,mars_kernel_0_3_accu_0_1,mars_kernel_0_3_accu_0_2,data1_3_0_buf,data_3_0_buf,indices,mars_kernel_0_3_indices_3_0_buf_0_1,mars_kernel_0_3_indices_3_0_buf_0_2,n,normal_t_4_0_buf,origin_t_4_0_buf,ptr1,ptr2,ptr3,mars_kernel_0_3_start_1,mars_kernel_0_3_start_2,mars_kernel_0_3_start_0,step);
+      mars_count_0_3++;
+      if (mars_count_0_3 == 3) 
+        mars_count_0_3 = 0;
+    }
+//HEAVY_LOOP:  
+//SLOW_LOOP:            
+//#pragma HLS array_partition variable=normal_t_4_0_buf cyclic factor = 8 dim=2
+//   ::memcpy_wide_bus_write_double_2d(((class ap_uint< 512 > *)normal_t),normal_t_4_0_buf,(sizeof(double ) * (0 + start * 30000)),(sizeof(double ) * ((unsigned long )30000)));
+  }
+//    memcpy(normal_t,  normal,  sizeof(double)*SAFE_LENGTH *NORMAL_LENGTH);
+}
+//void compute_normal_vector_v_kernel(
+//        bus_data_type data[(BUFFER_LENGTH+bus_data_width-1)/bus_data_width],
+//        int indices_t[INDEX_LENGTH],
+//        double origin_t[SAFE_LENGTH *NORMAL_LENGTH],
+//        double normal_t[SAFE_LENGTH *NORMAL_LENGTH])
+//void compute_normal_vector_v_kernel(
+#pragma ACCEL kernel
+
+void normal_kernel(class ap_uint< 512 > *data,class ap_uint< 512 > *data1,class ap_uint< 512 > *indices_t,class ap_uint< 512 > *origin_t,class ap_uint< 512 > *normal_t)
+{
+  int i;
+  int j;
+  compute_normal_vector_v_core(data,data1,indices_t,origin_t,normal_t);
+}

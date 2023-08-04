@@ -1,0 +1,14 @@
+<configuration>
+	<param_array name="hw_module_list">
+		<item>unmaned_task1</item>
+	</param_array>
+	<param_array name="hw_module_type">
+		<item>wrapped</item>
+	</param_array>
+	<param_array name="pcore_dir_list">
+		<item>../</item>
+	</param_array>
+	<param_array name="hw_module_imp">
+		<item></item>
+	</param_array>
+</configuration>

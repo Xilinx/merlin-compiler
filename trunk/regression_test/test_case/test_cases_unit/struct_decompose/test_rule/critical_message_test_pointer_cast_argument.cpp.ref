@@ -1,0 +1,2 @@
+
+ERROR: [DISAG-302] statement 'sub((class Student *)( *a_id));' (transformation:0) which contains unsupported type cast: '(class Student *)( *a_id)' is not decomposed

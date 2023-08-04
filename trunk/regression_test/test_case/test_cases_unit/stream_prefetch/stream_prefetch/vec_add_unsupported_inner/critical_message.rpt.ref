@@ -1,0 +1,6 @@
+
+WARNING: [STREAM-201] stream ports cannot be separated:
+    'void top(int * a) {...}' (__merlinkernel_vec_add.cpp:25)
+    Variable 'a' (__merlinkernel_vec_add.cpp:25) reference (__merlinkernel_vec_add.cpp:18) in function 'top' (__merlinkernel_vec_add.cpp:25) cannot be expressed by boundary scalar variable of the stream scope or loop iterators within the spawning scope
+
+

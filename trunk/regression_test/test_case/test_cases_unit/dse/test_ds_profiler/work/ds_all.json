@@ -1,0 +1,218 @@
+[
+  {
+    "I0": {
+      "default": "off", 
+      "deps": {}, 
+      "id": "I0", 
+      "options": "[x for x in [\"off\",\"\",\"flatten\"]]", 
+      "order": "0 if x!=\"flatten\" else 1", 
+      "order_var": "x"
+    }, 
+    "I0_0": {
+      "default": "off", 
+      "deps": {
+        "I0": 1
+      }, 
+      "id": "I0_0", 
+      "options": "[x for x in [\"off\",\"\",\"flatten\"] if x==\"off\" or I0!=\"flatten\"]", 
+      "order": "0 if x!=\"flatten\" else 1", 
+      "order_var": "x"
+    }, 
+    "I1": {
+      "default": "off", 
+      "deps": {}, 
+      "id": "I1", 
+      "options": "[x for x in [\"off\",\"\",\"flatten\"]]", 
+      "order": "0 if x!=\"flatten\" else 1", 
+      "order_var": "x"
+    }, 
+    "I1_0": {
+      "default": "off", 
+      "deps": {
+        "I1": 1
+      }, 
+      "id": "I1_0", 
+      "options": "[x for x in [\"off\",\"\",\"flatten\"] if x==\"off\" or I1!=\"flatten\"]", 
+      "order": "0 if x!=\"flatten\" else 1", 
+      "order_var": "x"
+    }, 
+    "I1_0_0": {
+      "default": "off", 
+      "deps": {
+        "I1": 1, 
+        "I1_0": 1
+      }, 
+      "id": "I1_0_0", 
+      "options": "[x for x in [\"off\",\"\",\"flatten\"] if x==\"off\" or I1_0!=\"flatten\" and I1!=\"flatten\"]", 
+      "order": "0 if x!=\"flatten\" else 1", 
+      "order_var": "x"
+    }, 
+    "I2": {
+      "default": "off", 
+      "deps": {}, 
+      "id": "I2", 
+      "options": "[x for x in [\"off\",\"\",\"flatten\"]]", 
+      "order": "0 if x!=\"flatten\" else 1", 
+      "order_var": "x"
+    }, 
+    "L0": {
+      "default": 1, 
+      "deps": {
+        "T0": 1
+      }, 
+      "id": "L0", 
+      "options": "[x for x in range(1,10)+[16,32,64,128] if x*T0<=10000]"
+    }, 
+    "L0_0": {
+      "default": 1, 
+      "deps": {
+        "I0": 1, 
+        "T0_0": 1
+      }, 
+      "id": "L0_0", 
+      "options": "[x for x in range(1,10)+[16,32,64,128] if x*T0_0<=512 and (x==1 or I0!=\"flatten\")]"
+    }, 
+    "L0_1": {
+      "default": 1, 
+      "deps": {
+        "I0": 1
+      }, 
+      "id": "L0_1", 
+      "options": "[x for x in range(1,10)+[16,32,35] if x==1 or I0!=\"flatten\"]"
+    }, 
+    "L1": {
+      "default": 1, 
+      "deps": {
+        "T1": 1
+      }, 
+      "id": "L1", 
+      "options": "[x for x in range(1,10)+[16,32,64,128] if x*T1<=10000]"
+    }, 
+    "L1_0": {
+      "default": 1, 
+      "deps": {
+        "I1": 1, 
+        "T1_0": 1
+      }, 
+      "id": "L1_0", 
+      "options": "[x for x in range(1,10)+[16,32,64,128] if x*T1_0<=512 and (x==1 or I1!=\"flatten\")]"
+    }, 
+    "L1_0_0": {
+      "default": 1, 
+      "deps": {
+        "I1": 1, 
+        "I1_0": 1, 
+        "T1_0_0": 1
+      }, 
+      "id": "L1_0_0", 
+      "options": "[x for x in range(1,10)+[16,32,64,128] if x*T1_0_0<=751 and (x==1 or I1_0!=\"flatten\" and I1!=\"flatten\")]"
+    }, 
+    "L1_0_0_0_0": {
+      "default": 1, 
+      "deps": {
+        "I1": 1, 
+        "I1_0": 1, 
+        "I1_0_0": 1
+      }, 
+      "id": "L1_0_0_0_0", 
+      "options": "[x for x in range(1,10)+[16,32,64,127] if x==1 or I1_0_0!=\"flatten\" and I1_0!=\"flatten\" and I1!=\"flatten\"]"
+    }, 
+    "L1_0_0_0_1": {
+      "default": 1, 
+      "deps": {
+        "I1": 1, 
+        "I1_0": 1, 
+        "I1_0_0": 1
+      }, 
+      "id": "L1_0_0_0_1", 
+      "options": "[x for x in range(1,10)+[16,32,63] if x==1 or I1_0_0!=\"flatten\" and I1_0!=\"flatten\" and I1!=\"flatten\"]"
+    }, 
+    "L2": {
+      "default": 1, 
+      "deps": {
+        "T2": 1
+      }, 
+      "id": "L2", 
+      "options": "[x for x in range(1,10)+[16,32,64,128] if x*T2<=511]"
+    }, 
+    "L2_0": {
+      "default": 1, 
+      "deps": {
+        "I2": 1
+      }, 
+      "id": "L2_0", 
+      "options": "[x for x in range(1,10)+[16,32,64,128] if x==1 or I2!=\"flatten\"]"
+    }, 
+    "T0": {
+      "default": 1, 
+      "deps": {
+        "T0_0": 1
+      }, 
+      "id": "T0", 
+      "options": "[2**x for x in range(0,13)+[10000] if x==0 or T0_0==1]"
+    }, 
+    "T0_0": {
+      "default": 1, 
+      "deps": {
+        "I0": 1, 
+        "T0": 1
+      }, 
+      "id": "T0_0", 
+      "options": "[2**x for x in range(0,9) if x==0 or T0==1 and I0!=\"flatten\"]"
+    }, 
+    "T1": {
+      "default": 1, 
+      "deps": {
+        "T1_0": 1, 
+        "T1_0_0": 1
+      }, 
+      "id": "T1", 
+      "options": "[2**x for x in range(0,13)+[10000] if x==0 or T1_0==1 and T1_0_0==1]"
+    }, 
+    "T1_0": {
+      "default": 1, 
+      "deps": {
+        "I1": 1, 
+        "T1": 1, 
+        "T1_0_0": 1
+      }, 
+      "id": "T1_0", 
+      "options": "[2**x for x in range(0,9) if x==0 or T1==1 and T1_0_0==1 and I1!=\"flatten\"]"
+    }, 
+    "T1_0_0": {
+      "default": 1, 
+      "deps": {
+        "I1": 1, 
+        "I1_0": 1, 
+        "T1": 1, 
+        "T1_0": 1
+      }, 
+      "id": "T1_0_0", 
+      "options": "[2**x for x in range(0,9)+[751] if x==0 or T1==1 and T1_0==1 and I1_0!=\"flatten\" and I1!=\"flatten\"]"
+    }, 
+    "T2": {
+      "default": 1, 
+      "deps": {}, 
+      "id": "T2", 
+      "options": "[2**x for x in range(0,8)+[511] ]"
+    }, 
+    "bw0": {
+      "default": 32, 
+      "deps": {}, 
+      "id": "bw0", 
+      "options": "[32,512]"
+    }, 
+    "bw1": {
+      "default": 32, 
+      "deps": {}, 
+      "id": "bw1", 
+      "options": "[32,512]"
+    }, 
+    "bw2": {
+      "default": 32, 
+      "deps": {}, 
+      "id": "bw2", 
+      "options": "[32,512]"
+    }
+  }
+]

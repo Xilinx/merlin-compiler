@@ -1,0 +1,86 @@
+#pragma ACCEL kernel
+
+void func_top_1(int b[100][100],int *c)
+{
+  
+#pragma ACCEL INTERFACE VARIABLE=c DEPTH=1000 BURST_OFF
+  
+#pragma ACCEL INTERFACE VARIABLE=b DEPTH=100,100 BURST_OFF
+  int tmp;
+  int i;
+  int j = 0;
+  int LineBuffer_b0[100];
+  int slide_wind_0_0[2][2];
+  for (i = -1L; i < 99; i++) {
+    while(j < 100){
+      for (int k = -1L; k < 99; k++) {{
+          int i_3;
+          int i_2;
+          int tmp_wind_0_0[2];
+          int k_0;
+          int i_1;
+          for (i_1 = 0L; i_1 <= 1L; ++i_1) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            for (k_0 = 1L; k_0 <= 1L; ++k_0) {
+              
+#pragma ACCEL PARALLEL COMPLETE
+              slide_wind_0_0[i_1][k_0 + -1] = slide_wind_0_0[i_1][k_0];
+            }
+          }
+          for (i_2 = 0; i_2 <= 1L; ++i_2) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            if (i_2 == 0L) {
+              tmp_wind_0_0[i_2] = LineBuffer_b0[k - 0L + 1L];
+            }
+          }
+          tmp_wind_0_0[1UL] = b[i + 0L + 1L][k + 0L + 1L];
+          for (i_3 = 0; i_3 <= 1L; ++i_3) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            slide_wind_0_0[i_3][1L] = tmp_wind_0_0[i_3];
+          }
+{
+            int i_4;
+            int tmp_b;
+            for (i_4 = 0; i_4 <= 0UL; ++i_4) {
+              
+#pragma ACCEL PARALLEL COMPLETE
+              tmp_b = tmp_wind_0_0[i_4 + 1];
+              if (i_4 == 0L) {
+                LineBuffer_b0[k - 0L + 1L] = tmp_b;
+              }
+            }
+          }
+        }
+        if (i >= 0L && i <= 98L && k >= 0L && k <= 98L) {
+          tmp += slide_wind_0_0[0L][0L] + slide_wind_0_0[1L][1L];
+          j++;
+        }
+      }
+    }
+  }
+// To support multiple line_buffer scopes
+  int slide_wind_0[51];
+  for (i = -49L; i < 45; i++) {{
+      int tmp_wind_0;
+      int i_0;
+      for (i_0 = 1L; i_0 <= 50L; ++i_0) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        slide_wind_0[i_0 + -1] = slide_wind_0[i_0];
+      }
+      tmp_wind_0 = c[i + 0L + 50L];
+      slide_wind_0[50L] = tmp_wind_0;
+    }
+    if (i >= 1L && i <= 44L) {
+      for (j = 0; j < 50; j++) {
+        tmp = slide_wind_0[j] + slide_wind_0[j + 1L];
+        for (int k = 0; k < 4; k++) {
+          tmp += b[i][j + k] + b[i + 1][j + k + 1];
+        }
+      }
+    }
+  }
+}

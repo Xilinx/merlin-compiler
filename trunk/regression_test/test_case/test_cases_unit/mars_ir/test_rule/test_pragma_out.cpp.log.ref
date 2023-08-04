@@ -1,0 +1,34 @@
+====> pragma outside loop 
+function: func_top_0
+SgBasicBlock:{int a[100][100];int b[100][100];int sum = 0;int k;int i;int j;#pragma ACCEL pipelinefor(i = 0;i < 100;i++) {#pragma ACCEL parallelfor(j = 0;j < 100;j++) {a[i][j] = b[i][j] + b[i + 1][j + 1];}}for(i = 0;i < 100;i++) {#pragma ACCEL pipelinefor(j = 0;j < 100;j++) {a[i][j] = b[i][j] + b[i + 1][j + 1];}}for(i = 0;i < 100;i++) {#pragma ACCEL parallelfor(j = 0;j < 100;j++) {a[i][j] = b[i][j] + b[i + 1][j + 1];}}int i1 = 0;#pragma ACCEL pipelinewhile(i1 < 100){sum += i1;i1++;}}
+function: func_top_0, loop: L_0, fine grained
+SgBasicBlock:{#pragma ACCEL parallelfor(j = 0;j < 100;j++) {a[i][j] = b[i][j] + b[i + 1][j + 1];}}
+function: func_top_0, loop: L_1, coarse grained
+SgBasicBlock:{#pragma ACCEL pipelinefor(j = 0;j < 100;j++) {a[i][j] = b[i][j] + b[i + 1][j + 1];}}
+function: func_top_0, loop: L_2, fine grained
+SgBasicBlock:{#pragma ACCEL parallelfor(j = 0;j < 100;j++) {a[i][j] = b[i][j] + b[i + 1][j + 1];}}
+function: func_top_0, loop: L_3, fine grained
+SgBasicBlock:{sum += i1;i1++;}
+function: func_top_0, loop: L_0_0, fine grained
+SgBasicBlock:{a[i][j] = b[i][j] + b[i + 1][j + 1];}
+function: func_top_0, loop: L_1_0, fine grained
+SgBasicBlock:{a[i][j] = b[i][j] + b[i + 1][j + 1];}
+function: func_top_0, loop: L_2_0, fine grained
+SgBasicBlock:{a[i][j] = b[i][j] + b[i + 1][j + 1];}
+====> pragma in loop 
+function: func_top_0
+SgBasicBlock:{int a[100][100];int b[100][100];int sum = 0;int k;int i;int j;#pragma ACCEL pipelinefor(i = 0;i < 100;i++) {#pragma ACCEL parallelfor(j = 0;j < 100;j++) {a[i][j] = b[i][j] + b[i + 1][j + 1];}}for(i = 0;i < 100;i++) {#pragma ACCEL pipelinefor(j = 0;j < 100;j++) {a[i][j] = b[i][j] + b[i + 1][j + 1];}}for(i = 0;i < 100;i++) {#pragma ACCEL parallelfor(j = 0;j < 100;j++) {a[i][j] = b[i][j] + b[i + 1][j + 1];}}int i1 = 0;#pragma ACCEL pipelinewhile(i1 < 100){sum += i1;i1++;}}
+function: func_top_0, loop: L_0, coarse grained
+SgBasicBlock:{#pragma ACCEL parallelfor(j = 0;j < 100;j++) {a[i][j] = b[i][j] + b[i + 1][j + 1];}}
+function: func_top_0, loop: L_1, coarse grained
+SgBasicBlock:{#pragma ACCEL pipelinefor(j = 0;j < 100;j++) {a[i][j] = b[i][j] + b[i + 1][j + 1];}}
+function: func_top_0, loop: L_2, coarse grained
+SgBasicBlock:{#pragma ACCEL parallelfor(j = 0;j < 100;j++) {a[i][j] = b[i][j] + b[i + 1][j + 1];}}
+function: func_top_0, loop: L_3, fine grained
+SgBasicBlock:{sum += i1;i1++;}
+function: func_top_0, loop: L_0_0, fine grained
+SgBasicBlock:{a[i][j] = b[i][j] + b[i + 1][j + 1];}
+function: func_top_0, loop: L_1_0, fine grained
+SgBasicBlock:{a[i][j] = b[i][j] + b[i + 1][j + 1];}
+function: func_top_0, loop: L_2_0, fine grained
+SgBasicBlock:{a[i][j] = b[i][j] + b[i + 1][j + 1];}

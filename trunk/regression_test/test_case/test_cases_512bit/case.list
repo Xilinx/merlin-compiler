@@ -1,0 +1,7 @@
+vec_add_512
+#vec_add_512_c
+vec_add_512_cpp
+vec_add_512_float
+vec_add_512_float_unalign
+vec_add_512_double_unalign
+vec_add_512_unalign

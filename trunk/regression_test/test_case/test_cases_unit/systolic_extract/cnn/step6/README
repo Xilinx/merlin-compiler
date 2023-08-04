@@ -1,0 +1,43 @@
+
+source $SYSTOLIC_ROOT/setenv_systolic.sh # parameters are set in this file
+
+
+
+##########################################################
+# FPGA onboard flow
+##########################################################
+
+source scripts/setenv_altera_16.0.sh
+
+## compile kernel (Cody does not need to touch this now)
+cd kernels/matrixMult
+../../scripts/compile_kernels.sh systolic_array_4x4_dot8.cl a10gx_es3
+cp systolic_array_4x4_dot8.aocx $SYSTOLIC_ROOT
+cd $SYSTOLIC_ROOT
+
+## compile host
+./scripts/compile_host.sh
+
+## on board run
+./scripts/run_host.sh
+
+##########################################################
+# OpenCL emulation flow
+##########################################################
+
+#simulation
+source scripts/setenv_altera_16.1.sh
+
+## compile host
+./scripts/compile_host_sim.sh 
+
+## compile kernel
+cd kernels/matrixMult
+../../scripts/compile_kernels_sim.sh systolic_array_4x4_dot8.cl a10gx
+cp systolic_array_4x4_dot8.sim.aocx $SYSTOLIC_ROOT
+cd $SYSTOLIC_ROOT
+
+## run simulation
+./scripts/run_sim.sh
+
+

@@ -1,0 +1,140 @@
+#include<stdio.h>
+#include<ap_int.h>
+#pragma ACCEL kernel
+
+void func_loop()
+{
+  int a[100];
+{
+    int _i0;
+    for (_i0 = 0; _i0 <= 99UL; ++_i0) {
+      int a_tmp = 0;
+      a[_i0] = a_tmp;
+    }
+  }
+  int b[100];
+{
+    int _i0;
+    for (_i0 = 0; _i0 <= 99UL; ++_i0) {
+      int b_tmp = 0;
+      b[_i0] = b_tmp;
+    }
+  }
+  int c[100];
+{
+    int _i0;
+    for (_i0 = 0; _i0 <= 99UL; ++_i0) {
+      int c_tmp = 0;
+      c[_i0] = c_tmp;
+    }
+  }
+  class ap_int< 10 > i = (0);
+  class ap_uint< 10 > j = (0);
+  int x;
+  int y;
+  int z;
+  int N = 100;
+  for (i = 0; ; i ++ ) {
+    printf("i = %d\n",(int )((long )i));
+/* block 1*/
+    c[i] = a[i] + b[i];
+    if (i<100) 
+      break; 
+  }
+  for (; i<100; i ++ ) {
+    printf("i = %d\n",(int )((long )i));
+/* block 3*/
+    c[i] = a[i] + b[i];
+  }
+  for (; ; i ++ ) {
+    printf("i = %d\n",(int )((long )i));
+/* block 4*/
+    c[i] = a[i] + b[i];
+    if (i<100) 
+      break; 
+  }
+  for (i = 0; ; ) {
+    printf("i = %d\n",(int )((long )i));
+/* block 5*/
+    c[i] = a[i] + b[i];
+    if (i<100) 
+      break; 
+    i ++ ;
+  }
+  for (; i<100; ) {
+    printf("i = %d\n",(int )((long )i));
+/* block 6*/
+    c[i] = a[i] + b[i];
+    i ++ ;
+  }
+  for (; ; ) {
+    printf("i = %d\n",(int )((long )i));
+/* block 7*/
+    c[i] = a[i] + b[i];
+    if (i<100) 
+      break; 
+    i ++ ;
+  }
+  j = 0;
+// Canonicalized from: for((i = 0 , j = 0);i<8;( ++ j , i+=2)) {...}
+// Standardize from: for(i = 0;i <= 7;i += 2) {...}
+  for (i = 0; i <= 3L; i++) {
+    class ap_int< 10 > _in_i = 0L + 2L * i;
+    printf("i = %d\n",(int )((long )_in_i));
+    printf("j = %d\n",(int )((unsigned long )j));
+    a[_in_i] = ((int )_in_i);
+    b[_in_i] = ((int )j);
+     ++ j;
+  }
+  i = 6L + 2L;
+  class ap_uint< 10 > _l_k = 0;
+  class ap_uint< 10 > _l_m = 0;
+// Canonicalized from: for(class ap_uint< 10 > k(0), m(0);k<8;( ++ m) , k+=2) {...}
+// Standardize from: for(_l_k = 0;_l_k <= 7;_l_k += 2) {...}
+  for (_l_k = 0; _l_k <= 3L; _l_k++) {
+    class ap_uint< 10 > _in_l_k = 0L + 2L * _l_k;
+    printf("k = %d\n",(int )((unsigned long )_in_l_k));
+    printf("m = %d\n",(int )((unsigned long )_l_m));
+    a[(long )_in_l_k] = ((int )_in_l_k);
+    b[(long )_in_l_k] = ((int )_l_m);
+     ++ _l_m;
+  }
+  _l_k = 6L + 2L;
+// Standardize from: for(i = 10;i>0;-- i) {...}
+  for (i = 0; i <= 9L; i++) {
+    class ap_int< 10 > _in_i_0 = 10L + -1 * i;
+    printf("i = %d\n",(int )((long )_in_i_0));
+    a[_in_i_0] = _in_i_0;
+  }
+  i = 1L + -1;
+  for (class ap_uint< 10 > k(0); k<8; k = k+2) {
+    printf("k = %d\n",(int )((unsigned long )k));
+    a[k] = k;
+  }
+}
+
+int main()
+{
+  int aa[100][100];
+  int bb[100][100];
+  int cc[100][100];
+  int *a;
+  int *b;
+  int *c;
+  int a_s;
+  int b_s;
+  int c_s;
+  int d_s;
+  float aa_f[100][100];
+  float bb_f[100][100];
+  float cc_f[100][100];
+  float *a_f;
+  float *b_f;
+  float *c_f;
+  float a_s_f;
+  float b_s_f;
+  float c_s_f;
+  float d_s_f;
+  func_loop();
+  return 0;
+}

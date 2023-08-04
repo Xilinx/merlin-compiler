@@ -1,0 +1,27 @@
+// From string-plus-int-f.cpp from LLVM's test-suite. Here, we have a pair of
+// operator functions that are also overloads of each other and we want to
+// ensure that they are not double-lowered by operator and overload lowering.
+
+void consume(const char *c)
+{
+}
+enum OperatorOverloadEnum {kMyOperatorOverloadedEnum=5} ;
+
+const char *p_ZplPKcOperatorOverloadEnum(const char *c,enum OperatorOverloadEnum e)
+{
+  return "yo";
+}
+static void __merlin_dummy_SgFunctionDeclaration_const_char_();
+
+const char *p_ZplOperatorOverloadEnumPKc(enum OperatorOverloadEnum e,const char *c)
+{
+  return "yo";
+}
+static void __merlin_dummy_SgFunctionDeclaration_const_char_();
+#pragma ACCEL kernel name = "f"
+
+void f(int index)
+{
+  consume((p_ZplPKcOperatorOverloadEnum("foo",kMyOperatorOverloadedEnum)));
+  consume((p_ZplOperatorOverloadEnumPKc(kMyOperatorOverloadedEnum,"pfoo")));
+}

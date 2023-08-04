@@ -1,0 +1,67 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 0;i < 100;++i) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 0;i < 100;++i) {...}
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+[Exp SgFunctionCallExp:__merlin_access_range(a,0,15)] {__merlin_access_range(a,0,15):SgFunctionCallExp __merlin_access_range(a,0,15)->1,0} : __merlin_access_range(a,0,15)..__merlin_access_range(a,0,15), constant bound: {__merlin_access_range(a,0,15):SgFunctionCallExp __merlin_access_range(a,0,15)->1,0} : neg_inf..pos_inf
+[Exp SgLessThanOp:i < 15] {i < 15:SgLessThanOp i < 15->1,0} : i < 15..i < 15, constant bound: {i < 15:SgLessThanOp i < 15->1,0} : neg_inf..pos_inf
+[Exp SgFunctionCallExp:__merlin_access_range(a,0,1500)] {__merlin_access_range(a,0,1500):SgFunctionCallExp __merlin_access_range(a,0,1500)->1,0} : __merlin_access_range(a,0,1500)..__merlin_access_range(a,0,1500), constant bound: {__merlin_access_range(a,0,1500):SgFunctionCallExp __merlin_access_range(a,0,1500)->1,0} : neg_inf..pos_inf
+[Exp SgFunctionCallExp:__merlin_access_range(a,i * 15,i * 15 + 15)] {__merlin_access_range(a,i * 15,i * 15 + 15):SgFunctionCallExp __merlin_access_range(a,i * 15,i * 15 + 15)->1,0} : __merlin_access_range(a,i * 15,i * 15 + 15)..__merlin_access_range(a,i * 15,i * 15 + 15), constant bound: {__merlin_access_range(a,i * 15,i * 15 + 15):SgFunctionCallExp __merlin_access_range(a,i * 15,i * 15 + 15)->1,0} : neg_inf..pos_inf
+[Exp SgFunctionCallExp:__merlin_access_range(a_sub,0,15)] {__merlin_access_range(a_sub,0,15):SgFunctionCallExp __merlin_access_range(a_sub,0,15)->1,0} : __merlin_access_range(a_sub,0,15)..__merlin_access_range(a_sub,0,15), constant bound: {__merlin_access_range(a_sub,0,15):SgFunctionCallExp __merlin_access_range(a_sub,0,15)->1,0} : neg_inf..pos_inf
+[Exp SgLessThanOp:i < 15] {i < 15:SgLessThanOp i < 15->1,0} : i < 15..i < 15, constant bound: {i < 15:SgLessThanOp i < 15->1,0} : neg_inf..pos_inf
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void sub_func_1(int * a,int * b) {...}
+  SgFunctionDeclaration void func_top_1(int * a,int * b,int i) {...}
+  SgFunctionDeclaration void sub_func_2(int * a) {...}
+  SgFunctionDeclaration void func_top_2(int * a) {...}
+  SgFunctionDeclaration void sub_func_3(int * a_sub) {...}
+  SgFunctionDeclaration void func_top_3(int * a) {...}
+  SgBasicBlock {__merlin_access_range(a,i * 15,i * 15 + 15);sub_func_2(a + i * 15);}
+  SgForStatement for(i = 0;i < 100;++i) {...}
+  SgBasicBlock {sub_func_3(a + i * 15);}
+  SgForStatement for(i = 0;i < 100;++i) {...}
+
+Arrays: 
+  int * a
+  int * b
+  int * a
+  int * b
+  int * a
+  int * a
+  int * a_sub
+  int * a
+
+Ranges: 
+  SgFunctionDeclaration void sub_func_1(int * a,int * b) {...}
+    int * a :  W[b[0]..b[0] exact]
+    int * b :  R[0..0 exact]
+  SgFunctionDeclaration void func_top_1(int * a,int * b,int i) {...}
+    int * a :  W[min(0,i)..max(15,i) inexact]
+    int * b :  R[0..0 exact]
+  SgFunctionDeclaration void sub_func_2(int * a) {...}
+    int * a :  W[na..na inexact]
+  SgFunctionDeclaration void func_top_2(int * a) {...}
+    int * a :  W[0..1500 inexact]
+  SgFunctionDeclaration void sub_func_3(int * a_sub) {...}
+    int * a_sub :  W[0..15 inexact]
+  SgFunctionDeclaration void func_top_3(int * a) {...}
+    int * a :  W[0..1500 inexact]
+  SgBasicBlock {__merlin_access_range(a,i * 15,i * 15 + 15);sub_func_2(a + i * 15);}
+    int * a :  W[i * 15..15 + i * 15 inexact]
+  SgForStatement for(i = 0;i < 100;++i) {...}
+    int * a :  W[0..1500 inexact]
+  SgBasicBlock {sub_func_3(a + i * 15);}
+    int * a :  W[i * 15..15 + i * 15 inexact]
+  SgForStatement for(i = 0;i < 100;++i) {...}
+    int * a :  W[0..1500 inexact]
+

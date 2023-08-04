@@ -1,0 +1,20 @@
+#include<string.h>
+
+void sub(int (*a)[10][20],int s)
+{
+  for (int i = 0; i < 10; ++i) 
+    for (int j = 0; j < 20; ++j) {
+      a[s][i][j] += 1;
+    }
+}
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+  int a_buf[30][10][20];
+  memcpy(a_buf[0][0],a,sizeof(int ) * 6000);
+  for (int s = 0; s < 30; ++s) {
+    sub((int (*)[10][20])a_buf,s);
+  }
+  memcpy(a,a_buf[0][0],sizeof(int ) * 6000);
+}

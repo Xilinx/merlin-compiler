@@ -1,0 +1,6 @@
+
+WARNING: [FGPIP-212] Complete parallelization of loop 'L_0_0  (test_noncanonical.cpp:11)
+ may be ignored or lead to vendor tool errors because its tripcount is variable.
+
+WARNING: [FGPIP-212] Complete parallelization of loop 'L_0_0'  (test_noncanonical.cpp:11), 
+ may be ignored or lead to vendor tool errors because its tripcount is variable.

@@ -1,0 +1,30 @@
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+static void __merlin_dummy_SgTemplateMemberFunctionDeclaration_template_();
+static void __merlin_dummy_SgTemplateMemberFunctionDeclaration_template_();
+
+struct ::A_int_ 
+{
+  int data;
+}
+;
+void p_ZN6A_int_C2IEEv(struct A_int_ *this_);
+void p_ZN6A_int_C2IEERK1AIiE(struct A_int_ *this_,const struct A_int_ &other);
+
+void p_ZN6A_int_C2IEEv(struct A_int_ *this_)
+{
+}
+
+void p_ZN6A_int_C2IEERK1AIiE(struct A_int_ *this_,const struct A_int_ &other)
+{
+  this_ -> data = other . data;
+}
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+  struct A_int_ tmp;
+  ;
+  struct A_int_ tmp2;
+  p_ZN6A_int_C2IEERK1AIiE(&tmp2,tmp);
+  ;
+}

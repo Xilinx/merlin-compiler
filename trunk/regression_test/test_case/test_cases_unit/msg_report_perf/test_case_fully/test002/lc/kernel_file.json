@@ -1,0 +1,8 @@
+{
+    "vec_add_kernel1": {
+        "vec_add_kernel1": "__merlinkernel_vec_add_kernel1.cpp"
+    },
+    "vec_add_kernel2": {
+        "vec_add_kernel2": "__merlinkernel_vec_add_kernel2.cpp"
+    }
+}

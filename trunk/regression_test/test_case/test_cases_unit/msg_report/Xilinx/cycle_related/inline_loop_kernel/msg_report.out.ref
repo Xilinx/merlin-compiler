@@ -1,0 +1,57 @@
+================================================================================
+Kernel : mykernel(inline_loop_kernel.cpp:54)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+orig            512      (inline_loop_kernel.cpp:54) memory burst and coalescing 
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++-------------------------------------------------------+------+------+------+------+------+------+------+-----------------------+
+|                       hierarchy                       |  TC  |  AC  | CPC  | LUT  |  FF  | BRAM | DSP  |        comment        |
++-------------------------------------------------------+------+------+------+------+------+------+------+-----------------------+
+|mykernel (inline_loop_kernel.cpp:54)                   |      |  6556|  6556|  1.20|  0.45|  3.24|  0.00|kernel                 |
+|    auto memory burst read and coalescing for 'orig'   |      |     -|   134|      |      |      |      |                       |
+|    do_process (inline_loop_kernel.cpp:56)             |      |     -|     -|      |      |      |      |inlined                |
+|    auto memory burst write and coalescing for 'orig'  |      |     -|   134|      |      |      |      |                       |
+|max (inline_loop_kernel.cpp:3)                         |      |     -|     -|      |      |      |      |inlined                |
+|min (inline_loop_kernel.cpp:8)                         |      |     -|     -|      |      |      |      |inlined                |
+|maxmin (inline_loop_kernel.cpp:13)                     |      |     -|     -|      |      |      |      |inlined                |
+|    max (inline_loop_kernel.cpp:15)                    |      |     -|     -|      |      |      |      |inlined                |
+|    min (inline_loop_kernel.cpp:16)                    |      |     -|     -|      |      |      |      |inlined                |
+|do_process (inline_loop_kernel.cpp:19)                 |      |     -|     -|      |      |      |      |inlined                |
+|    loop i (inline_loop_kernel.cpp:25)                 |  2048|  2049|  2049|      |      |      |      |IL=3, fully pipelined  |
+|    loop i (inline_loop_kernel.cpp:31)                 |   128|   129|   129|      |      |      |      |IL=3, fully pipelined  |
+|        loop j (inline_loop_kernel.cpp:32)             |    16|     -|     -|      |      |      |      |16x parallelized       |
+|    loop i (inline_loop_kernel.cpp:42)                 |  2048|  2049|  2049|      |      |      |      |IL=3, fully pipelined  |
+|        maxmin (inline_loop_kernel.cpp:43)             |      |  2049|     2|      |      |      |      |                       |
+|    loop i (inline_loop_kernel.cpp:48)                 |  2048|  2048|  2048|      |      |      |      |IL=2, fully pipelined  |
++-------------------------------------------------------+------+------+------+------+------+------+------+-----------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++-----------------------------------------------+--------+----------+
+|                     Name                      | Cycles | Activity |
++-----------------------------------------------+--------+----------+
+|     mykernel (inline_loop_kernel.cpp:54)      |  6556  | 100.00%  |
+| auto memory burst (inline_loop_kernel.cpp:54) |   0    |  0.00%   |
+| auto memory burst (inline_loop_kernel.cpp:54) |   0    |  0.00%   |
++-----------------------------------------------+--------+----------+
+
++--------------------------------------+------+------+------+------+
+|                 Name                 | BRAM | DSP  |  FF  | LUT  |
++--------------------------------------+------+------+------+------+
+| mykernel (inline_loop_kernel.cpp:54) | 3.24 | 0.00 | 0.45 | 1.20 |
++--------------------------------------+------+------+------+------+
+
+
+

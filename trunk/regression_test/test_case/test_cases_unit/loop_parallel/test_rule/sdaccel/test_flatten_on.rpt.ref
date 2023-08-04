@@ -1,0 +1,11 @@
+INFO: [FGPIP-103] Loop 'i'  (test_flatten_on.cpp:7) is pipelined
+INFO: [FGPIP-103] Loop 'L_1_0'  (test_flatten_on.cpp:15) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_flatten_on.cpp:23) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_flatten_on.cpp:30) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_flatten_on.cpp:46) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_flatten_on.cpp:58) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_flatten_on.cpp:68) is pipelined
+INFO: [FGPIP-108] Loop 'i'  (test_flatten_on.cpp:87) is pipelined with a target II of 1
+INFO: [FGPIP-103] Loop 'i'  (test_flatten_on.cpp:94) is pipelined
+INFO: [FLATN-101] Flattening the loop 'L_0' and  'L_0_0' (test_flatten_on.cpp:7)
+INFO: [FLATN-101] Flattening the loop 'L_0' and  'L_0_0' (test_flatten_on.cpp:87)

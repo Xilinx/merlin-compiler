@@ -1,0 +1,22 @@
+
+struct ::Y 
+{
+}
+;
+
+void p_ZN1Y1gEv(struct Y *this_)
+{
+  p_ZN1Y1fILi0EEEi(this_,0);
+}
+
+void p_ZN1Y1fILi0EEEi(struct Y *this_,int x)
+{
+}
+static void __merlin_dummy_SgClassDeclaration_struct_Y_();
+#pragma ACCEL kernel
+
+void k()
+{
+  struct Y y;
+  p_ZN1Y1gEv(&y);
+}

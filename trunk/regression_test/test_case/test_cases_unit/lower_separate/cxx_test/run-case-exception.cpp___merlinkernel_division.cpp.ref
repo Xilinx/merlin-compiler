@@ -1,0 +1,11 @@
+#include "merlin_type_define.h"
+extern int __merlin_include__GB_merlin_type_define_h_0;
+#pragma ACCEL kernel
+
+double division(int a,int b)
+{
+  if (b == 0) {
+    throw "Division by zero condition!";
+  }
+  return (double )(a / b);
+}

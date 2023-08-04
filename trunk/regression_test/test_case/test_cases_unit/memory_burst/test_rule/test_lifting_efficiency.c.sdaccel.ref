@@ -1,0 +1,158 @@
+#include <string.h> 
+// 1. loop structure
+// 2. function structure
+// 3. access pattern
+// 4. pragma modes
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void func_top_0(int *a,int *b)
+{
+  int i;
+  for (i = 100; i >= 0; i--) {
+    
+#pragma ACCEL pipeline
+    a[i * 152] = b[i * 162];
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_1(int *a,int *b)
+{
+  int a_buf[201];
+  int i;
+  int j;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 201);
+  for (i = 0; i <= 10; i++) {
+    int b_buf[1];
+    memcpy((void *)(&b_buf[0]),(const void *)(&b[i * 2000]),sizeof(int ) * 1);
+    for (j = 0; j <= 10; j++) {
+      
+#pragma ACCEL pipeline
+      a_buf[i * 20] = b_buf[0];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 201);
+}
+
+void sub_func_2(int *a,int *b)
+{
+  a[0] = b[0];
+}
+#pragma ACCEL kernel
+
+void func_top_2(int *a,int *b)
+{
+  int b_buf[101][1];
+  int a_buf[15001];
+  int i;
+  int j;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 15001);
+{
+    int i;
+    for (i = 0; i <= 100; i++) {
+      memcpy((void *)b_buf[i],(const void *)(&b[i * 161]),sizeof(int ) * 1);
+    }
+  }
+  for (i = 0; i <= 100; i++) {
+    
+#pragma ACCEL pipeline
+    sub_func_2(&a_buf[i * 150],b_buf[i]);
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 15001);
+}
+
+void sub_func_3(int *a,int *b)
+{
+  int j;
+  for (j = 0; j <= 10; j++) {
+    
+#pragma ACCEL pipeline
+    a[0] = b[0];
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_3(int *a,int *b)
+{
+  int i;
+  int j;
+  for (i = 0; i <= 10; i++) {
+    int b_buf[1];
+    int a_buf[1];
+    memcpy((void *)(&b_buf[0]),(const void *)(&b[i * 2000]),sizeof(int ) * 1);
+//expected burst for 'b' here, so that data access is paralleled with
+//computation
+    sub_func_3(a_buf,b_buf);
+    memcpy((void *)(&a[i * 1000]),(const void *)(&a_buf[0]),sizeof(int ) * 1);
+//expected burst for 'a' here
+  }
+}
+//Loop structure 
+#pragma ACCEL kernel
+
+void func_top_4(int *a,int *b)
+{
+  int a_buf[1291];
+  int i;
+  int j;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 1291);
+  for (i = 0; i <= 10; i++) {
+    int b_buf[11];
+    for (j = 0; j <= 10; j++) {
+      
+#pragma ACCEL pipeline
+      a_buf[i * 128 + j] = 0;
+    }
+    for (j = 0; j <= 10; j++) {
+      
+#pragma ACCEL pipeline
+      b_buf[j] = 1;
+    }
+    memcpy((void *)(&b[1024 + i * 1024]),(const void *)(&b_buf[0]),sizeof(int ) * 11);
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 1291);
+}
+//Loop with func call
+
+void sub_5(char *a,int v)
+{
+  for (int i = 0; i < 64; ++i) {
+    a[i] = (i + v);
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_5(char *a)
+{
+  char a_buf[262145];
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(char ) * 262145);
+  for (int i = 0; i < 1024; ++i) {
+    int a_0 = a_buf[256 + i * 256];
+    int a_1 = a_buf[156 + i * 256];
+    int a_2 = a_buf[56 + i * 256];
+    int a_3 = a_buf[6 + i * 256];
+    int a_4 = a_buf[i * 256];
+    int a_5 = a_buf[200 + i * 256];
+    sub_5(&a_buf[i * 256],a_0 + a_1 + a_2 + a_3 + a_4 + a_5);
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(char ) * 261952);
+}
+
+int main()
+{
+  int *a;
+  char *a_c;
+  int *b;
+  int *c;
+  int a_s;
+  int b_s;
+  int c_s;
+  func_top_0(a,b);
+  func_top_1(a,b);
+  func_top_2(a,b);
+  func_top_3(a,b);
+  func_top_4(a,b);
+  func_top_5(a_c);
+  return 0;
+}

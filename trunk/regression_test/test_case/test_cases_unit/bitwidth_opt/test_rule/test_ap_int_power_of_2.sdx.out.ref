@@ -1,0 +1,52 @@
+#include "memcpy_512_1d.h"
+#define SIZE_1 4
+#define SIZE_2 128
+#define SIZE_3 8
+#define SIZE_4 32
+#include "memcpy_512_5d.h"
+#undef SIZE_1
+#undef SIZE_2
+#undef SIZE_3
+#undef SIZE_4
+#include "memcpy_512.h"
+#include<string.h>
+#include<ap_int.h>
+//1d dimension
+extern int __merlin_include__GB_memcpy_512_h_2;
+extern int __merlin_include__GB_memcpy_512_5d_h_1;
+extern int __merlin_include__GB_memcpy_512_1d_h_0;
+#pragma ACCEL kernel
+
+void top(class ap_int< 40 > *a,class ap_int< 10 > *b,class ap_uint< 4 > *c,class ap_int< 63 > *d,class ap_int< 140 > *f,class ap_int< 20 > *g,ap_uint<512> *h)
+{
+  
+#pragma HLS DATA_PACK VARIABLE=h
+  class ap_int< 40 > a_buf[1000];
+  memcpy(a_buf,a,sizeof(class ap_int< 40 > ) * 1000);
+  class ap_int< 10 > b_buf[100][64];
+  memcpy(b_buf[0],b,sizeof(class ap_int< 10 > ) * 100 * 64);
+  class ap_uint< 4 > c_buf[100][200][16];
+  memcpy(c_buf[0][0],c,sizeof(class ap_uint< 4 > ) * 100 * 200 * 16);
+  class ap_int< 63 > d_buf[100][200][300][16];
+  memcpy(d_buf[0][0][0],d,sizeof(class ap_int< 63 > ) * 100 * 200 * 300 * 16);
+  class ap_int< 140 > f_buf[100][200];
+  memcpy(f_buf[0],f,sizeof(class ap_int< 140 > ) * 100 * 200);
+  class ap_int< 20 > g_buf[2000];
+  memcpy(g_buf,g,sizeof(class ap_int< 20 > ) * 2000);
+  class ap_uint< 16 > h_buf[25][4][128][8][32];
+  
+#pragma  HLS array_partition  variable=h_buf cyclic factor = 32 dim=5
+  memcpy_wide_bus_read_struct_5d_4_128_8_32_512(h_buf,0,0,0,0,0,(ap_uint<512> *)h,0 * 2,sizeof(class ap_uint< 16 > ) * ((unsigned long )25) * ((unsigned long )4) * ((unsigned long )128) * ((unsigned long )8) * ((unsigned long )32),3276800L);
+}
+
+int main()
+{
+  class ap_int< 40 > *a;
+  class ap_int< 10 > *b;
+  class ap_uint< 4 > *c;
+  class ap_int< 63 > *d;
+  class ap_int< 140 > *f;
+  class ap_int< 20 > *g;
+  class ap_uint< 16 > *h;
+  top(a,b,c,d,f,g,(ap_uint<512> *)h);
+}

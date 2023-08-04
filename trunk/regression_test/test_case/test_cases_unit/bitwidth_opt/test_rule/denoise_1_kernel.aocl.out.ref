@@ -1,0 +1,181 @@
+#include "header.h"
+#include "math.h"
+#define uu(p, n, m) (u[(p)*DEFINE_N_PITCH*DEFINE_M_PITCH + (n)*DEFINE_M_PITCH + (m)])
+#define gg(p, n, m) (g[(p)*DEFINE_N_PITCH*DEFINE_M_PITCH + (n)*DEFINE_M_PITCH + (m)])
+#define ff(p, n, m) (f[(p)*DEFINE_N_PITCH*DEFINE_M_PITCH + (n)*DEFINE_M_PITCH + (m)])
+#define uu_out(p, n, m) (u_out[(p)*DEFINE_N_PITCH*DEFINE_M_PITCH + (n)*DEFINE_M_PITCH + (m)])
+#pragma ACCEL kernel
+
+void denoise_1_kernel(float *u,float *g,float *f,float *u_out)
+{
+  float u_out_0_0_buf[512];
+  float u_0_6_buf[512];
+  float u_0_5_buf[512];
+  float u_0_4_buf[512];
+  float u_0_3_buf[512];
+  float u_0_2_buf[512];
+  float u_0_1_buf[512];
+  float u_0_0_buf[512];
+  float g_0_5_buf[512];
+  float g_0_4_buf[512];
+  float g_0_3_buf[512];
+  float g_0_2_buf[512];
+  float g_0_1_buf[512];
+  float g_0_0_buf[512];
+  float f_0_0_buf[512];
+  float sigma = 0.05f;
+  float DT = 5.0f;
+  float lambda = 0.065f;
+  float EPSILON = 5e-5;
+  float sigma2 = sigma * sigma;
+  float gamma1 = lambda / sigma2;
+  int p;
+  int n;
+  int m;
+  for (p = 1; p < 8 + 1; p++) {
+    for (n = 1; n < 512 + 1; n++) {
+      long _memcpy_i_13;
+      for (_memcpy_i_13 = 0; _memcpy_i_13 < sizeof(float ) * ((unsigned long )512) / 4; ++_memcpy_i_13) {
+        
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+        long total_offset1 = 0 * 512 + 0;
+        long total_offset2 = 0 * 0 + (264196 * p + 514 * n + 1);
+        f_0_0_buf[total_offset1 + _memcpy_i_13] = f[total_offset2 + _memcpy_i_13];
+      }
+      long _memcpy_i_7;
+      for (_memcpy_i_7 = 0; _memcpy_i_7 < sizeof(float ) * ((unsigned long )512) / 4; ++_memcpy_i_7) {
+        
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+        long total_offset1 = 0 * 512 + 0;
+        long total_offset2 = 0 * 0 + (264196 * p + 514 * n - 1 + 1);
+        g_0_0_buf[total_offset1 + _memcpy_i_7] = g[total_offset2 + _memcpy_i_7];
+      }
+      long _memcpy_i_8;
+      for (_memcpy_i_8 = 0; _memcpy_i_8 < sizeof(float ) * ((unsigned long )512) / 4; ++_memcpy_i_8) {
+        
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+        long total_offset1 = 0 * 512 + 0;
+        long total_offset2 = 0 * 0 + (264196 * p + 514 * n + 1 + 1);
+        g_0_1_buf[total_offset1 + _memcpy_i_8] = g[total_offset2 + _memcpy_i_8];
+      }
+      long _memcpy_i_9;
+      for (_memcpy_i_9 = 0; _memcpy_i_9 < sizeof(float ) * ((unsigned long )512) / 4; ++_memcpy_i_9) {
+        
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+        long total_offset1 = 0 * 512 + 0;
+        long total_offset2 = 0 * 0 + (264196 * p + 514 * n - 514 + 1);
+        g_0_2_buf[total_offset1 + _memcpy_i_9] = g[total_offset2 + _memcpy_i_9];
+      }
+      long _memcpy_i_10;
+      for (_memcpy_i_10 = 0; _memcpy_i_10 < sizeof(float ) * ((unsigned long )512) / 4; ++_memcpy_i_10) {
+        
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+        long total_offset1 = 0 * 512 + 0;
+        long total_offset2 = 0 * 0 + (264196 * p + 514 * n + 514 + 1);
+        g_0_3_buf[total_offset1 + _memcpy_i_10] = g[total_offset2 + _memcpy_i_10];
+      }
+      long _memcpy_i_11;
+      for (_memcpy_i_11 = 0; _memcpy_i_11 < sizeof(float ) * ((unsigned long )512) / 4; ++_memcpy_i_11) {
+        
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+        long total_offset1 = 0 * 512 + 0;
+        long total_offset2 = 0 * 0 + (264196 * p + 514 * n - 264196 + 1);
+        g_0_4_buf[total_offset1 + _memcpy_i_11] = g[total_offset2 + _memcpy_i_11];
+      }
+      long _memcpy_i_12;
+      for (_memcpy_i_12 = 0; _memcpy_i_12 < sizeof(float ) * ((unsigned long )512) / 4; ++_memcpy_i_12) {
+        
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+        long total_offset1 = 0 * 512 + 0;
+        long total_offset2 = 0 * 0 + (264196 * p + 514 * n + 264196 + 1);
+        g_0_5_buf[total_offset1 + _memcpy_i_12] = g[total_offset2 + _memcpy_i_12];
+      }
+      long _memcpy_i_0;
+      for (_memcpy_i_0 = 0; _memcpy_i_0 < sizeof(float ) * ((unsigned long )512) / 4; ++_memcpy_i_0) {
+        
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+        long total_offset1 = 0 * 512 + 0;
+        long total_offset2 = 0 * 0 + (264196 * p + 514 * n + 1);
+        u_0_0_buf[total_offset1 + _memcpy_i_0] = u[total_offset2 + _memcpy_i_0];
+      }
+      long _memcpy_i_1;
+      for (_memcpy_i_1 = 0; _memcpy_i_1 < sizeof(float ) * ((unsigned long )512) / 4; ++_memcpy_i_1) {
+        
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+        long total_offset1 = 0 * 512 + 0;
+        long total_offset2 = 0 * 0 + (264196 * p + 514 * n - 1 + 1);
+        u_0_1_buf[total_offset1 + _memcpy_i_1] = u[total_offset2 + _memcpy_i_1];
+      }
+      long _memcpy_i_2;
+      for (_memcpy_i_2 = 0; _memcpy_i_2 < sizeof(float ) * ((unsigned long )512) / 4; ++_memcpy_i_2) {
+        
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+        long total_offset1 = 0 * 512 + 0;
+        long total_offset2 = 0 * 0 + (264196 * p + 514 * n + 1 + 1);
+        u_0_2_buf[total_offset1 + _memcpy_i_2] = u[total_offset2 + _memcpy_i_2];
+      }
+      long _memcpy_i_3;
+      for (_memcpy_i_3 = 0; _memcpy_i_3 < sizeof(float ) * ((unsigned long )512) / 4; ++_memcpy_i_3) {
+        
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+        long total_offset1 = 0 * 512 + 0;
+        long total_offset2 = 0 * 0 + (264196 * p + 514 * n - 514 + 1);
+        u_0_3_buf[total_offset1 + _memcpy_i_3] = u[total_offset2 + _memcpy_i_3];
+      }
+      long _memcpy_i_4;
+      for (_memcpy_i_4 = 0; _memcpy_i_4 < sizeof(float ) * ((unsigned long )512) / 4; ++_memcpy_i_4) {
+        
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+        long total_offset1 = 0 * 512 + 0;
+        long total_offset2 = 0 * 0 + (264196 * p + 514 * n + 514 + 1);
+        u_0_4_buf[total_offset1 + _memcpy_i_4] = u[total_offset2 + _memcpy_i_4];
+      }
+      long _memcpy_i_5;
+      for (_memcpy_i_5 = 0; _memcpy_i_5 < sizeof(float ) * ((unsigned long )512) / 4; ++_memcpy_i_5) {
+        
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+        long total_offset1 = 0 * 512 + 0;
+        long total_offset2 = 0 * 0 + (264196 * p + 514 * n - 264196 + 1);
+        u_0_5_buf[total_offset1 + _memcpy_i_5] = u[total_offset2 + _memcpy_i_5];
+      }
+      long _memcpy_i_6;
+      for (_memcpy_i_6 = 0; _memcpy_i_6 < sizeof(float ) * ((unsigned long )512) / 4; ++_memcpy_i_6) {
+        
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+        long total_offset1 = 0 * 512 + 0;
+        long total_offset2 = 0 * 0 + (264196 * p + 514 * n + 264196 + 1);
+        u_0_6_buf[total_offset1 + _memcpy_i_6] = u[total_offset2 + _memcpy_i_6];
+      }
+      for (m = 1; m < 512 + 1; m++) {
+        
+#pragma ACCEL pipeline
+        float u_center = u_0_0_buf[m - 1];
+        float f_center = f_0_0_buf[m - 1];
+        float r;
+        r = u_center * f_center / sigma2;
+        r = r * (2.38944f + r * (0.950037f + r)) / (4.65314f + r * (2.57541f + r * (1.48937f + r)));
+        float u_1 = u_0_1_buf[m - 1];
+        float u_2 = u_0_2_buf[m - 1];
+        float u_3 = u_0_3_buf[m - 1];
+        float u_4 = u_0_4_buf[m - 1];
+        float u_5 = u_0_5_buf[m - 1];
+        float u_6 = u_0_6_buf[m - 1];
+        float g_1 = g_0_0_buf[m - 1];
+        float g_2 = g_0_1_buf[m - 1];
+        float g_3 = g_0_2_buf[m - 1];
+        float g_4 = g_0_3_buf[m - 1];
+        float g_5 = g_0_4_buf[m - 1];
+        float g_6 = g_0_5_buf[m - 1];
+        u_out_0_0_buf[m - 1] = (u_center + DT * (u_1 * g_1 + u_2 * g_2 + u_3 * g_3 + u_4 * g_4 + u_5 * g_5 + u_6 * g_6 + gamma1 * f_center * r)) / (1.0f + DT * (g_1 + g_2 + g_3 + g_4 + g_5 + g_6 + gamma1));
+      }
+      long _memcpy_i_14;
+      for (_memcpy_i_14 = 0; _memcpy_i_14 < sizeof(float ) * ((unsigned long )512) / 4; ++_memcpy_i_14) {
+        
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+        long total_offset1 = 0 * 0 + (264196 * p + 514 * n + 1);
+        long total_offset2 = 0 * 512 + 0;
+        u_out[total_offset1 + _memcpy_i_14] = u_out_0_0_buf[total_offset2 + _memcpy_i_14];
+      }
+    }
+  }
+}

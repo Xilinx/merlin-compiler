@@ -1,0 +1,26 @@
+#include<string.h>
+#pragma accel kernel
+
+void top(int *a,int *b)
+{
+  
+#pragma ACCEL interface variable=a depth=10
+  
+#pragma ACCEL interface variable=b depth=1
+  int i;
+  int j;
+  int index;
+  int a_buf[10];
+  memcpy(a_buf,a,sizeof(int ) * 10);
+  for (i = 0; i < 10; ++i) 
+// Original: #pragma ACCEL parallel
+{
+    for (j = 0; j < 10; ++j) {
+      if (a_buf[j] > 0) {
+        index = j;
+      }
+    }
+  }
+  b[0] = index;
+  return ;
+}

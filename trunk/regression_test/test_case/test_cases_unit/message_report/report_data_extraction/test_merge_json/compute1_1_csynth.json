@@ -1,0 +1,38 @@
+{
+    "L,compute1_1-STAGE1uD0_STAGE1un0": {
+        "II": "1", 
+        "iteration-latency": "17", 
+        "iteration-latency-min": "17", 
+        "latency-max": "25103", 
+        "latency-min": "25103", 
+        "name": "STAGE1uD0_STAGE1un0", 
+        "pipelined": "yes", 
+        "trip-count": "25088"
+    }, 
+    "L,compute1_1-merlinL3": {
+        "II": "1", 
+        "iteration-latency": "2", 
+        "iteration-latency-min": "2", 
+        "latency-max": "32", 
+        "latency-min": "32", 
+        "name": "merlinL3", 
+        "pipelined": "yes", 
+        "trip-count": "32"
+    }, 
+    "compute1_1": {
+        "interval-max": "25139", 
+        "interval-min": "25139", 
+        "latency-max": "25139", 
+        "latency-min": "25139", 
+        "total-BRAM": 0, 
+        "total-DSP": 321, 
+        "total-FF": 42448, 
+        "total-LUT": 22020, 
+        "total-URAM": 0, 
+        "util-BRAM": "0", 
+        "util-DSP": "2", 
+        "util-FF": "1", 
+        "util-LUT": "1", 
+        "util-URAM": "0"
+    }
+}

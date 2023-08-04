@@ -1,0 +1,17 @@
+
+struct ::A 
+{
+}
+;
+
+void p_ZN1A3subILi1EEEi(struct A *this_,int c)
+{
+}
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+#pragma ACCEL kernel
+
+void top(int c)
+{
+  struct A a;
+  p_ZN1A3subILi1EEEi(&a,c);
+}

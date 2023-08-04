@@ -1,0 +1,12 @@
+
+WARNING: [FGPIP-204] Parallelization NOT applied: loop 'L_0' (test_invalidpragma.cpp:11)  Reason: Invalid parallel factor: 0 
+  Hint:   parallel factor can only be constant positive integer 
+
+WARNING: [FGPIP-204] Parallelization NOT applied: loop 'L_0' (test_invalidpragma.cpp:28)  Reason: Invalid parallel factor: -1 
+  Hint:   parallel factor can only be constant positive integer 
+
+WARNING: [FGPIP-204] Parallelization NOT applied: loop 'L_1' (test_invalidpragma.cpp:35)  Reason: Invalid parallel factor: -1 
+  Hint:   parallel factor can only be constant positive integer 
+
+WARNING: [FGPIP-204] Parallelization NOT applied: loop 'L_0' (test_invalidpragma.cpp:49)  Reason: Invalid parallel factor: NN 
+  Hint:   parallel factor can only be constant positive integer 

@@ -1,0 +1,62 @@
+#include <assert.h>
+
+void f()
+{
+  (bool )0;
+  (bool )8;
+  (bool )(- 8);
+  int a;
+  int b;
+  a > - 8?(static_cast < void  >  (0)) : __assert_fail("a > -8","test_assert_range.cpp",9,__PRETTY_FUNCTION__);
+  b < 8?(static_cast < void  >  (0)) : __assert_fail("b < 8","test_assert_range.cpp",10,__PRETTY_FUNCTION__);
+  (bool )a;
+  (bool )b;
+  int x;
+  int y;
+  x > 8?(static_cast < void  >  (0)) : __assert_fail("x > 8","test_assert_range.cpp",15,__PRETTY_FUNCTION__);
+  y < - 8?(static_cast < void  >  (0)) : __assert_fail("y < -8","test_assert_range.cpp",16,__PRETTY_FUNCTION__);
+  (bool )x;
+  (bool )y;
+}
+
+void f0(int c)
+{
+  c >= 0 && c <= 15?(static_cast < void  >  (0)) : __assert_fail("c >= 0 && c <= 15","test_assert_range.cpp",22,__PRETTY_FUNCTION__);
+  for (int i0 = (c + 1) / 4; i0 < 4; ++i0) {
+    i0;
+  }
+}
+
+void f2(int c)
+{
+  c < 100?(static_cast < void  >  (0)) : __assert_fail("c < 100","test_assert_range.cpp",29,__PRETTY_FUNCTION__);
+  L1:
+  for (int i0 = 0; i0 < c; ++i0) {
+    i0;
+  }
+}
+
+void f3(int c)
+{
+{
+    c < 200?(static_cast < void  >  (0)) : __assert_fail("c < 200","test_assert_range.cpp",38,__PRETTY_FUNCTION__);
+  }
+  if (1) {
+    L1:
+    for (int i1 = 0; i1 < c; ++i1) {
+      i1;
+    }
+  }
+}
+
+void f4(int c)
+{
+  if (1) {
+    c < 100?(static_cast < void  >  (0)) : __assert_fail("c < 100","test_assert_range.cpp",49,__PRETTY_FUNCTION__);
+    L1:
+    for (int i2 = 0; i2 < c; ++i2) {
+      i2;
+    }
+  }
+  goto L1;
+}

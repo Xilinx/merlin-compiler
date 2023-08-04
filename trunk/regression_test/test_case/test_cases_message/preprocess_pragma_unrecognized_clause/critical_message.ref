@@ -1,0 +1,28 @@
+
+WARNING: [PROCS-216] Found an unknown pragma: cmost tsak name="vec_add2" (vec_add.c:26)
+
+WARNING: [PROCS-216] Found an unknown pragma: ACCEL pipline (vec_add_kernel.c:16)
+
+WARNING: [PROCS-216] Found an unknown pragma: ACCEL piepline flat (vec_add_kernel.c:19)
+
+WARNING: [PROCS-216] Found an unknown pragma: ACCEL paralel (vec_add_kernel.c:22)
+
+ERROR: [PROCS-363] Found an invalid PARALLEL pragma: ACCEL parallel complet (vec_add_kernel.c:28).
+  Diagnosis information: 
+unsupported attribute 'COMPLET'
+
+ERROR: [PROCS-363] Found an invalid PARALLEL pragma: ACCEL parallel factor 16 (vec_add_kernel.c:31).
+  Diagnosis information: 
+unsupported attribute '16'
+
+ERROR: [PROCS-363] Found an invalid PARALLEL pragma: ACCEL parallel factor= (vec_add_kernel.c:34).
+  Diagnosis information: 
+unsupported attribute 'FACTOR='
+
+ERROR: [PROCS-363] Found an invalid PIPELINE pragma: ACCEL pipeline II= (vec_add_kernel.c:40).
+  Diagnosis information: 
+unsupported attribute 'II='
+
+ERROR: [PROCS-363] Found an invalid PIPELINE pragma: ACCEL pipeline II 2 (vec_add_kernel.c:43).
+  Diagnosis information: 
+unsupported attribute '2'

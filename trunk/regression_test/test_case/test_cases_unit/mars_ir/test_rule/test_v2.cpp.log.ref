@@ -1,0 +1,156 @@
+[print] top loop info
+Loop : for(i = 0;i < 100;i++) {...}
+Loop : for(i = 0;i < 100;i++) {...}
+Loop : for(i = 0;i < 100;i++) {...}
+Loop : for(i = 0;i < 100;i++) {...}
+Loop : for(i = 0;i < 99;i++) {...}
+  port : a, 1
+  port : b, 1
+Loop : for(i = 1;i < 100;i++) {...}
+  port : a, 1
+  port : b, 1
+node0:
+(sync point = 0) {
+  Ports: 
+  SgVariableDeclaration:int a[100][100];
+  SgVariableDeclaration:int b[100][100];
+  SgVariableDeclaration:int sum = 0;
+  SgVariableDeclaration:int k;
+  SgVariableDeclaration:int i;
+  SgVariableDeclaration:int j;
+}
+
+sub loop: nullptr
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+0 ... loops are dead
+1 ... has sub loops
+1 ... loops are dead
+2 ... has sub loops
+2 ... loops are dead
+3 ... has sub loops
+3 ... loops are dead
+4 ... has sub loops
+4 ... loops are dead
+node1:
+(sync point, pipeline stage) = (1,0) SgForStatement:for(i = 0;i < 100;i++) {...}
+  (sync point = 0) {
+    Ports: 
+    SgPragmaDeclaration:#pragma ACCEL pipeline
+    SgForStatement:for(j = 0;j < 100;j++) {...}
+  }
+
+sub loop: nullptr
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+0 ... loops are dead
+1 ... has sub loops
+1 ... loops are dead
+2 ... has sub loops
+2 ... loops are dead
+3 ... has sub loops
+3 ... loops are dead
+4 ... has sub loops
+4 ... loops are dead
+node2:
+(sync point, pipeline stage) = (2,0) SgForStatement:for(i = 0;i < 100;i++) {...}
+  (sync point, pipeline stage) = (1,0) SgForStatement:for(j = 0;j < 100;j++) {...}
+    (sync point = 0) {
+      Ports: 
+      SgExprStatement:a[i][j] = b[i][j] + b[i + 1][j + 1];
+    }
+
+sub loop: nullptr
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+0 ... loops are dead
+1 ... has sub loops
+1 ... loops are dead
+2 ... has sub loops
+2 ... loops are dead
+3 ... has sub loops
+3 ... loops are dead
+4 ... has sub loops
+4 ... loops are dead
+node3:
+(sync point, pipeline stage) = (3,0) SgForStatement:for(i = 0;i < 100;i++) {...}
+  (sync point, pipeline stage) = (1,0) SgForStatement:for(j = 0;j < 100;j++) {...}
+    (sync point = 0) {
+      Ports: 
+      SgExprStatement:a[i][j] = b[i][j] + b[i + 1][j + 1];
+    }
+
+sub loop: nullptr
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+0 ... loops are dead
+1 ... has sub loops
+1 ... loops are dead
+2 ... has sub loops
+2 ... loops are dead
+3 ... has sub loops
+3 ... loops are dead
+4 ... has sub loops
+4 ... loops are dead
+node4:
+(sync point, pipeline stage) = (4,0) SgForStatement:for(i = 0;i < 100;i++) {...}
+  (sync point = 0) {
+    Ports: 
+    SgPragmaDeclaration:#pragma ACCEL pipeline
+    SgExprStatement:sum += i;
+  }
+
+sub loop: nullptr
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 100;i++) {...}
+0 ... loops are dead
+1 ... has sub loops
+1 ... loops are dead
+2 ... has sub loops
+2 ... loops are dead
+3 ... has sub loops
+3 ... loops are dead
+4 ... has sub loops
+4 ... loops are dead
+node5:
+(sync point, pipeline stage) = (1,0) SgForStatement:for(i = 0;i < 99;i++) {...}
+  (sync point = 0) {
+    Ports: (SgInitializedName:a, writeonly), (SgInitializedName:b, readonly)
+    SgPragmaDeclaration:#pragma ACCEL pipeline
+    SgExprStatement:a[i] = b[i] + b[i + 1];
+  }
+
+sub loop: SgForStatement:for(i = 0;i < 99;i++) {...}
+sub loop: SgForStatement:for(i = 1;i < 100;i++) {...}
+5 ... has sub loops
+6 ... has sub loops
+node6:
+(sync point, pipeline stage) = (2,0) SgForStatement:for(i = 1;i < 100;i++) {...}
+  (sync point = 0) {
+    Ports: (SgInitializedName:a, readwrite), (SgInitializedName:b, readonly)
+    SgPragmaDeclaration:#pragma ACCEL pipeline
+    SgExprStatement:a[i] -= b[i] - b[i - 1];
+  }
+
+sub loop: SgForStatement:for(i = 0;i < 99;i++) {...}
+sub loop: SgForStatement:for(i = 1;i < 100;i++) {...}
+5 ... has sub loops
+6 ... has sub loops
+node 0 ... remove_all_statements
+node 1 ... remove_all_statements
+node 2 ... remove_all_statements
+node 3 ... remove_all_statements
+node 4 ... remove_all_statements
+node 5 ... remove_all_statements
+node 6 ... remove_all_statements
+[TESTING] Total file number is: 7

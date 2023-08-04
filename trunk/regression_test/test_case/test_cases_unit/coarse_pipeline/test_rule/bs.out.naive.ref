@@ -1,0 +1,178 @@
+#define fptype float
+// Cumulative Normal Distribution Function
+// See Hull, Section 11.8, P.243-244
+#define inv_sqrt_2xPI 0.39894228040143270286
+#include "math.h"
+#include "stdio.h"
+#define CONST_E (2.71828182845904)
+
+float my_exp(float x)
+{
+  int sign = x >= 0?1 : 0;
+  float absx = (fabs(x));
+  float int_part = 1.0;
+  float y = (absx - floor(absx));
+  float frac_part = 1 + y + y * y / 2 + y * y * y / 6 + y * y * y * y / 24;
+//for (i = 0; i < (int)(floor(absx)); i++)
+//{
+//	int_part *= CONST_E;
+//}
+  return sign?1 / (int_part * frac_part) : int_part * frac_part;
+}
+
+float CNDF(float InputX)
+{
+  int sign;
+  float OutputX;
+  float xInput;
+  float xNPrimeofX;
+  float expValues;
+  float xK2;
+  float xK2_2;
+  float xK2_3;
+  float xK2_4;
+  float xK2_5;
+  float xLocal;
+  float xLocal_1;
+  float xLocal_2;
+  float xLocal_3;
+// Check for negative value of InputX
+  if (InputX < 0.0) {
+    InputX = -InputX;
+    sign = 1;
+  }
+   else 
+    sign = 0;
+  xInput = InputX;
+// Compute NPrimeX term common to both four & six decimal accuracy calcs
+  expValues = my_exp(((float )(- 0.5f * InputX * InputX)));
+  xNPrimeofX = expValues;
+  xNPrimeofX = (xNPrimeofX * 0.39894228040143270286);
+  xK2 = (0.2316419 * xInput);
+  xK2 = (1.0 + xK2);
+  xK2 = (1.0 / xK2);
+  xK2_2 = xK2 * xK2;
+  xK2_3 = xK2_2 * xK2;
+  xK2_4 = xK2_3 * xK2;
+  xK2_5 = xK2_4 * xK2;
+  xLocal_1 = (xK2 * 0.319381530);
+  xLocal_2 = (xK2_2 * - 0.356563782);
+  xLocal_3 = (xK2_3 * 1.781477937);
+  xLocal_2 = xLocal_2 + xLocal_3;
+  xLocal_3 = (xK2_4 * - 1.821255978);
+  xLocal_2 = xLocal_2 + xLocal_3;
+  xLocal_3 = (xK2_5 * 1.330274429);
+  xLocal_2 = xLocal_2 + xLocal_3;
+  xLocal_1 = xLocal_2 + xLocal_1;
+  xLocal = xLocal_1 * xNPrimeofX;
+  xLocal = (1.0 - xLocal);
+  OutputX = xLocal;
+  if (sign) {
+    OutputX = (1.0 - OutputX);
+  }
+  return OutputX;
+}
+// For debugging
+
+void print_xmm(float in,char *s)
+{
+  printf("%s: %f\n",s,in);
+}
+
+float BlkSchlsEqEuroNoDiv(float sptprice,float strike,float rate,float volatility,float time,int otype,float timet)
+{
+  float OptionPrice;
+// local private working variables for the calculation
+  float xStockPrice;
+  float xStrikePrice;
+  float xRiskFreeRate;
+  float xVolatility;
+  float xTime;
+  float xSqrtTime;
+  float logValues;
+  float xLogTerm;
+  float xD1;
+  float xD2;
+  float xPowerTerm;
+  float xDen;
+  float d1;
+  float d2;
+  float FutureValueX;
+  float NofXd1;
+  float NofXd2;
+  float NegNofXd1;
+  float NegNofXd2;
+  xStockPrice = sptprice;
+  xStrikePrice = strike;
+  xRiskFreeRate = rate;
+  xVolatility = volatility;
+  xTime = time;
+  xSqrtTime = (sqrt(xTime));
+//logValues = log( sptprice / strike );
+  logValues = sptprice / strike;
+  xLogTerm = logValues;
+  xPowerTerm = xVolatility * xVolatility;
+  xPowerTerm = (xPowerTerm * 0.5);
+  xD1 = xRiskFreeRate + xPowerTerm;
+  xD1 = xD1 * xTime;
+  xD1 = xD1 + xLogTerm;
+  xDen = xVolatility * xSqrtTime;
+  xD1 = xD1 / xDen;
+  xD2 = xD1 - xDen;
+  d1 = xD1;
+  d2 = xD2;
+  NofXd1 = CNDF(d1);
+  NofXd2 = CNDF(d2);
+  FutureValueX = strike * my_exp(((float )(-rate * time)));
+  if (otype == 0) {
+    OptionPrice = sptprice * NofXd1 - FutureValueX * NofXd2;
+  }
+   else {
+    NegNofXd1 = (1.0 - NofXd1);
+    NegNofXd2 = (1.0 - NofXd2);
+    OptionPrice = FutureValueX * NegNofXd2 - sptprice * NegNofXd1;
+  }
+  return OptionPrice;
+}
+
+void bs_kernel(float *sptprice,float *strike,float *rate,float *volatility,float *otime,float *otype,float *prices)
+{
+  float priceDelta;
+//int     BLOCK_SIZE; 
+//int     TOTAL_OPTION;
+#define BLOCK_SIZE 100
+#define TOTAL_OPTION  100
+  float sptprice_buf[100];
+  float strike_buf[100];
+  float rate_buf[100];
+  float volatility_buf[100];
+  float otime_buf[100];
+  float otype_buf[100];
+  float prices_buf[100];
+  int k;
+  int ii;
+  for (k = 0; k < 100; k++) 
+/* Original: #pragma ACCEL pipeline */
+{
+    memcpy(sptprice_buf,&sptprice[k * 100],sizeof(float ) * 100);
+    memcpy(rate_buf,&rate[k * 100],sizeof(float ) * 100);
+    memcpy(strike_buf,&strike[k * 100],sizeof(float ) * 100);
+    memcpy(volatility_buf,&volatility[k * 100],sizeof(float ) * 100);
+    memcpy(otime_buf,&otime[k * 100],sizeof(float ) * 100);
+    memcpy(otype_buf,&otype[k * 100],sizeof(float ) * 100);
+    for (ii = 0; ii < 100; ii++) {
+      
+#pragma ACCEL pipeline
+      float price;
+      float curr_sptprice = sptprice_buf[ii];
+      float curr_strike = strike_buf[ii];
+      float curr_rate = rate_buf[ii];
+      float curr_volatility = volatility_buf[ii];
+      float curr_otime = otime_buf[ii];
+      float curr_otype = otype_buf[ii];
+      price = BlkSchlsEqEuroNoDiv(curr_sptprice,curr_strike,curr_rate,curr_volatility,curr_otime,curr_otype,0);
+      prices_buf[ii] = price;
+    }
+    memcpy(&prices[k * 100],prices_buf,sizeof(float ) * 100);
+  }
+}

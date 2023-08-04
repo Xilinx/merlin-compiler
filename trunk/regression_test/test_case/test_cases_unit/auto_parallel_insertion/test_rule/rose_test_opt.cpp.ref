@@ -1,0 +1,58 @@
+#pragma ACCEL kernel
+
+void func_top_18(int a[64][64],int b[64][64],int c[64][64])
+{
+  for (int i1 = 0; i1 < 32; i1++) {
+    
+#pragma ACCEL PIPELINE AUTO
+    for (int i2 = 0; i2 < 32; i2++) {
+      
+#pragma ACCEL parallel reduction = c
+      for (int i3 = 0; i3 < 32; i3++) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        c[i1][i2] += a[i2][i3] * b[i2][i3];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_19(int a[64][64],int b[64][64],int c[64][64])
+{
+  for (int i1 = 0; i1 < 16; i1++) {
+    for (int i1_sub = 0; i1_sub < 2; ++i1_sub) {
+      
+#pragma ACCEL TILED_TAG
+      for (int i2 = 0; i2 < 32; i2++) {
+        for (int i3 = 0; i3 < 100; i3++) {
+          
+#pragma ACCEL PIPELINE AUTO
+          c[i1 * 2 + i1_sub][i2] += a[i2][i3] * b[i2][i3];
+        }
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_20(int a[64][64],int b[64][64],int c[64][64])
+{
+  for (int i0 = 0; i0 < 32; i0++) {
+    for (int i1 = 0; i1 < 32; i1++) {
+      
+#pragma ACCEL PIPELINE AUTO
+      
+#pragma ACCEL line_buffer variable=c
+      for (int i2 = 0; i2 < 32; i2++) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        for (int i3 = 0; i3 < 32; i3++) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          c[i1][i2] += a[i2][i3] * b[i2][i3];
+        }
+      }
+    }
+  }
+}

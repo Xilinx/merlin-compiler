@@ -1,0 +1,3 @@
+
+ERROR: [SEPAR-310] Anonymous type is not supported : 'struct {int size;};' (top.cpp:1)
+  Hint: please add a name for the above type

@@ -1,0 +1,23 @@
+#define SIZE 10
+#define PAR_FACTOR 32
+const unsigned long L_VECTOR_SIZE = (unsigned long )(32 / 8);
+int val = 5;
+#pragma ACCEL kernel
+
+void top(int *input)
+{
+  
+#pragma ACCEL interface variable=input depth=5
+  const int unroll_factor = 32;
+  
+#pragma HLS array_partition variable=param cyclic factor=32
+  
+#pragma HLS array_partition variable=param cyclic factor=32
+  static int label_local[10];
+  
+#pragma HLS array_partition variable=label_local cyclic factor=4
+  for (int ii = 1, f = 10; ii < 10; ++ii) {
+    
+#pragma ACCEL parallel factor=10
+  }
+}

@@ -1,0 +1,116 @@
+#include "memcpy_512_1d.h"
+#include "header.h"
+#include "math.h"
+#define uu(p, n, m) (u[(p)*DEFINE_N_PITCH*DEFINE_M_PITCH + (n)*DEFINE_M_PITCH + (m)])
+#define gg(p, n, m) (g[(p)*DEFINE_N_PITCH*DEFINE_M_PITCH + (n)*DEFINE_M_PITCH + (m)])
+#define ff(p, n, m) (f[(p)*DEFINE_N_PITCH*DEFINE_M_PITCH + (n)*DEFINE_M_PITCH + (m)])
+#define uu_out(p, n, m) (u_out[(p)*DEFINE_N_PITCH*DEFINE_M_PITCH + (n)*DEFINE_M_PITCH + (m)])
+extern int __merlin_include__GB_memcpy_512_1d_h_0;
+#pragma ACCEL kernel
+
+void denoise_1_kernel(ap_uint<512> *u,ap_uint<512> *g,ap_uint<512> *f,ap_uint<512> *u_out)
+{
+  
+#pragma HLS DATA_PACK VARIABLE=u_out
+  
+#pragma HLS DATA_PACK VARIABLE=f
+  
+#pragma HLS DATA_PACK VARIABLE=g
+  
+#pragma HLS DATA_PACK VARIABLE=u
+  float u_out_0_0_buf[512];
+  float u_0_6_buf[512];
+  float u_0_5_buf[512];
+  float u_0_4_buf[512];
+  float u_0_3_buf[512];
+  float u_0_2_buf[512];
+  float u_0_1_buf[512];
+  float u_0_0_buf[512];
+  float g_0_5_buf[512];
+  float g_0_4_buf[512];
+  float g_0_3_buf[512];
+  float g_0_2_buf[512];
+  float g_0_1_buf[512];
+  float g_0_0_buf[512];
+  float f_0_0_buf[512];
+  float sigma = 0.05f;
+  float DT = 5.0f;
+  float lambda = 0.065f;
+  float EPSILON = 5e-5;
+  float sigma2 = sigma * sigma;
+  float gamma1 = lambda / sigma2;
+  int p;
+  int n;
+  int m;
+  for (p = 1; p < 8 + 1; p++) {
+    for (n = 1; n < 512 + 1; n++) {
+      
+#pragma  HLS array_partition  variable=f_0_0_buf cyclic factor = 16 dim=1
+      memcpy_wide_bus_read_float_512(&f_0_0_buf[0],(ap_uint<512> *)f,(264196 * p + 514 * n + 1) * 4,sizeof(float ) * ((unsigned long )512),512L);
+      
+#pragma  HLS array_partition  variable=g_0_0_buf cyclic factor = 16 dim=1
+      memcpy_wide_bus_read_float_512(&g_0_0_buf[0],(ap_uint<512> *)g,(264196 * p + 514 * n - 1 + 1) * 4,sizeof(float ) * ((unsigned long )512),512L);
+      
+#pragma  HLS array_partition  variable=g_0_1_buf cyclic factor = 16 dim=1
+      memcpy_wide_bus_read_float_512(&g_0_1_buf[0],(ap_uint<512> *)g,(264196 * p + 514 * n + 1 + 1) * 4,sizeof(float ) * ((unsigned long )512),512L);
+      
+#pragma  HLS array_partition  variable=g_0_2_buf cyclic factor = 16 dim=1
+      memcpy_wide_bus_read_float_512(&g_0_2_buf[0],(ap_uint<512> *)g,(264196 * p + 514 * n - 514 + 1) * 4,sizeof(float ) * ((unsigned long )512),512L);
+      
+#pragma  HLS array_partition  variable=g_0_3_buf cyclic factor = 16 dim=1
+      memcpy_wide_bus_read_float_512(&g_0_3_buf[0],(ap_uint<512> *)g,(264196 * p + 514 * n + 514 + 1) * 4,sizeof(float ) * ((unsigned long )512),512L);
+      
+#pragma  HLS array_partition  variable=g_0_4_buf cyclic factor = 16 dim=1
+      memcpy_wide_bus_read_float_512(&g_0_4_buf[0],(ap_uint<512> *)g,(264196 * p + 514 * n - 264196 + 1) * 4,sizeof(float ) * ((unsigned long )512),512L);
+      
+#pragma  HLS array_partition  variable=g_0_5_buf cyclic factor = 16 dim=1
+      memcpy_wide_bus_read_float_512(&g_0_5_buf[0],(ap_uint<512> *)g,(264196 * p + 514 * n + 264196 + 1) * 4,sizeof(float ) * ((unsigned long )512),512L);
+      
+#pragma  HLS array_partition  variable=u_0_0_buf cyclic factor = 16 dim=1
+      memcpy_wide_bus_read_float_512(&u_0_0_buf[0],(ap_uint<512> *)u,(264196 * p + 514 * n + 1) * 4,sizeof(float ) * ((unsigned long )512),512L);
+      
+#pragma  HLS array_partition  variable=u_0_1_buf cyclic factor = 16 dim=1
+      memcpy_wide_bus_read_float_512(&u_0_1_buf[0],(ap_uint<512> *)u,(264196 * p + 514 * n - 1 + 1) * 4,sizeof(float ) * ((unsigned long )512),512L);
+      
+#pragma  HLS array_partition  variable=u_0_2_buf cyclic factor = 16 dim=1
+      memcpy_wide_bus_read_float_512(&u_0_2_buf[0],(ap_uint<512> *)u,(264196 * p + 514 * n + 1 + 1) * 4,sizeof(float ) * ((unsigned long )512),512L);
+      
+#pragma  HLS array_partition  variable=u_0_3_buf cyclic factor = 16 dim=1
+      memcpy_wide_bus_read_float_512(&u_0_3_buf[0],(ap_uint<512> *)u,(264196 * p + 514 * n - 514 + 1) * 4,sizeof(float ) * ((unsigned long )512),512L);
+      
+#pragma  HLS array_partition  variable=u_0_4_buf cyclic factor = 16 dim=1
+      memcpy_wide_bus_read_float_512(&u_0_4_buf[0],(ap_uint<512> *)u,(264196 * p + 514 * n + 514 + 1) * 4,sizeof(float ) * ((unsigned long )512),512L);
+      
+#pragma  HLS array_partition  variable=u_0_5_buf cyclic factor = 16 dim=1
+      memcpy_wide_bus_read_float_512(&u_0_5_buf[0],(ap_uint<512> *)u,(264196 * p + 514 * n - 264196 + 1) * 4,sizeof(float ) * ((unsigned long )512),512L);
+      
+#pragma  HLS array_partition  variable=u_0_6_buf cyclic factor = 16 dim=1
+      memcpy_wide_bus_read_float_512(&u_0_6_buf[0],(ap_uint<512> *)u,(264196 * p + 514 * n + 264196 + 1) * 4,sizeof(float ) * ((unsigned long )512),512L);
+      for (m = 1; m < 512 + 1; m++) {
+        
+#pragma ACCEL pipeline
+        float u_center = u_0_0_buf[m - 1];
+        float f_center = f_0_0_buf[m - 1];
+        float r;
+        r = u_center * f_center / sigma2;
+        r = r * (2.38944f + r * (0.950037f + r)) / (4.65314f + r * (2.57541f + r * (1.48937f + r)));
+        float u_1 = u_0_1_buf[m - 1];
+        float u_2 = u_0_2_buf[m - 1];
+        float u_3 = u_0_3_buf[m - 1];
+        float u_4 = u_0_4_buf[m - 1];
+        float u_5 = u_0_5_buf[m - 1];
+        float u_6 = u_0_6_buf[m - 1];
+        float g_1 = g_0_0_buf[m - 1];
+        float g_2 = g_0_1_buf[m - 1];
+        float g_3 = g_0_2_buf[m - 1];
+        float g_4 = g_0_3_buf[m - 1];
+        float g_5 = g_0_4_buf[m - 1];
+        float g_6 = g_0_5_buf[m - 1];
+        u_out_0_0_buf[m - 1] = (u_center + DT * (u_1 * g_1 + u_2 * g_2 + u_3 * g_3 + u_4 * g_4 + u_5 * g_5 + u_6 * g_6 + gamma1 * f_center * r)) / (1.0f + DT * (g_1 + g_2 + g_3 + g_4 + g_5 + g_6 + gamma1));
+      }
+      
+#pragma  HLS array_partition  variable=u_out_0_0_buf cyclic factor = 16 dim=1
+      memcpy_wide_bus_write_float_512((ap_uint<512> *)u_out,&u_out_0_0_buf[0],4 * (264196 * p + 514 * n + 1),sizeof(float ) * ((unsigned long )512),512L);
+    }
+  }
+}

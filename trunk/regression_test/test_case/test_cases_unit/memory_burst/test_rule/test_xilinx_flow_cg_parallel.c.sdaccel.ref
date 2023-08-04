@@ -1,0 +1,47 @@
+#include <string.h> 
+#include "cmost.h"
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void top(int a[100],int b[10])
+{
+  int b_buf_0[10][10];
+  int a_buf_0[10][10];
+  int i;
+{
+    int i;
+    for (i = 0; i < 10; ++i) {
+      
+#pragma HLS UNROLL
+      memcpy((void *)b_buf_0[i - 0LL],(const void *)(&b[0]),sizeof(int ) * 10);
+    }
+  }
+  for (i = 0; i < 10; ++i) {
+    
+#pragma ACCEL parallel
+    for (int j = 0; j < 10; ++j) {
+      a_buf_0[i - 0LL][j] = b_buf_0[i - 0LL][j];
+    }
+  }
+{
+    memcpy((void *)(&a[0]),(const void *)a_buf_0[0],sizeof(int ) * 100);
+  }
+  return ;
+}
+#pragma ACCEL kernel
+
+void top2(int a[1000000],int b[10])
+{
+  int i;
+  int j;
+  for (i = 0; i < 100000; ++i) {
+    int a_buf_0[10];
+    
+#pragma ACCEL parallel
+    for (j = 0; j < 10; ++j) {
+      a_buf_0[j] = b[j];
+    }
+    memcpy((void *)(&a[i * 10]),(const void *)(&a_buf_0[0]),sizeof(int ) * 10);
+  }
+  return ;
+}

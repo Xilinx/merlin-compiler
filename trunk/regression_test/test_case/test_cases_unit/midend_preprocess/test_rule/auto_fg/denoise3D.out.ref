@@ -1,0 +1,141 @@
+#include <math.h>
+#define IMG_P 62 
+#define IMG_N 62 
+#define IMG_M 62 
+
+void initial(float u[64][64][64])
+{
+  int p;
+  int n;
+  int m;
+  for (p = 0; p < 62 + 2; p++) {
+    for (n = 0; n < 62 + 2; n++) {
+      for (m = 0; m < 62 + 2; m++) {
+        
+#pragma ACCEL PIPELINE AUTO
+        u[p][n][m] = (p + n + m);
+      }
+    }
+  }
+}
+
+void calculate(float u[64][64][64],float g[64][64][64],float f[64][64][64],float u_out[64][64][64])
+{
+  float sigma = 0.05f;
+  float DT = 5.0f;
+  float lambda = 0.065f;
+  float EPSILON = 5e-5;
+  float sigma2 = sigma * sigma;
+  float gamma1 = lambda / sigma2;
+  int p;
+  int n;
+  int m;
+  float u_1;
+  float u_2;
+  float u_3;
+  float u_4;
+  float u_5;
+  float u_6;
+  float u_7;
+  float r;
+  float g_1;
+  float g_2;
+  float g_3;
+  float g_4;
+  float g_5;
+  float g_6;
+  float g_7;
+  register short lbv;
+  register short ubv;
+  register short lb;
+  register short ub;
+  register short lb1;
+  register short ub1;
+  register short lb2;
+  register short ub2;
+  register short c1;
+  register short c2;
+  register short c3;
+  register short c4;
+  register short c5;
+  register short c6;
+  for (p = 1; p < 62 + 1; p++) {
+    for (n = 1; n < 62 + 1; n++) {
+      for (m = 1; m < 62 + 1; m++) {
+        
+#pragma ACCEL PIPELINE AUTO
+        u_1 = u[p][n][m];
+        u_2 = u[p][n][m - 1];
+        u_3 = u[p][n][m + 1];
+        u_4 = u[p][n - 1][m];
+        u_5 = u[p][n + 1][m];
+        u_6 = u[p - 1][n][m];
+        u_7 = u[p + 1][n][m];
+        g_2 = g[p][n][m - 1];
+        g_3 = g[p][n][m + 1];
+        g_4 = g[p][n - 1][m];
+        g_5 = g[p][n + 1][m];
+        g_6 = g[p - 1][n][m];
+        g_7 = g[p + 1][n][m];
+        r = u_1 * f[p][n][m] / sigma2;
+        r = r * (2.38944f + r * (0.950037f + r)) / (4.65314f + r * (2.57541f + r * (1.48937f + r)));
+        u_out[p][n][m] = (u_1 + DT * (u_2 * g_2 + u_3 * g_3 + u_4 * g_4 + u_5 * g_5 + u_6 * g_6 + u_7 * g_7 + gamma1 * f[p][n][m] * r)) / (1.0f + DT * (g_2 + g_3 + g_4 + g_5 + g_6 + g_7 + gamma1));
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+/*float f[64][64][64],float u_out[64][64][64],int IMG_P,int IMG_N,int IMG_M*/
+
+void kernel_denoise()
+{
+  float u_out[66][66][66];
+/* computation */
+  float sigma = 0.05f;
+  float DT = 5.0f;
+  float lambda = 0.065f;
+  float EPSILON = 5e-5;
+  float sigma2 = sigma * sigma;
+  float gamma1 = lambda / sigma2;
+  int p;
+  int n;
+  int m;
+//float u[p][n][m];
+  float u_1;
+  float u_2;
+  float u_3;
+  float u_4;
+  float u_5;
+  float u_6;
+  float u_7;
+  float r;
+  float g_1;
+  float g_2;
+  float g_3;
+  float g_4;
+  float g_5;
+  float g_6;
+  float g_7;
+  float u[64][64][64];
+  float g[64][64][64];
+  float f[64][64][64];
+  int q = 0;
+  initial(u);
+  for (p = 1; p < 62 + 1; p++) {
+    for (n = 1; n < 62 + 1; n++) {
+      for (m = 1; m < 62 + 1; m++) {
+        
+#pragma ACCEL PIPELINE AUTO
+        u_1 = u[p][n][m];
+        u_2 = u[p][n][m - 1];
+        u_3 = u[p][n][m + 1];
+        u_4 = u[p][n - 1][m];
+        u_5 = u[p][n + 1][m];
+        u_6 = u[p - 1][n][m];
+        u_7 = u[p + 1][n][m];
+        g[p][n][m] = 1.0f / sqrtf(EPSILON + (u_1 - u_2) * (u_1 - u_2) + (u_1 - u_3) * (u_1 - u_3) + (u_1 - u_4) * (u_1 - u_4) + (u_1 - u_5) * (u_1 - u_5) + (u_1 - u_6) * (u_1 - u_6) + (u_1 - u_7) * (u_1 - u_7));
+      }
+    }
+  }
+  calculate(u,g,f,u_out);
+}

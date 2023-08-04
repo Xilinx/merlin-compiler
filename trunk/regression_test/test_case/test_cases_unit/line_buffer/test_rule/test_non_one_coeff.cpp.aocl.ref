@@ -1,0 +1,81 @@
+#define HS 256
+#define WS 1024
+#define FW 5
+#define FH 2
+#pragma ACCEL kernel
+
+void conv1d(float in[256][1024],float filter[2][5],float out[255][1020])
+{
+  
+#pragma ACCEL interface VARIABLE=in BURST_OFF
+  float LineBuffer_in0[1024];
+  float slide_wind_0[2][5];
+  for (int i = -1L; i < 256 - 2 + 1; i++) 
+    for (int j = -4L; j < 1024 - 5 + 1; j++) {{
+        int i_2;
+        int i_1;
+        float tmp_wind_0[2];
+        int j_0;
+        int i_0;
+        for (i_0 = 0L; i_0 <= 1L; ++i_0) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          for (j_0 = 1L; j_0 <= 4L; ++j_0) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            slide_wind_0[i_0][j_0 + -1] = slide_wind_0[i_0][j_0];
+          }
+        }
+        for (i_1 = 0; i_1 <= 1L; ++i_1) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          if (i_1 == 0L) {
+            tmp_wind_0[i_1] = LineBuffer_in0[j - 0L + 4L];
+          }
+        }
+        tmp_wind_0[1UL] = in[i + 0L + 1L][j + 0L + 4L];
+        for (i_2 = 0; i_2 <= 1L; ++i_2) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0[i_2][4L] = tmp_wind_0[i_2];
+        }
+{
+          int i_3;
+          float tmp_in;
+          for (i_3 = 0; i_3 <= 0UL; ++i_3) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            tmp_in = tmp_wind_0[i_3 + 1];
+            if (i_3 == 0L) {
+              LineBuffer_in0[j - 0L + 4L] = tmp_in;
+            }
+          }
+        }
+      }
+      if (i >= 0L && i <= 254L && j >= 0L && j <= 1019L) {
+        float tmp = 0.0f;
+        for (int p = 0; p < 2 / 2; p++) 
+          for (int q = 0; q < 5; q++) 
+            tmp += slide_wind_0[p * 2L][q] * filter[2 * p][q] + slide_wind_0[p * 2L + 1L][q] * filter[2 * p + 1][q];
+//#pragma ACCEL parallel
+        out[i][j] = tmp;
+      }
+    }
+//#pragma ACCEL parallel
+}
+#pragma ACCEL kernel
+
+void func_top_0(int *c)
+{
+  
+#pragma ACCEL INTERFACE VARIABLE=c DEPTH=1000
+  int sum = 0;
+  int k;
+  int i;
+  int j;
+  for (i = 0; i < 50; i++) {
+    for (j = 0; j < 100; j++) {
+      sum += c[i] + c[2 * i * 100 + j];
+    }
+  }
+}

@@ -1,0 +1,273 @@
+#include <string.h> 
+#include "config.h"
+#include <string.h>
+#pragma ACCEL kernel
+
+void CONV(float *Cout,float *Cin,float *weight,float *bias)
+{
+  int dummy_token_5;
+// Token comes from node 5 and 2 for sync level 2
+  int token_5;
+  int dummy_token_4;
+// Token comes from node 4 and 2 for sync level 2
+  int token_4;
+  int dummy_token_3;
+// Token comes from node 3 and 2 for sync level 2
+  int token_3;
+  int dummy_token_2;
+// Token comes from node 2 and 5 for sync level 2
+  int token_2;
+  int dummy_token_1;
+// Token comes from node 2 and 4 for sync level 2
+  int token_1;
+  int dummy_token_0;
+// Token comes from node 2 and 3 for sync level 2
+  int token_0;
+  float Cout_buf_0_0_rn_rf3[224][224][4];
+  float Cin_buf_0_0_rf2[226][226][4];
+  float weight_buf_0_0_rf1[8][8][3][3][4][4];
+  float bias_buf_0_rf0[8][4];
+  float Cout_buf_0_0_tmp;
+  float Cout_buf_0_0_rn[224][224][4];
+  int _memcpy_i4_2;
+  int _memcpy_i4_1;
+  int _memcpy_i4_0;
+  int _memcpy_i3_2;
+  int _memcpy_i3_1;
+  int _memcpy_i3_0;
+  int _memcpy_i2_2;
+  int _memcpy_i2_1;
+  int _memcpy_i2_0;
+  int _memcpy_i1_5;
+  int _memcpy_i1_4;
+  int _memcpy_i1_3;
+  int _memcpy_i1_2;
+  int _memcpy_i1_1;
+  int _memcpy_i1_0;
+  int _memcpy_i0_1;
+  int _memcpy_i0_0;
+  float bias_buf_0[8][4];
+  float weight_buf_0_0[8][8][3][3][4][4];
+  float Cout_buf_tmp_0_0[4];
+  float Cin_tmp_0_0[226][226][4];
+  float Cout_buf_0_0[224][224][4];
+  float Cin_buf_0_0[226][226][4];
+  for (_memcpy_i0_1 = 0; _memcpy_i0_1 < 8; ++_memcpy_i0_1) {
+    for (_memcpy_i0_0 = 0; _memcpy_i0_0 < 4; ++_memcpy_i0_0) {
+// Parallel pragma comes from SgInitializedName:bias_buf_0
+      
+#pragma ACCEL parallel
+      bias_buf_0[_memcpy_i0_1][_memcpy_i0_0] = bias[0 + ((0 * 8 + _memcpy_i0_1) * 4 + _memcpy_i0_0)];
+    }
+  }
+  for (_memcpy_i1_5 = 0; _memcpy_i1_5 < 8; ++_memcpy_i1_5) {
+    for (_memcpy_i1_4 = 0; _memcpy_i1_4 < 8; ++_memcpy_i1_4) {
+      for (_memcpy_i1_3 = 0; _memcpy_i1_3 < 3; ++_memcpy_i1_3) {
+        for (_memcpy_i1_2 = 0; _memcpy_i1_2 < 3; ++_memcpy_i1_2) {
+          for (_memcpy_i1_1 = 0; _memcpy_i1_1 < 4; ++_memcpy_i1_1) {
+// Parallel pragma comes from SgInitializedName:weight_buf_0_0
+            
+#pragma ACCEL parallel
+            for (_memcpy_i1_0 = 0; _memcpy_i1_0 < 4; ++_memcpy_i1_0) {
+// Parallel pragma comes from SgInitializedName:weight_buf_0_0
+              
+#pragma ACCEL parallel
+              weight_buf_0_0[_memcpy_i1_5][_memcpy_i1_4][_memcpy_i1_3][_memcpy_i1_2][_memcpy_i1_1][_memcpy_i1_0] = weight[0 + ((((((0 * 8 + _memcpy_i1_5) * 8 + _memcpy_i1_4) * 3 + _memcpy_i1_3) * 3 + _memcpy_i1_2) * 4 + _memcpy_i1_1) * 4 + _memcpy_i1_0)];
+            }
+          }
+        }
+      }
+    }
+  }
+  for (int i0 = 0; i0 < 32 / 4; i0++) {
+    for (_memcpy_i2_2 = 0; _memcpy_i2_2 < 224; ++_memcpy_i2_2) {
+      for (_memcpy_i2_1 = 0; _memcpy_i2_1 < 224; ++_memcpy_i2_1) {
+        for (_memcpy_i2_0 = 0; _memcpy_i2_0 < 4; ++_memcpy_i2_0) {
+// Token gen: node 3 and 2 for sync level 2(backward)
+          if (_memcpy_i2_0 == 0 && _memcpy_i2_1 == 0 && _memcpy_i2_2 == 0 && i0 != 0) {
+            dummy_token_3 = token_3;
+            
+#pragma ACCEL mem_fence
+          }
+// Token gen: node 4 and 2 for sync level 2(backward)
+          if (_memcpy_i2_0 == 0 && _memcpy_i2_1 == 0 && _memcpy_i2_2 == 0 && i0 != 0) {
+            dummy_token_4 = token_4;
+            
+#pragma ACCEL mem_fence
+          }
+// Token gen: node 5 and 2 for sync level 2(backward)
+          if (_memcpy_i2_0 == 0 && _memcpy_i2_1 == 0 && _memcpy_i2_2 == 0 && i0 != 0) {
+            dummy_token_5 = token_5;
+            
+#pragma ACCEL mem_fence
+          }
+          Cout_buf_0_0[_memcpy_i2_2][_memcpy_i2_1][_memcpy_i2_0] = Cout[i0 * 200704 + (((0 * 224 + _memcpy_i2_2) * 224 + _memcpy_i2_1) * 4 + _memcpy_i2_0)];
+// Token gen: node 2 and 5 for sync level 2(forward)
+          if (_memcpy_i2_0 == 3 && _memcpy_i2_1 == 223 && _memcpy_i2_2 == 223) {
+            
+#pragma ACCEL mem_fence
+            token_2 = 1;
+          }
+// Token gen: node 2 and 4 for sync level 2(forward)
+          if (_memcpy_i2_0 == 3 && _memcpy_i2_1 == 223 && _memcpy_i2_2 == 223) {
+            
+#pragma ACCEL mem_fence
+            token_1 = 1;
+          }
+// Token gen: node 2 and 3 for sync level 2(forward)
+          if (_memcpy_i2_0 == 3 && _memcpy_i2_1 == 223 && _memcpy_i2_2 == 223) {
+            
+#pragma ACCEL mem_fence
+            token_0 = 1;
+          }
+        }
+      }
+    }
+    for (int j0 = 0; j0 < 32 / 4; j0++) {
+      for (_memcpy_i3_2 = 0; _memcpy_i3_2 < 226; ++_memcpy_i3_2) {
+        for (_memcpy_i3_1 = 0; _memcpy_i3_1 < 226; ++_memcpy_i3_1) {
+// Token gen: node 2 and 3 for sync level 2(forward)
+          if (_memcpy_i3_1 == 0 && _memcpy_i3_2 == 0 && j0 == 0) {
+            dummy_token_0 = token_0;
+            
+#pragma ACCEL mem_fence
+          }
+          for (_memcpy_i3_0 = 0; _memcpy_i3_0 < 4; ++_memcpy_i3_0) {
+// Parallel pragma comes from SgInitializedName:Cin_buf_0_0
+            
+#pragma ACCEL parallel
+            Cin_buf_0_0[_memcpy_i3_2][_memcpy_i3_1][_memcpy_i3_0] = Cin[j0 * 204304 + (((0 * 226 + _memcpy_i3_2) * 226 + _memcpy_i3_1) * 4 + _memcpy_i3_0)];
+          }
+// Token gen: node 3 and 2 for sync level 2(backward)
+          if (_memcpy_i3_1 == 225 && _memcpy_i3_2 == 225 && j0 == 7 && i0 != 7) {
+            
+#pragma ACCEL mem_fence
+            token_3 = 1;
+          }
+        }
+      }
+      for (int p = 0; p < 3; p++) {
+        for (int q = 0; q < 3; q++) {
+          for (int h = 0; h < 226; h++) {
+            for (int w = 0; w < 226; w++) 
+// Original: #pragma ACCEL pipeline flatten
+{
+// Token gen: node 2 and 4 for sync level 2(forward)
+              if (w == 0 && h == 0 && q == 0 && p == 0 && j0 == 0) {
+                dummy_token_1 = token_1;
+                
+#pragma ACCEL mem_fence
+              }
+              if (p == 0 && q == 0) {
+                for (int ii = 0; ii < 4; ++ii) {
+                  
+#pragma ACCEL parallel
+                  Cin_buf_0_0_rf2[h][w][ii] = Cin_buf_0_0[h][w][ii];
+                }
+              }
+              if (h == 2 && w == 2) {
+                for (int ii = 0; ii < 4; ii++) {
+                  
+#pragma ACCEL parallel
+                  for (int jj = 0; jj < 4; jj++) {
+                    
+#pragma ACCEL parallel
+                    weight_buf_0_0_rf1[i0][j0][p][q][jj][ii] = weight_buf_0_0[i0][j0][p][q][jj][ii];
+                  }
+                }
+              }
+              if (j0 == 0 && p == 0 && q == 0 && h == 2 && w == 2) {
+                for (int ii = 0; ii < 4; ii++) {
+                  
+#pragma ACCEL parallel
+                  bias_buf_0_rf0[i0][ii] = bias_buf_0[i0][ii];
+                }
+              }
+              
+#pragma ACCEL PIPELINE II=1
+              if (p == 0 && q == 0) {
+                for (int ii = 0; ii < 4; ++ii) {
+                  
+#pragma ACCEL PARALLEL COMPLETE
+                  Cin_tmp_0_0[h][w][ii] = Cin_buf_0_0_rf2[h][w][ii];
+                }
+              }
+              if (h >= 3 - 1 && w >= 3 - 1) {
+                for (int ii = 0; ii < 4; ii++) {
+                  
+#pragma ACCEL PARALLEL COMPLETE
+                  if (p == 0 && q == 0 && j0 == 0) {
+                    Cout_buf_tmp_0_0[ii] = bias_buf_0_rf0[i0][ii];
+                  }
+                   else {
+                    Cout_buf_tmp_0_0[ii] = Cout_buf_0_0[- 2 + h][- 2 + w][ii];
+                  }
+// Cout[(i0 * TILE + ii) * IMROW * IMROW + h * IMROW +
+// w];
+                }
+                for (int jj = 0; jj < 4; jj++) {
+                  
+#pragma ACCEL PARALLEL COMPLETE
+                  for (int ii = 0; ii < 4; ii++) {
+                    
+#pragma ACCEL PARALLEL COMPLETE
+                    Cout_buf_tmp_0_0[ii] += weight_buf_0_0_rf1[i0][j0][p][q][jj][ii] * Cin_tmp_0_0[h + p - 3 + 1][w + q - 3 + 1][jj];
+// weight[(i0 * TILE + ii) * NUM * KERNEL * KERNEL +
+//       (j0 * TILE + jj) * KERNEL * KERNEL + p * KERNEL
+//       +
+//       q] *
+// Cin[(j0 * TILE + jj) * INIMROW * INIMROW +
+//    (h + p) * INIMROW + w + q];
+                  }
+                }
+                for (int ii = 0; ii < 4; ii++) {
+                  
+#pragma ACCEL PARALLEL COMPLETE
+// Cout[(i0 * TILE + ii) * IMROW * IMROW + h * IMROW + w] =
+                  Cout_buf_0_0_tmp = Cout_buf_tmp_0_0[ii];
+                  Cout_buf_0_0[- 2 + h][- 2 + w][ii] = Cout_buf_0_0_tmp;
+                  Cout_buf_0_0_rn_rf3[- 2 + h][- 2 + w][ii] = Cout_buf_0_0_tmp;
+                }
+                if (j0 == 7 && p == 2 && q == 2) {
+                  for (int ii = 0; ii < 4; ii++) {
+                    
+#pragma ACCEL parallel
+                    Cout_buf_0_0_rn[- 2 + h][- 2 + w][ii] = Cout_buf_0_0_rn_rf3[- 2 + h][- 2 + w][ii];
+                  }
+                }
+              }
+// Token gen: node 4 and 2 for sync level 2(backward)
+              if (w == 225 && h == 225 && q == 2 && p == 2 && j0 == 7 && i0 != 7) {
+                
+#pragma ACCEL mem_fence
+                token_4 = 1;
+              }
+            }
+          }
+        }
+      }
+    }
+    for (_memcpy_i4_2 = 0; _memcpy_i4_2 < 224; ++_memcpy_i4_2) {
+      for (_memcpy_i4_1 = 0; _memcpy_i4_1 < 224; ++_memcpy_i4_1) {
+// Token gen: node 2 and 5 for sync level 2(forward)
+        if (_memcpy_i4_1 == 0 && _memcpy_i4_2 == 0) {
+          dummy_token_2 = token_2;
+          
+#pragma ACCEL mem_fence
+        }
+        for (_memcpy_i4_0 = 0; _memcpy_i4_0 < 4; ++_memcpy_i4_0) {
+// Parallel pragma comes from SgInitializedName:Cout_buf_0_0_rn
+          
+#pragma ACCEL parallel
+          Cout[i0 * 200704 + (((0 * 224 + _memcpy_i4_2) * 224 + _memcpy_i4_1) * 4 + _memcpy_i4_0)] = Cout_buf_0_0_rn[_memcpy_i4_2][_memcpy_i4_1][_memcpy_i4_0];
+        }
+// Token gen: node 5 and 2 for sync level 2(backward)
+        if (_memcpy_i4_1 == 223 && _memcpy_i4_2 == 223 && i0 != 7) {
+          
+#pragma ACCEL mem_fence
+          token_5 = 1;
+        }
+      }
+    }
+  }
+}

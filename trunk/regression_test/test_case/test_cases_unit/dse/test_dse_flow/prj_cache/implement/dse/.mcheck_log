@@ -1,0 +1,28 @@
+aes.cpp:66:5: warning: unused label 'sub'
+    sub : for (i = 15; i>=0; i--) buf[i] = rj_sbox(buf[i]);
+    ^~~~~~
+aes.cpp:76:5: warning: unused label 'addkey'
+    addkey : for (i=15; i>=0;i--) buf[i] ^= key[i];
+    ^~~~~~~~~
+aes.cpp:85:5: warning: unused label 'cpkey'
+    cpkey : for (i=15;i>=0;i--)  buf[i] ^= (cpk[i] = key[i]), cpk[16+i] = key[16 + i];
+    ^~~~~~~~
+aes.cpp:106:5: warning: unused label 'mix'
+    mix : for (i = 0; i < 16; i += 4)
+    ^~~~~~
+aes.cpp:126:5: warning: unused label 'exp1'
+    exp1 : for(i = 4; i < 16; i += 4)  k[i] ^= k[i-4],   k[i+1] ^= k[i-3],
+    ^~~~~~~
+aes.cpp:133:5: warning: unused label 'exp2'
+    exp2 : for(i = 20; i < 32; i += 4) k[i] ^= k[i-4],   k[i+1] ^= k[i-3],
+    ^~~~~~~
+aes.cpp:148:5: warning: unused label 'ecb1'
+    ecb1 : for (i = 0; i < sizeof(ctx.key); i++){
+    ^~~~~~~
+aes.cpp:151:5: warning: unused label 'ecb2'
+    ecb2 : for (i = 8;i > 1; --i){
+    ^~~~~~~
+aes.cpp:157:5: warning: unused label 'ecb3'
+    ecb3 : for(i = 1, rcon = 1; i < 14; ++i)
+    ^~~~~~~
+9 warnings generated.

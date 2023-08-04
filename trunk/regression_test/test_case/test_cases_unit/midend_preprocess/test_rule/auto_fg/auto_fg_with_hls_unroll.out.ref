@@ -1,0 +1,22 @@
+#include<ap_int.h>
+// 1. loop structure
+// 2. function structure
+// 3. access pattern
+// 4. pragma modes
+#pragma ACCEL kernel
+
+void func_top_0()
+{
+  int a[100];
+  int b[100];
+  int i;
+  for (i = 0; i < 100; i++) {
+    
+#pragma ACCEL PIPELINE AUTO
+    for (int j = 0; j < 10; ++j) {
+      
+#pragma HLS unroll
+      a[i] = b[i];
+    }
+  }
+}

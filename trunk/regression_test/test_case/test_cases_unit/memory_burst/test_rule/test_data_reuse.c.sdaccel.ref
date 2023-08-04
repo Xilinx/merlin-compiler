@@ -1,0 +1,95 @@
+#include <string.h> 
+#include<assert.h>
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+  int a_buf[20][30];
+  int i;
+  int j;
+  int k;
+  for (i = 0; i < 10; ++i) {
+    for (k = 0; k < 20; ++k) {
+      for (j = 0; j < 30; ++j) {
+        a_buf[k][j] = 0;
+      }
+    }
+  }
+{
+    int k;
+    for (k = 0; k < 20; ++k) {
+      memcpy((void *)(&a[k * 10000]),(const void *)a_buf[k],sizeof(int ) * 30);
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void top2(int *a,int *b)
+{
+  int b_6_0_buf[1];
+  int b_buf[20][30];
+  int i;
+  int j;
+  int k;
+{
+    int k;
+    for (k = 0; k < 20; ++k) {
+      memcpy((void *)b_buf[k],(const void *)(&b[k * 10000]),sizeof(int ) * 30);
+    }
+  }
+{
+    memcpy((void *)(&b_6_0_buf[0]),(const void *)(&b[0]),sizeof(int ) * 1);
+  }
+  for (i = 0; i < 10; ++i) {
+    for (k = 0; k < 20; ++k) {
+      int a_buf[30];
+      for (j = 0; j < 30; ++j) {
+        a_buf[j] = b_buf[k][j] + 2;
+      }
+      memcpy((void *)(&a[k * 10000]),(const void *)(&a_buf[0]),sizeof(int ) * 30);
+    }
+    a[0] += b_6_0_buf[0];
+  }
+}
+#pragma ACCEL kernel
+
+void top3(int *a)
+{
+  int a_buf[18][27];
+  int i;
+  int j;
+  int k;
+  for (i = 1; i < 10; ++i) {
+    for (k = 2; k < 20; ++k) {
+      for (j = 3; j < 30; ++j) {
+        a_buf[k - 2][-3 + j] = 0;
+      }
+    }
+  }
+{
+    int k;
+    for (k = 2; k < 20; ++k) {
+      memcpy((void *)(&a[3 + k * 10000]),(const void *)a_buf[k - 2],sizeof(int ) * 27);
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void top4(int *a,int size)
+{
+  size < 20?((void )0) : __assert_fail("size < 20","test_data_reuse.c",45,__PRETTY_FUNCTION__);
+  size > 2?((void )0) : __assert_fail("size > 2","test_data_reuse.c",46,__PRETTY_FUNCTION__);
+  int i;
+  int j;
+  int k;
+  for (i = 1; i < 10; ++i) {
+    for (k = 2; k < size; ++k) {
+      int a_buf[27];
+      for (j = 3; j < 30; ++j) {
+        a_buf[-3 + j] = 0;
+      }
+      memcpy((void *)(&a[3 + k * 10000]),(const void *)(&a_buf[0]),sizeof(int ) * 27);
+    }
+  }
+}

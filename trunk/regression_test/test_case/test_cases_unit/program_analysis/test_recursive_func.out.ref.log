@@ -1,0 +1,12 @@
+Hello Program Analysis ... 
+1: (recursive)SgFunctionDeclaration:int func1(int a) {...}
+6: (normal)SgFunctionDeclaration:int func2_sub(int a) {...}
+10: (normal)SgFunctionDeclaration:int func2(int a) {...}
+16: (normal)SgFunctionDeclaration:int func3(int a) {...}
+18: (recursive)SgFunctionDeclaration:int func3_sub(int a) {...}
+24: (recursive)SgFunctionDeclaration:int func3(int a) {...}
+32: (normal)SgFunctionDeclaration:int func4_sub(int a) {...}
+36: (normal)SgFunctionDeclaration:int func4_1(int a) {...}
+40: (normal)SgFunctionDeclaration:int func4_2(int a) {...}
+44: (normal)SgFunctionDeclaration:int func4(int a) {...}
+

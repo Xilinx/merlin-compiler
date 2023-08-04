@@ -1,0 +1,79 @@
+#pragma ACCEL kernel
+
+void func_top_37_0(int N)
+{
+  int a[100][100];
+  int b[100][100];
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    
+#pragma unroll
+    for (j = 0; j < 100; j++) {
+      a[i % 50][j % 50] = b[i][j % N];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_37()
+{
+  int a[100][100];
+  int b[100][100];
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    
+#pragma unroll
+    for (j = 0; j < 100; j++) {
+      a[i][j % 100] = b[i][j];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_38()
+{
+  
+#pragma ACCEL attribute variable=a bankwidth=32
+  int a[100][100];
+  
+#pragma ACCEL attribute variable=b bankwidth=32
+  int b[100][100];
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    
+#pragma unroll 4
+    for (j = 0; j < 100; j++) {
+      a[i][j % 99] = b[i][(j + 1) % 100] + b[i][(j + 3) % 100];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_39(int x,int y,int z,int sum[1])
+{
+  
+#pragma ACCEL attribute variable=sub_force_x bankwidth=16
+  float sub_force_x[4] = {(0.0), (0.0), (0.0), (0.0)};
+  
+#pragma ACCEL attribute variable=sub_force_y bankwidth=16
+  float sub_force_y[4] = {(0.0), (0.0), (0.0), (0.0)};
+  
+#pragma ACCEL attribute variable=sub_force_z bankwidth=16
+  float sub_force_z[4] = {(0.0), (0.0), (0.0), (0.0)};
+  int j;
+  int j0;
+  for (j = 0; j < 25; j++) {
+    
+#pragma unroll
+    for (j0 = 0; j0 < 4; j0++) {
+      int jj = j * 4 + j0;
+      sub_force_x[jj % 4] += x;
+      sub_force_y[jj % 4] += y;
+      sub_force_z[jj % 4] += z;
+    }
+  }
+  sum[0] = (sub_force_x[0] + sub_force_y[0] + sub_force_z[0]);
+}

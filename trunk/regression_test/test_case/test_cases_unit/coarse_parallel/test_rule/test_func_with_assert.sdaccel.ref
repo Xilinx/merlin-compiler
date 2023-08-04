@@ -1,0 +1,78 @@
+#include <string.h> 
+#include <assert.h>
+#define FACTOR 100
+
+void func(int *a,int *b,int *c)
+{
+//int i;
+  for (int i0 = 0; i0 < 10; ++i0) {
+    for (int ii = 0; ii < 10; ++ii) {
+      
+#pragma ACCEL parallel
+      int i = i0 * 10 + ii;
+      c[i] = a[i] + b[i];
+    }
+  }
+}
+
+void top_L_0_2_para_sub(int c_buf_0[100],int b_buf_0[100],int a_buf_0[100],int j)
+// Original: #pragma ACCEL parallel
+{
+  
+#pragma HLS inline off
+  j < 100?(static_cast < void  >  (0)) : __assert_fail("j < 100","test_func_with_assert.cpp",(unsigned int )42,__PRETTY_FUNCTION__);
+  func(a_buf_0,b_buf_0,c_buf_0);
+}
+
+void top_L_0_2_para(int c_buf_0[100][100],int b_buf_0[100][100],int a_buf_0[100][100])
+{
+  
+#pragma HLS inline off
+  int j;
+  for (j = 0; j < 100; ++j) {
+    
+#pragma HLS unroll complete
+    top_L_0_2_para_sub(c_buf_0[j],b_buf_0[j],a_buf_0[j],j);
+  }
+}
+#pragma ACCEL kernel
+
+void top(int *a,int *b,int *c)
+{
+  for (int i = 0; i < 10000 / 100; ++i) {
+    int c_buf_0[100][100];
+    
+#pragma HLS array_partition variable=c_buf_0 dim=1 complete
+    int b_buf_0[100][100];
+    
+#pragma HLS array_partition variable=b_buf_0 dim=1 complete
+    int a_buf_0[100][100];
+    
+#pragma HLS array_partition variable=a_buf_0 dim=1 complete
+{
+      for (int j = 0; j < 100; ++j) {
+        
+#pragma HLS UNROLL
+        memcpy(a_buf_0[j],(const void *)(&a[i * 10000 + j * 100]),sizeof(int ) * 100);
+      }
+    }
+{
+      for (int j = 0; j < 100; ++j) {
+        
+#pragma HLS UNROLL
+        memcpy(b_buf_0[j],(const void *)(&b[i * 10000 + j * 100]),sizeof(int ) * 100);
+      }
+    }
+    top_L_0_2_para(c_buf_0,b_buf_0,a_buf_0);
+    for (int j = 0; j < 100; ++j) 
+// Original: #pragma ACCEL parallel
+{
+    }{
+      for (int j = 0; j < 100; ++j) {
+        
+#pragma HLS UNROLL
+        memcpy((void *)(&c[i * 10000 + j * 100]),c_buf_0[j],sizeof(int ) * 100);
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+<profile>
+
+<section name = "Vivado HLS Report for 'test xml report parse'" level="0">
+<item name = "Date">Wed Sep  4 05:44:52 2019
+</item>
+<item name = "Version">2019.1 (Build 2552052 on Fri May 24 15:28:33 MDT 2019)</item>
+<item name = "Project">aes256_encrypt_ecb_kernel</item>
+<item name = "Solution">solution</item>
+<item name = "Product family">virtexuplus</item>
+<item name = "Target device">xcu250-figd2104-2L-e</item>
+</section>
+

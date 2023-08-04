@@ -1,0 +1,132 @@
+#include<hls_stream.h>
+#include "cmost.h"
+extern int __merlin_include__GB_hls_stream_h_0;
+static hls::stream<float > __merlinconvolve_inFrame_r_ch[4];
+static hls::stream<float > __merlinconvolve_inFrame_g_ch[4];
+static hls::stream<float > __merlinconvolve_inFrame_b_ch[4];
+
+void __merlinconvolve_inFrame_r_streaming(float inFrame_r[2073600])
+{
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 518400L; ++merlin_it_0) {
+    
+#pragma ACCEL pipeline
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 4; ++merlin_it_1) {
+      
+#pragma ACCEL parallel
+      float merlin_tmp_2;
+      merlin_tmp_2 = inFrame_r[0 + merlin_it_0 * 4 + merlin_it_1];
+      __merlinconvolve_inFrame_r_ch[merlin_it_1] .  write (merlin_tmp_2);
+    }
+  }
+}
+
+void __merlinconvolve_inFrame_g_streaming(float inFrame_g[2073600])
+{
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 518400L; ++merlin_it_0) {
+    
+#pragma ACCEL pipeline
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 4; ++merlin_it_1) {
+      
+#pragma ACCEL parallel
+      float merlin_tmp_2;
+      merlin_tmp_2 = inFrame_g[0 + merlin_it_0 * 4 + merlin_it_1];
+      __merlinconvolve_inFrame_g_ch[merlin_it_1] .  write (merlin_tmp_2);
+    }
+  }
+}
+
+void __merlinconvolve_inFrame_b_streaming(float inFrame_b[2073600])
+{
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 518400L; ++merlin_it_0) {
+    
+#pragma ACCEL pipeline
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 4; ++merlin_it_1) {
+      
+#pragma ACCEL parallel
+      float merlin_tmp_2;
+      merlin_tmp_2 = inFrame_b[0 + merlin_it_0 * 4 + merlin_it_1];
+      __merlinconvolve_inFrame_b_ch[merlin_it_1] .  write (merlin_tmp_2);
+    }
+  }
+}
+
+void __merlinconvolve_computation(float inFrame_r[2073600],float inFrame_g[2073600],float inFrame_b[2073600],float *outFrame_r,float *outFrame_g,float *outFrame_b,const float *coef,int coef_size,int w,int h)
+{
+  
+#pragma HLS inline off
+  __merlin_access_range(coef,0,360UL);
+  __merlin_access_range(outFrame_b,0,2073599UL);
+  __merlin_access_range(outFrame_g,0,2073599UL);
+  __merlin_access_range(outFrame_r,0,2073599UL);
+  __merlin_access_range(inFrame_b,0,2073599);
+  __merlin_access_range(inFrame_g,0,2073599);
+  __merlin_access_range(inFrame_r,0,2073599);
+  coef_size = 19;
+  h = 2304;
+  w = 900;
+  for (int i = (int )(- 9L); ((long )i) < 2313L; i++) {
+    
+#pragma ACCEL PIPELINE
+    for (int j = (int )(- 9L); ((long )j) < 909L; j++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+{
+        if (((long )i) + - 9L + - 9L + 18L < 2304L && ((long )i) + - 9L + - 9L + 18L >= 0L && ((long )j) + - 9L + - 9L + 18L < 900L && ((long )j) + - 9L + - 9L + 18L >= 0L) {
+          __merlinconvolve_inFrame_r_ch[j % 4] .  read ();
+          __merlinconvolve_inFrame_g_ch[j % 4] .  read ();
+          __merlinconvolve_inFrame_b_ch[j % 4] .  read ();
+        }
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void convolve(float inFrame_r[2073600],float inFrame_g[2073600],float inFrame_b[2073600],float *outFrame_r,float *outFrame_g,float *outFrame_b,const float *coef,int coef_size,int w,int h)
+{
+  __merlin_access_range(coef,0,360UL);
+  __merlin_access_range(outFrame_b,0,2073599UL);
+  __merlin_access_range(outFrame_g,0,2073599UL);
+  __merlin_access_range(outFrame_r,0,2073599UL);
+  __merlin_access_range(inFrame_b,0,2073599);
+  __merlin_access_range(inFrame_g,0,2073599);
+  __merlin_access_range(inFrame_r,0,2073599);
+  
+#pragma ACCEL INTERFACE DEPTH=2073600 MAX_DEPTH=2073600 VARIABLE=outFrame_b
+  
+#pragma ACCEL INTERFACE DEPTH=2073600 MAX_DEPTH=2073600 VARIABLE=outFrame_g
+  
+#pragma ACCEL INTERFACE DEPTH=2073600 MAX_DEPTH=2073600 VARIABLE=outFrame_r
+  
+#pragma ACCEL INTERFACE BURST_OFF DEPTH=2304,900 MAX_DEPTH=2304,900 VARIABLE=inFrame_b EXPLICIT_BUNDLE BUS_BITWIDTH=128
+  
+#pragma ACCEL INTERFACE BURST_OFF DEPTH=2304,900 MAX_DEPTH=2304,900 VARIABLE=inFrame_g EXPLICIT_BUNDLE BUS_BITWIDTH=128
+  
+#pragma ACCEL INTERFACE BURST_OFF DEPTH=2304,900 MAX_DEPTH=2304,900 VARIABLE=inFrame_r EXPLICIT_BUNDLE BUS_BITWIDTH=128
+  
+#pragma ACCEL interface variable=coef depth=361 max_depth=361
+  
+#pragma HLS dataflow
+  
+#pragma HLS stream variable=__merlinconvolve_inFrame_r_ch
+  __merlinconvolve_inFrame_r_streaming(inFrame_r);
+  
+#pragma HLS stream variable=__merlinconvolve_inFrame_g_ch
+  __merlinconvolve_inFrame_g_streaming(inFrame_g);
+  
+#pragma HLS stream variable=__merlinconvolve_inFrame_b_ch
+  __merlinconvolve_inFrame_b_streaming(inFrame_b);
+  __merlinconvolve_computation(0,0,0,outFrame_r,outFrame_g,outFrame_b,coef,coef_size,w,h);
+}

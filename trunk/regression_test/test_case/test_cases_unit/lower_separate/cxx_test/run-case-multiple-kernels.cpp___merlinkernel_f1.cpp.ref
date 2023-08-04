@@ -1,0 +1,17 @@
+#include "merlin_type_define.h"
+extern int __merlin_include__GB_merlin_type_define_h_0;
+
+static void gl_func_1()
+{
+}
+int gl_var1 = 168;
+static const int c = 0;
+#pragma ACCEL kernel
+
+void f1()
+{
+  gl_var1 += 1 + c;
+  struct HideDef *h;
+  struct LS *ls;
+  gl_func_1();
+}

@@ -1,0 +1,4 @@
+
+ERROR: [LWCPP-301] Const ref operator cast is not supported: const struct ::Foo{Foo(const struct Foo &);}& operator const Foo &() {...} (unsupported-01.cpp:51)
+
+WARNING: [LWCPP-201] kernel's type signature is not reference C-like or global-namespace types. Down stream simulation may have compilation problem: void g(struct ::Foo foo) {...} (unsupported-01.cpp:55)

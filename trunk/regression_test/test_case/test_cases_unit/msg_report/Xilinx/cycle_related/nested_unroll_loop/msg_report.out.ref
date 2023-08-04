@@ -1,0 +1,54 @@
+================================================================================
+Kernel : mykernel(nested_unroll_loop.cpp:4)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+orig            512      (nested_unroll_loop.cpp:4) memory burst and coalescing 
+a               512      (nested_unroll_loop.cpp:4) memory burst and coalescing 
+out             512      (nested_unroll_loop.cpp:4) memory burst and coalescing 
+len             32       (nested_unroll_loop.cpp:4) scalar
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++-------------------------------------------------------------+-----+-----+-----+------+------+------+------+-----------------------+
+|                          hierarchy                          | TC  | AC  | CPC | LUT  |  FF  | BRAM | DSP  |        comment        |
++-------------------------------------------------------------+-----+-----+-----+------+------+------+------+-----------------------+
+|mykernel (nested_unroll_loop.cpp:4)                          |     |  542|  542|  1.47|  0.66|  3.61|  0.00|kernel                 |
+|    auto memory burst read and coalescing for 'a'            |     |    -|  134|      |      |      |      |                       |
+|    auto memory burst read and coalescing for 'orig'         |     |    -|  134|      |      |      |      |                       |
+|    loop i (nested_unroll_loop.cpp:11)                       |  128|  129|  129|      |      |      |      |IL=3, fully pipelined  |
+|        tilied loop: loop i (nested_unroll_loop.cpp:11)      |   16|    -|    -|      |      |      |      |16x parallelized       |
+|            loop j (nested_unroll_loop.cpp:14)               |   16|    -|    -|      |      |      |      |16x parallelized       |
+|    auto memory burst write and coalescing for 'merlin_out'  |     |    -|  134|      |      |      |      |                       |
++-------------------------------------------------------------+-----+-----+-----+------+------+------+------+-----------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++----------------------------------------------------------------+--------+----------+
+|                              Name                              | Cycles | Activity |
++----------------------------------------------------------------+--------+----------+
+|              mykernel (nested_unroll_loop.cpp:4)               |  413   |  76.20%  |
+|          mykernel:loop i (nested_unroll_loop.cpp:11)           |  129   |  23.80%  |
+|          auto memory burst (nested_unroll_loop.cpp:4)          |   0    |  0.00%   |
+|          auto memory burst (nested_unroll_loop.cpp:4)          |   0    |  0.00%   |
+|          auto memory burst (nested_unroll_loop.cpp:4)          |   0    |  0.00%   |
+| mykernel:tilied loop tiled loop: i (nested_unroll_loop.cpp:11) |   0    |  0.00%   |
++----------------------------------------------------------------+--------+----------+
+
++-------------------------------------+------+------+------+------+
+|                Name                 | BRAM | DSP  |  FF  | LUT  |
++-------------------------------------+------+------+------+------+
+| mykernel (nested_unroll_loop.cpp:4) | 3.61 | 0.00 | 0.66 | 1.47 |
++-------------------------------------+------+------+------+------+
+
+
+

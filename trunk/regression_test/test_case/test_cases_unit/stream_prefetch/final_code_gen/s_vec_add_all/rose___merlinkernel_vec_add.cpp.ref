@@ -1,0 +1,285 @@
+#define get_compute_id(x) x
+extern int __merlin_include__GB__0;
+#pragma OPENCL EXTENSION cl_altera_channels : enable
+// Original: #pragma ACCEL array_partition type=channel variable=ch_s_0 dim=1 factor=4
+// Original: #pragma ACCEL array_partition type=channel variable=ch_c_2 dim=1 factor=4
+// Original: #pragma ACCEL array_partition type=channel variable=ch_b_1 dim=1 factor=4
+// Original: #pragma ACCEL array_partition type=channel variable=ch_a_0 dim=1 factor=4
+#include "merlin_stream.h" 
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static void __merlin_dummy__pragma_ACCEL_STREAM_CHANNEL_C_();
+#ifndef __defined_ch_s_0_p
+#define __defined_ch_s_0_p
+#pragma channel int ch_s_0_p[4] __attribute__((depth(32)));
+typedef int __merlin_channel_typedef;
+#include "channel_def.h"
+__merlin_channel_typedef ch_s_0_p[4];
+#endif
+#include <string.h> 
+#include "merlin_stream.h" 
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static void __merlin_dummy__pragma_ACCEL_STREAM_CHANNEL_C_();
+#ifndef __defined_ch_c_2_p
+#define __defined_ch_c_2_p
+#pragma channel int ch_c_2_p[4] __attribute__((depth(32)));
+typedef int __merlin_channel_typedef;
+#include "channel_def.h"
+::__merlin_channel_typedef ch_c_2_p[4];
+#endif
+static void __merlin_dummy__pragma_ACCEL_STREAM_CHANNEL_C_();
+#ifndef __defined_ch_b_1_p
+#define __defined_ch_b_1_p
+#pragma channel int ch_b_1_p[4] __attribute__((depth(32)));
+typedef int __merlin_channel_typedef;
+#include "channel_def.h"
+::__merlin_channel_typedef ch_b_1_p[4];
+#endif
+static void __merlin_dummy__pragma_ACCEL_STREAM_CHANNEL_C_();
+#ifndef __defined_ch_a_0_p
+#define __defined_ch_a_0_p
+#pragma channel int ch_a_0_p[4] __attribute__((depth(32)));
+typedef int __merlin_channel_typedef;
+#include "channel_def.h"
+::__merlin_channel_typedef ch_a_0_p[4];
+#endif
+#include "cmost.h"
+#include <math.h>
+#include "merlin_type_define.h"
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static void __merlin_dummy_kernel_pragma();
+// Original: #pragma ACCEL kernel
+
+__kernel void msm_port_a_vec_add_0(__global int * restrict a)
+{
+  int _memcpy_i1_1;
+  int _memcpy_i1_0;
+  int a_buf_0[256][4];
+  
+#pragma ivdep array(a)
+  
+#pragma ivdep array(a_buf_0)
+  
+#pragma unroll 4
+  for (_memcpy_i1_1 = 0; _memcpy_i1_1 < 256; ++_memcpy_i1_1) {
+    
+#pragma HLS COALESCING_WIDTH=512
+    
+#pragma ivdep array(a)
+    
+#pragma ivdep array(a_buf_0)
+    
+#pragma unroll
+    for (_memcpy_i1_0 = 0; _memcpy_i1_0 < 4; ++_memcpy_i1_0) {
+      a_buf_0[_memcpy_i1_1][_memcpy_i1_0] = a[0 + ((0 * 256 + _memcpy_i1_1) * 4 + _memcpy_i1_0)];
+    }
+  }
+  int _i_sub;
+// Original pramga:  ACCEL PARALLEL FACTOR=4 
+  
+#pragma ivdep array(a_buf_0)
+  
+#pragma unroll 1
+  for (int i = 0; i < 256; i++) 
+// Original: #pragma ACCEL parallel factor=4
+// Original: #pragma ACCEL PARALLEL FACTOR=4
+{
+    
+#pragma ivdep array(a_buf_0)
+    
+#pragma unroll
+    for (_i_sub = 0; _i_sub < 4; ++_i_sub) 
+// Original: #pragma ACCEL parallel factor=4
+// Original: #pragma ACCEL PARALLEL FACTOR=4
+{
+      int a_sp_tmp_0;
+      a_sp_tmp_0 = a_buf_0[i][_i_sub];
+      write_channel_altera_ch_a_0_p__merlinalterafuncend(ch_a_0_p[_i_sub],a_sp_tmp_0);
+    }
+  }
+}
+
+__kernel void msm_port_b_vec_add_0(__global int * restrict b)
+{
+  int _memcpy_i2_1;
+  int _memcpy_i2_0;
+  int b_buf_0[256][4];
+  
+#pragma ivdep array(b)
+  
+#pragma ivdep array(b_buf_0)
+  
+#pragma unroll 4
+  for (_memcpy_i2_1 = 0; _memcpy_i2_1 < 256; ++_memcpy_i2_1) {
+    
+#pragma HLS COALESCING_WIDTH=512
+    
+#pragma ivdep array(b)
+    
+#pragma ivdep array(b_buf_0)
+    
+#pragma unroll
+    for (_memcpy_i2_0 = 0; _memcpy_i2_0 < 4; ++_memcpy_i2_0) {
+      b_buf_0[_memcpy_i2_1][_memcpy_i2_0] = b[0 + ((0 * 256 + _memcpy_i2_1) * 4 + _memcpy_i2_0)];
+    }
+  }
+  int _i_sub;
+// Original pramga:  ACCEL PARALLEL FACTOR=4 
+  
+#pragma ivdep array(b_buf_0)
+  
+#pragma unroll 1
+  for (int i = 0; i < 256; i++) 
+// Original: #pragma ACCEL parallel factor=4
+// Original: #pragma ACCEL PARALLEL FACTOR=4
+{
+    
+#pragma ivdep array(b_buf_0)
+    
+#pragma unroll
+    for (_i_sub = 0; _i_sub < 4; ++_i_sub) 
+// Original: #pragma ACCEL parallel factor=4
+// Original: #pragma ACCEL PARALLEL FACTOR=4
+{
+      int b_sp_tmp_0;
+      b_sp_tmp_0 = b_buf_0[i][_i_sub];
+      write_channel_altera_ch_b_1_p__merlinalterafuncend(ch_b_1_p[_i_sub],b_sp_tmp_0);
+    }
+  }
+}
+
+__kernel void msm_port_c_vec_add_0(__global int * restrict c)
+{
+  int _memcpy_i0_1;
+  int _memcpy_i0_0;
+  int c_buf_0[256][4];
+  int _i_sub;
+// Original pramga:  ACCEL PARALLEL FACTOR=4 
+  
+#pragma ivdep array(c_buf_0)
+  
+#pragma unroll 1
+  for (int i = 0; i < 256; i++) 
+// Original: #pragma ACCEL parallel factor=4
+// Original: #pragma ACCEL PARALLEL FACTOR=4
+{
+    
+#pragma ivdep array(c_buf_0)
+    
+#pragma unroll
+    for (_i_sub = 0; _i_sub < 4; ++_i_sub) 
+// Original: #pragma ACCEL parallel factor=4
+// Original: #pragma ACCEL PARALLEL FACTOR=4
+{
+      int c_sp_tmp_0;
+      c_sp_tmp_0 = ((int )(read_channel_altera_ch_c_2_p__merlinalterafuncend(ch_c_2_p[_i_sub])));
+      c_buf_0[i][_i_sub] = c_sp_tmp_0;
+    }
+  }
+  
+#pragma ivdep array(c)
+  
+#pragma ivdep array(c_buf_0)
+  
+#pragma unroll 4
+  for (_memcpy_i0_1 = 0; _memcpy_i0_1 < 256; ++_memcpy_i0_1) {
+    
+#pragma HLS COALESCING_WIDTH=512
+    
+#pragma ivdep array(c)
+    
+#pragma ivdep array(c_buf_0)
+    
+#pragma unroll
+    for (_memcpy_i0_0 = 0; _memcpy_i0_0 < 4; ++_memcpy_i0_0) {
+      c[0 + ((0 * 256 + _memcpy_i0_1) * 4 + _memcpy_i0_0)] = c_buf_0[_memcpy_i0_1][_memcpy_i0_0];
+    }
+  }
+}
+void __merlin_dummy_msm_node_0();
+ __attribute__ (( autorun))
+ __attribute__ (( num_compute_units(4)))
+ __attribute__ (( max_global_work_dim(0)))
+
+__kernel void msm_node_0()
+{
+  int id_0 = get_compute_id(0);
+  while(1){
+    int s_sn_tmp_0;
+    int _s;
+    s_sn_tmp_0 = ((int )(read_channel_altera_ch_s_0_p__merlinalterafuncend(ch_s_0_p[id_0])));
+    _s = s_sn_tmp_0;
+    int c_sn_tmp_0;
+    int b_sn_tmp_0;
+    int a_sn_tmp_0;
+    a_sn_tmp_0 = ((int )(read_channel_altera_ch_a_0_p__merlinalterafuncend(ch_a_0_p[id_0])));
+    int a0 = a_sn_tmp_0;
+    b_sn_tmp_0 = ((int )(read_channel_altera_ch_b_1_p__merlinalterafuncend(ch_b_1_p[id_0])));
+    int b0 = b_sn_tmp_0;
+    int c0 = 0;
+    for (int j = 0; j < 1024 * 10; j++) {
+      c0 += ((int )(pow((double )(a0 * b0 + j),1.5))) % 7 + _s;
+    }
+    c_sn_tmp_0 = c0;
+    write_channel_altera_ch_c_2_p__merlinalterafuncend(ch_c_2_p[id_0],c_sn_tmp_0);
+  }
+}
+
+void msm_port_s_msm_node_0_0(int s,int i_sub)
+{
+  int i_sub_0;
+{
+    
+#pragma unroll
+    for (i_sub_0 = ((int )0); i_sub_0 <= ((int )3); ++i_sub_0) {
+      int s_sp_tmp_0;
+      int _s;
+      s_sp_tmp_0 = s;
+      write_channel_altera_ch_s_0_p__merlinalterafuncend(ch_s_0_p[i_sub_0],s_sp_tmp_0);
+      _s = s;
+      _s;
+    }
+  }
+}
+
+__kernel void vec_add(int s,__global int * restrict a,__global int * restrict b,__global int * restrict c)
+{
+  int _i_sub;
+  int _i_sub_1;
+  
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=1 NODE=vec_add VARIABLE=b
+  int _i_sub_3;
+  
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=1 NODE=vec_add VARIABLE=a
+  int i_sub;
+  
+#pragma ACCEL interface variable=a stream_prefetch=on max_depth=1024 depth=1024
+  
+#pragma ACCEL interface variable=b stream_prefetch=on max_depth=1024 depth=1024
+  
+#pragma ACCEL interface variable=c stream_prefetch=on max_depth=1024 depth=1024
+  
+#pragma ACCEL interface variable=s stream_prefetch=on
+// Original pramga:  ACCEL PARALLEL FACTOR=4 
+  
+#pragma unroll 1
+  for (int i = 0; i < 256; i++) 
+// Original: #pragma ACCEL parallel factor=4
+// Original: #pragma ACCEL PARALLEL FACTOR=4
+{
+    msm_port_s_msm_node_0_0(s,0);
+    
+#pragma ACCEL mem_fence autokernel=msm_node_0 parent=vec_add depth=4
+  }
+// Original pragma: ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=0 NODE=msm_node_0 VARIABLE=s
+// Original: #pragma ACCEL parallel factor=4
+// Original: #pragma ACCEL PARALLEL FACTOR=4
+// Original pragma: ACCEL STREAM_NODE 
+// Original pragma: ACCEL STREAM_NODE PARALLEL_FACTOR=4
+  int _i_sub_4;
+  int _i_sub_2;
+  
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=write DIM_NUM=1 NODE=vec_add VARIABLE=c
+  int _i_sub_0;
+}

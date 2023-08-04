@@ -1,0 +1,45 @@
+#include<ap_int.h>
+// 1. loop structure
+// 2. function structure
+// 3. access pattern
+// 4. pragma modes
+#pragma ACCEL kernel
+
+void func_top_2()
+{
+  int a[100][100];
+  int b[100][100];
+  int i;
+  int j;
+  for (i = 0; i < 2; i++) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    for (j = 0; j < 8; j++) 
+// Original: #pragma ACCEL parallel
+{
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[i][j] = b[i][j];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_2_1()
+{
+  int a[100][100];
+  int b[100][100];
+  int i;
+  int j;
+  for (i = 0; i < 8; i++) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    for (j = 0; j < 8; j++) 
+// Original: #pragma ACCEL parallel
+{
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[i][j] = b[i][j];
+    }
+  }
+}

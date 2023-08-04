@@ -1,0 +1,65 @@
+#include<string.h>
+#define FACTOR 100
+
+void func(int *a,int *b,int *c)
+{
+  for (int i = 0; i < 10000 / 100; ++i) {
+    c[i] = a[i] + b[i];
+  }
+}
+
+void top_L_0_para_sub(int b_buf[100],int c_buf[100],int j,int a_buf_dup[100])
+// Original: #pragma ACCEL parallel
+{
+  
+#pragma HLS inline off
+  func(a_buf_dup,b_buf,c_buf);
+}
+
+void top_L_0_para(int b_buf[100][100],int c_buf[100][100],int a_buf_dup[100][100])
+{
+  
+#pragma HLS inline off
+  int j;
+  for (j = 0; j < 100; ++j) {
+    
+#pragma HLS unroll complete
+    top_L_0_para_sub(b_buf[j],c_buf[j],j,a_buf_dup[j]);
+  }
+}
+#pragma ACCEL kernel
+
+void top(int *a,int *b,int *c)
+{
+  int a_buf[100];
+  memcpy(a_buf,a,sizeof(int ) * 10000 / 100);
+  int b_buf[100][100];
+  
+#pragma HLS array_partition variable=b_buf dim=1 complete
+  memcpy(b_buf,b,sizeof(int ) * 10000);
+  int c_buf[100][100];
+  
+#pragma HLS array_partition variable=c_buf dim=1 complete
+  int a_buf_dup[100][100];
+  
+#pragma HLS array_partition variable=a_buf_dup dim=1 complete
+{
+    long _i0;
+    long _i1;
+    for (_i1 = 0; _i1 <= 99UL; ++_i1) {
+      
+#pragma HLS pipeline
+      for (_i0 = 0; _i0 <= 99UL; ++_i0) {
+        
+#pragma HLS unroll
+        a_buf_dup[_i0][_i1] = a_buf[_i1];
+      }
+    }
+  }
+  top_L_0_para(b_buf,c_buf,a_buf_dup);
+  for (int j = 0; j < 100; ++j) 
+// Original: #pragma ACCEL parallel
+{
+  }
+  memcpy(c_buf,c,sizeof(int ) * 10000);
+}

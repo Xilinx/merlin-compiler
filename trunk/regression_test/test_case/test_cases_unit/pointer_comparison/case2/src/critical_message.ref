@@ -1,0 +1,28 @@
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'pdst !=((void *)0)' (vec_add_kernel.c:15).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'psrc > pdst' (vec_add_kernel.c:17).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'psrc < pdst' (vec_add_kernel.c:19).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'psrc <= pdst' (vec_add_kernel.c:21).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'psrc >= pdst' (vec_add_kernel.c:23).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'psrc == pdst' (vec_add_kernel.c:25).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'pdst' (vec_add_kernel.c:32).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'flag1 = pdst' (vec_add_kernel.c:37).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'pdst' (vec_add_kernel.c:37).
+
+ERROR: [SYNCHK-336] Pointer comparison detected '(_Bool )pdst' (vec_add_kernel.c:41).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'a' (vec_add_kernel.c:45).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'b' (vec_add_kernel.c:48).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'a' (vec_add_kernel.c:51).
+
+ERROR: [SYNCHK-336] Pointer comparison detected 'a' (vec_add_kernel.c:54).

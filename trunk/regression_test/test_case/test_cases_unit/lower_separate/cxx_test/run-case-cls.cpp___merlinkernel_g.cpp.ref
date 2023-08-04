@@ -1,0 +1,185 @@
+#include "merlin_type_define.h"
+extern int __merlin_include__GB_merlin_type_define_h_0;
+
+static void p_ZN3FooC2Ev_1(struct Foo *this_)
+{
+  this_ -> y = 168;
+  this_ -> x = 168;
+}
+
+static void p_ZN3FooC2Ei_1(struct Foo *this_,int val)
+{
+  this_ -> x = val;
+  this_ -> y = 168;
+}
+
+static void p_ZN6CommonC2Ev_1(struct Common *this_)
+{
+  this_ -> y = 168;
+  this_ -> x = 168;
+}
+
+static void p_ZN3BarC2Ev_1(struct Bar *this_)
+{
+  p_ZN3FooC2Ev_1(&this_ -> foo);
+  p_ZN6CommonC2Ev_1(&this_ -> common);
+  this_ -> x = 168;
+  struct Foo temp;
+  p_ZN3FooC2Ev_1(&temp);
+  this_ -> foo = (temp);
+  struct Common temp_0;
+  p_ZN6CommonC2Ev_1(&temp_0);
+  this_ -> common = (temp_0);
+}
+
+static struct Foo p_ZN3Bar1fEv_1(struct Bar *this_)
+{
+  struct Foo temp;
+  p_ZN3FooC2Ev_1(&temp);
+  return temp;
+}
+
+static struct Foo p_ZN3Bar1fEi_1(struct Bar *this_,int val)
+{
+  struct Foo temp;
+  p_ZN3FooC2Ei_1(&temp,val);
+  return temp;
+}
+
+static struct Foo p_ZN3Bar2f1Ev_1(struct Bar *this_)
+{
+  struct Foo temp;
+  p_ZN3FooC2Ei_1(&temp,168);
+  return temp;
+}
+
+static void p_ZN6CommonC2Ei_1(struct Common *this_,int val)
+{
+  this_ -> y = 168;
+  this_ -> x = val;
+}
+
+static struct Common p_ZN3Bar1cEv_1(struct Bar *this_)
+{
+  struct Common temp;
+  p_ZN6CommonC2Ev_1(&temp);
+  return temp;
+}
+
+static struct Common p_ZN3Bar1cEi_1(struct Bar *this_,int val)
+{
+  struct Common temp;
+  p_ZN6CommonC2Ei_1(&temp,val);
+  return temp;
+}
+
+static struct Common p_ZN3Bar2c1Ev_1(struct Bar *this_)
+{
+  struct Common temp;
+  p_ZN6CommonC2Ei_1(&temp,168);
+  return temp;
+}
+
+static void p_ZN3BarC2Ei_1(struct Bar *this_,int val)
+{
+  p_ZN3FooC2Ei_1(&this_ -> foo,val);
+  p_ZN6CommonC2Ev_1(&this_ -> common);
+  this_ -> x = 168;
+  struct Common temp;
+  p_ZN6CommonC2Ei_1(&temp,val);
+  this_ -> common = (temp);
+}
+
+static void p_ZN3BarC2E3Foo6Common_1(struct Bar *this_,struct Foo f,struct Common c)
+{
+  this_ -> foo = f;
+  p_ZN6CommonC2Ev_1(&this_ -> common);
+  this_ -> x = 168;
+  this_ -> common = c;
+}
+
+static int p_ZN3Bar7fstaticEv_1()
+{
+  return 168;
+}
+
+static int p_ZN3Bar8fstatic1Ev_1()
+{
+  return 168;
+}
+
+static void fff_1(struct Bar &bar1,struct Bar *bar2)
+{
+}
+
+static void p_ZN3INTC2Ev_1(struct INT *this_)
+{
+  this_ -> x = 168;
+}
+
+static int p_ZN3INTcviEv_1(struct INT *this_)
+{
+  return this_ -> x;
+}
+int _ZN3Foo1zE = 168;
+int _ZN6Common1zE = 168;
+#pragma ACCEL kernel
+
+void g()
+{
+  struct Foo foo1;
+  p_ZN3FooC2Ev_1(&foo1);
+  ;
+  struct Foo foo2;
+  p_ZN3FooC2Ei_1(&foo2,128);
+  ;
+  struct Bar temp;
+  p_ZN3BarC2Ev_1(&temp);
+  struct Foo foo3 = p_ZN3Bar1fEv_1(&(temp));
+  struct Bar temp_0;
+  p_ZN3BarC2Ev_1(&temp_0);
+  struct Foo foo4 = p_ZN3Bar1fEi_1(&(temp_0),128);
+  struct Bar temp_1;
+  p_ZN3BarC2Ev_1(&temp_1);
+  struct Foo foo5 = p_ZN3Bar2f1Ev_1(&(temp_1));
+  struct Common common1;
+  p_ZN6CommonC2Ev_1(&common1);
+  ;
+  struct Common common2;
+  p_ZN6CommonC2Ei_1(&common2,128);
+  ;
+  struct Bar temp_2;
+  p_ZN3BarC2Ev_1(&temp_2);
+  struct Common common3 = p_ZN3Bar1cEv_1(&(temp_2));
+  struct Bar temp_3;
+  p_ZN3BarC2Ev_1(&temp_3);
+  struct Common common4 = p_ZN3Bar1cEi_1(&(temp_3),128);
+  struct Bar temp_4;
+  p_ZN3BarC2Ev_1(&temp_4);
+  struct Common common5 = p_ZN3Bar2c1Ev_1(&(temp_4));
+  struct Bar bar1;
+  p_ZN3BarC2Ev_1(&bar1);
+  ;
+  struct Bar bar2;
+  p_ZN3BarC2Ei_1(&bar2,168);
+  ;
+  struct Bar bar3;
+  p_ZN3BarC2E3Foo6Common_1(&bar3,foo5,common5);
+  ;
+  p_ZN3Bar7fstaticEv_1();
+  p_ZN3Bar7fstaticEv_1();
+  p_ZN3Bar7fstaticEv_1();
+  p_ZN3Bar8fstatic1Ev_1();
+  p_ZN3Bar8fstatic1Ev_1();
+  p_ZN3Bar8fstatic1Ev_1();
+  int zz = _ZN3Foo1zE;
+  zz = _ZN6Common1zE;
+  fff_1(bar1,&bar2);
+  bool b;
+  b = ((bool )168);
+  b += 168;
+  zz = ((int )b);
+  struct INT temp_5;
+  p_ZN3INTC2Ev_1(&temp_5);
+  int x_from_INT = p_ZN3INTcviEv_1(&(temp_5));
+}

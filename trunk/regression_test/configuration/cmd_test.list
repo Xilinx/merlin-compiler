@@ -1,0 +1,14 @@
+betest_cl_a_attri	$MERLIN_COMPILER_HOME/regression_test/test_case/cmd_test/betest_cl_a_attri
+betest_cl_a_boun2	$MERLIN_COMPILER_HOME/regression_test/test_case/cmd_test/betest_cl_a_boun2
+betest_cl_x_attri	$MERLIN_COMPILER_HOME/regression_test/test_case/cmd_test/betest_cl_x_attri
+# comment this teporary for 2018.2/18.1
+# betest_cl_x	$MERLIN_COMPILER_HOME/regression_test/test_case/cmd_test/betest_cl_x
+betest_cl_a	$MERLIN_COMPILER_HOME/regression_test/test_case/cmd_test/betest_cl_a
+metest_boun	$MERLIN_COMPILER_HOME/regression_test/test_case/cmd_test/metest_boun
+metest_a	$MERLIN_COMPILER_HOME/regression_test/test_case/cmd_test/metest_a
+# comment this teporary for 2018.2/18.1
+# betest_x	$MERLIN_COMPILER_HOME/regression_test/test_case/cmd_test/betest_x
+betest_a	$MERLIN_COMPILER_HOME/regression_test/test_case/cmd_test/betest_a
+metest_x	$MERLIN_COMPILER_HOME/regression_test/test_case/cmd_test/metest_x
+betest_cl_a_boun	$MERLIN_COMPILER_HOME/regression_test/test_case/cmd_test/betest_cl_a_boun
+fetest	$MERLIN_COMPILER_HOME/regression_test/test_case/cmd_test/fetest

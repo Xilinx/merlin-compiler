@@ -1,0 +1,3 @@
+
+WARNING: [PROCS-224] Found multiple loops containing the accesses of an local array 'a_buf' (renaming_check.c:10).
+

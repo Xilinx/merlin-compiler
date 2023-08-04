@@ -1,0 +1,24 @@
+#include<assert.h>
+#define VEC_SIZE 10000
+#pragma ACCEL kernel
+
+void vec_add_kernel(int *a,int *b,int *c,int inc,int n,int m)
+{
+  int j = 0;
+  for (j = 0; j < n / 2L; j++) {
+    
+#pragma HLS LOOP_TRIPCOUNT max=5000
+    
+#pragma ACCEL TILED_TAG
+    for (int j_sub = 0; j_sub < 2; ++j_sub) {
+      c[j * 2 + j_sub] = a[j * 2 + j_sub] + b[j * 2 + j_sub] + inc;
+    }
+  }
+{
+    for (j = n / 2 * 2; j < n; j++) {
+      
+#pragma HLS LOOP_TRIPCOUNT max=1
+      c[j] = a[j] + b[j] + inc;
+    }
+  }
+}

@@ -1,0 +1,2 @@
+
+ERROR: [LWCPP-301] Nested aggregate is not supported: class Inner {private: inline Foo f(){return Foo();}} (vec_add.cpp:2)

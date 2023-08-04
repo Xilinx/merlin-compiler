@@ -1,0 +1,2 @@
+INFO: [FGPIP-102] Loop 'i' (test_heuristic_const.cpp:7) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_heuristic_const.cpp:20) is fully parallelized

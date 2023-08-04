@@ -1,0 +1,76 @@
+#define VEC_SIZE 10000
+#pragma ACCEL kernel
+
+void vec_add_kernel(int *a,int *b,int *c,int inc,int sum)
+{
+  int k;
+  int j;
+  for (j = 0; j < 33; j++) {
+    for (int j_sub = 0; j_sub < 3; ++j_sub) {
+      
+#pragma ACCEL TILED_TAG
+      for (k = 0; k <= 100; k++) {
+        
+#pragma ACCEL pipeline
+        
+#pragma ACCEL false_dependence variable=c
+        c[100 * (j * 3 + j_sub) + k] = a[100 * (j * 3 + j_sub) + k] + b[100 * (j * 3 + j_sub) + k] + inc;
+      }
+    }
+  }
+{
+    for (j = 99L; j < 100; j++) {
+      for (k = 0; k <= 100; k++) {
+        
+#pragma ACCEL pipeline
+        
+#pragma ACCEL false_dependence variable=c
+        c[100 * j + k] = a[100 * j + k] + b[100 * j + k] + inc;
+      }
+    }
+  }
+  for (j = 0; j < 100; j++) {
+    for (k = 0; k < 33; k++) {
+      for (int k_sub_1 = 0; k_sub_1 < 3; ++k_sub_1) {
+        
+#pragma ACCEL TILED_TAG
+        
+#pragma ACCEL line_buffer variable=c
+        c[100 * j + (k * 3 + k_sub_1)] = a[100 * j + (k * 3 + k_sub_1)] + b[100 * j + (k * 3 + k_sub_1)] + inc;
+      }
+    }
+{
+      for (k = 99L; k <= 100; k++) {
+        c[100 * j + k] = a[100 * j + k] + b[100 * j + k] + inc;
+      }
+    }
+  }
+  for (j = 0; j < 100; j++) {
+    for (k = 0; k < 25; k++) {
+      for (int k_sub_0 = 0; k_sub_0 < 4; ++k_sub_0) {
+        
+#pragma ACCEL PARTIAL_PARALLEL_TAG
+        
+#pragma ACCEL PARALLEL 
+        
+#pragma ACCEL line_buffer variable=c
+        c[100 * j + (k * 4 + k_sub_0)] = a[100 * j + (k * 4 + k_sub_0)] + b[100 * j + (k * 4 + k_sub_0)] + inc;
+      }
+    }
+  }
+  for (j = 0; j < 100; j++) {
+    for (k = 0; k < 25; k++) {
+      
+#pragma ACCEL reduction variable=sum
+      for (int k_sub = 0; k_sub < 4; ++k_sub) {
+        
+#pragma ACCEL PARTIAL_PARALLEL_TAG
+        
+#pragma ACCEL PARALLEL 
+        
+#pragma ACCEL reduction variable=sum
+        sum += a[100 * j + (k * 4 + k_sub)] + b[100 * j + (k * 4 + k_sub)] + inc;
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+/****************************************************************************/
+// vec_add_kernel.cpp
+// Copyright (C) 2017 Xilinx, Inc. - All rights reserved.
+/****************************************************************************/
+#include <string.h>
+#define VEC_SIZE 200000
+
+void vec_add_kernel_L_0_0_para_sub(int inc,int jj,int a_buf[1],int b_buf[1],int c_buf[1])
+// Original: #pragma ACCEL parallel
+{
+  
+#pragma HLS inline off
+  for (int t = 0; t < 4096; t++) {
+    c_buf[0] = a_buf[0] + b_buf[0] + inc + t;
+  }
+}
+
+void vec_add_kernel_L_0_0_para(int inc,int a_buf[4][1],int b_buf[4][1],int c_buf[4][1])
+{
+  
+#pragma HLS inline off
+  int jj;
+  for (jj = 0; jj < 4; ++jj) {
+    
+#pragma HLS unroll complete
+    vec_add_kernel_L_0_0_para_sub(inc,jj,a_buf[jj],b_buf[jj],c_buf[jj]);
+  }
+}
+#pragma ACCEL kernel
+
+void vec_add_kernel(int a[200000],int b[200000],int c[200000],int inc)
+{
+  int j;
+  int jj;
+  for (j = 0; j < 200000 / 4; j++) {
+    int a_buf[4][1];
+    
+#pragma HLS array_partition variable=a_buf dim=1 complete
+    int b_buf[4][1];
+    
+#pragma HLS array_partition variable=b_buf dim=1 complete
+    int c_buf[4][1];
+    
+#pragma HLS array_partition variable=c_buf dim=1 complete
+    memcpy(a_buf[0],(&a[j * 4]),sizeof(int ) * 4);
+    memcpy(b_buf[0],(&b[j * 4]),sizeof(int ) * 4);
+    vec_add_kernel_L_0_0_para(inc,a_buf,b_buf,c_buf);
+    for (jj = 0; jj < 4; ++jj) 
+// Original: #pragma ACCEL parallel
+{
+    }
+    memcpy(b_buf[0],(&b[j * 4]),sizeof(int ) * 4);
+  }
+}

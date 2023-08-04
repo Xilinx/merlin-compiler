@@ -1,0 +1,6 @@
+
+WARNING: [PROCS-224] Found multiple loops containing the accesses of an local array 'a_buf' (if_check.c:10).
+
+
+WARNING: [PROCS-223] Found the access indices of the array 'a_buf' are not identical within loop 'for(i = 0;i < DIM11;' (L_0_1) (if_check.c:16).
+   Hints: Coarse-grained pipelining requires access indices to be identical in each loop.

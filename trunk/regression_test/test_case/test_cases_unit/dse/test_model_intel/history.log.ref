@@ -1,0 +1,8 @@
+1	T1	64	tmpc4AkwA	1242	19.24	10.60	0.00	10.29	39.0
+2	T1	128	tmpsCs7zm	392 (estimated)	14.12	11.69	1.00	10.29	48.1
+Design space: 2.00E+00
+DSE Summary: Explored 2 designs with 0 HLS errors, 0 Merlin errors, and 0 timeout
+Merlin transformation failure: 0
+Duplicated kernels: 0
+Cache hit count, Skip HLS count: res: 1, 1; perf: 1, 2
+Overall skipped HLS run 1, 50.00%

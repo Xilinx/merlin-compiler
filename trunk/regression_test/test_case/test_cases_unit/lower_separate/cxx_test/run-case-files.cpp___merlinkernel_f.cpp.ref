@@ -1,0 +1,17 @@
+#include "merlin_type_define.h"
+extern int __merlin_include__GB_merlin_type_define_h_0;
+int g_var;
+
+static int g_func_1()
+{
+  g_var++;
+}
+int g_var1;
+#pragma ACCEL kernel
+
+int f()
+{
+  struct HideDef *h;
+  g_func_1();
+  return g_var + g_var1;
+}

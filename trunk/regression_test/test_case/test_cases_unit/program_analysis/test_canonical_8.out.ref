@@ -1,0 +1,117 @@
+// Testing labels
+#pragma ACCEL kernel
+
+void func_loop()
+{
+  int a[101];
+  int b[101];
+  int c[101];
+  int i = 0;
+  int j = 0;
+  int k = 0;
+  int x;
+  int y;
+  int z;
+  int N = 100;
+  int _s_ic = 100;
+  char _l_ic = 100;
+  l1:
+// Canonicalized from: for(char ic = N;_s_ic >= 0;_s_ic--) {...}
+// Standardize from: for(_s_ic =((char )N);_s_ic >= 0;--_s_ic) {...}
+  for (_s_ic = 0; _s_ic <= 100; _s_ic++) {
+    int _in_s_ic = 100 + -1 * _s_ic;
+    int _s_jc = _in_s_ic;
+    char _l_jc = _in_s_ic;
+    l2:
+// Canonicalized from: for(char jc = ic;_s_jc < 100;_s_jc += 2) {...}
+    for (_s_jc = _in_s_ic; _s_jc <= 'c'; _s_jc += 2) {
+/* block 1*/
+      c[_in_s_ic] = a[_in_s_ic] + b[_s_jc];
+    }
+  }
+  _s_ic = 0 + -1;
+  int _s_ic_0 = 100;
+  char _l_ic_0 = 100;
+  l3:
+// Canonicalized from: for(char ic = N;_s_ic_0 >= 0;_s_ic_0--) {...}
+// Standardize from: for(_s_ic_0 =((char )N);_s_ic_0 >= 0;--_s_ic_0) {...}
+  for (_s_ic_0 = 0; _s_ic_0 <= 100; _s_ic_0++) {
+    int _in_s_ic_0 = 100 + -1 * _s_ic_0;
+    int cc = 10;
+    int _s_jc_0 = 9;
+    char _l_jc_0 = 9;
+    l4:
+// Canonicalized from: for(char jc =(((char )cc) - 1);_s_jc_0 < 100;_s_jc_0 += 2) {...}
+// Standardize from: for(_s_jc_0 =((char )(((int )((char )cc)) - 1));_s_jc_0 <= 'c';_s_jc_0 += 2) {...}
+    for (_s_jc_0 = 0; _s_jc_0 <= 45; _s_jc_0++) {
+      int _in_s_jc_0 = 9 + 2L * _s_jc_0;
+/* block 2*/
+      c[_in_s_ic_0] = a[_in_s_ic_0] + b[_in_s_jc_0];
+    }
+    _s_jc_0 = 99 + 2L;
+  }
+  _s_ic_0 = 0 + -1;
+  int _s_ic_1 = 100;
+  char _l_ic_1 = 100;
+  l5:
+// Canonicalized from: for(char ic = N;_s_ic_1 >= 0;_s_ic_1--) {...}
+// Standardize from: for(_s_ic_1 =((char )N);_s_ic_1 >= 0;--_s_ic_1) {...}
+  for (_s_ic_1 = 0; _s_ic_1 <= 100; _s_ic_1++) {
+    int _in_s_ic_1 = 100 + -1 * _s_ic_1;
+    int cc = c[0];
+    int _s_jc_1 = (char )cc;
+    char _l_jc_1 = (char )cc;
+    l6:
+// Canonicalized from: for(char jc = cc;_s_jc_1 < 100;_s_jc_1 += 2) {...}
+    for (_s_jc_1 = ((char )cc); _s_jc_1 <= 'c'; _s_jc_1 += 2) {
+/* block 3*/
+      c[_in_s_ic_1] = a[_in_s_ic_1] + b[_s_jc_1];
+    }
+  }
+  _s_ic_1 = 0 + -1;
+{
+    int _s_ic_2 = 100;
+    char _l_ic_2 = 100;
+    l7:
+// Canonicalized from: for(char ic = N;_s_ic_2 >= 0;_s_ic_2--) {...}
+// Standardize from: for(_s_ic_2 =((char )N);_s_ic_2 >= 0;--_s_ic_2) {...}
+    for (_s_ic_2 = 0; _s_ic_2 <= 100; _s_ic_2++) {
+      int _in_s_ic_2 = 100 + -1 * _s_ic_2;
+      int _s_jc_2 = _in_s_ic_2;
+      char _l_jc_2 = _in_s_ic_2;
+      l8:
+// Canonicalized from: for(char jc = ic;_s_jc_2 < 100;_s_jc_2 += 2) {...}
+      for (_s_jc_2 = _in_s_ic_2; _s_jc_2 <= 'c'; _s_jc_2 += 2) {
+/* block 4*/
+        c[_in_s_ic_2] = a[_in_s_ic_2] + b[_s_jc_2];
+      }
+    }
+    _s_ic_2 = 0 + -1;
+  }
+}
+
+int main()
+{
+  int aa[100][100];
+  int bb[100][100];
+  int cc[100][100];
+  int *a;
+  int *b;
+  int *c;
+  int a_s;
+  int b_s;
+  int c_s;
+  int d_s;
+  float aa_f[100][100];
+  float bb_f[100][100];
+  float cc_f[100][100];
+  float *a_f;
+  float *b_f;
+  float *c_f;
+  float a_s_f;
+  float b_s_f;
+  float c_s_f;
+  float d_s_f;
+  func_loop();
+  return 0;
+}

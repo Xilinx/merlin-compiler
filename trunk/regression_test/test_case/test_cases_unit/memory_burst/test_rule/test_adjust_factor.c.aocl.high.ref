@@ -1,0 +1,55 @@
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void func_top_0(int *a)
+{
+  int a_buf[1000000000];
+  int i0;
+  int i1;
+  int i2;
+  for (i0 = 0; i0 < 1000; ++i0) {
+    for (i1 = 0; i1 < 1000; ++i1) {
+      for (i2 = 0; i2 < 1000; ++i2) {
+        int i = i0 * 1000000 + i1 * 1000 + i2;
+        a_buf[i0 * 1000000 + i1 * 1000 + i2] = i;
+      }
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 1000000000);
+}
+#pragma ACCEL kernel
+
+void func_top_1(int *b)
+{
+  int b_buf[1000000];
+  int i0;
+  int i1;
+  int i2;
+  for (i0 = 0; i0 < 10000; ++i0) {
+    for (i1 = 0; i1 < 10; ++i1) {
+      for (i2 = 0; i2 < 10; ++i2) {
+        int i = i0 * 100 + i1 * 10 + i2;
+        b_buf[i0 * 100 + i1 * 10 + i2] = i;
+      }
+    }
+  }
+  memcpy((void *)(&b[0]),(const void *)(&b_buf[0]),sizeof(int ) * 1000000);
+}
+#pragma ACCEL kernel
+
+void func_top_2(int *b)
+{
+  int i0;
+  int i1;
+  int i2;
+  for (i0 = 0; i0 < 10000; ++i0) {
+    for (i1 = 0; i1 < 10; ++i1) {
+      for (i2 = 0; i2 < 10; ++i2) {
+        int i = i0 * 100 + i1 * 10 + i2;
+        b[i + 1000000];
+        b[i + 2000000];
+      }
+    }
+  }
+}

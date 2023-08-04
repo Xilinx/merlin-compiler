@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+<clock_period>5ns</clock_period>                            //clock
+<platform_name>alphadata_pcie7v3</platform_name>
+<part_name>xc7vx690tffg1761-2</part_name>
+<arch_name>virtex7</arch_name>
+<platform_name>alphadata_pcieku3</platform_name>
+<part_name>xcku060-ffva1156-2-e</part_name>
+<arch_name>ultra_kintex7</arch_name>
+<platform_name>baidu_kintex7</platform_name>
+<part_name>xc7k480tiffg1156-2L</part_name>
+<arch_name>kintex7</arch_name>
+<platform_name>baidu_kintex7</platform_name>
+<part_name>xc7k480tiffg1156-1</part_name>
+<arch_name>kintex7</arch_name>
+
+<pipeline_parallel> on </pipeline_parallel>                 
+<memory_burst     > on </memory_burst>                      
+<bitwidth_opt     > on </bitwidth_opt>
+<reduction_opt    > on </reduction_opt>
+<pcie_transfer_opt> on </pcie_transfer_opt>                 
+<coarse_grained_pipeline> on </coarse_grained_pipeline>     
+<naive_hls> off </naive_hls>
+<aggressive_opt_for_c>off</aggressive_opt_for_c>
+<aggressive_opt_for_cpp>off</aggressive_opt_for_cpp>
+
+<high_level_synthesis> off </high_level_synthesis>          
+<simulation>           off </simulation>                    
+<implementation>       off </implementation>                
+<normal>on</normal>                                         //on off default = on conflit with kenel
+<kernel>off</kernel>                                        //on off default = off conflit with normal
+<testing        > off </testing>                            
+<testing_run_ref> on </testing_run_ref>                     
+<testing_run_opt> on </testing_run_opt>                     
+<testing_run_sim> on </testing_run_sim>                     
+<testing_run_bit> on </testing_run_bit>                     
+<implementation_tool > built-in </implementation_tool>      //built-in sdaccel default = built-in
+<case_type>custom</case_type>
+<case_directory>custom</case_directory>
+<case_list>./local_case.list</case_list>
+<case>all</case>
+<regression_test>on</regression_test>
+-->
+<configs> 
+  <config>
+      <name>a10</name>
+      <case_type>tune_altera</case_type>
+      <case>all</case>
+      <flow>bit</flow>
+      <platform_name>a10gx</platform_name>
+      <part_name>10ax115s2f45i2sges</part_name>
+      <arch_name>arria10</arch_name>
+      <testing_run_opt> off </testing_run_opt>                     
+      <testing_run_sim> off </testing_run_sim>                     
+      <implementation_tool> aocl </implementation_tool>
+  </config>  
+
+<!--
+  <config>
+      <name>alphadata_ku3</name>
+      <case_type>org</case_type>
+      <case>all</case>
+      <flow>bit</flow>
+      <platform_name>alphadata_pcieku3</platform_name>
+      <part_name>xcku060-ffva1156-2-e</part_name>
+      <arch_name>ultra_kintex7</arch_name>
+      <testing_run_opt> off </testing_run_opt>                     
+      <testing_run_sim> off </testing_run_sim>                     
+  </config>  
+
+  <config>
+      <name>baidu_sda</name>
+      <case_type>org</case_type>
+      <case>all</case>
+      <flow>bit</flow>
+      <platform_name>baidu_kintex7</platform_name>
+      <part_name>xc7k480tiffg1156-2L</part_name>
+      <arch_name>kintex7</arch_name>
+      <testing_run_opt> off </testing_run_opt>                     
+      <testing_run_sim> off </testing_run_sim>                     
+  </config>  
+-->
+</configs>

@@ -1,0 +1,3 @@
+
+WARNING: [STREAM-202] Streaming port 'a' (__merlinkernel_vec_add.cpp:13) with multiple accesses may result in QoR degradation.
+  Hint: please merge multiple accesses into single access

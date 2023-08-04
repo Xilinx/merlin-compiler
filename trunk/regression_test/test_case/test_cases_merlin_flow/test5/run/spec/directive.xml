@@ -1,0 +1,82 @@
+
+<directives>
+    <include_path> -I/curr/hanhu/Nouse/lab1/src  -I /curr/hanhu/WORK/Merlin_Compiler/trunk/mars-gen/lib/merlin</include_path>
+
+<!-- Platform setup -->
+<!--
+<clock_period>4.16ns</clock_period>
+<timing_slack_ratio>0.2</timing_slack_ratio>
+<platform_name>alphadata_pcie7v3</platform_name><part_name>xc7vx690tffg1761-2</part_name><arch_name>virtex7</arch_name>
+<platform_name>alphadata_pcieku3</platform_name><part_name>xcku060-ffva1156-2-e</part_name><arch_name>ultra_kintex7</arch_name>
+<platform_name>baidu_kintex7</platform_name><part_name>xc7k480tiffg1156-2L</part_name><arch_name>kintex7</arch_name>
+<platform_name>baidu_kintex7</platform_name><part_name>xc7k480tffg1156-1</part_name><arch_name>kintex7</arch_name>
+<platform_name>alphadata_pcieku3</platform_name><part_name>xcku060-ffva1156-2-e</part_name><arch_name>ultra_kintex7</arch_name>
+<platform_name>de5net_a7</platform_name><part_name>5SGXEA7N2F45C2</part_name><arch_name>stratixv</arch_name>
+<bus_bitwidth> 512 </bus_bitwidth>
+<platform_name>baidu_kintex7</platform_name><part_name>xc7k480tiffg1156-2L</part_name><arch_name>kintex7</arch_name>
+<platform_name>xilinx:adm-pcie-ku3:2ddr</platform_name><part_name>xcku060-ffva1156-2-e</part_name><arch_name>ultra_kintex7</arch_name>
+<platform_name>xilinx:adm-pcie-7v3:1ddr</platform_name><part_name>xc7vx690tffg1761-2</part_name><arch_name>virtex7</arch_name>
+<platform_name>xilinx:tul-pcie3-ku115:2ddr</platform_name><part_name> XCKU115-FLVB2104-2-E</part_name><arch_name>kintex7</arch_name>
+<platform_name>baidu_kintex7</platform_name><part_name>xcku115-flvf1924-2-e</part_name><arch_name>kintexu</arch_name>
+-->
+<clock_period>4.16ns</clock_period>
+<platform_name>xilinx:adm-pcie-ku3:2ddr:3.2</platform_name><part_name>xcku060-ffva1156-2-e</part_name><arch_name>ultra_kintex7</arch_name>
+
+<!-- optimization schemes -->
+<fg_pipeline_parallel>    off  </fg_pipeline_parallel>
+<memory_burst     >       off  </memory_burst>
+<cg_memory_burst  >       off  </cg_memory_burst>
+<delinearization  >       off  </delinearization>
+<bitwidth_opt     >       off  </bitwidth_opt>
+<reduction_opt    >       off  </reduction_opt>
+<pcie_transfer_opt>       on  </pcie_transfer_opt>
+<coarse_grained_pipeline> off  </coarse_grained_pipeline>
+<auto_fine_grain_opt> off </auto_fine_grain_opt>
+<naive_hls>               off </naive_hls>
+<aggressive_opt_for_c>    off </aggressive_opt_for_c>
+<aggressive_opt_for_cpp>  off </aggressive_opt_for_cpp>
+<pure_kernel>on</pure_kernel>
+
+<burst_total_size_threshold>4000000</burst_total_size_threshold> 
+<burst_single_size_threshold>2000000</burst_single_size_threshold> 
+<burst_lifting_size_threshold>128000</burst_lifting_size_threshold> 
+
+<altera_opt>              on </altera_opt>
+<false_dep_removal>       off </false_dep_removal>
+<opt_effort> medium </opt_effort> 
+<!-- design flow -->
+<high_level_synthesis> off </high_level_synthesis>
+<simulation>           off </simulation>
+<implementation>       off </implementation>
+
+<!-- run bitstream  -->
+<normal>on</normal>
+<static>off</static>
+<kernel>off</kernel>
+
+<!-- auto testing -->
+<testing        > off </testing>
+<testing_run_ref> on </testing_run_ref>
+<testing_run_opt> on </testing_run_opt>
+<testing_run_sim> on </testing_run_sim>
+<testing_run_bit> on </testing_run_bit>
+
+<!-- misc -->
+<!-- 
+<kernel_timeoue> 300 </kernel_timeout>
+<implementation_tool > sdaccel </implementation_tool>
+<runtime_integration> on </runtime_integration>
+<implementation_tool > built-in </implementation_tool>
+<implementation_tool > aocl </implementation_tool>
+<implementation_tool > cheetah </implementation_tool>
+-->
+<implementation_tool > sdaccel </implementation_tool>
+<cstd></cstd>
+<!-- 
+<pure_kernel>on</pure_kernel>
+<ihatebug>debug</ihatebug>
+-->
+<skip_syntax_check>on</skip_syntax_check>
+<kestrel>on</kestrel>
+</directives>
+

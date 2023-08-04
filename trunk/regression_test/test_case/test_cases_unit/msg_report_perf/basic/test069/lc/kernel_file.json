@@ -1,0 +1,6 @@
+{
+    "vec_add_kernel": {
+        "msm_node_0": "__merlinkernel_vec_add_kernel.cpp",
+        "vec_add_kernel": "__merlinkernel_vec_add_kernel.cpp"
+    }
+}

@@ -1,0 +1,31 @@
+#include <assert.h>
+#pragma ACCEL kernel
+
+void func_top_0(int A[100],int B[100],int range)
+{
+  int k;
+  int j;
+  range < 100?(static_cast < void  >  (0)) : __assert_fail("range < 100","test_assert.cpp",7,__PRETTY_FUNCTION__);
+  for (k = 0; k < 100; k++) {
+    for (j = 0; j < range; j++) {
+      
+#pragma HLS LOOP_TRIPCOUNT max=99
+      A[j] = B[j + 1] + B[j];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_1(int A[100],int B[100],int range)
+{
+  int k;
+  int j;
+  range < 100?(static_cast < void  >  (0)) : __assert_fail("range < 100","test_assert.cpp",20,__PRETTY_FUNCTION__);
+  for (k = 0; k < 100; k++) {
+    for (j = 0; j < range; j++) {
+      
+#pragma HLS LOOP_TRIPCOUNT max=99
+      A[j] = B[j + 1] + B[j];
+    }
+  }
+}

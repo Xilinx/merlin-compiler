@@ -1,0 +1,594 @@
+cmd = mars_opt __merlinkernel_vec_add_kernel.cpp  -e c -p performance_estimation  -I\/curr\/hanhu\/unit_test\/test_case\/test0  -I\/curr\/hanhu\/unit_test\/test_case\/test0\/src\/  -I\/curr\/hanhu\/WORK\/Merlin_Compiler\/trunk\/build\/..\/\/mars-gen\/lib\/merlin -a STATIC -a kernel_list.json -a gen_token.json -a config.json -a step1.json -a aocl
+
+====== Typedef replace ========>
+=> nondefine func Orig: SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}
+=> nondefine func REPLACE: SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}
+=> nondefine func Orig: SgFunctionDeclaration:void __merlin_dummy_kernel_pragma() {...}
+=> nondefine func REPLACE: SgFunctionDeclaration:void __merlin_dummy_kernel_pragma() {...}
+[INFO] Beginning static performance estimation
+
+
+
+[INFO] ========================================================
+[INFO] 1. Create blocks..
+[INFO] ========================================================
+[INFO] Reading annotated report : gen_token.json
+[INFO] Reading annotated report : gen_token.json
+[EST ALGO][MakeNewBlocks, 659] Create TOP TASK.
+[EST ALGO][MakeNewBlocks, 648] Create top kernel: F_0_0_0_3
+[EST ALGO][GetExecFlowFromInput, 166] Block execute in parallel.
+[EST ALGO][AddChildBlock_AOCL, 402] Create a kernel block: SgFunctionDeclaration:void vec_add_kernel(int * a,in...
+[EST ALGO][MakeNewBlocks, 655] Create sub kernel: F_0_0_0_3
+[EST ALGO][MakeNewBlocks, 678] ExtPortList: 
+[EST ALGO][MakeNewBlocks, 680]    SgInitializedName:a
+[EST ALGO][MakeNewBlocks, 680]    SgInitializedName:b
+[EST ALGO][MakeNewBlocks, 680]    SgInitializedName:c
+[EST ALGO][AddChildBlock_AOCL, 253] Find a function declaration: SgFunctionDeclaration:void vec_add_kernel(int * a,in...
+Function body = {#pragma HLS INTERFACE m_axi port=a offset=slave depth=1000#pragma HLS INTERFACE m_axi port=b offset=slave depth=1000#pragma HLS INTERFACE m_axi port=c offset=slave depth=1000#pragma HLS INTERFACE s_axilite port=a bundle=control#pragma HLS INTERFACE s_axilite port=b bundle=control#pragma HLS INTERFACE s_axilite port=c bundle=control#pragma HLS INTERFACE s_axilite port=inc bundle=control#pragma HLS INTERFACE s_axilite port=inc_comp bundle=control#pragma HLS INTERFACE s_axilite port=return bundle=control#pragma ACCEL interface variable=a max_depth=1000 depth=1000#pragma ACCEL interface variable=b max_depth=1000 depth=1000#pragma ACCEL interface variable=c max_depth=1000 depth=1000for(int j = 0;j < 250;j++) {#pragma HLS pipelinefor(int j_sub = 0;j_sub < 4;++j_sub) {#pragma HLS unrollif(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}}}}
+[EST ALGO][GetExecFlowFromInput, 164] Block execute in serial.
+[EST ALGO][AddChildBlock_AOCL, 409] Create a loop block: SgForStatement:for(int j = 0;j < 250;j++) {.....
+[EST ALGO][AddChildBlock_AOCL, 268] Find a loop: SgForStatement:for(int j = 0;j < 250;j++) {.....
+[EST ALGO][GetExecFlowFromInput, 166] Block execute in parallel.
+[EST ALGO][AddChildBlock_AOCL, 409] Create a loop block: SgForStatement:for(int j_sub = 0;j_sub < 4;++...
+[EST ALGO][AddChildBlock_AOCL, 268] Find a loop: SgForStatement:for(int j_sub = 0;j_sub < 4;++...
+[EST ALGO][GetExecFlowFromInput, 166] Block execute in parallel.
+[EST ALGO][AddChildBlock_AOCL, 417] Create a if block: SgIfStmt:if(inc > 100) {c[j * 4 + j_sub...
+[EST ALGO][AddChildBlock_AOCL, 274] Find a if: SgIfStmt:if(inc > 100) {c[j * 4 + j_sub...
+[EST ALGO][AddChildBlock_AOCL, 278]     If body : SgBasicBlock:{c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+[EST ALGO][AddChildBlock_AOCL, 283]     Else body : nullptr
+[EST ALGO][GetExecFlowFromInput, 164] Block execute in serial.
+Find a external reference = c
+[EST ALGO][AddChildBlock_AOCL, 533]Read data size = 0, r_ub = 0, r_lb = 0, for : c
+[EST ALGO][AddChildBlock_AOCL, 538]Write data size = 4, w_ub = 3, w_lb = 0, for : c
+[EST ALGO][AddChildBlock_AOCL, 565]One ref data size = 128 for : c
+[EST ALGO][AddChildBlock_AOCL, 568]One ref type size = 32 for : c
+Find a external reference = a
+[EST ALGO][AddChildBlock_AOCL, 533]Read data size = 4, r_ub = 3, r_lb = 0, for : a
+[EST ALGO][AddChildBlock_AOCL, 538]Write data size = 0, w_ub = 0, w_lb = 0, for : a
+[EST ALGO][AddChildBlock_AOCL, 565]One ref data size = 128 for : a
+[EST ALGO][AddChildBlock_AOCL, 568]One ref type size = 32 for : a
+Find a external reference = b
+[EST ALGO][AddChildBlock_AOCL, 533]Read data size = 4, r_ub = 3, r_lb = 0, for : b
+[EST ALGO][AddChildBlock_AOCL, 538]Write data size = 0, w_ub = 0, w_lb = 0, for : b
+[EST ALGO][AddChildBlock_AOCL, 565]One ref data size = 128 for : b
+[EST ALGO][AddChildBlock_AOCL, 568]One ref type size = 32 for : b
+[EST ALGO][GetExecFlowFromInput, 164] Block execute in serial.
+
+
+
+[INFO] ========================================================
+[INFO] 2. Reading annotated report : gen_token.json
+[INFO] ========================================================
+[EST ALGO][ReadAnnotatedReportHelper, 514]*******************************
+[EST ALGO][ReadAnnotatedReportHelper, 516]Read report for 8, ID = F_0_0_0_3, void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][ReadAnnotatedReportHelper, 522]----Checking if updated...
+[EST ALGO][ReadAnnotatedReportHelper, 526]----Final updated = 0
+[EST ALGO][ReadAnnotatedReportHelper, 528]----Checking glue latency...
+[EST ALGO][ReadAnnotatedReportHelper, 532]----Final glue latency = 0
+[EST ALGO][ReadAnnotatedReportHelper, 534]----Checking glue latency iteration...
+[EST ALGO][ReadAnnotatedReportHelper, 540]----Final glue latency iteration = 0
+[EST ALGO][ReadAnnotatedReportHelper, 542]----Checking execution sequence...
+[EST ALGO][ReadAnnotatedReportHelper, 547]----execution in 0
+[EST ALGO][ReadAnnotatedReportHelper, 549]----Checking logic latency...
+[EST ALGO][ReadAnnotatedReportHelper, 553]----Final logic latency = 0
+[EST ALGO][ReadAnnotatedReportHelper, 555]----Checking logic latency iteration...
+[EST ALGO][ReadAnnotatedReportHelper, 561]----Final logic latency iteration = 0
+[EST ALGO][ReadAnnotatedReportHelper, 563]----Checking execution sequence...
+[EST ALGO][ReadAnnotatedReportHelper, 568]----execution in 0
+[EST ALGO][ReadAnnotatedReportHelper, 570]----Checking instance_number...
+[EST ALGO][ReadAnnotatedReportHelper, 575]----instance number 1
+[EST ALGO][ReadAnnotatedReportHelper, 725]----Checking latnecy max...
+[EST ALGO][ReadAnnotatedReportHelper, 730]----Final latency max = 1
+[EST ALGO][ReadAnnotatedReportHelper, 732]----Checking inline...
+[EST ALGO][ReadAnnotatedReportHelper, 736]----Final latency max = 1
+[EST ALGO][ReadAnnotatedReportHelper, 738]----Checking dead...
+[EST ALGO][ReadAnnotatedReportHelper, 742]----Final dead = 0
+[EST ALGO][ReadAnnotatedReportHelper, 744]----Checking execution sequence from json file...
+[EST ALGO][ReadAnnotatedReportHelper, 757]----Vector size0
+[EST ALGO][ReadAnnotatedReportHelper, 514]*******************************
+[EST ALGO][ReadAnnotatedReportHelper, 516]Read report for 0, ID = L_0_0_0_3_2_0_12, for(int j = 0;j < 250;j++) {...}
+[EST ALGO][ReadAnnotatedReportHelper, 522]----Checking if updated...
+[EST ALGO][ReadAnnotatedReportHelper, 526]----Final updated = 0
+[EST ALGO][ReadAnnotatedReportHelper, 528]----Checking glue latency...
+[EST ALGO][ReadAnnotatedReportHelper, 532]----Final glue latency = 0
+[EST ALGO][ReadAnnotatedReportHelper, 534]----Checking glue latency iteration...
+[EST ALGO][ReadAnnotatedReportHelper, 540]----Final glue latency iteration = 0
+[EST ALGO][ReadAnnotatedReportHelper, 542]----Checking execution sequence...
+[EST ALGO][ReadAnnotatedReportHelper, 547]----execution in 1
+[EST ALGO][ReadAnnotatedReportHelper, 549]----Checking logic latency...
+[EST ALGO][ReadAnnotatedReportHelper, 553]----Final logic latency = 0
+[EST ALGO][ReadAnnotatedReportHelper, 555]----Checking logic latency iteration...
+[EST ALGO][ReadAnnotatedReportHelper, 561]----Final logic latency iteration = 0
+[EST ALGO][ReadAnnotatedReportHelper, 563]----Checking execution sequence...
+[EST ALGO][ReadAnnotatedReportHelper, 568]----execution in 1
+[EST ALGO][ReadAnnotatedReportHelper, 570]----Checking instance_number...
+[EST ALGO][ReadAnnotatedReportHelper, 575]----instance number 1
+[EST ALGO][ReadAnnotatedReportHelper, 579]----Checking TC...
+[EST ALGO][ReadAnnotatedReportHelper, 594]----Final TC = 250
+[EST ALGO][ReadAnnotatedReportHelper, 597]----Checking flatten...
+[EST ALGO][ReadAnnotatedReportHelper, 614]----Final flatten = 0
+[EST ALGO][ReadAnnotatedReportHelper, 617]----Checking unroll factor...
+[EST ALGO][SetParentAttributeHaveUnrollLoopOnly, 502] Setting parent loop as not unroll loop.
+[EST ALGO][ReadAnnotatedReportHelper, 644]----Final unroll factor = 1
+[EST ALGO][ReadAnnotatedReportHelper, 647]----Checking II...
+[EST ALGO][ReadAnnotatedReportHelper, 665]----Final II = 50
+[EST ALGO][ReadAnnotatedReportHelper, 668]----Checking IL...
+[EST ALGO][ReadAnnotatedReportHelper, 677]----Final IL = 65
+[EST ALGO][ReadAnnotatedReportHelper, 679]----Checking total latency...
+[EST ALGO][ReadAnnotatedReportHelper, 684]----Final total latency = 12514
+[EST ALGO][ReadAnnotatedReportHelper, 686]----Checking iteration latency...
+[EST ALGO][ReadAnnotatedReportHelper, 693]----Final iteration latency = 65
+[EST ALGO][ReadAnnotatedReportHelper, 695]----Checking burst...
+[EST ALGO][ReadAnnotatedReportHelper, 708]----Final burst = 0. burst width = 0
+[EST ALGO][ReadAnnotatedReportHelper, 710]----Checking vendor latnecy...
+[EST ALGO][ReadAnnotatedReportHelper, 723]----Final vendor latency = 1
+[EST ALGO][ReadAnnotatedReportHelper, 514]*******************************
+[EST ALGO][ReadAnnotatedReportHelper, 516]Read report for 0, ID = L_0_0_0_3_2_0_12_3_1, for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+[EST ALGO][ReadAnnotatedReportHelper, 522]----Checking if updated...
+[EST ALGO][ReadAnnotatedReportHelper, 526]----Final updated = 0
+[EST ALGO][ReadAnnotatedReportHelper, 528]----Checking glue latency...
+[EST ALGO][ReadAnnotatedReportHelper, 532]----Final glue latency = 0
+[EST ALGO][ReadAnnotatedReportHelper, 534]----Checking glue latency iteration...
+[EST ALGO][ReadAnnotatedReportHelper, 540]----Final glue latency iteration = 0
+[EST ALGO][ReadAnnotatedReportHelper, 542]----Checking execution sequence...
+[EST ALGO][ReadAnnotatedReportHelper, 547]----execution in 1
+[EST ALGO][ReadAnnotatedReportHelper, 549]----Checking logic latency...
+[EST ALGO][ReadAnnotatedReportHelper, 553]----Final logic latency = 0
+[EST ALGO][ReadAnnotatedReportHelper, 555]----Checking logic latency iteration...
+[EST ALGO][ReadAnnotatedReportHelper, 561]----Final logic latency iteration = 0
+[EST ALGO][ReadAnnotatedReportHelper, 563]----Checking execution sequence...
+[EST ALGO][ReadAnnotatedReportHelper, 568]----execution in 1
+[EST ALGO][ReadAnnotatedReportHelper, 570]----Checking instance_number...
+[EST ALGO][ReadAnnotatedReportHelper, 575]----instance number 1
+[EST ALGO][ReadAnnotatedReportHelper, 579]----Checking TC...
+[EST ALGO][ReadAnnotatedReportHelper, 594]----Final TC = 4
+[EST ALGO][ReadAnnotatedReportHelper, 597]----Checking flatten...
+[EST ALGO][ReadAnnotatedReportHelper, 614]----Final flatten = 0
+[EST ALGO][ReadAnnotatedReportHelper, 617]----Checking unroll factor...
+[EST ALGO][ReadAnnotatedReportHelper, 644]----Final unroll factor = 4
+[EST ALGO][ReadAnnotatedReportHelper, 647]----Checking II...
+[EST ALGO][ReadAnnotatedReportHelper, 665]----Final II = 0
+[EST ALGO][ReadAnnotatedReportHelper, 668]----Checking IL...
+[EST ALGO][ReadAnnotatedReportHelper, 677]----Final IL = 1
+[EST ALGO][ReadAnnotatedReportHelper, 679]----Checking total latency...
+[EST ALGO][ReadAnnotatedReportHelper, 684]----Final total latency = 0
+[EST ALGO][ReadAnnotatedReportHelper, 686]----Checking iteration latency...
+[EST ALGO][ReadAnnotatedReportHelper, 693]----Final iteration latency = 0
+[EST ALGO][ReadAnnotatedReportHelper, 695]----Checking burst...
+[EST ALGO][ReadAnnotatedReportHelper, 708]----Final burst = 0. burst width = 0
+[EST ALGO][ReadAnnotatedReportHelper, 710]----Checking vendor latnecy...
+[EST ALGO][ReadAnnotatedReportHelper, 723]----Final vendor latency = 1
+[EST ALGO][ReadAnnotatedReportHelper, 514]*******************************
+[EST ALGO][ReadAnnotatedReportHelper, 516]Read report for 4, ID = X_0_0_0_3_2_0_12_3_1_3_1, if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+[EST ALGO][ReadAnnotatedReportHelper, 519]Critical Warning: TopoID does not exist in input json:
+[EST ALGO][ReadAnnotatedReportHelper, 522]----Checking if updated...
+[EST ALGO][ReadAnnotatedReportHelper, 526]----Final updated = 0
+[EST ALGO][ReadAnnotatedReportHelper, 528]----Checking glue latency...
+[EST ALGO][ReadAnnotatedReportHelper, 532]----Final glue latency = 0
+[EST ALGO][ReadAnnotatedReportHelper, 534]----Checking glue latency iteration...
+[EST ALGO][ReadAnnotatedReportHelper, 540]----Final glue latency iteration = 0
+[EST ALGO][ReadAnnotatedReportHelper, 542]----Checking execution sequence...
+[EST ALGO][ReadAnnotatedReportHelper, 547]----execution in 1
+[EST ALGO][ReadAnnotatedReportHelper, 549]----Checking logic latency...
+[EST ALGO][ReadAnnotatedReportHelper, 553]----Final logic latency = 0
+[EST ALGO][ReadAnnotatedReportHelper, 555]----Checking logic latency iteration...
+[EST ALGO][ReadAnnotatedReportHelper, 561]----Final logic latency iteration = 0
+[EST ALGO][ReadAnnotatedReportHelper, 563]----Checking execution sequence...
+[EST ALGO][ReadAnnotatedReportHelper, 568]----execution in 1
+[EST ALGO][ReadAnnotatedReportHelper, 570]----Checking instance_number...
+[EST ALGO][ReadAnnotatedReportHelper, 575]----instance number 1
+[INFO] ========================================================
+[INFO] 3. Compute cycles.
+[INFO] ========================================================
+[INFO] Reading external memory parameter file: config.json
+[WARNING] RBW_GBs not found.
+[WARNING] WBW_GBs not found.
+[WARNING] RLat_ns not found.
+[WARNING] WLat_ns not found.
+[WARNING] RandLat_ns not found.
+RBW_GBs=10.300000
+WBW_GBs=9.600000
+RLat_ns=434.000000
+WLat_ns=325.000000
+RandLat_ns=62.000000
+FPGACLK_GHz=0.250000
+MAX_BITWIDTH=512.000000
+LATENCY=240.000000
+Find Top Block = F_0_0_0_3
+**********************************************************
+3.1 Update cycles by compute all data
+**********************************************************
+ComputeStaticCycleHelper spawn size = 0
+[EST ALGO][ComputeStaticCycleHelper, 1574] Start compute cycles for TASK. 
+ComputeStaticCycleHelper spawn size = 0
+[EST ALGO][ComputeStaticCycleHelper, 1586] Start compute cycles for top kernel: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][ComputeStaticCycleFromSchedule, 1858]F_0_0_0_3 - schedule sequntial size: 1
+[EST ALGO][ComputeStaticCycleFromSchedule, 1861]F_0_0_0_3 - schedule parallel size: 1
+[EST ALGO][ComputeStaticCycleFromSchedule, 1870] j=0 ,k=0 ,Block=SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+ComputeStaticCycleHelper spawn size = 0
+[EST ALGO][ComputeStaticCycleHelper, 1602] Start compute cycles for function declaration: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][ComputeStaticCycleFromSchedule, 1858]F_0_0_0_3 - schedule sequntial size: 1
+[EST ALGO][ComputeStaticCycleFromSchedule, 1861]F_0_0_0_3 - schedule parallel size: 1
+[EST ALGO][ComputeStaticCycleFromSchedule, 1870] j=0 ,k=0 ,Block=SgForStatement:for(int j = 0;j < 250;j++) {...}
+ComputeStaticCycleHelper spawn size = 0
+[EST ALGO][ComputeStaticCycleHelper, 1670] Start compute cycles for loop: SgForStatement:for(int j = 0;j < 250;j++) {...}
+[EST ALGO][ComputeStaticCycleFromSchedule, 1858]L_0_0_0_3_2_0_12 - schedule sequntial size: 1
+[EST ALGO][ComputeStaticCycleFromSchedule, 1861]L_0_0_0_3_2_0_12 - schedule parallel size: 1
+[EST ALGO][ComputeStaticCycleFromSchedule, 1870] j=0 ,k=0 ,Block=SgForStatement:for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+ComputeStaticCycleHelper spawn size = 0
+[EST ALGO][ComputeStaticCycleHelper, 1670] Start compute cycles for loop: SgForStatement:for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+[EST ALGO][ComputeStaticCycleFromSchedule, 1858]L_0_0_0_3_2_0_12_3_1 - schedule sequntial size: 1
+[EST ALGO][ComputeStaticCycleFromSchedule, 1861]L_0_0_0_3_2_0_12_3_1 - schedule parallel size: 1
+[EST ALGO][ComputeStaticCycleFromSchedule, 1870] j=0 ,k=0 ,Block=SgIfStmt:if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+ComputeStaticCycleHelper spawn size = 0
+[EST ALGO][ComputeStaticCycleHelper, 1761] Finish compute cycles for statement if: SgIfStmt:if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}, Cycles=0, LogicCycles=0, GlueCycles=0
+[EST ALGO][ComputeStaticCycleFromSchedule, 1897] ComputeTemp: 0, LogicTemp: 0, GlueTemp: 0, TotalCycles: 0, LogicLatency: 0, GlueLatency: 0
+[EST ALGO][ComputeStaticCycleFromSchedule, 1903]L_0_0_0_3_2_0_12_3_1 - schedule spawn size: 0
+111 Final IL = 0, vendor latency = 1
+Final IL = 0, vendor latency = 1
+[EST ALGO][ComputeStaticCyclesForLoop, 1230] Loop not pipelined, TC=4, UnrollFactor=4, II=0, IL=0, LogicLatencyIteration=0, GlueLatencyIteration=0, CycleUnitStatic=0
+Find fully unroll loop with IL > 1.
+[EST ALGO][ComputeStaticCycleHelper, 1693] Prefinish compute cycles for loop: SgForStatement:for(int j_sub = 0;j_sub < 4;++j_sub) {...}, Cycles: 0, LogicLatency: 0, GlueLatency: 0, LogicLatencyIteration: 0, GlueLatencyIteration: 0
+[EST ALGO][ComputeStaticCycleHelper, 1714] Finish compute cycles for loop: SgForStatement:for(int j_sub = 0;j_sub < 4;++j_sub) {...}, Cycles: 0, LogicLatency: 0, GlueLatency: 0, LogicLatencyIteration: 0, GlueLatencyIteration: 0
+[EST ALGO][ComputeStaticCycleFromSchedule, 1897] ComputeTemp: 0, LogicTemp: 0, GlueTemp: 0, TotalCycles: 0, LogicLatency: 0, GlueLatency: 0
+[EST ALGO][ComputeStaticCycleFromSchedule, 1903]L_0_0_0_3_2_0_12 - schedule spawn size: 0
+111 Final IL = 0, vendor latency = 1
+Final IL = 1, vendor latency = 1
+[EST ALGO][ComputeStaticCyclesForLoop, 1219] Loop pipelined, TC=250, UnrollFactor=1, II=50, IL=1, LogicLatencyIteration=0, GlueLatencyIteration=0, CycleUnitStatic=12451
+[EST ALGO][ComputeStaticCycleHelper, 1693] Prefinish compute cycles for loop: SgForStatement:for(int j = 0;j < 250;j++) {...}, Cycles: 12451, LogicLatency: 0, GlueLatency: 0, LogicLatencyIteration: 0, GlueLatencyIteration: 0
+[EST ALGO][ComputeStaticCycleHelper, 1714] Finish compute cycles for loop: SgForStatement:for(int j = 0;j < 250;j++) {...}, Cycles: 12451, LogicLatency: 0, GlueLatency: 0, LogicLatencyIteration: 0, GlueLatencyIteration: 0
+[EST ALGO][ComputeStaticCycleFromSchedule, 1897] ComputeTemp: 12451, LogicTemp: 0, GlueTemp: 0, TotalCycles: 12451, LogicLatency: 0, GlueLatency: 0
+[EST ALGO][ComputeStaticCycleFromSchedule, 1903]F_0_0_0_3 - schedule spawn size: 0
+Logic latency = 0, Unit cycles = 12451, AccCycles = 12451
+[EST ALGO][ComputeStaticCycleHelper, 1643] Finish compute cycles for function declaration: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}, Cycles: 12451, LogicLatency: 0, GlueLatency: 12451
+[EST ALGO][ComputeStaticCycleFromSchedule, 1897] ComputeTemp: 12451, LogicTemp: 0, GlueTemp: 12451, TotalCycles: 12451, LogicLatency: 0, GlueLatency: 12451
+[EST ALGO][ComputeStaticCycleFromSchedule, 1903]F_0_0_0_3 - schedule spawn size: 0
+[EST ALGO][ComputeStaticCycleHelper, 1599] Finish compute cycles for top kernel: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}, Cycles: 12451
+[EST ALGO][ComputeStaticCycleHelper, 1579] Unit cycle of top kernel:12451
+[EST ALGO][ComputeStaticCycleHelper, 1580] FIRST_CYCLES=12451
+[EST ALGO][ComputeStaticCycles, 38] Print schedule for initial framework.
+
+FuncDecl(0):void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...} TopoID:F_0_0_0_3
+-ExtPort0:a
+-ExtPort1:b
+-ExtPort2:c
+-Schedule:
+Function: TopoID:F_0_0_0_3 Unit Cycles:12451 LogicLatency:0 GlueLatency:12451
+  (0,0) for(int j = 0;;,j < 250;,j++) TopoID:L_0_0_0_3_2_0_12 II:50 IL:1 UF:1 Flat:0 TCStatic:250 Unit Cycles:12451 Total Cycles:0
+            LogicLatency: 0, GlueLatency: 0, LogicLatencyIteration: 0, GlueLatencyIteration: 0
+**********************************************************
+3.2 Update cycles by memory burst
+**********************************************************
+**********************************************************
+3.2.1 Update burst data size
+**********************************************************
+[EST ALGO][UpdateBurstCyclesBySelf, 1984] Start compute for block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][UpdateBurstCyclesBySelf, 1998] - schedule sequntial size: 1
+[EST ALGO][UpdateBurstCyclesBySelf, 2001] - schedule parallel size: 1
+[EST ALGO][UpdateBurstCyclesBySelf, 1984] Start compute for block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][UpdateBurstCyclesBySelf, 1998] - schedule sequntial size: 1
+[EST ALGO][UpdateBurstCyclesBySelf, 2001] - schedule parallel size: 1
+[EST ALGO][UpdateBurstCyclesBySelf, 1984] Start compute for block: SgForStatement:for(int j = 0;j < 250;j++) {...}
+[EST ALGO][UpdateBurstCyclesBySelf, 1998] - schedule sequntial size: 1
+[EST ALGO][UpdateBurstCyclesBySelf, 2001] - schedule parallel size: 1
+[EST ALGO][UpdateBurstCyclesBySelf, 1984] Start compute for block: SgForStatement:for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+[EST ALGO][UpdateBurstCyclesBySelf, 1998] - schedule sequntial size: 1
+[EST ALGO][UpdateBurstCyclesBySelf, 2001] - schedule parallel size: 1
+[EST ALGO][UpdateBurstCyclesBySelf, 1984] Start compute for block: SgIfStmt:if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+[EST ALGO][UpdateBurstCyclesBySelf, 2044] SubBlocksBitwidth = 0, SubBlocksDataSize = 0, for block: SgIfStmt:if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+[EST ALGO][UpdateBurstCyclesBySelf, 2174] VarRefTotalData = 0, VarRefBitWidth = 0, for block: SgIfStmt:if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+[EST ALGO][UpdateBurstCyclesBySelf, 2200] Get Burst Data Size = 0, for block: SgIfStmt:if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+[EST ALGO][UpdateBurstCyclesBySelf, 2203] Get Burst Bit Width = 0, for block: SgIfStmt:if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+Sub block bitwidth = 0
+parallel bitwidth = 0
+[EST ALGO][UpdateBurstCyclesBySelf, 2044] SubBlocksBitwidth = 0, SubBlocksDataSize = 0, for block: SgForStatement:for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+[EST ALGO][UpdateBurstCyclesBySelf, 2093] Start compute for loop: SgForStatement:for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+one ref = c bitwidth = 128 OneDataSize 1 = 128 Cycles = 1
+one ref = a bitwidth = 128 OneDataSize 1 = 128 Cycles = 1
+one ref = b bitwidth = 128 OneDataSize 1 = 128 Cycles = 1
+[EST ALGO][UpdateBurstCyclesBySelf, 2157] Finish compute for loop: SgForStatement:for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+[EST ALGO][UpdateBurstCyclesBySelf, 2174] VarRefTotalData = 384, VarRefBitWidth = 384, for block: SgForStatement:for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+[EST ALGO][UpdateBurstCyclesBySelf, 2200] Get Burst Data Size = 384, for block: SgForStatement:for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+[EST ALGO][UpdateBurstCyclesBySelf, 2203] Get Burst Bit Width = 384, for block: SgForStatement:for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+Sub block bitwidth = 384
+parallel bitwidth = 384
+[EST ALGO][UpdateBurstCyclesBySelf, 2044] SubBlocksBitwidth = 384, SubBlocksDataSize = 96000, for block: SgForStatement:for(int j = 0;j < 250;j++) {...}
+[EST ALGO][UpdateBurstCyclesBySelf, 2174] VarRefTotalData = 0, VarRefBitWidth = 0, for block: SgForStatement:for(int j = 0;j < 250;j++) {...}
+[EST ALGO][UpdateBurstCyclesBySelf, 2200] Get Burst Data Size = 96000, for block: SgForStatement:for(int j = 0;j < 250;j++) {...}
+[EST ALGO][UpdateBurstCyclesBySelf, 2203] Get Burst Bit Width = 384, for block: SgForStatement:for(int j = 0;j < 250;j++) {...}
+Sub block bitwidth = 384
+parallel bitwidth = 384
+[EST ALGO][UpdateBurstCyclesBySelf, 2044] SubBlocksBitwidth = 384, SubBlocksDataSize = 96000, for block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][UpdateBurstCyclesBySelf, 2174] VarRefTotalData = 0, VarRefBitWidth = 0, for block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][UpdateBurstCyclesBySelf, 2200] Get Burst Data Size = 96000, for block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][UpdateBurstCyclesBySelf, 2203] Get Burst Bit Width = 384, for block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+Sub block bitwidth = 384
+parallel bitwidth = 384
+[EST ALGO][UpdateBurstCyclesBySelf, 2044] SubBlocksBitwidth = 384, SubBlocksDataSize = 96000, for block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][UpdateBurstCyclesBySelf, 2174] VarRefTotalData = 0, VarRefBitWidth = 0, for block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][UpdateBurstCyclesBySelf, 2200] Get Burst Data Size = 96000, for block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][UpdateBurstCyclesBySelf, 2203] Get Burst Bit Width = 384, for block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+**********************************************************
+3.2.2 Update burst cycles factor
+**********************************************************
+[EST ALGO][UpdateBurstCyclesFactor, 2217] Start update factor for type : 9, block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][UpdateBurstCyclesFactor, 2218] - schedule sequntial size: 1
+[EST ALGO][UpdateBurstCyclesFactor, 2223] - schedule parallel size: 1
+[EST ALGO][UpdateBurstCyclesFactor, 2232] 111 Child Data Size = 96000, Parent Data Size = 96000, for block = void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][UpdateBurstCyclesFactor, 2246] 222 Child Data Size = 96000, Parent Data Size = 96000, for block = void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][UpdateBurstCyclesFactor, 2258] Factor = 1, for block = void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][UpdateBurstCyclesFactor, 2217] Start update factor for type : 8, block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][UpdateBurstCyclesFactor, 2218] - schedule sequntial size: 1
+[EST ALGO][UpdateBurstCyclesFactor, 2223] - schedule parallel size: 1
+[EST ALGO][UpdateBurstCyclesFactor, 2217] Start update factor for type : 0, block: SgForStatement:for(int j = 0;j < 250;j++) {...}
+[EST ALGO][UpdateBurstCyclesFactor, 2218] - schedule sequntial size: 1
+[EST ALGO][UpdateBurstCyclesFactor, 2223] - schedule parallel size: 1
+[EST ALGO][UpdateBurstCyclesFactor, 2232] 111 Child Data Size = 384, Parent Data Size = 96000, for block = for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+parent TCStatic = 250
+[EST ALGO][UpdateBurstCyclesFactor, 2246] 222 Child Data Size = 96000, Parent Data Size = 96000, for block = for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+[EST ALGO][UpdateBurstCyclesFactor, 2258] Factor = 1, for block = for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+[EST ALGO][UpdateBurstCyclesFactor, 2217] Start update factor for type : 0, block: SgForStatement:for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+[EST ALGO][UpdateBurstCyclesFactor, 2218] - schedule sequntial size: 1
+[EST ALGO][UpdateBurstCyclesFactor, 2223] - schedule parallel size: 1
+[EST ALGO][UpdateBurstCyclesFactor, 2232] 111 Child Data Size = 0, Parent Data Size = 384, for block = if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+parent TCStatic = 4
+[EST ALGO][UpdateBurstCyclesFactor, 2246] 222 Child Data Size = 0, Parent Data Size = 384, for block = if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+[EST ALGO][UpdateBurstCyclesFactor, 2258] Factor = 1, for block = if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+[EST ALGO][UpdateBurstCyclesFactor, 2217] Start update factor for type : 4, block: SgIfStmt:if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+[EST ALGO][UpdateBurstCyclesFactor, 2218] - schedule sequntial size: 0
+[EST ALGO][UpdateBurstCyclesFactor, 2273] BurstFactor = 1, for block: SgIfStmt:if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+[EST ALGO][UpdateBurstCyclesFactor, 2273] BurstFactor = 1, for block: SgForStatement:for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+[EST ALGO][UpdateBurstCyclesFactor, 2273] BurstFactor = 1, for block: SgForStatement:for(int j = 0;j < 250;j++) {...}
+[EST ALGO][UpdateBurstCyclesFactor, 2273] BurstFactor = 1, for block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][UpdateBurstCyclesFactor, 2273] BurstFactor = 1, for block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+**********************************************************
+3.2.3 Update burst cycles
+**********************************************************
+[EST ALGO][UpdateBurstCycles, 2288] - schedule sequntial size: 1
+[EST ALGO][UpdateBurstCycles, 2292] - schedule parallel size: 1
+[EST ALGO][UpdateBurstCycles, 2301] Start calculate as subblock for block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][UpdateBurstCycles, 2302] ChildBurstFactor = 1
+[EST ALGO][UpdateBurstCycles, 2288] - schedule sequntial size: 1
+[EST ALGO][UpdateBurstCycles, 2292] - schedule parallel size: 1
+[EST ALGO][UpdateBurstCycles, 2301] Start calculate as subblock for block: SgForStatement:for(int j = 0;j < 250;j++) {...}
+[EST ALGO][UpdateBurstCycles, 2302] ChildBurstFactor = 1
+[EST ALGO][UpdateBurstCycles, 2288] - schedule sequntial size: 1
+[EST ALGO][UpdateBurstCycles, 2292] - schedule parallel size: 1
+[EST ALGO][UpdateBurstCycles, 2301] Start calculate as subblock for block: SgForStatement:for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+[EST ALGO][UpdateBurstCycles, 2302] ChildBurstFactor = 1
+[EST ALGO][UpdateBurstCycles, 2288] - schedule sequntial size: 1
+[EST ALGO][UpdateBurstCycles, 2292] - schedule parallel size: 1
+[EST ALGO][UpdateBurstCycles, 2301] Start calculate as subblock for block: SgIfStmt:if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+[EST ALGO][UpdateBurstCycles, 2302] ChildBurstFactor = 1
+[EST ALGO][UpdateBurstCycles, 2288] - schedule sequntial size: 0
+Prefinish block Cycles calculation: ChildBurstCyclesSum=0, ChildUnitCyclesSum=0, for block: if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+Finish block Cycles calculation: ChildBurstCyclesSum=0, ChildUnitCyclesSum=0, for block: if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+Child unit cycles sum = 0, Child burst cycles sum = 0, Burst var ref cycles = 0
+[EST ALGO][UpdateBurstCycles, 2422] CycleUnitStatic = 0, CycleUnitStaticOrg = 0, BurstCycles = 0, SubBlocksCycles = 0, VarRefCycles = 0, ComboBurstFactor = 1, for block: SgIfStmt:if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+[EST ALGO][UpdateBurstCycles, 2333] Finish calculate as subblock for block: SgIfStmt:if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+ChildBurstCyclesMax = 0, ChildUnitCyclesMax = 0
+Finish calculate for one parallel scope: Child burst cycles max = 0, Child unit cycles max = 0
+Prefinish block Cycles calculation: ChildBurstCyclesSum=0, ChildUnitCyclesSum=0, for block: for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+Finish block Cycles calculation: ChildBurstCyclesSum=0, ChildUnitCyclesSum=0, for block: for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+Child unit cycles sum = 0, Child burst cycles sum = 0, Burst var ref cycles = 0
+[EST ALGO][UpdateBurstCycles, 2422] CycleUnitStatic = 1, CycleUnitStaticOrg = 0, BurstCycles = 1, SubBlocksCycles = 0, VarRefCycles = 0, ComboBurstFactor = 1, for block: SgForStatement:for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+[EST ALGO][UpdateBurstCycles, 2333] Finish calculate as subblock for block: SgForStatement:for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+ChildBurstCyclesMax = 1, ChildUnitCyclesMax = 1
+Finish calculate for one parallel scope: Child burst cycles max = 1, Child unit cycles max = 1
+Prefinish block Cycles calculation: ChildBurstCyclesSum=1, ChildUnitCyclesSum=1, for block: for(int j = 0;j < 250;j++) {...}
+Finish block Cycles calculation: ChildBurstCyclesSum=250, ChildUnitCyclesSum=1, for block: for(int j = 0;j < 250;j++) {...}
+Child unit cycles sum = 1, Child burst cycles sum = 250, Burst var ref cycles = 0
+[EST ALGO][UpdateBurstCycles, 2422] CycleUnitStatic = 12451, CycleUnitStaticOrg = 12451, BurstCycles = 250, SubBlocksCycles = 250, VarRefCycles = 0, ComboBurstFactor = 1, for block: SgForStatement:for(int j = 0;j < 250;j++) {...}
+[EST ALGO][UpdateBurstCycles, 2333] Finish calculate as subblock for block: SgForStatement:for(int j = 0;j < 250;j++) {...}
+ChildBurstCyclesMax = 250, ChildUnitCyclesMax = 12451
+Finish calculate for one parallel scope: Child burst cycles max = 250, Child unit cycles max = 12451
+Prefinish block Cycles calculation: ChildBurstCyclesSum=250, ChildUnitCyclesSum=12451, for block: void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+Finish block Cycles calculation: ChildBurstCyclesSum=250, ChildUnitCyclesSum=12451, for block: void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+Child unit cycles sum = 12451, Child burst cycles sum = 250, Burst var ref cycles = 0
+[EST ALGO][UpdateBurstCycles, 2422] CycleUnitStatic = 12451, CycleUnitStaticOrg = 12451, BurstCycles = 250, SubBlocksCycles = 250, VarRefCycles = 0, ComboBurstFactor = 1, for block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][UpdateBurstCycles, 2333] Finish calculate as subblock for block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+ChildBurstCyclesMax = 250, ChildUnitCyclesMax = 12451
+Finish calculate for one parallel scope: Child burst cycles max = 250, Child unit cycles max = 12451
+Prefinish block Cycles calculation: ChildBurstCyclesSum=250, ChildUnitCyclesSum=12451, for block: void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+Finish block Cycles calculation: ChildBurstCyclesSum=250, ChildUnitCyclesSum=12451, for block: void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+Child unit cycles sum = 12451, Child burst cycles sum = 250, Burst var ref cycles = 0
+[EST ALGO][UpdateBurstCycles, 2422] CycleUnitStatic = 12451, CycleUnitStaticOrg = 12451, BurstCycles = 250, SubBlocksCycles = 250, VarRefCycles = 0, ComboBurstFactor = 1, for block: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][UpdateCycleByMemoryBurstTop, 92] Total cycle of top kernel:0
+SECOND_CYCLES=12451
+[EST ALGO][ComputeStaticCycles, 48] Print schedule for after memory burst updating.
+
+FuncDecl(0):void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...} TopoID:F_0_0_0_3
+-ExtPort0:a
+-ExtPort1:b
+-ExtPort2:c
+-Schedule:
+Function: TopoID:F_0_0_0_3 Unit Cycles:12451 LogicLatency:0 GlueLatency:12451
+  (0,0) for(int j = 0;;,j < 250;,j++) TopoID:L_0_0_0_3_2_0_12 II:50 IL:1 UF:1 Flat:0 TCStatic:250 Unit Cycles:12451 Total Cycles:0
+            LogicLatency: 0, GlueLatency: 0, LogicLatencyIteration: 0, GlueLatencyIteration: 0
+**********************************************************
+3.3 Update total cycles.
+**********************************************************
+[EST ALGO][ComputeTotalStaticCycle, 2585] Start compute cycles for TASK. 
+[EST ALGO][ComputeTotalStaticCycle, 2597] Start compute cycles for func void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][ComputeTotalStaticCycle, 2598] Input Factor = 1
+[EST ALGO][ComputeTotalStaticCycleFromSchedule, 2766]F_0_0_0_3 - schedule sequntial size: 1
+[EST ALGO][ComputeTotalStaticCycleFromSchedule, 2769]F_0_0_0_3 - schedule parallel size: 1
+[EST ALGO][ComputeTotalStaticCycle, 2597] Start compute cycles for func void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}
+[EST ALGO][ComputeTotalStaticCycle, 2598] Input Factor = 1
+[EST ALGO][ComputeTotalStaticCycleFromSchedule, 2766]F_0_0_0_3 - schedule sequntial size: 1
+[EST ALGO][ComputeTotalStaticCycleFromSchedule, 2769]F_0_0_0_3 - schedule parallel size: 1
+[EST ALGO][ComputeTotalStaticCycle, 2640] Start compute cycles for loop for(int j = 0;j < 250;j++) {...}
+[EST ALGO][ComputeTotalStaticCycle, 2642] Input Factor = 1
+[EST ALGO][ComputeTotalStaticCycle, 2678] UnrollFactor = 1, TCStatic = 250, TmpTCStatic = 250, NewFactor = 1
+[EST ALGO][ComputeTotalStaticCycleFromSchedule, 2766]L_0_0_0_3_2_0_12 - schedule sequntial size: 1
+[EST ALGO][ComputeTotalStaticCycleFromSchedule, 2769]L_0_0_0_3_2_0_12 - schedule parallel size: 1
+[EST ALGO][ComputeTotalStaticCycleFromSchedule, 2773] Have Pipeline parent.
+[EST ALGO][ComputeTotalStaticCycle, 2640] Start compute cycles for loop for(int j_sub = 0;j_sub < 4;++j_sub) {...}
+[EST ALGO][ComputeTotalStaticCycle, 2642] Input Factor = 1
+[EST ALGO][ComputeTotalStaticCycle, 2678] UnrollFactor = 4, TCStatic = 4, TmpTCStatic = 1, NewFactor = 1
+[EST ALGO][ComputeTotalStaticCycleFromSchedule, 2766]L_0_0_0_3_2_0_12_3_1 - schedule sequntial size: 1
+[EST ALGO][ComputeTotalStaticCycleFromSchedule, 2769]L_0_0_0_3_2_0_12_3_1 - schedule parallel size: 1
+[EST ALGO][ComputeTotalStaticCycle, 2689] Start compute cycles for if if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}
+[EST ALGO][ComputeTotalStaticCycle, 2690] Input Factor = 1
+[EST ALGO][ComputeTotalStaticCycleFromSchedule, 2766]X_0_0_0_3_2_0_12_3_1_3_1 - schedule sequntial size: 0
+[EST ALGO][ComputeTotalStaticCycleFromSchedule, 2783]X_0_0_0_3_2_0_12_3_1_3_1 - schedule spawn size: 0
+[EST ALGO][ComputeTotalStaticCycleFromSchedule, 2766]X_0_0_0_3_2_0_12_3_1_3_1 - schedule sequntial size: 0
+[EST ALGO][ComputeTotalStaticCycleFromSchedule, 2783]X_0_0_0_3_2_0_12_3_1_3_1 - schedule spawn size: 0
+[EST ALGO][ComputeTotalStaticCycle, 2706] Compute cycles for if: SgIfStmt:if(inc > 100) {c[j * 4 + j_sub] = a[j * 4 + j_sub] + b[j * 4 + j_sub];}, TotalCycles 0
+[EST ALGO][ComputeTotalStaticCycleFromSchedule, 2783]L_0_0_0_3_2_0_12_3_1 - schedule spawn size: 0
+[EST ALGO][ComputeTotalStaticCycle, 2686] Compute cycles for loop: SgForStatement:for(int j_sub = 0;j_sub < 4;++j_sub) {...}, IsPipeline=0, TotalCycles 1
+[EST ALGO][ComputeTotalStaticCycleFromSchedule, 2783]L_0_0_0_3_2_0_12 - schedule spawn size: 0
+[EST ALGO][ComputeTotalStaticCycle, 2686] Compute cycles for loop: SgForStatement:for(int j = 0;j < 250;j++) {...}, IsPipeline=1, TotalCycles 12451
+[EST ALGO][ComputeTotalStaticCycleFromSchedule, 2783]F_0_0_0_3 - schedule spawn size: 0
+[EST ALGO][ComputeTotalStaticCycle, 2613] Factor = 1, Cycles 12451
+[EST ALGO][ComputeTotalStaticCycle, 2617] Compute cycles for function declaration: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}, TotalCycles 12451. TmpCycles 12451
+[EST ALGO][ComputeTotalStaticCycleFromSchedule, 2783]F_0_0_0_3 - schedule spawn size: 0
+[EST ALGO][ComputeTotalStaticCycle, 2613] Factor = 1, Cycles 12451
+[EST ALGO][ComputeTotalStaticCycle, 2617] Compute cycles for function declaration: SgFunctionDeclaration:void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...}, TotalCycles 12451. TmpCycles 12451
+[EST ALGO][ComputeTotalStaticCycle, 2590] Unit cycle of top kernel:12451
+[EST ALGO][ComputeTotalStaticCycle, 2591] THIRD_CYCLES=12451
+[EST ALGO][ComputeStaticCycles, 59] Print schedule for after compute total cycle.
+
+FuncDecl(0):void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...} TopoID:F_0_0_0_3
+-ExtPort0:a
+-ExtPort1:b
+-ExtPort2:c
+-Schedule:
+Function: TopoID:F_0_0_0_3 Unit Cycles:12451 LogicLatency:0 GlueLatency:12451
+  (0,0) for(int j = 0;;,j < 250;,j++) TopoID:L_0_0_0_3_2_0_12 II:50 IL:1 UF:1 Flat:0 TCStatic:250 Unit Cycles:12451 Total Cycles:12451
+            LogicLatency: 0, GlueLatency: 0, LogicLatencyIteration: 0, GlueLatencyIteration: 0
+
+FuncDecl(1):void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...} TopoID:F_0_0_0_3
+-Schedule:
+Function: TopoID:F_0_0_0_3 Unit Cycles:12451 LogicLatency:0 GlueLatency:12451
+  (0,0) void vec_add_kernel(int * a,int * b,int * c,int inc,int inc_comp) {...} TopoID:F_0_0_0_3 Unit Cycles=12451 Total Cycles:12451
+            LogicLatency: 0, GlueLatency: 12451, LogicLatencyIteration: 0, GlueLatencyIteration: 0
+Function: TopoID:F_0_0_0_3 Unit Cycles:12451 LogicLatency:0 GlueLatency:12451
+  (0,0) for(int j = 0;;,j < 250;,j++) TopoID:L_0_0_0_3_2_0_12 II:50 IL:1 UF:1 Flat:0 TCStatic:250 Unit Cycles:12451 Total Cycles:12451
+            LogicLatency: 0, GlueLatency: 0, LogicLatencyIteration: 0, GlueLatencyIteration: 0
+[INFO] ========================================================
+[INFO] 4. Merge Json file.
+[INFO] ========================================================
+[INFO] Writing performance report : step1.json
+ID = F_0_0_0_3
+Report unit number = 0
+[EST ALGO][AddSimOutputMaker, 1067]DBW - DRAMDataByteStatic: 0
+[EST ALGO][AddSimOutputMaker, 1068]DBW - CycleStatic: 12451
+[EST ALGO][AddSimOutputMaker, 1069]DBW - FPGACLK_GHz: 0.25
+{
+    "F_0_0_0_3": {
+        "serially_execution":"0",
+        "CYCLE_BURST":"250",
+        "CYCLE_COMPUTE":"12451",
+    "CYCLE_UNIT":"12451",
+        "CYCLE_TOT":"0",
+        "DBW":"0.00",
+        "poison":"0"
+    },
+ID = L_0_0_0_3_2_0_12
+Report unit number = 1
+[EST ALGO][AddSimOutputMaker, 1067]DBW - DRAMDataByteStatic: 0
+[EST ALGO][AddSimOutputMaker, 1068]DBW - CycleStatic: 12451
+[EST ALGO][AddSimOutputMaker, 1069]DBW - FPGACLK_GHz: 0.25
+    "L_0_0_0_3_2_0_12": {
+        "CYCLE_BURST":"250",
+        "CYCLE_COMPUTE":"12451",
+    "CYCLE_UNIT":"12451",
+        "CYCLE_TOT":"0",
+        "DBW":"0.00",
+        "trip-count":"250",
+        "unroll-factor":"1",
+
+        "poison":"0"
+    },
+ID = L_0_0_0_3_2_0_12_3_1
+Report unit number = 2
+    "L_0_0_0_3_2_0_12_3_1": {
+        "CYCLE_UNIT":"ignore",
+        "CYCLE_TOT":"ignore",
+        "DBW":"ignore",
+        "trip-count":"4",
+        "unroll-factor":"4",
+        "poison":"0"
+    },
+ID = F_0_0_0_3
+Report unit number = 3
+[EST ALGO][AddSimOutputMaker, 1067]DBW - DRAMDataByteStatic: 0
+[EST ALGO][AddSimOutputMaker, 1068]DBW - CycleStatic: 12451
+[EST ALGO][AddSimOutputMaker, 1069]DBW - FPGACLK_GHz: 0.25
+    "TOP_vec_add_kernel": {
+        "CYCLE_UNIT":"12451",
+        "CYCLE_TOT":"0",
+        "DBW":"0.00",
+        "poison":"0",
+        "func_name": "vec_add_kernel",
+             "topo_id": "TOP_vec_add_kernel",
+             "type":"top_kernel"
+     },
+ID = F_0_0_0_3
+Report unit number = 4
+[EST ALGO][AddSimOutputMaker, 1067]DBW - DRAMDataByteStatic: 0
+[EST ALGO][AddSimOutputMaker, 1068]DBW - CycleStatic: 12451
+[EST ALGO][AddSimOutputMaker, 1069]DBW - FPGACLK_GHz: 0.25
+    "F_0_0_0_3": {
+        "serially_execution":"0",
+        "CYCLE_BURST":"250",
+        "CYCLE_COMPUTE":"12451",
+    "CYCLE_UNIT":"12451",
+        "CYCLE_TOT":"0",
+        "DBW":"0.00",
+        "poison":"0"
+    },
+ID = L_0_0_0_3_2_0_12
+Report unit number = 5
+[EST ALGO][AddSimOutputMaker, 1067]DBW - DRAMDataByteStatic: 0
+[EST ALGO][AddSimOutputMaker, 1068]DBW - CycleStatic: 12451
+[EST ALGO][AddSimOutputMaker, 1069]DBW - FPGACLK_GHz: 0.25
+    "L_0_0_0_3_2_0_12": {
+        "CYCLE_BURST":"250",
+        "CYCLE_COMPUTE":"12451",
+    "CYCLE_UNIT":"12451",
+        "CYCLE_TOT":"0",
+        "DBW":"0.00",
+        "trip-count":"250",
+        "unroll-factor":"1",
+
+        "poison":"0"
+    },
+ID = L_0_0_0_3_2_0_12_3_1
+Report unit number = 6
+    "L_0_0_0_3_2_0_12_3_1": {
+        "CYCLE_UNIT":"ignore",
+        "CYCLE_TOT":"ignore",
+        "DBW":"ignore",
+        "trip-count":"4",
+        "unroll-factor":"4",
+        "poison":"0"
+    }
+}
+Finish write file step1.json
+#################################################
+Delete some attribtues from json step1.json.
+#################################################
+Write output.json file.
+
+
+#################################################
+Delete some attribtues from json gen_token.json.
+#################################################
+Write output.json file.
+
+
+[INFO] Performance estimation complete
+
+====== Typedef replace ========>
+=> nondefine func Orig: SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}
+=> nondefine func REPLACE: SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}
+=> nondefine func Orig: SgFunctionDeclaration:void __merlin_dummy_kernel_pragma() {...}
+=> nondefine func REPLACE: SgFunctionDeclaration:void __merlin_dummy_kernel_pragma() {...}
+[INFO] Beginning merging simulation output step1.json and annotated report gen_token.json into performance report perf_est.json
+[INFO] Reading simulation output : step1.json
+[INFO] Reading annotated report : gen_token.json
+[INFO] Generating output file : perf_est.json
+[INFO] Merge complete
+cd .//lc_sim; merlin_safe_exec mars_opt __merlinkernel_vec_add_kernel.cpp  -e c -p performance_estimation  -I\/curr\/hanhu\/unit_test\/test_case\/test0  -I\/curr\/hanhu\/unit_test\/test_case\/test0\/src\/  -I\/curr\/hanhu\/WORK\/Merlin_Compiler\/trunk\/build\/..\/\/mars-gen\/lib\/merlin -a MERGE -a step1.json -a gen_token.json -a perf_est.json :: __merlinkernel_vec_add_kernel.cpp  :: 0

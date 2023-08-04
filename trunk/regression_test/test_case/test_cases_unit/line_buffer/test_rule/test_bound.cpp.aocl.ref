@@ -1,0 +1,91 @@
+#define HS 256
+#define WS 1024
+#define FH 5
+#define FW 1
+#pragma ACCEL kernel
+
+void conv1d(float in[256][1024],float filter[5][1],float out[252][1024])
+{
+  
+#pragma ACCEL interface VARIABLE=in BURST_OFF
+  float LineBuffer_in0[1024];
+  float LineBuffer_in1[1024];
+  float LineBuffer_in2[1024];
+  float LineBuffer_in3[1024];
+  float slide_wind_0[5][1];
+  for (int i = -4L; i < 256 - 5 + 1; i++) 
+    for (int j = 0L; j < 1024 - 1 + 1; j++) {{
+        int i_2;
+        int i_1;
+        float tmp_wind_0[5];
+        int i_0;
+        for (i_0 = 0L; i_0 <= 4L; ++i_0) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0[i_0][0] = slide_wind_0[i_0][0];
+        }
+        for (i_1 = 0; i_1 <= 4L; ++i_1) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          if (i_1 == 0L) {
+            tmp_wind_0[i_1] = LineBuffer_in0[j - 0L];
+          }
+           else {
+            if (i_1 == 1L) {
+              tmp_wind_0[i_1] = LineBuffer_in1[j - 0L];
+            }
+             else {
+              if (i_1 == 2L) {
+                tmp_wind_0[i_1] = LineBuffer_in2[j - 0L];
+              }
+               else {
+                if (i_1 == 3L) {
+                  tmp_wind_0[i_1] = LineBuffer_in3[j - 0L];
+                }
+              }
+            }
+          }
+        }
+        tmp_wind_0[4UL] = in[i + 0L + 4L][j + 0L + 0L];
+        for (i_2 = 0; i_2 <= 4L; ++i_2) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0[i_2][0L] = tmp_wind_0[i_2];
+        }
+{
+          int i_3;
+          float tmp_in;
+          for (i_3 = 0; i_3 <= 3UL; ++i_3) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            tmp_in = tmp_wind_0[i_3 + 1];
+            if (i_3 == 0L) {
+              LineBuffer_in0[j - 0L + 0L] = tmp_in;
+            }
+             else {
+              if (i_3 == 1L) {
+                LineBuffer_in1[j - 0L + 0L] = tmp_in;
+              }
+               else {
+                if (i_3 == 2L) {
+                  LineBuffer_in2[j - 0L + 0L] = tmp_in;
+                }
+                 else {
+                  if (i_3 == 3L) {
+                    LineBuffer_in3[j - 0L + 0L] = tmp_in;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      if (i >= 0L && i <= 251L && j >= 0L && j <= 1023L) {
+        float tmp = 0.0f;
+        for (int p = 0; p < 5; p++) 
+          for (int q = 0; q < 1 - 1; q++) 
+            tmp += slide_wind_0[p][q] * filter[p][q];
+        out[i][j] = tmp;
+      }
+    }
+}

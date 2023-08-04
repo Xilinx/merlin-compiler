@@ -1,0 +1,11 @@
+====== Typedef replace ========>
+=> nondefine func Orig: SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}
+=> nondefine func REPLACE: SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}
+=> nondefine func Orig: SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}
+=> nondefine func REPLACE: SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}
+=> nondefine func Orig: SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}
+=> nondefine func REPLACE: SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}
+=> nondefine func Orig: SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}
+=> nondefine func REPLACE: SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}
+=> nondefine func Orig: SgFunctionDeclaration:void __merlin_dummy_kernel_pragma() {...}
+=> nondefine func REPLACE: SgFunctionDeclaration:void __merlin_dummy_kernel_pragma() {...}

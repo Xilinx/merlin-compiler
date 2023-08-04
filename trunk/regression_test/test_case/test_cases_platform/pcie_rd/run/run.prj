@@ -1,0 +1,11 @@
+<project name="run">
+  <source_file_set>
+    <file type="c">../src/vec_add_kernel.c</file>
+    <file type="c">../src/vec_add.c</file>
+  </source_file_set>
+  <aux_file_set>
+    <file>../src/int_i2.dat</file>
+    <file>../src/int_i.dat</file>
+  </aux_file_set>
+  <spec_file>../run/spec/directive.xml</spec_file>
+</project>

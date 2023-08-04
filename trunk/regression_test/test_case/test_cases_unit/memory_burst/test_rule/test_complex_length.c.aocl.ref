@@ -1,0 +1,31 @@
+#include<assert.h>
+#include <string.h> 
+#include<assert.h>
+#include "cmost.h"
+extern int __merlin_include__GB_string_h_1;
+extern int __merlin_include__GB_assert_h_0;
+#pragma ACCEL kernel
+
+void top(int *a,unsigned int size)
+{
+  int a_buf[1000];
+  __merlin_access_range(a,0,999);
+  size < 1000?((void )0) : __assert_fail("size < 1000","test_complex_length.c",6,__PRETTY_FUNCTION__);
+{
+    unsigned long merlin_len = -1 + size * 2 <= 1000?-1 + size * 2 : 1000;
+    if (((-1 + size * 2 <= 1000?-1 + size * 2 : 1000)) >= 0) {
+      assert(merlin_len <= 1000L);
+      memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * merlin_len);
+    }
+  }
+  for (int i = 0; i < size; ++i) {
+    a_buf[i * 2]++;
+  }
+{
+    unsigned long merlin_len_0 = -1 + size * 2 <= 1000?-1 + size * 2 : 1000;
+    if (((-1 + size * 2 <= 1000?-1 + size * 2 : 1000)) >= 0) {
+      assert(merlin_len_0 <= 1000L);
+      memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * merlin_len_0);
+    }
+  }
+}

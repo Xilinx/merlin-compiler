@@ -1,0 +1,10 @@
+
+ERROR: [PROCS-378] Found pointer type casting from short * to long * in (vec_add_kernel.cpp:14).
+
+ERROR: [PROCS-378] Found pointer type casting from short * to double * in (vec_add_kernel.cpp:15).
+
+ERROR: [PROCS-378] Found pointer type casting from const int [2] to int * in (vec_add_kernel.cpp:18).
+
+ERROR: [PROCS-378] Found pointer type casting from char * to unsigned int * in (vec_add_kernel.cpp:20).
+
+ERROR: [PROCS-378] Found pointer type casting from char * to int * in (vec_add_kernel.cpp:23).

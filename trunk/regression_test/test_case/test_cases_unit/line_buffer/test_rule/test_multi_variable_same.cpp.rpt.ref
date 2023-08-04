@@ -1,0 +1,2 @@
+INFO: [LINEBUF-101] Applying line buffer on variable 'b' in loop 'L_0_0' (test_multi_variable_same.cpp:10) with a 1x5 stencil
+INFO: [LINEBUF-101] Applying line buffer on variable 'c' in loop 'L_0_0' (test_multi_variable_same.cpp:10) with a 1x5 stencil

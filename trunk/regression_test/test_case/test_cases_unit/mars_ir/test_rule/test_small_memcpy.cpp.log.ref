@@ -1,0 +1,10 @@
+====> pragma outside loop 
+function: top
+SgBasicBlock:{int index = const_config[0];int in_h = const_config[1];int offset = const_config[2];int c_buf[100];for(int i = 0;i < 10;++i) {index = index * 10 / in_h / 4;memcpy((void *)c_buf,((const void *)c) + index + offset,(4 * len));}}
+function: top, loop: L_0, coarse grained
+SgBasicBlock:{index = index * 10 / in_h / 4;memcpy((void *)c_buf,((const void *)c) + index + offset,(4 * len));}
+====> pragma in loop 
+function: top
+SgBasicBlock:{int index = const_config[0];int in_h = const_config[1];int offset = const_config[2];int c_buf[100];for(int i = 0;i < 10;++i) {index = index * 10 / in_h / 4;memcpy((void *)c_buf,((const void *)c) + index + offset,(4 * len));}}
+function: top, loop: L_0, coarse grained
+SgBasicBlock:{index = index * 10 / in_h / 4;memcpy((void *)c_buf,((const void *)c) + index + offset,(4 * len));}

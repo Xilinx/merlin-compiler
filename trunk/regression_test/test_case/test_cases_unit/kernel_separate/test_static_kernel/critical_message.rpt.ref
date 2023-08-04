@@ -1,0 +1,3 @@
+
+ERROR: [SYNCHK-335] Static kernel function void vec_add_kernel(int * a,int * b,int * c,int inc) {...} (vec_add.cpp:27) is not supported.
+Please remove static modifier.

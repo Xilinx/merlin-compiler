@@ -1,0 +1,12 @@
+
+ERROR: [DISAG-302] global port 'head' (test_recursive.c:6) with unsupported type: 
+recursive type: struct st *next;
+ is not decomposed
+
+ERROR: [DISAG-302] interface port 'a' (test_recursive.c:9) with unsupported type: 
+recursive type: struct st *next;
+ is not decomposed
+
+ERROR: [DISAG-302] local variable 'ptr' (test_recursive.c:17) with unsupported type: 
+recursive type: struct st *next;
+ is not decomposed

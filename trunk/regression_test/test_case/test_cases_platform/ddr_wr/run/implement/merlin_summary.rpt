@@ -1,0 +1,19 @@
+Merlin Compiler Version : 2016.4
+Merlin Compiler Build : 8367
+Merlin Compiler Build Date : 2017-02-07 08:54:51 -0800 (Tue, 07 Feb 2017)
+
+===================================================
+  High Level Synthesis                              
+===================================================
+AOCL 16.1.1
+/curr/software/Altera/16.1_pro/hld/bin/aocl
+
+Product family: stratixv
+Targect device: 5SGXEA7N2F45C2
++--------------------+--------+--------+--------+--------+---------+-------+
+|                    |  BRAM  |  DSP   |   FF   |   LE   | Latency | Slack |
++--------------------+--------+--------+--------+--------+---------+-------+
+|Total               |     347|      74|  221325|  111018|        0|     NA|
+|Available           |      NA|      NA|      NA|      NA|         |       |
+|Utilization (%)     |   15.00|    5.00|   15.00|   15.00|         |       |
++--------------------+--------+--------+--------+--------+---------+-------+

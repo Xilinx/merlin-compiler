@@ -1,0 +1,14 @@
+#pragma ACCEL kernel
+
+void k()
+{
+  while(1){
+    int i = 3;
+    if (i) {
+      i;
+    }
+     else {
+      break; 
+    }
+  }
+}

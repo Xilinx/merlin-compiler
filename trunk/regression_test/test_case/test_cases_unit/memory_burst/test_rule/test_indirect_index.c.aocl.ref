@@ -1,0 +1,19 @@
+#include <string.h> 
+#include<assert.h>
+#include "cmost.h"
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void top(int *a,int *b,int min,int max)
+{
+  __merlin_access_range(b,0,9999UL);
+  min > 0 && min < 1000?((void )0) : __assert_fail("min > 0 && min < 1000","test_indirect_index.c",6,__PRETTY_FUNCTION__);
+  max > 0 && max < 1000?((void )0) : __assert_fail("max > 0 && max < 1000","test_indirect_index.c",7,__PRETTY_FUNCTION__);
+  for (int i = min; i < max; ++i) {
+    int a_buf[1];
+    memcpy((void *)(&a_buf[0]),(const void *)(&a[i]),sizeof(int ) * 1);
+    int id = a_buf[0];
+    if (b[id] > 0) {
+    }
+  }
+}

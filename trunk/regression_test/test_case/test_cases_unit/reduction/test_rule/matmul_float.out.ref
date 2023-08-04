@@ -1,0 +1,60 @@
+#define VEC_SIZE 64
+#define VEC_flat_SIZE 4096
+#define aa(p, n) (a[(p)*VEC_SIZE + (n)])
+#define bb(p, n) (b[(p)*VEC_SIZE + (n)])
+#define cc(p, n) (c[(p)*VEC_SIZE + (n)])
+#define a_buf(p, n) (abuf[(p)*VEC_SIZE + (n)])
+#pragma ACCEL kernel
+
+void matmul_kernel(float *a,float *b,float *c)
+{
+  int j_0;
+  int i_0;
+  float c_2_0_buf[4096];
+  float b_2_0_buf[64];
+  float a_2_0_buf[4033];
+  int i;
+  int j;
+  int k;
+  int i0;
+  memcpy(&c_2_0_buf[0],&c[0],sizeof(float ) * 4096);
+  for (k = 0; k < 64; k++) {
+    memcpy(&a_2_0_buf[0],&a[k],sizeof(float ) * 4033);
+    memcpy(&b_2_0_buf[0],&b[64 * k],sizeof(float ) * 64);
+    float _c_2_0_buf_rdc[64][64];
+    for (i = 0; i < 64; i++) {
+      
+#pragma ACCEL pipeline
+      for (j = 0; j < 64; j++) {
+        
+#pragma ACCEL parallel complete
+        _c_2_0_buf_rdc[i][j] = 0;
+      }
+    }
+    for (i0 = 0; i0 < 64; i0++) {
+      for (i = 0; i < 64; i++) {
+        
+#pragma ACCEL pipeline
+        for (j = 0; j < 64; j++) {
+          
+#pragma HLS dependence variable=_c_2_0_buf_rdc array inter false
+          
+#pragma ACCEL parallel complete
+          _c_2_0_buf_rdc[i][j] += a_2_0_buf[64 * i] * b_2_0_buf[j];
+        }
+      }
+    }
+    for (i_0 = 0; i_0 <= 63; ++i_0) {
+      
+#pragma ACCEL PIPELINE
+      for (j_0 = 0; j_0 <= 63; ++j_0) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+{
+          c_2_0_buf[k * 64 + j] += _c_2_0_buf_rdc[i][j];
+        }
+      }
+    }
+  }
+  memcpy(&c[0],&c_2_0_buf[0],sizeof(float ) * 4096);
+}

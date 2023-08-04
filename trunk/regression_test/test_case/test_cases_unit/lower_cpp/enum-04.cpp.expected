@@ -1,0 +1,14 @@
+
+struct ::A 
+{
+  enum _A_style styletag;
+}
+;
+enum _A_style {MERLIN_MAX_ENUM_0=3L} ;
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+#pragma ACCEL kernel
+
+void k(struct A a)
+{
+  a . styletag;
+}

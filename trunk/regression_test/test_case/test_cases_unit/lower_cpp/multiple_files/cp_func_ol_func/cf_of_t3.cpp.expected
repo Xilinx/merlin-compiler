@@ -1,0 +1,10 @@
+
+void p_Z3fooc(char )
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_foo_c_();
+
+void g()
+{
+  p_Z3fooc(0);
+}

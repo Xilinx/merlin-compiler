@@ -1,0 +1,367 @@
+#include<string.h>
+#define DUMP 0
+#define learning_rate 0.01f
+#define LABEL_SIZE		10
+#define HIDDEN_SIZE     50
+#define FEATURE_SIZE	784
+#define CHUNK_SIZE 20
+#define lambda 0.0001f
+#define two_lambda 0.0002f
+#define two_lambda_learning_rate 0.000002f
+#define learning_rate_CHUNK_SIZE 0.0005f
+#define WEIGHTS_SIZE 238510 //(FEATURE_SIZE+1)*HIDDEN_SIZE+(HIDDEN_SIZE+1)*LABEL_SIZE
+#define TOTAL_SIZE 60000
+#define DATA_SIZE 47640000
+#include "cmost.h"
+// ZP: Please note this is to work around the bug in HLS
+// if the iteration is less than the pipeline depth, the dependence may be ignored wrongly
+//#define ADDITIONAL_CYCLES 2    // for 150MHz
+#define ADDITIONAL_CYCLES 5    // for 200MHz
+#include <math.h>
+
+void shift_left(float regs[50])
+{
+  __merlin_access_range(regs,0,62UL);
+  int i;
+  for (i = 0; i < 50 - 1; i++) {
+    
+#pragma ACCEL parallel complete
+    regs[i] = regs[i + 1];
+  }
+}
+
+void pipeline(int n_samples,volatile float *global_data,float weights1[50][785],float bias2[10],float weights2[10][50],float regs[50],float regs2[50],float regs3[50])
+{
+  int _memcpy_i4_1;
+  int _memcpy_i4_0;
+  __merlin_access_range(regs3,0,62UL);
+  __merlin_access_range(regs2,0,62UL);
+  __merlin_access_range(regs,0,62UL);
+  __merlin_access_range(weights2,0,9UL,0,62UL);
+  __merlin_access_range(bias2,0,9UL);
+  __merlin_access_range(weights1,0,62UL,0,784UL);
+  __merlin_access_range(global_data,0,47639999UL);
+  float data[20][794];
+  float neuron1[20][50];
+  float error2[20][10];
+  float error1[20][50];
+  int i;
+  int j;
+  int k;
+  int p;
+  int n_stage = n_samples / 20;
+  for (i = 0; i < n_stage; i++) {
+    
+#pragma HLS loop_tripcount max=3000
+{
+      for (_memcpy_i4_1 = 0; _memcpy_i4_1 < 20; ++_memcpy_i4_1) {
+        
+#pragma HLS COALESCING_WIDTH=1280
+        
+#pragma ACCEL PARALLEL SKIP COMPLETE
+        for (_memcpy_i4_0 = 0; _memcpy_i4_0 < 794; ++_memcpy_i4_0) {
+          
+#pragma ACCEL PARALLEL SKIP FACTOR=2
+          data[_memcpy_i4_1][_memcpy_i4_0] = global_data[i * 20 * (784 + 10) + ((0 * 20 + _memcpy_i4_1) * 794 + _memcpy_i4_0)];
+        }
+      }
+    }
+    for (j = 0; j < 20; j++) {
+      
+#pragma ACCEL pipeline
+      for (k = 0; k < 50; k++) {
+        
+#pragma ACCEL parallel complete
+        neuron1[j][k] = weights1[k][0];
+      }
+    }
+    for (p = 0; p < 784; p++) {
+      for (j = 0; j < 20; j++) {
+        
+#pragma ACCEL pipeline
+        float temp = data[j][10 + p];
+        for (k = 0; k < 50; k++) {
+          
+#pragma ACCEL parallel complete
+          neuron1[j][k] += temp * weights1[k][p + 1];
+        }
+      }
+    }
+    for (j = 0; j < 20; j++) {
+      for (k = 0; k < 50; k++) {
+        
+#pragma ACCEL parallel complete
+        regs[k] = neuron1[j][k];
+      }
+      for (k = 0; k < 50; k++) {
+        
+#pragma ACCEL pipeline
+        float a = regs[0];
+        shift_left(regs);
+        float b = (a / sqrtf(1.f + a * a) + 1.f) / 2.f;
+        shift_left(regs3);
+        regs3[50 - 1] = b;
+      }
+      for (k = 0; k < 50; k++) {
+        
+#pragma ACCEL parallel complete
+        neuron1[j][k] = regs3[k];
+      }
+    }
+    for (j = 0; j < 20; j++) {
+      for (k = 0; k < 10; k++) {
+        
+#pragma ACCEL pipeline
+        error2[j][k] = bias2[k];
+      }
+    }
+    for (j = 0; j < 20; j++) {
+      for (k = 0; k < 10 + 5; k++) {
+        
+#pragma ACCEL pipeline
+        for (p = 0; p < 50; p++) {
+          
+#pragma ACCEL parallel complete
+          if (k < 10) 
+            error2[j][k] += neuron1[j][p] * weights2[k][p];
+        }
+      }
+    }
+    for (j = 0; j < 20; j++) {
+      for (k = 0; k < 10; k++) {
+        
+#pragma ACCEL pipeline
+//#pragma ACCEL pipeline
+//#pragma HLS DEPENDENCE variable="error2" inter false
+        error2[j][k] = (error2[j][k] / sqrtf(1.f + error2[j][k] * error2[j][k]) + 1.f) / 2.f - data[j][k];
+      }
+    }
+    for (j = 0; j < 20; j++) {
+      
+#pragma ACCEL pipeline
+      for (p = 0; p < 50; p++) {
+        
+#pragma ACCEL parallel complete
+        if (k < 10) 
+          error2[j][k] += neuron1[j][p] * weights2[k][p];
+        error1[j][p] = 0.f;
+      }
+    }
+    for (k = 0; k < 10; k++) {
+      for (j = 0; j < 20; j++) {
+        
+#pragma ACCEL pipeline
+        float temp = error2[j][k];
+        for (p = 0; p < 50; p++) {
+          
+#pragma ACCEL parallel complete
+          error1[j][p] += temp * weights2[k][p];
+        }
+      }
+    }
+    for (j = 0; j < 20; j++) {
+      for (p = 0; p < 50; p++) {
+        
+#pragma ACCEL parallel complete
+        regs[p] = error1[j][p];
+        regs2[p] = neuron1[j][p];
+      }
+      for (p = 0; p < 50; p++) {
+        
+#pragma ACCEL pipeline
+        float a = regs[0];
+        shift_left(regs);
+        float b = regs2[0];
+        shift_left(regs2);
+        float c = a * b * (1.f - b) * 0.0005f;
+        shift_left(regs3);
+        regs3[50 - 1] = c;
+      }
+      for (p = 0; p < 50; p++) {
+        
+#pragma ACCEL parallel complete
+        error1[j][p] = regs3[p];
+      }
+    }
+    for (j = 0; j < 20; j++) {
+      for (k = 0; k < 10; k++) {
+        
+#pragma ACCEL pipeline
+        error2[j][k] *= 0.0005f;
+      }
+    }
+    for (k = 0; k < 10 + 5; k++) {
+      
+#pragma ACCEL pipeline
+      for (p = 0; p < 50; p++) {
+        
+#pragma ACCEL parallel complete
+        if (k < 10) 
+          weights2[k][p] -= weights2[k][p] * 0.000002f;
+      }
+    }
+    for (j = 0; j < 20; j++) {
+      for (k = 0; k < 10 + 5; k++) {
+        
+#pragma ACCEL pipeline
+        if (k < 10) 
+          bias2[k] -= error2[j][k];
+      }
+    }
+    for (j = 0; j < 20; j++) {
+      for (k = 0; k < 10 + 5; k++) {
+        
+#pragma ACCEL pipeline
+        float temp = error2[j][k];
+        for (p = 0; p < 50; p++) {
+          
+#pragma ACCEL parallel complete
+          if (k < 10) 
+            weights2[k][p] -= temp * neuron1[j][p];
+        }
+      }
+    }
+    for (p = 1; p < 784 + 1; p++) {
+      
+#pragma ACCEL pipeline
+      for (k = 0; k < 50; k++) {
+        
+#pragma ACCEL parallel complete
+        weights1[k][p] -= weights1[k][p] * 0.000002f;
+      }
+    }
+    for (j = 0; j < 20; j++) {
+      for (p = 0; p < 784 + 1; p++) {
+        
+#pragma ACCEL pipeline
+        float temp = data[j][10 + p - 1];
+        for (k = 0; k < 50; k++) {
+          
+#pragma ACCEL parallel complete
+          weights1[k][p] -= error1[j][k] * ((p == 0?1.f : temp));
+        }
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void twonn_kernel(int n_samples,volatile float *global_weights,volatile float *global_data)
+{
+  __merlin_access_range(global_data,0,47639999UL);
+  __merlin_access_range(global_weights,0,238509UL);
+// #pragma HLS INTERFACE ap_bus port=global_weights depth=397510
+// #pragma HLS RESOURCE variable=global_weights core=AXI4M
+// #pragma HLS INTERFACE ap_bus port=global_data depth=476400
+// #pragma HLS RESOURCE variable=global_data core=AXI4M
+// #pragma HLS RESOURCE variable=return core=AXI4LiteS metadata="-bus_bundle control"
+  float weights1[50][785];
+  float bias2[10];
+  float weights2[10][50];
+  int i;
+  int j;
+  int k;
+  float regs[50];
+  float regs2[50];
+  float regs3[50];
+  float buffer1[785];
+  for (i = 0; i < 50; i++) {
+    long _memcpy_i_0;
+    for (_memcpy_i_0 = 0; _memcpy_i_0 < ((size_t )((784 + 1) * 4)) / 4; ++_memcpy_i_0) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=5
+      long total_offset1 = 0 * 785 + 0;
+      long total_offset2 = 0 * 0 + i * (784 + 1);
+      buffer1[total_offset1 + _memcpy_i_0] = global_weights[total_offset2 + _memcpy_i_0];
+    }
+    for (j = 0; j < 784 + 1; j++) {
+      
+#pragma ACCEL pipeline
+      for (k = 0; k < 50; k++) {
+        
+#pragma ACCEL parallel complete
+        regs[k] = weights1[k][j];
+      }
+      shift_left(regs);
+      for (k = 0; k < 50; k++) {
+        
+#pragma ACCEL parallel complete
+        weights1[k][j] = regs[k];
+      }
+      weights1[50 - 1][j] = buffer1[j];
+    }
+  }
+  int weights_offset = (784 + 1) * 50;
+  float buffer[51];
+  for (i = 0; i < 10; i++) {
+    long _memcpy_i_1;
+    for (_memcpy_i_1 = 0; _memcpy_i_1 < ((size_t )((50 + 1) * 4)) / 4; ++_memcpy_i_1) {
+      
+#pragma ACCEL PARALLEL SKIP COMPLETE
+      long total_offset1 = 0 * 51 + 0;
+      long total_offset2 = 0 * 0 + (weights_offset + (50 + 1) * i);
+      buffer[total_offset1 + _memcpy_i_1] = global_weights[total_offset2 + _memcpy_i_1];
+    }
+    bias2[i] = buffer[0];
+    for (j = 0; j < 50; j++) {
+      
+#pragma ACCEL pipeline
+      shift_left(regs);
+      regs[50 - 1] = buffer[j + 1];
+    }
+    for (j = 0; j < 50; j++) {
+      
+#pragma ACCEL parallel complete
+      weights2[i][j] = regs[j];
+    }
+  }
+  pipeline(n_samples,global_data,weights1,bias2,weights2,regs,regs2,regs3);
+  for (i = 0; i < 50; i++) {
+    for (j = 0; j < 784 + 1; j++) {
+      
+#pragma ACCEL parallel pipeline
+      buffer1[j] = weights1[0][j];
+      for (k = 0; k < 50; k++) {
+        
+#pragma ACCEL parallel complete
+        regs[k] = weights1[k][j];
+      }
+      shift_left(regs);
+      for (k = 0; k < 50; k++) {
+        
+#pragma ACCEL parallel complete
+        weights1[k][j] = regs[k];
+      }
+    }
+    long _memcpy_i_2;
+    for (_memcpy_i_2 = 0; _memcpy_i_2 < ((size_t )((784 + 1) * 4)) / 4; ++_memcpy_i_2) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=5
+      long total_offset1 = 0 * 0 + i * (784 + 1);
+      long total_offset2 = 0 * 785 + 0;
+      global_weights[total_offset1 + _memcpy_i_2] = buffer1[total_offset2 + _memcpy_i_2];
+    }
+  }
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 50; j++) {
+      
+#pragma ACCEL parallel complete
+      regs[j] = weights2[i][j];
+    }
+    buffer[0] = bias2[i];
+    for (j = 0; j < 50; j++) {
+      
+#pragma ACCEL pipeline
+      buffer[j + 1] = regs[0];
+      shift_left(regs);
+    }
+    long _memcpy_i_3;
+    for (_memcpy_i_3 = 0; _memcpy_i_3 < ((size_t )((50 + 1) * 4)) / 4; ++_memcpy_i_3) {
+      
+#pragma ACCEL PARALLEL SKIP COMPLETE
+      long total_offset1 = 0 * 0 + (weights_offset + (50 + 1) * i);
+      long total_offset2 = 0 * 51 + 0;
+      global_weights[total_offset1 + _memcpy_i_3] = buffer[total_offset2 + _memcpy_i_3];
+    }
+  }
+}

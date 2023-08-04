@@ -1,0 +1,89 @@
+#include<hls_stream.h>
+#include "math.h"
+#include "assert.h"
+#define READ_SIZE 3840000
+#define WRITE_SIZE 30000
+extern int __merlin_include__GB_hls_stream_h_0;
+const int rom[100] = {(1), (1), (1)};
+static hls::stream<float > __merlinadder_inb_ch[16];
+static hls::stream<float > __merlinadder_out_ch;
+
+void __merlinadder_inb_streaming(float inb[3840000])
+{
+  
+#pragma HLS INLINE off
+  for (long merlin_it_0 = 0L; merlin_it_0 <= 5999L; merlin_it_0 += 1L) {
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 40L; ++merlin_it_1) {
+      
+#pragma ACCEL pipeline
+      long merlin_it_2;
+      for (merlin_it_2 = 0L; merlin_it_2 < 16; ++merlin_it_2) {
+        
+#pragma ACCEL parallel
+        float merlin_tmp_3;
+        merlin_tmp_3 = inb[rom[merlin_it_0] * 640 + merlin_it_1 * 16 + merlin_it_2];
+        __merlinadder_inb_ch[merlin_it_2] .  write (merlin_tmp_3);
+      }
+    }
+  }
+}
+
+void __merlinadder_out_streaming(float out[30000])
+{
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 30000L; ++merlin_it_0) {
+    
+#pragma ACCEL pipeline
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 1; ++merlin_it_1) {
+      
+#pragma ACCEL parallel
+      float merlin_tmp_2;
+      merlin_tmp_2 = __merlinadder_out_ch .  read ();
+      out[0 + merlin_it_0 * 1 + merlin_it_1] = merlin_tmp_2;
+    }
+  }
+}
+
+void __merlinadder_computation(float ina[640],float inb[3840000],float out[30000])
+{
+  
+#pragma HLS inline off
+  for (int i = 0; i < 6000; i++) {
+    int current_index = rom[i];
+    current_index < 6000?(static_cast < void  >  (0)) : __assert_fail("current_index < 6000","multadd_var_addr_with_assert.cpp",(unsigned int )13,__PRETTY_FUNCTION__);
+    for (int j = 0; j < 5; j++) {
+      float temp = 0.0f;
+      for (int k = 0; k < 128; k++) {
+        
+#pragma ACCEL parallel
+        temp += ina[j * 128 + k] * __merlinadder_inb_ch[k % 16] .  read ();
+      }
+//out[i*5+j] = 1.0f / (1.0f + exp(-temp));
+      __merlinadder_out_ch .  write (((float )(((double )1.0f) / (((double )1.0f) + exp((double )(-temp))))));
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void adder(float ina[640],float inb[3840000],float out[30000])
+{
+  
+#pragma ACCEL interface variable=out BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=32
+  
+#pragma ACCEL interface variable=ina
+  
+#pragma ACCEL interface variable=inb BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=512
+  
+#pragma HLS dataflow
+  
+#pragma HLS stream variable=__merlinadder_inb_ch
+  __merlinadder_inb_streaming(inb);
+  __merlinadder_computation(ina,0,0);
+  
+#pragma HLS stream variable=__merlinadder_out_ch
+  __merlinadder_out_streaming(out);
+}

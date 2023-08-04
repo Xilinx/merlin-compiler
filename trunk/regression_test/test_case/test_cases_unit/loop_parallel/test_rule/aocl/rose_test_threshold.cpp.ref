@@ -1,0 +1,51 @@
+#pragma ACCEL kernel
+
+void func_top_0()
+{
+  int a[100][100];
+  int b[100][100];
+  int c[3][2048];
+  int c1[2000];
+  int k;
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    
+#pragma unroll
+    for (k = 0; k < 99; k++) {
+      
+#pragma unroll
+      for (j = 0; j < 99; j++) {
+        a[i][j] = b[k][j] + b[k + 1][j + 1];
+      }
+    }
+  }
+  for (i = 0; i < 32; i++) {
+    
+#pragma unroll
+    for (j = 0; j < 1025; j++) {
+      c1[j] = j;
+    }
+  }
+  
+#pragma unroll
+  for (j = 0; j < 2000; j++) {
+    if (j <= 1500) 
+      c1[j] = j;
+  }
+  for (i = 0; i < 3; i++) {
+    
+#pragma unroll
+    for (int t = 0; t < 32; t++) {
+      
+#pragma unroll
+      for (j = 0; j < 32; j++) {
+        c[i][t * 32 + j] = j;
+        c[i][t * 32 + j + 1] = j;
+        c[i][t * 32 + j + 2] = j;
+        c[i][t * 32 + j + 3] = j;
+        c[i][t * 32 + j + 4] = j;
+      }
+    }
+  }
+}

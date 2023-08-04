@@ -1,0 +1,6 @@
+
+ERROR: [SEPAR-311] Global or static variable 'i' (vec_add_static.cpp:17)
+  shared in multiple kernels 'f3' (vec_add_static.cpp:7) , 'f4' (vec_add_static.cpp:12)  is not supported
+
+ERROR: [SEPAR-311] Global or static variable 'gl_var' (vec_add_global.cpp:2)
+  shared in multiple kernels 'f1' (vec_add_global.cpp:5) , 'f2' (vec_add_global.cpp:10)  is not supported

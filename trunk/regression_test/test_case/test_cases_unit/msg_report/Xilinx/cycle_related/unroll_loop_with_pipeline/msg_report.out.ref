@@ -1,0 +1,54 @@
+================================================================================
+Kernel : mykernel(unroll_loop_with_pipeline.cpp:4)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+orig            512      (unroll_loop_with_pipeline.cpp:4) memory burst and coalescing [1]
+out             512      (unroll_loop_with_pipeline.cpp:4) memory burst and coalescing [2]
+len             32       (unroll_loop_with_pipeline.cpp:4) scalar
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++-------------------------------------------------------------+----+----+-----+-------+------+------+------+-----------------------+
+|                          hierarchy                          | TC | AC | CPC |  LUT  |  FF  | BRAM | DSP  |        comment        |
++-------------------------------------------------------------+----+----+-----+-------+------+------+------+-----------------------+
+|mykernel (unroll_loop_with_pipeline.cpp:4)                   |    |  67|   67|  15.04|  5.32|  1.39|  0.00|kernel                 |
+|    auto memory burst read and coalescing for 'orig'         |    |   -|   16|       |      |      |      |                       |
+|    loop i (unroll_loop_with_pipeline.cpp:9)                 |    |   -|    -|   7.57|  2.45|  0.00|  0.00|16x parallelized       |
+|        loop j (unroll_loop_with_pipeline.cpp:11)            |  16|   -|    -|       |      |      |      |IL=1, fully pipelined  |
+|    auto memory burst write and coalescing for 'merlin_out'  |    |   -|   16|       |      |      |      |                       |
++-------------------------------------------------------------+----+----+-----+-------+------+------+------+-----------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++-----------------------------------------------------+--------+----------+
+|                        Name                         | Cycles | Activity |
++-----------------------------------------------------+--------+----------+
+|     mykernel (unroll_loop_with_pipeline.cpp:4)      |   67   | 100.00%  |
+| auto memory burst (unroll_loop_with_pipeline.cpp:4) |   0    |  0.00%   |
+| auto memory burst (unroll_loop_with_pipeline.cpp:4) |   0    |  0.00%   |
++-----------------------------------------------------+--------+----------+
+
++--------------------------------------------+------+------+------+-------+
+|                    Name                    | BRAM | DSP  |  FF  |  LUT  |
++--------------------------------------------+------+------+------+-------+
+| mykernel (unroll_loop_with_pipeline.cpp:4) | 1.39 | 0.00 | 5.32 | 15.04 |
++--------------------------------------------+------+------+------+-------+
+[1] Low bandwidth efficiency of memory burst: variable 'orig' (unroll_loop_with_pipeline.cpp:4) in scope (unroll_loop_with_pipeline.cpp:9).
+  Reason: short burst length = 1024 bytes
+
+[2] Low bandwidth efficiency of memory burst: variable 'merlin_out' (unroll_loop_with_pipeline.cpp:4) in scope (unroll_loop_with_pipeline.cpp:9).
+  Reason: short burst length = 1024 bytes
+
+
+
+

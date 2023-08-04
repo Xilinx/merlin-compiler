@@ -1,0 +1,12 @@
+#pragma ACCEL kernel
+
+void func_top_0(int *a,int *b)
+{
+  for (int i = 0; i < 100; i++) 
+// Original: #pragma ACCEL parallel factor=auto{options: P=[x for x in range(10) + [16,32,64,128]]; default:1} auto{options: Y=["", "priority=logic"]; default: ""}
+{
+    
+#pragma ACCEL PARALLEL FACTOR=auto{options: P=[x for x in range(10) + [16,32,64,128]]; default:1} auto{options: Y=["", "priority=logic"]; default: ""} 
+    a[i] = b[i];
+  }
+}

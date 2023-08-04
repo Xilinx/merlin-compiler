@@ -1,0 +1,23 @@
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+static void __merlin_dummy_SgTemplateMemberFunctionDeclaration_data_();
+struct A_int_ *g[2] = {(0), (0)};
+
+struct ::A_int_ 
+{
+  int data;
+}
+;
+void p_ZN6A_int_3addIEEv(struct A_int_ *this_);
+
+void p_ZN6A_int_3addIEEv(struct A_int_ *this_)
+{
+  this_ -> data++;
+}
+#pragma ACCEL kernel
+
+int top()
+{
+  struct A_int_ *a;
+  p_ZN6A_int_3addIEEv(a);
+  p_ZN6A_int_3addIEEv(g[1]);
+}

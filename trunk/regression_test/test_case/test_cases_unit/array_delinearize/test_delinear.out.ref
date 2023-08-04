@@ -1,0 +1,1425 @@
+#include "cmost.h"
+#include "test_delinear.h"
+#include <assert.h>
+#include <string.h>
+
+void test6_2_sub(int **p)
+{
+  return ;
+}
+#pragma ACCEL kernel
+
+void test6_2()
+{
+  int a[25][4][25][4];
+  for (int i = 0; i < 25; ++i) {
+    for (int j = 0; j < 4; ++j) {
+      for (int k = 0; k < 25; ++k) {
+        for (int l = 0; l < 4; ++l) {
+          a[i][j][k][l] = i * i + j * j + k * k + l * l;
+        }
+      }
+    }
+  }
+  test6_2_sub((int **)a[0]);
+}
+#pragma ACCEL kernel
+
+void test6_1(int *b)
+{
+  int a0[1024];
+  int a0_1[1024];
+  int a1[1024];
+  int a2[32][32];
+  int a3[32][32];
+  int a4[128][8];
+  int a5[128][8];
+  int a6[128][8];
+  int a7[256][4][128][8];
+  int a8[256][4][1024];
+  int a9[128][8];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j += 2) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l += 3) {
+          memcpy(a0,b,500);
+          memset(a0_1,0,500);
+          memcpy(b,a1,500);
+          memcpy(a1,b,sizeof(int ) * (4 * i + j));
+          memcpy(a2[i],b,sizeof(int ) * j);
+          memcpy(a3[i],b,sizeof(int ) * 8);
+          memcpy(a4[i],b,sizeof(int ) * (j + 8));
+          memcpy(a5[i],b,sizeof(int ) * (j + 7));
+          memcpy(a6[i],b,sizeof(int ) * (j + 9));
+          memcpy(a7[i][j][i],b,sizeof(int ) * (j + 4));
+          memcpy(a8[i][j],b,sizeof(int ) * (j + 4));
+          memcpy(a9[i],b,sizeof(int ) * 8);
+          a9[i * 2L + j][4];
+        }
+}
+#pragma ACCEL kernel
+
+void test6_1_1(int *b)
+{
+  int a[16][64];
+  int a1[16][1004];
+  int a2[16][1004][20];
+  int a3[16][64][16];
+  int a4[13][9][9][16];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j += 2) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l += 3) {
+          a[i][k];
+// support
+          memcpy(a[0],b,500);
+          a1[0][64 * i + k];
+          memcpy(a1[0],b,5000);
+// not supported
+          a2[0][64 * i + k][0];
+          memcpy(b,a2[0][0],5000);
+// not supported
+          a3[i][k][0];
+// support
+          memcpy(a3[0][0],b,5000);
+          a4[i][j][k][0];
+// support
+          memcpy(a4[0][0][0],b,5000);
+        }
+}
+#pragma ACCEL kernel
+
+void test6_2(int *b)
+{
+  int a0[32][32];
+  int a1[1024];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j += 2) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l += 3) {
+          memcpy(a0[0],b,500);
+          a0[i][j];
+          memset(a1,0,500);
+          a1[32 * i + j];
+        }
+}
+void test6_3_sub(int (*a)[16]);
+
+void test6_3_sub(int (*a)[16])
+{
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      a[i][j];
+}
+
+void test6_3_sub_1(int *a)
+{
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      a[j + i * 16];
+}
+
+void test6_3_sub_2(int *a)
+{
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      a[j + i * 16];
+}
+#pragma ACCEL kernel
+
+void test6_3(int t)
+{
+  t >= 0 && t < 4?((void )0) : __assert_fail("t>= 0 && t< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  int a[64][16];
+  test6_3_sub((int (*)[16])a);
+  int a1[1024];
+  test6_3_sub_1(a1);
+  int a2[32][32][1024];
+  test6_3_sub_2((int *)a2[t][0]);
+}
+void test6_3_sub(int (*a)[16]);
+#pragma ACCEL kernel
+
+void test6_4(int *a)
+{
+  int b[16] = {(0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0), (0)};
+  for (int i = 0; i < 2; i++) 
+    for (int j = 0; j < 2; j++) 
+      for (int k = 0; k < 2; k++) 
+        for (int l = 0; l < 2; l++) {
+          b[i * 8 + j * 4 + k * 2 + l];
+        }
+}
+#pragma ACCEL kernel
+
+void test6_5()
+{
+  int a1[16][8][8];
+  int t = a1[0][1][0];
+  t >= 0 && t < 8?((void )0) : __assert_fail("t>= 0 && t< 8","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  for (int i = 0; i <= t; i++) {
+    a1[1][0][i];
+    int p = a1[1][0][0];
+    p >= 0 && p < 8?((void )0) : __assert_fail("p>= 0 && p< 8","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+    for (int j = 0; j <= p; j++) {
+      a1[j][0][i];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void test6_5_1()
+{
+  int a1[16][8][8];
+  int t = a1[0][1][0];
+  t >= 0 && t < 8?((void )0) : __assert_fail("t>= 0 && t< 8","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  for (int i = 0; i <= t; i++) {
+    a1[1][0][t];
+    int p = a1[1][0][0];
+    p >= 0 && p < 8?((void )0) : __assert_fail("p>= 0 && p< 8","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+    for (int j = 0; j <= p; j++) {
+      a1[p][0][t];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void test6_5_2()
+{
+  int a1[16][8][8];
+  int a2[16][64];
+  int t = a1[0][1][0];
+  t >= 0 && t < 8?((void )0) : __assert_fail("t>= 0 && t< 8","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  for (int i = 0; i <= t; i++) {
+    a1[1][0][t];
+    int p = a1[1][0][0];
+    p >= 0 && p < 8?((void )0) : __assert_fail("p>= 0 && p< 8","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+    for (int j = 0; j <= p; j++) {
+      a2[p][t];
+// the range here is not correct
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void test6_5_3()
+{
+  int i;
+  int j;
+  int a[1024];
+  int b[1024];
+  int c[1024];
+  for (i = 0; i < 10; i++) {
+    for (j = b[i]; j < 10; j++) {
+      a[j];
+      c[j];
+    }
+  }
+  return ;
+}
+
+void test5_0_sub(int (*a)[8][8][4],int *b)
+{
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a[l][k][i][j];
+          b[(k + l * 8) * 32 + j + i * 4];
+        }
+}
+
+void test5_0_sub1(int a[4][8][8][4],int *b)
+{
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a[l][k][i][j];
+          b[(k + l * 8) * 32 + j + i * 4];
+        }
+}
+#pragma ACCEL kernel
+
+void test5_0()
+{
+  int a[4][8][8][4];
+  test5_0_sub((int (*)[8][8][4])a,0L);
+  test5_0_sub1(a,0L);
+}
+
+void test5_1_sub(int *a,int *b)
+{
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a[(k + l * 8) * 32 + j + i * 4];
+          b[(k + l * 8) * 32 + j + i * 4];
+        }
+}
+#pragma ACCEL kernel
+
+void test5_1()
+{
+  int a[1024];
+  test5_1_sub(a,0L);
+  test5_1_sub(a,0L);
+}
+#pragma ACCEL kernel
+
+void test5_1_1()
+{
+  int a[1024];
+  test5_1_sub(a,0L);
+  test5_1_sub(0L,a);
+}
+
+void test5_1_2_sub(int *a,int *b,int n)
+{
+  __merlin_access_range(a,0,31);
+  a[n];
+  b[n];
+}
+#pragma ACCEL kernel
+
+void test5_1_2(int n)
+{
+  int a[32][32];
+// delinearized
+  int b[1024];
+// not deliearized
+  for (int i = 0; i < 100; i++) 
+    test5_1_2_sub((int *)a[i],b + 32 * i,n);
+}
+
+void test5_1_3_sub(int *a,int *b,int n)
+{
+  __merlin_access_range(a,0,31);
+  a[n];
+  b[n];
+}
+#pragma ACCEL kernel
+
+void test5_1_3(int n)
+{
+  int a[32][32];
+// delinearized
+  int b[1024];
+// not deliearized
+  for (int i = 0; i < 100; i++) {
+    test5_1_3_sub((int *)a[i],b + 32 * i,n);
+    test5_1_3_sub((int *)a[i],b + 32 * i,n);
+  }
+}
+
+void test5_1_4_sub(int *a,int *b,int n)
+{
+  __merlin_access_range(a,0,31);
+  a[n];
+  b[n];
+}
+#pragma ACCEL kernel
+
+void test5_1_4(int n)
+{
+  int a[1024];
+// delinearized
+  int b[1024];
+// not deliearized
+  for (int i = 0; i < 100; i++) {
+    test5_1_4_sub(a + 32 * i,b + 32 * i,n);
+    test5_1_4_sub(a + 32 * i + 32,b + 32 * i,n);
+  }
+}
+
+void test5_2_sub(int (*a)[8][8][4],int (*b)[8][8][4])
+{
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a[l][k][i][j];
+          b[l][k][i][j];
+        }
+}
+#pragma ACCEL kernel
+
+void test5_2()
+{
+  int a[4][8][8][4];
+  test5_2_sub((int (*)[8][8][4])a,(int (*)[8][8][4])a);
+}
+
+void test5_3_sub(int (*a)[8][8][4],int (*b)[8][35])
+{
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a[l][k][i][j];
+          b[l][k][i * 4L + j];
+        }
+}
+#pragma ACCEL kernel
+
+void test5_3()
+{
+  int a[4][8][8][4];
+  int b[4][8][35];
+  test5_3_sub((int (*)[8][8][4])a,(int (*)[8][35])b);
+}
+
+void test5_4_sub(int *a,int *b)
+{
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a[(k + l * 8) * 32 + j + i * 4];
+          b[(k + l * 8) * 35 + j + i * 4];
+        }
+}
+#pragma ACCEL kernel
+
+void test5_4()
+{
+  int a[1024];
+  int b[1024];
+  test5_4_sub(a,0L);
+  test5_4_sub(b,0L);
+}
+
+void test5_5_sub_sub(int (*a)[8][8][4],int (*b)[8][35])
+{
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a[l][k][i][j];
+          b[l][k][i * 4L + j];
+        }
+}
+
+void test5_5_sub(int (*a)[8][8][4],int *b_)
+{
+  int b[4][8][35];
+  test5_5_sub_sub((int (*)[8][8][4])a,(int (*)[8][35])b);
+}
+#pragma ACCEL kernel
+
+void test5_5()
+{
+  int a[4][8][8][4];
+  int b[1024];
+  test5_5_sub((int (*)[8][8][4])a,0L);
+}
+
+void test5_6_sub_sub(int *a,int *b)
+{
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a[(k + l * 8) * 32 + j + i * 4];
+          b[(k + l * 8) * 35 + j + i * 4];
+        }
+}
+
+void test5_6_sub(int *a,int *b_)
+{
+  int b[1024];
+  test5_6_sub_sub(a,b);
+}
+#pragma ACCEL kernel
+
+void test5_6()
+{
+  int a[1024];
+  int b[1024];
+  test5_6_sub(a,0L);
+  test5_6_sub_sub(a,b);
+}
+
+void test4_0_sub(int (*a)[8][8][4])
+{
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) 
+          a[l][k][i][j];
+}
+#pragma ACCEL kernel
+
+void test4_0()
+{
+  int a[4][8][8][4];
+  test4_0_sub((int (*)[8][8][4])a);
+}
+
+void test4_1_sub(int (*a)[4])
+{
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) 
+          a[i][j];
+}
+#pragma ACCEL kernel
+
+void test4_1()
+{
+  int a[32][8][4];
+  test4_1_sub((int (*)[4])a[1]);
+}
+
+void test4_1_1_sub(int a[16])
+{
+  __merlin_access_range(a,0,15);
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) 
+          a[k % 16];
+// range not determined statically
+}
+#pragma ACCEL kernel
+
+void test4_1_1()
+{
+  int a[64][16];
+  for (int i = 0; i < 8; i++) 
+    test4_1_1_sub(a[i]);
+}
+
+void test4_1_2_sub1(int a[16],int k)
+{
+  __merlin_access_range(a,0,15);
+  a[k % 16]++;
+// range not determined statically
+}
+
+void test4_1_2_sub(int a[16])
+{
+  __merlin_access_range(a,0,15);
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          test4_1_2_sub1(a,k);
+          test4_1_2_sub1(a,k);
+        }
+}
+#pragma ACCEL kernel
+
+void test4_1_2()
+{
+  int a[64][16];
+  for (int i = 0; i < 8; i++) 
+    test4_1_2_sub(a[i]);
+}
+
+void test4_1_3_sub(int a[16])
+{
+  __merlin_access_range(a,0,15);
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a[k % 16]++;
+        }
+}
+#pragma ACCEL kernel
+
+void test4_1_3()
+{
+  int a[64][16];
+  int b[1024];
+  for (int i = 0; i < 8; i++) {
+    test4_1_3_sub(a[i]);
+    test4_1_3_sub(a[i]);
+    test4_1_3_sub(b);
+    test4_1_3_sub(b + 16 * i);
+  }
+}
+
+void test4_1_4_sub(int a[16])
+{
+  __merlin_access_range(a,0,15);
+  for (int k = 0; k < 8; k++) {
+    a[k % 16]++;
+  }
+}
+#pragma ACCEL kernel
+
+void test4_1_4()
+{
+  int a[1024];
+  for (int i = 0; i < 8; i++) {
+    test4_1_4_sub(a);
+    test4_1_4_sub(a);
+    a[0];
+    a[1];
+    a[3];
+// old error: range in _sub was missing, so it split into [256][4]
+  }
+}
+#pragma ACCEL kernel
+
+void test4_2()
+{
+  int test4_2_a1[4][8][8][4];
+  int test4_2_a2[4][8][8][4];
+  int test4_2_a3[1024];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          &test4_2_a1[l][k][i][j];
+          test4_2_a2[0][0][0];
+          test4_2_a2[l][k][i][j];
+          &test4_2_a3;
+          test4_2_a3[(k + l * 8) * 32 + j + i * 4];
+        }
+}
+#pragma ACCEL kernel
+
+void test4_3()
+{
+  int test4_3_a1[1][8][4][8][8][4][8];
+  int test4_3_a2[1][8][4][8][8][4][1][8];
+  int test4_3_a3[1][8][4][8][8][4][1][8];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          test4_3_a1[1][0][l][k][i][j];
+          test4_3_a2[1][0][l][k][i][j][1][0];
+          test4_3_a3[1][0][l][k][i][j][0];
+          test4_3_a3[1][0][l][k][i][j][1][0];
+        }
+}
+#pragma ACCEL kernel
+
+void test4_4()
+{
+  int a1[4][8][8][4];
+  int a2[1024];
+  int a3[1024];
+  int (*a1_)[8][8][4] = (int (*)[8][8][4])a1;
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a1_[l][k][i][j];
+        }
+}
+#pragma ACCEL kernel
+
+void test4_4_1_0()
+{
+  int a2[32][8][4];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+// steps: 1, 4, 32
+// a2[32][8][4];
+          int (*a2_)[4] = (int (*)[4])a2[k];
+// int (* a2_)[4] = a2[k];
+          a2_[i][j];
+// a2_[i][j]
+          a2[k][i][j];
+// a2[k][i][j]
+        }
+}
+#pragma ACCEL kernel
+
+void test4_4_1()
+{
+//#split_dim pos
+// This case tests the position of splitted dimensions between alias and
+// reference Considering the offsets which determines the level to split
+//
+// The split on the alias side and original array side are both supposed to be
+// applied
+  int a1[4][8][32];
+  int a2[32][8][4];
+  int a3[32][8][4];
+  int a4[1024];
+  int a5[32][8][4];
+  int (*a1_)[8][32] = (int (*)[8][32])a1;
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          int (*a2_)[4] = (int (*)[4])a2[k];
+          int *a3_ = (int *)a3[k][i];
+          int *a4_ = a4 + 32 * k + j;
+// not apply, cross alias
+          int *a5_ = (int *)a5[k][0];
+// empty alias
+          a1_[l][k][i * 4L + j];
+          a1[l][k][j * 8L + i];
+          a2_[i][j];
+          a2[k][i][j];
+          a3_[j];
+          a4_[4 * i];
+          a5[0][i][0];
+        }
+}
+#pragma ACCEL kernel
+
+void test4_4_2_ssss(int t,int p)
+{
+  int a2[32][32];
+  t >= 0 && t < 4?((void )0) : __assert_fail("t>= 0 && t< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  p >= 0 && p < 4?((void )0) : __assert_fail("p>= 0 && p< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  int *a2_ = (int *)a2[t];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a2_[i];
+        }
+}
+#pragma ACCEL kernel
+
+void test4_4_2_sss(int t,int p)
+{
+  int a2[32][32][1024];
+  t >= 0 && t < 4?((void )0) : __assert_fail("t>= 0 && t< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  p >= 0 && p < 4?((void )0) : __assert_fail("p>= 0 && p< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  int (*a2_)[1024] = (int (*)[1024])a2[t];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a2_[i][j];
+        }
+}
+#pragma ACCEL kernel
+
+void test4_4_2_ss(int t,int p)
+{
+  int a2[32][32][256][4];
+  t >= 0 && t < 4?((void )0) : __assert_fail("t>= 0 && t< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  p >= 0 && p < 4?((void )0) : __assert_fail("p>= 0 && p< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  int (*a2_)[256][4] = (int (*)[256][4])a2[t];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a2_[i][i][j];
+        }
+}
+#pragma ACCEL kernel
+
+void test4_4_2(int t,int p)
+{
+//#alias dim #
+// This case tests the support of multi-d array with alias
+//     the alias can have different dims (less than the original array dim)
+// Only the specific dimension is delinearized
+  int a1[32][32][512][2][32][8][4];
+  int a2[256][4][32][32][256][4];
+  int a3[64][16][256][4][1024];
+//    assert(t>=0&&t<4); // can also support assert, but the file line# will
+//    not change as below for regression test assert(p>=0&&p<4);
+  t >= 0 && t < 4?((void )0) : __assert_fail("t>= 0 && t< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  p >= 0 && p < 4?((void )0) : __assert_fail("p>= 0 && p< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  int (*a1_)[512][2][32][8][4] = (int (*)[512][2][32][8][4])a1[t];
+  int (*a2_)[256][4] = (int (*)[256][4])a2[1][0][t];
+  int *a3_ = &a3[t][2][t][p][t * 4];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a1_[1][1][0][k][i][j];
+          a2_[i][i][j];
+          a3_[j + 32 * k];
+        }
+}
+#pragma ACCEL kernel
+
+void test4_4_3(int t,int p)
+{
+//#alias type
+// Only the full array are being considered to be splitted
+// Only the m-D pointer to the array type can be a feasible alias of the array
+// to be split
+//      e.g. the original array has 5 dims
+//           an alias is a 2-D pointer to a 3-d array
+// Processing:
+//      When a dimension is split, if it is a pointer dim in alias,
+//           that dim of the alias expends into multiple pointer dims
+//      And if the split dim is an array dim in alias,
+//           that dim of the alias expends into mulitple array dims
+  int a1[1024][1024][256][4];
+  int a2[1024][1024][1024];
+  int a3[256][4][1024][256][4];
+  int a4[1024][1024][256][4];
+  typedef int (**t_2dp)[1024];
+  t >= 0 && t < 4?((void )0) : __assert_fail("t>= 0 && t< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  p >= 0 && p < 4?((void )0) : __assert_fail("p>= 0 && p< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  int (*a1_)[1024][256][4] = (int (*)[1024][256][4])a1;
+// a 1-d pointer to 2-d array
+  int (**a2_)[1024] = ((t_2dp )a2) + (4 * t + p);
+// a 2-d pointer to 1-d array
+  int (***a3_)[4] = (int (***)[4])(&a3[t][p]);
+// a 3-d pointer to int
+  int (**a4_)[4] = (int (**)[4])a4[0];
+// a 2-d pointer to int
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a1_[0][0][i][j];
+          a2_[0][0][j + i * 4];
+          a3_[0][0][i][j];
+          a4_[0][i][j];
+        }
+}
+#pragma ACCEL kernel
+
+void test4_4_4(int t,int p)
+{
+//#alias of alias
+  int a1[1024][1024][32][8][4];
+  int a2[1024][1024][1024];
+  int a3[64][16][256][4][32][8][4];
+  int a4[342][3][8][4][8][4][256][4];
+  t >= 0 && t < 4?((void )0) : __assert_fail("t>= 0 && t< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  p >= 0 && p < 4?((void )0) : __assert_fail("p>= 0 && p< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+// direct assignments on alias
+  int (*a1_)[1024][32][8][4] = (int (*)[1024][32][8][4])a1;
+// a 1-d pointer to 2-d array
+  int (*a1__)[1024][32][8][4] = (int (*)[1024][32][8][4])a1_;
+// a 1-d pointer to 2-d array
+// type coverted from array to pointer (not apply)
+  typedef int (**t_2dp)[1024];
+  int (*a2_)[1024][1024] = a2;
+// a 1-d pointer to 2-d array
+  int (**a2__)[1024] = (t_2dp )a2_;
+// a 3-d pointer to 1-d array
+// dimension reduce
+  int (*(*a3_)[4])[8][4] = (int (*(*)[4])[8][4])a3[p][0];
+  int (*a3__)[8][4] = (int (*)[8][4])a3_[t][0];
+// split one dim
+  int (*(*a4_)[8][4])[4] = (int (*(*)[8][4])[4])a4[0][1][t];
+  int (*(*a4__)[4])[4] = (int (*(*)[4])[4])a4[1][0][t][0];
+  int (*(*a4___)[4])[4] = (int (*(*)[4])[4])a4_[p];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a1_[0][0][k][j * 2L][0];
+          a1__[0][0][k][i][j];
+          a2_[0][0][32 * k + 8 * j];
+          a2__[0][0][32 * k + i * 4 + j];
+          a3_[0][0][k][j * 2L][0];
+          a3__[k][i][j];
+          a4_[0][i][j][i][0];
+          a4__[i][j][i][j];
+          a4___[i][j][i][j];
+        }
+}
+#pragma ACCEL kernel
+
+void test4_4_5(int t,int p)
+{
+// small coeff offset, which makes the separation between alias_exp and
+// alias_ref disabled
+  t >= 0 && t < 4?((void )0) : __assert_fail("t>= 0 && t< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  p >= 0 && p < 4?((void )0) : __assert_fail("p>= 0 && p< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  int a1[1024];
+  int a2[1024][1024];
+  int a3[1024][1024];
+  int a4[1024];
+  int a5[1024];
+  int *a1_ = a1 + 32 * p + 1;
+  a1_[4 * t];
+  int (*a2_)[1024] = a2 + 32 * p + 1;
+  a2_[4 * t][0];
+  int *a3_ = a3[0] + 32 * p + 1;
+  a3_[4 * t];
+  int *a4_ = a4 + p;
+  a4_[4 * t];
+  int *a5_ = a5 + t;
+  a5_[4 * t];
+}
+#pragma ACCEL kernel
+
+void test4_4_6(int t,int p)
+{
+// offset in sub-dim, also disable
+  t >= 0 && t < 4?((void )0) : __assert_fail("t>= 0 && t< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  p >= 0 && p < 4?((void )0) : __assert_fail("p>= 0 && p< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  int a1[1024][1024];
+  int a2[1024][1024];
+  int *a1_ = &a1[0][1];
+  int **a1__ = &a1_;
+  a1__[4 * t][4 * p];
+  int *a2_ = &a2[0][0];
+  int **a2__ = &a2_;
+  a2__[4 * t][4 * p];
+}
+#pragma ACCEL kernel
+
+void test4_4_7(int t,int p)
+{
+// offset in sub-dim, also disable
+  t >= 0 && t < 4?((void )0) : __assert_fail("t>= 0 && t< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  p >= 0 && p < 4?((void )0) : __assert_fail("p>= 0 && p< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  int a1[1024][256][4];
+  int a2[1024][1024];
+  int a3[1024][1024][1024];
+  int (*a1_)[256][4] = (int (*)[256][4])(&a1[t * 4]);
+  a1_[4][t][0];
+}
+#pragma ACCEL kernel
+
+void test4_4_8(int t,int p)
+{
+// offset in sub-dim, also disable
+  t >= 0 && t < 4?((void )0) : __assert_fail("t>= 0 && t< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  p >= 0 && p < 4?((void )0) : __assert_fail("p>= 0 && p< 4","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  int a1[256][4][1024];
+  int a2[256][4];
+  int (*a1_)[1024] = (int (*)[1024])a1[t];
+  a1_[0][4 + t];
+  int *a2_ = (int *)a2[t];
+  a2_[0];
+  int *a3_ = a2_;
+  a3_[0];
+}
+
+void add_one(int *&a)
+{
+  a++;
+}
+//#pragma ACCEL kernel
+
+void test4_5()
+{
+// This case is to test the detection of single-assignment alias
+  int a1[1024];
+  int a2[1024];
+  int a2_1[1024];
+  int a3[1024];
+  int a4[1024];
+  int *a1_ = a1;
+// a_ = a2; // can detected as non-single-assign
+  a1_++;
+// can not detected as non-single-assign
+  int *a2_ = a2;
+  a2_ = a2_1;
+// re-assign to another variable
+  int *a3_ = a3;
+  a3_ = a3;
+// re-assign to the same variable
+  int *a4_ = a4;
+  add_one(a4_);
+// function call
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a1_[(k + l * 8) * 32 + j + i * 4];
+          a2_[(k + l * 8) * 32 + j + i * 4];
+          a3_[(k + l * 8) * 32 + j + i * 4];
+          a4_[(k + l * 8) * 32 + j + i * 4];
+        }
+}
+#pragma ACCEL kernel
+
+void test4_6()
+{
+  int a4_6[4][8][8][4];
+  int a4_6_1[1024];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int m = 0; m < 4; m++) 
+        for (int k = 0; k < 8; k++) 
+          for (int l = 0; l < 4; l++) {
+            a4_6[l][k][i][j];
+            a4_6[l][k][i][m];
+            a4_6_1[(k + l * 8) * 32 + j + i * 4];
+// not match
+            a4_6_1[(k + l * 8) * 32 + m + 1 + i * 4];
+          }
+}
+#pragma ACCEL kernel
+
+void test4_7()
+{
+  int a[128][8];
+  int a1[16][8][8];
+  int a2[16][8][8];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) 
+          for (int m = 0; m < 2; m++) {
+// merge ranges in one dim
+            a[i][j];
+            a[i][l * 2L];
+            a[i][5];
+            a[1 + i][3];
+// higher dim
+            a1[k][i][j];
+            a1[k][1 + l * 2L][j];
+            a1[k][m * 4L][j];
+            a1[k][i][j];
+// merge in multiple pos
+            a2[k][i][l * 2L];
+            a2[k][1 + l * 2L][j];
+            a2[1 + k][3][4];
+          }
+}
+#pragma ACCEL kernel
+
+void test3_0()
+{
+  int a[4][8][8][4];
+  int b[57][18];
+  int c[256][4];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a[l][k][i][j];
+// 4 section, fully split     // correct
+          b[l * 2L + k][i * 2L + j];
+// 4 section, merge 1-2, 3-4  // correct
+          c[k * 4L + l * 8L + i][j];
+// 4 section, merge 2-4       // correct
+        }
+}
+int test3_1_a_s;
+#pragma ACCEL kernel
+
+void test3_1_s(int b)
+{
+  int a_l = test3_1_a_s;
+  a_l >= 0 && a_l < 8?((void )0) : __assert_fail("a_l>=0 && a_l< 8","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+  int a[256][4];
+  int a2[256][4];
+  for (int j = 0; j < 4; j++) {
+    a[a_l][j];
+// Here is a bug in defuse analysis: after transformation of
+// this line, the def of the a_l in the following statement
+// is none (even after init_defuse)
+    a2[a_l][0];
+//     then it makes the range analysis fails for the reference
+//     "a_l" in the second statement
+// This bug is to be revisited later.
+  }
+}
+int test3_1_a;
+#pragma ACCEL kernel
+
+void test3_1(int b)
+{
+  int a_l = test3_1_a;
+// assert(a_l>=0 && a_l< 8);
+  a_l >= 0 && a_l < 8?((void )0) : __assert_fail("a_l>=0 && a_l< 8","test_delinear.cpp",344,__PRETTY_FUNCTION__);
+// assert(test3_1_a>=0 && test3_1_a< 8);
+  test3_1_a >= 0 && test3_1_a < 8?((void )0) : __assert_fail("test3_1_a>=0 && test3_1_a< 8","test_delinear.cpp",345,__PRETTY_FUNCTION__);
+// assert(b>=0 && b< 8);
+  b >= 0 && b < 8?((void )0) : __assert_fail("b>=0 && b< 8","test_delinear.cpp",329,__PRETTY_FUNCTION__);
+  int a[256][4];
+  int a1[256][4];
+  int a2[4][8][8][4];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j += 2) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l += 3) {
+          a[a_l][j];
+          a1[test3_1_a][j];
+// not split due to range analysis of global var
+          a2[l][b][a_l][j];
+// ZP: 20170316 ERROR: should be "[l][b][test3_1_a][j];"
+//        FIXME: using the error output temporarily, to
+//        be fixed finally later
+        }
+}
+#pragma ACCEL kernel
+
+void test3_2()
+{
+  int a[256][4];
+  int a1[256][4];
+  int a2[256][4];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a[k * 2L + i][0];
+          a1[i][3 + -j];
+          a2[7 + -i][j];
+        }
+}
+#pragma ACCEL kernel
+
+void test3_2_1()
+{
+  int a[256][4];
+  int a1[64][4][4];
+  int a2[8][32][4];
+  int a3[256][4];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 4; j < 8; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = - 7; l < - 3; l++) 
+          for (int l1 = - 2; l1 < 0; l1++) {
+            a[1 + i][-4 + j];
+            a1[1 + i][-4 + j][0];
+            a2[-1 + k][33 + l][-4 + j];
+// two variable: applied
+            a3[1 + k * 32L + l1][-4 + j];
+// l1 cannot split because of the shift 1 from j
+          }
+}
+#pragma ACCEL kernel
+
+void test3_3()
+{
+  int a[32][33];
+  int a1[2][1000];
+  int a2[1][303][33];
+  int a3[1][9999];
+  int a4[1024];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a[i][k * 2L];
+          a1[j][i * 33L + k * 2L];
+          a2[j][i][k * 2L];
+          a3[j][i * 32L + k * 2L];
+          a4[10000 * l + j * 9999 + i * 32 + 2 * k];
+        }
+}
+#pragma ACCEL kernel
+
+void test3_4()
+{
+  int a[1024];
+  int a1[1024];
+  int a2[1024];
+  int a3[1024];
+  int b;
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a[b * 55 + i * 4 + j];
+          a1[i * 4 + b];
+          a2[4 * i * b + j];
+          a3[i & 1];
+        }
+}
+#pragma ACCEL kernel
+
+void test3_5()
+{
+  int a3_5[1024];
+  int a3_5_1[256][4];
+  for (int i = 0; i < 8; i++) 
+    for (int j = 0; j < 4; j++) 
+      for (int k = 0; k < 8; k++) 
+        for (int l = 0; l < 4; l++) {
+          a3_5[(k + l * 8) * 32 + j + i * 4 + 1];
+// ERROR: j+1 may be out of bound
+          a3_5_1[1 + k * 8L + l * 64L + i][j];
+// Correct: not applied
+        }
+}
+#pragma ACCEL kernel
+
+void test2()
+{
+  int a[32][32][128][8];
+  for (int i = 0; i < 32; i++) 
+    for (int j = 0; j < 32; j++) 
+      a[i][j][1][0];
+}
+#pragma ACCEL kernel
+
+void test2_1()
+{
+  int a[128][8][32][32];
+  for (int i = 0; i < 32; i++) 
+    for (int j = 0; j < 32; j++) 
+      a[1][0][i][j];
+}
+#pragma ACCEL kernel
+
+void test2_2()
+{
+  int a[32][32][32][32];
+  for (int i = 0; i < 32; i++) 
+    for (int j = 0; j < 32; j++) 
+      a[j][i][i][j];
+}
+#pragma ACCEL kernel
+
+void test2_3()
+{
+  int a[32][32][32][32][32];
+  int b[32][32][32][32][32];
+  int c[32][32][32][32][32];
+  for (int i = 0; i < 32; i++) 
+    for (int j = 0; j < 32; j++) {
+      a[i][j][i][i][j];
+      b[j][i][j][i][j];
+      c[j][i][i][j][j];
+    }
+}
+// array filtering
+#pragma ACCEL kernel
+
+void test1()
+{
+  int a[32][32];
+  for (int i = 0; i < 32; i++) 
+    for (int j = 0; j < 32; j++) 
+      a[i][j];
+}
+// host function does not change
+
+void test1_1()
+{
+  int a[1024];
+  for (int i = 0; i < 32; i++) 
+    for (int j = 0; j < 32; j++) 
+      a[i * 32 + j];
+}
+#pragma ACCEL kernel
+
+void test1_2(int a[1024])
+{
+  for (int i = 0; i < 32; i++) 
+    for (int j = 0; j < 32; j++) 
+      a[i * 32 + j];
+}
+int a[1024];
+#pragma ACCEL kernel
+
+void test1_3()
+{
+  for (int i = 0; i < 32; i++) 
+    for (int j = 0; j < 32; j++) 
+      a[i * 32 + j];
+}
+/////////////////////////////////////////////////////
+
+void sub_func(int a[4][16][16],int *read_port)
+{
+  int i;
+  int j;
+  int k;
+  for (i = 0; i < 4; i += 1) 
+    for (j = 0; j < 16; j += 4) 
+      for (k = 0; k < 16; k++) {
+        a[i][j][k];
+      }
+  memcpy(a[0][0],read_port,0);
+}
+/////////////////////////////////////////////////
+//
+//
+
+void sub_func1(int a[4][16][16],int *read_port)
+{
+  int i;
+  int j;
+  int k;
+  for (i = 0; i < 4; i += 1) 
+    for (j = 0; j < 16; j += 4) 
+      for (k = 0; k < 16; k++) {
+        a[i][j][k];
+      }
+  memcpy(a[0][0],read_port,0);
+}
+#pragma ACCEL kernel
+
+int main()
+{
+  int a0[4][256];
+  int a1[4][256];
+  int a2[4][256];
+  int a3[4][16][16];
+  int a4[1024];
+  int a5[4][16][16];
+  int a6[20][40];
+  int a7[800];
+  int i;
+  int j;
+  int k;
+  int l;
+  int m;
+  int n;
+  int *read_port;
+//    {
+//        a0;
+//        a1;
+//        a2;
+//        a3;
+//        a4;
+//        a5;
+//        a6;
+//    }
+  for (i = 0; i < 8; i += 1) 
+    for (j = 0; j < 128; j++) {
+      a0[i][2 + j];
+      a0[i][3 + j];
+    }
+  for (i = 0; i < 8; i += 1) 
+    for (j = 0; j < 256; j += 4) 
+      for (k = 0; k < 4; k++) {
+        a1[i][j + k];
+      }
+  for (i = 0; i < 8; i += 1) 
+    for (j = 0; j < 128; j++) {
+      a2[i][2 + j];
+      a2[i][3 + j];
+    }
+  for (i = 0; i < 8; i += 1) 
+    for (j = 0; j < 256; j += 4) 
+      for (k = 0; k < 4; k++) {
+        a2[i][j + k];
+      }
+  for (i = 0; i < 4; i += 1) 
+    for (j = 0; j < 16; j += 4) 
+      for (k = 0; k < 16; k++) {
+        a3[i][j][k];
+      }
+  sub_func(a3,read_port);
+  memcpy(a3[0][0],read_port,0);
+// ZP: do not support multiple calls of the same function
+// both a3 and a4 is not delinearized
+// sub_func(a4, read_port);
+  sub_func1(a5,read_port);
+  for (int i = 0; i < 100; ++i) {
+    for (int j = 0; j < 40; ++j) {
+      a6[2 + i][j];
+      a7[i * 40 + 81 + j];
+    }
+  }
+  return 1;
+}
+void g1(int x);
+void g2(long x);
+void g3(float x);
+void g4(double x);
+void g5(const int x);
+void g6(volatile int x);
+void h1(double &x);
+void h2(double *x);
+void h3(const int &x);
+
+void fa1()
+{
+  int a[10][10];
+  for (int i = 0; i < 10; ++i) {
+    for (int j = 0; j < 10; ++j) {
+      g1(a[i][j]);
+    }
+  }
+}
+
+void fa2()
+{
+  long a[10][10];
+  for (int i = 0; i < 10; ++i) {
+    for (int j = 0; j < 10; ++j) {
+      g2(a[i][j]);
+    }
+  }
+}
+
+void fa3()
+{
+  float a[10][10];
+  for (int i = 0; i < 10; ++i) {
+    for (int j = 0; j < 10; ++j) {
+      g3(a[i][j]);
+    }
+  }
+}
+
+void fa4()
+{
+  double a[10][10];
+  for (int i = 0; i < 10; ++i) {
+    for (int j = 0; j < 10; ++j) {
+      g4(a[i][j]);
+    }
+  }
+}
+
+void fa5()
+{
+  int a[10][10];
+  for (int i = 0; i < 10; ++i) {
+    for (int j = 0; j < 10; ++j) {
+      g5(a[i][j]);
+    }
+  }
+}
+
+void fa6()
+{
+  volatile int a[10][10];
+  for (int i = 0; i < 10; ++i) {
+    for (int j = 0; j < 10; ++j) {
+      g6(a[i][j]);
+    }
+  }
+}
+
+void fb1()
+{
+  double a[100];
+  for (int i = 0; i < 10; ++i) {
+    for (int j = 0; j < 10; ++j) {
+      h1(a[10 * i + j]);
+    }
+  }
+}
+
+void fb2()
+{
+  double a[100];
+  for (int i = 0; i < 10; ++i) {
+    for (int j = 0; j < 10; ++j) {
+      h2(&a[10 * i + j]);
+    }
+  }
+}
+
+void fb3()
+{
+  int a[10][10];
+  for (int i = 0; i < 10; ++i) {
+    for (int j = 0; j < 10; ++j) {
+      h3(a[i][j]);
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void f()
+{
+  fa1();
+  fa2();
+  fa3();
+  fa4();
+  fa5();
+  fa6();
+  fb1();
+  fb2();
+  fb3();
+}

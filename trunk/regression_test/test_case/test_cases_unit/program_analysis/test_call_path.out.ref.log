@@ -1,0 +1,282 @@
+Hello Program Analysis ... 
+
+**** Test call path ****
+
+->
+void sub1() {...}
+sub1()
+->
+void printf(const char *);void top(int a){int b = a;b;}void sub1(){printf("");}v
+
+''
+..
+'void sub1() {...}'
+ 'sub1()'
+..
+'void printf(const char *);void top(int a){int b = a;b;}void sub1(){printf("");}v'
+ ''
+
+->
+void sub1() {...}
+sub1()
+->
+void printf(const char *);void top(int a){int b = a;b;}void sub1(){printf("");}v
+
+''
+..
+'void sub1() {...}'
+ 'sub1()'
+..
+'void printf(const char *);void top(int a){int b = a;b;}void sub1(){printf("");}v'
+ ''
+
+->
+void top(int a) {...}
+top(a)
+->
+void printf(const char *);void top(int a){int b = a;b;}void sub1(){printf("");}v
+
+''
+..
+'void top(int a) {...}'
+ 'top(a)'
+..
+'void printf(const char *);void top(int a){int b = a;b;}void sub1(){printf("");}v'
+ ''
+
+->
+void sub1() {...}
+sub1()
+->
+void sub2() {...}
+sub2()
+->
+void printf(const char *);void top(int a){int b = a;b;}void sub1(){printf("");}v
+
+''
+..
+'void sub1() {...}'
+ 'sub1()'
+..
+'void sub2() {...}'
+ 'sub2()'
+..
+'void printf(const char *);void top(int a){int b = a;b;}void sub1(){printf("");}v'
+ ''
+
+->
+void sub1() {...}
+sub1()
+->
+void sub2() {...}
+sub2()
+->
+void printf(const char *);void top(int a){int b = a;b;}void sub1(){printf("");}v
+
+''
+..
+'void sub1() {...}'
+ 'sub1()'
+..
+'void sub2() {...}'
+ 'sub2()'
+..
+'void printf(const char *);void top(int a){int b = a;b;}void sub1(){printf("");}v'
+ ''
+
+->
+function definition: void top(int a) {...}
+
+''
+..
+'function definition: void top(int a) {...}'
+ ''
+
+->
+{int b = a;b;}
+
+''
+..
+'{int b = a;b;}'
+ ''
+
+->
+function definition: void sub1() {...}
+
+''
+..
+'function definition: void sub1() {...}'
+ ''
+
+->
+{printf("");}
+
+''
+..
+'{printf("");}'
+ ''
+
+->
+void sub1() {...}
+sub1()
+->
+function definition: void sub2() {...}
+
+''
+..
+'void sub1() {...}'
+ 'sub1()'
+..
+'function definition: void sub2() {...}'
+ ''
+
+->
+void sub1() {...}
+sub1()
+->
+function definition: void sub2() {...}
+
+''
+..
+'void sub1() {...}'
+ 'sub1()'
+..
+'function definition: void sub2() {...}'
+ ''
+
+->
+void sub1() {...}
+sub1()
+->
+{sub1();sub1();}
+
+''
+..
+'void sub1() {...}'
+ 'sub1()'
+..
+'{sub1();sub1();}'
+ ''
+
+->
+void sub1() {...}
+sub1()
+->
+{sub1();sub1();}
+
+''
+..
+'void sub1() {...}'
+ 'sub1()'
+..
+'{sub1();sub1();}'
+ ''
+
+->
+void top(int a) {...}
+top(a)
+->
+function definition: void sub3() {...}
+
+''
+..
+'void top(int a) {...}'
+ 'top(a)'
+..
+'function definition: void sub3() {...}'
+ ''
+
+->
+void sub1() {...}
+sub1()
+->
+void sub2() {...}
+sub2()
+->
+function definition: void sub3() {...}
+
+''
+..
+'void sub1() {...}'
+ 'sub1()'
+..
+'void sub2() {...}'
+ 'sub2()'
+..
+'function definition: void sub3() {...}'
+ ''
+
+->
+void sub1() {...}
+sub1()
+->
+void sub2() {...}
+sub2()
+->
+function definition: void sub3() {...}
+
+''
+..
+'void sub1() {...}'
+ 'sub1()'
+..
+'void sub2() {...}'
+ 'sub2()'
+..
+'function definition: void sub3() {...}'
+ ''
+
+->
+void top(int a) {...}
+top(a)
+->
+{int a = 1;top(a);sub2();}
+
+''
+..
+'void top(int a) {...}'
+ 'top(a)'
+..
+'{int a = 1;top(a);sub2();}'
+ ''
+
+->
+void sub1() {...}
+sub1()
+->
+void sub2() {...}
+sub2()
+->
+{int a = 1;top(a);sub2();}
+
+''
+..
+'void sub1() {...}'
+ 'sub1()'
+..
+'void sub2() {...}'
+ 'sub2()'
+..
+'{int a = 1;top(a);sub2();}'
+ ''
+
+->
+void sub1() {...}
+sub1()
+->
+void sub2() {...}
+sub2()
+->
+{int a = 1;top(a);sub2();}
+
+''
+..
+'void sub1() {...}'
+ 'sub1()'
+..
+'void sub2() {...}'
+ 'sub2()'
+..
+'{int a = 1;top(a);sub2();}'
+ ''
+

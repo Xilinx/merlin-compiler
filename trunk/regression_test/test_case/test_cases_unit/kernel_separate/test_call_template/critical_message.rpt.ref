@@ -1,0 +1,2 @@
+
+ERROR: [SEPAR-304] Cannot support template function: 'f < double > ' (vec_add.cpp:32)

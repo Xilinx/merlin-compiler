@@ -1,0 +1,21 @@
+
+struct Foo 
+{
+}
+;
+
+struct ::Bar 
+{
+}
+;
+void p_ZN3BarC2Ev(struct Bar *this_);
+struct Foo p_ZN3Bar1fEv(struct Bar *this_);
+static void __merlin_dummy_SgClassDeclaration_struct_Bar_();
+void f(struct Foo );
+#pragma ACCEL kernel name = "g"
+
+void g(struct Foo foo)
+{
+  struct Bar temp;
+  f((p_ZN3Bar1fEv(&(temp))));
+}

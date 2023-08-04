@@ -1,0 +1,2 @@
+
+ERROR: [SEPAR-309] Global variable 'a' (vec_add.cpp:4) with recursive assignment is not supported

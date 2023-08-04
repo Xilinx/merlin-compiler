@@ -1,0 +1,63 @@
+#pragma ACCEL kernel
+
+void func_top_0()
+{
+  int a[100];
+  int b[100];
+  int i;
+  for (i = 0; i < 100; i++) 
+// Original: #pragma ACCEL PARALLEL
+// Original: #pragma ACCEL ARRAY_PARTITION OFF
+{
+    
+#pragma HLS unroll
+    a[i] = b[i];
+  }
+  for (i = 0; i < 100; i++) 
+// Original: #pragma ACCEL PARALLEL COMPLETE
+// Original: #pragma ACCEL array_partition off
+{
+    
+#pragma HLS unroll
+    a[i] = b[i];
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_1()
+{
+  int a[100][100];
+  int b[100][100];
+  
+#pragma HLS array_partition variable=b complete dim=2
+  int sum = 0;
+  for (int i = 0; i < 100; i++) 
+// Original: #pragma ACCEL PARALLEL
+// Original: #pragma ACCEL ARRAY_PARTITION OFF
+{
+    
+#pragma HLS unroll
+    for (int j = 0; j < 100; j++) 
+// Original: #pragma ACCEL PARALLEL
+// Original: #pragma ACCEL ARRAY_PARTITION OFF
+{
+      
+#pragma HLS unroll
+      sum += a[i][j];
+    }
+  }
+  for (int i = 0; i < 100; i++) 
+// Original: #pragma ACCEL PARALLEL
+// Original: #pragma ACCEL ARRAY_PARTITION OFF
+{
+    
+#pragma HLS unroll
+    for (int j = 0; j < 100; j++) 
+// Original: #pragma ACCEL PARALLEL
+{
+      
+#pragma HLS unroll
+      sum += b[i][j];
+    }
+  }
+}

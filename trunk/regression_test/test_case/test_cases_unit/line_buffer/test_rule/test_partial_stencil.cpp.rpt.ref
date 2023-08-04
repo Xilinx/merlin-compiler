@@ -1,0 +1,4 @@
+INFO: [LINEBUF-101] Applying line buffer on variable 'b' in loop 'L_0_0' (test_partial_stencil.cpp:12) with a 1x2x2 stencil
+
+WARNING: [LINEBUF-202] Stopping line buffer optimization on variable 'bb' in loop 'L_1_0_0' (test_partial_stencil.cpp:20): the accesses are not stencil.
+

@@ -1,0 +1,37 @@
+// Test out CV-qualified member function lowering.
+void g();
+
+struct ::S 
+{
+}
+;
+
+void p_ZN1S1fEv(struct S *this_)
+{
+}
+
+void p_ZNK1S1fEv(const struct S *this_)
+{
+}
+
+void p_ZNVK1S1fEv(volatile const struct S *this_)
+{
+}
+
+void p_ZNV1S1fEv(volatile struct S *this_)
+{
+}
+static void __merlin_dummy_SgClassDeclaration_struct_S_();
+#pragma ACCEL kernel
+
+void kernel()
+{
+  struct S a;
+  p_ZN1S1fEv(&a);
+  const struct S b;
+  p_ZNK1S1fEv(&b);
+  const volatile struct S c;
+  p_ZNVK1S1fEv(&c);
+  volatile struct S d;
+  p_ZNV1S1fEv(&d);
+}

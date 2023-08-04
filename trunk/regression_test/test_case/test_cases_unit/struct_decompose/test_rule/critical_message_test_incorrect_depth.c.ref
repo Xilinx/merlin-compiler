@@ -1,0 +1,6 @@
+
+ERROR: [MDARR-307] Incorrect max_depth or depth info '3,4' for variable 'a->a',
+  whose dimensin size is 1 in pragma (transformation:0)
+
+ERROR: [MDARR-307] Incorrect max_depth or depth info '1,2' for variable 'a->a',
+  whose dimensin size is 1 in pragma (transformation:0)

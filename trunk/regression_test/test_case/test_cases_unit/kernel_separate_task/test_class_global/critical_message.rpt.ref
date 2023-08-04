@@ -1,0 +1,3 @@
+
+ERROR: [SEPAR-318] Cannot support global variable in task scope: 
+ counter(vec_add.cpp:4)

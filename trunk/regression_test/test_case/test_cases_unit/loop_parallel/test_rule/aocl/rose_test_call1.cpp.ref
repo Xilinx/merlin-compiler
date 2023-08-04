@@ -1,0 +1,36 @@
+
+int add_func_1(int a,int b)
+{
+  return a + b;
+}
+
+int add_func_2(int a[100],int b[100],int i,int j)
+{
+  return a[i] + b[j];
+}
+#pragma ACCEL kernel
+
+void func_top_0()
+{
+  int a[100];
+  
+#pragma ACCEL attribute variable=b bankwidth=4
+  int b[100];
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    for (j = 0; j < 99; j++) {
+      a[i] = add_func_1(b[j],b[j + 1]);
+    }
+  }
+  for (i = 0; i < 100; i++) {
+    for (j = 0; j < 99; j++) {
+      a[i] = add_func_2(b,b,j,j + 1);
+    }
+  }
+}
+
+int main()
+{
+  func_top_0();
+}

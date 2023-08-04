@@ -1,0 +1,39 @@
+// Test static storage variable lowering. Static storage duration are variables
+// that are allocated at program start and de-allocated at program end.
+// Informally, they are a generalization of global variables:
+//
+// - (Namespace-)global variables
+// - Static class member vars
+unsigned int _ZN12_GLOBAL_N_11uE = (unsigned int )23;
+namespace 
+{
+static void __merlin_dummy_SgVariableDeclaration_unsigned_i_();
+}
+float _ZN6nested1fE;
+namespace nested
+{
+static void __merlin_dummy_SgVariableDeclaration_float_f_();
+}
+
+struct ::S 
+{
+}
+;
+const int _ZN1S1yE = 10;
+static void __merlin_dummy_SgClassDeclaration_struct_S_();
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+bool _ZN1S1bE = false;
+static void __merlin_dummy_SgVariableDeclaration_bool_b_f_();
+
+struct ::A_1_ 
+{
+}
+;
+bool _ZN4A_1_1aE;
+#pragma ACCEL kernel
+
+void kernel()
+{
+_ZN6nested1fE = 23.0f;
+_ZN12_GLOBAL_N_11uE <<= 9 + _ZN1S1bE + _ZN1S1yE + _ZN4A_1_1aE;
+}

@@ -1,0 +1,116 @@
+#include<hls_stream.h>
+#include<hls_stream.h>
+extern int __merlin_include__GB_hls_stream_h_0;
+static class hls::stream< int  > top_b_ch[4];
+static hls::stream<int > __merlintop_a_ch[4];
+
+void top_b_streaming(int *b)
+{
+  
+#pragma HLS array_partition variable=top_b_ch complete dim=1
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  long merlin_it_1_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 625L; ++merlin_it_0) {
+    for (merlin_it_1_0 = 0L; merlin_it_1_0 < 4; ++merlin_it_1_0) {
+      long merlin_it_2;
+      
+#pragma ACCEL parallel
+      for (merlin_it_2 = 0L; merlin_it_2 < 4; ++merlin_it_2) {
+        
+#pragma ACCEL parallel
+        top_b_ch[merlin_it_2] . write(b[0 + (merlin_it_2 + (merlin_it_1_0 * 4 + merlin_it_0 * 16))]);
+      }
+    }
+  }
+}
+static class hls::stream< int  > top_c_ch[4];
+
+void top_c_streaming(int *c)
+{
+  
+#pragma HLS array_partition variable=top_c_ch complete dim=1
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  long merlin_it_1_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 625L; ++merlin_it_0) {
+    for (merlin_it_1_0 = 0L; merlin_it_1_0 < 4; ++merlin_it_1_0) {
+      
+#pragma ACCEL parallel
+      long merlin_it_2;
+      for (merlin_it_2 = 0L; merlin_it_2 < 4; ++merlin_it_2) {
+        
+#pragma ACCEL parallel
+        c[0 + (merlin_it_2 + (merlin_it_1_0 * 4 + merlin_it_0 * 16))] = top_c_ch[merlin_it_2] . read();
+      }
+    }
+  }
+}
+
+void computation_top(int *a,int *b,int *c)
+{
+  
+#pragma HLS inline off
+  for (int i = 0; i < 10000 / 4; ++i) {
+    
+#pragma ACCEL pipeline
+    for (int i0 = 0; i0 < 4; ++i0) {
+      
+#pragma ACCEL parallel
+      top_c_ch[i0] . write((__merlintop_a_ch[i0] .  read () + top_b_ch[i0] . read()));
+    }
+  }
+}
+
+void __merlintop_a_streaming(int *a)
+{
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 2500L; ++merlin_it_0) {
+    
+#pragma ACCEL pipeline
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 4; ++merlin_it_1) {
+      
+#pragma ACCEL parallel
+      int merlin_tmp_2;
+      merlin_tmp_2 = a[0 + merlin_it_0 * 4 + merlin_it_1];
+      __merlintop_a_ch[merlin_it_1] .  write (merlin_tmp_2);
+    }
+  }
+}
+
+void __merlintop_computation(int *a,int *b,int *c)
+{
+  
+#pragma HLS inline off
+  
+#pragma HLS dataflow
+  
+#pragma HLS stream variable=top_b_ch depth=1
+  top_b_streaming(b);
+  computation_top(a,b,c);
+  
+#pragma HLS stream variable=top_c_ch depth=1
+  top_c_streaming(c);
+}
+#pragma ACCEL kernel
+
+void top(int *a,int *b,int *c)
+{
+  
+#pragma ACCEL interface variable=a depth=10000 max_depth=10000 BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=128
+  
+#pragma ACCEL interface variable=b depth=10000 max_depth=10000
+  
+#pragma ACCEL interface variable=c depth=10000 max_depth=10000
+  
+#pragma HLS dataflow
+  
+#pragma HLS stream variable=__merlintop_a_ch
+  __merlintop_a_streaming(a);
+  __merlintop_computation(0,b,c);
+}

@@ -1,0 +1,2 @@
+INFO: [FGPIP-103] Loop 'i'  (test_call6.cpp:11) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_call6.cpp:13) is fully parallelized

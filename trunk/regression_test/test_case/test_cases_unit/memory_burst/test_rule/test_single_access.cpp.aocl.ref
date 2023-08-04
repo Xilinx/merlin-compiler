@@ -1,0 +1,29 @@
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+
+void sub(int *a,int i,long a_offset)
+{
+  a[i + a_offset] = 0;
+}
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+// expected no burst anywhere
+  for (int i = 0; i < 1000000; ++i) {
+    int a_buf[1];
+    sub(a_buf,i,-i);
+    memcpy((void *)(&a[i]),(const void *)(&a_buf[0]),sizeof(int ) * 1);
+  }
+}
+#include<assert.h>
+#pragma ACCEL kernel
+
+void top2(int *a,int size)
+{
+  size < 1000?(static_cast < void  >  (0)) : __assert_fail("size < 1000","test_single_access.cpp",14,__PRETTY_FUNCTION__);
+  for (int i = 0; i < size; ++i) {
+    a[i + size];
+    a[i + size + 1000000];
+  }
+}

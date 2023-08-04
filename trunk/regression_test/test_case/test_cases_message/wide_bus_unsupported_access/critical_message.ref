@@ -1,0 +1,21 @@
+INFO: [BURST-102] Detected manual memory burst: variable 'b' (vec_add_kernel.cpp:16)
+  burst buffer size = 3200 bytes
+INFO: [BURST-102] Detected manual memory burst: variable 'a' (vec_add_kernel.cpp:16)
+  burst buffer size = 15984 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (vec_add_kernel.cpp:16) in scope (vec_add_kernel.cpp:17)
+  burst buffer size = 3996 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'c' (vec_add_kernel.cpp:16) in scope (vec_add_kernel.cpp:28)
+  burst buffer size = 3996 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (vec_add_kernel.cpp:16) in scope (vec_add_kernel.cpp:28)
+  burst buffer size = 3996 bytes
+
+WARNING: [WDBUS-209] Memory coalescing variable 'b' (vec_add_kernel.cpp:16) may cause long compilation time of downstream tool.
+  Reason: the access offset is not divisible by 16
+INFO: [WDBUS-101] Memory coalescing inferred: variable 'a' (vec_add_kernel.cpp:16)
+  interface bitwidth = 512 bits
+INFO: [WDBUS-101] Memory coalescing inferred: variable 'b' (vec_add_kernel.cpp:16)
+  interface bitwidth = 512 bits
+INFO: [WDBUS-101] Memory coalescing inferred: variable 'c' (vec_add_kernel.cpp:16)
+  interface bitwidth = 512 bits
+INFO: [FGPIP-103] Loop 'i'  (vec_add_kernel.cpp:9) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (vec_add_kernel.cpp:28) is pipelined

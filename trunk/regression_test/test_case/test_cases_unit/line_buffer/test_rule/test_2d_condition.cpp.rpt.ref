@@ -1,0 +1,1 @@
+INFO: [LINEBUF-101] Applying line buffer on variable 'c' in loop 'L_0_0_0' (test_2d_condition.cpp:10) with a 1x2x1 stencil

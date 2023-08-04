@@ -1,0 +1,2 @@
+
+ERROR: [PROCS-317] Recursive function '::A::f' (fn.cpp:3) is not supported

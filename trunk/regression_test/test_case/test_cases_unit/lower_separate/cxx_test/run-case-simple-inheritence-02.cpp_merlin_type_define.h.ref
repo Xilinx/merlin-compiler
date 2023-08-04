@@ -1,0 +1,8 @@
+
+#ifndef __MERLIN_TYPE_DEFINE_H__
+
+#define __MERLIN_TYPE_DEFINE_H__
+struct A {int a;};
+struct B {struct A A;int b;};
+
+#endif

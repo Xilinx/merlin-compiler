@@ -1,0 +1,2 @@
+[DER ALGO][getPipelinedLoops]find a pipelined loop: SgForStatement:for(i = 0;i < 100;++i) {...}
+[DER ALGO][getPipelinedLoops]find a pipelined loop: SgForStatement:for(i = 0;i < 100;++i) {...}

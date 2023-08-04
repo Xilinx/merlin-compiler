@@ -1,0 +1,57 @@
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void kernel_durbin(int n,int yy[32][32],int sum[32][32],int sumi[32][32],int alpha[32],int beta[32],int r[32],int out[32])
+{
+  int out_buf[32];
+  int alpha_buf[33];
+  int r_buf[32];
+  int beta_buf[32];
+  memcpy((void *)(&beta_buf[0]),(const void *)(&beta[0]),sizeof(int ) * 32);
+  memcpy((void *)(&r_buf[0]),(const void *)(&r[0]),sizeof(int ) * 32);
+  memcpy((void *)(&alpha_buf[0]),(const void *)(&alpha[0]),sizeof(int ) * 33);
+  int i;
+  int k;
+  int y[32][32];
+  y[0][0] = r_buf[0];
+  beta_buf[0] = 1;
+  alpha_buf[0] = r_buf[0];
+  for (k = 1; k < 32; k++) {
+    beta_buf[k] = beta_buf[-1 + k] - alpha_buf[-1 + k] * alpha_buf[-1 + k] * beta_buf[-1 + k];
+    sum[0][k] = r_buf[k];
+    for (i = 0; i <= k - 1; i++) {
+      
+#pragma ACCEL pipeline II=1
+      sumi[i + 1][k] = sum[i][k] + r_buf[-1 + -i + k] * y[i][k - 1];
+    }
+    alpha_buf[k] = -sumi[k][k] * beta_buf[k];
+    for (i = 0; i <= k - 1; i = i + 2) {
+      
+#pragma ACCEL pipeline
+      yy[i][k] = y[i][k - 1] + alpha_buf[k] * y[k - i - 1][k - 1];
+      yy[i][k + 1] = y[i][k] + alpha_buf[1 + k] * y[k - i][k];
+    }
+    yy[k][k] = alpha_buf[k];
+  }
+  for (i = 0; i < 32; i++) {
+    out_buf[i] = yy[i][32 - 1];
+  }
+  memcpy((void *)(&out[0]),(const void *)(&out_buf[0]),sizeof(int ) * 32);
+  memcpy((void *)(&beta[0]),(const void *)(&beta_buf[0]),sizeof(int ) * 32);
+  memcpy((void *)(&alpha[0]),(const void *)(&alpha_buf[0]),sizeof(int ) * 32);
+}
+
+int main()
+{
+  int n;
+  int yy[32][32];
+  int sum[32][32];
+  int sumi[32][32];
+  int alpha[32];
+  int beta[32];
+  int r[32];
+  int out[32];
+  kernel_durbin(n,yy,sum,sumi,alpha,beta,r,out);
+  return 0;
+}

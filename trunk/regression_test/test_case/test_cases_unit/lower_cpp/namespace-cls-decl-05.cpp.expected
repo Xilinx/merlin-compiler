@@ -1,0 +1,23 @@
+
+struct ::a_B 
+{
+}
+;
+void p_ZN1a1B1fEv(struct a_B *this_);
+
+void p_ZN1a1B1fEv(struct a_B *this_)
+{
+}
+namespace a
+{
+static void __merlin_dummy_SgClassDeclaration_struct_B_();
+}
+static void __merlin_dummy_SgMemberFunctionDeclaration_void_f_();
+#pragma ACCEL kernel
+
+void k()
+{
+using a::B;
+struct a_B b;
+p_ZN1a1B1fEv(&b);
+}

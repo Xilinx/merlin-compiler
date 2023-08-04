@@ -1,0 +1,6 @@
+
+ERROR: [SYNCHK-302] Found an out-of-bound read access on argument 'b' (test0.c:62) : access range=[0..99]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+ERROR: [SYNCHK-301] Found an out-of-bound write access on argument 'cc' (test0.c:62) : access range=[0..99]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.

@@ -1,0 +1,14 @@
+Hello Program Analysis ... 
+**** Test Loop and Access **** 
+a[i]: a[0..99] iv=k,ii,i,j pv= scope=_p_
+a[i]: a[0..99] iv=ii,i,j pv= scope=func_0(a);
+a[i]: a[0..99] iv=i,j pv= scope={func_1(a);}
+a[i]: a[i..i] iv=j pv=i scope=for(j = 0;j < 100;j++) {...}
+a[i]: a[i..i] iv= pv=i scope={a[i];}
+b[i][j * 100]: b[0..9][0..900] iv=i,j pv= scope=_p_
+b[i][j * 100]: b[i..i][0..900] iv=j pv=i scope={for(j = 0;j < 10;j++) {b[i][j * 100];a[i * 10 + j];}}
+b[i][j * 100]: b[i..i][j * 100..j * 100] iv= pv=i,j scope={b[i][j * 100];a[i * 10 + j];}
+a[i * 10 + j]: a[0..99] iv=i,j pv= scope=_p_
+a[i * 10 + j]: a[i * 10..9 + i * 10] iv=j pv=i scope={for(j = 0;j < 10;j++) {b[i][j * 100];a[i * 10 + j];}}
+a[i * 10 + j]: a[i * 10 + j..i * 10 + j] iv= pv=i,j scope={b[i][j * 100];a[i * 10 + j];}
+

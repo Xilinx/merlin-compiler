@@ -1,0 +1,12 @@
+adpcm	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_chstone_simple/adpcm
+aes	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_chstone_simple/aes
+dfadd	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_chstone_simple/dfadd
+dfdiv	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_chstone_simple/dfdiv
+dfmul	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_chstone_simple/dfmul
+gsm	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_chstone_simple/gsm
+#jpeg	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_chstone_simple/jpeg
+mips	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_chstone_simple/mips
+#motion	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_chstone_simple/motion
+sha	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_chstone_simple/sha
+#blowfish	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_chstone_simple/blowfish
+#dfsin	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_chstone_simple/dfsin

@@ -1,0 +1,21 @@
+// Test out struct with only static member lowering.
+
+struct ::S 
+{
+}
+;
+static void __merlin_dummy_SgClassDeclaration_struct_S_();
+
+struct ::S2 
+{
+}
+;
+int p_ZN2S21fEv();
+static void __merlin_dummy_SgClassDeclaration_struct_S2_();
+#pragma ACCEL kernel
+
+void kernel()
+{
+  struct S a;
+  p_ZN2S21fEv();
+}

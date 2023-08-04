@@ -1,0 +1,156 @@
+//Won't apply coarse pipeline because the loop iterator is used outside the for loop
+#pragma ACCEL kernel
+
+void func_top_2(int a[100][100],int b[100][100])
+{
+  int i;
+  int j;
+  int a_buf[100][100];
+  for (i = 0; i < 100; i++) 
+// Original: #pragma ACCEL pipeline
+{
+    for (j = 0; j < 100; j++) {
+      a_buf[i][j] = b[i][j];
+    }
+    j = 0;
+    for (; j < 100; j++) {
+      a[i][j] = a_buf[i][j];
+    }
+  }
+}
+
+int sub_13(int a[100][100])
+{
+  if (a[0][0]) 
+    return 1;
+}
+#pragma ACCEL kernel
+
+void func_top_13()
+{
+  int a[100][100];
+  int b[100][100];
+  int i = 0;
+  int j = 0;
+  int c;
+  for (i = 0; i < 100; i++) 
+// Original: #pragma ACCEL pipeline
+{
+    for (j = 0; j < 100; j++) {
+      a[i][j] = i;
+    }
+{
+      a[0][0] = 1;
+      a[0][1] = 1;
+    }
+    c = sub_13(a);
+    for (j = 0; j < 100; j++) {
+      b[i][j] = a[i][j] + c;
+    }
+  }
+}
+
+int sub_14(int a)
+{
+  if (a) 
+    return 1;
+}
+
+void mars_kernel_0_5_node_0_stage_0(int i,int exec,int a[100][100])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int j;
+    for (j = 0; j < 100; j++) {
+      a[i][j] = i;
+    }
+  }
+}
+
+void mars_kernel_0_5_node_1_stage_1(int i,int exec,int a[100][100],int *c)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+     *c = sub_14(a[0][0]);
+  }
+}
+
+void mars_kernel_0_5_node_2_stage_2(int i,int exec,int a[100][100],int b[100][100],int c)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int j;
+    for (j = 0; j < 100; j++) {
+      b[i][j] = a[i][j] + c;
+    }
+  }
+}
+
+void mars_kernel_0_5(int mars_i,int mars_init,int mars_cond,int mars_a_0[100][100],int mars_a_1[100][100],int mars_a_2[100][100],int mars_b_2[100][100],int *mars_c_1,int *mars_c_2)
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_0_5_node_0_stage_0(mars_i - 0,(int )(mars_i >= mars_init + 0 & mars_i <= mars_cond + 0),mars_a_0);
+  mars_kernel_0_5_node_1_stage_1(mars_i - 1,(int )(mars_i >= mars_init + 1 & mars_i <= mars_cond + 1),mars_a_1,mars_c_1);
+  mars_kernel_0_5_node_2_stage_2(mars_i - 2,(int )(mars_i >= mars_init + 2 & mars_i <= mars_cond + 2),mars_a_2,mars_b_2, *mars_c_2);
+}
+#pragma ACCEL kernel
+
+void func_top_14()
+{
+  int a[100][100];
+  int b[100][100];
+  int i = 0;
+  int j = 0;
+  int c;
+  int mars_count_0_5 = 0;
+  int mars_kernel_0_5_a_0[100][100];
+  int mars_kernel_0_5_a_1[100][100];
+  int mars_kernel_0_5_a_2[100][100];
+  int mars_kernel_0_5_c_0 = c;
+  int mars_kernel_0_5_c_1 = c;
+  int mars_kernel_0_5_c_2 = c;
+  for (i = 1; i < 100 + 2; i++) 
+// Original: #pragma ACCEL pipeline
+{
+    if (mars_count_0_5 == 0) 
+      mars_kernel_0_5(i,1,99,mars_kernel_0_5_a_0,mars_kernel_0_5_a_1,mars_kernel_0_5_a_2,b,&mars_kernel_0_5_c_0,&mars_kernel_0_5_c_1);
+     else if (mars_count_0_5 == 1) 
+      mars_kernel_0_5(i,1,99,mars_kernel_0_5_a_2,mars_kernel_0_5_a_0,mars_kernel_0_5_a_1,b,&mars_kernel_0_5_c_2,&mars_kernel_0_5_c_0);
+     else 
+      mars_kernel_0_5(i,1,99,mars_kernel_0_5_a_1,mars_kernel_0_5_a_2,mars_kernel_0_5_a_0,b,&mars_kernel_0_5_c_1,&mars_kernel_0_5_c_2);
+    mars_count_0_5++;
+    if (mars_count_0_5 == 3) 
+      mars_count_0_5 = 0;
+  }
+}
+
+int main()
+{
+  int aa[100][100];
+  int bb[100][100];
+  int cc[100][100];
+  int *a;
+  int *b;
+  int *c;
+  int a_s;
+  int b_s;
+  int c_s;
+  int d_s;
+  float aa_f[100][100];
+  float bb_f[100][100];
+  float cc_f[100][100];
+  float *a_f;
+  float *b_f;
+  float *c_f;
+  float a_s_f;
+  float b_s_f;
+  float c_s_f;
+  float d_s_f;
+  func_top_2(aa,bb);
+  func_top_13();
+  func_top_14();
+}

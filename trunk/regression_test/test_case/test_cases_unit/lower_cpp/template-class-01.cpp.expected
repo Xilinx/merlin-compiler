@@ -1,0 +1,53 @@
+
+struct ::B 
+{
+  char c;
+}
+;
+
+void p_ZN1BC2Ev(struct B *this_)
+{
+  this_ -> c = ((char )0);
+}
+
+int p_ZNK1B3getEv(const struct B *this_)
+{
+  return (int )(this_ -> c);
+}
+
+void p_ZN1B3incEi(struct B *this_,int a)
+{
+  this_ -> c += a;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_B_();
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+static void __merlin_dummy_SgTemplateMemberFunctionDeclaration_();
+static void __merlin_dummy_SgTemplateMemberFunctionDeclaration_data_i_();
+
+struct ::A_B_ 
+{
+  struct B data;
+}
+;
+void p_ZN4A_B_C2IEEv(struct A_B_ *this_);
+void p_ZN4A_B_3addIEEi(struct A_B_ *this_,int a);
+
+void p_ZN4A_B_C2IEEv(struct A_B_ *this_)
+{
+  p_ZN1BC2Ev(&this_ -> data);
+}
+
+void p_ZN4A_B_3addIEEi(struct A_B_ *this_,int a)
+{
+  p_ZN1B3incEi(&this_ -> data,a);
+}
+#pragma ACCEL kernel
+
+int main()
+{
+  struct A_B_ a;
+  p_ZN4A_B_C2IEEv(&a);
+  ;
+  p_ZN4A_B_3addIEEi(&a,10);
+  return 0;
+}

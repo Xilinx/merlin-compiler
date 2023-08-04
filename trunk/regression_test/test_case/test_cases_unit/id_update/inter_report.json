@@ -1,0 +1,18 @@
+{
+    "F_0_0_0_5": {
+        "interval-max": "2531",
+        "interval-min": "2531",
+        "latency-max": "2530",
+        "latency-min": "2530",
+        "name": "vec_add_kernel",
+        "pipeline": "none"
+    },
+    "L_0_0_0_5_2_0_10": {
+        "interval-max": "2531",
+        "interval-min": "2531",
+        "latency-max": "2530",
+        "latency-min": "2530",
+        "name": "vec_add_kernel",
+        "pipeline": "none"
+    }
+}

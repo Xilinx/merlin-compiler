@@ -1,0 +1,91 @@
+{
+    "X": {
+        "org_identifier": "X",
+        "applied_index": -1,
+        "children_num": 1,
+        "histories": [],
+        "messages": []
+    },
+    "X_0": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_0": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_0_0": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_0_0_1": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_0_0_1_2": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_0_0_1_2_0": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 8,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_0_0_1_2_0_7": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 5,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_0_0_1_2_0_7_3": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "histories": [
+            {
+                "action": 1,
+                "location": 0
+            },
+            {
+                "action": 0,
+                "location": 0
+            }
+        ],
+        "messages": [
+            "Delete: SgPragmaDeclaration:#pragma ACCEL PARALLEL FACTOR=16\nfrom: SgBasicBlock:{#pragma ACCEL PARALLEL FACTOR=16c[j] = a[j] + b[j] + inc;}",
+            "Insert: SgPragmaDeclaration:#pragma ACCEL PARALLEL FACTOR=16 "
+        ]
+    },
+    "X_0_0_0_1_2_0_7_3_0": {
+        "org_identifier": "Built0",
+        "applied_index": 0,
+        "children_num": 1,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "Build an SgNode"
+        ]
+    }
+}

@@ -1,0 +1,174 @@
+
+WARNING: [TILE-210] The tripcount of loop for(k = 0;k < 117;k++) {...} (vec_add_kernel_test_5.c:15)
+ is not divisible by the factor '10'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(j = 0;j < 10013;j++) {...} (vec_add_kernel_test_6.c:12)
+ is not divisible by the factor '16'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(j = 0;j < 10013;j++) {...} (vec_add_kernel_test_7.c:12)
+ is not divisible by the factor '16'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(k = 0;k < 117;k++) {...} (vec_add_kernel_test_7.c:15)
+ is not divisible by the factor '10'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(k = 0;k < 101;k++) {...} (vec_add_kernel_test_9.c:20)
+ is not divisible by the factor '10'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(j = 0;j < 202;j++) {...} (vec_add_kernel_test_10.c:17)
+ is not divisible by the factor '20'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 303;i++) {...} (vec_add_kernel_test_11.c:14)
+ is not divisible by the factor '30'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-211] The tripcount of loop for(j = 0;j < n;j++) {...} (vec_add_kernel_test_13.c:12)
+ may not be divisible by the factor '4'. This will negatively impact both resource utilization and performance.
+ Hint: Please rewrite the tripcount as a multiple of the factor.
+
+WARNING: [TILE-211] The tripcount of loop for(j = 0;j < n;j++) {...} (vec_add_kernel_test_15.c:13)
+ may not be divisible by the factor '16'. This will negatively impact both resource utilization and performance.
+ Hint: Please rewrite the tripcount as a multiple of the factor.
+
+WARNING: [TILE-211] The tripcount of loop for(j = 1;j < n;j++) {...} (vec_add_kernel_test_16.c:12)
+ may not be divisible by the factor '4'. This will negatively impact both resource utilization and performance.
+ Hint: Please rewrite the tripcount as a multiple of the factor.
+
+WARNING: [TILE-210] The tripcount of loop for(j = 1;j < 12;j++) {...} (vec_add_kernel_test_16_1.c:12)
+ is not divisible by the factor '4'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-211] The tripcount of loop for(j = 1;j < n;j++) {...} (vec_add_kernel_test_17.c:12)
+ may not be divisible by the factor '3'. This will negatively impact both resource utilization and performance.
+ Hint: Please rewrite the tripcount as a multiple of the factor.
+
+WARNING: [TILE-210] The tripcount of loop for(k = 1;k < 20;k++) {...} (vec_add_kernel_test_17.c:14)
+ is not divisible by the factor '5'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-205] Ignoring a loop tiling pragma for loop with non-constant lower bound: for(j = 2 * n;j < 200;j++) {...} (vec_add_kernel_test_18.c:15)
+
+
+WARNING: [TILE-210] The tripcount of loop for(k = 0;k < 101;k++) {...} (vec_add_kernel_test_18.c:18)
+ is not divisible by the factor '10'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-211] The tripcount of loop for(k = 0;k < j;k++) {...} (vec_add_kernel_test_21.c:14)
+ may not be divisible by the factor '5'. This will negatively impact both resource utilization and performance.
+ Hint: Please rewrite the tripcount as a multiple of the factor.
+
+WARNING: [TILE-210] The tripcount of loop for(j = 0;j < 10;j++) {...} (vec_add_kernel_test_label_indivisible.c:9)
+ is not divisible by the factor '4'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(j = 0;j < 10;j++) {...} (vec_add_kernel_test_label_multi.c:11)
+ is not divisible by the factor '4'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 6;i++) {...} (vec_add_kernel_test_label_multi.c:13)
+ is not divisible by the factor '4'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(j = 0;j < 10;j++) {...} (vec_add_kernel_test_label_multi2.c:12)
+ is not divisible by the factor '4'. This will negatively impact both resource utilization and performance.
+
+ERROR: [TILE-303] Cannot parallel an indivisible loop with labels: for(j = 0;j < 10;j++) {...} (vec_add_kernel_test_label_multi2.c:12)
+Reason: the label 'mylabel_outer' is targeted by a goto statement.
+
+WARNING: [TILE-206] Ignoring a loop tiling pragma for a tiling factor <=1: for(j = 0;j < 8;j++) {...} (vec_add_kernel_test_pragma_odd2.c:11)
+
+
+WARNING: [TILE-210] The tripcount of loop for(j = 0;j < 100;j++) {...} (vec_add_kernel_test_pragma_special.c:8)
+ is not divisible by the factor '3'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(k = 0;k <= 100;k++) {...} (vec_add_kernel_test_pragma_special.c:18)
+ is not divisible by the factor '3'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(j = 0;j < 100;j++) {...} (vec_add_kernel_test_pragma_cache.c:9)
+ is not divisible by the factor '3'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(j = 0;j < 100;j++) {...} (vec_add_kernel_test_pragma_cache_2.c:8)
+ is not divisible by the factor '3'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_1.c:9)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_1.c:21)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_1.c:33)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_1.c:45)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_1.c:56)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_1.c:67)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_1.c:78)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_1.c:90)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_1.c:102)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_1.c:114)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-208] Loop tiling is disabled because tiling factor >= loop tripcount: for(i = 0;i < 63;++i) {...} (vec_add_kernel_test_multi_1.c:126)
+
+
+WARNING: [TILE-210] The tripcount of loop for(j = 0;j < 10250;j++) {...} (vec_add_kernel_test_multi_1.c:139)
+ is not divisible by the factor '80'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 63;++i) {...} (vec_add_kernel_test_multi_1.c:126)
+ is not divisible by the factor '16'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_2.c:6)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_2.c:17)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_2.c:29)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_2.c:41)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_2.c:53)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_2.c:64)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_2.c:75)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_2.c:86)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_2.c:98)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 10250;++i) {...} (vec_add_kernel_test_multi_2.c:110)
+ is not divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-208] Loop tiling is disabled because tiling factor >= loop tripcount: for(i = 0;i < 63;++i) {...} (vec_add_kernel_test_multi_2.c:122)
+
+
+WARNING: [TILE-210] The tripcount of loop for(i = 0;i < 63;++i) {...} (vec_add_kernel_test_multi_2.c:122)
+ is not divisible by the factor '16'. This will negatively impact both resource utilization and performance.
+
+WARNING: [TILE-201] Ignoring a loop tiling pragma for non-canonical loop: for(;j < n;j++) {...} (vec_add_kernel_test_illegal.c:8)
+
+
+WARNING: [TILE-202] Ignoring a loop tiling pragma for loop with decremental iteration space: for(j = 10000;j > 0;j--) {...} (vec_add_kernel_test_illegal.c:11)
+
+
+WARNING: [TILE-203] Ignoring a loop tiling pragma for loop with non-constant step: for(j = 0;j < 10000;j += n) {...} (vec_add_kernel_test_illegal.c:14)
+
+
+WARNING: [TILE-201] Ignoring a loop tiling pragma for non-canonical loop: for(j = 0;j < 10000;j++) {...} (vec_add_kernel_test_illegal.c:17)
+
+
+WARNING: [TILE-211] The tripcount of loop for(j = 0;j < n;j++) {...} (vec_add_kernel_test_tripcount.c:8)
+ may not be divisible by the factor '2'. This will negatively impact both resource utilization and performance.
+ Hint: Please rewrite the tripcount as a multiple of the factor.

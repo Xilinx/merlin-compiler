@@ -1,0 +1,45 @@
+#include<hls_stream.h>
+
+struct ::globalID 
+{
+  int m_gid;
+}
+;
+
+void p_ZN8globalIDC2Ei(struct globalID *this_,int i)
+{
+  this_ -> m_gid = i;
+}
+
+int p_ZNK8globalIDltERK8globalID(const struct globalID *this_,const struct globalID &g)
+{
+  return (int )(this_ -> m_gid < g . m_gid);
+}
+static void __merlin_dummy_SgClassDeclaration_struct_glo_();
+#pragma ACCEL kernel
+
+void k(struct globalID &g)
+{
+  struct globalID temp;
+  p_ZN8globalIDC2Ei(&temp,1);
+  if ((p_ZNK8globalIDltERK8globalID(&g,temp))) {
+  }
+}
+#pragma ACCEL kernel
+
+void k2(class hls::stream< globalID  > &out)
+{
+  struct globalID tmp;
+  p_ZN8globalIDC2Ei(&tmp,0);
+  ;
+  out . write(tmp);
+}
+#pragma ACCEL kernel
+
+void k3(struct globalID *out)
+{
+  struct globalID tmp;
+  p_ZN8globalIDC2Ei(&tmp,0);
+  ;
+   *out = tmp;
+}

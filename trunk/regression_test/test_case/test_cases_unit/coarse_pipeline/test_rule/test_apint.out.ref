@@ -1,0 +1,33 @@
+#include "ap_int.h"
+#include "xf_params.h"
+#include "xf_structs.h"
+#include "xf_types.h"
+
+void sub_func(StreamType< 5> ::name &P0)
+{
+  class ap_uint< 8 > STEP(8);
+  P0 = P0|P0<<2*STEP;
+  ;
+}
+#pragma ACCEL kernel
+
+void func_top_7(float a[100][100],float b[100][100])
+{
+  int i;
+  int j;
+  int img_width = 100;
+  float c_buf[100][100];
+  StreamType< 5> ::name P0;
+  class ap_uint< 13 > col;
+  for (col = 0; col<((int )img_width); col ++ ) 
+// Original: #pragma ACCEL pipeline
+{
+    
+#pragma HLS LOOP_TRIPCOUNT min=100 max=100
+    P0 = 1;
+    sub_func(P0);
+    for (j = 0; j < 100; j++) {
+      c_buf[(long )col][j] = a[(long )col][j];
+    }
+  }
+}

@@ -1,0 +1,60 @@
+#pragma ACCEL kernel
+
+void test1()
+{
+  if (0) 
+    0;
+// int i;
+  for (int i = 0; i; i = i + 1) {
+// rose has a bug which leads to "for (int i =
+// 0; 0 ; i=i+1)" after const propagation
+    int a[1][1] = {(0)};
+  }
+}
+#pragma ACCEL kernel
+
+void test2()
+{
+  int b;
+{
+    int a = (- 5L);
+    int a1 = (int )(- 5L);
+    if (b & -5) 
+      ;
+    if (b & -5) 
+      ;
+  }
+{
+    unsigned int a = (- 5L);
+    unsigned int a1 = ((int )(- 5L));
+    if (b & 4294967291L) 
+      ;
+    if (b & 4294967291L) 
+      ;
+  }
+{
+    unsigned short a = (- 5L);
+    unsigned short a1 = ((int )(- 5L));
+    if (b & 65531) 
+      ;
+    if (b & 65531) 
+      ;
+  }
+{
+    unsigned long long a = (- 5L);
+    unsigned long long a1 = ((int )(- 5L));
+    if (b & -5) 
+      ;
+    if (b & -5) 
+      ;
+  }
+{
+    float b = 0;
+    float a = ((double )(- 5L));
+    float a1 = (float )(- 4L);
+    if (b + a) 
+      ;
+    if (b + a1) 
+      ;
+  }
+}

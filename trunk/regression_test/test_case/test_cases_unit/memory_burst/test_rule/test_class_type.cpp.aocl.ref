@@ -1,0 +1,16 @@
+
+struct st 
+{
+  int a;
+  char b;
+}
+;
+#pragma ACCEL kernel
+
+void top(struct st *a)
+{
+  for (int i = 0; i < 100; ++i) {
+    a[i] . a = i;
+    a[i] . b = (i * i);
+  }
+}

@@ -1,0 +1,5 @@
+
+WARNING: [CMOPT-209] Coarse-grained dataflow pipelining cannot be generated because of synchronization on host interface 'a'
+
+ERROR: [CMOPT-301] Cannot apply the synchronization on the non-canonical loop 'for(;k1 < 100;++k1) ' (test_err.cpp:7)
+

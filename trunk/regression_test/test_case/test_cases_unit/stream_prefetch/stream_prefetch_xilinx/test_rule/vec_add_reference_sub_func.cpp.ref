@@ -1,0 +1,62 @@
+#include<hls_stream.h>
+#define VEC_SIZE 10000
+extern int __merlin_include__GB_hls_stream_h_0;
+static hls::stream<int > __merlinvec_add_kernel_b_ch[16];
+
+void func(int &res,int a)
+{
+  if (a > res) 
+    res = a;
+}
+
+void __merlinvec_add_kernel_b_streaming(int *b)
+{
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 625L; ++merlin_it_0) {
+    
+#pragma ACCEL pipeline
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 16; ++merlin_it_1) {
+      
+#pragma ACCEL parallel
+      int merlin_tmp_2;
+      merlin_tmp_2 = b[0 + merlin_it_0 * 16 + merlin_it_1];
+      __merlinvec_add_kernel_b_ch[merlin_it_1] .  write (merlin_tmp_2);
+    }
+  }
+}
+
+void __merlinvec_add_kernel_computation(int *a,int *b)
+{
+  
+#pragma HLS inline off
+  a[0] = 0;
+  for (int j = 0; j < 10000 / 16; j++) {
+    
+#pragma ACCEL pipeline
+    for (int j0 = 0; j0 < 16; ++j0) {
+      
+#pragma ACCEL parallel
+      
+#pragma ACCEL reduction
+      func(a[0],(__merlinvec_add_kernel_b_ch[j0] .  read ()));
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void vec_add_kernel(int *a,int *b)
+{
+  
+#pragma ACCEL interface variable=a depth=10000
+  
+#pragma ACCEL interface variable=b depth=10000 BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=512
+  
+#pragma HLS dataflow
+  
+#pragma HLS stream variable=__merlinvec_add_kernel_b_ch
+  __merlinvec_add_kernel_b_streaming(b);
+  __merlinvec_add_kernel_computation(a,0);
+}

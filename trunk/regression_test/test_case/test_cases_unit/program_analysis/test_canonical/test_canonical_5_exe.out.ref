@@ -1,0 +1,178 @@
+// Testing types of iterators
+#include <stdio.h>
+int iig;
+#pragma ACCEL kernel
+
+void func_loop()
+{
+  int a[1025];
+  int b[1025];
+  int c[1025];
+  for (int pp = 0; pp < 1025; pp++) {
+    a[pp] = 1;
+    b[pp] = 5;
+    c[pp] = 2;
+  }
+  short is;
+  int jj;
+  int j = 0;
+  int x;
+  int y;
+  int z;
+  int N = 100;
+  jj = 0;
+// Canonicalized from: for((is = 0 , jj = 0);is < 8;is++) {...}
+  for (is = ((short )0); is <= 7; ++is) {
+/* block 1*/
+    c[jj] = a[is] + b[is];
+    printf("index1 = %d\n",(int )is);
+  }
+  jj = 0;
+// Canonicalized from: for((is = 0 , jj = 0);is <= 1024;is += 2) {...}
+// Standardize from: for(is =((short )0);is <= 1024;is += 2) {...}
+  for (is = 0; is <= 512; is++) {
+    short _in_is = 0 + 2L * is;
+/* block 2*/
+    c[jj] = a[_in_is] + b[_in_is];
+    printf("index2 = %d\n",(int )_in_is);
+  }
+  is = 1024 + 2L;
+  short _l_ii = 0;
+  short _l_jj = 0;
+// Canonicalized from: for(short ii = 0, jj = 0;ii <= N;ii++) {...}
+  for (_l_ii = ((short )0); _l_ii <= 100; ++_l_ii) {
+/* block 3*/
+    c[_l_jj] = a[_l_ii] + b[_l_ii];
+    printf("index3 = %d\n",(int )_l_ii);
+  }
+  jj = 0;
+// Canonicalized from: for((iig = 0 , jj = 0);iig <= N;iig += 2) {...}
+// Standardize from: for(iig = 0;iig <= 100;iig += 2) {...}
+  for (iig = 0; iig <= 50; iig++) {
+    int _in_iig = 0 + 2L * iig;
+/* block 4*/
+    c[jj] = a[_in_iig] + b[_in_iig];
+    printf("index4 = %d\n",_in_iig);
+  }
+  iig = 100 + 2L;
+  char ii0;
+  char jj0;
+  int _s_ii0;
+  jj0 = ((char )0);
+// Canonicalized from: for((_s_ii0 = 0 , jj0 = 0);_s_ii0 <= N;_s_ii0 += 2) {...}
+// Standardize from: for(_s_ii0 =((char )0);_s_ii0 <= 'd';_s_ii0 += 2) {...}
+  for (_s_ii0 = 0; _s_ii0 <= 50; _s_ii0++) {
+    int _in_s_ii0 = 0 + 2L * _s_ii0;
+/* block 5*/
+    c[jj0] = a[_in_s_ii0] + b[_in_s_ii0];
+    printf("index5 = %d\n",(int )_in_s_ii0);
+  }
+  _s_ii0 = 100 + 2L;
+  ii0 = _s_ii0;
+  int _s_ii0_0;
+// Canonicalized from: for(_s_ii0_0 = 0;_s_ii0_0 <= N;_s_ii0_0++) {...}
+  for (_s_ii0_0 = ((char )0); _s_ii0_0 <= 'd'; ++_s_ii0_0) {
+/*block 6*/
+    c[_s_ii0_0] = a[_s_ii0_0] + b[_s_ii0_0];
+    printf("index6 = %d\n",(int )_s_ii0_0);
+  }
+  ii0 = _s_ii0_0;
+  int _s_ii = 0;
+  int _s_jj = 0;
+  char _l_ii_0 = 0;
+  char _l_jj_0 = 0;
+// Canonicalized from: for(char ii = 0, jj = 0;_s_ii <= N;_s_ii += 2) {...}
+// Standardize from: for(_s_ii =((char )0);_s_ii <= 'd';_s_ii += 2) {...}
+  for (_s_ii = 0; _s_ii <= 50; _s_ii++) {
+    int _in_s_ii = 0 + 2L * _s_ii;
+/*block 8*/
+    c[_s_jj] = a[_in_s_ii] + b[_in_s_ii];
+    printf("index7 = %d\n",(int )_in_s_ii);
+  }
+  _s_ii = 100 + 2L;
+{
+    char ii;
+    char jj;
+    int _s_ii_0;
+    jj = ((char )0);
+// Canonicalized from: for((_s_ii_0 = 0 , jj = 0);_s_ii_0 <= N;_s_ii_0 += 2) {...}
+// Standardize from: for(_s_ii_0 =((char )0);_s_ii_0 <= 'd';_s_ii_0 += 2) {...}
+    for (_s_ii_0 = 0; _s_ii_0 <= 50; _s_ii_0++) {
+      int _in_s_ii_0 = 0 + 2L * _s_ii_0;
+/*block 8.1*/
+      c[jj] = a[_in_s_ii_0] + b[_in_s_ii_0];
+      printf("index8 = %d\n",(int )_in_s_ii_0);
+    }
+    _s_ii_0 = 100 + 2L;
+    ii = _s_ii_0;
+  }
+  int _s_ii_1 = 0;
+  unsigned char _l_ii_1 = 0;
+// Canonicalized from: for(unsigned char ii = 0;_s_ii_1 < 254;_s_ii_1 += 2) {...}
+// Standardize from: for(_s_ii_1 =((unsigned char )0);_s_ii_1 <= 253;_s_ii_1 += 2) {...}
+  for (_s_ii_1 = 0; _s_ii_1 <= 126; _s_ii_1++) {
+    int _in_s_ii_1 = 0 + 2L * _s_ii_1;
+/*block 9*/
+    c[_in_s_ii_1] = a[_in_s_ii_1] + b[_in_s_ii_1];
+    printf("index9 = %d\n",(int )_in_s_ii_1);
+  }
+  _s_ii_1 = 252 + 2L;
+  int _s_ii_2 = -20;
+  char _l_ii_2 = -20;
+// Canonicalized from: for(char ii =(- 20);_s_ii_2 < 100;_s_ii_2 += 2) {...}
+// Standardize from: for(_s_ii_2 =((char )(- 20));_s_ii_2 <= 'c';_s_ii_2 += 2) {...}
+  for (_s_ii_2 = 0; _s_ii_2 <= 59; _s_ii_2++) {
+    int _in_s_ii_2 = -20 + 2L * _s_ii_2;
+/*block 9.1*/
+    c[((int )_in_s_ii_2) + 21] = a[((int )_in_s_ii_2) + 21] + b[((int )_in_s_ii_2) + 21];
+    printf("index9.1 = %d\n",((int )_in_s_ii_2) + 21);
+  }
+  _s_ii_2 = 98 + 2L;
+  int _s_i = 0;
+  char _l_i = 0;
+// Canonicalized from: for(char i = 0;100 > _s_i;_s_i++) {...}
+  for (_s_i = ((char )0); _s_i <= 'c'; ++_s_i) {
+    int _s_j = 3;
+    char _l_j = 3;
+// Canonicalized from: for(char j = 3;_s_j <= i;_s_j++) {...}
+    for (_s_j = ((char )3); _s_j <= _s_i; ++_s_j) {
+/*block 10*/
+      c[_s_i] = a[_s_i] + b[_s_j];
+      printf("index10 = %d\n",(int )_s_i);
+    }
+  }
+// Standardize from: for(unsigned long i_top =(unsigned long )0;i_top <((unsigned long )1024L);i_top +=((unsigned long )64)) {...}
+  for (unsigned long i_top = 0; i_top <= 15UL; i_top++) {
+    unsigned long _in_i_top = 0UL + 64L * i_top;
+    for (int i_sub = 0; i_sub < 64; i_sub++) {
+/*block 12*/
+      int i = (int )(_in_i_top + ((unsigned long )i_sub));
+      c[i] += a[i] + b[i];
+      printf("index11 = %d\n",i);
+    }
+  }
+// Standardize from: for(unsigned int ii = 0;ii <= 1024;ii += 2) {...}
+  for (unsigned int ii = 0; ii <= 512U; ii++) {
+    unsigned int _in_ii = 0U + 2L * ii;
+/*block 13*/
+    c[_in_ii] += a[_in_ii] + b[_in_ii];
+    printf("index12 = %d\n",_in_ii);
+  }
+// Standardize from: for(unsigned short ii = 0;ii <= 100;ii += 2) {...}
+  for (unsigned short ii = 0; ii <= 50; ii++) {
+    unsigned short _in_ii_0 = 0 + 2L * ii;
+/*block 13*/
+    c[_in_ii_0] += a[_in_ii_0] + b[_in_ii_0];
+  }
+#if 0
+/*block 13*/
+#endif
+  for (int pp = 0; pp < 1025; pp++) 
+    printf("result = %d\n",c[pp]);
+}
+
+int main()
+{
+  func_loop();
+  return 0;
+}

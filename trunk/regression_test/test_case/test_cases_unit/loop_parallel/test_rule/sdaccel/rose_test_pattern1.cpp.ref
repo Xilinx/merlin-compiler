@@ -1,0 +1,55 @@
+#pragma ACCEL kernel
+
+void func_top_0(int offset[100],int b[100])
+{
+  int a[7][100];
+  
+#pragma HLS array_partition variable=a complete dim=1
+  int c[36];
+  
+#pragma HLS array_partition variable=c complete dim=1
+  int ca[100];
+  int cc[512];
+  int k;
+  int i;
+  int j;
+  for (i = 0; i < 36; i++) 
+// Original: #pragma ACCEL pipeline
+{
+    
+#pragma HLS pipeline
+    c[offset[i]] = b[i] + 1;
+    c[offset[i + 1]] = b[i + 1] + c[offset[i]] + c[offset[i + 2]];
+  }
+  int ii = 0;
+// bound check array 'ca' read_range=[0..136 inexact]
+//  for (j = 0; j < 36; j++) {
+//#pragma ACCEL pipeline
+//      ii = j/2;
+//      ca[offset[ii]] = b[ii] + 1;
+//      ca[offset[ii+1]] = b[j+1] + ca[j] + ca[ii << 2 +1];
+//  }
+  for (i = 0; i < 36; i++) 
+// Original: #pragma ACCEL pipeline
+{
+    
+#pragma HLS pipeline
+    cc[offset[i]] = c[i];
+    cc[offset[i + 1]] = c[offset[i]] + cc[offset[i + 2]];
+  }
+  for (i = 0; i < 100; i++) 
+// Original: #pragma ACCEL pipeline
+{
+    
+#pragma HLS dependence variable=a array inter false 
+    
+#pragma HLS pipeline
+    for (j = 0; j < 7; j++) 
+// Original: #pragma ACCEL parallel
+{
+      
+#pragma HLS unroll
+      a[offset[j * 4]][i] = b[i] + 1;
+    }
+  }
+}

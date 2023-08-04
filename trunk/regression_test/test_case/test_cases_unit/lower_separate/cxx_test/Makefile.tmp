@@ -1,0 +1,2 @@
+run:
+	-mars_opt *.cpp -e c -p lower_separate

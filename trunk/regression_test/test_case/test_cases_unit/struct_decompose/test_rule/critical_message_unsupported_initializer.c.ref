@@ -1,0 +1,10 @@
+
+ERROR: [DISAG-301] Cannot decompose global port 'work2' (unsupported_initializer.c:6) with unsupported reference or initializer: 
+unsupported initializer: .lock =(spinlock_t ){(0)}
+
+ Hint: complex pointer re-interpretation is not supported. Please rewrite
+
+ERROR: [DISAG-301] Cannot decompose local variable 'work' (unsupported_initializer.c:11) with unsupported reference or initializer: 
+unsupported initializer: .lock =(spinlock_t ){(0)}
+
+ Hint: complex pointer re-interpretation is not supported. Please rewrite

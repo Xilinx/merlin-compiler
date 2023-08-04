@@ -1,0 +1,15 @@
+
+<directives>
+<platform_name>/curr/software/Vitis/Vitis/2020.1/platforms/xilinx_u250_xdma_201830_2/xilinx_u250_xdma_201830_2.xpfm</platform_name>
+<opt_effort>standard</opt_effort>
+<tool_version>vitis</tool_version>
+<ihatebug>debug-level2</ihatebug>
+<merlincc>on</merlincc>
+<implementation_tool>sdaccel</implementation_tool>
+<source_file> vec_add_kernel.cpp</source_file>
+<stream_prefetch>off</stream_prefetch>
+<clock_period>5ns</clock_period>
+<include_path> -I/home/hanhu/Merlin_Compiler/trunk/build/test/unit_test/msg_report_vec_add/vitis_mo -I/home/hanhu/Merlin_Compiler/trunk/build/test/unit_test/msg_report_vec_add/vitis_mo/../src/ -I/home/hanhu/Merlin_Compiler/trunk/build/test/unit_test/msg_report_vec_add/vitis_mo/../src -I/home/hanhu/Merlin_Compiler/trunk/build/test/unit_test/msg_report_vec_add/vitis_mo/./ -I/home/hanhu/Merlin_Compiler/trunk//mars-gen/lib/merlin</include_path>
+<macro_define> -D XILINX </macro_define>
+</directives>
+

@@ -1,0 +1,19 @@
+
+WARNING: [FGPIP-222] Pipelining loop 'i' (test_threshold.cpp:19) may lead to excessive resource usage and long runtime in downstream tools.
+
+WARNING: [FGPIP-215] Parallelizing loop 'j' (test_threshold.cpp:27) may lead to excessive resource usage and long runtime in downstream tools.
+
+WARNING: [FGPIP-222] Pipelining loop 'i' (test_threshold.cpp:33) may lead to excessive resource usage and long runtime in downstream tools.
+
+WARNING: [FGPIP-215] Parallelizing loop 'j' (test_threshold.cpp:21) may lead to excessive resource usage and long runtime in downstream tools.
+
+WARNING: [FGPIP-215] Parallelizing loop 't' (test_threshold.cpp:35) may lead to excessive resource usage and long runtime in downstream tools.
+INFO: [FGPIP-103] Loop 'i'  (test_threshold.cpp:10) is pipelined
+INFO: [FGPIP-102] Loop 'k' (test_threshold.cpp:12) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_threshold.cpp:14) is fully parallelized
+INFO: [FGPIP-103] Loop 'i'  (test_threshold.cpp:19) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_threshold.cpp:21) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_threshold.cpp:27) is fully parallelized
+INFO: [FGPIP-103] Loop 'i'  (test_threshold.cpp:33) is pipelined
+INFO: [FGPIP-102] Loop 't' (test_threshold.cpp:35) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_threshold.cpp:37) is fully parallelized

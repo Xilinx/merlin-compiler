@@ -1,0 +1,18 @@
+#pragma ACCEL kernel
+
+void test(int input)
+{
+  int b[100];
+{
+    int b[100];
+    
+#pragma HLS array_partition variable=b complete dim=1
+    for (int i = 0; i < 100; i++) 
+// Original: #pragma ACCEL parallel
+{
+      
+#pragma HLS unroll
+      b[i] = input;
+    }
+  }
+}

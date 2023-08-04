@@ -1,0 +1,178 @@
+#pragma ACCEL kernel
+
+void foo1(int *a,int *b,int *c,int *d)
+{
+  int dummy_token_9;
+// Token comes from node 3 and 1 for sync level 2
+  int token_9;
+  int dummy_token_8;
+// Token comes from node 3 and 0 for sync level 2
+  int token_8;
+  int dummy_token_7;
+// Token comes from node 2 and 1 for sync level 2
+  int token_7;
+  int dummy_token_6;
+// Token comes from node 2 and 0 for sync level 2
+  int token_6;
+  int dummy_token_5;
+// Token comes from node 1 and 3 for sync level 2
+  int token_5;
+  int dummy_token_4;
+// Token comes from node 1 and 2 for sync level 2
+  int token_4;
+  int dummy_token_3;
+// Token comes from node 1 and 0 for sync level 4
+  int token_3;
+  int dummy_token_2;
+// Token comes from node 0 and 3 for sync level 2
+  int token_2;
+  int dummy_token_1;
+// Token comes from node 0 and 2 for sync level 2
+  int token_1;
+  int dummy_token_0;
+// Token comes from node 0 and 1 for sync level 4
+  int token_0;
+  int i;
+  int j;
+  int k;
+  for (i = 0; i < 100; ++i) {
+    for (j = 0; j < 100; ++j) {
+      for (k = 0; k < 100; ++k) {
+// Token gen: node 1 and 0 for sync level 4(backward)
+        if (k == 0 && (j != 0 || i != 0)) {
+          dummy_token_3 = token_3;
+          
+#pragma ACCEL mem_fence
+        }
+// Token gen: node 2 and 0 for sync level 2(backward)
+        if (k == 0 && j == 0 && i != 0) {
+          dummy_token_6 = token_6;
+          
+#pragma ACCEL mem_fence
+        }
+// Token gen: node 3 and 0 for sync level 2(backward)
+        if (k == 0 && j == 0 && i != 0) {
+          dummy_token_8 = token_8;
+          
+#pragma ACCEL mem_fence
+        }
+        a[k + i + j] += k;
+// Token gen: node 0 and 3 for sync level 2(forward)
+        if (k == 99 && j == 99) {
+          
+#pragma ACCEL mem_fence
+          token_2 = 1;
+        }
+// Token gen: node 0 and 2 for sync level 2(forward)
+        if (k == 99 && j == 99) {
+          
+#pragma ACCEL mem_fence
+          token_1 = 1;
+        }
+// Token gen: node 0 and 1 for sync level 4(forward)
+        if (k == 99) {
+          
+#pragma ACCEL mem_fence
+          token_0 = 1;
+        }
+      }
+      for (k = 0; k < 100; ++k) {
+// Token gen: node 0 and 1 for sync level 4(forward)
+        if (k == 0) {
+          dummy_token_0 = token_0;
+          
+#pragma ACCEL mem_fence
+        }
+// Token gen: node 2 and 1 for sync level 2(backward)
+        if (k == 0 && j == 0 && i != 0) {
+          dummy_token_7 = token_7;
+          
+#pragma ACCEL mem_fence
+        }
+// Token gen: node 3 and 1 for sync level 2(backward)
+        if (k == 0 && j == 0 && i != 0) {
+          dummy_token_9 = token_9;
+          
+#pragma ACCEL mem_fence
+        }
+        b[k] += a[k + i];
+// Token gen: node 1 and 3 for sync level 2(forward)
+        if (k == 99 && j == 99) {
+          
+#pragma ACCEL mem_fence
+          token_5 = 1;
+        }
+// Token gen: node 1 and 2 for sync level 2(forward)
+        if (k == 99 && j == 99) {
+          
+#pragma ACCEL mem_fence
+          token_4 = 1;
+        }
+// Token gen: node 1 and 0 for sync level 4(backward)
+        if (k == 99 && (j != 99 || i != 99)) {
+          
+#pragma ACCEL mem_fence
+          token_3 = 1;
+        }
+      }
+    }
+// Token gen: node 0 and 2 for sync level 2(forward)
+    dummy_token_1 = token_1;
+    
+#pragma ACCEL mem_fence
+// Token gen: node 1 and 2 for sync level 2(forward)
+    dummy_token_4 = token_4;
+    
+#pragma ACCEL mem_fence
+    c[i] += a[i];
+// Token gen: node 2 and 1 for sync level 2(backward)
+    if (i != 99) {
+      
+#pragma ACCEL mem_fence
+      token_7 = 1;
+    }
+// Token gen: node 2 and 0 for sync level 2(backward)
+    if (i != 99) {
+      
+#pragma ACCEL mem_fence
+      token_6 = 1;
+    }
+    for (j = 0; j < 100; ++j) {
+// Token gen: node 0 and 3 for sync level 2(forward)
+      if (j == 0) {
+        dummy_token_2 = token_2;
+        
+#pragma ACCEL mem_fence
+      }
+// Token gen: node 1 and 3 for sync level 2(forward)
+      if (j == 0) {
+        dummy_token_5 = token_5;
+        
+#pragma ACCEL mem_fence
+      }
+      d[i + j] += a[j];
+// Token gen: node 3 and 1 for sync level 2(backward)
+      if (j == 99 && i != 99) {
+        
+#pragma ACCEL mem_fence
+        token_9 = 1;
+      }
+// Token gen: node 3 and 0 for sync level 2(backward)
+      if (j == 99 && i != 99) {
+        
+#pragma ACCEL mem_fence
+        token_8 = 1;
+      }
+    }
+  }
+}
+
+int main()
+{
+  int a[300];
+  int b[300];
+  int c[300];
+  int d[300];
+  foo1(a,b,c,d);
+  return 0;
+}

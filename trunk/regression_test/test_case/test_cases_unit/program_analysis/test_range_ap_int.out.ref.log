@@ -1,0 +1,109 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(class ap_int< 4 > i(0);i<10;++ i) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = 0;j<10;j+=1) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(class ap_int< 5 > k(1);k<10;k = k+1) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(class ap_int< 5 > m(10);m>=0;m = m-1) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i0 = 0;i0<bound;++i0) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(class ap_int< 10 > i1(0);i1<bound+1;++ i1) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(class ap_int< 10 > j(0);j<i/2;++ j) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(class ap_int< 10 > i(0);i<100;++ i) {...}
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void top(int * a,int * b,class ::ap_int < 10 ... c,class ::ap_uint < 10... d,int * e,int * f,int * g) {...}
+  SgBasicBlock {a[(100-2*i)] =(i);}
+  SgForStatement for(class ap_int< 4 > i(0);i<10;++ i) {...}
+  SgBasicBlock {class ap_uint< 5 > _in_j = 0L + 1L * j;b[((_in_j*2+1))] =(_in_j);}
+  SgForStatement for(j = 0;j <= 9L;j++) {...}
+  SgBasicBlock {c[(k*2+3)] = k;}
+  SgForStatement for(class ap_int< 5 > k(1);k<10;k = k+1) {...}
+  SgBasicBlock {d[(m*4+2)] = m;}
+  SgForStatement for(class ap_int< 5 > m(10);m>=0;m = m-1) {...}
+  SgBasicBlock {e[i0] = i0;}
+  SgForStatement for(int i0 = 0;i0<bound;++i0) {...}
+  SgBasicBlock {f[i1] =(i1);}
+  SgForStatement for(class ap_int< 10 > i1(0);i1<bound+1;++ i1) {...}
+  SgBasicBlock {for(class ap_int< 10 > j(0);j<i/2;++ j) {g[j] = 0;}}
+  SgForStatement for(class ap_int< 10 > i(0);i<100;++ i) {...}
+  SgBasicBlock {g[j] = 0;}
+  SgForStatement for(class ap_int< 10 > j(0);j<i/2;++ j) {...}
+
+Arrays: 
+  int * a
+  int * b
+  class ::ap_int < 10 ... c
+  class ::ap_uint < 10... d
+  int * e
+  int * f
+  int * g
+
+Ranges: 
+  SgFunctionDeclaration void top(int * a,int * b,class ::ap_int < 10 ... c,class ::ap_uint < 10... d,int * e,int * f,int * g) {...}
+    int * a :  W[82..100 inexact]
+    int * b :  W[1..19 inexact]
+    class ::ap_int < 10 ... c :  W[5..21 inexact]
+    class ::ap_uint < 10... d :  W[2..42 inexact]
+    int * e :  W[0..4 exact]
+    int * f :  W[0..10 exact]
+    int * g :  W[0..48 inexact]
+  SgBasicBlock {a[(100-2*i)] =(i);}
+    int * a :  W[100L + i * -2..100L + i * -2 exact]
+  SgForStatement for(class ap_int< 4 > i(0);i<10;++ i) {...}
+    int * a :  W[82..100 inexact]
+  SgBasicBlock {class ap_uint< 5 > _in_j = 0L + 1L * j;b[((_in_j*2+1))] =(_in_j);}
+    int * b :  W[1UL + j * 2..1UL + j * 2 exact]
+  SgForStatement for(j = 0;j <= 9L;j++) {...}
+    int * b :  W[1..19 inexact]
+  SgBasicBlock {c[(k*2+3)] = k;}
+    class ::ap_int < 10 ... c :  W[3L + k * 2..3L + k * 2 exact]
+  SgForStatement for(class ap_int< 5 > k(1);k<10;k = k+1) {...}
+    class ::ap_int < 10 ... c :  W[5..21 inexact]
+  SgBasicBlock {d[(m*4+2)] = m;}
+    class ::ap_uint < 10... d :  W[2L + m * 4..2L + m * 4 exact]
+  SgForStatement for(class ap_int< 5 > m(10);m>=0;m = m-1) {...}
+    class ::ap_uint < 10... d :  W[2..42 inexact]
+  SgBasicBlock {e[i0] = i0;}
+    int * e :  W[i0..i0 exact]
+  SgForStatement for(int i0 = 0;i0<bound;++i0) {...}
+    int * e :  W[0..4 exact]
+  SgBasicBlock {f[i1] =(i1);}
+    int * f :  W[i1..i1 exact]
+  SgForStatement for(class ap_int< 10 > i1(0);i1<bound+1;++ i1) {...}
+    int * f :  W[0..10 exact]
+  SgBasicBlock {for(class ap_int< 10 > j(0);j<i/2;++ j) {g[j] = 0;}}
+    int * g :  W[0..-1L + i / 2 inexact]
+  SgForStatement for(class ap_int< 10 > i(0);i<100;++ i) {...}
+    int * g :  W[0..48 inexact]
+  SgBasicBlock {g[j] = 0;}
+    int * g :  W[j..j exact]
+  SgForStatement for(class ap_int< 10 > j(0);j<i/2;++ j) {...}
+    int * g :  W[0..-1L + i / 2 inexact]
+

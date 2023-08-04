@@ -1,0 +1,8 @@
+Feature FAlCON_ALTERA checked out. 
+
+[INFO] Here we enter test_stream_ir_top() 
+
+Remove dead stmt offset =(i * 100 + id_0 *(100 / 5) + j0) * 100 + k;
+Remove dead stmt k = k0 * 10 + kk;
+Remove dead stmt int offset;
+Remove dead stmt int k;

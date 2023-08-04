@@ -1,0 +1,4373 @@
+{
+    "skeleton": {
+        "aes256_encrypt_ecb_kernel@L@0": {
+            "merlin_memcpy_0@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "aes256_encrypt_ecb_kernel": {
+            "aes256_encrypt_ecb_kernel@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 2050
+            },
+            "aes256_encrypt_ecb_kernel@L@0": {
+                "unroll-factor": 2,
+                "trip-count": 2
+            }
+        },
+        "mars_kernel_0_2_node_1_stage_1": {
+            "aes256_encrypt_ecb_kernel_L_1_0_para@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "mars_kernel_0_2_node_2_stage_0@L@0": {},
+        "mars_kernel_0_2_node_2_stage_0": {
+            "mars_kernel_0_2_node_2_stage_0@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 2
+            }
+        },
+        "mars_kernel_0_2_bus": {
+            "mars_kernel_0_2_node_3_stage_2@F@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "mars_kernel_0_2_node_0_stage_0@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "mars_kernel_0_2_node_3_stage_2": {
+            "memcpy_wide_bus_write_char_3d_4096_16_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "mars_kernel_0_2_node_0_stage_0": {
+            "memcpy_wide_bus_read_char_3d_4096_16_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "aes256_encrypt_ecb_kernel_L_1_0_para@L@0": {
+            "aes256_encrypt_ecb_kernel_L_1_0_para_sub@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "aes256_encrypt_ecb_kernel_L_1_0_para_sub@L@0": {
+            "aes256_encrypt_ecb@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "aes256_encrypt_ecb_kernel_L_1_0_para_sub": {
+            "aes256_encrypt_ecb_kernel_L_1_0_para_sub@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 4096
+            }
+        },
+        "aes256_encrypt_ecb@L@1": {
+            "aes_expandEncKey@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "aes256_encrypt_ecb@L@0": {},
+        "aes256_encrypt_ecb": {
+            "aes_expandEncKey@F@6": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "aes_shiftRows@F@5": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "aes_subBytes@F@4": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "aes_addRoundKey@F@7": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "aes_addRoundKey_cpy@F@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "aes256_encrypt_ecb@L@1": {
+                "unroll-factor": 7,
+                "trip-count": 7
+            },
+            "aes256_encrypt_ecb@L@3": {
+                "unroll-factor": 13,
+                "trip-count": 13
+            },
+            "aes256_encrypt_ecb@L@0": {
+                "unroll-factor": 32,
+                "trip-count": 32
+            }
+        },
+        "aes_expandEncKey@L@9": {},
+        "aes_expandEncKey": {
+            "rj_sbox@F@7": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "rj_sbox@F@6": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "rj_sbox@F@8": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "rj_sbox@F@5": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "aes_expandEncKey@L@9": {
+                "unroll-factor": 3,
+                "trip-count": 3
+            },
+            "aes_expandEncKey@L@4": {
+                "unroll-factor": 3,
+                "trip-count": 3
+            },
+            "rj_sbox@F@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "rj_sbox@F@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "rj_sbox@F@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "rj_sbox@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "aes_mixColumns@L@0": {
+            "rj_xtime@F@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "rj_xtime@F@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "rj_xtime@F@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "rj_xtime@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "aes_mixColumns": {
+            "aes_mixColumns@L@0": {
+                "unroll-factor": 4,
+                "trip-count": 4
+            }
+        },
+        "rj_xtime": {},
+        "aes_shiftRows": {},
+        "aes_addRoundKey_cpy": {
+            "aes_addRoundKey_cpy@L@0": {
+                "unroll-factor": 16,
+                "trip-count": 16
+            }
+        },
+        "aes_addRoundKey@L@0": {},
+        "aes_subBytes": {
+            "aes_subBytes@L@0": {
+                "unroll-factor": 16,
+                "trip-count": 16
+            }
+        },
+        "rj_sbox": {},
+        "memcpy_wide_bus_write_double_3d_4096_16_512@L@4": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_double_3d_4096_16_512@L@3@L@3": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_double_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_double_3d_4096_16_512@L@3@L@2": {
+            "memcpy_wide_bus_write_double_3d_4096_16_512@L@3@L@2@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 4096
+            }
+        },
+        "memcpy_wide_bus_write_double_3d_4096_16_512@L@3@L@1": {
+            "memcpy_wide_bus_write_double_3d_4096_16_512@L@3@L@1@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_write_double_3d_4096_16_512@L@3@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_double_3d_4096_16_512@L@3": {
+            "memcpy_wide_bus_write_double_3d_4096_16_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_write_double_3d_4096_16_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_double_3d_4096_16_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_double_3d_4096_16_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            }
+        },
+        "memcpy_wide_bus_write_double_3d_4096_16_512@L@1": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_double_3d_4096_16_512@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_double_3d_4096_16_512": {
+            "memcpy_wide_bus_write_double_3d_4096_16_512@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_write_double_3d_4096_16_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_double_3d_4096_16_512@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_write_double_3d_4096_16_512@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            }
+        },
+        "memcpy_wide_bus_read_double_3d_4096_16_512@L@3@L@3": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_3d_4096_16_512@L@3@L@1@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_3d_4096_16_512@L@3@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_3d_4096_16_512@L@3": {
+            "memcpy_wide_bus_read_double_3d_4096_16_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_read_double_3d_4096_16_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_double_3d_4096_16_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_double_3d_4096_16_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            }
+        },
+        "memcpy_wide_bus_read_double_3d_4096_16_512@L@2": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_3d_4096_16_512@L@3@L@3": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_3d_4096_16_512@L@3@L@2@L@0": {
+            "memcpy_wide_bus_write_float_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@2": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@60": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_double_512": {
+            "memcpy_wide_bus_write_double_512@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "__assert_fail@F@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_double_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_double_512@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_write_double_512@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@56": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@3@L@10": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@55": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@50": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@49": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@41": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@58": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@45": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@39": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_3d_4096_16_512@L@3@L@1@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@1": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@31": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@37": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@36": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@3@L@13": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@52": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@3@L@5": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@21": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@7": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@34": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@18": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_3d_4096_16_512@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@32": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@11": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@3@L@15": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_double_3d_4096_16_512@L@3@L@1@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@8": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_single_read_float_512": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@43": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@3@L@6": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3": {
+            "memcpy_wide_bus_read_char_512@L@3@L@62": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@61": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@60": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@58": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@57": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@56": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@55": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@50": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@49": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@48": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@47": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@63": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@20": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@18": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@51": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@17": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@15": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@21": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@22": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@19": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@46": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@25": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@14": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@11": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@13": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@33": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@7": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@53": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@12": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@6": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@52": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@8": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@9": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@24": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@31": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@54": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@36": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@40": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@35": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@45": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@16": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@26": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@42": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@27": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@10": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@23": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@39": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@28": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@5": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@30": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@37": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@29": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@38": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@34": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@41": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@59": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@43": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@32": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_512@L@3@L@44": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            }
+        },
+        "aes_expandEncKey@L@4": {},
+        "memcpy_wide_bus_read_char_512": {
+            "memcpy_wide_bus_read_char_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_char_512@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "__assert_fail@F@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_512@L@3@L@5": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@4": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@38": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@37": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@31": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@29": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@28": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@24": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@1": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@20": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@22": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_3d_4096_16_512@L@3@L@2": {
+            "memcpy_wide_bus_read_double_3d_4096_16_512@L@3@L@2@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 4096
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3": {
+            "memcpy_wide_bus_write_char_512@L@3@L@61": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@60": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@59": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@58": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@55": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@48": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@47": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@62": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@18": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@24": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@16": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@13": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@15": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@53": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@11": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@23": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@54": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@17": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@26": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@52": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@27": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@57": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@46": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@8": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@5": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@35": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@20": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@6": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@37": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@63": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@14": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@51": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@34": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@12": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@7": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@9": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@42": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@25": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@31": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@56": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@28": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@22": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@41": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@29": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@50": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@19": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@30": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@32": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@49": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@21": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@33": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@45": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@36": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@38": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@10": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@39": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@40": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@43": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3@L@44": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@3@L@8": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@21": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "mars_kernel_0_2_comp": {
+            "mars_kernel_0_2_node_1_stage_1@F@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "mars_kernel_0_2_node_2_stage_0@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@25": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@23": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@20": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_512": {
+            "memcpy_wide_bus_read_double_512@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "__assert_fail@F@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_double_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@17": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@54": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@62": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@46": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@26": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@30": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@62": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@3@L@3": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "merlin_memcpy_0": {
+            "merlin_memcpy_0@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@15": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512": {
+            "memcpy_wide_bus_write_short_512@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_short_512@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            }
+        },
+        "memcpy_wide_bus_write_double_512@L@1": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_3d_4096_16_512@L@3@L@2": {
+            "memcpy_wide_bus_read_float_3d_4096_16_512@L@3@L@2@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 4096
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@12": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@3": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_3d_4096_16_512@L@3@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@35": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "mars_kernel_0_2": {
+            "mars_kernel_0_2_comp@F@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "mars_kernel_0_2_bus@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@48": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@10": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@3@L@1": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@19": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@3@L@7": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@47": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@8": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@36": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@3": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@7": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@6": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@3@L@10": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@22": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@30": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@4": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@9": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@3@L@6": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "aes_addRoundKey": {
+            "aes_addRoundKey@L@0": {
+                "unroll-factor": 16,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@15": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@25": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@3@L@3": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@59": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@33": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@3@L@12": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@1": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_double_512@L@3@L@3": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@2": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512": {
+            "memcpy_wide_bus_write_char_512@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_char_512@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_512@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            }
+        },
+        "memcpy_wide_bus_write_int_3d_4096_16_512@L@3@L@3": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@4": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_512": {
+            "memcpy_wide_bus_write_int_512@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_int_512@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_512@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@3@L@12": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@47": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@3@L@14": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@3@L@13": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@26": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@3@L@9": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_3d_4096_16_512@L@3@L@2@L@0": {
+            "memcpy_wide_bus_write_int_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@3@L@15": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@1": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_512@L@3@L@1": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@19": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@12": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@3@L@2": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@6": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@4": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@24": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_3d_4096_16_512@L@3@L@2": {
+            "memcpy_wide_bus_write_int_3d_4096_16_512@L@3@L@2@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 4096
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@13": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@3": {
+            "memcpy_wide_bus_write_float_512@L@3@L@13": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_512@L@3@L@12": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_512@L@3@L@11": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_512@L@3@L@10": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_512@L@3@L@15": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_512@L@3@L@9": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_512@L@3@L@14": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_512@L@3@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_512@L@3@L@5": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_512@L@3@L@8": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_512@L@3@L@6": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_512@L@3@L@7": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@3@L@1": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_single_read_double_512": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@29": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@53": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512": {
+            "memcpy_wide_bus_read_short_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_short_512@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "__assert_fail@F@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@3@L@12": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@26": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@3@L@14": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_3d_4096_16_512": {
+            "memcpy_wide_bus_read_float_3d_4096_16_512@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "__assert_fail@F@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_float_3d_4096_16_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "aes256_encrypt_ecb_kernel_L_1_0_para": {
+            "aes256_encrypt_ecb_kernel_L_1_0_para@L@0": {
+                "unroll-factor": 2,
+                "trip-count": 2
+            }
+        },
+        "memcpy_wide_bus_single_read_char_512": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@2": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@3@L@9": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@23": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@14": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@3@L@3": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@12": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@2": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@60": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "merlin_get_range_512": {
+            "__assert_fail@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@3@L@10": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@20": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@16": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@9": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@3@L@11": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@20": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@3@L@6": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_3d_4096_16_512@L@3@L@2@L@0": {
+            "memcpy_wide_bus_read_int_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@3@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_double_3d_4096_16_512@L@3@L@2@L@0": {
+            "memcpy_wide_bus_write_double_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@1": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@61": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@25": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_3d_4096_16_512@L@3@L@1": {
+            "memcpy_wide_bus_read_double_3d_4096_16_512@L@3@L@1@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@3@L@1": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_3d_4096_16_512@L@3@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@27": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_3d_4096_16_512": {
+            "memcpy_wide_bus_write_int_3d_4096_16_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_int_3d_4096_16_512@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_3d_4096_16_512@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_3d_4096_16_512@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@9": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_single_read_short_512": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@10": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@51": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_3d_4096_16_512@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@2": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@58": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@3@L@7": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@30": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@13": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@3@L@5": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_3d_4096_16_512": {
+            "memcpy_wide_bus_write_char_3d_4096_16_512@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_3d_4096_16_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_char_3d_4096_16_512@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_3d_4096_16_512@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@40": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@3@L@13": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_3d_4096_16_512@L@3@L@2@L@0": {
+            "memcpy_wide_bus_write_char_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_read_double_3d_4096_16_512@L@3@L@2@L@0": {
+            "memcpy_wide_bus_read_double_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3": {
+            "memcpy_wide_bus_read_short_512@L@3@L@30": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@29": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@27": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@26": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@25": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@24": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@23": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@8": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@16": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@28": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@6": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@22": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@5": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@7": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@17": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@10": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@11": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@31": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@12": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@13": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@14": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@15": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@18": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@19": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@20": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@9": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_512@L@3@L@21": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@11": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_512@L@3@L@6": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_3d_4096_16_512@L@3@L@3": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_3d_4096_16_512": {
+            "memcpy_wide_bus_read_int_3d_4096_16_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_int_3d_4096_16_512@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "__assert_fail@F@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@23": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@16": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@17": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_512@L@3@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@3@L@14": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@18": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_3d_4096_16_512@L@4": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@5": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@29": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@3@L@15": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@19": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@3@L@11": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_3d_4096_16_512@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@19": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_double_512@L@3@L@4": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_3d_4096_16_512@L@4": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@1": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "merlin_memcpy_0@L@0": {},
+        "memcpy_wide_bus_read_char_512@L@3@L@63": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@3@L@4": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@27": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@34": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@5": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_double_512@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@3@L@5": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_3d_4096_16_512@L@3@L@1": {
+            "memcpy_wide_bus_write_float_3d_4096_16_512@L@3@L@1@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "aes_subBytes@L@0": {
+            "rj_sbox@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@14": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_3d_4096_16_512@L@3@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@53": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@5": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@17": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_3d_4096_16_512@L@3@L@1@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@28": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@8": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_single_write_char_512": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@16": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_3d_4096_16_512@L@3": {
+            "memcpy_wide_bus_write_char_3d_4096_16_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_write_char_3d_4096_16_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_char_3d_4096_16_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 4
+            },
+            "memcpy_wide_bus_write_char_3d_4096_16_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@27": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@3": {
+            "memcpy_wide_bus_write_int_512@L@3@L@13": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_512@L@3@L@11": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_512@L@3@L@6": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_512@L@3@L@7": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_512@L@3@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_512@L@3@L@15": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_512@L@3@L@14": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_512@L@3@L@12": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_512@L@3@L@10": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_512@L@3@L@8": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_512@L@3@L@5": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_512@L@3@L@9": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_write_double_512@L@3@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@6": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@3": {
+            "memcpy_wide_bus_read_int_512@L@3@L@14": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_int_512@L@3@L@13": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_int_512@L@3@L@12": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_int_512@L@3@L@10": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_int_512@L@3@L@15": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_int_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_int_512@L@3@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_int_512@L@3@L@6": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_int_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_int_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_int_512@L@3@L@9": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_int_512@L@3@L@5": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_int_512@L@3@L@11": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_int_512@L@3@L@7": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_int_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_int_512@L@3@L@8": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@18": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@5": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_512@L@1": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "merlin_set_range_512": {
+            "__assert_fail@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_3d_4096_16_512@L@3@L@1": {
+            "memcpy_wide_bus_read_float_3d_4096_16_512@L@3@L@1@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_write_short_3d_4096_16_512@L@3@L@2@L@0": {
+            "memcpy_wide_bus_write_short_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@28": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@31": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3": {
+            "memcpy_wide_bus_write_short_512@L@3@L@27": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@26": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@28": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@9": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@25": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@22": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@6": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@24": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@16": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@31": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@7": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@29": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@17": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@30": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@20": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@10": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@8": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@11": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@12": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@18": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@23": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@13": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@14": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@15": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@19": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@5": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_512@L@3@L@21": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@2": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@28": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@4": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@42": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@24": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@6": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@44": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_512": {
+            "memcpy_wide_bus_read_float_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_float_512@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "__assert_fail@F@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_3d_4096_16_512@L@3@L@2": {
+            "memcpy_wide_bus_read_int_3d_4096_16_512@L@3@L@2@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 4096
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@3@L@7": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@7": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@8": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@24": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@7": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@10": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@11": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@3@L@4": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@3@L@11": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@30": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@11": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@21": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@12": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@13": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@14": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_3d_4096_16_512@L@3@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@15": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@1": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@16": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_double_512@L@3@L@6": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@51": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_3d_4096_16_512@L@3@L@3": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@17": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@18": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@23": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@22": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_3d_4096_16_512": {
+            "memcpy_wide_bus_read_double_3d_4096_16_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_double_3d_4096_16_512@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "__assert_fail@F@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@26": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@27": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_3d_4096_16_512@L@4": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@29": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@31": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@54": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@32": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_3d_4096_16_512@L@1": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@14": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@35": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@3@L@8": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@38": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@39": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_3d_4096_16_512@L@3@L@1@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@3@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@41": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@2": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@43": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@3@L@3": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@44": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@40": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@45": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@48": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@50": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_3d_4096_16_512": {
+            "memcpy_wide_bus_read_short_3d_4096_16_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_short_3d_4096_16_512@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "__assert_fail@F@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@52": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@22": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_512@L@3": {
+            "memcpy_wide_bus_read_double_512@L@3@L@7": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_read_double_512@L@3@L@6": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_read_double_512@L@3@L@5": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_read_double_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_read_double_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_read_double_512@L@3@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_read_double_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_read_double_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@55": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@56": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@59": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@3@L@7": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@61": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@63": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@3": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_3d_4096_16_512@L@4": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@4": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@3": {
+            "memcpy_wide_bus_read_float_512@L@3@L@13": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_float_512@L@3@L@12": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_float_512@L@3@L@11": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_float_512@L@3@L@10": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_float_512@L@3@L@14": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_float_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_float_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_float_512@L@3@L@15": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_float_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_float_512@L@3@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_float_512@L@3@L@5": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_float_512@L@3@L@6": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_float_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_float_512@L@3@L@9": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_float_512@L@3@L@8": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_float_512@L@3@L@7": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@3@L@2": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@3@L@4": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@3@L@9": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@3@L@10": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@3@L@12": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@21": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_3d_4096_16_512@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@3@L@13": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "aes256_encrypt_ecb_kernel@L@1": {
+            "mars_kernel_0_2@F@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "mars_kernel_0_2@F@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "mars_kernel_0_2@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_512@L@3@L@4": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@57": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512": {
+            "memcpy_wide_bus_write_float_512@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_float_512@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_512@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@3@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@3@L@1": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@3@L@4": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@3@L@5": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@3@L@6": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_3d_4096_16_512@L@3@L@1": {
+            "memcpy_wide_bus_write_short_3d_4096_16_512@L@3@L@1@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_read_char_3d_4096_16_512@L@3@L@1@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@3@L@8": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_3d_4096_16_512@L@3@L@2": {
+            "memcpy_wide_bus_write_float_3d_4096_16_512@L@3@L@2@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 4096
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@3@L@11": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@3@L@14": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@2": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@4": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_512@L@2": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "aes_addRoundKey_cpy@L@0": {},
+        "memcpy_wide_bus_single_write_double_512": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_512@L@3@L@2": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_512@L@3@L@3": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_512@L@3@L@7": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@3@L@2": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_double_512@L@3": {
+            "memcpy_wide_bus_write_double_512@L@3@L@7": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_write_double_512@L@3@L@6": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_write_double_512@L@3@L@5": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_write_double_512@L@3@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_write_double_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_write_double_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_write_double_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            },
+            "memcpy_wide_bus_write_double_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 8
+            }
+        },
+        "memcpy_wide_bus_write_double_512@L@3@L@1": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@9": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_double_512@L@3@L@2": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_3d_4096_16_512@L@3": {
+            "memcpy_wide_bus_read_int_3d_4096_16_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_int_3d_4096_16_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_int_3d_4096_16_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_int_3d_4096_16_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_write_double_512@L@3@L@5": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_double_512@L@3@L@7": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_3d_4096_16_512": {
+            "memcpy_wide_bus_read_char_3d_4096_16_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_char_3d_4096_16_512@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "__assert_fail@F@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@49": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_3d_4096_16_512@L@2": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_3d_4096_16_512@L@3": {
+            "memcpy_wide_bus_read_char_3d_4096_16_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            },
+            "memcpy_wide_bus_read_char_3d_4096_16_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_char_3d_4096_16_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 4
+            },
+            "memcpy_wide_bus_read_char_3d_4096_16_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 64
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@10": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_3d_4096_16_512@L@3@L@1": {
+            "memcpy_wide_bus_read_char_3d_4096_16_512@L@3@L@1@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@42": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_3d_4096_16_512@L@3@L@2": {
+            "memcpy_wide_bus_read_char_3d_4096_16_512@L@3@L@2@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 4096
+            }
+        },
+        "memcpy_wide_bus_single_write_float_512": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_3d_4096_16_512@L@1": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@3@L@8": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_3d_4096_16_512@L@3@L@1": {
+            "memcpy_wide_bus_write_char_3d_4096_16_512@L@3@L@1@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_write_char_3d_4096_16_512@L@3@L@1@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_3d_4096_16_512@L@3@L@2": {
+            "memcpy_wide_bus_write_char_3d_4096_16_512@L@3@L@2@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 4096
+            }
+        },
+        "memcpy_wide_bus_read_short_3d_4096_16_512@L@2": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_3d_4096_16_512@L@3": {
+            "memcpy_wide_bus_write_float_3d_4096_16_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_3d_4096_16_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_float_3d_4096_16_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_float_3d_4096_16_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_read_char_3d_4096_16_512@L@3@L@2@L@0": {
+            "memcpy_wide_bus_read_char_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_read_short_3d_4096_16_512@L@3": {
+            "memcpy_wide_bus_read_short_3d_4096_16_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_read_short_3d_4096_16_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_short_3d_4096_16_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 2
+            },
+            "memcpy_wide_bus_read_short_3d_4096_16_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            }
+        },
+        "memcpy_wide_bus_read_short_3d_4096_16_512@L@3@L@1": {
+            "memcpy_wide_bus_read_short_3d_4096_16_512@L@3@L@1@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@46": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_3d_4096_16_512@L@3@L@2": {
+            "memcpy_wide_bus_read_short_3d_4096_16_512@L@3@L@2@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 4096
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@13": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_3d_4096_16_512@L@3@L@2@L@0": {
+            "memcpy_wide_bus_read_short_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_write_short_512@L@3@L@25": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_short_3d_4096_16_512@L@3@L@3": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@33": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_3d_4096_16_512": {
+            "memcpy_wide_bus_write_short_3d_4096_16_512@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_3d_4096_16_512@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_3d_4096_16_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_short_3d_4096_16_512@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            }
+        },
+        "memcpy_wide_bus_write_short_3d_4096_16_512@L@1": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_512": {
+            "memcpy_wide_bus_read_int_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_int_512@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "__assert_fail@F@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_3d_4096_16_512@L@3": {
+            "memcpy_wide_bus_write_short_3d_4096_16_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            },
+            "memcpy_wide_bus_write_short_3d_4096_16_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_short_3d_4096_16_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 2
+            },
+            "memcpy_wide_bus_write_short_3d_4096_16_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 32
+            }
+        },
+        "memcpy_wide_bus_write_short_3d_4096_16_512@L@3@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_short_3d_4096_16_512@L@3@L@2": {
+            "memcpy_wide_bus_write_short_3d_4096_16_512@L@3@L@2@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 4096
+            }
+        },
+        "memcpy_wide_bus_write_short_3d_4096_16_512@L@3@L@3": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_single_write_int_512": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_3d_4096_16_512@L@2": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_3d_4096_16_512@L@3@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_512@L@3@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_3d_4096_16_512@L@3@L@1": {
+            "memcpy_wide_bus_read_int_3d_4096_16_512@L@3@L@1@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_write_double_512@L@4": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@3@L@2": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_3d_4096_16_512@L@3@L@3": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_3d_4096_16_512@L@3": {
+            "memcpy_wide_bus_write_int_3d_4096_16_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_int_3d_4096_16_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_int_3d_4096_16_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_int_3d_4096_16_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_write_int_3d_4096_16_512@L@3@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_int_3d_4096_16_512@L@3@L@1": {
+            "memcpy_wide_bus_write_int_3d_4096_16_512@L@3@L@1@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_write_int_3d_4096_16_512@L@3@L@1@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_single_write_short_512": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_512@L@3@L@9": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_3d_4096_16_512@L@2": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_char_512@L@3@L@3": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_3d_4096_16_512@L@3": {
+            "memcpy_wide_bus_read_float_3d_4096_16_512@L@3@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_read_float_3d_4096_16_512@L@3@L@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_float_3d_4096_16_512@L@3@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_read_float_3d_4096_16_512@L@3@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_read_float_3d_4096_16_512@L@3@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_3d_4096_16_512@L@3@L@1@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@57": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_3d_4096_16_512@L@3@L@2@L@0": {
+            "memcpy_wide_bus_read_float_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "memcpy_wide_bus_read_float_3d_4096_16_512@L@3@L@2@L@0@L@0": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_double_512@L@3@L@4": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_float_3d_4096_16_512@L@3@L@3": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_int_512@L@3@L@15": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_3d_4096_16_512": {
+            "memcpy_wide_bus_write_float_3d_4096_16_512@L@4": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_3d_4096_16_512@L@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "__assert_fail@F@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "memcpy_wide_bus_write_float_3d_4096_16_512@L@1": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            },
+            "memcpy_wide_bus_write_float_3d_4096_16_512@L@0": {
+                "unroll-factor": 1,
+                "trip-count": 16
+            }
+        },
+        "aes256_encrypt_ecb@L@3": {
+            "aes_addRoundKey@F@5": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "aes_mixColumns@F@2": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "aes_shiftRows@F@1": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "aes_expandEncKey@F@4": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "aes_addRoundKey@F@3": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            },
+            "aes_subBytes@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_read_char_512@L@3@L@15": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_3d_4096_16_512@L@1": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_single_read_int_512": {
+            "merlin_get_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        },
+        "memcpy_wide_bus_write_float_3d_4096_16_512@L@3@L@1@L@0": {
+            "merlin_set_range_512@F@0": {
+                "unroll-factor": 1,
+                "trip-count": 1
+            }
+        }
+    },
+    "topo_id_map": {
+        "aes256_encrypt_ecb_kernel@L@1": "L_0_0_0_20_2_0_27",
+        "aes256_encrypt_ecb_kernel@L@0": "L_0_0_0_20_2_0_10_1",
+        "merlin_memcpy_0@L@0": "L_0_0_0_19_2_0_5",
+        "merlin_memcpy_0": "F_0_0_0_19",
+        "mars_kernel_0_2_node_1_stage_1": "F_0_0_0_15",
+        "mars_kernel_0_2_node_2_stage_0@L@0": "L_0_0_0_14_2_0_1_1_1",
+        "mars_kernel_0_2_node_2_stage_0": "F_0_0_0_14",
+        "mars_kernel_0_2_bus": "F_0_0_0_13",
+        "mars_kernel_0_2_node_3_stage_2": "F_0_0_0_12",
+        "mars_kernel_0_2_node_0_stage_0": "F_0_0_0_11",
+        "rj_xtime": "F_0_0_0_5",
+        "aes_addRoundKey_cpy": "F_0_0_0_3",
+        "aes_addRoundKey@L@0": "L_0_0_0_2_2_0_2_0",
+        "mars_kernel_0_2_comp": "F_0_0_0_16",
+        "aes_subBytes": "F_0_0_0_1",
+        "aes_expandEncKey@L@4": "L_0_0_0_7_2_0_7_0",
+        "aes256_encrypt_ecb_kernel_L_1_0_para": "F_0_0_0_10",
+        "aes_addRoundKey_cpy@L@0": "L_0_0_0_3_2_0_2_0",
+        "aes_addRoundKey": "F_0_0_0_2",
+        "aes256_encrypt_ecb_kernel_L_1_0_para@L@0": "L_0_0_0_10_2_0_2",
+        "aes_shiftRows": "F_0_0_0_4",
+        "aes256_encrypt_ecb": "F_0_0_0_8",
+        "aes_subBytes@L@0": "L_0_0_0_1_2_0_2_0",
+        "rj_sbox": "F_0_0_0_0",
+        "aes_mixColumns": "F_0_0_0_6",
+        "mars_kernel_0_2": "F_0_0_0_17",
+        "aes256_encrypt_ecb_kernel_L_1_0_para_sub": "F_0_0_0_9",
+        "aes256_encrypt_ecb@L@0": "L_0_0_0_8_2_0_9_0",
+        "aes_mixColumns@L@0": "L_0_0_0_6_2_0_7_0",
+        "aes256_encrypt_ecb_kernel": "F_0_0_0_20",
+        "aes256_encrypt_ecb@L@1": "L_0_0_0_8_2_0_11_0",
+        "aes_expandEncKey": "F_0_0_0_7",
+        "aes_expandEncKey@L@9": "L_0_0_0_7_2_0_14_0",
+        "aes256_encrypt_ecb@L@3": "L_0_0_0_8_2_0_16_0",
+        "aes256_encrypt_ecb_kernel_L_1_0_para_sub@L@0": "L_0_0_0_9_2_0_2"
+    }
+}

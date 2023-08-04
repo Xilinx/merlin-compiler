@@ -1,0 +1,16 @@
+
+<directives>
+<reduction_opt>off</reduction_opt>
+<platform_name>xilinx_u250_xdma_201830_1</platform_name>
+<opt_effort>standard</opt_effort>
+<ihatebug>debug-level2</ihatebug>
+<merlincc>on</merlincc>
+<implementation_tool>sdaccel</implementation_tool>
+<source_file> vec_add_kernel.cpp</source_file>
+<clock_period>5ns</clock_period>
+<part_name></part_name>
+<reduction_altera>off</reduction_altera>
+<include_path> -I/space/scratch/hanhu/merlin_benchmark/examples/vec_add/original/xilinx_mo -I/space/scratch/hanhu/merlin_benchmark/examples/vec_add/original/xilinx_mo/../src/ -I/space/scratch/hanhu/merlin_benchmark/examples/vec_add/original/xilinx_mo/../src -I/space/scratch/hanhu/merlin_benchmark/examples/vec_add/original/xilinx_mo/./ -I/home/hanhu/Merlin_Compiler/trunk/build/..//mars-gen/lib/merlin</include_path>
+<macro_define> -D XILINX  -D INTEL </macro_define>
+</directives>
+

@@ -1,0 +1,6 @@
+
+WARNING: [LWCPP-201] kernel's type signature is not reference C-like or global-namespace types. Down stream simulation may have compilation problem: void top(class ::A{public: do... a) {...} (unsupported-type.cpp:11)
+
+ERROR: [LWCPP-302] kernel cannot be overloaded: void top(double _Complex * a) {...} (unsupported-type.cpp:8)
+
+ERROR: [LWCPP-302] kernel cannot be overloaded: void top(struct ::A{double _C... a) {...} (unsupported-type.cpp:11)

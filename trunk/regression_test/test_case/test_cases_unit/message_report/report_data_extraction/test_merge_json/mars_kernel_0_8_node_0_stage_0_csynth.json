@@ -1,0 +1,26 @@
+{
+    "mars_kernel_0_8_node_0_stage_0": {
+        "interval-max": "?", 
+        "interval-min": "1", 
+        "latency-max": "?", 
+        "latency-min": "1", 
+        "total-BRAM": 0, 
+        "total-DSP": 5, 
+        "total-FF": 2693, 
+        "total-LUT": 3306, 
+        "total-URAM": 0, 
+        "util-BRAM": "0", 
+        "util-DSP": "~0", 
+        "util-FF": "~0", 
+        "util-LUT": "~0", 
+        "util-URAM": "0"
+    }, 
+    "recv_data": {
+        "instance_name": "grp_recv_data_fu_54", 
+        "interval-max": "?", 
+        "interval-min": "27146", 
+        "latency-max": "?", 
+        "latency-min": "27146", 
+        "module_name": "recv_data"
+    }
+}

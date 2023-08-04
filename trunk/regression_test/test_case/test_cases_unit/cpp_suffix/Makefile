@@ -1,0 +1,19 @@
+unit_test:
+	-rm -rf err.log
+	-rm -rf kernel_top.mco
+	-touch err.log
+	-merlincc -c test.cpp --platform=aocl::a10gx || echo fails >> err.log
+	-if [ ! -f kernel_top.mco ]; then echo "fails">> err.log; fi;
+	-rm -rf kernel_top.mco
+	-merlincc -c test.C --platform=aocl::a10gx || echo fails >> err.log
+	-if [ ! -f kernel_top.mco ]; then echo "fails">> err.log; fi;
+	-rm -rf kernel_top.mco
+	-merlincc -c test.cxx --platform=aocl::a10gx || echo fails >> err.log
+	-if [ ! -f kernel_top.mco ]; then echo "fails">> err.log; fi;
+	-rm -rf kernel_top.mco
+	-merlincc -c test.c++ --platform=aocl::a10gx || echo fails >> err.log
+	-if [ ! -f kernel_top.mco ]; then echo "fails">> err.log; fi;
+	-rm -rf kernel_top.mco
+	-merlincc -c test.cc --platform=aocl::a10gx || echo fails >> err.log
+	-if [ ! -f kernel_top.mco ]; then echo "fails">> err.log; fi;
+	-rm -rf kernel_top.mco

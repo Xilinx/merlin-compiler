@@ -1,0 +1,2 @@
+run:
+	-mars_opt *.cpp -e c -p dependency_resolve | grep "DER ALGO" > algo-log

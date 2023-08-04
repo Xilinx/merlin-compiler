@@ -1,0 +1,63 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = - 50;j < 1;j++) {...}
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for((i = 0 , j = 23);i <= N;i++) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = 100;j <= 200;j++) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 100;i <= 200;i += 2) {...}
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+[Exp SgModOp:j % 2] {j % 2:SgModOp j % 2->1,0} : j % 2..j % 2, constant bound: {j % 2:SgModOp j % 2->1,0} : neg_inf..pos_inf
+[Exp SgIntVal:0] 0, constant bound: 0
+[Exp SgIntVal:0] 0, constant bound: 0
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void func(int M) {...}
+  SgBasicBlock {for(j = - 50;j < 1;j++) {if(j % 2) a[i] = i;}}
+  SgForStatement for(i = 0;i <= 100;++i) {...}
+  SgBasicBlock {if(j % 2) a[i] = i;}
+  SgForStatement for(j = - 50;j < 1;j++) {...}
+  SgBasicBlock {int _in_i = 100 + 2L * i;for(j = 100;j <= 200;j++) {b[_in_i] = _in_i;}}
+  SgForStatement for(i = 0;i <= 50;i++) {...}
+  SgBasicBlock {b[_in_i] = _in_i;}
+  SgForStatement for(j = 100;j <= 200;j++) {...}
+
+Arrays: 
+  int [100] a
+  int [100] b
+
+Ranges: 
+  SgFunctionDeclaration void func(int M) {...}
+    int [100] a :  W[0..99 inexact]
+  SgBasicBlock {for(j = - 50;j < 1;j++) {if(j % 2) a[i] = i;}}
+    int [100] a :  W[i..max(i,99) inexact]
+  SgForStatement for(i = 0;i <= 100;++i) {...}
+    int [100] a :  W[0..99 inexact]
+  SgBasicBlock {if(j % 2) a[i] = i;}
+    int [100] a :  W[i..max(i,99) inexact]
+  SgForStatement for(j = - 50;j < 1;j++) {...}
+    int [100] a :  W[i..max(i,99) inexact]
+  SgBasicBlock {int _in_i = 100 + 2L * i;for(j = 100;j <= 200;j++) {b[_in_i] = _in_i;}}
+    int [100] b :  W[100 + i * 2L..100 + i * 2L exact]
+  SgForStatement for(i = 0;i <= 50;i++) {...}
+  SgBasicBlock {b[_in_i] = _in_i;}
+    int [100] b :  W[100 + i * 2L..100 + i * 2L exact]
+  SgForStatement for(j = 100;j <= 200;j++) {...}
+    int [100] b :  W[100 + i * 2L..100 + i * 2L exact]
+

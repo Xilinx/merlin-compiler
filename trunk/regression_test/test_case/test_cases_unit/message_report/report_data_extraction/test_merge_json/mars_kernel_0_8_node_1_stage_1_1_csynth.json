@@ -1,0 +1,26 @@
+{
+    "compute1_1": {
+        "instance_name": "grp_compute1_1_fu_284", 
+        "interval-max": "25139", 
+        "interval-min": "25139", 
+        "latency-max": "25139", 
+        "latency-min": "25139", 
+        "module_name": "compute1_1"
+    }, 
+    "mars_kernel_0_8_node_1_stage_1_1": {
+        "interval-max": "25140", 
+        "interval-min": "1", 
+        "latency-max": "25140", 
+        "latency-min": "1", 
+        "total-BRAM": 0, 
+        "total-DSP": 321, 
+        "total-FF": 42451, 
+        "total-LUT": 22043, 
+        "total-URAM": 0, 
+        "util-BRAM": "0", 
+        "util-DSP": "2", 
+        "util-FF": "1", 
+        "util-LUT": "1", 
+        "util-URAM": "0"
+    }
+}

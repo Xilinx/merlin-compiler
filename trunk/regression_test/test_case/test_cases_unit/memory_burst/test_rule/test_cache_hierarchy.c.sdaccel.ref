@@ -1,0 +1,169 @@
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+
+void sub(int *a,int *b,int i,long a_offset,long b_offset)
+{
+  for (int j = 0; j < 100; j++) {
+    a[i * 100 + j + a_offset] = b[i * 100 + j + b_offset] + 100;
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_1(int a[10000],int b[10000])
+{
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) 
+/* Original: #pragma ACCEL cache */
+{
+    int b_buf[100];
+    int a_buf[100];
+    memcpy((void *)(&b_buf[0]),(const void *)(&b[i * 100]),sizeof(int ) * 100);
+    sub(a_buf,b_buf,i,i * -100,i * -100);
+    memcpy((void *)(&a[i * 100]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+  }
+}
+
+void sub_1(int *a,int *b,int i)
+/* Original: #pragma ACCEL cache */
+{
+  int b_buf[100];
+  int a_buf[100];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[i * 100]),sizeof(int ) * 100);
+  for (int j = 0; j < 100; j++) {
+    a_buf[j] = b_buf[j] + 100;
+  }
+  memcpy((void *)(&a[i * 100]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_2(int a[10000],int b[10000])
+{
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    sub_1(a,b,i);
+  }
+}
+
+void sub_2(int *a,int *b,int i)
+{
+  for (int j = 0; j < 100; j++) {
+    a[i * 100 + j] = b[i * 100 + j] + 100;
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_3(int a[10000],int b[10000])
+/* Original: #pragma ACCEL cache */
+{
+  int b_buf[10000];
+  int a_buf[10000];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10000);
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    sub_2(a_buf,b_buf,i);
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+}
+
+void sub_3(int *a,int *b,int i)
+{
+  for (int j = 0; j < 100; j++) {
+    a[i * 100 + j] = b[i * 100 + j] + 100;
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_4(int a[10000],int b[10000])
+/* Original: #pragma ACCEL cache variable=a,b */
+{
+  int b_buf[10000];
+  int a_buf[10000];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10000);
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    sub_3(a_buf,b_buf,i);
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+}
+
+void sub_4(int *a,int *b,int i)
+/* Original: #pragma ACCEL cache variable=a */
+{
+  int a_buf[100];
+  for (int j = 0; j < 100; j++) {
+    a_buf[j] = b[i * 100 + j] + 100;
+  }
+  memcpy((void *)(&a[i * 100]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_5(int a[10000],int b[10000])
+{
+  int b_buf[10000];
+  int i;
+  int j;
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10000);
+  for (i = 0; i < 100; i++) {
+    sub_4(a,b_buf,i);
+  }
+}
+
+void sub_5(int *a,int *b,int i)
+{
+  for (int j = 0; j < 100; j++) {
+    a[i * 100 + j] = b[i * 100 + j] + 100;
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_6(int a[10000],int b[10000])
+/* Original: #pragma ACCEL cache variable=a,b */
+{
+  int b_buf[10000];
+  int a_buf[10000];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10000);
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    sub_5(a_buf,b_buf,i);
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+}
+
+void sub_6(int *a,int *b,int i)
+/* Original: #pragma ACCEL cache */
+{
+  int b_buf[100];
+  int a_buf[100];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[i * 100]),sizeof(int ) * 100);
+  for (int j = 0; j < 100; j++) {
+    a_buf[j] = b_buf[j] + 100;
+  }
+  memcpy((void *)(&a[i * 100]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+
+void sub_6_2(int *a,int *b,int i)
+{
+  int b_buf[100];
+  int a_buf[100];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[i * 100]),sizeof(int ) * 100);
+  for (int j = 0; j < 100; j++) {
+    a_buf[j] = b_buf[j] + 100;
+  }
+  memcpy((void *)(&a[i * 100]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_7(int a[10000],int b[10000])
+{
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    sub_6(a,b,i);
+    sub_6_2(a,b,i);
+  }
+}

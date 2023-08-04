@@ -1,0 +1,17 @@
+#pragma ACCEL kernel
+
+void top(int *a,int *b)
+{
+  
+#pragma ACCEl interface variable=a depth=1000
+  
+#pragma ACCEl interface variable=b depth=1000
+  int *a_ptr = &a[10];
+  int *b_ptr = &b[10];
+  for (int i = 0; i < 100; ++i) {
+    a_ptr[i] = b_ptr[i] + 2;
+  }
+  if (b_ptr[100] > 0) {
+    a_ptr[100] = 100;
+  }
+}

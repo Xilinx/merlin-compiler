@@ -1,0 +1,8 @@
+
+WARNING: [MDARR-201] OpenCL host library generation is disabled because some of the dimension sizes of the interface variable 'a' (test_missing_depth_with_multi_kernel.c:7) of type 'struct A *' is not determined.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=a max_depth=?
+
+WARNING: [MDARR-201] OpenCL host library generation is disabled because some of the dimension sizes of the interface variable 'a_y' (test_missing_depth_with_multi_kernel.c:7) of type 'int *' is not determined.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=a->y max_depth=?

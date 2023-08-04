@@ -1,0 +1,41 @@
+
+WARNING: [TILE-211] The tripcount of loop for(j = 0;j < n;j++) {...} (vec_add_kernel.c:17)
+ may not be divisible by the factor '5'. This will negatively impact both resource utilization and performance.
+ Hint: Please rewrite the tripcount as a multiple of the factor.
+
+WARNING: [BURST-222] Memory burst NOT inferred: variable 'c' (vec_add_kernel.c:8) in scope (vec_add_kernel.c:17) which is fine grained scope.
+ Hint: please apply cache pragma in the scope
+  #pragma ACCEL cache variable=c
+
+WARNING: [BURST-222] Memory burst NOT inferred: variable 'a' (vec_add_kernel.c:8) in scope (vec_add_kernel.c:17) which is fine grained scope.
+ Hint: please apply cache pragma in the scope
+  #pragma ACCEL cache variable=a
+
+WARNING: [BURST-222] Memory burst NOT inferred: variable 'b' (vec_add_kernel.c:8) in scope (vec_add_kernel.c:17) which is fine grained scope.
+ Hint: please apply cache pragma in the scope
+  #pragma ACCEL cache variable=b
+INFO: [BURST-101] Memory burst inferred: variable 'c' (vec_add_kernel.c:8) in scope (vec_add_kernel.c:17)
+  burst buffer size = 3980 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (vec_add_kernel.c:8) in scope (vec_add_kernel.c:17)
+  burst buffer size = 3980 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (vec_add_kernel.c:8) in scope (vec_add_kernel.c:17)
+  burst buffer size = 3980 bytes
+
+WARNING: [WDBUS-203] Suboptimal memory coalescing: variable 'a' (vec_add_kernel.c:8)
+  Reason: the lowest dimension size of on-chip buffer is not divisible by 2
+
+WARNING: [WDBUS-203] Suboptimal memory coalescing: variable 'b' (vec_add_kernel.c:8)
+  Reason: the lowest dimension size of on-chip buffer is not divisible by 2
+
+WARNING: [WDBUS-203] Suboptimal memory coalescing: variable 'c' (vec_add_kernel.c:8)
+  Reason: the lowest dimension size of on-chip buffer is not divisible by 2
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'c_4_0_buf' (vec_add_kernel.c:8)
+ in loop 'j' (vec_add_kernel.c:17)
+INFO: [FGPIP-103] Loop fine-grained pipelining applied: loop 'L_0'
+  (vec_add_kernel.c:17)
+INFO: [FGPIP-102] Loop fine-grained parallelization applied: loop 'L_0_0'
+ (vec_add_kernel.c:17) 
+  parallel units:  5
+INFO: [FGPIP-102] Loop fine-grained parallelization applied: loop 'L_1'
+ (vec_add_kernel.c:17) 
+  parallel units:  unknown

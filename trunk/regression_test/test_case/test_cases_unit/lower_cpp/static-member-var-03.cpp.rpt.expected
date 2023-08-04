@@ -1,0 +1,2 @@
+
+ERROR: [LWCPP-303] Uninitialised const variable: 'data' (static-member-var-03.cpp:2)

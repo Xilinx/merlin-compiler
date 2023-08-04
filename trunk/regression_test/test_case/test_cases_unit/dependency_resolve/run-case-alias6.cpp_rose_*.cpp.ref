@@ -1,0 +1,129 @@
+
+void simple_float()
+{
+  int i;
+  float x;
+  for ((i = 0 , x *= 8); i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    float &xx = x;
+  }
+  for (i = 0; i < 100 && (x *= 8); ++i) {
+    
+#pragma ACCEL pipeline
+    float &xx = x;
+  }
+  for (i = 0; i < 100; (++i , x *= 8)) {
+    
+#pragma ACCEL pipeline
+    float &xx = x;
+  }
+  for (i = 0; i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    float &xx = x;
+    x *= 8;
+  }
+  while(1){
+    
+#pragma ACCEL pipeline
+    float &xx = x;
+    x *= 8;
+  }
+  while((x *= 8)){
+    
+#pragma ACCEL pipeline
+    float &xx = x;
+  }
+}
+
+void simple_double()
+{
+  int i;
+  double x;
+  for ((i = 0 , x *= 8); i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    double *xx = &x;
+  }
+  for (i = 0; i < 100 && (x *= 8); ++i) {
+    
+#pragma ACCEL pipeline
+    double *xx = &x;
+  }
+  for (i = 0; i < 100; (++i , x *= 8)) {
+    
+#pragma ACCEL pipeline
+    double *xx = &x;
+  }
+  for (i = 0; i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    double *xx = &x;
+    x *= 8;
+  }
+  while(1){
+    
+#pragma ACCEL pipeline
+    double *xx = &x;
+    x *= 8;
+  }
+  while((x *= 8)){
+    
+#pragma ACCEL pipeline
+    double *xx = &x;
+  }
+}
+
+double f(double x,double y)
+{
+  return x + y;
+}
+
+void complicated()
+{
+  int i;
+  double x;
+  double y;
+  double z;
+  for ((i = 0 , x *= y + z + f(y,z)); i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    double &xx = x;
+  }
+  for (i = 0; i < 100 && (x *= y + z + f(y,z)); ++i) {
+    
+#pragma ACCEL pipeline
+    double &xx = x;
+  }
+  for (i = 0; i < 100; (++i , x *= y + z + f(y,z))) {
+    
+#pragma ACCEL pipeline
+    double &xx = x;
+  }
+  for (i = 0; i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    double &xx = x;
+    x *= y + z + f(y,z);
+  }
+  while(1){
+    
+#pragma ACCEL pipeline
+    double &xx = x;
+    x *= y + z + f(y,z);
+  }
+  while((x *= y + z + f(y,z))){
+    
+#pragma ACCEL pipeline
+    double &xx = x;
+  }
+}
+#pragma ACCEL kernel
+
+void g()
+{
+  simple_float();
+  simple_double();
+  complicated();
+}

@@ -1,0 +1,381 @@
+
+WARNING: [FGPIP-209] Loop fine-grained parallelization applied: loop 'L_0' (test.cpp:532)
+  Hint: parallel factor 1000 is adjusted to the loop tripcount 100.
+INFO: [FGPIP-105] Loop 'i' (test.cpp:11) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:28) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:43) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:59) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:65) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:80) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:89) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:100) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:107) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:118) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:143) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:169) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:197) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:215) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:233) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:251) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:269) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:288) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:307) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:332) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:351) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:369) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:379) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:396) is parallelized with a factor of 10
+INFO: [FGPIP-103] Loop 'i'  (test.cpp:413) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test.cpp:415) is fully parallelized
+INFO: [FGPIP-108] Loop 'j'  (test.cpp:433) is pipelined with a target II of 1
+INFO: [FGPIP-105] Loop 'j' (test.cpp:450) is parallelized with a factor of 10
+INFO: [FGPIP-102] Loop 'j' (test.cpp:485) is fully parallelized
+INFO: [FGPIP-108] Loop 'j'  (test.cpp:503) is pipelined with a target II of 1
+INFO: [FGPIP-105] Loop 'j' (test.cpp:518) is parallelized with a factor of 4
+INFO: [FGPIP-105] Loop 'i' (test.cpp:547) is parallelized with a factor of 100
+INFO: [FGPIP-103] Loop 'i'  (test.cpp:563) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test.cpp:568) is fully parallelized
+INFO: [FGPIP-105] Loop 'j' (test.cpp:589) is parallelized with a factor of 10
+
+WARNING: [FGPIP-202] Loop fine-grained parallelization CANNOT be applied: loop 'k'
+  (test.cpp:626),  because the loop contains subloop(s) not being parallelized.
+INFO: [FGPIP-105] Loop 'i' (test.cpp:647) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:663) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:672) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:707) is parallelized with a factor of 4
+INFO: [FGPIP-105] Loop 'k' (test.cpp:730) is parallelized with a factor of 2
+INFO: [FGPIP-108] Loop 'k'  (test.cpp:730) is pipelined with a target II of 1
+INFO: [FGPIP-105] Loop 'j' (test1.cpp:13) is parallelized with a factor of 5
+INFO: [FGPIP-105] Loop 'j' (test1.cpp:27) is parallelized with a factor of 4
+
+WARNING: [FGPIP-222] Pipelining loop 'i' (test_threshold.cpp:19) may lead to excessive resource usage and long runtime in downstream tools.
+
+WARNING: [FGPIP-215] Parallelizing loop 'j' (test_threshold.cpp:27) may lead to excessive resource usage and long runtime in downstream tools.
+
+WARNING: [FGPIP-222] Pipelining loop 'i' (test_threshold.cpp:33) may lead to excessive resource usage and long runtime in downstream tools.
+INFO: [FGPIP-103] Loop 'i'  (test_threshold.cpp:10) is pipelined
+INFO: [FGPIP-102] Loop 'k' (test_threshold.cpp:12) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_threshold.cpp:14) is fully parallelized
+INFO: [FGPIP-103] Loop 'i'  (test_threshold.cpp:19) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_threshold.cpp:21) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_threshold.cpp:27) is fully parallelized
+INFO: [FGPIP-103] Loop 'i'  (test_threshold.cpp:33) is pipelined
+INFO: [FGPIP-102] Loop 't' (test_threshold.cpp:35) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_threshold.cpp:37) is fully parallelized
+
+WARNING: [FGPIP-202] Loop fine-grained parallelization CANNOT be applied: loop 'k'
+  (test_pattern.cpp:14),  because the loop contains subloop(s) not being parallelized.
+INFO: [FGPIP-103] Loop 'j'  (test_pattern.cpp:16) is pipelined
+INFO: [FGPIP-108] Loop 'i'  (test_pattern.cpp:41) is pipelined with a target II of 1
+INFO: [FGPIP-103] Loop 'm'  (test_pattern.cpp:77) is pipelined
+INFO: [FGPIP-108] Loop 'i'  (test_pattern.cpp:104) is pipelined with a target II of 26
+INFO: [FGPIP-102] Loop 'j' (test_pattern.cpp:106) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_pattern.cpp:110) is fully parallelized
+INFO: [FGPIP-103] Loop 'k'  (test_pattern.cpp:144) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_pattern.cpp:146) is fully parallelized
+
+WARNING: [FGPIP-213] Loop 'i'  (test_pattern1.cpp:25) probably cannot be fully-pipelined as array 'cc' has an irregular access pattern and cannot be split into different sub-arrays.
+INFO: [FGPIP-103] Loop 'i'  (test_pattern1.cpp:10) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_pattern1.cpp:25) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_pattern1.cpp:31) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_pattern1.cpp:33) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test4.cpp:12) is fully parallelized
+INFO: [FGPIP-105] Loop 'k' (test4.cpp:19) is parallelized with a factor of 5
+INFO: [FGPIP-105] Loop 'k' (test4.cpp:26) is parallelized with a factor of 5
+
+WARNING: [FGPIP-204] Parallelization NOT applied: loop 'L_0' (test_invalidpragma.cpp:11)  Reason: Invalid parallel factor: 0 
+  Hint:   parallel factor can only be constant positive integer 
+
+WARNING: [FGPIP-204] Parallelization NOT applied: loop 'L_0' (test_invalidpragma.cpp:28)  Reason: Invalid parallel factor: -1 
+  Hint:   parallel factor can only be constant positive integer 
+
+WARNING: [FGPIP-204] Parallelization NOT applied: loop 'L_1' (test_invalidpragma.cpp:35)  Reason: Invalid parallel factor: -1 
+  Hint:   parallel factor can only be constant positive integer 
+
+WARNING: [FGPIP-204] Parallelization NOT applied: loop 'L_0' (test_invalidpragma.cpp:49)  Reason: Invalid parallel factor: NN 
+  Hint:   parallel factor can only be constant positive integer 
+
+WARNING: [FGPIP-221] Ignoring pragma 'HLS array_partition variable=a cyclic factor=NN1'  because of unknown partitioning factor 'NN1'
+INFO: [FGPIP-103] Loop 'i'  (test_invalidpragma.cpp:17) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_invalidpragma.cpp:35) is pipelined
+INFO: [FGPIP-102] Loop 'i' (test_vendorpragma.cpp:36) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_vendorpragma.cpp:42) is fully parallelized
+INFO: [FGPIP-103] Loop 'i'  (test_vendorpragma.cpp:49) is pipelined
+INFO: [FGPIP-108] Loop 'j'  (test_call1.cpp:11) is pipelined with a target II of 1
+INFO: [FGPIP-108] Loop 'j'  (test_call1.cpp:18) is pipelined with a target II of 1
+INFO: [FGPIP-103] Loop 'j'  (test_call2.cpp:8) is pipelined
+INFO: [FGPIP-108] Loop 'j'  (test_call2.cpp:21) is pipelined with a target II of 1
+INFO: [FGPIP-108] Loop 'i'  (test_call2.cpp:28) is pipelined with a target II of 1
+INFO: [FGPIP-102] Loop 'j' (test_call2.cpp:30) is fully parallelized
+
+WARNING: [FGPIP-213] Loop 'j'  (test_call3.cpp:11) probably cannot be fully-pipelined as array 'b' has an irregular access pattern and cannot be split into different sub-arrays.
+
+WARNING: [FGPIP-213] Loop 'i'  (test_call3.cpp:18) probably cannot be fully-pipelined as array 'a' has an irregular access pattern and cannot be split into different sub-arrays.
+INFO: [FGPIP-108] Loop 'j'  (test_call3.cpp:11) is pipelined with a target II of 1
+INFO: [FGPIP-108] Loop 'i'  (test_call3.cpp:18) is pipelined with a target II of 1
+INFO: [FGPIP-102] Loop 'j' (test_call3.cpp:20) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_call4.cpp:4) is fully parallelized
+INFO: [FGPIP-108] Loop 'j'  (test_call4.cpp:19) is pipelined with a target II of 1
+INFO: [FGPIP-108] Loop 'i'  (test_call4.cpp:26) is pipelined with a target II of 1
+INFO: [FGPIP-102] Loop 'j' (test_call4.cpp:28) is fully parallelized
+INFO: [FGPIP-108] Loop 'i'  (test_call5.cpp:9) is pipelined with a target II of 1
+INFO: [FGPIP-102] Loop 'j' (test_call5.cpp:11) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_call5.cpp:20) is fully parallelized
+INFO: [FGPIP-103] Loop 'i'  (test_call6.cpp:11) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_call6.cpp:13) is fully parallelized
+INFO: [FGPIP-108] Loop 'i'  (test_mod.cpp:7) is pipelined with a target II of 1
+INFO: [FGPIP-102] Loop 'j' (test_mod.cpp:9) is fully parallelized
+INFO: [FGPIP-108] Loop 'i'  (test_mod.cpp:22) is pipelined with a target II of 1
+INFO: [FGPIP-102] Loop 'j' (test_mod.cpp:24) is fully parallelized
+INFO: [FGPIP-105] Loop 'j' (test_mod.cpp:38) is parallelized with a factor of 4
+INFO: [FGPIP-103] Loop 'j'  (test_mod.cpp:52) is pipelined
+INFO: [FGPIP-102] Loop 'j0' (test_mod.cpp:54) is fully parallelized
+
+WARNING: [FGPIP-213] Loop 'i'  (test_cond.cpp:42) probably cannot be fully-pipelined as array 'a' has an irregular access pattern and cannot be split into different sub-arrays.
+INFO: [FGPIP-105] Loop 'j' (test_cond.cpp:10) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_cond.cpp:27) is parallelized with a factor of 10
+INFO: [FGPIP-108] Loop 'i'  (test_cond.cpp:42) is pipelined with a target II of 1
+INFO: [FGPIP-102] Loop 'j' (test_cond.cpp:45) is fully parallelized
+INFO: [FGPIP-108] Loop 'i'  (test_cond.cpp:61) is pipelined with a target II of 1
+INFO: [FGPIP-102] Loop 'j' (test_cond.cpp:64) is fully parallelized
+INFO: [FGPIP-105] Loop 'j' (test_cond.cpp:79) is parallelized with a factor of 10
+INFO: [FGPIP-102] Loop 'n_sub_0' (test_cond.cpp:98) is fully parallelized
+INFO: [FGPIP-103] Loop 'j'  (test_cond.cpp:124) is pipelined
+INFO: [FGPIP-102] Loop 'j_sub' (test_cond.cpp:126) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_cond.cpp:152) is fully parallelized
+INFO: [FGPIP-103] Loop 'k'  (test_false_dependence_sdaccel.cpp:4) is pipelined
+INFO: [FGPIP-102] Loop 'k' (test_false_dependence_sdaccel.cpp:23) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_sdaccel.cpp:26) is fully parallelized
+INFO: [FGPIP-102] Loop 'k' (test_false_dependence_sdaccel.cpp:45) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_sdaccel.cpp:47) is fully parallelized
+INFO: [FGPIP-102] Loop 'k' (test_false_dependence_sdaccel.cpp:64) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_sdaccel.cpp:66) is fully parallelized
+INFO: [FGPIP-103] Loop 'k'  (test_false_dependence_sdaccel.cpp:82) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_sdaccel.cpp:85) is fully parallelized
+INFO: [FGPIP-103] Loop 'j'  (test_false_dependence_sdaccel.cpp:102) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (test_false_dependence_sdaccel.cpp:116) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (test_false_dependence_sdaccel.cpp:122) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (test_false_dependence_sdaccel.cpp:138) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (test_false_dependence_sdaccel.cpp:143) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (test_false_dependence_sdaccel.cpp:148) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (test_false_dependence_sdaccel.cpp:153) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_false_dependence_sdaccel.cpp:167) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_sdaccel.cpp:172) is fully parallelized
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a00' (test_false_dependence_sdaccel.cpp:170)
+ in loop 'i' (test_false_dependence_sdaccel.cpp:167)
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_sdaccel.cpp:134)
+ in loop 'j' (test_false_dependence_sdaccel.cpp:153)
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_sdaccel.cpp:134)
+ in loop 'j' (test_false_dependence_sdaccel.cpp:148)
+
+WARNING: [FGPIP-217] To apply dependency false pragma on variable 'b' (test_false_dependence_sdaccel.cpp:136) in loop 'j' (test_false_dependence_sdaccel.cpp:143) may result in an incorrect hardware implementation.
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'b' (test_false_dependence_sdaccel.cpp:136)
+ in loop 'j' (test_false_dependence_sdaccel.cpp:143)
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_sdaccel.cpp:134)
+ in loop 'j' (test_false_dependence_sdaccel.cpp:138)
+
+WARNING: [FGPIP-217] To apply dependency false pragma on variable 'a' (test_false_dependence_sdaccel.cpp:114) in loop 'j' (test_false_dependence_sdaccel.cpp:122) may result in an incorrect hardware implementation.
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_sdaccel.cpp:114)
+ in loop 'j' (test_false_dependence_sdaccel.cpp:122)
+
+WARNING: [FGPIP-217] To apply dependency false pragma on variable 'a' (test_false_dependence_sdaccel.cpp:114) in loop 'j' (test_false_dependence_sdaccel.cpp:116) may result in an incorrect hardware implementation.
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_sdaccel.cpp:114)
+ in loop 'j' (test_false_dependence_sdaccel.cpp:116)
+
+WARNING: [FGPIP-217] To apply dependency false pragma on variable 'bb' (test_false_dependence_sdaccel.cpp:95) in loop 'i' (test_false_dependence_sdaccel.cpp:98) may result in an incorrect hardware implementation.
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'bb' (test_false_dependence_sdaccel.cpp:95)
+ in loop 'i' (test_false_dependence_sdaccel.cpp:98)
+
+WARNING: [FGPIP-217] To apply dependency false pragma on variable 'a' (test_false_dependence_sdaccel.cpp:94) in loop 'i' (test_false_dependence_sdaccel.cpp:98) may result in an incorrect hardware implementation.
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_sdaccel.cpp:94)
+ in loop 'i' (test_false_dependence_sdaccel.cpp:98)
+
+WARNING: [PROCS-234] Ignoring pragma '#pragma ACCEL FALSE_DEPENDENCE VARIABLE = a_buf FORCE=off' (test_false_dependence_sdaccel.cpp:81) because cannot find the specified variable
+
+WARNING: [PROCS-234] Ignoring pragma '#pragma ACCEL FALSE_DEPENDENCE' (test_false_dependence_sdaccel.cpp:63) because Xilinx tool cannot support a false dependence pragma without a specified variable
+
+WARNING: [FGPIP-217] To apply dependency false pragma on variable 'a' (test_false_dependence_sdaccel.cpp:37) in loop 'i' (test_false_dependence_sdaccel.cpp:42) may result in an incorrect hardware implementation.
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_sdaccel.cpp:37)
+ in loop 'i' (test_false_dependence_sdaccel.cpp:42)
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_sdaccel.cpp:14)
+ in loop 'i' (test_false_dependence_sdaccel.cpp:20)
+
+WARNING: [PROCS-234] Ignoring pragma '#pragma ACCEL FALSE_DEPENDENCE VARIABLE=a' (test_false_dependence_sdaccel.cpp:7) because cannot find the specified variable
+INFO: [FGPIP-103] Loop 'j'  (test_auto_false_dependence.cpp:2) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (test_auto_false_dependence.cpp:19) is pipelined
+INFO: [FGPIP-103] Loop 'while(t > 0){#pragma'  (test_auto_false_dependence.cpp:31) is pipelined
+INFO: [FGPIP-103] Loop 'w'  (test_auto_false_dependence.cpp:52) is pipelined
+INFO: [FGPIP-102] Loop 'iter' (test_auto_false_dependence.cpp:55) is fully parallelized
+INFO: [FGPIP-102] Loop 'p' (test_auto_false_dependence.cpp:58) is fully parallelized
+INFO: [FGPIP-102] Loop 'q' (test_auto_false_dependence.cpp:61) is fully parallelized
+
+WARNING: [FGPIP-209] Loop fine-grained parallelization applied: loop 'L_0' (test_dual.cpp:532)
+  Hint: parallel factor 1000 is adjusted to the loop tripcount 100.
+INFO: [FGPIP-105] Loop 'i' (test_dual.cpp:11) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:28) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:43) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:59) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:65) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:80) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:89) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:100) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:107) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:118) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:143) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:169) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:197) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:215) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:233) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:251) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:269) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:288) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:307) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:332) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:351) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:369) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:379) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:396) is parallelized with a factor of 10
+INFO: [FGPIP-103] Loop 'i'  (test_dual.cpp:413) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_dual.cpp:415) is fully parallelized
+INFO: [FGPIP-108] Loop 'j'  (test_dual.cpp:433) is pipelined with a target II of 1
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:450) is parallelized with a factor of 10
+INFO: [FGPIP-102] Loop 'j' (test_dual.cpp:485) is fully parallelized
+INFO: [FGPIP-108] Loop 'j'  (test_dual.cpp:503) is pipelined with a target II of 1
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:518) is parallelized with a factor of 4
+INFO: [FGPIP-105] Loop 'i' (test_dual.cpp:547) is parallelized with a factor of 100
+INFO: [FGPIP-103] Loop 'i'  (test_dual.cpp:563) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_dual.cpp:568) is fully parallelized
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:589) is parallelized with a factor of 10
+
+WARNING: [FGPIP-202] Loop fine-grained parallelization CANNOT be applied: loop 'k'
+  (test_dual.cpp:626),  because the loop contains subloop(s) not being parallelized.
+INFO: [FGPIP-105] Loop 'i' (test_dual.cpp:647) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:663) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:672) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:707) is parallelized with a factor of 4
+INFO: [FGPIP-105] Loop 'k' (test_dual.cpp:730) is parallelized with a factor of 2
+INFO: [FGPIP-108] Loop 'k'  (test_dual.cpp:730) is pipelined with a target II of 1
+INFO: [FGPIP-108] Loop 'i'  (test_priority.cpp:9) is pipelined with a target II of 1
+INFO: [FGPIP-102] Loop 'i' (test_priority.cpp:16) is fully parallelized
+INFO: [FGPIP-108] Loop 'i'  (test_priority.cpp:32) is pipelined with a target II of 1
+INFO: [FGPIP-102] Loop 'i' (test_priority.cpp:39) is fully parallelized
+INFO: [FLATN-101] Flattening the loop 'L_0' and  'L_0_0' (test_priority.cpp:9)
+INFO: [FLATN-101] Flattening the loop 'L_0' and  'L_0_0' (test_priority.cpp:32)
+INFO: [FGPIP-108] Loop 'sub_start'  (test_index_transform.cpp:16) is pipelined with a target II of 1
+INFO: [FGPIP-103] Loop 'j'  (test_index_transform1.cpp:6) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (test_index_transform1.cpp:19) is pipelined
+INFO: [FGPIP-103] Loop 'k'  (test_index_transform1.cpp:34) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_index_transform1.cpp:36) is fully parallelized
+INFO: [FGPIP-108] Loop 'sub_start'  (test_index_transform2.cpp:14) is pipelined with a target II of 1
+INFO: [FGPIP-103] Loop 'i'  (test_factor_propagate.cpp:36) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_factor_propagate.cpp:39) is fully parallelized
+
+WARNING: [FGPIP-212] Complete parallelization of loop 'j  (test_assert.cpp:23)
+ may be ignored or lead to vendor tool errors because its tripcount is variable.
+INFO: [FGPIP-103] Loop 'j'  (test_assert.cpp:9) is pipelined
+INFO: [FGPIP-103] Loop 'k'  (test_assert.cpp:21) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_assert.cpp:23) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_alias.cpp:13) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_alias.cpp:30) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_alias.cpp:40) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_alias.cpp:48) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_alias.cpp:57) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_alias.cpp:68) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_alias.cpp:78) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_alias.cpp:105) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_alias.cpp:109) is fully parallelized
+
+WARNING: [FGPIP-202] Loop fine-grained parallelization CANNOT be applied: loop 'j'
+  (test_alias.cpp:113),  because the loop contains subloop(s) not being parallelized.
+INFO: [FGPIP-102] Loop 'j' (test_alias.cpp:117) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_alias.cpp:122) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_alias.cpp:126) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_alias.cpp:132) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_alias1.cpp:12) is fully parallelized
+INFO: [FGPIP-108] Loop 'i'  (test_flatten_off.cpp:9) is pipelined with a target II of 1
+INFO: [FGPIP-103] Loop 'i'  (test_flatten_off.cpp:16) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_flatten_on.cpp:7) is pipelined
+INFO: [FGPIP-103] Loop 'L_1_0'  (test_flatten_on.cpp:15) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_flatten_on.cpp:23) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_flatten_on.cpp:30) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_flatten_on.cpp:46) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_flatten_on.cpp:58) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_flatten_on.cpp:68) is pipelined
+INFO: [FGPIP-108] Loop 'i'  (test_flatten_on.cpp:87) is pipelined with a target II of 1
+INFO: [FGPIP-103] Loop 'i'  (test_flatten_on.cpp:94) is pipelined
+INFO: [FLATN-101] Flattening the loop 'L_0' and  'L_0_0' (test_flatten_on.cpp:7)
+INFO: [FLATN-101] Flattening the loop 'L_0' and  'L_0_0' (test_flatten_on.cpp:87)
+INFO: [FGPIP-102] Loop 'i' (test_partition_off.cpp:6) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_partition_off.cpp:13) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_partition_off.cpp:25) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_partition_off.cpp:28) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_partition_off.cpp:35) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_partition_off.cpp:38) is fully parallelized
+INFO: [FGPIP-102] Loop 'round_counter' (test_struct.cpp:18) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_struct.cpp:31) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_struct.cpp:40) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_struct.cpp:46) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_struct.cpp:48) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_struct_2.cpp:10) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_struct_3.cpp:6) is fully parallelized
+INFO: [FGPIP-103] Loop 'i'  (test_struct_3.cpp:13) is pipelined
+INFO: [FGPIP-105] Loop 'j' (test_global.cpp:15) is parallelized with a factor of 4
+INFO: [FGPIP-102] Loop 'i' (test_scope.cpp:6) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_scope_range.cpp:8) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_scope_range.cpp:23) is fully parallelized
+INFO: [FGPIP-103] Loop 'i'  (test_function_scope.cpp:14) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (test_heuristic.cpp:13) is pipelined
+INFO: [FGPIP-102] Loop 'k' (test_heuristic.cpp:19) is fully parallelized
+
+WARNING: [FGPIP-213] Loop 'j'  (test_heuristic_func.cpp:18) probably cannot be fully-pipelined as array 'Data' has an irregular access pattern and cannot be split into different sub-arrays.
+INFO: [FGPIP-102] Loop 'j' (test_heuristic_func.cpp:5) is fully parallelized
+INFO: [FGPIP-103] Loop 'j'  (test_heuristic_func.cpp:18) is pipelined
+INFO: [FGPIP-102] Loop 'i' (test_heuristic_const.cpp:7) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_heuristic_const.cpp:20) is fully parallelized
+INFO: [FGPIP-103] Loop 'while(t > 0){#pragma'  (test_heuristic_invariant.cpp:9) is pipelined
+
+WARNING: [FGPIP-212] Complete parallelization of loop 'L_0_0  (test_noncanonical.cpp:11)
+ may be ignored or lead to vendor tool errors because its tripcount is variable.
+INFO: [FGPIP-103] Loop 'L_0'  (test_noncanonical.cpp:9) is pipelined
+INFO: [FGPIP-102] Loop 'L_0_0' (test_noncanonical.cpp:11) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_err.cpp:6) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_ap_int.cpp:6) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_ap_int.cpp:18) is fully parallelized
+
+ERROR: [FGPIP-303] Found out-of-bound access on variable 'cc' (test_access_bound.cpp:1) with type 'int [10]' in loop 'L_0' (test_access_bound.cpp:9) :
+dimension '1' access_range=[11...11]
+
+ERROR: [FGPIP-303] Found out-of-bound access on variable 'aa' (test_access_bound.cpp:12) with type 'int [50]' in loop 'L_0' (test_access_bound.cpp:9) :
+dimension '1' access_range=[50...50]
+
+ERROR: [FGPIP-303] Found out-of-bound access on variable 'a' (test_access_bound.cpp:5) with type 'int [50]' in loop 'L_1' (test_access_bound.cpp:16) :
+dimension '1' access_range=[50...50]
+
+ERROR: [FGPIP-303] Found out-of-bound access on variable 'c1' (test_access_bound.cpp:8) with type 'int [1]' in loop 'L_1' (test_access_bound.cpp:16) :
+dimension '1' access_range=[1...1]
+
+ERROR: [FGPIP-303] Found out-of-bound access on variable 'm_buf' (test_access_bound1.cpp:4) with type 'float [400]' in function (test_access_bound1.cpp:2) :
+dimension '1' access_range=[420...420]
+
+WARNING: [FGPIP-212] Complete parallelization of loop 'i  (test_access_bound2.cpp:2)
+ may be ignored or lead to vendor tool errors because its tripcount is variable.
+
+ERROR: [FGPIP-303] Found out-of-bound access on variable 'c1' (test_access_bound2.cpp:16) with type 'int [1]' in function (test_access_bound2.cpp:15) :
+dimension '1' access_range=[1...1]
+
+WARNING: [FGPIP-212] Complete parallelization of loop 'i  (test_access_bound_valid.cpp:2)
+ may be ignored or lead to vendor tool errors because its tripcount is variable.
+INFO: [FGPIP-102] Loop 'i' (test_access_bound_valid.cpp:2) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_access_bound_valid.cpp:9) is fully parallelized
+INFO: [FGPIP-103] Loop 'i'  (test_access_bound_valid.cpp:19) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_access_bound_valid.cpp:24) is pipelined
+
+WARNING: [FGPIP-213] Loop 'L_0'  (test_while.cpp:10) probably cannot be fully-pipelined as array 'aa' has an irregular access pattern and cannot be split into different sub-arrays.
+INFO: [FGPIP-103] Loop 'while(t > 1){#pragma'  (test_while.cpp:10) is pipelined
+INFO: [FGPIP-102] Loop 'L_1' (test_while.cpp:16) is fully parallelized
+INFO: [FGPIP-103] Loop 'i'  (test_visited_loop.cpp:7) is pipelined
+INFO: [FGPIP-102] Loop 't' (test_visited_loop.cpp:9) is fully parallelized
+INFO: [FGPIP-103] Loop 'i'  (test_default_II.cpp:4) is pipelined
+INFO: [FGPIP-102] Loop 'i' (test_stream_variable.cpp:19) is fully parallelized
+INFO: [FGPIP-103] Loop 'i'  (test_resource_pragma.cpp:13) is pipelined
+INFO: [FGPIP-102] Loop 'i' (test_resource_pragma.cpp:23) is fully parallelized

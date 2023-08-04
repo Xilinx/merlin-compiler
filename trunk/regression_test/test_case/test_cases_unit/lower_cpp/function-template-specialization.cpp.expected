@@ -1,0 +1,28 @@
+
+const struct A &p_Z3maxI1AERK1ARK1A(const struct A &x,const struct A &y)
+{
+  return x . a > y . a?x : y;
+}
+const int &p_Z3maxIiERKiRKi(const int &x,const int &y);
+
+const int &p_Z3maxIiERKiRKi(const int &x,const int &y)
+{
+  return x > y?x : y;
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+
+struct A 
+{
+  int a;
+}
+;
+static void __merlin_dummy_SgTemplateInstantiationFunctionDecl_const_stru_();
+#pragma ACCEL kernel
+
+void k()
+{
+  struct A a1;
+  struct A a2;
+  p_Z3maxI1AERK1ARK1A(a1,a2);
+  p_Z3maxIiERKiRKi(0,1);
+}

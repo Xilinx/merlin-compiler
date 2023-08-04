@@ -1,0 +1,14 @@
+
+<directives>
+<platform_name>xilinx_u250_xdma_201830_1</platform_name>
+<opt_effort>standard</opt_effort>
+<ihatebug>debug-level2</ihatebug>
+<merlincc>on</merlincc>
+<implementation_tool>sdaccel</implementation_tool>
+<source_file> vec_add_kernel.c</source_file>
+<clock_period>5ns</clock_period>
+<part_name></part_name>
+<include_path> -I/home/garybai/tmp -I/space/scratch/garyb/SCM/Merlin_Compiler/trunk/build/..//mars-gen/lib/merlin</include_path>
+<macro_define></macro_define>
+</directives>
+

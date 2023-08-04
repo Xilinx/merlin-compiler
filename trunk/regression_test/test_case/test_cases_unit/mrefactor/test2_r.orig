@@ -1,0 +1,12 @@
+#include<vector>
+class A {
+  std::vector<int> data;
+  public:
+    int get() const {
+      return data.at(0);
+    }
+};
+
+
+
+

@@ -1,0 +1,28 @@
+#include <string.h> 
+/*Loop kernel from denoise, medical imaging*/
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void denoise2D(int b[4096])
+{
+  int a[4096];
+  int i;
+  int j;
+/*Array Access*/
+  for (j = 1; j < 64; j++) {
+    int b_buf[63];
+    for (i = 1; i < 64; i++) {
+      
+#pragma ACCEL parallel factor=6
+      b_buf[-1 + i] = (a[(j + 1) * 64 + i] + a[(j - 1) * 64 + i] + a[j * 64 + i + 1] + a[j * 64 + i - 1]) / 4;
+    }
+    memcpy((void *)(&b[1 + j * 64]),(const void *)(&b_buf[0]),sizeof(int ) * 63);
+  }
+}
+
+int main()
+{
+  int b[4096];
+  denoise2D(b);
+  return 0;
+}

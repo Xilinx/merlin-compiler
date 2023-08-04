@@ -1,0 +1,29 @@
+#include<assert.h>
+#define VEC_SIZE 10000
+#pragma ACCEL kernel
+
+void vec_add_kernel(int *a,int *b,int *c,int inc,int n,int m)
+{
+  int j = 0;
+  
+#pragma ACCEL tile factor=2
+  for (; j < n; j++) {
+    c[j] = a[j] + b[j] + inc;
+  }
+  
+#pragma ACCEL tile factor=3
+  for (j = 10000; j > 0; j--) {
+    c[j] = a[j] + b[j] + inc;
+  }
+  
+#pragma ACCEL tile factor=6
+  for (j = 0; j < 10000; j += n) {
+    c[j] = a[j] + b[j] + inc;
+  }
+  
+#pragma ACCEL tile factor=3
+  for (j = 0; j < 10000; j++) {
+    c[j] = a[j] + b[j] + inc;
+    j = 100;
+  }
+}

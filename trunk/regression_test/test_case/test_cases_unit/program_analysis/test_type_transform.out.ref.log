@@ -1,0 +1,22 @@
+Hello Program Analysis ... 
+remove modifier from const int [10] to int [10]
+remove modifier from const volatile double [][10] to double [][10]
+remove modifier from const char * to char *
+remove modifier from const int & to int &
+remove modifier from const int to int
+remove modifier from volatile double [10] to double [10]
+remove modifier from const float(*)[s2] to float **
+replace var refs from const int [10] to const int [10]
+replace var refs from double [][10] to double [][10]
+replace var refs from volatile double [10] to volatile double [10]
+replace var refs from const float(*)[10] to const float(*)[10]
+test creating type from string 
+int [10UL] (expected int [10])
+int * (expected int *)
+const double * (expected const double *)
+::ap_int<12> (expected ap_int<12>)
+::ap_uint<10> (expected ap_uint<10>)
+struct ::st (expected ::st)
+struct ::st (expected st)
+WARNING: cannot get type for st2
+

@@ -1,0 +1,13 @@
+
+#ifndef __MERLIN_TYPE_DEFINE_H__
+
+#define __MERLIN_TYPE_DEFINE_H__
+struct B {unsigned int u;};
+struct C {unsigned int u;char bob;};
+struct D {unsigned int u;};
+struct E {struct D d;};
+struct F {unsigned int u;char c;struct E e;};
+struct G {};
+struct A {};
+
+#endif

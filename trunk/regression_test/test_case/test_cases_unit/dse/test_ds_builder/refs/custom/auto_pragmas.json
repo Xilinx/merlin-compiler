@@ -1,0 +1,10 @@
+{
+    "ACCEL parallel factor=auto{options: P2=range(1, 10); default: 1}": "L_0_0_0_3_2_0_14_3_1_3_1_3_1_1_0",
+    "ACCEL parallel factor=auto{options: P1=[str(2**x) for x in range(0, 10)]; default: \"1\"}": "L_0_0_0_3_2_0_14_3_1_3_1",
+    "ACCEL tiling factor=auto{options:T1 = [2**x for x in range(0, 10) if T0 == 1]; default: 1}": "L_0_0_0_3_2_0_14_3_1",
+    "ACCEL parallel factor=auto{options: P0}": "L_0_0_0_2_2_0_2",
+    "ACCEL tiling factor=auto{options: T0=[2**x for x in range(0, 11) if T1 == 1]; default: 1; order: 0 if v <= 256 else 1 if v <= 512 else 2}": "L_0_0_0_3_2_0_14",
+    "ACCEL interface variable=c max_depth=10000 depth=10000 bus_bitwidth=auto{ options: B=[32,64,128,256,512]; default: 32}": "F_0_0_0_3",
+    "ACCEL pipeline AUTO{OPTIONS: I=[\"off\", \"\", \"flatten\"]; DEFAULT: \"off\"; ORDER: 0 if v!=\"flatten\" else 1}": "L_0_0_0_3_2_0_13",
+    "ACCEL parallel factor=auto{options:P0=[2**x for x in range(0, 10) if x==0 or I != \"flatten\"]; default: 1} priority=logic": "L_0_0_0_3_2_0_13_3_1"
+}

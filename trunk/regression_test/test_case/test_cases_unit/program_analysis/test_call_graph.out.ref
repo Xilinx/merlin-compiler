@@ -1,0 +1,17 @@
+
+void top(int a)
+{
+  int b = a;
+  b;
+}
+
+void sub2()
+{
+}
+
+void sub3()
+{
+  int a = 1;
+  top(a);
+  sub2();
+}

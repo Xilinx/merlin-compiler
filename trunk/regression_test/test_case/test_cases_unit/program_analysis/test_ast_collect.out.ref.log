@@ -1,0 +1,20 @@
+Hello Program Analysis ... 
+Test GetNodesByType()
+number of SgExprStatement 5
+number of SgInitializer 2
+number of SgDeclarationStatement 17
+number of SgExpression 26
+number of SgExprStatement 5
+number of SgStatement 41
+number of SgInitializer 2
+number of SgFunctionCallExp 1
+number of SgFunctionDeclaration 4
+number of SgTemplateFunctionDeclaration 1
+number of SgClassDeclaration 2
+number of SgTemplateClassDeclaration 1
+number of SgPragmaDeclaration 2
+number of SgScopeStatement 15
+number of SgInitializedName 10
+number of SgCompoundAssignOp 1
+number of SgDeclarationStatement 17
+

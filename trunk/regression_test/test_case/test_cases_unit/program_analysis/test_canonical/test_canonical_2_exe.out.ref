@@ -1,0 +1,99 @@
+// Testing multiple loop initial/testing/increment
+#include<stdio.h>
+#pragma ACCEL kernel
+
+void func_loop()
+{
+  int a[100];
+{
+    int _i0;
+    for (_i0 = 0; _i0 <= 99UL; ++_i0) {
+      int a_tmp = 0;
+      a[_i0] = a_tmp;
+    }
+  }
+  int b[100] = {(1)};
+  int c[100] = {(2)};
+  int i = 0;
+  int j = 0;
+  int jjj;
+  int x;
+  int y;
+  int z;
+  int N = 100;
+{
+    int _l_i = 0;
+    int _l_jjj;
+// Canonicalized from: for(int i = 0, jjj;i >= 0;i += - 1) {...}
+// Standardize from: for(_l_i = 0;_l_i >= 0;--_l_i) {...}
+    for (_l_i = 0; _l_i <= 0; _l_i++) {
+      int _in_l_i = 0 + -1 * _l_i;
+/* block 2.1*/
+      c[-_in_l_i] = a[-_in_l_i] + b[-_in_l_i];
+      printf("index = %d\n",-_in_l_i);
+    }
+    _l_i = 0 + -1;
+  }
+{
+    int _l_i_0 = 0;
+    int _l_jjj_0 = 0;
+// Canonicalized from: for(int i = 0, jjj = 0;i >= 0;i += - 1) {...}
+// Standardize from: for(_l_i_0 = 0;_l_i_0 >= 0;--_l_i_0) {...}
+    for (_l_i_0 = 0; _l_i_0 <= 0; _l_i_0++) {
+      int _in_l_i_0 = 0 + -1 * _l_i_0;
+/* block 2.2*/
+      c[-_in_l_i_0] = a[-_in_l_i_0] + b[-_in_l_i_0 + _l_jjj_0];
+      printf("index = %d\n",-_in_l_i_0);
+    }
+    _l_i_0 = 0 + -1;
+  }
+  jjj;
+// Canonicalized from: for((i = 0 , jjj);i < N;i++) {...}
+  for (i = 0; i <= 99; ++i) {
+/* block 2.3*/
+    c[i] = a[i] + b[i];
+    printf("index = %d\n",i);
+  }
+  j = 3;
+// Canonicalized from: for((i = 0 , j = 3);i <= N - 1;i++) {...}
+  for (i = 0; i <= 99; ++i) {
+/* block 9*/
+    c[i]--;
+    printf("index = %d\n",i);
+  }
+  (((a[0] , j = 3) , x = 1) , y);
+// Canonicalized from: for(((((a[0] , i = 1) , j = 3) , x = 1) , y);i <= N;i++) {...}
+  for (i = 1; i <= 100; ++i) {
+/* block 10*/
+    c[i - 1] += 2;
+    printf("index = %d\n",i - 1);
+  }
+  j = 3;
+// Canonicalized from: for((i = 0 , j = 3);i >= N;(i -= 2 , j--)) {...}
+  for (i = 0; i >= 100; i -= 2) {
+/* block 11*/
+    c[i] = a[i] + b[i];
+    printf("index = %d\n",i);
+    j--;
+  }
+  j = 0;
+  j = 23;
+// Canonicalized from: for((i = 0 , j = 23);i <= N;i++) {...}
+  for (i = 0; i <= 100; ++i) {
+    for (j = - 50; j < 1; j++) {
+/* block 15*/
+      if ((bool )(j % 2)) {
+        c[i] += i;
+        printf("index = %d\n",i);
+      }
+    }
+  }
+  for (int pp = 0; pp < 100; pp++) 
+    printf("result = %d\n",c[pp]);
+}
+
+int main()
+{
+  func_loop();
+  return 0;
+}

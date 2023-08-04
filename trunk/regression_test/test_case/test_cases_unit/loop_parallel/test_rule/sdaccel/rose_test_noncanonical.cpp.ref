@@ -1,0 +1,28 @@
+#pragma ACCEL kernel
+
+void func_top_0()
+{
+  int a[100][100];
+  int b[100][100];
+  int k = 0;
+  int i = 0;
+  int j;
+  for (; i < 100; i++) 
+// Original: #pragma ACCEL pipeline
+{
+    
+#pragma HLS pipeline
+    for (j = 0; (j < 100 , k < 100); (j++ , k++)) 
+// Original: #pragma ACCEL parallel complete
+{
+      
+#pragma HLS unroll
+      a[i][j] = b[k][j] + b[k + 1][j + 1];
+    }
+  }
+}
+
+int main()
+{
+  func_top_0();
+}

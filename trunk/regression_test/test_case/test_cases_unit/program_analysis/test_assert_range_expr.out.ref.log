@@ -1,0 +1,91 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i = 0;i < a[2];++i) {...}
+[Loop i] for(int i = 0;i < a[2];++i) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int ii = 0;ii < a[2] / 3;++ii) {...}
+[Loop ii] for(int ii = 0;ii < a[2] / 3;++ii) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i0 = 0;i0 < count / 3;++i0) {...}
+[Loop i0] for(int i0 = 0;i0 < count / 3;++i0) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i1 = 0;i1 < count / 3;++i1) {...}
+[Loop i1] for(int i1 = 0;i1 < count / 3;++i1) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int j = 0;j < a[2] - a[3];++j) {...}
+[Loop j] for(int j = 0;j < a[2] - a[3];++j) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int k = 0;k < a[2] + a[3];++k) {...}
+[Loop k] for(int k = 0;k < a[2] + a[3];++k) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int k0 = count * count;k0 < 100;++k0) {...}
+[Loop k0] for(int k0 = count * count;k0 < 100;++k0) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int k1 = count * count - 2;k1 < a[2] + 10;++k1) {...}
+[Loop k1] for(int k1 = count * count - 2;k1 < a[2] + 10;++k1) {...} [0..0]
+
+**** Test Variable Range **** 
+
+**** Test Expression Range **** 
+[Exp SgLessThanOp:i < a[2]] {i < a[2]:SgLessThanOp i < a[2]->1,0} : i < a[2]..i < a[2]
+[Range i < a[2]..i < a[2] (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : 0..-1L + a[2]
+[Range 0..-1L + a[2] (min(0x0L)...(max(0x8L))]
+[Exp SgLessThanOp:ii < a[2] / 3] {ii < a[2] / 3:SgLessThanOp ii < a[2] / 3->1,0} : ii < a[2] / 3..ii < a[2] / 3
+[Range ii < a[2] / 3..ii < a[2] / 3 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:ii] {ii:SgForStatement ii->1,0} : 0..-1L + a[2] / 3
+[Range 0..-1L + a[2] / 3 (min(0x0L)...(max(0x2L))]
+[Exp SgMultiplyOp:4 * ii] {ii * 4:SgForStatement ii->4,0} : 0..-4L + a[2] / 3 * 4
+[Range 0..-4L + a[2] / 3 * 4 (min(0x0L)...(max(0x8L))]
+[Exp SgAddOp:4 * ii + 2] {2 + ii * 4:SgForStatement ii->4,2} : 2..-2L + a[2] / 3 * 4
+[Range 2..-2L + a[2] / 3 * 4 (min(0x2L)...(max(0xaL))]
+[Exp SgLessThanOp:i0 < count / 3] {i0 < count / 3:SgLessThanOp i0 < count / 3->1,0} : i0 < count / 3..i0 < count / 3
+[Range i0 < count / 3..i0 < count / 3 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i0] {i0:SgForStatement i0->1,0} : 0..-1L + count / 3
+[Range 0..-1L + count / 3 (min(0x0L)...(max(0x5L))]
+[Exp SgMultiplyOp:4 * i0] {i0 * 4:SgForStatement i0->4,0} : 0..-4L + count / 3 * 4
+[Range 0..-4L + count / 3 * 4 (min(0x0L)...(max(0x14L))]
+[Exp SgAddOp:4 * i0 + 2] {2 + i0 * 4:SgForStatement i0->4,2} : 2..-2L + count / 3 * 4
+[Range 2..-2L + count / 3 * 4 (min(0x2L)...(max(0x16L))]
+[Exp SgLessThanOp:i1 < count / 3] {i1 < count / 3:SgLessThanOp i1 < count / 3->1,0} : i1 < count / 3..i1 < count / 3
+[Range i1 < count / 3..i1 < count / 3 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i1] {i1:SgForStatement i1->1,0} : 0..-1L + count / 3
+[Range 0..-1L + count / 3 (min(0x0L)...(max(0x5L))]
+[Exp SgMultiplyOp:4 * i1] {i1 * 4:SgForStatement i1->4,0} : 0..-4L + count / 3 * 4
+[Range 0..-4L + count / 3 * 4 (min(0x0L)...(max(0x14L))]
+[Exp SgAddOp:4 * i1 + 2] {2 + i1 * 4:SgForStatement i1->4,2} : 2..-2L + count / 3 * 4
+[Range 2..-2L + count / 3 * 4 (min(0x2L)...(max(0x16L))]
+[Exp SgLessThanOp:j < a[2] - a[3]] {j < a[2] - a[3]:SgLessThanOp j < a[2] - a[3]->1,0} : j < a[2] - a[3]..j < a[2] - a[3]
+[Range j < a[2] - a[3]..j < a[2] - a[3] (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:j] {j:SgForStatement j->1,0} : 0..-1L + -a[3] + a[2]
+[Range 0..-1L + -a[3] + a[2] (min(0x0L)...(max(0x8L))]
+[Exp SgLessThanOp:k < a[2] + a[3]] {k < a[2] + a[3]:SgLessThanOp k < a[2] + a[3]->1,0} : k < a[2] + a[3]..k < a[2] + a[3]
+[Range k < a[2] + a[3]..k < a[2] + a[3] (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:k] {k:SgForStatement k->1,0} : 0..-1L + a[2] + a[3]
+[Range 0..-1L + a[2] + a[3] (min(0x0L)...(max(0x8L))]
+[Exp SgLessThanOp:k0 < 100] {k0 < 100:SgLessThanOp k0 < 100->1,0} : k0 < 100..k0 < 100
+[Range k0 < 100..k0 < 100 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:k0] {k0:SgForStatement k0->1,0} : count * count..99
+[Range count * count..99 (min(0xbL)...(max(0x63L))]
+[Exp SgLessThanOp:k1 < a[2] + 10] {k1 < a[2] + 10:SgLessThanOp k1 < a[2] + 10->1,0} : k1 < a[2] + 10..k1 < a[2] + 10
+[Range k1 < a[2] + 10..k1 < a[2] + 10 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:k1] {k1:SgForStatement k1->1,0} : -2L + count * count..9L + a[2]
+[Range -2L + count * count..9L + a[2] (min(0x9L)...(max(0x12L))]
+SgForStatement:for(int i = 0;i < a[2];++i) {...}: TC = 0, TC_ub = 9
+SgForStatement:for(int ii = 0;ii < a[2] / 3;++ii) {...}: TC = 0, TC_ub = 3
+SgForStatement:for(int i0 = 0;i0 < count / 3;++i0) {...}: TC = 0, TC_ub = 6
+SgForStatement:for(int i1 = 0;i1 < count / 3;++i1) {...}: TC = 0, TC_ub = 6
+SgForStatement:for(int j = 0;j < a[2] - a[3];++j) {...}: TC = 0, TC_ub = 9
+SgForStatement:for(int k = 0;k < a[2] + a[3];++k) {...}: TC = 0, TC_ub = 9
+SgForStatement:for(int k0 = count * count;k0 < 100;++k0) {...}: TC = ? , TC_ub = ?
+SgForStatement:for(int k1 = count * count - 2;k1 < a[2] + 10;++k1) {...}: TC = ? , TC_ub = ?
+

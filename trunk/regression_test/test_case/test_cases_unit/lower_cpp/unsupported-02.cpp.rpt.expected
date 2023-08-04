@@ -1,0 +1,2 @@
+
+ERROR: [LWCPP-301] Pointer-to-member access operator is not supported: (x .* &a) (unsupported-02.cpp:10)

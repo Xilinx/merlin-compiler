@@ -1,0 +1,216 @@
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void func_top_1(int a[10000],int b[10000])
+{
+  int b_buf[10000];
+  int a_buf[10000];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10000);
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    for (j = 0; j < 100; j++) 
+/* Original: #pragma ACCEL cache */
+{
+      a_buf[i * 100 + j] = b_buf[i * 100 + j] + 100;
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+}
+#pragma ACCEL kernel
+
+void func_top_2(int a[10000],int b[10000])
+{
+  int b_buf[10000];
+  int a_buf[10000];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10000);
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) 
+/* Original: #pragma ACCEL cache */
+{
+    for (j = 0; j < 100; j++) {
+      a_buf[i * 100 + j] = b_buf[i * 100 + j] + 100;
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+}
+#pragma ACCEL kernel
+
+void func_top_3(int a[10000],int b[10000])
+/* Original: #pragma ACCEL cache */
+{
+  int b_buf[10000];
+  int a_buf[10000];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10000);
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    for (j = 0; j < 100; j++) {
+      a_buf[i * 100 + j] = b_buf[i * 100 + j] + 100;
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+}
+#pragma ACCEL kernel
+
+void func_top_4(int a[10000],int b[10000])
+{
+  int b_buf[10000];
+  int a_buf[10000];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10000);
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    for (j = 0; j < 100; j++) 
+/* Original: #pragma ACCEL cache variable=a */
+{
+      a_buf[i * 100 + j] = b_buf[i * 100 + j] + 100;
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+}
+#pragma ACCEL kernel
+
+void func_top_5(int a[10000],int b[10000])
+{
+  int b_buf[10000];
+  int a_buf[10000];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10000);
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) 
+/* Original: #pragma ACCEL cache variable=a */
+{
+    for (j = 0; j < 100; j++) {
+      a_buf[i * 100 + j] = b_buf[i * 100 + j] + 100;
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+}
+#pragma ACCEL kernel
+
+void func_top_6(int a[10000],int b[10000])
+/* Original: #pragma ACCEL cache variable=a */
+{
+  int b_buf[10000];
+  int a_buf[10000];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10000);
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    for (j = 0; j < 100; j++) {
+      a_buf[i * 100 + j] = b_buf[i * 100 + j] + 100;
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+}
+#pragma ACCEL kernel
+
+void func_top_7(int a[10000],int b[10000])
+{
+  int b_buf[10000];
+  int a_buf[10000];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10000);
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) 
+/* Original: #pragma ACCEL cache variable=a */
+{
+    for (j = 0; j < 100; j++) 
+/* Original: #pragma ACCEL cache variable=b */
+{
+      a_buf[i * 100 + j] = b_buf[i * 100 + j] + 100;
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+}
+#pragma ACCEL kernel
+
+void func_top_8(int a[10000],int b[10000])
+/* Original: #pragma ACCEL cache */
+{
+  int b_buf[10000];
+  int a_buf[10000];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10000);
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) 
+/* Original: #pragma ACCEL cache variable=a */
+{
+    for (j = 0; j < 100; j++) {
+      a_buf[i * 100 + j] = b_buf[i * 100 + j] + 100;
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+}
+#pragma ACCEL kernel
+
+void func_top_9(int a[10000],int b[10000])
+/* Original: #pragma ACCEL cache */
+{
+  int b_buf[10000];
+  int a_buf[10000];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10000);
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    for (j = 0; j < 100; j++) 
+/* Original: #pragma ACCEL cache variable=b */
+{
+      a_buf[i * 100 + j] = b_buf[i * 100 + j] + 100;
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+}
+#pragma ACCEL kernel
+
+void func_top_10(int a[10000],int b[10000])
+{
+  int b_buf[10000];
+  int a_buf[10000];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10000);
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    for (j = 0; j < 100; j++) 
+/* Original: #pragma ACCEL cache variable=a,b */
+{
+      a_buf[i * 100 + j] = b_buf[i * 100 + j] + 100;
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+}
+#pragma ACCEL kernel
+
+void func_top_11(int a[10000000],int b[10000000])
+{
+  int a_buf[10000];
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) 
+/* Original: #pragma ACCEL cache variable=a,b */
+{
+    for (j = 0; j < 100; j++) {
+      a_buf[i * 100 + j] = b[i * 1000000 + j] + b[i * 1000000 + j + 1000000];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+}
+#pragma ACCEL kernel
+
+void func_top_12(int a[10000000],int b[10000000])
+{
+  int a_buf[10000];
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    for (j = 0; j < 100; j++) 
+/* Original: #pragma ACCEL cache variable=a,b */
+{
+      a_buf[i * 100 + j] = b[i * 1000000 + j] + b[i * 1000000 + j + 1000000];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+}

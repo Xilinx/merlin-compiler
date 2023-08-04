@@ -1,0 +1,21 @@
+::A_rtype p_Z1fI1AEi(int x);
+
+::A_rtype p_Z1fI1AEi(int x)
+{
+  return (::A_rtype )(x * _ZN1A1GE);
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+
+struct ::A 
+{
+}
+;
+typedef double A_rtype;
+const int _ZN1A1GE = 3;
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+#pragma ACCEL kernel
+
+void k()
+{
+  p_Z1fI1AEi(1);
+}

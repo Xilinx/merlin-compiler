@@ -1,0 +1,297 @@
+
+WARNING: [FGPIP-209] Loop fine-grained parallelization applied: loop 'L_0' (test.cpp:532)
+  Hint: parallel factor 1000 is adjusted to the loop tripcount 100.
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:211)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:229)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:247)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:265)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:303)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test.cpp:392)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test.cpp:409)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:410)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test.cpp:429)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test.cpp:446)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test.cpp:480)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:499)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:514)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test.cpp:529)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:530)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test.cpp:544)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:545)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test.cpp:559)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:560)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'A' (test.cpp:682)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'aa' (test.cpp:746)
+ Reason: multiple accesses or complex access pattern. 
+INFO: [FGPIP-105] Loop 'i' (test.cpp:11) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:28) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:43) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:59) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:65) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:80) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:89) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:100) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:107) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:118) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:143) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:169) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:197) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:215) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:233) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:251) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:269) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:288) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:307) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:332) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:351) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:369) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:379) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:396) is parallelized with a factor of 10
+INFO: [FGPIP-102] Loop 'j' (test.cpp:415) is fully parallelized
+INFO: [FGPIP-105] Loop 'j' (test.cpp:450) is parallelized with a factor of 10
+INFO: [FGPIP-102] Loop 'j' (test.cpp:485) is fully parallelized
+INFO: [FGPIP-105] Loop 'j' (test.cpp:518) is parallelized with a factor of 4
+INFO: [FGPIP-105] Loop 'i' (test.cpp:532) is parallelized with a factor of 1000
+INFO: [FGPIP-105] Loop 'i' (test.cpp:547) is parallelized with a factor of 100
+INFO: [FGPIP-102] Loop 'j' (test.cpp:568) is fully parallelized
+INFO: [FGPIP-105] Loop 'j' (test.cpp:589) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'k' (test.cpp:626) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'i' (test.cpp:647) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:663) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:672) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:707) is parallelized with a factor of 4
+INFO: [FGPIP-105] Loop 'k' (test.cpp:730) is parallelized with a factor of 2
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test1.cpp:7)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test1.cpp:8)
+ Reason: multiple accesses or complex access pattern. 
+INFO: [FGPIP-105] Loop 'j' (test1.cpp:13) is parallelized with a factor of 5
+INFO: [FGPIP-105] Loop 'j' (test1.cpp:27) is parallelized with a factor of 4
+
+WARNING: [FGPIP-222] Pipelining loop 'i' (test_threshold.cpp:19) may lead to excessive resource usage and long runtime in downstream tools.
+
+WARNING: [FGPIP-215] Parallelizing loop 'j' (test_threshold.cpp:27) may lead to excessive resource usage and long runtime in downstream tools.
+
+WARNING: [FGPIP-222] Pipelining loop 'i' (test_threshold.cpp:33) may lead to excessive resource usage and long runtime in downstream tools.
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test_threshold.cpp:3)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test_threshold.cpp:4)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'c' (test_threshold.cpp:5)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'c1' (test_threshold.cpp:6)
+ Reason: multiple accesses or complex access pattern. 
+INFO: [FGPIP-102] Loop 'k' (test_threshold.cpp:12) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_threshold.cpp:14) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_threshold.cpp:21) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_threshold.cpp:27) is fully parallelized
+INFO: [FGPIP-102] Loop 't' (test_threshold.cpp:35) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_threshold.cpp:37) is fully parallelized
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'u' (test_pattern.cpp:72)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'optVal' (test_pattern.cpp:98)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'optValBuf' (test_pattern.cpp:99)
+ Reason: multiple accesses or complex access pattern. 
+INFO: [FGPIP-102] Loop 'k' (test_pattern.cpp:14) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_pattern.cpp:106) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_pattern.cpp:110) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_pattern.cpp:146) is fully parallelized
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'val' (test4.cpp:1)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test4.cpp:5)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test4.cpp:6)
+ Reason: multiple accesses or complex access pattern. 
+INFO: [FGPIP-102] Loop 'j' (test4.cpp:12) is fully parallelized
+INFO: [FGPIP-105] Loop 'k' (test4.cpp:19) is parallelized with a factor of 5
+INFO: [FGPIP-105] Loop 'k' (test4.cpp:26) is parallelized with a factor of 5
+
+WARNING: [FGPIP-204] Parallelization NOT applied: loop 'L_0' (test_invalidpragma.cpp:11)  Reason: Invalid parallel factor: 0 
+  Hint:   parallel factor can only be constant positive integer 
+
+WARNING: [FGPIP-204] Parallelization NOT applied: loop 'L_0' (test_invalidpragma.cpp:28)  Reason: Invalid parallel factor: -1 
+  Hint:   parallel factor can only be constant positive integer 
+
+WARNING: [FGPIP-204] Parallelization NOT applied: loop 'L_1' (test_invalidpragma.cpp:35)  Reason: Invalid parallel factor: -1 
+  Hint:   parallel factor can only be constant positive integer 
+
+WARNING: [FGPIP-204] Parallelization NOT applied: loop 'L_0' (test_invalidpragma.cpp:49)  Reason: Invalid parallel factor: NN 
+  Hint:   parallel factor can only be constant positive integer 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test_call2.cpp:17)
+ Reason: multiple accesses or complex access pattern. 
+INFO: [FGPIP-102] Loop 'j' (test_call2.cpp:30) is fully parallelized
+
+WARNING: [FGPIP-213] Loop 'j'  (test_call3.cpp:11) probably cannot be fully-pipelined as array 'b' has an irregular access pattern and cannot be split into different sub-arrays.
+
+WARNING: [FGPIP-213] Loop 'i'  (test_call3.cpp:18) probably cannot be fully-pipelined as array 'a' has an irregular access pattern and cannot be split into different sub-arrays.
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test_call3.cpp:7)
+ Reason: multiple accesses or complex access pattern. 
+INFO: [FGPIP-102] Loop 'j' (test_call3.cpp:20) is fully parallelized
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'aa' (test_call4.cpp:13)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'bb' (test_call4.cpp:14)
+ Reason: multiple accesses or complex access pattern. 
+INFO: [FGPIP-102] Loop 'j' (test_call4.cpp:28) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_call4.cpp:4) is fully parallelized
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test_mod.cpp:3)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test_mod.cpp:18)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test_mod.cpp:19)
+ Reason: multiple accesses or complex access pattern. 
+INFO: [FGPIP-102] Loop 'j' (test_mod.cpp:9) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_mod.cpp:24) is fully parallelized
+INFO: [FGPIP-105] Loop 'j' (test_mod.cpp:38) is parallelized with a factor of 4
+INFO: [FGPIP-102] Loop 'j0' (test_mod.cpp:54) is fully parallelized
+
+WARNING: [FGPIP-213] Loop 'i'  (test_cond.cpp:42) probably cannot be fully-pipelined as array 'a' has an irregular access pattern and cannot be split into different sub-arrays.
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test_cond.cpp:38)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test_cond.cpp:39)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test_cond.cpp:57)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test_cond.cpp:58)
+ Reason: multiple accesses or complex access pattern. 
+INFO: [FGPIP-105] Loop 'j' (test_cond.cpp:10) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_cond.cpp:27) is parallelized with a factor of 10
+INFO: [FGPIP-102] Loop 'j' (test_cond.cpp:45) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_cond.cpp:64) is fully parallelized
+INFO: [FGPIP-105] Loop 'j' (test_cond.cpp:79) is parallelized with a factor of 10
+INFO: [FGPIP-102] Loop 'n_sub_0' (test_cond.cpp:98) is fully parallelized
+INFO: [FGPIP-102] Loop 'j_sub' (test_cond.cpp:126) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_cond.cpp:152) is fully parallelized
+
+WARNING: [FGPIP-213] Loop 'j'  (test_false_dependence_aocl.cpp:121) probably cannot be fully-pipelined as array 'b' has an irregular access pattern and cannot be split into different sub-arrays.
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test_false_dependence_aocl.cpp:5)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test_false_dependence_aocl.cpp:6)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test_false_dependence_aocl.cpp:30)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test_false_dependence_aocl.cpp:31)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test_false_dependence_aocl.cpp:55)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test_false_dependence_aocl.cpp:56)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test_false_dependence_aocl.cpp:82)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test_false_dependence_aocl.cpp:83)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-208] Ignoring pragma '#pragma ACCEL FALSE_DEPENDENCE' (test_false_dependence_aocl.cpp:119)  because loop-carried dependence exists on variable 'a' (test_false_dependence_aocl.cpp:109)
+
+WARNING: [FGPIP-208] Ignoring pragma '#pragma ACCEL FALSE_DEPENDENCE' (test_false_dependence_aocl.cpp:119)  because loop-carried dependence exists on variable 'b' (test_false_dependence_aocl.cpp:110)
+
+WARNING: [FGPIP-208] Ignoring pragma '#pragma ACCEL FALSE_DEPENDENCE' (test_false_dependence_aocl.cpp:91)  because loop-carried dependence exists on variable 'a' (test_false_dependence_aocl.cpp:82)
+INFO: [FGPIP-107] False loop-carried data dependence applied to all the arrays in loop 'i' (test_false_dependence_aocl.cpp:60)
+
+WARNING: [FGPIP-208] Ignoring pragma '#pragma ACCEL FALSE_DEPENDENCE VARIABLE=a' (test_false_dependence_aocl.cpp:39)  because loop-carried dependence exists on variable 'a' (test_false_dependence_aocl.cpp:30)
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_aocl.cpp:5)
+ in loop 'i' (test_false_dependence_aocl.cpp:10)
+INFO: [FGPIP-102] Loop 'k' (test_false_dependence_aocl.cpp:14) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_aocl.cpp:18) is fully parallelized
+INFO: [FGPIP-102] Loop 'k' (test_false_dependence_aocl.cpp:40) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_aocl.cpp:43) is fully parallelized
+INFO: [FGPIP-102] Loop 'k' (test_false_dependence_aocl.cpp:67) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_aocl.cpp:70) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_aocl.cpp:97) is fully parallelized
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'mars_kernel_1_0_0_b_2_0_buf_1' (test_factor_propagate.cpp:87)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'mars_kernel_1_0_0_b_2_0_buf_0' (test_factor_propagate.cpp:88)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'c_2_0_buf' (test_factor_propagate.cpp:91)
+ Reason: multiple accesses or complex access pattern. 
+INFO: [FGPIP-102] Loop 'j' (test_factor_propagate.cpp:39) is fully parallelized
+
+WARNING: [FGPIP-212] Complete parallelization of loop 'j  (test_assert.cpp:23)
+ may be ignored or lead to vendor tool errors because its tripcount is variable.
+
+WARNING: [FGPIP-212] Complete parallelization of loop 'j'  (test_assert.cpp:23), 
+ may be ignored or lead to vendor tool errors because its tripcount is variable.
+
+WARNING: [FGPIP-212] Complete parallelization of loop 'L_0_0  (test_noncanonical.cpp:11)
+ may be ignored or lead to vendor tool errors because its tripcount is variable.
+
+WARNING: [FGPIP-212] Complete parallelization of loop 'L_0_0'  (test_noncanonical.cpp:11), 
+ may be ignored or lead to vendor tool errors because its tripcount is variable.
+
+WARNING: [FGPIP-212] Complete parallelization of loop 'j'  (test_err.cpp:6), 
+ may be ignored or lead to vendor tool errors because its tripcount is variable.

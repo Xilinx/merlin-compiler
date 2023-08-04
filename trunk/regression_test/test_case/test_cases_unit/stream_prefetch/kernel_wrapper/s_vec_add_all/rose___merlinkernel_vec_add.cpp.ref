@@ -1,0 +1,31 @@
+#include <math.h>
+#include "merlin_type_define.h"
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static void __merlin_dummy_kernel_pragma();
+// Original: #pragma ACCEL kernel
+
+void vec_add(int s,int a[1024],int b[1024],int c[1024])
+{
+  
+#pragma ACCEL interface variable=a stream_prefetch=on depth=1024
+  
+#pragma ACCEL interface variable=b stream_prefetch=on depth=1024
+  
+#pragma ACCEL interface variable=c stream_prefetch=on depth=1024
+  
+#pragma ACCEL interface variable=s stream_prefetch=on
+  for (int i = 0; i < 1024; i++) 
+// Original: #pragma ACCEL parallel factor=4
+{
+    
+#pragma ACCEL PARALLEL FACTOR=4
+    int a0 = a[i];
+    int b0 = b[i];
+    int c0 = 0;
+    for (int j = 0; j < 1024 * 10; j++) {
+      c0 += ((int )(pow((double )(a0 * b0 + j),1.5))) % 7 + s;
+    }
+    c[i] = c0;
+  }
+}

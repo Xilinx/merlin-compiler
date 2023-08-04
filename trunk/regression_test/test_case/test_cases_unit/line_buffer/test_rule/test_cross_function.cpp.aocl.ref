@@ -1,0 +1,34 @@
+
+int sub_func(int b[100][100])
+{
+  int tmp = 0;
+  for (int i = 0; i < 100; i++) {
+    int slide_wind_0[6];
+    for (int j = -5L; j < 94; j++) {{
+        int tmp_wind_0;
+        int j_0;
+        for (j_0 = 1L; j_0 <= 5L; ++j_0) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0[j_0 + -1] = slide_wind_0[j_0];
+        }
+        tmp_wind_0 = b[0L + i * 1L][j + 0L + 5L];
+        slide_wind_0[5L] = tmp_wind_0;
+      }
+      if (j >= 0L && j <= 93L) {
+        for (int k = 0; k < 5; k++) {
+          tmp += slide_wind_0[k] + slide_wind_0[k + 1L];
+        }
+      }
+    }
+  }
+  return tmp;
+}
+#pragma ACCEL kernel
+
+void func_top_1(int b[100][100])
+{
+  
+#pragma ACCEL interface VARIABLE=b BURST_OFF
+  int sum = sub_func(b);
+}

@@ -1,0 +1,26 @@
+#define FC 16
+
+void sub(int *c,int *a,int *b,int offset)
+{
+  
+#pragma HLS inline off
+  c[offset] = a[offset] + b[offset];
+}
+#pragma ACCEL kernel
+
+void top(int *a,int *b,int *c)
+{
+  
+#pragma ACCEL interface variable=a depth=10000
+  
+#pragma ACCEL interface variable=b depth=10000
+  
+#pragma ACCEL interface variable=c depth=10000
+  for (int i = 0; i < 10000 / 16; ++i) {
+    
+#pragma ACCEL parallel
+    for (int i0 = 0; i0 < 16; ++i0) {
+      sub(c,a,b,i * 16 + i0);
+    }
+  }
+}

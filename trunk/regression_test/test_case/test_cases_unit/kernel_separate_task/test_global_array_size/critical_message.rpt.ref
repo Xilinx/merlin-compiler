@@ -1,0 +1,9 @@
+
+ERROR: [SEPAR-318] Cannot support global variable in task scope: 
+ arr(vec_add.cpp:4)
+
+ERROR: [SEPAR-318] Cannot support global variable in task scope: 
+ arr2(vec_add.cpp:5)
+
+ERROR: [SEPAR-318] Cannot support static variable in task scope: 
+ arr3(vec_add.cpp:9)

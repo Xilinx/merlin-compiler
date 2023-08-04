@@ -1,0 +1,2 @@
+
+ERROR: [SEPAR-308] Inlined or undefined type is not supported : '::my_enum' (transformation:0)

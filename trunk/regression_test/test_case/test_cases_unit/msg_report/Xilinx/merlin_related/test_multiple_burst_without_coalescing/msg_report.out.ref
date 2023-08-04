@@ -1,0 +1,51 @@
+================================================================================
+Kernel : top(test_multiple_burst_without_coalescing.cpp:2)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+a               32       (test_multiple_burst_without_coalescing.cpp:2) memory burst[1]
+b               32       (test_multiple_burst_without_coalescing.cpp:2) memory burst
+c               32       (test_multiple_burst_without_coalescing.cpp:2) memory burst
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++-----------------------------------------------------------+------+------+------+------+------+------+------+---------+
+|                         hierarchy                         |  TC  |  AC  | CPC  | LUT  |  FF  | BRAM | DSP  | comment |
++-----------------------------------------------------------+------+------+------+------+------+------+------+---------+
+|top (test_multiple_burst_without_coalescing.cpp:2)         |      |  4150|  4150|  0.60|  0.17|  0.28|  0.00|kernel   |
+|    loop i (test_multiple_burst_without_coalescing.cpp:7)  |  1000|  1000|  1000|      |      |      |      |         |
+|    auto memory burst write for 'a'                        |      |     -|  1050|      |      |      |      |         |
+|    auto memory burst write for 'b'                        |      |     -|  1050|      |      |      |      |         |
+|    auto memory burst write for 'c'                        |      |     -|  1050|      |      |      |      |         |
++-----------------------------------------------------------+------+------+------+------+------+------+------+---------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++------------------------------------------------------------------+--------+----------+
+|                               Name                               | Cycles | Activity |
++------------------------------------------------------------------+--------+----------+
+|        top (test_multiple_burst_without_coalescing.cpp:2)        |  3150  |  75.90%  |
+|    top:loop i (test_multiple_burst_without_coalescing.cpp:7)     |  1000  |  24.10%  |
+| auto memory burst (test_multiple_burst_without_coalescing.cpp:2) |   0    |  0.00%   |
+| auto memory burst (test_multiple_burst_without_coalescing.cpp:2) |   0    |  0.00%   |
+| auto memory burst (test_multiple_burst_without_coalescing.cpp:2) |   0    |  0.00%   |
++------------------------------------------------------------------+--------+----------+
+
++----------------------------------------------------+------+------+------+------+
+|                        Name                        | BRAM | DSP  |  FF  | LUT  |
++----------------------------------------------------+------+------+------+------+
+| top (test_multiple_burst_without_coalescing.cpp:2) | 0.28 | 0.00 | 0.17 | 0.60 |
++----------------------------------------------------+------+------+------+------+
+[1] Memory coalescing NOT inferred explicitly: variable 'a' (test_multiple_burst_without_coalescing.cpp:2)
+
+
+

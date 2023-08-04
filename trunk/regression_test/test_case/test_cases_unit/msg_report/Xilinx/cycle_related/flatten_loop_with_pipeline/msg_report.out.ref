@@ -1,0 +1,59 @@
+================================================================================
+Kernel : mykernel(flatten_loop_with_pipeline.cpp:4)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+orig            512      (flatten_loop_with_pipeline.cpp:4) memory burst and coalescing 
+out             512      (flatten_loop_with_pipeline.cpp:4) memory burst and coalescing 
+len             32       (flatten_loop_with_pipeline.cpp:4) scalar
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++-------------------------------------------------------------+----+------+------+-------+------+------+------+----------------------------------------------------------+
+|                          hierarchy                          | TC |  AC  | CPC  |  LUT  |  FF  | BRAM | DSP  |                         comment                          |
++-------------------------------------------------------------+----+------+------+-------+------+------+------+----------------------------------------------------------+
+|mykernel (flatten_loop_with_pipeline.cpp:4)                  |    |  9868|  9868|  13.15|  1.46|  2.50|  0.00|kernel                                                    |
+|    auto memory burst read and coalescing for 'merlin_out'   |    |     -|   266|       |      |      |      |                                                          |
+|    auto memory burst read and coalescing for 'orig'         |    |     -|   266|       |      |      |      |                                                          |
+|    loop i (flatten_loop_with_pipeline.cpp:8)                |  64|  8960|  8960|       |      |      |      |                                                          |
+|        loop j (flatten_loop_with_pipeline.cpp:9)            |   2|  8960|   140|       |      |      |      |flattened with loop i (flatten_loop_with_pipeline.cpp:8)  |
+|            loop k (flatten_loop_with_pipeline.cpp:11)       |  16|  2176|    17|       |      |      |      |IL=3, fully pipelined                                     |
+|            loop k (flatten_loop_with_pipeline.cpp:15)       |  16|  6144|    48|       |      |      |      |IL=3, pipelined II=3[1]                                   |
+|    auto memory burst write and coalescing for 'merlin_out'  |    |     -|  1905|       |      |      |      |                                                          |
++-------------------------------------------------------------+----+------+------+-------+------+------+------+----------------------------------------------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++------------------------------------------------------+--------+----------+
+|                         Name                         | Cycles | Activity |
++------------------------------------------------------+--------+----------+
+| mykernel:loop k (flatten_loop_with_pipeline.cpp:15)  |  6144  |  62.26%  |
+| mykernel:loop k (flatten_loop_with_pipeline.cpp:11)  |  2176  |  22.05%  |
+|     mykernel (flatten_loop_with_pipeline.cpp:4)      |  908   |  9.20%   |
+|  mykernel:loop j (flatten_loop_with_pipeline.cpp:9)  |  640   |  6.49%   |
+| auto memory burst (flatten_loop_with_pipeline.cpp:4) |   0    |  0.00%   |
+| auto memory burst (flatten_loop_with_pipeline.cpp:4) |   0    |  0.00%   |
+| auto memory burst (flatten_loop_with_pipeline.cpp:4) |   0    |  0.00%   |
+|  mykernel:loop i (flatten_loop_with_pipeline.cpp:8)  |   0    |  0.00%   |
++------------------------------------------------------+--------+----------+
+
++---------------------------------------------+------+------+------+-------+
+|                    Name                     | BRAM | DSP  |  FF  |  LUT  |
++---------------------------------------------+------+------+------+-------+
+| mykernel (flatten_loop_with_pipeline.cpp:4) | 2.50 | 0.00 | 1.46 | 13.15 |
++---------------------------------------------+------+------+------+-------+
+[1] 'merlin_out_buf_0' has no loop carried-dependence on loop 'k'  (flatten_loop_with_pipeline.cpp:15).
+Hint: applying Merlin false_dependence pragma for 'merlin_out_buf_0' on loop 'k' may help enhance the performance.
+
+
+
+

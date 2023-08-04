@@ -1,0 +1,3 @@
+<configuration>
+	<param_array name="bfifo_list"></param_array>
+</configuration>

@@ -1,0 +1,12 @@
+#include "ap_int.h"
+#pragma ACCEL kernel
+
+void eevee()
+{
+  class ap_uint< 512 > xyz(123);
+  class ap_int< 512 > yyz;
+  class ap_fixed< 16 , 8 , AP_TRN , AP_SAT , 0 > nyc;
+  class ap_ufixed< 32 , 16 , AP_TRN , AP_WRAP , 0 > ord;
+//ap_fixed_base<16, 8, false, AP_TRN, AP_SAT, 4> sjc;
+  class ap_fixed< 16 , 8 , AP_TRN , AP_SAT , 0 > lax;
+}

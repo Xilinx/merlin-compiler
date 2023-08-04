@@ -1,0 +1,28 @@
+Hello Program Analysis ... 
+**** Test Is Write **** 
+1 : b @ SgExprStatement:b = a[10];
+0 : a @ SgExprStatement:b = a[10];
+0 : a @ SgExprStatement:c = a[10];
+1 : a @ SgExprStatement:a[10] = b;
+0 : b @ SgExprStatement:a[10] = b;
+1 : a @ SgExprStatement:a[10] = c;
+1 : a @ SgExprStatement:a[i] = i;
+0 : a @ SgExprStatement:c =(a[i] + 3);
+2 : a @ SgExprStatement:a[0]++;
+2 : b @ SgExprStatement:b += 1;
+2 : b @ SgExprStatement:--b;
+2 : a @ SgExprStatement:a[0] += 1;
+2 : b @ SgExprStatement:b += a[0];
+0 : a @ SgExprStatement:b += a[0];
+1 : a @ SgExprStatement:a[2] = a[1];
+0 : a @ SgExprStatement:a[2] = a[1];
+2 : a @ SgExprStatement:a;
+2 : a @ SgVariableDeclaration:int *d = &a[0];
+1 : a @ SgExprStatement:func1(a);
+0 : a @ SgExprStatement:func2(a);
+2 : a @ SgExprStatement:func3(a);
+2 : a @ SgExprStatement:func4(a[0]);
+1 : a @ SgExprStatement:memset(a,0,1024);
+0 : b @ SgExprStatement:abs(b);
+0 : a @ SgExprStatement:log(a[0]);
+

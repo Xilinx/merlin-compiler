@@ -1,0 +1,3 @@
+
+ERROR: [SEPAR-316] Only support variable reference expression in task kernel call
+ a + 1(vec_add.cpp:7)

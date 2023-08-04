@@ -1,0 +1,88 @@
+// Testing different loop test
+#include <stdio.h>
+#pragma ACCEL kernel
+
+void func_loop()
+{
+  int a[100];
+{
+    int _i0;
+    for (_i0 = 0; _i0 <= 99UL; ++_i0) {
+      int a_tmp = 0;
+      a[_i0] = a_tmp;
+    }
+  }
+  int b[100];
+  int c[100];
+  for (int pp = 0; pp < 100; pp++) {
+    a[pp] = 1;
+    b[pp] = 5;
+    c[pp] = 2;
+  }
+  int i = 0;
+  int j = 0;
+  int N = 100;
+// Standardize from: for(i = 0;i < N;i += 1) {...}
+  for (i = 0; i <= 99; i++) {
+    int _in_i = 0 + 1L * i;
+/* block 1*/
+    c[_in_i] = a[_in_i] * b[_in_i];
+    printf("index = %d\n",_in_i);
+  }
+  i = 99 + 1L;
+// Standardize from: for(i = 0;i <= N - 1;i += 1) {...}
+  for (i = 0; i <= 99; i++) {
+    int _in_i_0 = 0 + 1L * i;
+/* block 2*/
+    c[_in_i_0] += a[_in_i_0] + b[_in_i_0];
+    printf("index = %d\n",_in_i_0);
+  }
+  i = 99 + 1L;
+  j = 3;
+// Canonicalized from: for((i = 0 , j = 3);10 > i;i++) {...}
+  for (i = 0; i <= 9; ++i) {
+/* block 6*/
+    c[i] += j;
+    printf("index = %d\n",i);
+  }
+  j = 3;
+// Canonicalized from: for((i = N - 1 , j = 3);0 < i;--i) {...}
+// Standardize from: for(i = N - 1;i >= 1;--i) {...}
+  for (i = 0; i <= 98; i++) {
+    int _in_i_1 = 99 + -1 * i;
+/* block 7*/
+    c[_in_i_1]++;
+    printf("index = %d\n",_in_i_1);
+  }
+  i = 1 + -1;
+// Loop range is loop invariant
+  j = 3;
+// Canonicalized from: for((i = N - 2 , j = 3);i > b[i];--i) {...}
+  for (i = N - 2; i >= 1 + b[i]; --i) {
+/* block 8*/
+    c[i]--;
+    printf("index = %d\n",i);
+  }
+  j = 3;
+// Canonicalized from: for((i = N - 3 , j = 3);i > b[i] * 2;--i) {...}
+  for (i = N - 3; i >= 1 + b[i] * 2; --i) {
+/* block 17*/
+    c[i] += a[i];
+    printf("index = %d\n",i);
+  }
+  j = 3;
+// Canonicalized from: for((i = 0 , j = 3);2 + 3 * 4 / 6 > i;i++) {...}
+  for (i = 0; i <= 3; ++i) {
+/* block 18*/
+    c[i] += a[i] + b[i];
+    printf("index = %d\n",i);
+  }
+  for (int pp = 0; pp < 100; pp++) 
+    printf("result = %d\n",c[pp]);
+}
+
+int main()
+{
+  func_loop();
+  return 0;
+}

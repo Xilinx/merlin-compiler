@@ -1,0 +1,32 @@
+/* (previously processed: ignoring self-referential macro declaration) macro name = c */ 
+#pragma ACCEL kernel
+
+void func_top_3(int c[32][32][32])
+{
+  
+#pragma ACCEL interface variable=c max_depth=32,32,32 depth=32,32,32 BURST_OFF
+  int sum;
+  for (int i = 0; i < 32; i++) {
+    for (int j = 0; j < 31; j++) {
+      int slide_wind_0[3];
+      for (int k = 1L; k < 31L; k++) {
+        
+#pragma ACCEL pipeline
+{
+          int tmp_wind_0;
+          int k_0;
+          for (k_0 = 1L; k_0 <= 2L; ++k_0) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            slide_wind_0[k_0 + -1] = slide_wind_0[k_0];
+          }
+          tmp_wind_0 = c[1L + i * 1L][0L + j * 1L][k + -1L + -1L + 2L];
+          slide_wind_0[2L] = tmp_wind_0;
+        }
+        if (k + -1L >= 2L && k + -1L <= 29L) {
+          sum += slide_wind_0[0L] + slide_wind_0[2L];
+        }
+      }
+    }
+  }
+}

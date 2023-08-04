@@ -1,0 +1,6 @@
+
+ERROR: [SEPAR-318] Cannot support global variable in task scope: 
+ my_global_var(vec_add.cpp:1)
+
+ERROR: [SEPAR-318] Cannot support global variable in task scope: 
+ my_global_var_double(vec_add.cpp:2)

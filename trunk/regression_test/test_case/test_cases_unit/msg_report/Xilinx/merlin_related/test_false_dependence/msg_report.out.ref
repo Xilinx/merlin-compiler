@@ -1,0 +1,106 @@
+================================================================================
+Kernel : hestonEuroBarrier(hestonEuroBarrier.cpp:40)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+pCall            -       (hestonEuroBarrier.cpp:41)
+pPut             -       (hestonEuroBarrier.cpp:41)
+expect           -       (hestonEuroBarrier.cpp:42) scalar
+kappa            -       (hestonEuroBarrier.cpp:43) scalar
+variance         -       (hestonEuroBarrier.cpp:44) scalar
+correlation      -       (hestonEuroBarrier.cpp:45) scalar
+timeT            -       (hestonEuroBarrier.cpp:46) scalar
+freeRate         -       (hestonEuroBarrier.cpp:47) scalar
+volatility       -       (hestonEuroBarrier.cpp:48) scalar
+initPrice        -       (hestonEuroBarrier.cpp:49) scalar
+strikePrice      -       (hestonEuroBarrier.cpp:50) scalar
+upB              -       (hestonEuroBarrier.cpp:51) scalar
+lowB             -       (hestonEuroBarrier.cpp:52) scalar
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++------------------------------------------------------------+-----+-------------+-------------+------+------+------+------+------+----------------------------+
+|                         hierarchy                          | TC  |     AC      |     CPC     | LUT  |  FF  | BRAM | DSP  | URAM |          comment           |
++------------------------------------------------------------+-----+-------------+-------------+------+------+------+------+------+----------------------------+
+|hestonEuroBarrier (hestonEuroBarrier.cpp:40)                |     |  36241701958|  36241701958|  7.00|  3.00|  5.00|  6.00|  0.00|kernel                      |
+|    simulation (hestonEuroBarrier.cpp:59)                   |     |  36241701794|  36241701794|  7.00|  2.00|  5.00|  6.00|  0.00|                            |
+|extract_number (RNG.cpp:97)                                 |     |            -|            -|      |      |      |      |      |inlined                     |
+|    increase (RNG.cpp:98)                                   |     |            -|            -|      |      |      |      |      |inlined                     |
+|    increase (RNG.cpp:98)                                   |     |            -|            -|      |      |      |      |      |inlined                     |
+|    increase (RNG.cpp:98)                                   |     |            -|            -|      |      |      |      |      |inlined                     |
+|increase (RNG.cpp:135)                                      |     |            -|            -|      |      |      |      |      |inlined                     |
+|BOX_MULLER (RNG.cpp:140)                                    |     |            -|            -|      |      |      |      |      |inlined                     |
+|    extract_number (RNG.cpp:144)                            |     |            -|            -|      |      |      |      |      |inlined                     |
+|    sqrtf (RNG.cpp:147)                                     |     |            -|            -|      |      |      |      |      |                            |
+|        logf (RNG.cpp:147)                                  |     |             |             |      |      |      |      |      |optimized                   |
+|        logf (RNG.cpp:147)                                  |     |             |             |      |      |      |      |      |optimized                   |
+|    cosf (RNG.cpp:148)                                      |     |            -|            -|      |      |      |      |      |                            |
+|    sinf (RNG.cpp:149)                                      |     |            -|            -|      |      |      |      |      |                            |
+|my_fmaxf (hestonEuroBarrier.cpp:37)                         |     |            -|            -|      |      |      |      |      |                            |
+|simulation (hestonEuroBarrier.cpp:73)                       |     |  36241701794|  36241701794|  7.00|  2.00|  5.00|  6.00|  0.00|                            |
+|    loop i (hestonEuroBarrier.cpp:82)                       |   32|            -|            -|      |      |      |      |      |parallelized                |
+|    loop i (hestonEuroBarrier.cpp:93)                       |   32|            -|            -|      |      |      |      |      |parallelized                |
+|    loop i (hestonEuroBarrier.cpp:99)                       |  312|         1562|         1562|      |      |      |      |      |pipelined II=5              |
+|        loop k (hestonEuroBarrier.cpp:103)                  |   32|            -|            -|      |      |      |      |      |parallelized                |
+|    expf (hestonEuroBarrier.cpp:115)                        |     |            -|            -|      |      |      |      |      |                            |
+|    sqrtf (hestonEuroBarrier.cpp:116)                       |     |            -|            -|      |      |      |      |      |                            |
+|        my_fmaxf (hestonEuroBarrier.cpp:117)                |     |            -|            -|      |      |      |      |      |inlined                     |
+|    my_fmaxf (hestonEuroBarrier.cpp:120)                    |     |            -|            -|      |      |      |      |      |                            |
+|    loop i (hestonEuroBarrier.cpp:132)                      |   32|            -|            -|      |      |      |      |      |parallelized                |
+|    loop s (hestonEuroBarrier.cpp:137)                      |     |             |             |      |      |      |      |      |optimized in loop flatten   |
+|        loop i (hestonEuroBarrier.cpp:138)                  |     |        16384|        16384|      |      |      |      |      |fully pipelined             |
+|    loop j (hestonEuroBarrier.cpp:146)                      |  512|  36241681920|  36241681920|      |      |      |      |      |                            |
+|        loop path (hestonEuroBarrier.cpp:148)               |  256|  36238787072|     70778881|      |      |      |      |      |pipelined II=135            |
+|            loop s (hestonEuroBarrier.cpp:150)              |  512|            -|            -|      |      |      |      |      |flattened                   |
+|                loop i (hestonEuroBarrier.cpp:155)          |    4|            -|            -|      |      |      |      |      |flattened, parallelized[1]  |
+|                    BOX_MULLER (hestonEuroBarrier.cpp:158)  |     |            -|            -|      |      |      |      |      |inlined                     |
+|                    expf (hestonEuroBarrier.cpp:161)        |     |            -|            -|      |      |      |      |      |                            |
+|                    my_fmaxf (hestonEuroBarrier.cpp:169)    |     |            -|            -|      |      |      |      |      |                            |
+|        loop s (hestonEuroBarrier.cpp:174)                  |  512|      2894848|         5654|      |      |      |      |      |pipelined II=11             |
+|            loop i (hestonEuroBarrier.cpp:179)              |   32|            -|            -|      |      |      |      |      |parallelized                |
+|    loop i (hestonEuroBarrier.cpp:199)                      |   32|            -|            -|      |      |      |      |      |parallelized                |
++------------------------------------------------------------+-----+-------------+-------------+------+------+------+------+------+----------------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++--------------------------------------------------+-------------+----------+
+|                       Name                       |   Cycles    | Activity |
++--------------------------------------------------+-------------+----------+
+| simulation:loop path (hestonEuroBarrier.cpp:148) | 36238787072 |  99.99%  |
+|  simulation:loop s (hestonEuroBarrier.cpp:174)   |   2894848   |  0.01%   |
+|      simulation (hestonEuroBarrier.cpp:73)       |    18312    |  0.00%   |
+|  simulation:loop i (hestonEuroBarrier.cpp:138)   |    16384    |  0.00%   |
+|   simulation:loop i (hestonEuroBarrier.cpp:99)   |    1562     |  0.00%   |
+|   hestonEuroBarrier (hestonEuroBarrier.cpp:40)   |     164     |  0.00%   |
+|           extract_number (RNG.cpp:97)            |      0      |  0.00%   |
+|              increase (RNG.cpp:135)              |      0      |  0.00%   |
+|             BOX_MULLER (RNG.cpp:140)             |      0      |  0.00%   |
+|       my_fmaxf (hestonEuroBarrier.cpp:37)        |      0      |  0.00%   |
+|   simulation:loop i (hestonEuroBarrier.cpp:82)   |      0      |  0.00%   |
++--------------------------------------------------+-------------+----------+
+
++----------------------------------------------+------+------+------+------+------+
+|                     Name                     | BRAM | DSP  |  FF  | LUT  | URAM |
++----------------------------------------------+------+------+------+------+------+
+|    simulation (hestonEuroBarrier.cpp:73)     | 5.00 | 6.00 | 2.00 | 7.00 | 0.00 |
+| hestonEuroBarrier (hestonEuroBarrier.cpp:40) | 0.00 | 0.00 | 1.00 | 0.00 | 0.00 |
+|           BOX_MULLER (RNG.cpp:140)           | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+|     my_fmaxf (hestonEuroBarrier.cpp:37)      | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+|            increase (RNG.cpp:135)            | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
+|         extract_number (RNG.cpp:97)          | 0.00 | 0.00 | 0.00 | 0.00 | 0.00 |
++----------------------------------------------+------+------+------+------+------+
+[1] 'bBarrier' has no loop carried-dependence on loop 'i'  (hestonEuroBarrier.cpp:155).
+Hint: applying Merlin false_dependence pragma for 'bBarrier' on loop 'i' may help enhance the performance.
+
+
+
+

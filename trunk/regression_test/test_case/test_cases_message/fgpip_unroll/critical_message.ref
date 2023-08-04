@@ -1,0 +1,45 @@
+
+WARNING: [PROCS-203] Found a loop 'for(int i = 0;i < 32' (vec_add_kernel.cpp:28) with unknown loop tripcount. 
+INFO: [PROCS-102] Hint: you may specify the range of the variables in the loop bounds using 'assert'. Please refer to Merlin User Guide
+
+WARNING: [PROCS-245] Found a loop ' for(int i = 0;i < 32... ' (vec_add_kernel.cpp:28) without a bound on its tripcount. Please specify one using '#pragma HLS loop_tripcount max=?' or 'assert'.
+Use default max tripcount (2) for analysis
+INFO: [BURST-101] Memory burst inferred: variable 'c' (vec_add_kernel.cpp:7) in scope (vec_add_kernel.cpp:12)
+  burst buffer size = 4096 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (vec_add_kernel.cpp:7) in scope (vec_add_kernel.cpp:12)
+  burst buffer size = 4096 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (vec_add_kernel.cpp:7) in scope (vec_add_kernel.cpp:12)
+  burst buffer size = 4096 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'c' (vec_add_kernel.cpp:7) in scope (vec_add_kernel.cpp:19)
+  burst buffer size = 4096 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (vec_add_kernel.cpp:7) in scope (vec_add_kernel.cpp:19)
+  burst buffer size = 4096 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (vec_add_kernel.cpp:7) in scope (vec_add_kernel.cpp:19)
+  burst buffer size = 4096 bytes
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'c' (vec_add_kernel.cpp:7) in scope (vec_add_kernel.cpp:26)
+  Reason: the bound of the access range is not determined (0..1023 + inc * -32 exact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'a' (vec_add_kernel.cpp:7) in scope (vec_add_kernel.cpp:26)
+  Reason: the bound of the access range is not determined (0..1023 + inc * -32 exact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'b' (vec_add_kernel.cpp:7) in scope (vec_add_kernel.cpp:26)
+  Reason: the bound of the access range is not determined (0..1023 + inc * -32 exact)
+  Hint: please specify the bounds of the variables using 'assert'
+INFO: [WDBUS-101] Memory coalescing inferred: variable 'a' (vec_add_kernel.cpp:7)
+  interface bitwidth = 512 bits
+INFO: [WDBUS-101] Memory coalescing inferred: variable 'b' (vec_add_kernel.cpp:7)
+  interface bitwidth = 512 bits
+INFO: [WDBUS-101] Memory coalescing inferred: variable 'c' (vec_add_kernel.cpp:7)
+  interface bitwidth = 512 bits
+
+WARNING: [FGPIP-212] Complete parallelization of loop 'i  (vec_add_kernel.cpp:28)
+ may be ignored or lead to vendor tool errors because its tripcount is variable.
+INFO: [FGPIP-103] Loop 'j'  (vec_add_kernel.cpp:12) is pipelined
+INFO: [FGPIP-102] Loop 'i' (vec_add_kernel.cpp:14) is fully parallelized
+INFO: [FGPIP-103] Loop 'i'  (vec_add_kernel.cpp:21) is pipelined
+INFO: [FGPIP-102] Loop 'i_sub' (vec_add_kernel.cpp:21) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (vec_add_kernel.cpp:26) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (vec_add_kernel.cpp:28) is fully parallelized

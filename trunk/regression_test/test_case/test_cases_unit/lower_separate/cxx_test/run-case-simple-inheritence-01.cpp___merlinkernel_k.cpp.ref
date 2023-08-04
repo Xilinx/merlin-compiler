@@ -1,0 +1,30 @@
+#include "merlin_type_define.h"
+extern int __merlin_include__GB_merlin_type_define_h_0;
+
+static void p_ZN1AC2Ei_1(struct A *this_,int i)
+{
+  this_ -> a = i;
+}
+
+static void p_ZN1BC2Ev_1(struct B *this_)
+{
+  p_ZN1AC2Ei_1(&this_ -> A,0);
+  this_ -> b = - 1;
+}
+
+static void p_ZN1CC2Ev_1(struct C *this_)
+{
+  p_ZN1AC2Ei_1(&this_ -> A,1);
+  this_ -> c = - 1;
+}
+#pragma ACCEL kernel
+
+void k()
+{
+  struct B bo;
+  p_ZN1BC2Ev_1(&bo);
+  ;
+  struct C co;
+  p_ZN1CC2Ev_1(&co);
+  ;
+}

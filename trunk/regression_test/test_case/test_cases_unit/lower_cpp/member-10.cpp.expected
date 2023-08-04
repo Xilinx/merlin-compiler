@@ -1,0 +1,20 @@
+// Ensure that lowering preserves pragmas inside aggregates.
+
+struct ::S 
+{
+  
+#pragma ACCEL attribute variable = u depth = 100
+  unsigned int u;
+}
+;
+
+void p_ZN1S1fEv(struct S *this_)
+{
+}
+static void __merlin_dummy_SgClassDeclaration_struct_S_();
+#pragma ACCEL kernel
+
+void kernel()
+{
+  struct S s;
+}

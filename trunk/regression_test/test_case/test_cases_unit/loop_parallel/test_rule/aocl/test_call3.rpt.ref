@@ -1,0 +1,8 @@
+
+WARNING: [FGPIP-213] Loop 'i'  (test_call3.cpp:18) probably cannot be fully-pipelined as array 'a' has an irregular access pattern and cannot be split into different sub-arrays.
+
+WARNING: [FGPIP-213] Loop 'j'  (test_call3.cpp:11) probably cannot be fully-pipelined as array 'b' has an irregular access pattern and cannot be split into different sub-arrays.
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test_call3.cpp:7)
+ Reason: multiple accesses or complex access pattern. 
+INFO: [FGPIP-102] Loop 'j' (test_call3.cpp:20) is fully parallelized

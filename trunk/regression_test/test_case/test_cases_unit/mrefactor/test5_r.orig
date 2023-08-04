@@ -1,0 +1,23 @@
+#include<array>
+class A {
+  std::array<int, 10> data;
+  public:
+    int get() const {
+      return data.at(11);
+    }
+};
+
+//template <typename T> 
+//void f(std::array<T, 10> &a, T b) {
+//  a[0] = b;
+//}
+
+int main() {
+  A a;
+  int r = a.get();
+  std::array<int, 10> c;
+  //f(c, 0);
+  std::array<int, 10> d;
+  d.at(0) = 0;
+  return 0;
+}

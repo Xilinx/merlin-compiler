@@ -1,0 +1,2 @@
+nw	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_simple_xilinx/nw
+idct	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/idct

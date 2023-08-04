@@ -1,0 +1,2 @@
+INFO: [FGPIP-102] Loop 'j' (test_ap_int.cpp:6) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_ap_int.cpp:18) is fully parallelized

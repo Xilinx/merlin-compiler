@@ -1,0 +1,30 @@
+#include <string.h> 
+#define VEC_SIZE 10000
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void vec_add_kernel(int *a,int *b,int *c,int inc)
+{
+  int b_buf[10000];
+  int a_buf[10000];
+  int c_buf[10000];
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 10000);
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10000);
+  int j;
+  for (j = 0; j < 10000; j++) {
+    
+#pragma ACCEL pipeline_parallel factor = 10
+    c_buf[j] = a_buf[j] + b_buf[j] + inc;
+  }
+  memcpy((void *)(&c[0]),(const void *)(&c_buf[0]),sizeof(int ) * 10000);
+}
+
+int main()
+{
+  int *a;
+  int *b;
+  int *c;
+  int inc;
+  vec_add_kernel(a,b,c,inc);
+  return 0;
+}

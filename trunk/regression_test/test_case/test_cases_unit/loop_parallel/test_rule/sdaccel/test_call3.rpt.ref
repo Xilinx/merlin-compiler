@@ -1,0 +1,7 @@
+
+WARNING: [FGPIP-213] Loop 'i'  (test_call3.cpp:18) probably cannot be fully-pipelined as array 'a' has an irregular access pattern and cannot be split into different sub-arrays.
+
+WARNING: [FGPIP-213] Loop 'j'  (test_call3.cpp:11) probably cannot be fully-pipelined as array 'b' has an irregular access pattern and cannot be split into different sub-arrays.
+INFO: [FGPIP-108] Loop 'j'  (test_call3.cpp:11) is pipelined with a target II of 1
+INFO: [FGPIP-108] Loop 'i'  (test_call3.cpp:18) is pipelined with a target II of 1
+INFO: [FGPIP-102] Loop 'j' (test_call3.cpp:20) is fully parallelized

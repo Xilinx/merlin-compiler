@@ -1,0 +1,137 @@
+//Loop structure 
+#pragma ACCEL kernel
+
+void func_top_3(int a[100][100],int b[100][100],int c,int d)
+{
+  int i;
+  int j;
+  int k;
+  int a_buf[100][100];
+  for (j = 0; j < 100; j++) 
+// Original: #pragma ACCEL pipeline
+{
+    if (c) 
+      for (i = 0; i < 100; i++) {
+        a_buf[i][j] = b[i][j];
+      }
+     else if (d) {
+      for (k = 0; k < 100; k++) 
+        a[k][j] = a_buf[k][j];
+    }
+  }
+}
+
+void mars_kernel_0_4_node_0_stage_0(int j,int exec,int a_buf[100][100],int b[100][100])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int i;
+    for (i = 0; i < 100; i++) {
+      a_buf[i][j] = b[i][j];
+    }
+  }
+}
+
+void mars_kernel_0_4_node_1_stage_1(int j,int exec,int a[100][100],int a_buf[100][100])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int i;
+    for (i = 0; i < 100; i++) {
+      a[i][j] = a_buf[i][j];
+    }
+  }
+}
+
+void mars_kernel_0_4_bus(int mars_j,int mars_init,int mars_cond,int a[100][100],int mars_a_buf_0[100][100],int mars_a_buf_1[100][100],int b[100][100])
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_0_4_node_0_stage_0(mars_j - 0,(int )(mars_j >= mars_init + 0 & mars_j <= mars_cond + 0),mars_a_buf_0,b);
+  mars_kernel_0_4_node_1_stage_1(mars_j - 1,(int )(mars_j >= mars_init + 1 & mars_j <= mars_cond + 1),a,mars_a_buf_1);
+}
+
+void mars_kernel_0_4_comp(int mars_j,int mars_init,int mars_cond,int a[100][100],int mars_a_buf_0[100][100],int mars_a_buf_1[100][100],int b[100][100])
+{
+  
+#pragma HLS INLINE OFF
+}
+
+void mars_kernel_0_4(int mars_j,int mars_init,int mars_cond,int a[100][100],int mars_a_buf_0[100][100],int mars_a_buf_1[100][100],int b[100][100])
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_0_4_bus(mars_j,mars_init,mars_cond,a,mars_a_buf_0,mars_a_buf_1,b);
+  mars_kernel_0_4_comp(mars_j,mars_init,mars_cond,a,mars_a_buf_0,mars_a_buf_1,b);
+}
+#pragma ACCEL kernel
+
+void func_top_3_0(int a[100][100],int b[100][100],int c,int d)
+{
+  int i;
+  int j;
+  int k;
+  int a_buf[100][100];
+  int mars_count_0_4 = 0;
+  int mars_kernel_0_4_a_buf_0[100][100];
+  int mars_kernel_0_4_a_buf_1[100][100];
+  for (j = 0; j < 100 + 1; j++) 
+// Original: #pragma ACCEL pipeline
+{
+    if (mars_count_0_4 == 0) 
+      mars_kernel_0_4(j,0,99,a,mars_kernel_0_4_a_buf_0,mars_kernel_0_4_a_buf_1,b);
+     else 
+      mars_kernel_0_4(j,0,99,a,mars_kernel_0_4_a_buf_1,mars_kernel_0_4_a_buf_0,b);
+    mars_count_0_4++;
+    if (mars_count_0_4 == 2) 
+      mars_count_0_4 = 0;
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_3_1(int a[100][100],int b[100][100],int c,int d)
+{
+  int i;
+  int j;
+  int k;
+  int a_buf[100][100];
+  for (j = 0; j < 100; j++) 
+// Original: #pragma ACCEL pipeline
+{
+    for (i = 0; i < 100; i++) {
+      a_buf[i][j] = b[i][j];
+    }
+    for (; i < 100; i++) {
+      a[i][j] = a_buf[i][j];
+    }
+  }
+}
+
+int main()
+{
+  int aa[100][100];
+  int bb[100][100];
+  int cc[100][100];
+  int *a;
+  int *b;
+  int *c;
+  int a_s;
+  int b_s;
+  int c_s;
+  int d_s;
+  float aa_f[100][100];
+  float bb_f[100][100];
+  float cc_f[100][100];
+  float *a_f;
+  float *b_f;
+  float *c_f;
+  float a_s_f;
+  float b_s_f;
+  float c_s_f;
+  float d_s_f;
+  func_top_3(aa,bb,c_s,d_s);
+  func_top_3_0(aa,bb,c_s,d_s);
+  func_top_3_1(aa,bb,c_s,d_s);
+}

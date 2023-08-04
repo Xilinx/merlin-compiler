@@ -1,0 +1,50 @@
+<opt>
+	<node addrmap_id="0" async="" device="" dup_factor="1" graph_name="unmaned_graph0" iterator_vector="" kernel_name="test_kernel" module_type="wrapped" name="unmaned_task1_top">
+		<port io="input" name="burst_length" type="param"></port>
+		<port io="input" name="burst_number" type="param"></port>
+		<port base_addr="0x00000000" data_bitwidth="32" data_type="int" io="input" name="a_0" type="bus_e1">
+			<pattern name="bus_e1_unmaned_task1_a_0_ch0">
+				<access_pattern>r:</access_pattern>
+				<actual_argument>__m_a</actual_argument>
+				<array_dim>100000000</array_dim>
+				<array_name>a</array_name>
+				<bfifo_unit_size>32768</bfifo_unit_size>
+				<buf_size_list>0</buf_size_list>
+				<channel_name>bus_e1_unmaned_task1_a_0_ch0</channel_name>
+				<channel_offset></channel_offset>
+				<condition_vector>1</condition_vector>
+				<data_bitwidth>32</data_bitwidth>
+				<data_bitwidth_kernel>32</data_bitwidth_kernel>
+				<data_size_in_byte>400000000</data_size_in_byte>
+				<data_type>int</data_type>
+				<direction>read</direction>
+				<formal_argument>a</formal_argument>
+				<front_polymatrix_id>2</front_polymatrix_id>
+				<func_arg_idx>2</func_arg_idx>
+				<func_arg_name>a</func_arg_name>
+				<func_name>unmaned_task1</func_name>
+				<gid_level>0</gid_level>
+				<global_exp></global_exp>
+				<has_reuse_chain>no</has_reuse_chain>
+				<iter_name_list></iter_name_list>
+				<iterator_range></iterator_range>
+				<iterator_vector></iterator_vector>
+				<local_exp></local_exp>
+				<max_depth>100000000</max_depth>
+				<name>a</name>
+				<order_vector>1</order_vector>
+				<parameter></parameter>
+				<parameter_range></parameter_range>
+				<parameter_vector></parameter_vector>
+				<port_name>a</port_name>
+				<port_type>bus_e1</port_type>
+				<ref_name>a_0</ref_name>
+				<ref_name_list>a</ref_name_list>
+				<ref_offset_list></ref_offset_list>
+				<task_iter_domain></task_iter_domain>
+				<type>access</type>
+			</pattern>
+		</port>
+		<port io="input" name="out" type="param"></port>
+	</node>
+</opt>

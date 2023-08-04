@@ -1,0 +1,40 @@
+
+void f()
+{
+  int i = 0;
+  int ii = 0;
+  int j;
+  if (j) {
+    int a[2][2] = {{(1), (2)}, {(1), (2)}};
+    if (j) 
+      i = 1;
+    for (j = 1; j < 100; ++j) {
+      i;
+    }
+  }
+  if (j) {
+    int a[2][2] = {{(1), (2)}, {(1), (2)}};
+    ii = 1;
+    for (j = 1; j < 100; ++j) {
+      ii;
+    }
+  }
+}
+
+void f2(int a)
+{
+  a++;
+}
+
+void f3()
+{
+  int a[100];
+  f2(a[0] + a[1]);
+}
+
+void f4()
+{
+  int a[10][100];
+  a[5];
+// because it is not full access, currently, we get conversative result 
+}

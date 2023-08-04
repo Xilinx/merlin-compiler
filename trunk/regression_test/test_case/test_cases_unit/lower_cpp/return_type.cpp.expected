@@ -1,0 +1,27 @@
+
+struct ::st_A 
+{
+  int a;
+}
+;
+
+struct st_A p_ZN2st1A3addEv(struct st_A *this_)
+{
+  this_ -> a++;
+  return  *this_;
+}
+namespace st
+{
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+
+void sub(struct A a)
+{
+}
+}
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+struct st_A tmp;
+tmp = p_ZN2st1A3addEv(&tmp);
+}

@@ -1,0 +1,57 @@
+================================================================================
+Kernel : top(cg_parallel_disabled.cpp:8)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+a               128      (cg_parallel_disabled.cpp:8) memory burst and coalescing 
+b               128      (cg_parallel_disabled.cpp:8) memory burst and coalescing 
+c               128      (cg_parallel_disabled.cpp:8) memory burst and coalescing [1]
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++-----------------------------------------------------------+------+---------+---------+------+------+-------+------+----------------------------------+
+|                         hierarchy                         |  TC  |   AC    |   CPC   | LUT  |  FF  | BRAM  | DSP  |             comment              |
++-----------------------------------------------------------+------+---------+---------+------+------+-------+------+----------------------------------+
+|top (cg_parallel_disabled.cpp:8)                           |      |  1316125|  1316125|  3.44|  0.54|  17.41|  0.04|kernel                            |
+|    auto memory burst read and coalescing for 'a'          |      |        -|    25022|      |      |       |      |                                  |
+|    loop i (cg_parallel_disabled.cpp:13)                   |  1000|  1266000|  1266000|      |      |       |      |                                  |
+|        auto memory burst read and coalescing for 'b'      |      |        -|      262|      |      |       |      |                                  |
+|        tilied loop: loop i (cg_parallel_disabled.cpp:13)  |    10|  1003000|     1003|      |      |       |      |[2]                               |
+|            func (cg_parallel_disabled.cpp:14)             |      |        -|        -|      |      |       |      |inlined                           |
+|    auto memory burst write and coalescing for 'c'         |      |        -|   375330|      |      |       |      |[1]                               |
+|func (cg_parallel_disabled.cpp:1)                          |      |        -|        -|      |      |       |      |inlined                           |
+|    loop i (cg_parallel_disabled.cpp:2)                    |   100|     1003|     1003|      |      |       |      |flattened, IL=5, fully pipelined  |
++-----------------------------------------------------------+------+---------+---------+------+------+-------+------+----------------------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++-------------------------------------------------------------+---------+----------+
+|                            Name                             | Cycles  | Activity |
++-------------------------------------------------------------+---------+----------+
+| top:tilied loop tiled loop: i (cg_parallel_disabled.cpp:13) | 1003000 |  76.21%  |
+|          top:loop i (cg_parallel_disabled.cpp:13)           | 263000  |  19.98%  |
+|              top (cg_parallel_disabled.cpp:8)               |  50125  |  3.81%   |
+|       auto memory burst (cg_parallel_disabled.cpp:8)        |    0    |  0.00%   |
+|       auto memory burst (cg_parallel_disabled.cpp:8)        |    0    |  0.00%   |
+|       auto memory burst (cg_parallel_disabled.cpp:13)       |    0    |  0.00%   |
++-------------------------------------------------------------+---------+----------+
+
++----------------------------------+-------+------+------+------+
+|               Name               | BRAM  | DSP  |  FF  | LUT  |
++----------------------------------+-------+------+------+------+
+| top (cg_parallel_disabled.cpp:8) | 17.41 | 0.04 | 0.54 | 3.44 |
++----------------------------------+-------+------+------+------+
+[1] Coarse-grained parallelization NOT applied: loop (cg_parallel_disabled.cpp:13) because access on array 'c' (cg_parallel_disabled.cpp:8) cannot be parallelized due to possible loop carried data dependence.
+[2] External memory access cannot be parallelized
+
+
+

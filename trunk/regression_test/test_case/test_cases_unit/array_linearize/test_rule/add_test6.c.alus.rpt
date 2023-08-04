@@ -1,0 +1,3 @@
+
+ERROR: [SYNCHK-302] Found an out-of-bound read access on argument 'a' (add_test6.c:6) : access range=[-1..-1]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.

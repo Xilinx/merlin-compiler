@@ -1,0 +1,38 @@
+
+void top()
+{
+  int a[1000];
+  for (int i = 0; i < 10; ++i) {
+    if (i < 5) {
+      for (int j = 0; j < 98; ++j) {
+        a[i * 100 + j];
+      }
+      a[i * 100 + 98];
+      a[i * 100 + 99];
+    }
+     else {
+      for (int j = 0; j < 100; ++j) {
+        a[i * 100 + j];
+      }
+    }
+  }
+}
+
+void top_2()
+{
+  int a[1000];
+  for (int i = 0; i < 10; ++i) {
+    if (i < 5) {
+      for (int j = 0; j < 100; ++j) {
+        a[i * 100 + j];
+      }
+    }
+     else {
+      for (int j = 0; j < 98; ++j) {
+        a[i * 100 + j];
+      }
+      a[i * 100 + 98];
+      a[i * 100 + 99];
+    }
+  }
+}

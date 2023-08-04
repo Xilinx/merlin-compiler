@@ -1,0 +1,15 @@
+// RUN: template_fn_expansion %s
+int p_Z8identityIiEi(int t);
+
+int p_Z8identityIiEi(int t)
+{
+  return p_Z8identityIiEi(t);
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+int (*k)(int ) = &p_Z8identityIiEi;
+#pragma ACCEL kernel
+
+int main(int argc,char **argv)
+{
+  return k(argc);
+}

@@ -1,0 +1,7 @@
+
+WARNING: [LINEBUF-202] Stopping line buffer optimization on variable 'A' in loop 'L_0' (test_level.cpp:23): the accesses are not stencil.
+
+
+WARNING: [LINEBUF-202] Stopping line buffer optimization on variable 'A' in loop 'L_0' (test_level.cpp:39): the accesses are not stencil.
+
+INFO: [LINEBUF-101] Applying line buffer on variable 'A' in loop 'L_0_0' (test_level.cpp:8) with a 3x1 stencil

@@ -1,0 +1,7 @@
+<configuration>
+	<param_tree name="input">
+	</param_tree>
+	<param_tree name="output">
+	</param_tree>
+	<param name="nof_iteration">1</param>
+</configuration>

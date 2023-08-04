@@ -1,0 +1,14 @@
+#define VEC_SIZE 10000
+#define VEC_DIM_SIZE 100
+#pragma ACCEL kernel
+
+void vec_add_kernel(int *a,int *b,int *c)
+{
+  for (int i = 0; i < 100; i++) {
+    
+#pragma ACCEL pipeline flatten
+    for (int j = 0; j < 100; j++) {
+      c[i] += a[100 * i + j] + b[100 * i + j];
+    }
+  }
+}

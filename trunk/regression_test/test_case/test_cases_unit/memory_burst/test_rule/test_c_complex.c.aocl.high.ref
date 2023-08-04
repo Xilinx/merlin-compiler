@@ -1,0 +1,19 @@
+#include <string.h> 
+#include<complex.h>
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void top(float _Complex *a,float _Complex *b,float _Complex *c)
+{
+  float _Complex b_buf[10000000];
+  float _Complex a_buf[10000000];
+  float _Complex c_buf[10000000];
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(float _Complex ) * 10000000);
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(float _Complex ) * 10000000);
+  for (int i = 0; i < 10000; ++i) {
+    for (int j = 0; j < 1000; ++j) {
+      c_buf[i * 1000 + j] = a_buf[i * 1000 + j] + b_buf[i * 1000 + j];
+    }
+  }
+  memcpy((void *)(&c[0]),(const void *)(&c_buf[0]),sizeof(float _Complex ) * 10000000);
+}

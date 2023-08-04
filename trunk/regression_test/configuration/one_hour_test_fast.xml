@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs> 
+  <config>
+      <name>fcs_a_s</name>
+      <case_type>tune_altera_v2</case_type>
+      <case>idct blackschole kmeans matmul</case>
+      <flow>no_bit_test_hls</flow>
+      <platform_name>a10gx</platform_name>
+      <implementation_tool > aocl </implementation_tool>
+      <opt_effort>standard</opt_effort>
+      <cstd>c99</cstd>
+  </config>  
+  <config>
+      <name>c_a_s</name>
+      <case_type>chstone_simple</case_type>
+      <case>dfadd dfsin sha</case>
+      <flow>no_bit_test_hls</flow>
+      <platform_name>a10gx</platform_name>
+      <implementation_tool > aocl </implementation_tool>
+      <opt_effort>standard</opt_effort>
+      <cstd>c99</cstd>
+  </config>  
+  <config>
+      <name>fcs_x</name>
+      <case_type>org_v2</case_type>
+      <case>idct vec_sum</case>
+      <flow>no_bit_test_hls</flow>
+      <platform_name>xilinx:adm-pcie-ku3:2ddr:3.3</platform_name>
+      <opt_effort>standard</opt_effort>
+      <cstd>c99</cstd>
+  </config>  
+  <config>
+      <name>cov_a</name>
+      <case_type>coverage</case_type>
+      <case>all</case>
+      <flow>no_bit_test_hls</flow>
+      <platform_name>a10gx</platform_name>
+      <implementation_tool > aocl </implementation_tool>
+      <opt_effort>standard</opt_effort>
+      <cstd>c99</cstd>
+  </config>  
+
+</configs>

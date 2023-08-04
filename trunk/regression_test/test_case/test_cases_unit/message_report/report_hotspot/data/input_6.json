@@ -1,0 +1,172 @@
+[
+    {
+        "comment": "-", 
+        "comment_resource": "-", 
+        "inline": "", 
+        "comment_interface": "-", 
+        "Target_FREQ": "300", 
+        "total-DSP": "3 (~0%)", 
+        "interfaces": [
+            {
+                "src_line": 7, 
+                "name": "A", 
+                "var_type": "array", 
+                "burst": "on", 
+                "type": "interface", 
+                "src_filename": "source.cpp", 
+                "comment_interface": "cached but not coalesced__merlin_note", 
+                "coalesce": "off", 
+                "coalesce_bitwidth": "-", 
+                "src_col": 11, 
+                "table_note": "Low bandwidth efficiency of memory burst: variable 'A' (source.cpp:7) in scope (source.cpp:14).\n  Reason: short burst length = 8 bytes\n", 
+                "interface_bitwidth": "64", 
+                "src_topo_id": "X_0_0_0_2_0_0", 
+                "burst_read_write": "RO"
+            }, 
+            {
+                "src_line": 7, 
+                "name": "sz", 
+                "var_type": "scalar", 
+                "burst": "-", 
+                "type": "interface", 
+                "src_filename": "source.cpp", 
+                "comment_interface": "scalar", 
+                "coalesce": "-", 
+                "coalesce_bitwidth": "-", 
+                "src_col": 25, 
+                "table_note": "", 
+                "interface_bitwidth": "32", 
+                "src_topo_id": "X_0_0_0_2_0_1", 
+                "burst_read_write": "-"
+            }
+        ], 
+        "Estimate_FREQ": "273", 
+        "src_col": 1, 
+        "total-URAM": "0 (~0%)", 
+        "childs": [
+            {
+                "comment": "parallel factor=16x", 
+                "comment_resource": "", 
+                "src_line": 11, 
+                "table_note": "", 
+                "name": "j", 
+                "src_func_name": "sum", 
+                "total-FF": "-", 
+                "type": "loop", 
+                "total-LUT": "-", 
+                "src_filename": "source.cpp", 
+                "comment_interface": "-", 
+                "total-URAM": "-", 
+                "childs": [], 
+                "src_col": 5, 
+                "unroll-factor": 16, 
+                "total-DSP": "-", 
+                "trip-count": "16", 
+                "CYCLE_UNIT": "-", 
+                "total-BRAM": "-", 
+                "src_topo_id": "L_0_0_0_2_2_0_2"
+            }, 
+            {
+                "comment": "", 
+                "comment_resource": "", 
+                "src_line": 14, 
+                "table_note": "", 
+                "name": "i", 
+                "src_func_name": "sum", 
+                "total-FF": "-", 
+                "type": "loop", 
+                "total-LUT": "-", 
+                "src_filename": "source.cpp", 
+                "comment_interface": "-", 
+                "total-URAM": "-", 
+                "childs": [
+                    {
+                        "comment": "cache size=8B", 
+                        "comment_resource": "", 
+                        "name": "auto memory burst for 'A'(read)", 
+                        "total-DSP": "-", 
+                        "total-FF": "-", 
+                        "CYCLE_UNIT": 1, 
+                        "total-URAM": "-", 
+                        "total-LUT": "-", 
+                        "total-BRAM": "-", 
+                        "type": "burst"
+                    }, 
+                    {
+                        "comment": "pipeline II=9", 
+                        "comment_resource": "", 
+                        "src_line": 17, 
+                        "table_note": "", 
+                        "name": "j", 
+                        "src_func_name": "sum", 
+                        "total-FF": "-", 
+                        "type": "loop", 
+                        "parent_loop": "L_0_0_0_2_2_0_3", 
+                        "total-LUT": "-", 
+                        "src_filename": "source.cpp", 
+                        "comment_interface": "-", 
+                        "total-URAM": "-", 
+                        "childs": [], 
+                        "src_col": 9, 
+                        "total-DSP": "-", 
+                        "trip-count": "16", 
+                        "CYCLE_UNIT": 144, 
+                        "total-BRAM": "-", 
+                        "src_topo_id": "L_0_0_0_2_2_0_3_3_1"
+                    }
+                ], 
+                "src_col": 5, 
+                "total-DSP": "-", 
+                "trip-count": "?", 
+                "CYCLE_UNIT": "?", 
+                "total-BRAM": "-", 
+                "src_topo_id": "L_0_0_0_2_2_0_3"
+            } 
+        ], 
+        "total-LUT": "3334 (~0%)", 
+        "estimate": "2.760", 
+        "total-BRAM": "4 (~0%)", 
+        "call_functions": [], 
+        "target": "3.33", 
+        "src_line": 7, 
+        "name": "sum", 
+        "total-FF": "4285 (~0%)", 
+        "stmts": [
+            {
+                "src_line": 7, 
+                "src_col": 1, 
+                "src_filename": "source.cpp", 
+                "src_topo_id": "F_0_0_0_2", 
+                "type": "stmt"
+            }
+        ], 
+        "src_topo_id": "F_0_0_0_2", 
+        "uncertainty": "0.90", 
+        "src_filename": "source.cpp", 
+        "sub_functions": [], 
+        "CYCLE_UNIT": "?", 
+        "var_refs": [
+            {
+                "src_line": 11, 
+                "src_col": 34, 
+                "src_filename": "source.cpp", 
+                "src_topo_id": "X_0_0_0_2_2_0_2_3_0_0_0", 
+                "type": "var_ref", 
+                "name": "tmp"
+            } 
+        ], 
+        "table_note": "", 
+        "var_defs": [
+            {
+                "src_line": 8, 
+                "src_col": 5, 
+                "src_filename": "source.cpp", 
+                "src_topo_id": "X_0_0_0_2_2_0_0_1", 
+                "type": "var_def", 
+                "name": "t"
+            } 
+        ], 
+        "global_variables": [], 
+        "type": "kernel"
+    }
+]

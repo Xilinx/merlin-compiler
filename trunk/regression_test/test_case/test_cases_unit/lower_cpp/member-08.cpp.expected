@@ -1,0 +1,20 @@
+// Test out-of-line member function definitions.
+
+struct ::S 
+{
+}
+;
+void p_ZN1S4vaddEj(struct S *this_,unsigned int );
+
+void p_ZN1S4vaddEj(struct S *this_,unsigned int )
+{
+}
+static void __merlin_dummy_SgClassDeclaration_struct_S_();
+static void __merlin_dummy_SgMemberFunctionDeclaration_void_vadd_();
+#pragma ACCEL kernel
+
+void vec_add_kernel()
+{
+  struct S dy;
+  p_ZN1S4vaddEj(&dy,3);
+}

@@ -1,0 +1,49 @@
+#include "merlin_type_define.h"
+extern int __merlin_include__GB_merlin_type_define_h_0;
+
+static void p_ZN1AC2Ev_1(struct A *this_)
+{
+  this_ -> x = 168;
+}
+
+static void p_ZN1SC2Ev_1(struct S *this_)
+{
+  this_ -> x = 168;
+  p_ZN1AC2Ev_1(&this_ -> y);
+}
+
+static void f2_1(int x,struct C c)
+{
+}
+
+static void f3_1(int x)
+{
+}
+#pragma ACCEL kernel
+
+void f(int x,struct C c)
+{
+  int i;
+  int xx;
+  struct S s;
+  p_ZN1SC2Ev_1(&s);
+  ;
+  struct A yy;
+  p_ZN1AC2Ev_1(&yy);
+  ;
+  for (i = 0; i < 100; ++i) {
+    int x;
+    struct A y;
+    p_ZN1AC2Ev_1(&y);
+    ;
+  }
+  if (i > 20) {
+    int x;
+    struct A y;
+    p_ZN1AC2Ev_1(&y);
+    ;
+  }
+//  f1(x, yy, c);
+  f2_1(x,c);
+  f3_1(x);
+}

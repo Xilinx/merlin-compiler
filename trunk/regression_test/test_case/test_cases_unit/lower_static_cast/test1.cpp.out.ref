@@ -1,0 +1,19 @@
+
+int foo1(void *bar1)
+{
+  return  *((int *)bar1);
+}
+#pragma ACCEL kernel
+
+int foo()
+{
+  int i;
+  double d1 = (double )i;
+  double d2 = (double )((long )((short )i));
+  double *pd2 = &d2;
+  if ((bool )i) 
+    return 1;
+  while((foo1((void *)pd2)) && ((float )d1) > 0)
+    i--;
+  return 0;
+}

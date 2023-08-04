@@ -1,0 +1,35 @@
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+
+struct st 
+{
+  char r;
+  char g;
+  char b;
+}
+;
+#pragma ACCEL kernel
+
+void top(struct st *a)
+{
+  
+#pragma ACCEL skip_sync variable=a_buf
+  
+#pragma ACCEL skip_sync variable=a
+  
+#pragma ACCEL skip_sync variable=a_buf
+  
+#pragma ACCEL skip_sync variable=a
+  
+#pragma ACCEL interface variable=a depth=10000
+  
+#pragma ACCEL pipeline
+  struct st a_buf[10000];
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(struct st ) * 10000);
+  for (int i = 0; i < 10000; ++i) {
+    a_buf[i] . r++;
+    a_buf[i] . g++;
+    a_buf[i] . b++;
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(struct st ) * 10000);
+}

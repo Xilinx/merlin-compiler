@@ -1,0 +1,14 @@
+<directives>
+<reduction_opt>off</reduction_opt>
+<platform_name></platform_name>
+<opt_effort>standard</opt_effort>
+<ihatebug>debug-level2</ihatebug>
+<merlincc>on</merlincc>
+<implementation_tool>IMPL_TOOL</implementation_tool>
+<clock_period>5ns</clock_period>
+<part_name></part_name>
+<reduction_altera>off</reduction_altera>
+<include_path> -I ./ </include_path>
+<macro_define> -D XILINX  -D MC_BASELINE </macro_define>
+</directives>
+

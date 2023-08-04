@@ -1,0 +1,32 @@
+{
+    "digitrec_kernel_L_0_1_para":{
+        "1":"digitrec_kernel_L_0_1_para_sub.24 digitrec_kernel_L_0_1_para_sub.23 digitrec_kernel_L_0_1_para_sub.22 digitrec_kernel_L_0_1_para_sub.21 digitrec_kernel_L_0_1_para_sub.20 digitrec_kernel_L_0_1_para_sub.19 digitrec_kernel_L_0_1_para_sub.18 digitrec_kernel_L_0_1_para_sub.17 digitrec_kernel_L_0_1_para_sub.16 digitrec_kernel_L_0_1_para_sub.15 digitrec_kernel_L_0_1_para_sub.14 digitrec_kernel_L_0_1_para_sub.13 digitrec_kernel_L_0_1_para_sub.12 digitrec_kernel_L_0_1_para_sub.11 digitrec_kernel_L_0_1_para_sub.10 digitrec_kernel_L_0_1_para_sub.9 digitrec_kernel_L_0_1_para_sub.8 digitrec_kernel_L_0_1_para_sub.7 digitrec_kernel_L_0_1_para_sub.6 digitrec_kernel_L_0_1_para_sub.5 digitrec_kernel_L_0_1_para_sub.4 digitrec_kernel_L_0_1_para_sub.3 digitrec_kernel_L_0_1_para_sub.2 digitrec_kernel_L_0_1_para_sub.1 digitrec_kernel_L_0_1_para_sub.0 "
+    },
+    "digitrec_kernel_L_0_3_para":{
+        "1":"digitrec_kernel_L_0_3_para_sub.0 digitrec_kernel_L_0_3_para_sub.1 digitrec_kernel_L_0_3_para_sub.2 digitrec_kernel_L_0_3_para_sub.3 digitrec_kernel_L_0_3_para_sub.4 digitrec_kernel_L_0_3_para_sub.5 digitrec_kernel_L_0_3_para_sub.6 digitrec_kernel_L_0_3_para_sub.7 digitrec_kernel_L_0_3_para_sub.8 digitrec_kernel_L_0_3_para_sub.9 digitrec_kernel_L_0_3_para_sub.10 digitrec_kernel_L_0_3_para_sub.11 digitrec_kernel_L_0_3_para_sub.12 digitrec_kernel_L_0_3_para_sub.13 digitrec_kernel_L_0_3_para_sub.14 digitrec_kernel_L_0_3_para_sub.15 digitrec_kernel_L_0_3_para_sub.16 digitrec_kernel_L_0_3_para_sub.17 digitrec_kernel_L_0_3_para_sub.18 digitrec_kernel_L_0_3_para_sub.19 digitrec_kernel_L_0_3_para_sub.20 digitrec_kernel_L_0_3_para_sub.21 digitrec_kernel_L_0_3_para_sub.22 digitrec_kernel_L_0_3_para_sub.23 digitrec_kernel_L_0_3_para_sub.24 "
+    },
+    "digitrec_kernel":{
+        "2":"mars_kernel_0_1 "
+    },
+    "mars_kernel_0_1_bus":{
+        "1":"mars_kernel_0_1_node_1_stage_0 ",
+        "2":"mars_kernel_0_1_node_0_stage_0 "
+    },
+    "mars_kernel_0_1_comp":{
+        "1":"mars_kernel_0_1_node_13_stage_9 ",
+        "2":"mars_kernel_0_1_node_2_stage_1 mars_kernel_0_1_node_5_stage_2 mars_kernel_0_1_node_7_stage_3 mars_kernel_0_1_node_8_stage_4 mars_kernel_0_1_node_9_stage_5 mars_kernel_0_1_node_10_stage_6 mars_kernel_0_1_node_11_stage_7 mars_kernel_0_1_node_12_stage_8 ",
+        "3":"mars_kernel_0_1_node_4_stage_1 "
+    },
+    "mars_kernel_0_1_node_1_stage_0":{
+        "5":"merlin_memcpy_0.0.0 "
+    },
+    "mars_kernel_0_1_node_2_stage_1":{
+        "1":"digitrec_kernel_L_0_1_para "
+    },
+    "mars_kernel_0_1_node_5_stage_2":{
+        "1":"digitrec_kernel_L_0_3_para "
+    },
+    "mars_kernel_0_1":{
+        "1":"mars_kernel_0_1_bus mars_kernel_0_1_comp "
+    }
+}

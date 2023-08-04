@@ -1,0 +1,19 @@
+<directives>
+<platform_name>a10gx</platform_name>
+<implementation_tool > aocl </implementation_tool>
+<pure_kernel>on</pure_kernel>
+<opt_effort>medium</opt_effort>
+
+<false_dep_removal> on </false_dep_removal>
+<loop_flatten> keep_last </loop_flatten>
+<loop_tiling> on </loop_tiling>
+<reduction_altera> on </reduction_altera>
+<volatile_flag> off </volatile_flag>
+<burst_single_size_threshold>1500000</burst_single_size_threshold>
+<burst_total_size_threshold>2500000</burst_total_size_threshold>
+
+
+<ihatebug>debug</ihatebug>
+
+</directives>
+

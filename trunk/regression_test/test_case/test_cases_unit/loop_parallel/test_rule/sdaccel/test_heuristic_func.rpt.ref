@@ -1,0 +1,4 @@
+
+WARNING: [FGPIP-213] Loop 'j'  (test_heuristic_func.cpp:18) probably cannot be fully-pipelined as array 'Data' has an irregular access pattern and cannot be split into different sub-arrays.
+INFO: [FGPIP-102] Loop 'j' (test_heuristic_func.cpp:5) is fully parallelized
+INFO: [FGPIP-103] Loop 'j'  (test_heuristic_func.cpp:18) is pipelined

@@ -1,0 +1,138 @@
+#include<hls_stream.h>
+extern int __merlin_include__GB_hls_stream_h_0;
+static hls::stream<signed short > __merlinmultMat_16_mult_re_ch[64];
+static hls::stream<signed short > __merlinmultMat_16_mult_im_ch[64];
+
+static void cmult_16_1(signed char *in_re,signed char *in_im,signed char *coeff_re,signed char *coeff_im,signed short *out_re,signed short *out_im)
+{
+  signed short p_l;
+  signed short p_h;
+  signed short p_l2;
+  signed short p_h2;
+  signed long b;
+  signed long p1;
+  signed long p2;
+//(a+jb)*re{c}
+  b = ((signed long )(((long long )( *in_re)) + (((long long )( *in_im)) << 2 * 8)));
+  p1 = ((long )( *coeff_re)) * b;
+  p_h = ((signed short )((long )(p1 >> 2 * 8)));
+  p_l = ((signed short )(p1 & ((long )((1 << 8 * 2) - 1))));
+//(a+jb)*im{c}
+  p2 = ((long )( *coeff_im)) * b;
+  p_h2 = ((signed short )(((long )p_h) + (p2 & ((long )((1 << 8 * 2) - 1)))));
+  p_l2 = ((signed short )(((long )p_l) - ((long )(p2 >> 2 * 8))));
+   *out_im = p_h2;
+   *out_re = p_l2;
+}
+
+void __merlinmultMat_16_mult_re_streaming(signed short *mult_re)
+{
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 6600L; ++merlin_it_0) {
+    
+#pragma ACCEL pipeline
+    long merlin_it_0_mod = merlin_it_0 % 2;
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 32; ++merlin_it_1) {
+      
+#pragma ACCEL parallel
+      signed short merlin_tmp_2;
+      if (merlin_it_0_mod == 0) {
+        merlin_tmp_2 = __merlinmultMat_16_mult_re_ch[merlin_it_1 + 0] .  read ();
+      }
+       else {
+        merlin_tmp_2 = __merlinmultMat_16_mult_re_ch[merlin_it_1 + 32] .  read ();
+      }
+      mult_re[0 + merlin_it_0 * 32 + merlin_it_1] = merlin_tmp_2;
+    }
+  }
+}
+
+void __merlinmultMat_16_mult_im_streaming(signed short *mult_im)
+{
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 6600L; ++merlin_it_0) {
+    
+#pragma ACCEL pipeline
+    long merlin_it_0_mod = merlin_it_0 % 2;
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 32; ++merlin_it_1) {
+      
+#pragma ACCEL parallel
+      signed short merlin_tmp_2;
+      if (merlin_it_0_mod == 0) {
+        merlin_tmp_2 = __merlinmultMat_16_mult_im_ch[merlin_it_1 + 0] .  read ();
+      }
+       else {
+        merlin_tmp_2 = __merlinmultMat_16_mult_im_ch[merlin_it_1 + 32] .  read ();
+      }
+      mult_im[0 + merlin_it_0 * 32 + merlin_it_1] = merlin_tmp_2;
+    }
+  }
+}
+
+void __merlinmultMat_16_computation(signed char *in_re,signed char *in_im,signed char *coeff_re,signed char *coeff_im,signed short *mult_re,signed short *mult_im)
+{
+  
+#pragma HLS inline off
+  int i;
+  int j;
+  int k;
+  for (i = 0; i < 3300; i++) {
+    
+#pragma ACCEL PIPELINE AUTO
+    for (j = 0; j < 64; j++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      signed short tmp_im;
+      signed short tmp_re;
+      signed short res_im;
+      signed short res_re;
+      res_re = ((signed short )0);
+      res_im = ((signed short )0);
+      for (k = 0; k < 16; k++) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        cmult_16_1(&in_re[((long )i) * 16L + ((long )k)],&in_im[((long )i) * 16L + ((long )k)],&coeff_re[((long )j) * 16L + ((long )k)],&coeff_im[((long )j) * 16L + ((long )k)],&tmp_re,&tmp_im);
+        res_re += ((int )tmp_re);
+        res_im += ((int )tmp_im);
+      }
+      __merlinmultMat_16_mult_re_ch[j] .  write (((signed short )(((int )res_re) >> 9)));
+      __merlinmultMat_16_mult_im_ch[j] .  write (((signed short )(((int )res_im) >> 9)));
+    }
+  }
+// multiplying first and second matrices and storing in mult.
+//#pragma ACCEL parallel factor=2
+}
+#pragma ACCEL kernel
+
+void multMat_16(signed char *in_re,signed char *in_im,signed char *coeff_re,signed char *coeff_im,signed short *mult_re,signed short *mult_im)
+{
+  
+#pragma ACCEL interface variable=mult_im depth=3300,64 max_depth=3300,64 BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=512
+  
+#pragma ACCEL interface variable=mult_re depth=3300,64 max_depth=3300,64 BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=512
+  
+#pragma ACCEL interface variable=coeff_im depth=64,16 max_depth=64,16
+  
+#pragma ACCEL interface variable=coeff_re depth=64,16 max_depth=64,16
+  
+#pragma ACCEL interface variable=in_im depth=3300,16 max_depth=3300,16
+  
+#pragma ACCEL interface variable=in_re depth=3300,16 max_depth=3300,16
+// multiplying first and second matrices and storing in mult.
+//#pragma ACCEL parallel factor=2
+  
+#pragma HLS dataflow
+  __merlinmultMat_16_computation(in_re,in_im,coeff_re,coeff_im,0,0);
+  
+#pragma HLS stream variable=__merlinmultMat_16_mult_re_ch
+  __merlinmultMat_16_mult_re_streaming(mult_re);
+  
+#pragma HLS stream variable=__merlinmultMat_16_mult_im_ch
+  __merlinmultMat_16_mult_im_streaming(mult_im);
+}

@@ -1,0 +1,7 @@
+F_0 (name:test, CYCLE_UNIT:288)
+L_0 (name:loop1, CYCLE_UNIT:288, trip-count:8)
+    X_1 (name:fun1, CYCLE_UNIT:7, type:callfunction)
+    L_0_1 (name:loop0_1, CYCLE_UNIT:3, unroll-factor:4)
+F_1 (name:fun1, CYCLE_UNIT:7)
+    L_3 (name:loop3, CYCLE_UNIT:7, trip-count:12, pipeline:yes, II:2)
+        L_3_1 (name:loop3_1, CYCLE_UNIT:3, unroll-factor:4)

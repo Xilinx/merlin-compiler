@@ -1,0 +1,25 @@
+#define VEC_SIZE 10000
+#define VEC_DIM_SIZE 100
+#pragma ACCEL kernel
+
+void vec_add_kernel(int *a,int *b,int *c)
+{
+  int c_1_0_buf[100];
+  int b_1_0_buf[100];
+  int a_1_0_buf[100];
+  int i;
+  int j;
+  memcpy(&c_1_0_buf[0],&c[0],sizeof(int ) * 100);
+  for (i = 0; i < 100; i++) {
+    
+#pragma ACCEL pipeline
+    memcpy(&a_1_0_buf[0],&a[100 * i],sizeof(int ) * 100);
+    memcpy(&b_1_0_buf[0],&b[100 * i],sizeof(int ) * 100);
+    for (j = 0; j < 100; j++) {
+      
+#pragma ACCEL parallel complete
+      c_1_0_buf[j] += a_1_0_buf[j] + b_1_0_buf[j];
+    }
+  }
+  memcpy(&c[0],&c_1_0_buf[0],sizeof(int ) * 100);
+}

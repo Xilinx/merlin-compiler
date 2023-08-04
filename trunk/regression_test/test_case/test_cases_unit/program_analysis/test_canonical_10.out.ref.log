@@ -1,0 +1,128 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(;k < 10;++k) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(;k1 < 10;++k1) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(;k2 >= 0;--k2) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(;k >= 0;--k) {...}
+Non-canonicalizable 
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(;k6 <= 10;++k6) {...}
+SgForStatement:for(;k6 <= 10;++k6) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(;k3 <= 10;++k3) {...}
+SgForStatement:for(;k3 <= 10;++k3) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(;k4 <= 10;++k4) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(;k5 <= 10;++k5) {...}
+SgForStatement:for(;k5 <= 10;++k5) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+[Exp SgGreaterThanOp:a[0] > 0] {a[0] > 0:SgGreaterThanOp a[0] > 0->1,0} : a[0] > 0..a[0] > 0, constant bound: {a[0] > 0:SgGreaterThanOp a[0] > 0->1,0} : neg_inf..pos_inf
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void foo_loop(int n) {...}
+  SgFunctionDeclaration int main() {...}
+  SgBasicBlock {a[k] = k;}
+  SgForStatement for(k = 0;k <= 9;++k) {...}
+  SgBasicBlock {a[k1] =((int )k1);}
+  SgForStatement for(k1 = 0;k1 <= 9;++k1) {...}
+  SgBasicBlock {unsigned int _in_k2 = 10U + -1 * k2;a[_in_k2] =((int )_in_k2);}
+  SgForStatement for(k2 = 0;k2 <= 10U;k2++) {...}
+  SgBasicBlock {a[k] = k;}
+  SgForStatement for(;k >= 0;--k) {...}
+  SgBasicBlock {a[k6] =((int )k6);}
+  SgForStatement for(k6 =((char )n);k6 <= '\n';++k6) {...}
+  SgBasicBlock {a[k3] =((int )k3);}
+  SgForStatement for(k3 =((unsigned char )n);k3 <= 10;++k3) {...}
+  SgBasicBlock {a[k4] =((int )k4);}
+  SgForStatement for(k4 =((unsigned long )n);k4 <= 10UL;++k4) {...}
+  SgBasicBlock {a[k5] =((int )k5);}
+  SgForStatement for(k5 =((signed char )n);k5 <= '\n';++k5) {...}
+
+Arrays: 
+  int [100] a
+
+Ranges: 
+  SgFunctionDeclaration void foo_loop(int n) {...}
+    int [100] a :  R[0..0 exact] W[0..99 inexact]
+    intersect: 0..0 exact
+    union: 0..99 inexact
+  SgFunctionDeclaration int main() {...}
+  SgBasicBlock {a[k] = k;}
+    int [100] a :  W[k..k exact]
+  SgForStatement for(k = 0;k <= 9;++k) {...}
+    int [100] a :  W[0..9 exact]
+  SgBasicBlock {a[k1] =((int )k1);}
+    int [100] a :  W[k1..k1 exact]
+  SgForStatement for(k1 = 0;k1 <= 9;++k1) {...}
+    int [100] a :  W[0..9 exact]
+  SgBasicBlock {unsigned int _in_k2 = 10U + -1 * k2;a[_in_k2] =((int )_in_k2);}
+    int [100] a :  W[10U + -k2..10U + -k2 exact]
+  SgForStatement for(k2 = 0;k2 <= 10U;k2++) {...}
+    int [100] a :  W[0..10 exact]
+  SgBasicBlock {a[k] = k;}
+    int [100] a :  W[k..k exact]
+  SgForStatement for(;k >= 0;--k) {...}
+    int [100] a :  W[0..99 inexact]
+  SgBasicBlock {a[k6] =((int )k6);}
+    int [100] a :  W[k6..k6 exact]
+  SgForStatement for(k6 =((char )n);k6 <= '\n';++k6) {...}
+    int [100] a :  W[0..99 inexact]
+  SgBasicBlock {a[k3] =((int )k3);}
+    int [100] a :  W[k3..k3 exact]
+  SgForStatement for(k3 =((unsigned char )n);k3 <= 10;++k3) {...}
+    int [100] a :  W[0..99 inexact]
+  SgBasicBlock {a[k4] =((int )k4);}
+    int [100] a :  W[k4..k4 exact]
+  SgForStatement for(k4 =((unsigned long )n);k4 <= 10UL;++k4) {...}
+    int [100] a :  W[(unsigned long )n..10 inexact]
+  SgBasicBlock {a[k5] =((int )k5);}
+    int [100] a :  W[k5..k5 exact]
+  SgForStatement for(k5 =((signed char )n);k5 <= '\n';++k5) {...}
+    int [100] a :  W[0..99 inexact]
+

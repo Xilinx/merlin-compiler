@@ -1,0 +1,42 @@
+<directives>
+  <aggressive_opt_for_c>    off </aggressive_opt_for_c>
+  <aggressive_opt_for_cpp>  off </aggressive_opt_for_cpp>
+  <arch_name>ultra_kintex7</arch_name>
+  <auto_dse> off </auto_dse>
+  <auto_fgpar_opt>          on  </auto_fgpar_opt>
+  <auto_fgpar_threshold>       16  </auto_fgpar_threshold>
+  <auto_fgpip_opt>          on  </auto_fgpip_opt>
+  <burst_lifting_size_threshold>128000</burst_lifting_size_threshold>
+  <burst_single_size_threshold>2000000</burst_single_size_threshold>
+  <burst_total_size_threshold>4000000</burst_total_size_threshold>
+  <cg_memory_burst>         on  </cg_memory_burst>
+  <clock_period>4.16ns</clock_period>
+  <coarse_grained_pipeline> on  </coarse_grained_pipeline>
+  <cstd>c99</cstd>
+  <delinearization>         on  </delinearization>
+  <fg_pipeline_parallel>    on  </fg_pipeline_parallel>
+  <generate_l2_api>on</generate_l2_api>
+  <high_level_synthesis> off </high_level_synthesis>
+  <ihatebug>debug-level2</ihatebug>
+  <implementation>       off </implementation>
+  <implementation_tool> aocl </implementation_tool>
+  <kernel>off</kernel>
+  <loop_tiling>             on  </loop_tiling>
+  <memory_burst>            on  </memory_burst>
+  <memory_coalescing>       on  </memory_coalescing>
+  <naive_hls>               off </naive_hls>
+  <normal>on</normal>
+  <part_name>xcku060-ffva1156-2-e</part_name>
+  <pcie_transfer_opt>       on  </pcie_transfer_opt>
+  <platform_name>a10gx</platform_name>
+  <reduction_opt>           on  </reduction_opt>
+  <report_time>off</report_time>
+  <simulation>           off </simulation>
+  <skip_syntax_check>on</skip_syntax_check>
+  <static>off</static>
+  <testing> off </testing>
+  <testing_run_bit> on </testing_run_bit>
+  <testing_run_opt> on </testing_run_opt>
+  <testing_run_ref> on </testing_run_ref>
+  <testing_run_sim> on </testing_run_sim>
+</directives>

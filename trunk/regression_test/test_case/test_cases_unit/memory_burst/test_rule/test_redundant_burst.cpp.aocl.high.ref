@@ -1,0 +1,33 @@
+#include "cmost.h"
+#include<assert.h>
+
+void sub(int *a,int size)
+{
+  size < 100?(static_cast < void  >  (0)) : __assert_fail("size < 100","test_redundant_burst.cpp",5,__PRETTY_FUNCTION__);
+  for (int i = 0; i < size; ++i) {
+    a[i] = i;
+  }
+}
+
+void top_sub(int a[100])
+{
+  sub(a,100);
+}
+
+void top_sub_2(int b[90])
+{
+  sub(b,90);
+}
+//avoid redundant burst
+#pragma ACCEL kernel
+
+void top(int a[100],int b[90])
+{
+  __merlin_access_range(a,0,99);
+  __merlin_access_range(b,0,89);
+  for (int i = 0; i < 10; ++i) {
+    top_sub(a);
+    a[i]++;
+    top_sub_2(b);
+  }
+}

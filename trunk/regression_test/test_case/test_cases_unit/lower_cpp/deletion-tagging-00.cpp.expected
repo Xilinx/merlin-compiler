@@ -1,0 +1,24 @@
+// This file tests checks to make sure that Youxiang's deletion tagging
+// technique works properly for function-scope statements. Given a statement S
+// that is scheduled to be deleted, its deletion tag is a non-defining function
+// decl whose name contains S's AST info.
+
+struct ::C 
+{
+}
+;
+
+void p_ZN1C1fEv(struct C *this_)
+{
+}
+static void __merlin_dummy_SgClassDeclaration_struct_C_();
+#pragma ACCEL kernel
+
+void f()
+{
+  struct C c;
+// ^ Because `struct C` is a C++-like aggregate that will be lowered, this
+// declaration will be deleted. Its deletion tag, however should not be
+// declared static, because nested function decls cannot be static.
+  p_ZN1C1fEv(&c);
+}

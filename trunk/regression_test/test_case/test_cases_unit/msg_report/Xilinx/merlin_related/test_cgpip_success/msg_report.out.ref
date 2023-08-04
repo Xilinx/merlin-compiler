@@ -1,0 +1,60 @@
+================================================================================
+Kernel : top(test_cgpip_success.cpp:2)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+a               32       (test_cgpip_success.cpp:2) memory burst[1]
+b               32       (test_cgpip_success.cpp:2) memory burst[2]
+c               32       (test_cgpip_success.cpp:2) memory burst[3]
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++--------------------------------------------+-----+------+------+------+------+------+------+-----------------------+
+|                 hierarchy                  | TC  |  AC  | CPC  | LUT  |  FF  | BRAM | DSP  |        comment        |
++--------------------------------------------+-----+------+------+------+------+------+------+-----------------------+
+|top (test_cgpip_success.cpp:2)              |     |  6379|  6379|  0.87|  0.25|  0.56|  0.07|kernel                 |
+|    auto memory burst read for 'a'          |     |     -|  1050|      |      |      |      |                       |
+|    auto memory burst read for 'b'          |     |     -|  1050|      |      |      |      |                       |
+|    auto memory burst read for 'c'          |     |     -|  1050|      |      |      |      |                       |
+|    loop i (test_cgpip_success.cpp:4)       |   11|  1177|  1177|      |      |      |      |pipelined              |
+|        loop i0 (test_cgpip_success.cpp:5)  |  100|   101|   101|      |      |      |      |IL=3, fully pipelined  |
+|    auto memory burst write for 'c'         |     |     -|  1050|      |      |      |      |                       |
++--------------------------------------------+-----+------+------+------+------+------+------+-----------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++----------------------------------------------+--------+----------+
+|                     Name                     | Cycles | Activity |
++----------------------------------------------+--------+----------+
+|        top (test_cgpip_success.cpp:2)        |  5202  |  81.55%  |
+|    top:loop i (test_cgpip_success.cpp:4)     |  1076  |  16.87%  |
+|    top:loop i0 (test_cgpip_success.cpp:5)    |  101   |  1.58%   |
+| auto memory burst (test_cgpip_success.cpp:2) |   0    |  0.00%   |
+| auto memory burst (test_cgpip_success.cpp:2) |   0    |  0.00%   |
+| auto memory burst (test_cgpip_success.cpp:2) |   0    |  0.00%   |
+| auto memory burst (test_cgpip_success.cpp:2) |   0    |  0.00%   |
++----------------------------------------------+--------+----------+
+
++--------------------------------+------+------+------+------+
+|              Name              | BRAM | DSP  |  FF  | LUT  |
++--------------------------------+------+------+------+------+
+| top (test_cgpip_success.cpp:2) | 0.56 | 0.07 | 0.25 | 0.87 |
++--------------------------------+------+------+------+------+
+[1] Suboptimal memory coalescing: variable 'a' (test_cgpip_success.cpp:2)
+  Reason: the lowest dimension size of on-chip buffer is not divisible by 16
+[2] Suboptimal memory coalescing: variable 'b' (test_cgpip_success.cpp:2)
+  Reason: the lowest dimension size of on-chip buffer is not divisible by 16
+[3] Suboptimal memory coalescing: variable 'c' (test_cgpip_success.cpp:2)
+  Reason: the lowest dimension size of on-chip buffer is not divisible by 16
+
+
+

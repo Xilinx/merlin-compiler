@@ -1,0 +1,2 @@
+
+ERROR: [SYNCHK-307] Found a local array variable 'z' (t.cpp:4) with statically unknown size in the kernel

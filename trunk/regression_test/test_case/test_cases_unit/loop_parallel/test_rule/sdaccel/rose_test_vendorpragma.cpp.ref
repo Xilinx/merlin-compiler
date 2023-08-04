@@ -1,0 +1,121 @@
+
+struct DATA32 
+{
+  unsigned int data[32];
+}
+;
+
+struct DATA 
+{
+  struct DATA32 data;
+}
+;
+
+void sub_func(struct DATA array[10])
+{
+  for (int i = 0; i < 10; i++) {
+    
+#pragma ACCEL unroll
+    array[i];
+  }
+}
+// Existing HLS partition: #pragma HLS ARRAY_PARTITION variable=&array complete dim=0
+#pragma ACCEL kernel
+
+void func_top_1(int *in)
+{
+  
+#pragma ACCEL interface variable=in depth=3300,16 max_depth=3300,16
+  
+#pragma HLS array partition variable=in dim=2
+  int a[100];
+  
+#pragma HLS array_partition variable=a cyclic factor=4 dim=1
+  
+#pragma HLS resource variable=a core = ROM_nP_LUTRAM
+  int b[100];
+// Existing HLS partition: #pragma HLS array_partition variable=a,b cyclic factor=4
+  
+#pragma HLS array_partition variable=b cyclic factor=4 dim=1
+  int aa[100];
+// Existing HLS partition: #pragma HLS array partition variable=aa cyclic factor=10
+  
+#pragma HLS array_partition variable=aa cyclic factor=10 dim=1
+  int c[100];
+// Existing HLS partition: #pragma HLS array partition variable=c cyclic factor=10
+  
+#pragma HLS array_partition variable=c complete dim=1
+  struct DATA burst;
+// Existing HLS partition: #pragma HLS array partition variable=burst->data->data cyclic factor=8
+  
+#pragma HLS array_partition variable=burst.data.data complete dim=1
+  struct DATA32 burst32;
+// Existing HLS partition: #pragma HLS array partition variable=burst32->data cyclic factor=16
+  
+#pragma HLS array_partition variable=burst32.data complete dim=1
+  int fully_a[10][10];
+// Existing HLS partition: #pragma HLS array_partition variable=fully_a dim=1 complete
+// Existing HLS partition: #pragma HLS array_partition variable=fully_a dim=2 complete
+  
+#pragma HLS array_partition variable=fully_a complete dim=2
+  
+#pragma HLS array_partition variable=fully_a complete dim=1
+  int fully_b[10][10];
+// Existing HLS partition: #pragma HLS array_partition variable=fully_b dim=0 complete
+  
+#pragma HLS array_partition variable=fully_b complete dim=2
+  
+#pragma HLS array_partition variable=fully_b complete dim=1
+  struct DATA burst_array[10];
+  
+#pragma HLS array_partition variable=burst_array complete dim=1
+  
+#pragma HLS array_partition variable=burst_array[9].data.data complete dim=1
+  
+#pragma HLS array_partition variable=burst_array[8].data.data complete dim=1
+  
+#pragma HLS array_partition variable=burst_array[7].data.data complete dim=1
+  
+#pragma HLS array_partition variable=burst_array[6].data.data complete dim=1
+  
+#pragma HLS array_partition variable=burst_array[5].data.data complete dim=1
+  
+#pragma HLS array_partition variable=burst_array[4].data.data complete dim=1
+  
+#pragma HLS array_partition variable=burst_array[3].data.data complete dim=1
+  
+#pragma HLS array_partition variable=burst_array[2].data.data complete dim=1
+  
+#pragma HLS array_partition variable=burst_array[1].data.data complete dim=1
+  
+#pragma HLS array_partition variable=burst_array[0].data.data complete dim=1
+  for (int i = 0; i < 10; i++) 
+// Original: #pragma ACCEL parallel
+{
+    
+#pragma HLS unroll
+    c[i] = fully_a[9][i];
+    c[i] += fully_b[9][i];
+  }
+  for (int i = 0; i < 100; i++) 
+// Original: #pragma ACCEL parallel
+{
+    
+#pragma HLS unroll
+    c[i]++;
+    if (i < 32) 
+      burst32 . data[i] = 10;
+  }
+  for (int j = 0; j < 16; j++) {
+    for (int i = 0; i < 100; i++) 
+// Original: #pragma ACCEL PIPELINE
+{
+      
+#pragma HLS dependence variable=a array inter false 
+      
+#pragma HLS pipeline
+      a[i] = b[i] + c[i] - aa[i] + in[i * 16 + j];
+    }
+  }
+  sub_func(burst_array);
+}

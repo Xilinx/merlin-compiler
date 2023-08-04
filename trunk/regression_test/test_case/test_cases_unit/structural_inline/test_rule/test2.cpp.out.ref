@@ -1,0 +1,93 @@
+
+void foo1()
+{
+  int tmp;
+  for (int i = 0; i < 10; i++) {
+    tmp++;
+  }
+}
+
+void foo2()
+{
+  int tmp;
+  for (int i = 0; i < 10; i++) {
+    
+#pragma HLS unroll
+    tmp++;
+  }
+}
+
+int foo3(int tmp)
+{
+  for (int i = 0; i < 10; i++) {
+    tmp++;
+  }
+  return tmp;
+}
+
+int foo4(int tmp)
+{
+  for (int i = 0; i < 10; i++) {
+    
+#pragma HLS unroll
+    tmp++;
+  }
+  return tmp;
+}
+
+void foo5()
+{
+  foo2();
+}
+
+void func_top_0_df()
+{
+  
+#pragma HLS dataflow
+  foo1();
+  foo2();
+}
+
+void foo9()
+{
+  for (int i = 0; i < 100; i++) {
+    i++;
+  }
+}
+
+void foo8()
+{
+  foo9();
+}
+
+void foo7()
+{
+  
+#pragma HLS inline
+  int tmp;
+  tmp++;
+}
+
+void foo6()
+{
+  
+#pragma HLS inline
+  foo7();
+}
+#pragma ACCEL kernel
+
+void func_top_1()
+{
+  for (int i = 0; i < 100; i++) {
+    
+#pragma HLS pipeline II=2
+    foo6();
+    foo6();
+  }
+  for (int i = 0; i < 100; i++) {
+    
+#pragma HLS pipeline II=1
+    foo6();
+    foo6();
+  }
+}

@@ -1,0 +1,14 @@
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void func_top_0(int *a,int *b)
+{
+  int a_buf_0[1000];
+  int a_buf[1000000];
+  int i;
+  for (i = 0; i < 1000; ++i) {
+    a_buf_0[i] = b[i];
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf_0[0]),sizeof(int ) * 1000);
+}

@@ -1,0 +1,100 @@
+// Testing different increments
+#include<stdio.h>
+#pragma ACCEL kernel
+
+void func_loop()
+{
+  int a[100];
+{
+    int _i0;
+    for (_i0 = 0; _i0 <= 99UL; ++_i0) {
+      int a_tmp = 0;
+      a[_i0] = a_tmp;
+    }
+  }
+  int b[100];
+  int c[100];
+  for (int pp = 0; pp < 100; pp++) {
+    b[pp] = 1;
+    c[pp] = 2;
+  }
+  int i = 0;
+  int j = 0;
+  int N = 100;
+// Standardize from: for(i = 0;i >= 0;i += - 1) {...}
+  for (i = 0; i <= 0; i++) {
+    int _in_i = 0 + -1L * i;
+/* block 2*/
+    c[_in_i] = a[_in_i] + b[_in_i];
+    printf("index = %d\n",_in_i);
+  }
+  i = 0 + -1L;
+// Standardize from: for(i = 0;i < N;i += 2) {...}
+  for (i = 0; i <= 49; i++) {
+    int _in_i_0 = 0 + 2L * i;
+/* block 3*/
+    c[_in_i_0] = a[_in_i_0] + b[_in_i_0];
+    printf("index = %d\n",_in_i_0);
+  }
+  i = 98 + 2L;
+// Standardize from: for(i = - 4;i < 96;i += 8) {...}
+  for (i = 0; i <= 12; i++) {
+    int _in_i_1 = -4 + 8L * i;
+/* block 3.1*/
+    c[_in_i_1 + 4] -= 2;
+    printf("index = %d\n",_in_i_1 + 4);
+  }
+  i = 92 + 8L;
+// Standardize from: for(i = 0;i >= 0;i -= 1) {...}
+  for (i = 0; i <= 0; i++) {
+    int _in_i_2 = 0 + -1L * i;
+/* block 4*/
+    c[_in_i_2] = a[_in_i_2] + b[_in_i_2];
+    printf("index = %d\n",_in_i_2);
+  }
+  i = 0 + -1L;
+// Standardize from: for(i = N - 1;i >= 0;i--) {...}
+  for (i = 0; i <= 99; i++) {
+    int _in_i_3 = 99 + -1 * i;
+/* block 6*/
+    c[_in_i_3] = a[_in_i_3] + b[_in_i_3];
+    printf("index = %d\n",_in_i_3);
+  }
+  i = 0 + -1;
+//#if 0
+  j = 3;
+// Canonicalized from: for((i = N - 1 , j = 3);i >= 0;--i) {...}
+// Standardize from: for(i = N - 1;i >= 0;--i) {...}
+  for (i = 0; i <= 99; i++) {
+    int _in_i_4 = 99 + -1 * i;
+/* block 7*/
+    c[_in_i_4] = a[_in_i_4] + b[_in_i_4];
+    printf("index = %d\n",_in_i_4);
+  }
+  i = 0 + -1;
+  j = 3;
+// Canonicalized from: for((i = 0 , j = 3);i >= N;(i -= 2 , j--)) {...}
+  for (i = 0; i >= 100; i -= 2) {
+/* block 10*/
+    c[i]++;
+    printf("index = %d\n",i);
+    j--;
+  }
+//#endif
+// Standardize from: for(i = 0;i < N;i += 1 + 4 * 5 / 2) {...}
+  for (i = 0; i <= 9; i++) {
+    int _in_i_5 = 0 + 11L * i;
+/* block 14.1*/
+    c[_in_i_5]++;
+    printf("index = %d\n",_in_i_5);
+  }
+  i = 99 + 11L;
+  for (int pp = 0; pp < 100; pp++) 
+    printf("result = %d\n",c[pp]);
+}
+
+int main()
+{
+  func_loop();
+  return 0;
+}

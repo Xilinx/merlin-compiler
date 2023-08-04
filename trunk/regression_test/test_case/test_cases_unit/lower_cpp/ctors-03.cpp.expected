@@ -1,0 +1,28 @@
+// Check that implicit copy ctors are handled gracefully.
+
+struct ::NonPOD 
+{
+  int y;
+}
+;
+void p_ZN6NonPODC2Ev(struct NonPOD *this_);
+void p_ZN6NonPODC2ERK6NonPOD(struct NonPOD *this_,const struct NonPOD &);
+void p_ZN6NonPODC2EO6NonPOD(struct NonPOD *this_,struct NonPOD &&);
+static void __merlin_dummy_SgClassDeclaration_struct_Non_();
+
+struct X 
+{
+  struct NonPOD np;
+}
+;
+// X's implicit copy ctor is called here because NonPOD has a user-defined copy
+// ctor.
+#pragma ACCEL kernel name = "check_copy"
+
+void check_copy(struct X x)
+{
+  struct X x2;
+  x2 . np . y = x . np . y;
+  p_ZN6NonPODC2EO6NonPOD(&x2 . np,x . np);
+  ;
+}

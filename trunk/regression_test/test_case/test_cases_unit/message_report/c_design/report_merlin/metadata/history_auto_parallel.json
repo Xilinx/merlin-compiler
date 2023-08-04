@@ -1,0 +1,31 @@
+{
+    "X": {
+        "org_identifier": "X",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"auto_parallel\"\n}"
+        ]
+    },
+    "X_0": {
+        "org_identifier": "X_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0\",\n    \"passname\": \"auto_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"auto_parallel\"\n}"
+        ]
+    }
+}

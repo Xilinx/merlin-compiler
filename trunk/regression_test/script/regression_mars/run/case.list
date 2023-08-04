@@ -1,0 +1,17 @@
+../../../test_case/test_cases_org_cpp/lab1
+../../../test_case/test_cases_org_cpp/lab2
+../../../test_case/test_cases_org_cpp/lab3
+../../../test_case/test_cases_org_cpp/lab4
+../../../test_case/test_cases_org_cpp/lab5
+../../../test_case/test_cases_org_cpp/lab6
+../../../test_case/test_cases_org_cpp/lab7
+../../../test_case/test_cases_org_cpp/denoise
+../../../test_case/test_cases_org_cpp/segmentation
+../../../test_case/test_cases_org_cpp/namd
+../../../test_case/test_cases_org_cpp/smithwaterman
+../../../test_case/test_cases_org_cpp/idct
+../../../test_case/test_cases_org_cpp/blackschole
+../../../test_case/test_cases_org_cpp/dwt
+../../../test_case/test_cases_org_cpp/twoNN
+../../../test_case/test_cases_org_cpp/logistic
+../../../test_case/test_cases_org_cpp/matmul

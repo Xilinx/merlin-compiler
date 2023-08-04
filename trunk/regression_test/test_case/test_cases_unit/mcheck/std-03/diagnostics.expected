@@ -1,0 +1,3 @@
+warning: 'auto' type specifier is a C++11 extension
+error: expected expression
+warning: unknown attribute 'bitwidth' ignored

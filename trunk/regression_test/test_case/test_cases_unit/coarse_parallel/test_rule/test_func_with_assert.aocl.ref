@@ -1,0 +1,167 @@
+#include "merlin_stream.h" 
+extern int __merlin_include__GB_merlin_stream_h_0;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=32 NODE=msm_node_0 PORT=msm_port_j_l6_msm_node_0_0 
+merlin_stream ch__j_l6_3;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=10 NODE=msm_node_0 PORT=msm_port_c_buf_0_msm_node_0_0 
+merlin_stream ch_c_buf_0_2;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=10 NODE=msm_node_0 PORT=msm_port_b_buf_0_msm_node_0_0 
+merlin_stream ch_b_buf_0_1;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=10 NODE=msm_node_0 PORT=msm_port_a_buf_0_msm_node_0_0 
+merlin_stream ch_a_buf_0_0;
+#include <string.h> 
+#include <assert.h>
+#define FACTOR 100
+
+void func(int *a,int *b,int *c)
+{
+//int i;
+  for (int _i0_l1 = 0; _i0_l1 < 10; ++_i0_l1) {
+    for (int _ii_l2 = 0; _ii_l2 < 10; ++_ii_l2) {
+      int c_buf_0_sn_tmp_0;
+      int b_buf_0_sn_tmp_0;
+      int a_buf_0_sn_tmp_0;
+      
+#pragma ACCEL parallel
+      int i = _i0_l1 * 10 + _ii_l2;
+      merlin_stream_read(&ch_a_buf_0_0,&a_buf_0_sn_tmp_0);
+      merlin_stream_read(&ch_b_buf_0_1,&b_buf_0_sn_tmp_0);
+      c_buf_0_sn_tmp_0 = a_buf_0_sn_tmp_0 + b_buf_0_sn_tmp_0;
+      merlin_stream_write(&ch_c_buf_0_2,&c_buf_0_sn_tmp_0);
+    }
+  }
+}
+
+void msm_node_0(int a_buf_0[100][100],int b_buf_0[100][100],int c_buf_0[100][100],int _j_l6)
+{
+  int _j_l6_sn_tmp_0;
+  int __j_l6;
+  merlin_stream_read(&ch__j_l6_3,&_j_l6_sn_tmp_0);
+  __j_l6 = _j_l6_sn_tmp_0;
+  __j_l6 < 100?(static_cast < void  >  (0)) : __assert_fail("j < 100","test_func_with_assert.cpp",(unsigned int )42,__PRETTY_FUNCTION__);
+  func(a_buf_0[__j_l6],b_buf_0[__j_l6],c_buf_0[__j_l6]);
+}
+
+void msm_port_a_buf_0_msm_node_0_0(int a_buf_0[100][100],int _j_l6)
+{
+  int __j_l6;
+  __j_l6 = _j_l6;
+//int i;
+  for (int _i0_l1 = 0; _i0_l1 < 10; ++_i0_l1) {
+    for (int _ii_l2 = 0; _ii_l2 < 10; ++_ii_l2) {
+      int a_buf_0_sp_tmp_0;
+      
+#pragma ACCEL parallel
+      a_buf_0_sp_tmp_0 = a_buf_0[__j_l6][_i0_l1 * 10 + _ii_l2];
+      merlin_stream_write(&ch_a_buf_0_0,&a_buf_0_sp_tmp_0);
+    }
+  }
+}
+
+void msm_port_b_buf_0_msm_node_0_0(int b_buf_0[100][100],int _j_l6)
+{
+  int __j_l6;
+  __j_l6 = _j_l6;
+//int i;
+  for (int _i0_l1 = 0; _i0_l1 < 10; ++_i0_l1) {
+    for (int _ii_l2 = 0; _ii_l2 < 10; ++_ii_l2) {
+      int b_buf_0_sp_tmp_0;
+      
+#pragma ACCEL parallel
+      b_buf_0_sp_tmp_0 = b_buf_0[__j_l6][_i0_l1 * 10 + _ii_l2];
+      merlin_stream_write(&ch_b_buf_0_1,&b_buf_0_sp_tmp_0);
+    }
+  }
+}
+
+void msm_port_c_buf_0_msm_node_0_0(int c_buf_0[100][100],int _j_l6)
+{
+  int __j_l6;
+  __j_l6 = _j_l6;
+//int i;
+  for (int _i0_l1 = 0; _i0_l1 < 10; ++_i0_l1) {
+    for (int _ii_l2 = 0; _ii_l2 < 10; ++_ii_l2) {
+      int c_buf_0_sp_tmp_0;
+      
+#pragma ACCEL parallel
+      merlin_stream_read(&ch_c_buf_0_2,&c_buf_0_sp_tmp_0);
+      c_buf_0[__j_l6][_i0_l1 * 10 + _ii_l2] = c_buf_0_sp_tmp_0;
+    }
+  }
+}
+
+void msm_port_j_l6_msm_node_0_0(int _j_l6)
+{
+  int _j_l6_sp_tmp_0;
+  int __j_l6;
+  _j_l6_sp_tmp_0 = _j_l6;
+  merlin_stream_write(&ch__j_l6_3,&_j_l6_sp_tmp_0);
+  __j_l6 = _j_l6;
+  __j_l6;
+}
+#pragma ACCEL kernel
+
+void top(int *a,int *b,int *c)
+{
+  for (int _i_l3 = 0; _i_l3 < 10000 / 100; ++_i_l3) {
+    int c_buf_0[100][100];
+    int b_buf_0[100][100];
+    int a_buf_0[100][100];
+{
+      for (int _j_l4 = 0; _j_l4 < 100; ++_j_l4) {
+        
+#pragma HLS UNROLL
+        memcpy(a_buf_0[_j_l4],(const void *)(&a[_i_l3 * 10000 + _j_l4 * 100]),sizeof(int ) * 100);
+      }
+    }
+{
+      for (int _j_l5 = 0; _j_l5 < 100; ++_j_l5) {
+        
+#pragma HLS UNROLL
+        memcpy(b_buf_0[_j_l5],(const void *)(&b[_i_l3 * 10000 + _j_l5 * 100]),sizeof(int ) * 100);
+      }
+    }
+    for (int _j_l6 = 0; _j_l6 < 100; ++_j_l6) {
+      
+#pragma ACCEL parallel
+{
+        merlin_stream_init(&ch_a_buf_0_0,10000,4);
+        
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=2 NODE=msm_node_0 VARIABLE=a_buf_0 
+        msm_port_a_buf_0_msm_node_0_0(a_buf_0,_j_l6);
+      }
+{
+        merlin_stream_init(&ch_b_buf_0_1,10000,4);
+        
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=2 NODE=msm_node_0 VARIABLE=b_buf_0 
+        msm_port_b_buf_0_msm_node_0_0(b_buf_0,_j_l6);
+      }
+      merlin_stream_init(&ch_c_buf_0_2,10000,4);
+{
+        merlin_stream_init(&ch__j_l6_3,1,4);
+        
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=0 NODE=msm_node_0 VARIABLE=_j_l6 
+        msm_port_j_l6_msm_node_0_0(_j_l6);
+      }
+// Original pragma: ACCEL STREAM_NODE 
+      
+#pragma ACCEL STREAM_NODE PARALLEL_FACTOR=100 
+      msm_node_0(a_buf_0,b_buf_0,c_buf_0,_j_l6);
+      merlin_stream_reset(&ch__j_l6_3);
+{
+        
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=write DIM_NUM=2 NODE=msm_node_0 VARIABLE=c_buf_0 
+        msm_port_c_buf_0_msm_node_0_0(c_buf_0,_j_l6);
+        merlin_stream_reset(&ch_c_buf_0_2);
+      }
+      merlin_stream_reset(&ch_b_buf_0_1);
+      merlin_stream_reset(&ch_a_buf_0_0);
+    }
+{
+      for (int _j_l7 = 0; _j_l7 < 100; ++_j_l7) {
+        
+#pragma HLS UNROLL
+        memcpy((void *)(&c[_i_l3 * 10000 + _j_l7 * 100]),c_buf_0[_j_l7],sizeof(int ) * 100);
+      }
+    }
+  }
+}

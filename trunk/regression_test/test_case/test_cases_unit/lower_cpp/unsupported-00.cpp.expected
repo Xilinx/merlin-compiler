@@ -1,0 +1,37 @@
+Feature FALCON_ALTERA checked out. 
+
+%E [LWCPP-301] Unsupported construct (namespace): namespace stuff{void f(){}}
+	 in file "/curr/bryant/dev/merlcc/trunk/source-opt/tools/lower_cpp/test/unsupported-00.cpp"
+	at line 1, column 1: 
+
+
+%E [LWCPP-301] Unsupported construct (constructor): void S() {...}
+	 in file "/curr/bryant/dev/merlcc/trunk/source-opt/tools/lower_cpp/test/unsupported-00.cpp"
+	at line 6, column 5: 
+
+
+%E [LWCPP-301] Unsupported construct (destructor): void ~S() {...}
+	 in file "/curr/bryant/dev/merlcc/trunk/source-opt/tools/lower_cpp/test/unsupported-00.cpp"
+	at line 7, column 5: 
+
+
+%E [LWCPP-301] Unsupported construct (template member function): void f(G ) {...}
+	 in file "/curr/bryant/dev/merlcc/trunk/source-opt/tools/lower_cpp/test/unsupported-00.cpp"
+	at line 8, column 27: 
+
+
+%E [LWCPP-301] Unsupported construct (static member function): void g(unsigned int ) {...}
+	 in file "/curr/bryant/dev/merlcc/trunk/source-opt/tools/lower_cpp/test/unsupported-00.cpp"
+	at line 10, column 5: 
+
+
+%E [LWCPP-301] Unsupported construct (try-catch clause): try {}catch(... ){}
+	 in file "/curr/bryant/dev/merlcc/trunk/source-opt/tools/lower_cpp/test/unsupported-00.cpp"
+	at line 14, column 5: 
+
+
+%E [LWCPP-301] Unsupported construct (template class): template < unsigned N > struct ap_uint {unsigned vec [ N ];};
+	 in file "/curr/bryant/dev/merlcc/trunk/source-opt/tools/lower_cpp/test/unsupported-00.cpp"
+	at line 19, column 1: 
+
+Internal error.std::exception

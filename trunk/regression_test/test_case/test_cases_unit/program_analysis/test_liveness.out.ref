@@ -1,0 +1,40 @@
+
+int func(int *a,int aa)
+{
+  return  *a + aa;
+}
+
+void func2(int a[100])
+{
+}
+int g_asdf = 0;
+
+int main()
+{
+  int c[10];
+{
+    int _i0;
+    for (_i0 = 0; _i0 <= 9UL; ++_i0) {
+      int c_tmp = 0;
+      c[_i0] = c_tmp;
+    }
+  }
+  int a = 0 + c[2];
+  int b = a + 2;
+  int aa[100];
+  int cc[100];
+  func2(aa);
+  func(&cc[0],b);
+  a = 1 + g_asdf;
+  for (int i = 0; i < 100; i++) {
+    int d;
+//test case for bug155
+    c[i] = a;
+    a = 2;
+    i;
+  }
+  g_asdf = 12;
+  a = 3;
+  func(&b,a);
+  return c[0];
+}

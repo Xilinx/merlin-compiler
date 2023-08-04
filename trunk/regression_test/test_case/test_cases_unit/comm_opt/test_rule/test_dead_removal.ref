@@ -1,0 +1,40 @@
+#pragma ACCEL kernel
+
+void kernel_top(int *a)
+{
+  int i;
+  int j;
+  int k;
+  int m;
+  int i1_arr[1];
+  int i1;
+  int a0 = 10;
+  int d[100];
+  int b[100][100];
+  int c[100][100][100];
+  for (m = 1; m < 3; m++) {
+    for (k = 0; k < 5; k++) {
+      for (j = 0; j < 10; j++) {
+        for (i = 0; i < 100; i++) {
+          c[i][j][k] += 0 + 1 + 2;
+          i1_arr[0] = 10;
+        }
+      }
+    }
+  }
+  for (k = 0; k < 5; k++) {
+    for (j = 0; j < 10; j++) {
+      for (i = 0; i < 100; i++) {
+      }
+    }
+  }
+  for (i = 0; i < 100; i++) {
+    d[i] += 0 + 1 + 2 + a[i] + i1_arr[0];
+  }
+}
+
+void main()
+{
+  int *a;
+  kernel_top(a);
+}

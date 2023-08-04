@@ -1,0 +1,483 @@
+Feature FAlCON_ALTERA checked out. 
+
+[INFO] Here we enter test_stream_ir_top() 
+
+
+[INFO] Here we enter test_stream_ir_port_gen() 
+
+[MARS-IR-WARN] test_port_gen.c, line 164: Unsupported for-loop upper range in iteration domain analysis: new_base
+[MARS-IR-WARN] test_port_gen.c, line 175: No statement inside the loop. 
+[MARS-IR-WARN] test_port_gen.c, line 185: The statements in the for loop should be bracketed for analysis.
+[MARS-IR-WARN] test_port_gen.c, line 282: The statements in the for loop should be bracketed for analysis.
+[MARS-IR-WARN] test_port_gen.c, line 329: The statements in the for loop should be bracketed for analysis.
+[MARS-IR-WARN] test_port_gen.c, line 337: The statements in the for loop should be bracketed for analysis.
+[MARS-IR-WARN] test_port_gen.c, line 358: The statements in the for loop should be bracketed for analysis.
+[MARS-IR-WARN] test_port_gen.c, line 420: The statements in the for loop should be bracketed for analysis.
+[MARS-IR-WARN] test_port_gen.c, line 443: The statements in the for loop should be bracketed for analysis.
+[MARS-IR-WARN] test_port_gen.c, line 452: The statements in the for loop should be bracketed for analysis.
+[MARS-IR-WARN] test_port_gen.c, line 460: The statements in the for loop should be bracketed for analysis.
+[MARS-IR-WARN] test_port_gen.c, line 463: The statements in the for loop should be bracketed for analysis.
+[MARS-IR-WARN] test_port_gen.c, line 477: The statements in the for loop should be bracketed for analysis.
+[MARS-IR-WARN] test_port_gen.c, line 478: The statements in the for loop should be bracketed for analysis.
+[MARS-IR-WARN] test_port_gen.c, line 508: The statements in the for loop should be bracketed for analysis.
+[MARS-IR-WARN] test_port_gen.c, line 515: Unsupported for-loop upper range in iteration domain analysis: idx
+[MARS-IR-WARN] test_port_gen.c, line 529: The statements in the for loop should be bracketed for analysis.
+[MARS-IR-WARN] test_port_gen.c, line 530: Unsupported for-loop lower range in iteration domain analysis: i
+[MARS-IR-WARN] test_port_gen.c, line 530: Unsupported for-loop upper range in iteration domain analysis: 2 * i
+[MARS-IR-WARN] test_port_gen.c, line 540: Unsupported for-loop upper range in iteration domain analysis: 100 + base
+[MARS-IR-WARN] test_port_gen.c, line 554: The statements in the for loop should be bracketed for analysis.
+[print topo:]36
+[print topo:]71
+[print topo:]36
+-- Not expressible: new_base in SgAddOp:i + new_base
+StreamPort is not generated: in function test_1_3_0
+-- Variable 'new_base' in 'i + new_base' in function 'test_1_3_0' cannot be expressed by boundary scalar variable of the stream scope or loop iterators within the spawning scope
+
+
+-- Not expressible: new_base in SgAddOp:i + new_base
+StreamPort is not generated: in function test_1_3_1
+-- Variable 'new_base' in 'i + new_base' in function 'test_1_3_1' cannot be expressed by boundary scalar variable of the stream scope or loop iterators within the spawning scope
+
+
+--   step: new_base(i + new_base)->P_NULL:SgVarRefExp:base
+-- induct: new_base(i + new_base)->P_NULL:SgVarRefExp:base
+--   step: new_base(i + new_base)->P_NULL:SgVarRefExp:base
+-- induct: new_base(i + new_base)->P_NULL:SgVarRefExp:base
+-- Find a ref: a[i + new_base]
+--   step: new_base(new_base)->P_NULL:SgVarRefExp:base
+-- induct: new_base(new_base)->P_NULL:SgVarRefExp:base
+--   step: new_base(i + new_base)->P_NULL:SgVarRefExp:base
+-- induct: new_base(i + new_base)->P_NULL:SgVarRefExp:base
+--   step: x(x++)->P_NULL:SgVarRefExp:new_base
+-- induct: x(x++)->P_NULL:SgVarRefExp:new_base
+-- ref_map:
+  SgPntrArrRefExp:a[i + _base]@msm_port_a_test_1_3_1_1_0 -> SgPntrArrRefExp:a[i + new_base]@test_1_3_1_1
+** Stream port generated: msm_port_a_test_1_3_1_1_0(a,base);
+
+-- ref_map:
+  SgVarRefExp:base@msm_port_base_test_1_3_1_1_0 -> SgVarRefExp:base@test_1_3_1_1
+  SgPntrArrRefExp:a[i + _base]@msm_port_a_test_1_3_1_1_0 -> SgPntrArrRefExp:a[i + new_base]@test_1_3_1_1
+** Stream port generated: msm_port_base_test_1_3_1_1_0(_base);
+
+-- Not expressible: new_base in SgAddOp:i + new_base
+StreamPort is not generated: in function test_1_3_2
+-- Variable 'new_base' in 'i + new_base' in function 'test_1_3_2' cannot be expressed by boundary scalar variable of the stream scope or loop iterators within the spawning scope
+
+
+  ---- [GetPntr] Array ref is possibly written: a++
+StreamPort is not generated: in function test_1_3_2_1
+-- Fatal error: pntr parsing fails for array 'a' in function 'test_1_3_2_1'
+
+-- Not expressible: new_base in SgLessThanOp:i < new_base
+StreamPort is not generated: in function test_1_3_3
+-- Variable 'new_base' in 'i < new_base' in function 'test_1_3_3' cannot be expressed by boundary scalar variable of the stream scope or loop iterators within the spawning scope
+
+
+-- Not expressible: i in SgPntrArrRefExp:a[i]
+StreamPort is not generated: in function test_1_3_4
+-- Variable 'i' in 'a[i]' in function 'test_1_3_4' cannot be expressed by boundary scalar variable of the stream scope or loop iterators within the spawning scope
+
+
+-- Not expressible: a in SgPntrArrRefExp:a[i]
+StreamPort is not generated: in function test_1_3_5
+-- Variable 'a' in 'a[i]' in function 'test_1_3_5' cannot be expressed by boundary scalar variable of the stream scope or loop iterators within the spawning scope
+
+
+StreamPort is not generated: in function test_2_0_0
+-- Can not have while statment surrounding array reference 'a[i]' in function 'test_2_0_0' : while(i)a[i] = 245;
+
+StreamPort is not generated: in function test_2_0_1
+-- Can not have do-while statment surrounding array reference 'a[i]' in function 'test_2_0_1' : do {a[i];}while(i = 0);
+
+StreamPort is not generated: in function test_2_1_0
+-- Can not have goto statment in function 'test_2_1_0' : goto L_2_1_0;
+
+-- Find a ref: a[i]
+-- ref_map:
+  SgPntrArrRefExp:a[i]@msm_port_a_test_2_1_1_0 -> SgPntrArrRefExp:a[i]@test_2_1_1
+** Stream port generated: msm_port_a_test_2_1_1_0(a);
+
+-- Find a ref: a[i]
+-- ref_map:
+  SgPntrArrRefExp:a[i]@msm_port_a_test_2_1_3_0 -> SgPntrArrRefExp:a[i]@test_2_1_3
+** Stream port generated: msm_port_a_test_2_1_3_0(a);
+
+StreamPort is not generated: in function test_2_2_0
+-- Can not have continue statment in a loop surrounding array reference 'a[i]' in function 'test_2_2_0' : continue;
+-- Can not have continue statment in a loop surrounding array reference 'b[i]' in function 'test_2_2_0' : continue;
+
+StreamPort is not generated: in function test_2_2_1
+-- Can not have break statment in a loop surrounding array reference 'a[i]' in function 'test_2_2_1' : break;
+-- Can not have break statment in a loop surrounding array reference 'b[i]' in function 'test_2_2_1' : break;
+
+-- Find a ref: a[i]
+-- ref_map:
+  SgPntrArrRefExp:a[i]@msm_port_a_test_2_2_2_0 -> SgPntrArrRefExp:a[i]@test_2_2_2
+** Stream port generated: msm_port_a_test_2_2_2_0(a);
+
+-- Find a ref: b[i]
+--   step: a(a[i])->P_NULL:SgVarRefExp:a
+-- induct: a(a[i])->P_NULL:SgVarRefExp:a
+-- ref_map:
+  SgPntrArrRefExp:a[i]@msm_port_a_test_2_2_2_0 -> SgPntrArrRefExp:a[i]@test_2_2_2
+  SgPntrArrRefExp:b[i]@msm_port_b_test_2_2_2_0 -> SgPntrArrRefExp:b[i]@test_2_2_2
+** Stream port generated: msm_port_b_test_2_2_2_0(b);
+
+-- Find a ref: a[i]
+-- Find a ref: a[i + j]
+-- Find a ref: a[i]
+-- Find a ref: a[i + 2]
+-- ref_map:
+  SgPntrArrRefExp:a[i]@msm_port_a_test_2_3_0 -> SgPntrArrRefExp:a[i]@test_2_3
+  SgPntrArrRefExp:a[i + _j1]@msm_port_a_test_2_3_0 -> SgPntrArrRefExp:a[i + j]@test_2_3
+  SgPntrArrRefExp:a[i]@msm_port_a_test_2_3_0 -> SgPntrArrRefExp:a[i]@test_2_3
+  SgPntrArrRefExp:a[i + 2]@msm_port_a_test_2_3_0 -> SgPntrArrRefExp:a[i + 2]@test_2_3
+** Stream port generated: msm_port_a_test_2_3_0(a,base);
+
+-- Find a ref: b[i]
+--   step: base(_base = base)->P_NULL:SgVarRefExp:base
+-- induct: base(_base = base)->P_NULL:SgVarRefExp:base
+--   step: _base(_base == 0)->P_NULL:SgVarRefExp:base
+--   step: _base(_base == 0)->P_NULL:SgVarRefExp:base
+-- induct: _base(_base == 0)->P_NULL:SgVarRefExp:base
+--   step: a(a[i])->P_NULL:SgVarRefExp:a
+-- induct: a(a[i])->P_NULL:SgVarRefExp:a
+--   step: _base(_base == 0)->P_NULL:SgVarRefExp:base
+--   step: _base(_base == 0)->P_NULL:SgVarRefExp:base
+-- induct: _base(_base == 0)->P_NULL:SgVarRefExp:base
+--   step: a(a[i])->P_NULL:SgVarRefExp:a
+-- induct: a(a[i])->P_NULL:SgVarRefExp:a
+--   step: a(a[i + _j1])->P_NULL:SgVarRefExp:a
+-- induct: a(a[i + _j1])->P_NULL:SgVarRefExp:a
+--   step: _base(_base == 0)->P_NULL:SgVarRefExp:base
+--   step: _base(_base == 0)->P_NULL:SgVarRefExp:base
+-- induct: _base(_base == 0)->P_NULL:SgVarRefExp:base
+--   step: a(a[i])->P_NULL:SgVarRefExp:a
+-- induct: a(a[i])->P_NULL:SgVarRefExp:a
+--   step: _base(_base == 0)->P_NULL:SgVarRefExp:base
+--   step: _base(_base == 0)->P_NULL:SgVarRefExp:base
+-- induct: _base(_base == 0)->P_NULL:SgVarRefExp:base
+--   step: a(a[i + 2])->P_NULL:SgVarRefExp:a
+-- induct: a(a[i + 2])->P_NULL:SgVarRefExp:a
+-- ref_map:
+  SgPntrArrRefExp:a[i]@msm_port_a_test_2_3_0 -> SgPntrArrRefExp:a[i]@test_2_3
+  SgPntrArrRefExp:a[i + _j1]@msm_port_a_test_2_3_0 -> SgPntrArrRefExp:a[i + j]@test_2_3
+  SgPntrArrRefExp:a[i]@msm_port_a_test_2_3_0 -> SgPntrArrRefExp:a[i]@test_2_3
+  SgPntrArrRefExp:a[i + 2]@msm_port_a_test_2_3_0 -> SgPntrArrRefExp:a[i + 2]@test_2_3
+  SgPntrArrRefExp:b[i]@msm_port_b_test_2_3_0 -> SgPntrArrRefExp:b[i]@test_2_3
+** Stream port generated: msm_port_b_test_2_3_0(b,base);
+
+-- ref_map:
+  SgPntrArrRefExp:a[i]@msm_port_a_test_2_3_0 -> SgPntrArrRefExp:a[i]@test_2_3
+  SgPntrArrRefExp:a[i + _j1]@msm_port_a_test_2_3_0 -> SgPntrArrRefExp:a[i + j]@test_2_3
+  SgPntrArrRefExp:a[i]@msm_port_a_test_2_3_0 -> SgPntrArrRefExp:a[i]@test_2_3
+  SgPntrArrRefExp:a[i + 2]@msm_port_a_test_2_3_0 -> SgPntrArrRefExp:a[i + 2]@test_2_3
+  SgPntrArrRefExp:b[i]@msm_port_b_test_2_3_0 -> SgPntrArrRefExp:b[i]@test_2_3
+  SgVarRefExp:base@msm_port_base_test_2_3_0 -> SgVarRefExp:base@test_2_3
+** Stream port generated: msm_port_base_test_2_3_0(_base);
+
+StreamPort is not generated: in function test_2_4
+-- Can not have switch statment surrounding array reference 'a[i]' in function 'test_2_4' : switch(i){case 0:a[i];case 1:a[i + 1];}
+
+StreamPort is not generated: in function test_2_5_1
+-- Can not have non-canonical loop surrounding array reference 'a[i]' in function 'test_2_5_1' : for(;i < 10;i++) a[i];
+
+-- Find a ref: a[i]
+-- ref_map:
+  SgPntrArrRefExp:a[_i]@msm_port_a_test_2_5_2_0 -> SgPntrArrRefExp:a[i]@test_2_5_2
+** Stream port generated: msm_port_a_test_2_5_2_0(a);
+
+StreamPort is not generated: in function test_2_6
+-- Can not modify loop iterator in its loop body for array reference 'a[i]' in function 'test_2_6', Loop: for(i = 0;i < 10;i++) {...}
+
+-- Find a ref: a[i]
+-- ref_map:
+  SgPntrArrRefExp:a[i]@msm_port_a_test_2_7_0 -> SgPntrArrRefExp:a[i]@test_2_7
+** Stream port generated: msm_port_a_test_2_7_0(a);
+
+-- Find a ref: a[i + j]
+-- Find a ref: a[i + j + 1]
+-- Find a ref: a[i]
+-- Find a ref: a[i + j]
+-- ref_map:
+  SgPntrArrRefExp:a[_i + j]@msm_port_a_test_2_8_0 -> SgPntrArrRefExp:a[i + j]@test_2_8
+  SgPntrArrRefExp:a[_i1 + j + 1]@msm_port_a_test_2_8_0 -> SgPntrArrRefExp:a[i + j + 1]@test_2_8
+  SgPntrArrRefExp:a[_i2]@msm_port_a_test_2_8_0 -> SgPntrArrRefExp:a[i]@test_2_8
+  SgPntrArrRefExp:a[_i3 + _j]@msm_port_a_test_2_8_0 -> SgPntrArrRefExp:a[i + j]@test_2_8
+** Stream port generated: msm_port_a_test_2_8_0(a);
+
+-- Find a ref: b[i + 6]
+--   step: a(a[_i + j])->P_NULL:SgVarRefExp:a
+-- induct: a(a[_i + j])->P_NULL:SgVarRefExp:a
+--   step: a(a[_i1 + j + 1])->P_NULL:SgVarRefExp:a
+-- induct: a(a[_i1 + j + 1])->P_NULL:SgVarRefExp:a
+--   step: a(a[_i2])->P_NULL:SgVarRefExp:a
+-- induct: a(a[_i2])->P_NULL:SgVarRefExp:a
+--   step: a(a[_i3 + _j])->P_NULL:SgVarRefExp:a
+-- induct: a(a[_i3 + _j])->P_NULL:SgVarRefExp:a
+-- ref_map:
+  SgPntrArrRefExp:a[_i + j]@msm_port_a_test_2_8_0 -> SgPntrArrRefExp:a[i + j]@test_2_8
+  SgPntrArrRefExp:a[_i1 + j + 1]@msm_port_a_test_2_8_0 -> SgPntrArrRefExp:a[i + j + 1]@test_2_8
+  SgPntrArrRefExp:a[_i2]@msm_port_a_test_2_8_0 -> SgPntrArrRefExp:a[i]@test_2_8
+  SgPntrArrRefExp:a[_i3 + _j]@msm_port_a_test_2_8_0 -> SgPntrArrRefExp:a[i + j]@test_2_8
+  SgPntrArrRefExp:b[_i + 6]@msm_port_b_test_2_8_0 -> SgPntrArrRefExp:b[i + 6]@test_2_8
+** Stream port generated: msm_port_b_test_2_8_0(b);
+
+-- ref_map:
+  SgPntrArrRefExp:a[_i + j]@msm_port_a_test_2_8_0 -> SgPntrArrRefExp:a[i + j]@test_2_8
+  SgPntrArrRefExp:a[_i1 + j + 1]@msm_port_a_test_2_8_0 -> SgPntrArrRefExp:a[i + j + 1]@test_2_8
+  SgPntrArrRefExp:a[_i2]@msm_port_a_test_2_8_0 -> SgPntrArrRefExp:a[i]@test_2_8
+  SgPntrArrRefExp:a[_i3 + _j]@msm_port_a_test_2_8_0 -> SgPntrArrRefExp:a[i + j]@test_2_8
+  SgPntrArrRefExp:b[_i + 6]@msm_port_b_test_2_8_0 -> SgPntrArrRefExp:b[i + 6]@test_2_8
+  SgVarRefExp:base@msm_port_base_test_2_8_0 -> SgVarRefExp:base@test_2_8
+** Stream port generated: msm_port_base_test_2_8_0(_base);
+
+-- Find a ref: a[i + j]
+-- Find a ref: a[i + 2]
+-- ref_map:
+  SgPntrArrRefExp:a[_i + j]@msm_port_a_test_2_9_0 -> SgPntrArrRefExp:a[i + j]@test_2_9
+  SgPntrArrRefExp:a[_i1 + 2]@msm_port_a_test_2_9_0 -> SgPntrArrRefExp:a[i + 2]@test_2_9
+** Stream port generated: msm_port_a_test_2_9_0(a);
+
+-- Find a ref: a[i]
+-- Find a ref: a[i + 1]
+-- Find a ref: a[i + j]
+-- ref_map:
+  SgPntrArrRefExp:a[i]@msm_port_a_test_2_10_0 -> SgPntrArrRefExp:a[i]@test_2_10
+  SgPntrArrRefExp:a[i + 1]@msm_port_a_test_2_10_0 -> SgPntrArrRefExp:a[i + 1]@test_2_10
+  SgPntrArrRefExp:a[i + j]@msm_port_a_test_2_10_0 -> SgPntrArrRefExp:a[i + j]@test_2_10
+** Stream port generated: msm_port_a_test_2_10_0(a);
+
+-- Find a ref: b[0]
+--   step: a(a[i])->P_NULL:SgVarRefExp:a
+-- induct: a(a[i])->P_NULL:SgVarRefExp:a
+--   step: a(a[i + 1])->P_NULL:SgVarRefExp:a
+-- induct: a(a[i + 1])->P_NULL:SgVarRefExp:a
+--   step: a(a[i + j])->P_NULL:SgVarRefExp:a
+-- induct: a(a[i + j])->P_NULL:SgVarRefExp:a
+-- ref_map:
+  SgPntrArrRefExp:a[i]@msm_port_a_test_2_10_0 -> SgPntrArrRefExp:a[i]@test_2_10
+  SgPntrArrRefExp:a[i + 1]@msm_port_a_test_2_10_0 -> SgPntrArrRefExp:a[i + 1]@test_2_10
+  SgPntrArrRefExp:a[i + j]@msm_port_a_test_2_10_0 -> SgPntrArrRefExp:a[i + j]@test_2_10
+  SgPntrArrRefExp:b[0]@msm_port_b_test_2_10_0 -> SgPntrArrRefExp:b[0]@test_2_10
+** Stream port generated: msm_port_b_test_2_10_0(b);
+
+-- Find a ref: a[i]
+-- ref_map:
+  SgPntrArrRefExp:a[i]@msm_port_a_test_2_11_0 -> SgPntrArrRefExp:a[i]@test_2_11
+** Stream port generated: msm_port_a_test_2_11_0(a);
+
+-- Find a ref: a[0]
+-- Find a ref: a[1]
+-- ref_map:
+  SgPntrArrRefExp:a[0]@msm_port_a_test_2_12_0 -> SgPntrArrRefExp:a[0]@test_2_12
+  SgPntrArrRefExp:a[1]@msm_port_a_test_2_12_0 -> SgPntrArrRefExp:a[1]@test_2_12
+** Stream port generated: msm_port_a_test_2_12_0(a);
+
+--   step: a(a[0])->P_NULL:SgVarRefExp:a
+-- induct: a(a[0])->P_NULL:SgVarRefExp:a
+--   step: a(a[1])->P_NULL:SgVarRefExp:a
+-- induct: a(a[1])->P_NULL:SgVarRefExp:a
+-- ref_map:
+  SgPntrArrRefExp:a[0]@msm_port_a_test_2_12_0 -> SgPntrArrRefExp:a[0]@test_2_12
+  SgPntrArrRefExp:a[1]@msm_port_a_test_2_12_0 -> SgPntrArrRefExp:a[1]@test_2_12
+** Stream port generated: msm_port_b_test_2_12_0();
+
+-- ref_map:
+  SgPntrArrRefExp:a[0]@msm_port_a_test_2_12_0 -> SgPntrArrRefExp:a[0]@test_2_12
+  SgPntrArrRefExp:a[1]@msm_port_a_test_2_12_0 -> SgPntrArrRefExp:a[1]@test_2_12
+  SgVarRefExp:base@msm_port_base_test_2_12_0 -> SgVarRefExp:base@test_2_12
+** Stream port generated: msm_port_base_test_2_12_0(_base);
+
+-- Find a ref: a[j]
+-- Find a ref: a[i]
+-- ref_map:
+  SgPntrArrRefExp:a[_j]@msm_port_a_test_5_0_0 -> SgPntrArrRefExp:a[j]@test_5_0
+  SgPntrArrRefExp:a[i]@msm_port_a_test_5_0_0 -> SgPntrArrRefExp:a[i]@test_5_0
+** Stream port generated: msm_port_a_test_5_0_0(a,j);
+
+-- Find a ref: b[i]
+--   step: j(_j = j)->P_NULL:SgVarRefExp:j
+-- induct: j(_j = j)->P_NULL:SgVarRefExp:j
+--   step: a(a[_j])->P_NULL:SgVarRefExp:a
+-- induct: a(a[_j])->P_NULL:SgVarRefExp:a
+--   step: _j(a[_j])->P_NULL:SgVarRefExp:j
+--   step: _j(a[_j])->P_NULL:SgVarRefExp:j
+-- induct: _j(a[_j])->P_NULL:SgVarRefExp:j
+--   step: a(a[i])->P_NULL:SgVarRefExp:a
+-- induct: a(a[i])->P_NULL:SgVarRefExp:a
+-- ref_map:
+  SgPntrArrRefExp:a[_j]@msm_port_a_test_5_0_0 -> SgPntrArrRefExp:a[j]@test_5_0
+  SgPntrArrRefExp:a[i]@msm_port_a_test_5_0_0 -> SgPntrArrRefExp:a[i]@test_5_0
+  SgPntrArrRefExp:b[i]@msm_port_b_test_5_0_0 -> SgPntrArrRefExp:b[i]@test_5_0
+** Stream port generated: msm_port_b_test_5_0_0(b);
+
+-- Find a ref: c[0]
+--   step: b(b[i])->P_NULL:SgVarRefExp:b
+-- induct: b(b[i])->P_NULL:SgVarRefExp:b
+--   step: j(_j = j)->P_NULL:SgVarRefExp:j
+-- induct: j(_j = j)->P_NULL:SgVarRefExp:j
+--   step: a(a[_j])->P_NULL:SgVarRefExp:a
+-- induct: a(a[_j])->P_NULL:SgVarRefExp:a
+--   step: _j(a[_j])->P_NULL:SgVarRefExp:j
+--   step: _j(a[_j])->P_NULL:SgVarRefExp:j
+-- induct: _j(a[_j])->P_NULL:SgVarRefExp:j
+--   step: a(a[i])->P_NULL:SgVarRefExp:a
+-- induct: a(a[i])->P_NULL:SgVarRefExp:a
+-- ref_map:
+  SgPntrArrRefExp:a[_j]@msm_port_a_test_5_0_0 -> SgPntrArrRefExp:a[j]@test_5_0
+  SgPntrArrRefExp:a[i]@msm_port_a_test_5_0_0 -> SgPntrArrRefExp:a[i]@test_5_0
+  SgPntrArrRefExp:b[i]@msm_port_b_test_5_0_0 -> SgPntrArrRefExp:b[i]@test_5_0
+  SgPntrArrRefExp:c[0]@msm_port_c_test_5_0_0 -> SgPntrArrRefExp:c[0]@test_5_0
+** Stream port generated: msm_port_c_test_5_0_0(c);
+
+-- ref_map:
+  SgPntrArrRefExp:a[_j]@msm_port_a_test_5_0_0 -> SgPntrArrRefExp:a[_j]@test_5_0
+  SgPntrArrRefExp:a[i]@msm_port_a_test_5_0_0 -> SgPntrArrRefExp:a[i]@test_5_0
+  SgPntrArrRefExp:b[i]@msm_port_b_test_5_0_0 -> SgPntrArrRefExp:b[i]@test_5_0
+  SgPntrArrRefExp:c[0]@msm_port_c_test_5_0_0 -> SgPntrArrRefExp:c[0]@test_5_0
+  SgVarRefExp:j@msm_port_j_test_5_0_0 -> SgVarRefExp:j@test_5_0
+** Stream port generated: msm_port_j_test_5_0_0(_j);
+
+-- Find a ref: a[j]
+-- Find a ref: a[i]
+-- Find a ref: a[j]
+-- Find a ref: a[j + 2]
+-- ref_map:
+  SgPntrArrRefExp:a[_j]@msm_port_a_test_5_1_0 -> SgPntrArrRefExp:a[j]@test_5_1
+  SgPntrArrRefExp:a[i]@msm_port_a_test_5_1_0 -> SgPntrArrRefExp:a[i]@test_5_1
+  SgPntrArrRefExp:a[_j]@msm_port_a_test_5_1_0 -> SgPntrArrRefExp:a[j]@test_5_1
+  SgPntrArrRefExp:a[_j + 2]@msm_port_a_test_5_1_0 -> SgPntrArrRefExp:a[j + 2]@test_5_1
+** Stream port generated: msm_port_a_test_5_1_0(a,j);
+
+-- ref_map:
+  SgPntrArrRefExp:a[_j]@msm_port_a_test_5_1_0 -> SgPntrArrRefExp:a[_j]@test_5_1
+  SgPntrArrRefExp:a[i]@msm_port_a_test_5_1_0 -> SgPntrArrRefExp:a[i]@test_5_1
+  SgPntrArrRefExp:a[_j]@msm_port_a_test_5_1_0 -> SgPntrArrRefExp:a[_j]@test_5_1
+  SgPntrArrRefExp:a[_j + 2]@msm_port_a_test_5_1_0 -> SgPntrArrRefExp:a[_j + 2]@test_5_1
+  SgVarRefExp:j@msm_port_j_test_5_1_0 -> SgVarRefExp:j@test_5_1
+** Stream port generated: msm_port_j_test_5_1_0(_j);
+
+StreamPort is not generated: in function test_5_1_2
+-- Variable 'a' in function 'test_5_1_2' cannot have both read and write accesses
+
+
+--   step: a(a[i])->P_NULL:SgPntrArrRefExp:a[j]
+-- induct: a(a[i])->P_NULL:SgPntrArrRefExp:a[j]
+--   step: a(a[i])->P_NULL:SgPntrArrRefExp:a[j]
+-- induct: a(a[i])->P_NULL:SgPntrArrRefExp:a[j]
+-- Find a ref: a[j]
+-- Find a ref: a[i][j]
+--   step: a(a[i])->P_NULL:SgPntrArrRefExp:a[j]
+-- induct: a(a[i])->P_NULL:SgPntrArrRefExp:a[j]
+-- ref_map:
+  SgPntrArrRefExp:a[_j][i][j]@msm_port_a_test_5_4_0 -> SgPntrArrRefExp:a[i][j]@sub_5_4
+** Stream port generated: msm_port_a_test_5_4_0(a,j);
+
+-- Find a ref: b[j][j]
+--   step: a(a[i])->P_NULL:SgPntrArrRefExp:a[j]
+-- induct: a(a[i])->P_NULL:SgPntrArrRefExp:a[j]
+--   step: j(_j = j)->P_NULL:SgVarRefExp:j
+-- induct: j(_j = j)->P_NULL:SgVarRefExp:j
+--   step: a(a[_j])->P_NULL:SgVarRefExp:a
+-- induct: a(a[_j])->P_NULL:SgVarRefExp:a
+--   step: _j(a[_j])->P_NULL:SgVarRefExp:j
+--   step: _j(a[_j])->P_NULL:SgVarRefExp:j
+-- induct: _j(a[_j])->P_NULL:SgVarRefExp:j
+-- ref_map:
+  SgPntrArrRefExp:a[_j][i][j]@msm_port_a_test_5_4_0 -> SgPntrArrRefExp:a[i][j]@sub_5_4
+  SgPntrArrRefExp:b[_j][_j]@msm_port_b_test_5_4_0 -> SgPntrArrRefExp:b[j][j]@test_5_4
+** Stream port generated: msm_port_b_test_5_4_0(b,j);
+
+-- ref_map:
+  SgPntrArrRefExp:a[_j][i][j]@msm_port_a_test_5_4_0 -> SgPntrArrRefExp:a[i][j]@sub_5_4
+  SgPntrArrRefExp:b[_j][_j]@msm_port_b_test_5_4_0 -> SgPntrArrRefExp:b[_j][_j]@test_5_4
+  SgVarRefExp:j@msm_port_j_test_5_4_0 -> SgVarRefExp:j@test_5_4
+** Stream port generated: msm_port_j_test_5_4_0(_j);
+
+StreamPort is not generated: in function test_5_10
+-- Can not have while statment surrounding array reference 'a[0]' in function 'test_5_10' : while(1)a[0];
+
+-- Find a ref: a[i]
+-- ref_map:
+  SgPntrArrRefExp:a[i]@msm_port_a_org_test_0_0 -> SgPntrArrRefExp:a[i]@org_test_0
+** Stream port generated: msm_port_a_org_test_0_0(a);
+
+--   step: idx(j < idx)->P_NULL:SgAddOp:i + 3
+-- induct: idx(j < idx)->P_NULL:SgAddOp:3 + i
+--   step: aa(aa[idx - j])->P_NULL:SgAddOp:a + i * i
+-- induct: aa(aa[idx - j])->P_NULL:SgAddOp:i * i + a
+--   step: idx(idx - j)->P_NULL:SgAddOp:i + 3
+-- induct: idx(idx - j)->P_NULL:SgAddOp:3 + i
+--   step: offset(i + j + base + offset)->P_NULL:SgAddOp:100 + o
+--   step: offset(i + j + base + offset)->P_NULL:SgAddOp:100 + 2
+-- induct: offset(i + j + base + offset)->P_NULL:SgIntVal:102
+--   step: idx(j < idx)->P_NULL:SgAddOp:i + 3
+-- induct: idx(j < idx)->P_NULL:SgAddOp:3 + i
+--   step: aa(aa[idx - j])->P_NULL:SgAddOp:a + i * i
+-- induct: aa(aa[idx - j])->P_NULL:SgAddOp:i * i + a
+--   step: idx(idx - j)->P_NULL:SgAddOp:i + 3
+-- induct: idx(idx - j)->P_NULL:SgAddOp:3 + i
+--   step: offset(i + j + base + offset)->P_NULL:SgAddOp:100 + o
+--   step: offset(i + j + base + offset)->P_NULL:SgAddOp:100 + 2
+-- induct: offset(i + j + base + offset)->P_NULL:SgIntVal:102
+-- Find a ref: a[i + j + base + offset]
+-- Find a ref: a + i * i
+-- Find a ref: aa[idx - j]
+--   step: o(100 + o)->P_NULL:SgIntVal:2
+-- induct: o(100 + o)->P_NULL:SgIntVal:2
+--   step: offset(i + j + base + offset)->P_NULL:SgAddOp:100 + o
+--   step: offset(i + j + base + offset)->P_NULL:SgAddOp:100 + 2
+-- induct: offset(i + j + base + offset)->P_NULL:SgIntVal:102
+--   step: idx(j < idx)->P_NULL:SgAddOp:i + 3
+-- induct: idx(j < idx)->P_NULL:SgAddOp:3 + i
+--   step: aa(aa[idx - j])->P_NULL:SgAddOp:a + i * i
+-- induct: aa(aa[idx - j])->P_NULL:SgAddOp:i * i + a
+--   step: idx(idx - j)->P_NULL:SgAddOp:i + 3
+-- induct: idx(idx - j)->P_NULL:SgAddOp:3 + i
+-- ref_map:
+  SgPntrArrRefExp:(i * i + a)[3 + i - _j]@msm_port_a_org_test_1_0 -> SgPntrArrRefExp:aa[idx - j]@sub_func
+  SgPntrArrRefExp:a[_i + _j1 + _base + 102]@msm_port_a_org_test_1_0 -> SgPntrArrRefExp:a[i + j + base + offset]@org_test_1
+** Stream port generated: msm_port_a_org_test_1_0(a,base);
+
+-- ref_map:
+  SgPntrArrRefExp:(i * i + a)[3 + i - _j]@msm_port_a_org_test_1_0 -> SgPntrArrRefExp:aa[idx - j]@sub_func
+  SgPntrArrRefExp:a[_i + _j1 + _base + 102]@msm_port_a_org_test_1_0 -> SgPntrArrRefExp:a[i + j + _base + offset]@org_test_1
+  SgVarRefExp:base@msm_port_base_org_test_1_0 -> SgVarRefExp:base@org_test_1
+** Stream port generated: msm_port_base_org_test_1_0(_base);
+
+--   step: a(a[i])->P_NULL:SgVarRefExp:a
+-- induct: a(a[i])->P_NULL:SgVarRefExp:a
+--   step: i(a[i])->P_NULL:SgVarRefExp:i
+-- induct: i(a[i])->P_NULL:SgVarRefExp:i
+--   step: a(a[i])->P_NULL:SgVarRefExp:a
+-- induct: a(a[i])->P_NULL:SgVarRefExp:a
+--   step: i(a[i])->P_NULL:SgVarRefExp:i
+-- induct: i(a[i])->P_NULL:SgVarRefExp:i
+-- Find a ref: a
+-- Find a ref: a[i]
+--   step: a(a[i])->P_NULL:SgVarRefExp:a
+-- induct: a(a[i])->P_NULL:SgVarRefExp:a
+--   step: i(a[i])->P_NULL:SgVarRefExp:i
+-- induct: i(a[i])->P_NULL:SgVarRefExp:i
+-- ref_map:
+  SgPntrArrRefExp:a[i]@msm_port_a_org_test_2_0 -> SgPntrArrRefExp:a[i]@sub_2
+** Stream port generated: msm_port_a_org_test_2_0(a);
+
+--   step: b(b[i])->P_NULL:SgAddOp:a + 1
+-- induct: b(b[i])->P_NULL:SgAddOp:1 + a
+--   step: b(b[i])->P_NULL:SgAddOp:a + 1
+-- induct: b(b[i])->P_NULL:SgAddOp:1 + a
+-- Find a ref: a + 1
+-- Find a ref: b[i]
+--   step: b(b[i])->P_NULL:SgAddOp:a + 1
+-- induct: b(b[i])->P_NULL:SgAddOp:1 + a
+-- ref_map:
+  SgPntrArrRefExp:(1 + a)[_i]@msm_port_a_org_test_3_0 -> SgPntrArrRefExp:b[i]@org_test_3
+** Stream port generated: msm_port_a_org_test_3_0(a,i);
+
+-- ref_map:
+  SgPntrArrRefExp:(1 + a)[_i]@msm_port_a_org_test_3_0 -> SgPntrArrRefExp:b[_i]@org_test_3
+  SgVarRefExp:i@msm_port_i_org_test_3_0 -> SgVarRefExp:i@org_test_3
+** Stream port generated: msm_port_i_org_test_3_0(_i);
+

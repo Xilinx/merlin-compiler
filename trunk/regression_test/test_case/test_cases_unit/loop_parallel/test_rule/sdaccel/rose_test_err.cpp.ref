@@ -1,0 +1,16 @@
+#pragma ACCEL kernel
+
+void func_top_0(int A[100],int B[100],int range)
+{
+  int k;
+  int j;
+  for (k = 0; k < 100; k++) {
+    for (j = 0; j < range; j++) 
+// Original: #pragma ACCEL parallel complete
+{
+      
+#pragma HLS unroll
+      A[j] = B[j + 1] + B[j];
+    }
+  }
+}

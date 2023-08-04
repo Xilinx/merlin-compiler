@@ -1,0 +1,16 @@
+
+ERROR: [INFTF-306] Found multiple interface pragmas for port 'a' (add_test10.c:2)
+:
+#pragma ACCEL interface variable=a depth=100 (add_test10.c:3)
+#pragma ACCEL interface variable=a depth=100 (add_test10.c:4)
+  Hint: please try to merge them into one single pragma
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'a' (add_test10.c:2)
+
+ERROR: [INFTF-307] Found incorrect depth info '10,20' for port 'b' (add_test10.c:2)
+with dimension size 1
+
+ERROR: [INFTF-308] Found incorrect max_depth info '10,20'for port 'b' (add_test10.c:2)
+with dimension size 1
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'b' (add_test10.c:2)

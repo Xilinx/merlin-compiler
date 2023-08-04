@@ -1,0 +1,1 @@
+INFO: [LINEBUF-101] Applying line buffer on variable 'in' in loop 'L_0_0' (conv1d5x1.cpp:9) with a 1x5 stencil

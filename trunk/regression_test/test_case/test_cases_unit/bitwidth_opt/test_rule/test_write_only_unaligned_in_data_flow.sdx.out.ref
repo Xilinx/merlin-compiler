@@ -1,0 +1,15 @@
+#include<string.h>
+
+void sub(int *a)
+{
+  int a_buf[1001];
+  memcpy(a,a_buf,sizeof(int ) * 1001);
+}
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+  
+#pragma HLS dataflow
+  sub(a);
+}

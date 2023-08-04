@@ -1,0 +1,4 @@
+F_0 (name:test, CYCLE_UNIT:30)
+L_0 (name:loop1, CYCLE_UNIT:30, flatten:yes, trip-count:10)
+    L_0_1 (name:loop2, CYCLE_UNIT:3, flatten:yes, flatten-id:L_0)
+        L_0_1_1 (name:loop3, CYCLE_UNIT:3)

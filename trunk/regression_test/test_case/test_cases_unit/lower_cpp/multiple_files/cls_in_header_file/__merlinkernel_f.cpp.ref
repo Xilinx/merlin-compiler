@@ -1,0 +1,23 @@
+#include "merlin_type_define.h"
+extern int __merlin_include__GB_merlin_type_define_h_0;
+int _ZN1A6s_dataE;
+
+static void p_ZN1A3addEv_1(struct A *this_)
+{
+  this_ -> data++;
+  _ZN1A6s_dataE++;
+}
+
+static void p_ZN1A4addxEv_1(struct A *this_)
+{
+  this_ -> data++;
+  _ZN1A6s_dataE++;
+}
+#pragma ACCEL kernel
+
+void f()
+{
+  struct A a;
+  p_ZN1A3addEv_1(&a);
+  p_ZN1A4addxEv_1(&a);
+}

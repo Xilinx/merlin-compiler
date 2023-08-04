@@ -1,0 +1,24 @@
+
+ERROR: [PROCS-353] The argument 'a' contains long long type not supported by OpenCL standard(unsigned long long)
+
+ERROR: [PROCS-353] The argument 'b' contains long long type not supported by OpenCL standard(long long)
+
+ERROR: [PROCS-353] The argument 'c' contains long long type not supported by OpenCL standard(signed long long x;)
+
+ERROR: [PROCS-369] Find name "long long" in void top(unsigned long long * a,long long * b,st * c) {...}(test_unsupported_type.c:5) which conflict with OpenCL key word.
+
+ERROR: [PROCS-372] Expression 'c[i] . x =(a[i] + b[i])' (test_unsupported_type.c:7) with 'long long' type is not supported
+
+ERROR: [PROCS-372] Expression 'c[i] . x' (test_unsupported_type.c:7) with 'long long' type is not supported
+
+ERROR: [PROCS-372] Expression 'x' (test_unsupported_type.c:7) with 'long long' type is not supported
+
+ERROR: [PROCS-372] Expression '(a[i] + b[i])' (test_unsupported_type.c:7) with 'long long' type is not supported
+
+ERROR: [PROCS-372] Expression 'a[i]' (test_unsupported_type.c:7) with 'long long' type is not supported
+
+ERROR: [PROCS-372] Expression 'a' (test_unsupported_type.c:7) with 'long long' type is not supported
+
+ERROR: [PROCS-372] Expression 'b[i]' (test_unsupported_type.c:7) with 'long long' type is not supported
+
+ERROR: [PROCS-372] Expression 'b' (test_unsupported_type.c:7) with 'long long' type is not supported

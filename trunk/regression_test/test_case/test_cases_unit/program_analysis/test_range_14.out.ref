@@ -1,0 +1,24 @@
+
+void func(int M)
+{
+  int a[100];
+  int i;
+  unsigned int j;
+  for (i = 0; i < 100; ++i) {
+    unsigned int index = 100 + 4294967295u * i;
+    a[index] = i;
+  }
+  for (i = 1; i < 100; ++i) {
+    unsigned int index = i + 4294967295u;
+    a[index] = i;
+  }
+// Standardize from: for(j = 100;((int )j) >= 0;j += 4294967295u) {...}
+  for (j = 0; j <= 100U; j++) {
+    unsigned int _in_j = 100U + -1L * j;
+    a[_in_j] = _in_j;
+  }
+  j = 0U + -1L;
+  for (j = 100; j < 4294967295u; ++j) {
+    a[j - 1] = j;
+  }
+}

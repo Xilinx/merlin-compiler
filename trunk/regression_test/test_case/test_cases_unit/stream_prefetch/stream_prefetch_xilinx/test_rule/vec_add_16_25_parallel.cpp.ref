@@ -1,0 +1,248 @@
+#include<hls_stream.h>
+//(C) Copyright 2016-2021 Xilinx, Inc.
+//All Rights Reserved.
+//
+//Licensed to the Apache Software Foundation (ASF) under one
+//or more contributor license agreements.  See the NOTICE file
+//distributed with this work for additional information
+//regarding copyright ownership.  The ASF licenses this file
+//to you under the Apache License, Version 2.0 (the
+//"License"); you may not use this file except in compliance
+//with the License.  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//Unless required by applicable law or agreed to in writing,
+//software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+//KIND, either express or implied.  See the License for the
+//specific language governing permissions and limitations
+//under the License. (edited)
+#define VEC_SIZE 10000
+#define TS 25
+extern int __merlin_include__GB_hls_stream_h_0;
+static hls::stream<int > __merlinvec_add_kernel_a_ch[16];
+static hls::stream<int > __merlinvec_add_kernel_b_ch[16];
+static hls::stream<int > __merlinvec_add_kernel_c_ch[400];
+
+void __merlinvec_add_kernel_a_streaming(int *a)
+{
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 625L; ++merlin_it_0) {
+    
+#pragma ACCEL pipeline
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 16; ++merlin_it_1) {
+      
+#pragma ACCEL parallel
+      int merlin_tmp_2;
+      merlin_tmp_2 = a[0 + merlin_it_0 * 16 + merlin_it_1];
+      __merlinvec_add_kernel_a_ch[merlin_it_1] .  write (merlin_tmp_2);
+    }
+  }
+}
+
+void __merlinvec_add_kernel_b_streaming(int *b)
+{
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 625L; ++merlin_it_0) {
+    
+#pragma ACCEL pipeline
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 16; ++merlin_it_1) {
+      
+#pragma ACCEL parallel
+      int merlin_tmp_2;
+      merlin_tmp_2 = b[0 + merlin_it_0 * 16 + merlin_it_1];
+      __merlinvec_add_kernel_b_ch[merlin_it_1] .  write (merlin_tmp_2);
+    }
+  }
+}
+
+void __merlinvec_add_kernel_c_streaming(int *c)
+{
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 625L; ++merlin_it_0) {
+    
+#pragma ACCEL pipeline
+    long merlin_it_0_mod = merlin_it_0 % 25;
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 16; ++merlin_it_1) {
+      
+#pragma ACCEL parallel
+      int merlin_tmp_2;
+      if (merlin_it_0_mod == 0) {
+        merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 0] .  read ();
+      }
+       else {
+        if (merlin_it_0_mod == 1) {
+          merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 16] .  read ();
+        }
+         else {
+          if (merlin_it_0_mod == 2) {
+            merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 32] .  read ();
+          }
+           else {
+            if (merlin_it_0_mod == 3) {
+              merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 48] .  read ();
+            }
+             else {
+              if (merlin_it_0_mod == 4) {
+                merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 64] .  read ();
+              }
+               else {
+                if (merlin_it_0_mod == 5) {
+                  merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 80] .  read ();
+                }
+                 else {
+                  if (merlin_it_0_mod == 6) {
+                    merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 96] .  read ();
+                  }
+                   else {
+                    if (merlin_it_0_mod == 7) {
+                      merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 112] .  read ();
+                    }
+                     else {
+                      if (merlin_it_0_mod == 8) {
+                        merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 128] .  read ();
+                      }
+                       else {
+                        if (merlin_it_0_mod == 9) {
+                          merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 144] .  read ();
+                        }
+                         else {
+                          if (merlin_it_0_mod == 10) {
+                            merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 160] .  read ();
+                          }
+                           else {
+                            if (merlin_it_0_mod == 11) {
+                              merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 176] .  read ();
+                            }
+                             else {
+                              if (merlin_it_0_mod == 12) {
+                                merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 192] .  read ();
+                              }
+                               else {
+                                if (merlin_it_0_mod == 13) {
+                                  merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 208] .  read ();
+                                }
+                                 else {
+                                  if (merlin_it_0_mod == 14) {
+                                    merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 224] .  read ();
+                                  }
+                                   else {
+                                    if (merlin_it_0_mod == 15) {
+                                      merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 240] .  read ();
+                                    }
+                                     else {
+                                      if (merlin_it_0_mod == 16) {
+                                        merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 256] .  read ();
+                                      }
+                                       else {
+                                        if (merlin_it_0_mod == 17) {
+                                          merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 272] .  read ();
+                                        }
+                                         else {
+                                          if (merlin_it_0_mod == 18) {
+                                            merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 288] .  read ();
+                                          }
+                                           else {
+                                            if (merlin_it_0_mod == 19) {
+                                              merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 304] .  read ();
+                                            }
+                                             else {
+                                              if (merlin_it_0_mod == 20) {
+                                                merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 320] .  read ();
+                                              }
+                                               else {
+                                                if (merlin_it_0_mod == 21) {
+                                                  merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 336] .  read ();
+                                                }
+                                                 else {
+                                                  if (merlin_it_0_mod == 22) {
+                                                    merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 352] .  read ();
+                                                  }
+                                                   else {
+                                                    if (merlin_it_0_mod == 23) {
+                                                      merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 368] .  read ();
+                                                    }
+                                                     else {
+                                                      merlin_tmp_2 = __merlinvec_add_kernel_c_ch[merlin_it_1 + 384] .  read ();
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      c[0 + merlin_it_0 * 16 + merlin_it_1] = merlin_tmp_2;
+    }
+  }
+}
+
+void __merlinvec_add_kernel_computation(int *a,int *b,int *c,int inc)
+{
+  
+#pragma HLS inline off
+  int j;
+  int j0;
+  int j1;
+  int jj;
+  for (j0 = 0; j0 < 10000 / 25 / 16; j0++) 
+    for (j1 = 0; j1 < 16; j1++) {
+      
+#pragma ACCEL parallel
+      for (jj = 0; jj < 25; jj++) {
+        
+#pragma ACCEL parallel
+        j = j0 * 25 * 16 + j1 * 25 + jj;
+        __merlinvec_add_kernel_c_ch[jj + j1 * 25L] .  write ((__merlinvec_add_kernel_a_ch[(jj + j1 * 25L) % 16] .  read () + __merlinvec_add_kernel_b_ch[(jj + j1 * 25L) % 16] .  read () + inc));
+      }
+    }
+}
+#pragma ACCEL kernel name="vec_add_kernel"
+
+void vec_add_kernel(int *a,int *b,int *c,int inc)
+{
+  
+#pragma ACCEL interface variable=a depth=10000 BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=512
+  
+#pragma ACCEL interface variable=b depth=10000 BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=512
+  
+#pragma ACCEL interface variable=c depth=10000 BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=512
+  
+#pragma HLS dataflow
+  
+#pragma HLS stream variable=__merlinvec_add_kernel_a_ch
+  __merlinvec_add_kernel_a_streaming(a);
+  
+#pragma HLS stream variable=__merlinvec_add_kernel_b_ch
+  __merlinvec_add_kernel_b_streaming(b);
+  __merlinvec_add_kernel_computation(0,0,0,inc);
+  
+#pragma HLS stream variable=__merlinvec_add_kernel_c_ch
+  __merlinvec_add_kernel_c_streaming(c);
+}

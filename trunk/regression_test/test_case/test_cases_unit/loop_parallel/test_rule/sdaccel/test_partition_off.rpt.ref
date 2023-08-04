@@ -1,0 +1,6 @@
+INFO: [FGPIP-102] Loop 'i' (test_partition_off.cpp:6) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_partition_off.cpp:13) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_partition_off.cpp:25) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_partition_off.cpp:28) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_partition_off.cpp:35) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_partition_off.cpp:38) is fully parallelized

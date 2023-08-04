@@ -1,0 +1,250 @@
+<system>
+	<task_def name="top__">
+		<iteration_domain_def name="unmaned_graph0_set">
+			<expression opcode="<=">
+				<integer>0</integer>
+				<integer>1</integer>
+			</expression>
+		</iteration_domain_def>
+		<task_def name="unmaned_graph0">
+			<domain_ref name="unmaned_graph0_set"></domain_ref>
+			<attribute name="order">
+				<string>1</string>
+			</attribute>
+			<attribute name="condition_vector">
+				<string>1</string>
+			</attribute>
+			<attribute name="name">
+				<string>unmaned_graph0</string>
+			</attribute>
+			<attribute name="order_vector">
+				<string>1</string>
+			</attribute>
+			<attribute name="type">
+				<string>graph</string>
+			</attribute>
+			<attribute name="module_type">
+				<identifier>wrapper</identifier>
+			</attribute>
+		</task_def>
+		<iteration_domain_def name="unmaned_task1_set">
+			<expression opcode="<=">
+				<integer>0</integer>
+				<integer>1</integer>
+			</expression>
+		</iteration_domain_def>
+		<task_def name="unmaned_task1">
+			<domain_ref name="unmaned_task1_set"></domain_ref>
+			<attribute name="order">
+				<string>1</string>
+			</attribute>
+			<attribute name="condition_vector">
+				<string>1</string>
+			</attribute>
+			<attribute name="graph_name">
+				<string>unmaned_graph0</string>
+			</attribute>
+			<attribute name="kernel_name">
+				<string>test_kernel</string>
+			</attribute>
+			<attribute name="name">
+				<string>unmaned_task1</string>
+			</attribute>
+			<attribute name="order_vector">
+				<string>1</string>
+			</attribute>
+			<attribute name="type">
+				<string>task</string>
+			</attribute>
+			<attribute name="module_type">
+				<identifier>wrapper</identifier>
+			</attribute>
+		</task_def>
+		<connect_list>
+			<connect>
+				<data_ref name="burst_length">
+					<attribute name="name">
+						<identifier>burst_length</identifier>
+					</attribute>
+					<attribute name="access_pattern">
+						<string>r:</string>
+					</attribute>
+					<attribute name="actual_argument">
+						<string>burst_length</string>
+					</attribute>
+					<attribute name="array_dim">
+						<string>1</string>
+					</attribute>
+					<attribute name="condition_vector">
+						<string>1</string>
+					</attribute>
+					<attribute name="data_bitwidth">
+						<string>32</string>
+					</attribute>
+					<attribute name="data_bitwidth_kernel">
+						<string>32</string>
+					</attribute>
+					<attribute name="data_size_in_byte">
+						<string>4</string>
+					</attribute>
+					<attribute name="data_type">
+						<string>int</string>
+					</attribute>
+					<attribute name="formal_argument">
+						<string>burst_length</string>
+					</attribute>
+					<attribute name="func_arg_idx">
+						<string>0</string>
+					</attribute>
+					<attribute name="func_arg_name">
+						<string>burst_length</string>
+					</attribute>
+					<attribute name="func_name">
+						<string>unmaned_task1</string>
+					</attribute>
+					<attribute name="max_depth">
+						<string>1</string>
+					</attribute>
+					<attribute name="order_vector">
+						<string>1</string>
+					</attribute>
+					<attribute name="port_type">
+						<string>param</string>
+					</attribute>
+					<attribute name="ref_name">
+						<string>burst_length_0</string>
+					</attribute>
+					<attribute name="type">
+						<string>access</string>
+					</attribute>
+				</data_ref>
+				<task_ref name="unmaned_task1"></task_ref>
+				<direction>in</direction>
+			</connect>
+		</connect_list>
+		<connect_list>
+			<connect>
+				<data_ref name="burst_number">
+					<attribute name="name">
+						<identifier>burst_number</identifier>
+					</attribute>
+					<attribute name="access_pattern">
+						<string>r:</string>
+					</attribute>
+					<attribute name="actual_argument">
+						<string>burst_number</string>
+					</attribute>
+					<attribute name="array_dim">
+						<string>1</string>
+					</attribute>
+					<attribute name="condition_vector">
+						<string>1</string>
+					</attribute>
+					<attribute name="data_bitwidth">
+						<string>32</string>
+					</attribute>
+					<attribute name="data_bitwidth_kernel">
+						<string>32</string>
+					</attribute>
+					<attribute name="data_size_in_byte">
+						<string>4</string>
+					</attribute>
+					<attribute name="data_type">
+						<string>int</string>
+					</attribute>
+					<attribute name="formal_argument">
+						<string>burst_number</string>
+					</attribute>
+					<attribute name="func_arg_idx">
+						<string>1</string>
+					</attribute>
+					<attribute name="func_arg_name">
+						<string>burst_number</string>
+					</attribute>
+					<attribute name="func_name">
+						<string>unmaned_task1</string>
+					</attribute>
+					<attribute name="max_depth">
+						<string>1</string>
+					</attribute>
+					<attribute name="order_vector">
+						<string>1</string>
+					</attribute>
+					<attribute name="port_type">
+						<string>param</string>
+					</attribute>
+					<attribute name="ref_name">
+						<string>burst_number_0</string>
+					</attribute>
+					<attribute name="type">
+						<string>access</string>
+					</attribute>
+				</data_ref>
+				<task_ref name="unmaned_task1"></task_ref>
+				<direction>in</direction>
+			</connect>
+		</connect_list>
+		<connect_list>
+			<connect>
+				<data_ref name="a">
+					<attribute name="name">
+						<identifier>a</identifier>
+					</attribute>
+					<attribute name="access_pattern">
+						<string>r:</string>
+					</attribute>
+					<attribute name="actual_argument">
+						<string>__m_a</string>
+					</attribute>
+					<attribute name="array_dim">
+						<string>10000</string>
+					</attribute>
+					<attribute name="condition_vector">
+						<string>1</string>
+					</attribute>
+					<attribute name="data_bitwidth">
+						<string>32</string>
+					</attribute>
+					<attribute name="data_bitwidth_kernel">
+						<string>32</string>
+					</attribute>
+					<attribute name="data_size_in_byte">
+						<string>40000</string>
+					</attribute>
+					<attribute name="data_type">
+						<string>int</string>
+					</attribute>
+					<attribute name="formal_argument">
+						<string>a</string>
+					</attribute>
+					<attribute name="func_arg_idx">
+						<string>2</string>
+					</attribute>
+					<attribute name="func_arg_name">
+						<string>a</string>
+					</attribute>
+					<attribute name="func_name">
+						<string>unmaned_task1</string>
+					</attribute>
+					<attribute name="max_depth">
+						<string>10000</string>
+					</attribute>
+					<attribute name="order_vector">
+						<string>1</string>
+					</attribute>
+					<attribute name="port_type">
+						<string>bus_e1</string>
+					</attribute>
+					<attribute name="ref_name">
+						<string>a_0</string>
+					</attribute>
+					<attribute name="type">
+						<string>access</string>
+					</attribute>
+				</data_ref>
+				<task_ref name="unmaned_task1"></task_ref>
+				<direction>in</direction>
+			</connect>
+		</connect_list>
+	</task_def>
+</system>

@@ -1,0 +1,26 @@
+
+struct A 
+{
+  int a;
+}
+;
+
+struct ::B 
+{
+  struct A A;
+  int b;
+}
+;
+
+int p_ZN1B1fEv(struct B *this_)
+{
+  return (&this_ -> A) -> a + this_ -> b;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_B_();
+#pragma ACCEL kernel
+
+void k()
+{
+  struct B bo;
+  bo . b += bo . A . a;
+}

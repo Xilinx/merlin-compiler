@@ -1,0 +1,7 @@
+src:
+    #original C test design
+    burst read a serial of data with multiple iterations
+
+test.sh:
+     #test different burst length to transfer 1G bytes data
+     test.sh project_bit.exe kernel_top.xclbin

@@ -1,0 +1,101 @@
+[Intel Auto Register Attribute] started ... 
+ -- Find a FG-parallel loop: (L:16) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:23) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:31) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:39) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:47) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:55) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:63) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:71) for(int i = 0;i < 16;i++) {...}
+ -- auto_register: test1_1_a P_nullptr:SgArrayType:int [16]
+ ++ skip: test1_1_a1 due to No parallel dim 'SgInitializedName:test1_1_a1' line=22
+ -- auto_register: test1_1_b P_nullptr:SgArrayType:int [16]
+ -- auto_register: test1_1_c P_nullptr:SgArrayType:int [16]
+ -- auto_register: test1_1_d P_nullptr:SgArrayType:int [16]
+ -- auto_register: test1_1_e P_nullptr:SgArrayType:int [16]
+ ++ skip: test1_1_f due to Total size is too big 1024 'SgInitializedName:test1_1_f' line=62
+ ++ skip: test1_1_g due to Total size is too big 1024 'SgInitializedName:test1_1_g' line=70
+ -- Find a FG-parallel loop: (L:83) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:90) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:97) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:104) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:111) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:118) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:125) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:132) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:139) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:146) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:153) for(int i = 0;i < 16;i++) {...}
+ ++ skip: test1_2_a due to Total size is too big 4096 'SgInitializedName:test1_2_a' line=82
+ ++ skip: test1_2_a1 due to Total size is too big 4104 'SgInitializedName:test1_2_a1' line=89
+ ++ skip: test1_2_a2 due to Total size is too big 4096 'SgInitializedName:test1_2_a2' line=96
+ ++ skip: test1_2_c due to Total size is too big 4096 'SgInitializedName:test1_2_c' line=110
+ ++ skip: test1_2_c1 due to Total size is too big 4112 'SgInitializedName:test1_2_c1' line=117
+ ++ skip: test1_2_d due to Total size is too big 4096 'SgInitializedName:test1_2_d' line=124
+ ++ skip: test1_2_d1 due to Total size is too big 4160 'SgInitializedName:test1_2_d1' line=131
+ ++ skip: test1_2_e due to Total size is too big 4096 'SgInitializedName:test1_2_e' line=138
+ ++ skip: test1_2_e1 due to Total size is too big 4112 'SgInitializedName:test1_2_e1' line=145
+ ++ skip: test1_2_f due to Total size is too big 4096 'SgInitializedName:test1_2_f' line=152
+ -- Find a FG-parallel loop: (L:163) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:171) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:179) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:187) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:196) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:205) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:213) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:222) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:231) for(int i = 0;i < 16;i++) {...}
+ ++ skip: test1_3_a due to Total size is too big 4096 'SgInitializedName:test1_3_a' line=162
+ ++ skip: test1_3_b due to Total size is too big 4096 'SgInitializedName:test1_3_b' line=169
+ ++ skip: test1_3_c due to Total size is too big 4096 'SgInitializedName:test1_3_c' line=178
+ ++ skip: test1_3_d due to Total size is too big 4096 'SgInitializedName:test1_3_d' line=186
+ ++ skip: test1_3_e due to Total size is too big 4096 'SgInitializedName:test1_3_e' line=195
+ ++ skip: test1_3_f due to Total size is too big 4096 'SgInitializedName:test1_3_f' line=204
+ ++ skip: test1_3_g due to Total size is too big 4096 'SgInitializedName:test1_3_g' line=212
+ ++ skip: test1_3_h due to Total size is too big 4096 'SgInitializedName:test1_3_h' line=220
+ ++ skip: test1_3_h1 due to Total size is too big 4096 'SgInitializedName:test1_3_h1' line=221
+ ++ skip: test1_3_i due to Total size is too big 4096 'SgInitializedName:test1_3_i' line=229
+ -- Find a FG-parallel loop: (L:292) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:246) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:255) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:272) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:282) for(int i = 0;i < 16;i++) {...}
+ ++ skip: test1_4_a due to Total size is too big 4096 'SgInitializedName:test1_4_a' line=291
+ ++ skip: test1_4_b due to Total size is too big 4096 'SgInitializedName:test1_4_b' line=298
+ ++ skip: test1_4_c due to Total size is too big 4096 'SgInitializedName:test1_4_c' line=301
+ ++ skip: test1_4_d due to Total size is too big 4096 'SgInitializedName:test1_4_d' line=305
+ ++ skip: test1_4_d1 due to Total size is too big 4096 'SgInitializedName:test1_4_d1' line=306
+ ++ skip: sub1_4_e due to Total size is too big 4096 'SgInitializedName:sub1_4_e' line=281
+ -- Find a FG-parallel loop: (L:339) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:347) for(int i = 0;i < 16;i++) {...}
+ ++ skip: test2_1_a due to Total size is too big 4096 'SgInitializedName:test2_1_a' line=316
+ ++ skip: test2_1_b due to Total size is too big 4096 'SgInitializedName:test2_1_b' line=323
+ ++ skip: test2_1_c due to Total size is too big 4096 'SgInitializedName:test2_1_c' line=330
+ ++ skip: test2_1_d due to Total size is too big 4096 'SgInitializedName:test2_1_d' line=337
+ ++ skip: test2_1_e due to Total size is too big 4096 'SgInitializedName:test2_1_e' line=345
+ -- Find a FG-parallel loop: (L:373) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:364) for(int i = 0;i < 16;i++) {...}
+ -- Find a FG-parallel loop: (L:379) for(int i = 0;i < 16;i++) {...}
+ ++ skip: test2_2_a due to Total size is too big 4096 'SgInitializedName:test2_2_a' line=357
+ ++ skip: test2_2_a due to Total size is too big 4096 'SgInitializedName:test2_2_a' line=363
+ ++ skip: test2_2_b due to Total size is too big 4096 'SgInitializedName:test2_2_b' line=372
+ ++ skip: test2_2_b due to Total size is too big 4096 'SgInitializedName:test2_2_b' line=378
+ -- pragma: #pragma ACCEL attribute register variable=test1_1_a -> test1_1_a
+     -- Insert attributes in type test1_1_a: int [16] -> int __attribute__((register)) [16]
+ -- pragma: #pragma ACCEL attribute register variable=test1_1_b -> test1_1_b
+     -- Insert attributes in type test1_1_b: int [16] -> int __attribute__((register)) [16]
+ -- pragma: #pragma ACCEL attribute register variable=test1_1_c -> test1_1_c
+     -- Insert attributes in type test1_1_c: int [16] -> int __attribute__((register)) [16]
+ -- pragma: #pragma ACCEL attribute register variable=test1_1_d -> test1_1_d
+     -- Insert attributes in type test1_1_d: int [16] -> int __attribute__((register)) [16]
+ -- pragma: #pragma ACCEL attribute register variable=test1_1_e -> test1_1_e
+     -- Insert attributes in type test1_1_e: int [16] -> int __attribute__((register)) [16]
+ -- pragma: #pragma ACCEL attribute register variable=test2_1_a -> test2_1_a
+     -- Insert attributes in type test2_1_a: char [256][2] -> char __attribute__((register)) [256][2]
+ -- pragma: #pragma ACCEL attribute register variable=test2_1_b -> test2_1_b
+     -- Insert attributes in type test2_1_b: char [256][2] -> char __attribute__((register)) [256][2]
+ -- pragma: #pragma ACCEL attribute register variable=test2_1_c -> test2_1_c
+     -- Insert attributes in type test2_1_c: char [256][2] -> char __attribute__((register)) [256][2]
+[Intel Auto Register Attribute] started ... 
+ -- Find a FG-parallel loop: (L:11) for(int i = 0;i < 16;i++) {...}
+ ++ skip: test5_5_b due to Total size is too big 32768 'SgInitializedName:test5_5_b' line=9

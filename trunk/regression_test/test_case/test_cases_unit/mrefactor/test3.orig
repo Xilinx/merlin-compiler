@@ -1,0 +1,8 @@
+#include"test3.h"
+    int A::get() const {
+      return data[0];
+    }
+
+
+
+

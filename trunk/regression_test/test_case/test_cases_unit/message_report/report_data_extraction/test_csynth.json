@@ -1,0 +1,74 @@
+{
+    "L,aes256_encrypt_ecb_kernel-merlinL3": {
+        "II": "-", 
+        "iteration-latency": "4159", 
+        "iteration-latency-min": "6", 
+        "latency-max": "8525950", 
+        "latency-min": "12300", 
+        "name": "merlinL3", 
+        "pipelined": "no", 
+        "trip-count": "2050"
+    }, 
+    "L,test-loop 1_0": {
+        "II": "-", 
+        "iteration-latency": "4159", 
+        "iteration-latency-min": "6", 
+        "latency-max": "8525950", 
+        "latency-min": "12300", 
+        "name": "merlinL3", 
+        "pipelined": "no", 
+        "trip-count": "2050"
+    }, 
+    "L,aes256_encrypt_ecb_kernel-loop 1_1": {
+        "II": "-", 
+        "iteration-latency": "4159", 
+        "iteration-latency-min": "6", 
+        "latency-max": "8525950", 
+        "latency-min": "12300", 
+        "name": "merlinL3", 
+        "pipelined": "no", 
+        "trip-count": "2050"
+    }, 
+    "L,aes256_encrypt_ecb_kernel-loop 1_2": {
+        "II": "-", 
+        "iteration-latency": "4159", 
+        "iteration-latency-min": "6", 
+        "latency-max": "8525950", 
+        "latency-min": "12300", 
+        "name": "merlinL3", 
+        "pipelined": "no", 
+        "trip-count": "2050"
+    }, 
+    "aes256_encrypt_ecb_kernel": {
+        "interval-max": "8525994", 
+        "interval-min": "12344", 
+        "latency-max": "8525994", 
+        "latency-min": "12344", 
+        "total-BRAM": 638, 
+        "total-DSP": 0, 
+        "total-FF": 21539, 
+        "total-LUT": 68888, 
+        "total-URAM": 0, 
+        "util-BRAM": "11", 
+        "util-DSP": "0", 
+        "util-FF": "~0", 
+        "util-LUT": "3", 
+        "util-URAM": "0"
+    }, 
+    "mars_kernel_0_2": {
+        "instance_name": "grp_mars_kernel_0_2_fu_1638", 
+        "interval-max": "4157", 
+        "interval-min": "4", 
+        "latency-max": "4157", 
+        "latency-min": "4", 
+        "module_name": "mars_kernel_0_2"
+    }, 
+    "merlin_memcpy_0_0_0": {
+        "instance_name": "grp_merlin_memcpy_0_0_0_fu_2097", 
+        "interval-max": "42", 
+        "interval-min": "42", 
+        "latency-max": "42", 
+        "latency-min": "42", 
+        "module_name": "merlin_memcpy_0_0_0"
+    }
+}

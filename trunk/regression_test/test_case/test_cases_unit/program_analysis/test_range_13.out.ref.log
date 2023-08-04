@@ -1,0 +1,44 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i = 0;i < 100;++i) sub(c[i],a[i],b[i]);
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+[Exp SgPlusAssignOp:b += a] {b += a:SgPlusAssignOp b += a->1,0} : b += a..b += a, constant bound: {b += a:SgPlusAssignOp b += a->1,0} : neg_inf..pos_inf
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void sub(int & c,int & a,int & b) {...}
+  SgFunctionDeclaration void func() {...}
+  SgExprStatement sub(c[i],a[i],b[i]);
+  SgForStatement for(int i = 0;i < 100;++i) sub(c[i],a[i],b[i]);
+
+Arrays: 
+  int [100] a
+  int [100] b
+  int [100] c
+
+Ranges: 
+  SgFunctionDeclaration void sub(int & c,int & a,int & b) {...}
+  SgFunctionDeclaration void func() {...}
+    int [100] a :  R[0..99 exact]
+    int [100] b :  R[0..99 exact] W[0..99 exact]
+    intersect: 0..99 exact
+    union: 0..99 exact
+    int [100] c :  W[0..99 exact]
+  SgExprStatement sub(c[i],a[i],b[i]);
+    int [100] a :  R[i..i exact]
+    int [100] b :  R[i..i exact] W[i..i exact]
+    intersect: i..i exact
+    union: i..i exact
+    int [100] c :  W[i..i exact]
+  SgForStatement for(int i = 0;i < 100;++i) sub(c[i],a[i],b[i]);
+    int [100] a :  R[0..99 exact]
+    int [100] b :  R[0..99 exact] W[0..99 exact]
+    intersect: 0..99 exact
+    union: 0..99 exact
+    int [100] c :  W[0..99 exact]
+

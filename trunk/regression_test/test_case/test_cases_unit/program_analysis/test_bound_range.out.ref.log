@@ -1,0 +1,57 @@
+Hello Program Analysis ... 
+**** Test variable range with bound  **** 
+
+Scopes: 
+  SgFunctionDeclaration void top(int * a,int * b) {...}
+  SgBasicBlock {if(i * i < 100) {a[i] = b[i];}}
+  SgForStatement for(i = 0;i < 1000;++i) {...}
+  SgBasicBlock {a[t] = b[t];}
+  SgForStatement for(t = 0;t < 4 *((25 - 6 + 1) / 4 +(25 - 6 + 1) % 4) / 4;t++) {...}
+
+Arrays: 
+  void ** a
+  void ** a
+  const char * filename
+  void *** a
+  const char * filename
+  void **** a
+  const char * filename
+  void ** a
+  const char * filename
+  void * a
+  void ** a
+  void *** a
+  void * a
+  const char * filename
+  void ** a
+  const char * filename
+  void *** a
+  const char * filename
+  void * buffer
+  const char * file_name
+  void * buffer
+  const char * file_name
+  float * sec
+  void * a
+  void * a
+  const char * filename
+  int * a
+  int * b
+
+Ranges: 
+  SgFunctionDeclaration void top(int * a,int * b) {...}
+    int * a :  W[0..100 inexact]
+    int * b :  R[0..2000 inexact]
+  SgBasicBlock {if(i * i < 100) {a[i] = b[i];}}
+    int * a :  W[i..i inexact]
+    int * b :  R[i..i inexact]
+  SgForStatement for(i = 0;i < 1000;++i) {...}
+    int * a :  W[0..999 inexact]
+    int * b :  R[0..999 inexact]
+  SgBasicBlock {a[t] = b[t];}
+    int * a :  W[t..t exact]
+    int * b :  R[t..t exact]
+  SgForStatement for(t = 0;t < 4 *((25 - 6 + 1) / 4 +(25 - 6 + 1) % 4) / 4;t++) {...}
+    int * a :  W[0..4 exact]
+    int * b :  R[0..4 exact]
+

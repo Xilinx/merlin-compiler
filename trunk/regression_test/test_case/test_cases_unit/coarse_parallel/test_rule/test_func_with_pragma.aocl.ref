@@ -1,0 +1,89 @@
+#include "merlin_stream.h" 
+#include <string.h> 
+#include "merlin_stream.h" 
+extern int __merlin_include__GB_merlin_stream_h_0;
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static void __merlin_dummy_extern_int_merlin_include_G_();
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=32 NODE=align_kernel_fpga PORT=msm_port_profbuf_vec_data_align_kernel_fpga_0
+::merlin_stream ch_profbuf_vec_data_3;
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static const unsigned long NWORDS_PER_REG = 16;
+static const unsigned long NBYTES_PER_REG = 16;
+static const unsigned long NBYTES_PER_WORD = 1;
+
+void merlin_assign_m128i_0(unsigned char (*lhs_data)[16])
+{
+  int i_0;
+  for (i_0 = 0; i_0 < 16UL; ++i_0) {
+    unsigned char profbuf_vec_data_sn_tmp_0;
+    
+#pragma ACCEL PARALLEL COMPLETE
+    merlin_stream_read(&ch_profbuf_vec_data_3,(&profbuf_vec_data_sn_tmp_0));
+    ( *lhs_data)[i_0] = profbuf_vec_data_sn_tmp_0;
+  }
+}
+
+void msm_port_profbuf_vec_data_align_kernel_fpga_0(unsigned char *profbuf_vec_data)
+{
+  int _i_sub_4;
+  int _i_0_5;
+  for (int __i_l23_l1 = 0; __i_l23_l1 < 2500; __i_l23_l1++) {
+    
+#pragma ACCEL PARALLEL FACTOR=1
+    for (_i_sub_4 = 0; _i_sub_4 < 4; ++_i_sub_4) {
+      
+#pragma ACCEL PARALLEL
+      for (int __j_l24_l2 = 0; __j_l24_l2 < 128; __j_l24_l2++) {
+        for (_i_0_5 = 0; ((unsigned long )_i_0_5) < 16UL; ++_i_0_5) {
+          unsigned char profbuf_vec_data_sp_tmp_0;
+          
+#pragma ACCEL PARALLEL COMPLETE
+          profbuf_vec_data_sp_tmp_0 = (&profbuf_vec_data[(__i_l23_l1 * 4 + _i_sub_4) * 2048 + __j_l24_l2 * 16])[_i_0_5];
+          merlin_stream_write(&ch_profbuf_vec_data_3,(&profbuf_vec_data_sp_tmp_0));
+        }
+      }
+    }
+  }
+}
+
+void msm_node_0()
+{
+  unsigned char profbuf_data[128][16];
+  for (int __j_l24_l4 = 0; __j_l24_l4 < 128; __j_l24_l4++) {
+    merlin_assign_m128i_0(&profbuf_data[__j_l24_l4]);
+  }
+}
+#pragma ACCEL kernel
+
+void align_kernel_fpga(char rf_vec[20480000],int rf_len_vec[10000],int profbuf_size_vec[10000],unsigned char *profbuf_vec_data,long results[10000],int N)
+{
+  merlin_stream_init(&ch_profbuf_vec_data_3,0,1);
+  
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=1 NODE=align_kernel_fpga VARIABLE=profbuf_vec_data
+  msm_port_profbuf_vec_data_align_kernel_fpga_0(profbuf_vec_data);
+  int i_sub;
+  
+#pragma ACCEL INTERFACE STREAM_PREFETCH=on VARIABLE=profbuf_vec_data max_depth=1280000,16 DEPTH=1280000,16 memory_burst=off
+  
+#pragma ACCEL interface variable=rf_vec stream_prefetch=on max_depth=20480000 depth=20480000 memory_burst=off
+  
+#pragma ACCEL interface variable=rf_len_vec stream_prefetch=on max_depth=10000 depth=10000 memory_burst=off
+  
+#pragma ACCEL interface variable=profbuf_size_vec stream_prefetch=on max_depth=10000 depth=10000 memory_burst=off
+  
+#pragma ACCEL interface variable=results stream_prefetch=on max_depth=10000 depth=10000 memory_burst=off
+  for (int __i_l23_l3 = 0; __i_l23_l3 < 2500; __i_l23_l3++) {
+    
+#pragma ACCEL PARALLEL FACTOR=1
+    for (i_sub = 0; i_sub < 4; ++i_sub) {
+      
+#pragma ACCEL PARALLEL
+// Original pragma: ACCEL STREAM_NODE 
+      
+#pragma ACCEL STREAM_NODE PARALLEL_FACTOR=4 
+      msm_node_0();
+    }
+  }
+  merlin_stream_reset(&ch_profbuf_vec_data_3);
+}

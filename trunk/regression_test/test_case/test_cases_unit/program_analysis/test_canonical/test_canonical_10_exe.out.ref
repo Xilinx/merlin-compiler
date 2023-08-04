@@ -1,0 +1,49 @@
+#include<stdio.h>
+
+void foo_loop(int n)
+{
+  int a[100];
+  int k;
+  k = 0;
+// Canonicalized from: for(;k < 10;++k) {...}
+  for (k = 0; k <= 9; ++k) {
+    a[k] = k;
+    printf("index = %d\n",k);
+  }
+  k = 10;
+// Canonicalized from: for(;k >= 0;--k) {...}
+// Standardize from: for(k = 10;k >= 0;--k) {...}
+  for (k = 0; k <= 10; k++) {
+    int _in_k = 10 + -1 * k;
+    a[_in_k] = _in_k;
+    printf("index = %d\n",_in_k);
+  }
+  k = 0 + -1;
+  if (a[0] > 0) 
+    k = 10;
+   else 
+    k = 11;
+  for (; k >= 0; --k) {
+    a[k] = k;
+    printf("index = %d\n",k);
+  }
+  k = n;
+// Canonicalized from: for(;k <= 10;++k) {...}
+  for (k = n; k <= 10; ++k) {
+    a[k] = k;
+    printf("index = %d\n",k);
+  }
+// Standardize from: for(unsigned int i = 100;i >= 1;--i) {...}
+  for (unsigned int i = 0; i <= 99U; i++) {
+    unsigned int _in_i = 100U + -1 * i;
+    unsigned int ic = _in_i;
+    a[ic] = ic;
+    printf("index = %d\n",ic);
+  }
+}
+
+int main()
+{
+  foo_loop(2);
+  return 0;
+}

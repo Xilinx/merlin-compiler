@@ -1,0 +1,7 @@
+{
+    "vec_add_kernel":{
+        "2":"merlin_memcpy_0.0 ",
+        "4":"merlin_memcpy_1.0 ",
+        "10":"merlin_memcpy_2.0 "
+    }
+}

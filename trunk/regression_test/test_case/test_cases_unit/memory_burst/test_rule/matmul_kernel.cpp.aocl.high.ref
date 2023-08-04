@@ -1,0 +1,49 @@
+#include <string.h> 
+#include<assert.h>
+#define VEC_SIZE 1024
+#define TS 256
+#define aa(p, n) (a[(p)*VEC_SIZE + (n)])
+#define bb(p, n) (b[(p)*VEC_SIZE + (n)])
+#define cc(p, n) (c[(p)*VEC_SIZE + (n)])
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void matmul_kernel(float *a,float *b,float *c)
+{
+  
+#pragma ACCEL skip_sync variable=c_buf
+  
+#pragma ACCEL skip_sync variable=c
+  
+#pragma ACCEL skip_sync variable=c_buf
+  
+#pragma ACCEL skip_sync variable=c
+  float c_buf[1048576];
+  float b_buf[1048576];
+  float a_buf[1048576];
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(float ) * 1048576);
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(float ) * 1048576);
+  memcpy((void *)(&c_buf[0]),(const void *)(&c[0]),sizeof(float ) * 1048576);
+  int i;
+  int j;
+  int k;
+  int j0;
+  int jj;
+  for (k = 0; k < 1024; k++) {
+    for (i = 0; i < 1024; i++) {
+      for (j0 = 0; j0 < 1024 / 256; j0++) 
+// Original: #pragma ACCEL pipeline flatten
+{
+        
+#pragma ACCEL PIPELINE II=1
+        for (jj = 0; jj < 256; jj++) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          j = j0 * 256 + jj;
+          c_buf[i * 1024 + j0 * 256 + jj] += a_buf[k * 1024 + i] * b_buf[j0 * 256 + k * 1024 + jj];
+        }
+      }
+    }
+  }
+  memcpy((void *)(&c[0]),(const void *)(&c_buf[0]),sizeof(float ) * 1048576);
+}

@@ -1,0 +1,134 @@
+{
+    "X": {
+        "org_identifier": "X",
+        "applied_index": -1,
+        "children_num": 1,
+        "histories": [],
+        "messages": []
+    },
+    "X_0": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_1": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_1_0": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_1_0_2": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_1_0_2_2": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_1_0_2_2_0": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 15,
+        "histories": [
+            {
+                "action": 0,
+                "location": 10
+            },
+            {
+                "action": 0,
+                "location": 12
+            },
+            {
+                "action": 0,
+                "location": 11
+            },
+            {
+                "action": 0,
+                "location": 13
+            },
+            {
+                "action": 1,
+                "location": 9
+            }
+        ],
+        "messages": [
+            "Insert: SgPragmaDeclaration:#pragma cmost graph_begin\nfrom: SgExprStatement:vec_add_kernel(__m_a,__m_b,__m_c,inc);",
+            "Insert: SgPragmaDeclaration:#pragma cmost graph_end\nfrom: SgExprStatement:vec_add_kernel(__m_a,__m_b,__m_c,inc);",
+            "Insert: SgPragmaDeclaration:#pragma cmost task_begin\nfrom: SgExprStatement:vec_add_kernel(__m_a,__m_b,__m_c,inc);",
+            "Insert: SgPragmaDeclaration:#pragma cmost task_end\nfrom: SgExprStatement:vec_add_kernel(__m_a,__m_b,__m_c,inc);",
+            "Delete: SgPragmaDeclaration:#pragma ACCEL task\nfrom: SgBasicBlock:{#pragma ACCEL wrapper variable=a port=a depth=10000 max_depth=10000 data_type=int io=RO copy=false#pragma ACCEL wrapper variable=b port=b depth=10000 max_depth=10000 data_type=int io=RO copy=false#pragma ACCEL wrapper variable=c port=c depth=10000 max_depth=10000 data_type=int io=WO copy=false#pragma ACCEL wrapper variable=inc port=incstatic int __m_a[10000];static int __m_b[10000];static int __m_c[10000];{if(a != 0) {memcpy(((void *)(__m_a + 0)),((const void *)a),10000 * sizeof(int ));}else {printf(\"Error! The external memory pointed by 'a' is invalid.\\n\");exit(1);}}{if(b != 0) {memcpy(((void *)(__m_b + 0)),((const void *)b),10000 * sizeof(int ));}else {printf(\"Error! The external memory pointed by 'b' is invalid.\\n\");exit(1);}}#pragma ACCEL task#pragma cmost graph_begin#pragma cmost task_begin// #pragma ACCEL taskvec_add_kernel(__m_a,__m_b,__m_c,inc);#pragma cmost task_end#pragma cmost graph_end{if(c != 0) {memcpy(((void *)c),((const void *)(__m_c + 0)),10000 * sizeof(int ));}else {printf(\"Error! The external memory pointed by 'c' is invalid.\\n\");exit(1);}}}"
+        ]
+    },
+    "X_0_1_0_2_2_0_10": {
+        "org_identifier": "Built2",
+        "applied_index": 0,
+        "children_num": 1,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "Build an SgNode"
+        ]
+    },
+    "X_0_1_0_2_2_0_12": {
+        "org_identifier": "Built3",
+        "applied_index": 0,
+        "children_num": 1,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "Build an SgNode"
+        ]
+    },
+    "X_0_1_0_2_2_0_13": {
+        "org_identifier": "Built1",
+        "applied_index": 0,
+        "children_num": 1,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "Build an SgNode"
+        ]
+    },
+    "X_0_1_0_2_2_0_9": {
+        "org_identifier": "Built0",
+        "applied_index": 0,
+        "children_num": 1,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "Build an SgNode"
+        ]
+    }
+}

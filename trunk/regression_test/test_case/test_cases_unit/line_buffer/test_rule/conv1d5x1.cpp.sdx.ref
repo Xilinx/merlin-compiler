@@ -1,0 +1,34 @@
+#define HS 256
+#define WS 1024
+#define FW 5
+#define FH 1
+#pragma ACCEL kernel
+
+void conv1d(float in[256][1024],float filter[1][5],float out[256][1020])
+{
+  for (int i = 0; i < 256 - 1 + 1; i++) {
+    float slide_wind_0[5];
+    for (int j = -4; j < 1024 - 5 + 1; j++) {
+      
+#pragma HLS dependence variable=slide_wind_0 array inter false
+      if (j + 4L + 0L < 1024L) {
+        float tmp_wind_0;
+        int j_0;
+        for (j_0 = 1L; j_0 <= 4L; ++j_0) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0[j_0 + -1] = slide_wind_0[j_0];
+        }
+        tmp_wind_0 = in[0L + i * 1L][j + 4L + 0L];
+        slide_wind_0[4L] = tmp_wind_0;
+      }
+      if (j >= 0L && j <= 1019L) {
+        float tmp = 0.0f;
+        for (int p = 0; p < 1; p++) 
+          for (int q = 0; q < 5; q++) 
+            tmp += slide_wind_0[q + 0L] * filter[p][q];
+        out[i][j] = tmp;
+      }
+    }
+  }
+}

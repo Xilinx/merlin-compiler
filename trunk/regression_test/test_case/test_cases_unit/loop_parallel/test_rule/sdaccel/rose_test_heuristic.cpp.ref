@@ -1,0 +1,37 @@
+#include <ap_int.h>
+typedef class ap_uint< 24 > StreamType_9_name;
+typedef class ap_uint< 24 > PixelType_15_name;
+#pragma ACCEL kernel
+
+void func_top_1(int width,unsigned char out[1])
+{
+  unsigned char lut[3][256];
+  
+#pragma HLS array_partition variable=lut complete dim=1
+  StreamType_9_name val_src;
+  int k;
+  colLoop:
+  for (int j = 0; j < width; j++) 
+// Original: #pragma ACCEL PIPELINE AUTO
+{
+    
+#pragma HLS pipeline
+    
+#pragma HLS LOOP_TRIPCOUNT min=128 max=128
+    unsigned char l = (unsigned char )0;
+    int c = 0;
+    procLoop:
+    for (k = 0; k <= 2L; k++) 
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+      
+#pragma HLS unroll
+      class ap_uint< 13 > _in_k = (0L + 8L * k);
+      PixelType_15_name p;
+      p = val_src . range((_in_k+(8 - 1)),_in_k);
+      out[0] += ((unsigned long )lut[l][(long )p]);
+      l++;
+    }
+    k = (16L + 8L);
+  }
+}

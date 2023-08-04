@@ -1,0 +1,18 @@
+
+int add(int a)
+{
+  return a + a;
+}
+int p_Z9temp_funcIaddEi(int a);
+
+int p_Z9temp_funcIaddEi(int a)
+{
+  return add(a);
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+  a[0] = p_Z9temp_funcIaddEi(0);
+}

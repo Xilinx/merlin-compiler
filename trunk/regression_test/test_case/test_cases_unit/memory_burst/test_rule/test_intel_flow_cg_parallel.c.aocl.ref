@@ -1,0 +1,65 @@
+#include <string.h> 
+#include "cmost.h"
+extern int __merlin_include__GB_string_h_0;
+
+void sub_0(int *a,int *b,int c)
+{
+  for (int j = 0; j < 10; ++j) {
+    a[j] = b[j];
+  }
+}
+#pragma ACCEL kernel
+
+void top(int a[100],int b[10],int c[10])
+{
+  int c_1_0_buf[10];
+  int b_buf_0[10][10];
+  int a_buf_0[10][10];
+  int i;
+{
+    int i;
+    for (i = 0; i < 10; ++i) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      memcpy((void *)b_buf_0[i - 0LL],(const void *)(&b[0]),sizeof(int ) * 10);
+    }
+  }
+  for (i = 0; i < 10; ++i) {
+    
+#pragma ACCEL parallel
+    sub_0((int *)a_buf_0[i - 0LL],b_buf_0[i - 0LL],c_1_0_buf[i]);
+  }
+{
+    memcpy((void *)(&a[0]),(const void *)a_buf_0[0],sizeof(int ) * 100);
+  }
+  return ;
+}
+
+void sub(int *a,int *b)
+{
+  __merlin_access_range(a,0,9);
+  __merlin_access_range(b,0,9);
+  int j = 0;
+  while(j < 10){
+    a[j] = b[j];
+    j++;
+  }
+}
+#pragma ACCEL kernel
+
+void top2(int a[100],int b[10])
+{
+  int b_buf_0[10];
+  int a_buf_0[100];
+  int i;
+  int j;
+  memcpy((void *)(&a_buf_0[0]),(const void *)(&a[0]),sizeof(int ) * 100);
+  memcpy((void *)(&b_buf_0[0]),(const void *)(&b[0]),sizeof(int ) * 10);
+  for (i = 0; i < 10; ++i) {
+    
+#pragma ACCEL parallel
+    sub(&a_buf_0[i * 10],b_buf_0);
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf_0[0]),sizeof(int ) * 100);
+  return ;
+}

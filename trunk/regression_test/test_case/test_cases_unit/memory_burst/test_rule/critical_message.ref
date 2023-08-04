@@ -1,0 +1,2317 @@
+
+WARNING: [BURST-219] Found a possible negative lower bound (ip * 8192) in memory burst for array 'img_0' (dwt.c:118) reference (dwt.c:178, dwt.c:361)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'img_0' (dwt.c:118) in scope (dwt.c:129)
+  burst buffer size = 32768 bytes
+
+WARNING: [BURST-219] Found a possible negative lower bound (ip * 8192) in memory burst for array 'img_1' (dwt.c:119) reference (dwt.c:179, dwt.c:362)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'img_1' (dwt.c:119) in scope (dwt.c:129)
+  burst buffer size = 32768 bytes
+
+WARNING: [BURST-219] Found a possible negative lower bound (ip * 8192) in memory burst for array 'img_2' (dwt.c:120) reference (dwt.c:180, dwt.c:363)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'img_2' (dwt.c:120) in scope (dwt.c:129)
+  burst buffer size = 32768 bytes
+
+WARNING: [BURST-219] Found a possible negative lower bound (ip * 8192) in memory burst for array 'img_3' (dwt.c:121) reference (dwt.c:181, dwt.c:364)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'img_3' (dwt.c:121) in scope (dwt.c:129)
+  burst buffer size = 32768 bytes
+
+WARNING: [BURST-219] Found a possible negative lower bound (ip * 8192) in memory burst for array 'img_4' (dwt.c:122) reference (dwt.c:182, dwt.c:365)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'img_4' (dwt.c:122) in scope (dwt.c:129)
+  burst buffer size = 32768 bytes
+
+WARNING: [BURST-219] Found a possible negative lower bound (ip * 8192) in memory burst for array 'img_5' (dwt.c:123) reference (dwt.c:183, dwt.c:366)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'img_5' (dwt.c:123) in scope (dwt.c:129)
+  burst buffer size = 32768 bytes
+
+WARNING: [BURST-219] Found a possible negative lower bound (ip * 8192) in memory burst for array 'img_6' (dwt.c:124) reference (dwt.c:184, dwt.c:367)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'img_6' (dwt.c:124) in scope (dwt.c:129)
+  burst buffer size = 32768 bytes
+
+WARNING: [BURST-219] Found a possible negative lower bound (ip * 8192) in memory burst for array 'img_7' (dwt.c:125) reference (dwt.c:185, dwt.c:368)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'img_7' (dwt.c:125) in scope (dwt.c:129)
+  burst buffer size = 32768 bytes
+
+WARNING: [BURST-211] Memory burst NOT inferred: variable 'img_0' (dwt.c:118). Reason: improper streaming access order
+
+WARNING: [BURST-211] Memory burst NOT inferred: variable 'img_1' (dwt.c:119). Reason: improper streaming access order
+
+WARNING: [BURST-211] Memory burst NOT inferred: variable 'img_2' (dwt.c:120). Reason: improper streaming access order
+
+WARNING: [BURST-211] Memory burst NOT inferred: variable 'img_3' (dwt.c:121). Reason: improper streaming access order
+
+WARNING: [BURST-211] Memory burst NOT inferred: variable 'img_4' (dwt.c:122). Reason: improper streaming access order
+
+WARNING: [BURST-211] Memory burst NOT inferred: variable 'img_5' (dwt.c:123). Reason: improper streaming access order
+
+WARNING: [BURST-211] Memory burst NOT inferred: variable 'img_6' (dwt.c:124). Reason: improper streaming access order
+
+WARNING: [BURST-211] Memory burst NOT inferred: variable 'img_7' (dwt.c:125). Reason: improper streaming access order
+
+WARNING: [BURST-220] Found on-chip buffer is almost used out before inferring burst
+INFO: [BURST-101] Memory burst inferred: variable 'u_out' (denoise3D.c:88) in scope (denoise3D.c:89)
+  burst buffer size = 1015288 bytes
+
+WARNING: [CGPAR-213] Coarse-grained parallelization NOT applied: loop (test2.c:762) because access on array 'a' (test2.c:757) cannot be parallelized due to possible loop carried data dependence.
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:7) in scope (test2.c:10)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:7) in scope (test2.c:10).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:100) in scope (test2.c:101)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:100) in scope (test2.c:101).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:598) in scope (test2.c:601)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:598) in scope (test2.c:601).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:611) in scope (test2.c:614)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:611) in scope (test2.c:614).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:622) in scope (test2.c:626)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:622) in scope (test2.c:626).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:634) in scope (test2.c:638)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:634) in scope (test2.c:638).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:647) in scope (test2.c:650)
+  burst buffer size = 36 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:647) in scope (test2.c:650).
+  Reason: short burst length = 36 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:658) in scope (test2.c:662)
+  burst buffer size = 36 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:658) in scope (test2.c:662).
+  Reason: short burst length = 36 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:670) in scope (test2.c:673)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:670) in scope (test2.c:673).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:681) in scope (test2.c:684)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:681) in scope (test2.c:684).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:774) in scope (test2.c:775)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:774) in scope (test2.c:775).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:983) in scope (test2.c:984)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:983) in scope (test2.c:984).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'sum' (test2.c:983) in scope (test2.c:994)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'sum' (test2.c:983) in scope (test2.c:994).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:18) in scope (test2.c:22)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:18) in scope (test2.c:22).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:33) in scope (test2.c:37)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:33) in scope (test2.c:37).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:48) in scope (test2.c:52)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:48) in scope (test2.c:52).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:48) in scope (test2.c:52)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:48) in scope (test2.c:52).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:62) in scope (test2.c:66)
+  burst buffer size = 440 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:62) in scope (test2.c:66).
+  Reason: short burst length = 440 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:81) in scope (test2.c:85)
+  burst buffer size = 440 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:81) in scope (test2.c:85).
+  Reason: short burst length = 440 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:81) in scope (test2.c:85)
+  burst buffer size = 404 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:81) in scope (test2.c:85).
+  Reason: short burst length = 404 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:133) in scope (test2.c:137)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:133) in scope (test2.c:137).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:149) in scope (test2.c:153)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:149) in scope (test2.c:153).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:165) in scope (test2.c:169)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:165) in scope (test2.c:169).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:290) in scope (test2.c:294)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:290) in scope (test2.c:294).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:290) in scope (test2.c:294)
+  burst buffer size = 440 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:290) in scope (test2.c:294).
+  Reason: short burst length = 440 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:304) in scope (test2.c:308)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:304) in scope (test2.c:308).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:304) in scope (test2.c:308)
+  burst buffer size = 800 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:304) in scope (test2.c:308).
+  Reason: short burst length = 800 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:318) in scope (test2.c:322)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:318) in scope (test2.c:322).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:318) in scope (test2.c:322)
+  burst buffer size = 5840 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:332) in scope (test2.c:336)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:332) in scope (test2.c:336).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+
+WARNING: [BURST-219] Found a possible negative lower bound (-10 + i * 105879460) in memory burst for array 'b' (test2.c:332) reference (test2.c:340, test2.c:340, test2.c:340)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:332) in scope (test2.c:336)
+  burst buffer size = 120 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:332) in scope (test2.c:336).
+  Reason: short burst length = 120 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:346) in scope (test2.c:350)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:346) in scope (test2.c:350).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:360) in scope (test2.c:364)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:360) in scope (test2.c:364).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:360) in scope (test2.c:364)
+  burst buffer size = 36904 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:374) in scope (test2.c:378)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:374) in scope (test2.c:378).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:374) in scope (test2.c:378)
+  burst buffer size = 1600 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:388) in scope (test2.c:392)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:388) in scope (test2.c:392).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:388) in scope (test2.c:393)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:388) in scope (test2.c:393).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:402) in scope (test2.c:406)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:402) in scope (test2.c:406).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:402) in scope (test2.c:406)
+  burst buffer size = 1120 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:416) in scope (test2.c:417)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:416) in scope (test2.c:417).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:416) in scope (test2.c:417)
+  burst buffer size = 1120 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:437) in scope (test2.c:442)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:437) in scope (test2.c:442).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:452) in scope (test2.c:456)
+  burst buffer size = 3676 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:452) in scope (test2.c:456)
+  burst buffer size = 3644 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:467) in scope (test2.c:471)
+  burst buffer size = 3640 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:467) in scope (test2.c:471)
+  burst buffer size = 3640 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:481) in scope (test2.c:485)
+  burst buffer size = 3640 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:481) in scope (test2.c:485)
+  burst buffer size = 3676 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:495) in scope (test2.c:499)
+  burst buffer size = 3676 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:495) in scope (test2.c:499)
+  burst buffer size = 3672 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:510) in scope (test2.c:514)
+  burst buffer size = 440 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:510) in scope (test2.c:514).
+  Reason: short burst length = 440 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:524) in scope (test2.c:528)
+  burst buffer size = 440 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:524) in scope (test2.c:528).
+  Reason: short burst length = 440 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:539) in scope (test2.c:543)
+  burst buffer size = 440 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:539) in scope (test2.c:543).
+  Reason: short burst length = 440 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:554) in scope (test2.c:555)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:554) in scope (test2.c:555).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:583) in scope (test2.c:587)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:583) in scope (test2.c:587).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:583) in scope (test2.c:587)
+  burst buffer size = 440 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:583) in scope (test2.c:587).
+  Reason: short burst length = 440 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:692) in scope (test2.c:696)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:692) in scope (test2.c:696).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:692) in scope (test2.c:696)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:692) in scope (test2.c:696).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:708) in scope (test2.c:712)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:708) in scope (test2.c:712).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:724) in scope (test2.c:728)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:724) in scope (test2.c:728).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:788) in scope (test2.c:789)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:788) in scope (test2.c:789).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:788) in scope (test2.c:789)
+  burst buffer size = 1156 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:871) in scope (test2.c:876)
+  burst buffer size = 3680 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:889) in scope (test2.c:894)
+  burst buffer size = 2872 bytes
+
+WARNING: [BURST-219] Found a possible negative lower bound (N * 101) in memory burst for array 'a' (test2.c:906) reference (test2.c:915, test2.c:916, test2.c:917)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:906) in scope (test2.c:911)
+  burst buffer size = 3680 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:983) in scope (test2.c:987)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:983) in scope (test2.c:987).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:1002) in scope (test2.c:1006)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:1002) in scope (test2.c:1006).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:1002) in scope (test2.c:1006)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:1002) in scope (test2.c:1006).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:197) in scope (test2.c:198)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:197) in scope (test2.c:198).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:217) in scope (test2.c:218)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:217) in scope (test2.c:218).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:217) in scope (test2.c:218)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:217) in scope (test2.c:218).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:223) in scope (test2.c:227)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:223) in scope (test2.c:227).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:265) in scope (test2.c:266)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:265) in scope (test2.c:266).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:265) in scope (test2.c:266)
+  burst buffer size = 404 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:265) in scope (test2.c:266).
+  Reason: short burst length = 404 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:273) in scope (test2.c:278)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:273) in scope (test2.c:278).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:740) in scope (test2.c:745)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:740) in scope (test2.c:745).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:757) in scope (test2.c:762)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:757) in scope (test2.c:762).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:850) in scope (test2.c:856)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:850) in scope (test2.c:856).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'A_out' (test2.c:812) in scope (test2.c:833)
+  burst buffer size = 16 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'A_out' (test2.c:812) in scope (test2.c:833).
+  Reason: short burst length = 16 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:923) in scope (test2.c:933)
+  burst buffer size = 3680 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:953) in scope (test2.c:963)
+  burst buffer size = 3680 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:346) in scope (test2.c:351)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:346) in scope (test2.c:351).
+  Reason: short burst length = 40 bytes
+
+
+WARNING: [BURST-219] Found a possible negative lower bound (-10 + i * 434530450) in memory burst for array 'b' (test2.c:346) reference (test2.c:354)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:7) in scope (test2.c:8)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:7) in scope (test2.c:8).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:18) in scope (test2.c:19)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:18) in scope (test2.c:19).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:33) in scope (test2.c:34)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:33) in scope (test2.c:34).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:48) in scope (test2.c:49)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:48) in scope (test2.c:49).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:48) in scope (test2.c:49)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:48) in scope (test2.c:49).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:62) in scope (test2.c:67)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:62) in scope (test2.c:67).
+  Reason: short burst length = 40 bytes
+
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'b' (test2.c:62). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:62) in scope (test2.c:72)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:62) in scope (test2.c:72).
+  Reason: short burst length = 40 bytes
+
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'a' (test2.c:81). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'b' (test2.c:81). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:100) in scope (test2.c:104)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:100) in scope (test2.c:104).
+  Reason: short burst length = 40 bytes
+
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'b' (test2.c:100). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:100) in scope (test2.c:110)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:100) in scope (test2.c:110).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:100) in scope (test2.c:115)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:100) in scope (test2.c:115).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:100) in scope (test2.c:118)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:100) in scope (test2.c:118).
+  Reason: short burst length = 40 bytes
+
+
+WARNING: [BURST-219] Found a possible negative lower bound (10 + i * 10) in memory burst for array 'a' (test2.c:100) reference (test2.c:127)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:100) in scope (test2.c:124)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:100) in scope (test2.c:124).
+  Reason: short burst length = 40 bytes
+
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'a' (test2.c:133). Reason: improper streaming access order
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'b' (test2.c:133). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'a' (test2.c:149). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:149) in scope (test2.c:154)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:149) in scope (test2.c:154).
+  Reason: short burst length = 40 bytes
+
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'a' (test2.c:165). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:165) in scope (test2.c:170)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:165) in scope (test2.c:170).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:273) in scope (test2.c:274)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:273) in scope (test2.c:274).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:290) in scope (test2.c:291)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:290) in scope (test2.c:291).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'b' (test2.c:290). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:304) in scope (test2.c:305)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:304) in scope (test2.c:305).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'b' (test2.c:304). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:318) in scope (test2.c:319)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:318) in scope (test2.c:319).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'b' (test2.c:318). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:332) in scope (test2.c:333)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:332) in scope (test2.c:333).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'b' (test2.c:332). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:346) in scope (test2.c:347)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:346) in scope (test2.c:347).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'b' (test2.c:346). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:360) in scope (test2.c:361)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:360) in scope (test2.c:361).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'b' (test2.c:360). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:374) in scope (test2.c:375)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:374) in scope (test2.c:375).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'b' (test2.c:374). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:388) in scope (test2.c:389)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:388) in scope (test2.c:389).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'b' (test2.c:388). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:402) in scope (test2.c:403)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:402) in scope (test2.c:403).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'b' (test2.c:402). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'b' (test2.c:416). Reason: improper streaming access order
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'b' (test2.c:437). Reason: improper streaming access order
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'a' (test2.c:452). Reason: improper streaming access order
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'b' (test2.c:452). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:467) in scope (test2.c:471)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:467) in scope (test2.c:471).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:467) in scope (test2.c:471)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:467) in scope (test2.c:471).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:481) in scope (test2.c:485)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:481) in scope (test2.c:485).
+  Reason: short burst length = 40 bytes
+
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'b' (test2.c:481). Reason: improper streaming access order
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'a' (test2.c:495). Reason: improper streaming access order
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'b' (test2.c:495). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'a' (test2.c:510). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'a' (test2.c:524). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'a' (test2.c:539). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'b' (test2.c:554). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:583) in scope (test2.c:584)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:583) in scope (test2.c:584).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'b' (test2.c:583). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:598) in scope (test2.c:599)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:598) in scope (test2.c:599).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:611) in scope (test2.c:612)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:611) in scope (test2.c:612).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:622) in scope (test2.c:623)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:622) in scope (test2.c:623).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:634) in scope (test2.c:635)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:634) in scope (test2.c:635).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:647) in scope (test2.c:648)
+  burst buffer size = 36 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:647) in scope (test2.c:648).
+  Reason: short burst length = 36 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:670) in scope (test2.c:671)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:670) in scope (test2.c:671).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:681) in scope (test2.c:682)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:681) in scope (test2.c:682).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:692) in scope (test2.c:693)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:692) in scope (test2.c:693).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:692) in scope (test2.c:693)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:692) in scope (test2.c:693).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:708) in scope (test2.c:709)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:708) in scope (test2.c:709).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:724) in scope (test2.c:725)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:724) in scope (test2.c:725).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:740) in scope (test2.c:741)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:740) in scope (test2.c:741).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:757) in scope (test2.c:758)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:757) in scope (test2.c:758).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'b' (test2.c:788). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'A_out' (test2.c:812) in scope (test2.c:813)
+  burst buffer size = 16 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'A_out' (test2.c:812) in scope (test2.c:813).
+  Reason: short burst length = 16 bytes
+
+
+WARNING: [BURST-210] Memory burst NOT inferred: variable 'a' (test2.c:850). Reason: both read and write access
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'a' (test2.c:871). Reason: improper streaming access order
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'a' (test2.c:889). Reason: improper streaming access order
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'a' (test2.c:906). Reason: improper streaming access order
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'a' (test2.c:923). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:953) in scope (test2.c:965)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:953) in scope (test2.c:965).
+  Reason: short burst length = 4 bytes
+
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'a' (test2.c:953). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:983) in scope (test2.c:984)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:983) in scope (test2.c:984).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:983) in scope (test2.c:987)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:983) in scope (test2.c:987).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'sum' (test2.c:983) in scope (test2.c:984)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'sum' (test2.c:983) in scope (test2.c:984).
+  Reason: short burst length = 40 bytes
+
+
+WARNING: [BURST-219] Found a possible negative lower bound (i) in memory burst for array 'b' (test2.c:983) reference (test2.c:997)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:983) in scope (test2.c:994)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:983) in scope (test2.c:994).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test2.c:1002) in scope (test2.c:1003)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test2.c:1002) in scope (test2.c:1003).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test2.c:1002) in scope (test2.c:1003)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test2.c:1002) in scope (test2.c:1003).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_disable_burst.c:7) in scope (test_disable_burst.c:11)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_disable_burst.c:7) in scope (test_disable_burst.c:11).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_disable_burst.c:18) in scope (test_disable_burst.c:21)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_disable_burst.c:18) in scope (test_disable_burst.c:21).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_disable_burst.c:45) in scope (test_disable_burst.c:46)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_disable_burst.c:45) in scope (test_disable_burst.c:46).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_disable_burst.c:52) in scope (test_disable_burst.c:56)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_disable_burst.c:52) in scope (test_disable_burst.c:56).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_disable_burst.c:7) in scope (test_disable_burst.c:8)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_disable_burst.c:7) in scope (test_disable_burst.c:8).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_disable_burst.c:18) in scope (test_disable_burst.c:19)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_disable_burst.c:18) in scope (test_disable_burst.c:19).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_burst_size.c:19) in scope (test_burst_size.c:22)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_burst_size.c:19) in scope (test_burst_size.c:22).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_burst_size.c:7) in scope (test_burst_size.c:10)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_burst_size.c:7) in scope (test_burst_size.c:10).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_burst_size.c:7) in scope (test_burst_size.c:10)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_burst_size.c:7) in scope (test_burst_size.c:10).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_burst_size.c:46) in scope (test_burst_size.c:47)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_burst_size.c:46) in scope (test_burst_size.c:47).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_burst_size.c:30) in scope (test_burst_size.c:36)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_burst_size.c:30) in scope (test_burst_size.c:36).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_burst_size.c:52) in scope (test_burst_size.c:56)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_burst_size.c:52) in scope (test_burst_size.c:56).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_burst_size.c:52) in scope (test_burst_size.c:58)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_burst_size.c:52) in scope (test_burst_size.c:58).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_burst_size.c:7) in scope (test_burst_size.c:8)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_burst_size.c:7) in scope (test_burst_size.c:8).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_burst_size.c:7) in scope (test_burst_size.c:8)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_burst_size.c:7) in scope (test_burst_size.c:8).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_burst_size.c:19) in scope (test_burst_size.c:20)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_burst_size.c:19) in scope (test_burst_size.c:20).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_inbalanced_read_write.c:7) in scope (test_inbalanced_read_write.c:8)
+  burst buffer size = 396 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_inbalanced_read_write.c:7) in scope (test_inbalanced_read_write.c:8).
+  Reason: short burst length = 396 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_inbalanced_read_write.c:7) in scope (test_inbalanced_read_write.c:10)
+  burst buffer size = 396 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_inbalanced_read_write.c:7) in scope (test_inbalanced_read_write.c:10).
+  Reason: short burst length = 396 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_inbalanced_read_write.c:18) in scope (test_inbalanced_read_write.c:21)
+  burst buffer size = 396 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_inbalanced_read_write.c:18) in scope (test_inbalanced_read_write.c:21).
+  Reason: short burst length = 396 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_inbalanced_read_write.c:18) in scope (test_inbalanced_read_write.c:21)
+  burst buffer size = 396 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_inbalanced_read_write.c:18) in scope (test_inbalanced_read_write.c:21).
+  Reason: short burst length = 396 bytes
+
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'a' (test_inbalanced_read_write.c:7). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'b' (test_inbalanced_read_write.c:7). Reason: improper streaming access order
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'a' (test_inbalanced_read_write.c:18). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'b' (test_inbalanced_read_write.c:18). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_burst_write_only.c:7) in scope (test_burst_write_only.c:11)
+  burst buffer size = 396 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_burst_write_only.c:7) in scope (test_burst_write_only.c:11).
+  Reason: short burst length = 396 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_burst_write_only.c:7) in scope (test_burst_write_only.c:11)
+  burst buffer size = 396 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_burst_write_only.c:7) in scope (test_burst_write_only.c:11).
+  Reason: short burst length = 396 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_burst_write_only.c:18) in scope (test_burst_write_only.c:21)
+  burst buffer size = 396 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_burst_write_only.c:18) in scope (test_burst_write_only.c:21).
+  Reason: short burst length = 396 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_burst_write_only.c:18) in scope (test_burst_write_only.c:21)
+  burst buffer size = 396 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_burst_write_only.c:18) in scope (test_burst_write_only.c:21).
+  Reason: short burst length = 396 bytes
+
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'a' (test_burst_write_only.c:7). Reason: improper streaming access order
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'b' (test_burst_write_only.c:7). Reason: improper streaming access order
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'a' (test_burst_write_only.c:18). Reason: improper streaming access order
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'b' (test_burst_write_only.c:18). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_lifting_efficiency.c:7) in scope (test_lifting_efficiency.c:10)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_lifting_efficiency.c:7) in scope (test_lifting_efficiency.c:10).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_lifting_efficiency.c:7) in scope (test_lifting_efficiency.c:10)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_lifting_efficiency.c:7) in scope (test_lifting_efficiency.c:10).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_lifting_efficiency.c:36) in scope (test_lifting_efficiency.c:40)
+  burst buffer size = 60004 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_lifting_efficiency.c:36) in scope (test_lifting_efficiency.c:40)
+  burst buffer size = 404 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_lifting_efficiency.c:36) in scope (test_lifting_efficiency.c:40).
+  Reason: short burst length = 404 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_lifting_efficiency.c:18) in scope (test_lifting_efficiency.c:22)
+  burst buffer size = 804 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_lifting_efficiency.c:18) in scope (test_lifting_efficiency.c:22).
+  Reason: short burst length = 804 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_lifting_efficiency.c:18) in scope (test_lifting_efficiency.c:22)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_lifting_efficiency.c:18) in scope (test_lifting_efficiency.c:22).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_lifting_efficiency.c:70) in scope (test_lifting_efficiency.c:74)
+  burst buffer size = 5164 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_lifting_efficiency.c:70) in scope (test_lifting_efficiency.c:74)
+  burst buffer size = 44 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_lifting_efficiency.c:70) in scope (test_lifting_efficiency.c:74).
+  Reason: short burst length = 44 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_lifting_efficiency.c:55) in scope (test_lifting_efficiency.c:59)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_lifting_efficiency.c:55) in scope (test_lifting_efficiency.c:59).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_lifting_efficiency.c:55) in scope (test_lifting_efficiency.c:59)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_lifting_efficiency.c:55) in scope (test_lifting_efficiency.c:59).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_lifting_efficiency.c:97) in scope (test_lifting_efficiency.c:98)
+  burst buffer size = 262145 bytes
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'a' (test_lifting_efficiency.c:7). Reason: improper streaming access order
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'b' (test_lifting_efficiency.c:7). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_lifting_efficiency.c:18) in scope (test_lifting_efficiency.c:22)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_lifting_efficiency.c:18) in scope (test_lifting_efficiency.c:22).
+  Reason: short burst length = 4 bytes
+
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'a' (test_lifting_efficiency.c:36). Reason: improper streaming access order
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'b' (test_lifting_efficiency.c:36). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_lifting_efficiency.c:70) in scope (test_lifting_efficiency.c:74)
+  burst buffer size = 44 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_lifting_efficiency.c:70) in scope (test_lifting_efficiency.c:74).
+  Reason: short burst length = 44 bytes
+
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'a' (test_lifting_efficiency.c:97). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_lifting_efficiency.c:90) in scope (test_lifting_efficiency.c:90)
+  burst buffer size = 64 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_lifting_efficiency.c:90) in scope (test_lifting_efficiency.c:90).
+  Reason: short burst length = 64 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_burst_single_threshold.cpp:7) in scope (test_burst_single_threshold.cpp:10)
+  burst buffer size = 400000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_burst_single_threshold.cpp:7) in scope (test_burst_single_threshold.cpp:10)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_burst_single_threshold.cpp:7) in scope (test_burst_single_threshold.cpp:10).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_burst_single_threshold.cpp:17) in scope (test_burst_single_threshold.cpp:20)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_burst_single_threshold.cpp:17) in scope (test_burst_single_threshold.cpp:20).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_burst_single_threshold.cpp:17) in scope (test_burst_single_threshold.cpp:20)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_burst_single_threshold.cpp:17) in scope (test_burst_single_threshold.cpp:20).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_burst_single_threshold.cpp:7) in scope (test_burst_single_threshold.cpp:8)
+  burst buffer size = 400000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_burst_single_threshold.cpp:7) in scope (test_burst_single_threshold.cpp:8)
+  burst buffer size = 400000 bytes
+
+WARNING: [BURST-202] Memory burst inferred: variable 'a' (test_burst_single_threshold.cpp:17) in scope (test_burst_single_threshold.cpp:18)
+  with insufficient on-chip memory (4000000 bytes required)
+  Hint: 1. tile large loops into smaller ones to adjust the burst buffer size
+        2. specify the burst length threshold by adding interface attribute 
+        'max_burst_size=?'
+        3. decrease the single resource threshold by using 
+        '--attribute burst_single_size_threshold=?'
+        4. make range analysis accurate by changing 
+         pointer parameter into array parameter in sub function
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_burst_single_threshold.cpp:17) in scope (test_burst_single_threshold.cpp:18)
+  burst buffer size = 4000000 bytes
+
+WARNING: [BURST-205] Memory burst NOT inferred : variable 'a' (test_burst_single_threshold.cpp:7)in scope 'a' (test_burst_single_threshold.cpp:10) with big on-chip 
+  buffer.
+  Reason: required burst buffer is too large (400000 bytes)
+  Hint: 1. tile large loops into smaller ones to adjust the burst buffer size
+        2. specify the burst length threshold by adding interface attribute 
+        'max_burst_size=?'
+        3. decrease the single resource threshold by using 
+        '--attribute burst_single_size_threshold=?'
+        4. make range analysis accurate by changing 
+         pointer parameter into array parameter in sub function
+
+WARNING: [BURST-205] Memory burst NOT inferred : variable 'a' (test_burst_single_threshold.cpp:17)in scope 'a' (test_burst_single_threshold.cpp:20) with big on-chip 
+  buffer.
+  Reason: required burst buffer is too large (4000000 bytes)
+  Hint: 1. tile large loops into smaller ones to adjust the burst buffer size
+        2. specify the burst length threshold by adding interface attribute 
+        'max_burst_size=?'
+        3. decrease the single resource threshold by using 
+        '--attribute burst_single_size_threshold=?'
+        4. make range analysis accurate by changing 
+         pointer parameter into array parameter in sub function
+
+WARNING: [BURST-205] Memory burst NOT inferred : variable 'b' (test_burst_single_threshold.cpp:17)in scope 'b' (test_burst_single_threshold.cpp:20) with big on-chip 
+  buffer.
+  Reason: required burst buffer is too large (4000000 bytes)
+  Hint: 1. tile large loops into smaller ones to adjust the burst buffer size
+        2. specify the burst length threshold by adding interface attribute 
+        'max_burst_size=?'
+        3. decrease the single resource threshold by using 
+        '--attribute burst_single_size_threshold=?'
+        4. make range analysis accurate by changing 
+         pointer parameter into array parameter in sub function
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_large_buffer.c:2) in scope (test_large_buffer.c:6)
+  burst buffer size = 4000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_large_buffer.c:2) in scope (test_large_buffer.c:3)
+  burst buffer size = 4000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_adjust_factor.c:2) in scope (test_adjust_factor.c:6)
+  burst buffer size = 4000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_adjust_factor.c:17) in scope (test_adjust_factor.c:21)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_adjust_factor.c:17) in scope (test_adjust_factor.c:21).
+  Reason: short burst length = 400 bytes
+  Hint: increase tile factor
+
+WARNING: [BURST-205] Memory burst NOT inferred : variable 'b' (test_adjust_factor.c:32)in scope 'b' (test_adjust_factor.c:35) with big on-chip 
+  buffer.
+  Reason: required burst buffer is too large (4000000 bytes)
+  Hint: 1. tile large loops into smaller ones to adjust the burst buffer size
+        2. specify the burst length threshold by adding interface attribute 
+        'max_burst_size=?'
+        3. decrease the single resource threshold by using 
+        '--attribute burst_single_size_threshold=?'
+        4. make range analysis accurate by changing 
+         pointer parameter into array parameter in sub function
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_adjust_factor.c:32) in scope (test_adjust_factor.c:36)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_adjust_factor.c:32) in scope (test_adjust_factor.c:36).
+  Reason: short burst length = 400 bytes
+  Hint: increase tile factor
+
+WARNING: [BURST-202] Memory burst inferred: variable 'a' (test_adjust_factor.c:2) in scope (test_adjust_factor.c:3)
+  with insufficient on-chip memory (4000000000L bytes required)
+  Hint: 1. tile large loops into smaller ones to adjust the burst buffer size
+        2. specify the burst length threshold by adding interface attribute 
+        'max_burst_size=?'
+        3. decrease the single resource threshold by using 
+        '--attribute burst_single_size_threshold=?'
+        4. make range analysis accurate by changing 
+         pointer parameter into array parameter in sub function
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_adjust_factor.c:17) in scope (test_adjust_factor.c:18)
+  burst buffer size = 4000000 bytes
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'b' (test_adjust_factor.c:32). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_negative_offset.c:9) in scope (test_negative_offset.c:11)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_negative_offset.c:41) in scope (test_negative_offset.c:43)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_negative_offset.c:27) in scope (test_negative_offset.c:29)
+  burst buffer size = 40000 bytes
+
+WARNING: [BURST-202] Memory burst inferred: variable 'a' (test_negative_offset.c:41) in scope (test_negative_offset.c:41)
+  with insufficient on-chip memory (4000000 bytes required)
+  Hint: 1. tile large loops into smaller ones to adjust the burst buffer size
+        2. specify the burst length threshold by adding interface attribute 
+        'max_burst_size=?'
+        3. decrease the single resource threshold by using 
+        '--attribute burst_single_size_threshold=?'
+        4. make range analysis accurate by changing 
+         pointer parameter into array parameter in sub function
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_iter_cross_func.c:6) in scope (test_iter_cross_func.c:8)
+  burst buffer size = 4092 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cast.cpp:13) in scope (test_cast.cpp:14)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_cast.cpp:13) in scope (test_cast.cpp:14).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cast.cpp:13) in scope (test_cast.cpp:14)
+  burst buffer size = 4000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'c' (test_cast.cpp:13) in scope (test_cast.cpp:14)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'c' (test_cast.cpp:13) in scope (test_cast.cpp:14).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cast.cpp:13) in scope (test_cast.cpp:13)
+  burst buffer size = 4000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_void.cpp:3) in scope (test_void.cpp:4)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_void.cpp:3) in scope (test_void.cpp:4).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_void.cpp:3) in scope (test_void.cpp:3)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_void.cpp:3) in scope (test_void.cpp:3).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_data_reuse.c:4) in scope (test_data_reuse.c:8)
+  burst buffer size = 2400 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_data_reuse.c:17) in scope (test_data_reuse.c:21)
+  burst buffer size = 120 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_data_reuse.c:17) in scope (test_data_reuse.c:21).
+  Reason: short burst length = 120 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_data_reuse.c:17) in scope (test_data_reuse.c:21)
+  burst buffer size = 2400 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_data_reuse.c:31) in scope (test_data_reuse.c:35)
+  burst buffer size = 1944 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_data_reuse.c:44) in scope (test_data_reuse.c:49)
+  burst buffer size = 108 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_data_reuse.c:44) in scope (test_data_reuse.c:49).
+  Reason: short burst length = 108 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_data_reuse.c:17) in scope (test_data_reuse.c:20)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_data_reuse.c:17) in scope (test_data_reuse.c:20).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_data_reuse.c:4) in scope (test_data_reuse.c:8)
+  burst buffer size = 120 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_data_reuse.c:4) in scope (test_data_reuse.c:8).
+  Reason: short burst length = 120 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_data_reuse.c:17) in scope (test_data_reuse.c:21)
+  burst buffer size = 120 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_data_reuse.c:17) in scope (test_data_reuse.c:21).
+  Reason: short burst length = 120 bytes
+
+
+WARNING: [BURST-207] Memory burst NOT inferred: variable 'a' (test_data_reuse.c:17). Reason: unsupported access, such as pointer alias, pointer arithmetic operation
+
+WARNING: [BURST-207] Memory burst NOT inferred: variable 'b' (test_data_reuse.c:17). Reason: unsupported access, such as pointer alias, pointer arithmetic operation
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_data_reuse.c:31) in scope (test_data_reuse.c:35)
+  burst buffer size = 108 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_data_reuse.c:31) in scope (test_data_reuse.c:35).
+  Reason: short burst length = 108 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_complex_length.c:4) in scope (test_complex_length.c:7)
+  burst buffer size = 4000 bytes
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'a' (test_complex_length.c:4). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_condition_write.cpp:2) in scope (test_condition_write.cpp:3)
+  burst buffer size = 4000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_condition_write.cpp:14) in scope (test_condition_write.cpp:15)
+  burst buffer size = 4000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_condition_write.cpp:30) in scope (test_condition_write.cpp:31)
+  burst buffer size = 4000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_condition_write.cpp:2) in scope (test_condition_write.cpp:4)
+  burst buffer size = 4000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_condition_write.cpp:14) in scope (test_condition_write.cpp:17)
+  burst buffer size = 4000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_condition_write.cpp:14) in scope (test_condition_write.cpp:20)
+  burst buffer size = 4000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_condition_write.cpp:30) in scope (test_condition_write.cpp:34)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_condition_write.cpp:30) in scope (test_condition_write.cpp:34).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_condition_write.cpp:30) in scope (test_condition_write.cpp:37)
+  burst buffer size = 4000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_single_access.cpp:5) in scope (test_single_access.cpp:7)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_single_access.cpp:5) in scope (test_single_access.cpp:7).
+  Reason: short burst length = 4 bytes
+
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'a' (test_single_access.cpp:13)
+  Reason: the bound of the access range is not determined (na..998 + size inexact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'a' (test_single_access.cpp:13)
+  Reason: the bound of the access range is not determined (na..1000998 + size inexact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-202] Memory burst inferred: variable 'a' (test_single_access.cpp:5) in scope (test_single_access.cpp:5)
+  with insufficient on-chip memory (4000000 bytes required)
+  Hint: 1. tile large loops into smaller ones to adjust the burst buffer size
+        2. specify the burst length threshold by adding interface attribute 
+        'max_burst_size=?'
+        3. decrease the single resource threshold by using 
+        '--attribute burst_single_size_threshold=?'
+        4. make range analysis accurate by changing 
+         pointer parameter into array parameter in sub function
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'a' (test_single_access.cpp:13). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_partial_write.c:3) in scope (test_partial_write.c:7)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_partial_write.c:3) in scope (test_partial_write.c:7).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_partial_write.c:19) in scope (test_partial_write.c:23)
+  burst buffer size = 436 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_partial_write.c:19) in scope (test_partial_write.c:23).
+  Reason: short burst length = 436 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_partial_write.c:35) in scope (test_partial_write.c:39)
+  burst buffer size = 364 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_partial_write.c:35) in scope (test_partial_write.c:39).
+  Reason: short burst length = 364 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'h_coeff' (test_pointer_alias_2.cpp:14) in scope (test_pointer_alias_2.cpp:41)
+  burst buffer size = 20 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'h_coeff' (test_pointer_alias_2.cpp:14) in scope (test_pointer_alias_2.cpp:41).
+  Reason: short burst length = 20 bytes
+
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'from' (test_pointer_alias_2.cpp:25)
+  Reason: the bound of the access range is not determined (coord(x,y,z)..coord(x,y,z) exact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'from' (test_pointer_alias_2.cpp:25)
+  Reason: the bound of the access range is not determined (coord(x - r,y,z)..coord(x - r,y,z) exact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'from' (test_pointer_alias_2.cpp:25)
+  Reason: the bound of the access range is not determined (coord(x + r,y,z)..coord(x + r,y,z) exact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'from' (test_pointer_alias_2.cpp:25)
+  Reason: the bound of the access range is not determined (coord(x,y - r,z)..coord(x,y - r,z) exact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'from' (test_pointer_alias_2.cpp:25)
+  Reason: the bound of the access range is not determined (coord(x,y + r,z)..coord(x,y + r,z) exact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'from' (test_pointer_alias_2.cpp:25)
+  Reason: the bound of the access range is not determined (coord(x,y,z - r)..coord(x,y,z - r) exact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'from' (test_pointer_alias_2.cpp:25)
+  Reason: the bound of the access range is not determined (coord(x,y,z + r)..coord(x,y,z + r) exact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'to' (test_pointer_alias_2.cpp:26)
+  Reason: the bound of the access range is not determined (coord(x,y,z)..coord(x,y,z) exact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'h_coeff' (test_pointer_alias_2.cpp:14). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'c' (test_pointer_alias_3.cpp:2) in scope (test_pointer_alias_3.cpp:2)
+  burst buffer size = 4000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'ptr' (test_pointer_alias_3.cpp:7) in scope (test_pointer_alias_3.cpp:14)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'ptr' (test_pointer_alias_3.cpp:7) in scope (test_pointer_alias_3.cpp:14).
+  Reason: short burst length = 400 bytes
+
+
+WARNING: [BURST-207] Memory burst NOT inferred: variable 'a' (test_pointer_alias_3.cpp:2). Reason: unsupported access, such as pointer alias, pointer arithmetic operation
+
+WARNING: [BURST-207] Memory burst NOT inferred: variable 'b' (test_pointer_alias_3.cpp:2). Reason: unsupported access, such as pointer alias, pointer arithmetic operation
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_redundant_burst.cpp:18) in scope (test_redundant_burst.cpp:21)
+  burst buffer size = 396 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_redundant_burst.cpp:18) in scope (test_redundant_burst.cpp:21).
+  Reason: short burst length = 396 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_redundant_burst.cpp:18) in scope (test_redundant_burst.cpp:21)
+  burst buffer size = 360 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_redundant_burst.cpp:18) in scope (test_redundant_burst.cpp:21).
+  Reason: short burst length = 360 bytes
+ due to small external memory
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'a' (test_redundant_burst.cpp:18). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_indirect_index.c:4) in scope (test_indirect_index.c:8)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_indirect_index.c:4) in scope (test_indirect_index.c:8).
+  Reason: short burst length = 4 bytes
+
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'b' (test_indirect_index.c:4)
+  Reason: the bound of the access range is not determined (a_buf[0]..a_buf[0] exact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-213] Memory burst NOT inferred: variable 'a' (test_indirect_index.c:4). Reason: possible negative burst length
+  Hint: please specify the bounds of the variables using 'assert' 
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'b' (test_indirect_index.c:4). Reason: improper streaming access order
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'b' (test_indirect_index.c:4)
+  Reason: the bound of the access range is not determined (a[i]..a[i] exact)
+  Hint: please specify the bounds of the variables using 'assert'
+INFO: [BURST-101] Memory burst inferred: variable 'key' (test_complex_call_path.cpp:293) in scope (test_complex_call_path.cpp:303)
+  burst buffer size = 32 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'key' (test_complex_call_path.cpp:293) in scope (test_complex_call_path.cpp:303).
+  Reason: short burst length = 32 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'data' (test_complex_call_path.cpp:293) in scope (test_complex_call_path.cpp:303)
+  burst buffer size = 65536 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'key' (test_complex_call_path.cpp:293) in scope (test_complex_call_path.cpp:294)
+  burst buffer size = 32 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'key' (test_complex_call_path.cpp:293) in scope (test_complex_call_path.cpp:294).
+  Reason: short burst length = 32 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'i' (test_noncanonical.cpp:5) in scope (test_noncanonical.cpp:16)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'i' (test_noncanonical.cpp:5) in scope (test_noncanonical.cpp:16).
+  Reason: short burst length = 4 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'j' (test_noncanonical.cpp:5) in scope (test_noncanonical.cpp:16)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'j' (test_noncanonical.cpp:5) in scope (test_noncanonical.cpp:16).
+  Reason: short burst length = 4 bytes
+ due to small external memory
+
+WARNING: [BURST-219] Found a possible negative lower bound (i_buf[0] * 1024L + j_buf[0]) in memory burst for array 'c' (test_noncanonical.cpp:5) reference (test_noncanonical.cpp:20)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'c' (test_noncanonical.cpp:5) in scope (test_noncanonical.cpp:17)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'c' (test_noncanonical.cpp:5) in scope (test_noncanonical.cpp:17).
+  Reason: short burst length = 4 bytes
+ due to small external memory
+
+WARNING: [BURST-219] Found a possible negative lower bound (i_buf[0] * 1024L + j_buf[0]) in memory burst for array 'c2' (test_noncanonical.cpp:5) reference (test_noncanonical.cpp:21)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'c2' (test_noncanonical.cpp:5) in scope (test_noncanonical.cpp:17)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'c2' (test_noncanonical.cpp:5) in scope (test_noncanonical.cpp:17).
+  Reason: short burst length = 4 bytes
+ due to small external memory
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'i' (test_noncanonical.cpp:5). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'j' (test_noncanonical.cpp:5) in scope (test_noncanonical.cpp:5)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'j' (test_noncanonical.cpp:5) in scope (test_noncanonical.cpp:5).
+  Reason: short burst length = 4 bytes
+ due to small external memory
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'c' (test_noncanonical.cpp:5)
+  Reason: the bound of the access range is not determined (na..na inexact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'c2' (test_noncanonical.cpp:5)
+  Reason: the bound of the access range is not determined (na..na inexact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'c' (test_noncanonical.cpp:5)
+  Reason: the bound of the access range is not determined (i_buf[0] * 1024L + j_buf[0]..i_buf[0] * 1024L + j_buf[0] exact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'c2' (test_noncanonical.cpp:5)
+  Reason: the bound of the access range is not determined (i_buf[0] * 1024L + j_buf[0]..i_buf[0] * 1024L + j_buf[0] exact)
+  Hint: please specify the bounds of the variables using 'assert'
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:2) in scope (test_cache_basic.c:7)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_cache_basic.c:2) in scope (test_cache_basic.c:7).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:2) in scope (test_cache_basic.c:7)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_cache_basic.c:2) in scope (test_cache_basic.c:7).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:15) in scope (test_cache_basic.c:19)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_cache_basic.c:15) in scope (test_cache_basic.c:19).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:15) in scope (test_cache_basic.c:19)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_cache_basic.c:15) in scope (test_cache_basic.c:19).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:28) in scope (test_cache_basic.c:29)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:28) in scope (test_cache_basic.c:29)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:43) in scope (test_cache_basic.c:47)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:43) in scope (test_cache_basic.c:48)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_cache_basic.c:43) in scope (test_cache_basic.c:48).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:56) in scope (test_cache_basic.c:60)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:56) in scope (test_cache_basic.c:60)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_cache_basic.c:56) in scope (test_cache_basic.c:60).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:69) in scope (test_cache_basic.c:70)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:69) in scope (test_cache_basic.c:74)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:82) in scope (test_cache_basic.c:86)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_cache_basic.c:82) in scope (test_cache_basic.c:86).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:82) in scope (test_cache_basic.c:88)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_cache_basic.c:82) in scope (test_cache_basic.c:88).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:96) in scope (test_cache_basic.c:97)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:96) in scope (test_cache_basic.c:101)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_cache_basic.c:96) in scope (test_cache_basic.c:101).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:110) in scope (test_cache_basic.c:111)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:110) in scope (test_cache_basic.c:116)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_cache_basic.c:110) in scope (test_cache_basic.c:116).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:124) in scope (test_cache_basic.c:129)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_cache_basic.c:124) in scope (test_cache_basic.c:129).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:124) in scope (test_cache_basic.c:129)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_cache_basic.c:124) in scope (test_cache_basic.c:129).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:138) in scope (test_cache_basic.c:142)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_cache_basic.c:138) in scope (test_cache_basic.c:142).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:151) in scope (test_cache_basic.c:156)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_cache_basic.c:151) in scope (test_cache_basic.c:156).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:138) in scope (test_cache_basic.c:142)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_cache_basic.c:138) in scope (test_cache_basic.c:142).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:151) in scope (test_cache_basic.c:155)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_cache_basic.c:151) in scope (test_cache_basic.c:155).
+  Reason: short burst length = 4 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:2) in scope (test_cache_basic.c:3)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:2) in scope (test_cache_basic.c:3)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:15) in scope (test_cache_basic.c:16)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:15) in scope (test_cache_basic.c:16)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:43) in scope (test_cache_basic.c:44)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:43) in scope (test_cache_basic.c:44)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:56) in scope (test_cache_basic.c:57)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:56) in scope (test_cache_basic.c:57)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:69) in scope (test_cache_basic.c:70)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:82) in scope (test_cache_basic.c:83)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:82) in scope (test_cache_basic.c:83)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:96) in scope (test_cache_basic.c:97)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:110) in scope (test_cache_basic.c:111)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:124) in scope (test_cache_basic.c:125)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_basic.c:124) in scope (test_cache_basic.c:125)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:138) in scope (test_cache_basic.c:139)
+  burst buffer size = 40000 bytes
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'b' (test_cache_basic.c:138). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_basic.c:151) in scope (test_cache_basic.c:152)
+  burst buffer size = 40000 bytes
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'b' (test_cache_basic.c:151). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_hierarchy.c:7) in scope (test_cache_hierarchy.c:11)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_cache_hierarchy.c:7) in scope (test_cache_hierarchy.c:11).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_hierarchy.c:7) in scope (test_cache_hierarchy.c:11)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_cache_hierarchy.c:7) in scope (test_cache_hierarchy.c:11).
+  Reason: short burst length = 400 bytes
+
+
+WARNING: [BURST-219] Found a possible negative lower bound (i * 100) in memory burst for array 'a' (test_cache_hierarchy.c:16) reference (test_cache_hierarchy.c:19)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_hierarchy.c:16) in scope (test_cache_hierarchy.c:16)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_cache_hierarchy.c:16) in scope (test_cache_hierarchy.c:16).
+  Reason: short burst length = 400 bytes
+
+
+WARNING: [BURST-219] Found a possible negative lower bound (i * 100) in memory burst for array 'b' (test_cache_hierarchy.c:16) reference (test_cache_hierarchy.c:19)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_hierarchy.c:16) in scope (test_cache_hierarchy.c:16)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_cache_hierarchy.c:16) in scope (test_cache_hierarchy.c:16).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_hierarchy.c:37) in scope (test_cache_hierarchy.c:38)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_hierarchy.c:37) in scope (test_cache_hierarchy.c:38)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_hierarchy.c:53) in scope (test_cache_hierarchy.c:54)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_hierarchy.c:53) in scope (test_cache_hierarchy.c:54)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_hierarchy.c:69) in scope (test_cache_hierarchy.c:73)
+  burst buffer size = 40000 bytes
+
+WARNING: [BURST-219] Found a possible negative lower bound (i * 100) in memory burst for array 'a' (test_cache_hierarchy.c:62) reference (test_cache_hierarchy.c:65)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_hierarchy.c:62) in scope (test_cache_hierarchy.c:62)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_cache_hierarchy.c:62) in scope (test_cache_hierarchy.c:62).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_hierarchy.c:83) in scope (test_cache_hierarchy.c:84)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_hierarchy.c:83) in scope (test_cache_hierarchy.c:84)
+  burst buffer size = 40000 bytes
+
+WARNING: [BURST-219] Found a possible negative lower bound (i * 100) in memory burst for array 'a' (test_cache_hierarchy.c:93) reference (test_cache_hierarchy.c:96)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_hierarchy.c:93) in scope (test_cache_hierarchy.c:93)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_cache_hierarchy.c:93) in scope (test_cache_hierarchy.c:93).
+  Reason: short burst length = 400 bytes
+
+
+WARNING: [BURST-219] Found a possible negative lower bound (i * 100) in memory burst for array 'b' (test_cache_hierarchy.c:93) reference (test_cache_hierarchy.c:96)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_hierarchy.c:93) in scope (test_cache_hierarchy.c:93)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_cache_hierarchy.c:93) in scope (test_cache_hierarchy.c:93).
+  Reason: short burst length = 400 bytes
+
+
+WARNING: [BURST-219] Found a possible negative lower bound (i * 100) in memory burst for array 'a' (test_cache_hierarchy.c:100) reference (test_cache_hierarchy.c:102)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_cache_hierarchy.c:100) in scope (test_cache_hierarchy.c:101)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_cache_hierarchy.c:100) in scope (test_cache_hierarchy.c:101).
+  Reason: short burst length = 400 bytes
+
+
+WARNING: [BURST-219] Found a possible negative lower bound (i * 100) in memory burst for array 'b' (test_cache_hierarchy.c:100) reference (test_cache_hierarchy.c:102)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_cache_hierarchy.c:100) in scope (test_cache_hierarchy.c:101)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_cache_hierarchy.c:100) in scope (test_cache_hierarchy.c:101).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (denoise2D.c:3) in scope (denoise2D.c:9)
+  burst buffer size = 16124 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (denoise2D.c:3) in scope (denoise2D.c:9)
+  burst buffer size = 252 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (denoise2D.c:3) in scope (denoise2D.c:9).
+  Reason: short burst length = 252 bytes
+
+INFO: [BURST-102] Memory burst inferred manually: variable 'global_data' (logistic.c:151)
+  burst buffer size = 203264 bytes
+INFO: [BURST-102] Memory burst inferred manually: variable 'global_gradient' (logistic.c:151)
+  burst buffer size = 125440 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'bias2' (twonn.cpp:26) in scope (twonn.cpp:41)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'bias2' (twonn.cpp:26) in scope (twonn.cpp:41).
+  Reason: short burst length = 40 bytes
+ due to small external memory
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'weights1' (twonn.cpp:25). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'bias2' (twonn.cpp:26). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'weights2' (twonn.cpp:27). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'c' (vec_add_kernel_lab1.c:3) in scope (vec_add_kernel_lab1.c:6)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (vec_add_kernel_lab1.c:3) in scope (vec_add_kernel_lab1.c:6)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (vec_add_kernel_lab1.c:3) in scope (vec_add_kernel_lab1.c:6)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'c' (vec_add_kernel_lab1.c:3) in scope (vec_add_kernel_lab1.c:4)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (vec_add_kernel_lab1.c:3) in scope (vec_add_kernel_lab1.c:4)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (vec_add_kernel_lab1.c:3) in scope (vec_add_kernel_lab1.c:4)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'c' (vec_add_kernel_lab2.c:4) in scope (vec_add_kernel_lab2.c:9)
+  burst buffer size = 3996 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (vec_add_kernel_lab2.c:4) in scope (vec_add_kernel_lab2.c:9)
+  burst buffer size = 3996 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (vec_add_kernel_lab2.c:4) in scope (vec_add_kernel_lab2.c:9)
+  burst buffer size = 3996 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'c' (vec_add_kernel_lab2.c:4) in scope (vec_add_kernel_lab2.c:5)
+  burst buffer size = 3996 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (vec_add_kernel_lab2.c:4) in scope (vec_add_kernel_lab2.c:5)
+  burst buffer size = 3996 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (vec_add_kernel_lab2.c:4) in scope (vec_add_kernel_lab2.c:5)
+  burst buffer size = 3996 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'c' (vec_add_kernel_lab3.c:4) in scope (vec_add_kernel_lab3.c:9)
+  burst buffer size = 4000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (vec_add_kernel_lab3.c:4) in scope (vec_add_kernel_lab3.c:9)
+  burst buffer size = 4000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (vec_add_kernel_lab3.c:4) in scope (vec_add_kernel_lab3.c:9)
+  burst buffer size = 4000 bytes
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'c' (vec_add_kernel_lab3.c:4). Reason: improper streaming access order
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'a' (vec_add_kernel_lab3.c:4). Reason: improper streaming access order
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'b' (vec_add_kernel_lab3.c:4). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'curvature_motion_part_g' (segmentation.c:51) in scope (segmentation.c:108)
+  burst buffer size = 557032 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'interpt' (segmentation.c:51) in scope (segmentation.c:108)
+  burst buffer size = 557032 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'curvature_motion_part_g' (segmentation.c:19) in scope (segmentation.c:30)
+  burst buffer size = 557032 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'interpt' (segmentation.c:51) in scope (segmentation.c:112)
+  burst buffer size = 128 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'interpt' (segmentation.c:51) in scope (segmentation.c:112).
+  Reason: short burst length = 128 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'curvature_motion_part_g' (segmentation.c:51) in scope (segmentation.c:112)
+  burst buffer size = 128 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'curvature_motion_part_g' (segmentation.c:51) in scope (segmentation.c:112).
+  Reason: short burst length = 128 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'beta' (durbin.c:7) in scope (durbin.c:10)
+  burst buffer size = 128 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'beta' (durbin.c:7) in scope (durbin.c:10).
+  Reason: short burst length = 128 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'r' (durbin.c:8) in scope (durbin.c:10)
+  burst buffer size = 128 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'r' (durbin.c:8) in scope (durbin.c:10).
+  Reason: short burst length = 128 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'alpha' (durbin.c:6) in scope (durbin.c:10)
+  burst buffer size = 132 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'alpha' (durbin.c:6) in scope (durbin.c:10).
+  Reason: short burst length = 132 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'out' (durbin.c:9) in scope (durbin.c:38)
+  burst buffer size = 128 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'out' (durbin.c:9) in scope (durbin.c:38).
+  Reason: short burst length = 128 bytes
+ due to small external memory
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'beta' (durbin.c:7). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'alpha' (durbin.c:6). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'sum' (durbin.c:4). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'r' (durbin.c:8). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'sumi' (durbin.c:5). Reason: improper streaming access order
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'yy' (durbin.c:3). Reason: improper streaming access order
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'alpha' (durbin.c:6). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'yy' (durbin.c:3). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'out' (durbin.c:9) in scope (durbin.c:10)
+  burst buffer size = 128 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'out' (durbin.c:9) in scope (durbin.c:10).
+  Reason: short burst length = 128 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'beta' (durbin2.c:2) in scope (durbin2.c:3)
+  burst buffer size = 128 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'beta' (durbin2.c:2) in scope (durbin2.c:3).
+  Reason: short burst length = 128 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'yy' (durbin2.c:2) in scope (durbin2.c:3)
+  burst buffer size = 4092 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'r' (durbin2.c:2) in scope (durbin2.c:3)
+  burst buffer size = 128 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'r' (durbin2.c:2) in scope (durbin2.c:3).
+  Reason: short burst length = 128 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'alpha' (durbin2.c:2) in scope (durbin2.c:3)
+  burst buffer size = 132 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'alpha' (durbin2.c:2) in scope (durbin2.c:3).
+  Reason: short burst length = 132 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'sumi' (durbin2.c:2) in scope (durbin2.c:10)
+  burst buffer size = 3964 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'sum' (durbin2.c:2) in scope (durbin2.c:10)
+  burst buffer size = 3964 bytes
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'beta' (durbin2.c:2). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'alpha' (durbin2.c:2). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'sum' (durbin2.c:2). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'r' (durbin2.c:2). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'sumi' (durbin2.c:2). Reason: improper streaming access order
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'yy' (durbin2.c:2). Reason: improper streaming access order
+
+WARNING: [BURST-208] Memory burst NOT inferred: variable 'alpha' (durbin2.c:2). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'yy' (durbin2.c:2). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'out' (durbin2.c:2) in scope (durbin2.c:3)
+  burst buffer size = 128 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'out' (durbin2.c:2) in scope (durbin2.c:3).
+  Reason: short burst length = 128 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'c' (matmul_kernel.c:10) in scope (matmul_kernel.c:19)
+  burst buffer size = 16384 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (matmul_kernel.c:10) in scope (matmul_kernel.c:19)
+  burst buffer size = 16384 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (matmul_kernel.c:10) in scope (matmul_kernel.c:19)
+  burst buffer size = 16384 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'c' (matmul_kernel.c:10) in scope (matmul_kernel.c:11)
+  burst buffer size = 16384 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (matmul_kernel.c:10) in scope (matmul_kernel.c:11)
+  burst buffer size = 16384 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (matmul_kernel.c:10) in scope (matmul_kernel.c:11)
+  burst buffer size = 16384 bytes
+INFO: [BURST-103] Memory burst inferred manually: variable 'i_cell_pos' (namd_kernel.c:2585)
+INFO: [BURST-103] Memory burst inferred manually: variable 'i_cell_vel' (namd_kernel.c:2585)
+
+WARNING: [BURST-219] Found a possible negative lower bound (((int )j) * 4 + index * 2000) in memory burst for array 'o_cell_pos' (namd_kernel.c:2585) reference (namd_kernel.c:2814)
+  Hint: possible solutions are
+  1. Set accurate bound for variables using 'assert'
+  2. Please consider shifting the data layout to ensure the lower  bounds are non-negative
+  3. Or consider separating the boundary loop iterations from the main loop, so that the main loop will always have a non-negative lower bound for memory burst
+INFO: [BURST-101] Memory burst inferred: variable 'o_cell_pos' (namd_kernel.c:2585) in scope (namd_kernel.c:2705)
+  burst buffer size = 16 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'o_cell_pos' (namd_kernel.c:2585) in scope (namd_kernel.c:2705).
+  Reason: short burst length = 16 bytes
+
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'i_cell_pos' (namd_kernel.c:2585). Reason: improper streaming access order
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'i_cell_vel' (namd_kernel.c:2585). Reason: improper streaming access order
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'o_cell_pos' (namd_kernel.c:2585)
+  Reason: the bound of the access range is not determined (na..na inexact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'o_cell_vel' (namd_kernel.c:2585)
+  Reason: the bound of the access range is not determined (na..na inexact)
+  Hint: please specify the bounds of the variables using 'assert'
+INFO: [BURST-101] Memory burst inferred: variable 'a' (matmul_kernel.cpp:8) in scope (matmul_kernel.cpp:15)
+  burst buffer size = 4096 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (matmul_kernel.cpp:8) in scope (matmul_kernel.cpp:15)
+  burst buffer size = 4096 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'c' (matmul_kernel.cpp:8) in scope (matmul_kernel.cpp:16)
+  burst buffer size = 4096 bytes
+
+WARNING: [BURST-202] Memory burst inferred: variable 'a' (matmul_kernel.cpp:8) in scope (matmul_kernel.cpp:9)
+  with insufficient on-chip memory (4194304 bytes required)
+  Hint: 1. tile large loops into smaller ones to adjust the burst buffer size
+        2. specify the burst length threshold by adding interface attribute 
+        'max_burst_size=?'
+        3. decrease the single resource threshold by using 
+        '--attribute burst_single_size_threshold=?'
+        4. make range analysis accurate by changing 
+         pointer parameter into array parameter in sub function
+INFO: [BURST-101] Memory burst inferred: variable 'b' (matmul_kernel.cpp:8) in scope (matmul_kernel.cpp:9)
+  burst buffer size = 4194304 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'c' (matmul_kernel.cpp:8) in scope (matmul_kernel.cpp:9)
+  burst buffer size = 4194304 bytes
+INFO: [BURST-102] Memory burst inferred manually: variable 'b' (test_burst_with_manual_burst.c:67)
+  burst buffer size = 1600 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_burst_with_manual_burst.c:76) in scope (test_burst_with_manual_burst.c:76)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_burst_with_manual_burst.c:76) in scope (test_burst_with_manual_burst.c:76).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_burst_with_manual_burst.c:7) in scope (test_burst_with_manual_burst.c:11)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_burst_with_manual_burst.c:7) in scope (test_burst_with_manual_burst.c:11).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_burst_with_manual_burst.c:7) in scope (test_burst_with_manual_burst.c:17)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_burst_with_manual_burst.c:7) in scope (test_burst_with_manual_burst.c:17).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_burst_with_manual_burst.c:44) in scope (test_burst_with_manual_burst.c:45)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_burst_with_manual_burst.c:44) in scope (test_burst_with_manual_burst.c:45).
+  Reason: short burst length = 4 bytes
+
+
+WARNING: [BURST-203] Cannot burst all the accesses of variable 'a' (test_burst_with_manual_burst.c:51) because of data dependence
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_burst_with_manual_burst.c:7) in scope (test_burst_with_manual_burst.c:8)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_burst_with_manual_burst.c:7) in scope (test_burst_with_manual_burst.c:8).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_burst_with_manual_burst.c:7) in scope (test_burst_with_manual_burst.c:8)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_burst_with_manual_burst.c:7) in scope (test_burst_with_manual_burst.c:8).
+  Reason: short burst length = 400 bytes
+
+
+WARNING: [BURST-209] Memory burst NOT inferred: variable 'a' (test_burst_with_manual_burst.c:76). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_pointer_cast.cpp:9) in scope (test_pointer_cast.cpp:10)
+  burst buffer size = 9997 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_pointer_cast.cpp:9) in scope (test_pointer_cast.cpp:10)
+  burst buffer size = 39988 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_pointer_cast.cpp:17) in scope (test_pointer_cast.cpp:18)
+  burst buffer size = 39988 bytes
+
+WARNING: [BURST-207] Memory burst NOT inferred: variable 'a' (test_pointer_cast.cpp:4). Reason: unsupported access, such as pointer alias, pointer arithmetic operation
+
+WARNING: [BURST-207] Memory burst NOT inferred: variable 'a' (test_pointer_cast.cpp:2). Reason: unsupported access, such as pointer alias, pointer arithmetic operation
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'a' (test_pointer_cast.cpp:9). Reason: improper streaming access order
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'b' (test_pointer_cast.cpp:9). Reason: improper streaming access order
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'a' (test_pointer_cast.cpp:17)
+  Reason: the bound of the access range is not determined (na..na inexact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-206] Memory burst NOT inferred: variable 'b' (test_pointer_cast.cpp:17). Reason: improper streaming access order
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_unbound.c:2) in scope (test_unbound.c:3)
+  burst buffer size = 4 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_unbound.c:2) in scope (test_unbound.c:3).
+  Reason: short burst length = 4 bytes
+
+
+WARNING: [BURST-204] Memory burst NOT inferred: variable 'a' (test_unbound.c:2). Reason: burst length cannot be determined (size) 
+  Hint:   set accurate bound for variables using 'assert'
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'a' (test_unbound.c:2)
+  Reason: the bound of the access range is not determined (0..-1 + size exact)
+  Hint: please specify the bounds of the variables using 'assert'
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_ap_int_fixed.cpp:3) in scope (test_ap_int_fixed.cpp:5)
+  burst buffer size = 100 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_ap_int_fixed.cpp:3) in scope (test_ap_int_fixed.cpp:5).
+  Reason: short burst length = 100 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_ap_int_fixed.cpp:3) in scope (test_ap_int_fixed.cpp:5)
+  burst buffer size = 100 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_ap_int_fixed.cpp:3) in scope (test_ap_int_fixed.cpp:5).
+  Reason: short burst length = 100 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'c' (test_ap_int_fixed.cpp:3) in scope (test_ap_int_fixed.cpp:5)
+  burst buffer size = 100 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'c' (test_ap_int_fixed.cpp:3) in scope (test_ap_int_fixed.cpp:5).
+  Reason: short burst length = 100 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'd' (test_ap_int_fixed.cpp:3) in scope (test_ap_int_fixed.cpp:5)
+  burst buffer size = 100 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'd' (test_ap_int_fixed.cpp:3) in scope (test_ap_int_fixed.cpp:5).
+  Reason: short burst length = 100 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_ap_int_fixed.cpp:3) in scope (test_ap_int_fixed.cpp:3)
+  burst buffer size = 100 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_ap_int_fixed.cpp:3) in scope (test_ap_int_fixed.cpp:3).
+  Reason: short burst length = 100 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_ap_int_fixed.cpp:3) in scope (test_ap_int_fixed.cpp:3)
+  burst buffer size = 100 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_ap_int_fixed.cpp:3) in scope (test_ap_int_fixed.cpp:3).
+  Reason: short burst length = 100 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'c' (test_ap_int_fixed.cpp:3) in scope (test_ap_int_fixed.cpp:3)
+  burst buffer size = 100 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'c' (test_ap_int_fixed.cpp:3) in scope (test_ap_int_fixed.cpp:3).
+  Reason: short burst length = 100 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'd' (test_ap_int_fixed.cpp:3) in scope (test_ap_int_fixed.cpp:3)
+  burst buffer size = 100 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'd' (test_ap_int_fixed.cpp:3) in scope (test_ap_int_fixed.cpp:3).
+  Reason: short burst length = 100 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (matmul_kernel_intel.cpp:8) in scope (matmul_kernel_intel.cpp:9)
+  burst buffer size = 1048576 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (matmul_kernel_intel.cpp:8) in scope (matmul_kernel_intel.cpp:9)
+  burst buffer size = 1048576 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'c' (matmul_kernel_intel.cpp:8) in scope (matmul_kernel_intel.cpp:9)
+  burst buffer size = 1048576 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_burst_single_threshold_2.cpp:7) in scope (test_burst_single_threshold_2.cpp:10)
+  burst buffer size = 400000 bytes
+
+WARNING: [BURST-202] Memory burst inferred: variable 'a' (test_burst_single_threshold_2.cpp:17) in scope (test_burst_single_threshold_2.cpp:20)
+  with insufficient on-chip memory (4000000 bytes required)
+  Hint: 1. tile large loops into smaller ones to adjust the burst buffer size
+        2. specify the burst length threshold by adding interface attribute 
+        'max_burst_size=?'
+        3. decrease the single resource threshold by using 
+        '--attribute burst_single_size_threshold=?'
+        4. make range analysis accurate by changing 
+         pointer parameter into array parameter in sub function
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_burst_single_threshold_2.cpp:17) in scope (test_burst_single_threshold_2.cpp:20)
+  burst buffer size = 4000000 bytes
+
+WARNING: [BURST-205] Memory burst NOT inferred : variable 'a' (test_burst_single_threshold_2.cpp:7)in scope 'a' (test_burst_single_threshold_2.cpp:10) with big on-chip 
+  buffer.
+  Reason: required burst buffer is too large (400000 bytes)
+  Hint: 1. tile large loops into smaller ones to adjust the burst buffer size
+        2. specify the burst length threshold by adding interface attribute 
+        'max_burst_size=?'
+        3. decrease the single resource threshold by using 
+        '--attribute burst_single_size_threshold=?'
+        4. make range analysis accurate by changing 
+         pointer parameter into array parameter in sub function
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_intel_flow_cg_parallel.c:8) in scope (test_intel_flow_cg_parallel.c:10)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_intel_flow_cg_parallel.c:8) in scope (test_intel_flow_cg_parallel.c:10).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_intel_flow_cg_parallel.c:8) in scope (test_intel_flow_cg_parallel.c:10)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_intel_flow_cg_parallel.c:8) in scope (test_intel_flow_cg_parallel.c:10).
+  Reason: short burst length = 400 bytes
+
+
+WARNING: [CGPAR-214] Coarse-grained parallelization NOT applied: loop (test_intel_flow_cg_parallel.c:30) because access on ports cannot be streamed due to following reasons
+  Can not have while statment surrounding variable reference 'a[j]' (test_intel_flow_cg_parallel.c:22) in function 'top2' (test_intel_flow_cg_parallel.c:28) : while(j < 10){a[j] = b[j];j++;}
+  Can not have while statment surrounding variable reference 'b[j]' (test_intel_flow_cg_parallel.c:22) in function 'top2' (test_intel_flow_cg_parallel.c:28) : while(j < 10){a[j] = b[j];j++;}
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_intel_flow_cg_parallel.c:28) in scope (test_intel_flow_cg_parallel.c:30)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_intel_flow_cg_parallel.c:28) in scope (test_intel_flow_cg_parallel.c:30).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_intel_flow_cg_parallel.c:28) in scope (test_intel_flow_cg_parallel.c:30)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_intel_flow_cg_parallel.c:28) in scope (test_intel_flow_cg_parallel.c:30).
+  Reason: short burst length = 40 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'c' (test_intel_flow_cg_parallel.c:8) in scope (test_intel_flow_cg_parallel.c:10)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'c' (test_intel_flow_cg_parallel.c:8) in scope (test_intel_flow_cg_parallel.c:10).
+  Reason: short burst length = 40 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_xilinx_flow_cg_parallel.c:4) in scope (test_xilinx_flow_cg_parallel.c:6)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_xilinx_flow_cg_parallel.c:4) in scope (test_xilinx_flow_cg_parallel.c:6).
+  Reason: short burst length = 400 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_xilinx_flow_cg_parallel.c:4) in scope (test_xilinx_flow_cg_parallel.c:6)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_xilinx_flow_cg_parallel.c:4) in scope (test_xilinx_flow_cg_parallel.c:6).
+  Reason: short burst length = 400 bytes
+
+
+WARNING: [CGPAR-213] Coarse-grained parallelization NOT applied: loop (test_xilinx_flow_cg_parallel.c:18) because access on array 'a' (test_xilinx_flow_cg_parallel.c:16) cannot be parallelized due to required buffer size (4000000 bytes) more than single buffer size threshold (1048576 bytes).
+  Hint: 1. decrease parallel factor
+        2. specify the burst length threshold by adding interface attribute 
+        'max_burst_size=?'
+        3. increase the single resource threshold by using 
+        '--attribute burst_single_size_threshold=?'
+        4. make range analysis accurate by changing 
+        pointer parameter into array parameter in sub function 
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_xilinx_flow_cg_parallel.c:45) in scope (test_xilinx_flow_cg_parallel.c:48)
+  burst buffer size = 360 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_xilinx_flow_cg_parallel.c:45) in scope (test_xilinx_flow_cg_parallel.c:48).
+  Reason: short burst length = 360 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_xilinx_flow_cg_parallel.c:45) in scope (test_xilinx_flow_cg_parallel.c:48)
+  burst buffer size = 360 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_xilinx_flow_cg_parallel.c:45) in scope (test_xilinx_flow_cg_parallel.c:48).
+  Reason: short burst length = 360 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_xilinx_flow_cg_parallel.c:28) in scope (test_xilinx_flow_cg_parallel.c:31)
+  burst buffer size = 4000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_xilinx_flow_cg_parallel.c:28) in scope (test_xilinx_flow_cg_parallel.c:31)
+  burst buffer size = 4000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_xilinx_flow_cg_parallel.c:16) in scope (test_xilinx_flow_cg_parallel.c:18)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_xilinx_flow_cg_parallel.c:16) in scope (test_xilinx_flow_cg_parallel.c:18).
+  Reason: short burst length = 40 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_xilinx_flow_cg_parallel.c:28) in scope (test_xilinx_flow_cg_parallel.c:30)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_xilinx_flow_cg_parallel.c:28) in scope (test_xilinx_flow_cg_parallel.c:30).
+  Reason: short burst length = 40 bytes
+ due to small external memory
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_xilinx_flow_cg_parallel.c:28) in scope (test_xilinx_flow_cg_parallel.c:37)
+  burst buffer size = 40 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'a' (test_xilinx_flow_cg_parallel.c:28) in scope (test_xilinx_flow_cg_parallel.c:37).
+  Reason: short burst length = 40 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'b' (test_buff_name.cpp:3) in scope (test_buff_name.cpp:4)
+  burst buffer size = 400 bytes
+
+WARNING: [BURST-215] Low bandwidth efficiency of memory burst: variable 'b' (test_buff_name.cpp:3) in scope (test_buff_name.cpp:4).
+  Reason: short burst length = 400 bytes
+
+INFO: [BURST-101] Memory burst inferred: variable 'a' (test_buff_name.cpp:3) in scope (test_buff_name.cpp:4)
+  burst buffer size = 39616 bytes

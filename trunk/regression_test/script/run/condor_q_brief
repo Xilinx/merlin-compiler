@@ -1,0 +1,22 @@
+#!/bin/bash
+
+LINE_NUM=30
+
+if [ $# -gt 1 ]
+then
+LINE_NUM=$1
+fi
+
+user_name=$(whoami)
+echo "username=${user_name} "
+condor_q ${user_name} -wide | head -n $LINE_NUM
+
+TOTAL_LINE=$(condor_q ${user_name} -wide|wc -l)
+
+if [ $TOTAL_LINE -gt $LINE_NUM ]
+then
+echo "..."
+condor_q ${user_name} -wide | tail -n 2
+fi
+
+

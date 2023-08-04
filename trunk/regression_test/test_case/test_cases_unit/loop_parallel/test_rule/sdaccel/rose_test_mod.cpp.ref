@@ -1,0 +1,107 @@
+#pragma ACCEL kernel
+
+void func_top_37_0(int N)
+{
+  int a[100][100];
+  
+#pragma HLS array_partition variable=a complete dim=2
+  int b[100][100];
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) 
+// Original: #pragma ACCEL PIPELINE II = 1
+{
+    
+#pragma HLS pipeline II=1
+    for (j = 0; j < 100; j++) 
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+      
+#pragma HLS unroll
+      a[i % 50][j % 50] = b[i][j % N];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_37()
+{
+  int a[100][100];
+  
+#pragma HLS array_partition variable=a complete dim=2
+  int b[100][100];
+  
+#pragma HLS array_partition variable=b complete dim=2
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) 
+// Original: #pragma ACCEL PIPELINE II = 1
+{
+    
+#pragma HLS dependence variable=a array inter false 
+    
+#pragma HLS pipeline II=1
+    for (j = 0; j < 100; j++) 
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+      
+#pragma HLS unroll
+      a[i][j % 100] = b[i][j];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_38()
+{
+  int a[100][100];
+  
+#pragma HLS array_partition variable=a cyclic factor=8 dim=2
+  int b[100][100];
+  
+#pragma HLS array_partition variable=b cyclic factor=8 dim=2
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    for (j = 0; j < 100; j++) 
+// Original: #pragma ACCEL PARALLEL factor = 4
+{
+      
+#pragma HLS unroll factor=4
+      a[i][j % 99] = b[i][(j + 1) % 100] + b[i][(j + 3) % 100];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_39(int x,int y,int z,int sum[1])
+{
+  float sub_force_x[4] = {(0.0), (0.0), (0.0), (0.0)};
+  
+#pragma HLS array_partition variable=sub_force_x complete dim=1
+  float sub_force_y[4] = {(0.0), (0.0), (0.0), (0.0)};
+  
+#pragma HLS array_partition variable=sub_force_y complete dim=1
+  float sub_force_z[4] = {(0.0), (0.0), (0.0), (0.0)};
+  
+#pragma HLS array_partition variable=sub_force_z complete dim=1
+  int j;
+  int j0;
+  for (j = 0; j < 25; j++) 
+// Original: #pragma ACCEL PIPELINE
+{
+    
+#pragma HLS pipeline
+    for (j0 = 0; j0 < 4; j0++) 
+// Original: #pragma ACCEL PARALLEL
+{
+      
+#pragma HLS unroll
+      int jj = j * 4 + j0;
+      sub_force_x[jj % 4] += x;
+      sub_force_y[jj % 4] += y;
+      sub_force_z[jj % 4] += z;
+    }
+  }
+  sum[0] = (sub_force_x[0] + sub_force_y[0] + sub_force_z[0]);
+}

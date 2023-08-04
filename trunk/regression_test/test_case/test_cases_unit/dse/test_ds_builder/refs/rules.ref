@@ -1,0 +1,6 @@
+ERROR: [DSE-310] "options" error: Illegal option list P=[x for x in [1,2,3,4] if] in options: P=[x for x in [1,2,3,4] if]; default: 1
+ERROR: [DSE-332] Dependent parameter "sin" is either not an allowable builtin function or not in the design space
+ERROR: [DSE-315] Missing attribute "default" in options: P=range(10)
+ERROR: [DSE-332] Dependent parameter "I2" is either not an allowable builtin function or not in the design space
+ERROR: [DSE-333] Missing definition of parameter range(10); default: 1.
+ERROR: [DSE-308] Missing attribute "options" in default: 1

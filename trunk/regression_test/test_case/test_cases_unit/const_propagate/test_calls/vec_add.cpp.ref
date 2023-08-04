@@ -1,0 +1,60 @@
+#include<assert.h>
+extern int __merlin_include__GB_assert_h_0;
+int add_func_2(int a[100],int b[100],int i,int j,int c = 0);
+
+int add_func_1(int a,int b,int c)
+{
+  assert(c <= 1L && c >= 0L);
+  return a + b + c;
+}
+
+int add_func_2(int a[100],int b[100],int i,int j,int c)
+{
+  assert(c <= 1L && c >= 0L);
+  return a[i] + b[j] * c;
+}
+
+int add_func_3(int a,int b,int c)
+{
+  int c_copy = 1;
+  return a + b + 1;
+}
+#pragma ACCEL kernel
+
+void func_top_0()
+{
+  int a[100];
+  int b[100];
+  int i;
+  int j;
+  int aa = 1;
+  int bb = 0;
+  for (i = 0; i < 99; i++) {
+    for (j = 0; j < 90; j++) {
+      a[i] = add_func_1(b[j],b[j + 1],1);
+      a[i + 1] = add_func_1(b[j + 2],b[j + 3],0);
+    }
+  }
+  for (i = 0; i < 99; i++) {
+    for (j = 0; j < 99; j++) {
+      a[i] = add_func_2(b,b,j,j + 1,1);
+    }
+    a[i] += add_func_2(b,b,i,i + 1);
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_1()
+{
+  int a[100];
+  int b[100];
+  int i;
+  int j;
+  int aa = 1;
+  for (i = 0; i < 99; i++) {
+    for (j = 0; j < 90; j++) {
+      a[i] = add_func_3(b[j],b[j + 1],1);
+      a[i + 1] = add_func_3(b[j + 2],b[j + 3],1);
+    }
+  }
+}

@@ -1,0 +1,24 @@
+#pragma ACCEL kernel
+
+void func_top_0(int co)
+{
+  int c[5][100];
+  
+#pragma HLS array_partition variable=c complete dim=1
+  int k;
+  int i;
+  int j;
+  for (i = 0; i < 3; i++) 
+// Original: #pragma ACCEL pipeline
+{
+    
+#pragma HLS pipeline
+    for (int t = 0; t < 5; t++) 
+// Original: #pragma ACCEL parallel
+{
+      
+#pragma HLS unroll
+      c[t][co + t] = i;
+    }
+  }
+}

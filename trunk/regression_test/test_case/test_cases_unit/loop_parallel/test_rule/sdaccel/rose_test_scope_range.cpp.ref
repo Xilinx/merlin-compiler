@@ -1,0 +1,46 @@
+#include<ap_int.h>
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+  int a_buf[1];
+  
+#pragma HLS array_partition variable=a_buf complete dim=1
+//  class ap_uint< 8 > i = 0;
+  int i = 0;
+// Existing HLS partition: #pragma HLS array_partition variable=a_buf dim=1 complete
+  for (i = 0; i < 1; ++i) 
+// Original: #pragma ACCEL parallel complete
+{
+    
+#pragma HLS unroll
+    a_buf[i] = a[i];
+    if (i == 0) {
+    }
+     else {
+      a_buf[i - 1] = a[i];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void top2(int *a)
+{
+  int a_buf[1];
+  
+#pragma HLS array_partition variable=a_buf complete dim=1
+  class ap_uint< 8 > i = (0);
+// Existing HLS partition: #pragma HLS array_partition variable=a_buf dim=1 complete
+  for (i = 0; i<1;  ++ i) 
+// Original: #pragma ACCEL parallel complete
+{
+    
+#pragma HLS unroll
+    a_buf[i] = a[i];
+    if (i==0) {
+    }
+     else {
+      a_buf[(i-1)] = a[i];
+    }
+  }
+}

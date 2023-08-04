@@ -1,0 +1,67 @@
+#include<string.h>
+void sub1(int );
+void sub2(int *);
+#pragma ACCEL kernel
+
+void foo(int *a,int *b,int *c,int *d)
+{
+  int a_buf[1000];
+  int b_buf[1000];
+  int c_buf[1000];
+  long _memcpy_i_0;
+  for (_memcpy_i_0 = 0; _memcpy_i_0 < sizeof(int ) * ((unsigned long )1000) / 4; ++_memcpy_i_0) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=50
+    long total_offset1 = 0 * 0 + 0;
+    long total_offset2 = 0 * 1000 + 0;
+    a[total_offset1 + _memcpy_i_0] = a_buf[total_offset2 + _memcpy_i_0];
+  }
+  a[50]++;
+  a[60]--;
+  a[70] += a[40];
+  a[70] -= a[40];
+  a[70] &= a[40];
+  a[70] |= a[40];
+  a[70] ^= a[40];
+  a[70] >>= a[40];
+  a[70] <<= a[40];
+  a[70] %= a[40];
+  a[70] /= a[40];
+  long _memcpy_i_1;
+  for (_memcpy_i_1 = 0; _memcpy_i_1 < sizeof(int ) * ((unsigned long )1000) / 4; ++_memcpy_i_1) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=50
+    long total_offset1 = 0 * 1000 + 0;
+    long total_offset2 = 0 * 0 + 0;
+    b_buf[total_offset1 + _memcpy_i_1] = b[total_offset2 + _memcpy_i_1];
+  }
+  sub1(b[0]);
+  long _memcpy_i_2;
+  for (_memcpy_i_2 = 0; _memcpy_i_2 < sizeof(int ) * ((unsigned long )1000) / 4; ++_memcpy_i_2) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=50
+    long total_offset1 = 0 * 1000 + 0;
+    long total_offset2 = 0 * 0 + 0;
+    c_buf[total_offset1 + _memcpy_i_2] = c[total_offset2 + _memcpy_i_2];
+  }
+  sub2(&c[2]);
+  d[0]++;
+  switch(a[0]){
+    case 0:
+    a[0] += b[0];
+    break; 
+    default:
+    a_buf[0] = b[0];
+    break; 
+  }
+}
+
+int main()
+{
+  int *a;
+  int *b;
+  int *c;
+  int *d;
+  foo(a,b,c,d);
+  return 0;
+}

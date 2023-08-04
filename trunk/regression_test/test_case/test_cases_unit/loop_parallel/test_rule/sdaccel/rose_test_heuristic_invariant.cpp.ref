@@ -1,0 +1,25 @@
+#pragma ACCEL kernel
+
+void func_top_1(int input[2],int var)
+{
+  int b[2][16];
+  
+#pragma HLS array_partition variable=b complete dim=2
+  
+#pragma HLS array_partition variable=b complete dim=1
+  int write_idx = 0;
+  int read_idx = var / 8;
+  int t = 16;
+  while(t > 0)
+// Original: #pragma ACCEL pipeline
+{
+    
+#pragma HLS pipeline
+    b[0][write_idx % 16] = input[0];
+    b[1][write_idx % 16] = input[1];
+    input[0] = b[0][(read_idx + 0) % 16];
+    input[1] = b[1][(read_idx + 1) % 16];
+    write_idx++;
+    t--;
+  }
+}

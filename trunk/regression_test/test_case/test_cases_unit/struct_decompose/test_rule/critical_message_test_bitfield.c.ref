@@ -1,0 +1,4 @@
+
+ERROR: [DISAG-302] global port 'flag' (test_bitfield.c:5) with unsupported type: 
+bitfield decl: unsigned int a:1;
+ is not decomposed

@@ -1,0 +1,17 @@
+static int p_ZN2st1fEi(int i);
+
+static int p_ZN2st1fEi(int i)
+{
+  return i + 1;
+}
+namespace st
+{
+static void __merlin_dummy_SgFunctionDeclaration_int_st_f_();
+static void __merlin_dummy_SgFunctionDeclaration_int_st_f_();
+}
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+a[0] = p_ZN2st1fEi(a[0]);
+}

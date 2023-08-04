@@ -1,0 +1,155 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(unsigned char ii = 0;ii < 100;ii++) {...}
+SgForStatement:for(unsigned char ii = 0;_s_ii < 100;_s_ii++) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(i = 0;i < 100;i++) {...}
+SgForStatement:for(_s_i = 0;_s_i < 100;_s_i++) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(i = 0;i < 100;i++) {...}
+SgForStatement:for(_s_i_0 = 0;_s_i_0 < 100;_s_i_0++) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(i0 = 0;i0 < 100;i0++) {...}
+SgForStatement:for(_s_i0 = 0;_s_i0 < 100;_s_i0++) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for((i = 0 , j = 0);i < 100;i++) {...}
+SgForStatement:for((_s_i_1 = 0 , j = 0);_s_i_1 < 100;_s_i_1++) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for((i = 0 , j = 0);i < 100;i++) {...}
+SgForStatement:for((_s_i_2 = 0 , j = 0);_s_i_2 < 100;_s_i_2++) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for((i0 = 0 , j = 1);i0 < 100;i0++) {...}
+SgForStatement:for((_s_i0_0 = 0 , j = 1);_s_i0_0 < 100;_s_i0_0++) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void func_loop(int [100] aa,int [100] bb) {...}
+  SgFunctionDeclaration int main() {...}
+  SgBasicBlock {aa[_s_ii] = bb[_s_ii];}
+  SgForStatement for(_s_ii =((unsigned char )0);_s_ii <= 99;++_s_ii) {...}
+  SgBasicBlock {c[_s_i] = a[_s_i] + b[_s_i];}
+  SgForStatement for(_s_i =((char )0);_s_i <= 'c';++_s_i) {...}
+  SgBasicBlock {c[_s_i_0] = a[_s_i_0] + b[_s_i_0];}
+  SgForStatement for(_s_i_0 =((char )0);_s_i_0 <= 'c';++_s_i_0) {...}
+  SgBasicBlock {c[_s_i0] = a[_s_i0] + b[_s_i0];}
+  SgForStatement for(_s_i0 =((unsigned char )0);_s_i0 <= 99;++_s_i0) {...}
+  SgBasicBlock {c[_s_i_1] = a[_s_i_1] + b[j];}
+  SgForStatement for(_s_i_1 =((char )0);_s_i_1 <= 'c';++_s_i_1) {...}
+  SgBasicBlock {c[_s_i_2] = a[_s_i_2] + b[j];}
+  SgForStatement for(_s_i_2 =((char )0);_s_i_2 <= 'c';++_s_i_2) {...}
+  SgBasicBlock {c[_s_i0_0] = a[_s_i0_0] + b[j];}
+  SgForStatement for(_s_i0_0 =((unsigned char )0);_s_i0_0 <= 99;++_s_i0_0) {...}
+
+Arrays: 
+  int [100] aa
+  int [100] bb
+  int [10] a
+  int [10] b
+  int [10] c
+  int [100] aa
+  int [100] bb
+
+Ranges: 
+  SgFunctionDeclaration void func_loop(int [100] aa,int [100] bb) {...}
+    int [100] aa :  W[0..99 exact]
+    int [100] bb :  R[0..99 exact]
+    int [10] a :  R[0..99 exact]
+    int [10] b :  R[0..99 exact]
+    int [10] c :  W[0..99 exact]
+  SgFunctionDeclaration int main() {...}
+    int [100] aa :  W[0..99 exact]
+    int [100] bb :  R[0..99 exact]
+  SgBasicBlock {aa[_s_ii] = bb[_s_ii];}
+    int [100] aa :  W[_s_ii.._s_ii exact]
+    int [100] bb :  R[_s_ii.._s_ii exact]
+  SgForStatement for(_s_ii =((unsigned char )0);_s_ii <= 99;++_s_ii) {...}
+    int [100] aa :  W[0..99 exact]
+    int [100] bb :  R[0..99 exact]
+  SgBasicBlock {c[_s_i] = a[_s_i] + b[_s_i];}
+    int [10] a :  R[_s_i.._s_i exact]
+    int [10] b :  R[_s_i.._s_i exact]
+    int [10] c :  W[_s_i.._s_i exact]
+  SgForStatement for(_s_i =((char )0);_s_i <= 'c';++_s_i) {...}
+    int [10] a :  R[0..99 exact]
+    int [10] b :  R[0..99 exact]
+    int [10] c :  W[0..99 exact]
+  SgBasicBlock {c[_s_i_0] = a[_s_i_0] + b[_s_i_0];}
+    int [10] a :  R[_s_i_0.._s_i_0 exact]
+    int [10] b :  R[_s_i_0.._s_i_0 exact]
+    int [10] c :  W[_s_i_0.._s_i_0 exact]
+  SgForStatement for(_s_i_0 =((char )0);_s_i_0 <= 'c';++_s_i_0) {...}
+    int [10] a :  R[0..99 exact]
+    int [10] b :  R[0..99 exact]
+    int [10] c :  W[0..99 exact]
+  SgBasicBlock {c[_s_i0] = a[_s_i0] + b[_s_i0];}
+    int [10] a :  R[_s_i0.._s_i0 exact]
+    int [10] b :  R[_s_i0.._s_i0 exact]
+    int [10] c :  W[_s_i0.._s_i0 exact]
+  SgForStatement for(_s_i0 =((unsigned char )0);_s_i0 <= 99;++_s_i0) {...}
+    int [10] a :  R[0..99 exact]
+    int [10] b :  R[0..99 exact]
+    int [10] c :  W[0..99 exact]
+  SgBasicBlock {c[_s_i_1] = a[_s_i_1] + b[j];}
+    int [10] a :  R[_s_i_1.._s_i_1 exact]
+    int [10] b :  R[0..0 exact]
+    int [10] c :  W[_s_i_1.._s_i_1 exact]
+  SgForStatement for(_s_i_1 =((char )0);_s_i_1 <= 'c';++_s_i_1) {...}
+    int [10] a :  R[0..99 exact]
+    int [10] b :  R[0..0 exact]
+    int [10] c :  W[0..99 exact]
+  SgBasicBlock {c[_s_i_2] = a[_s_i_2] + b[j];}
+    int [10] a :  R[_s_i_2.._s_i_2 exact]
+    int [10] b :  R[0..0 exact]
+    int [10] c :  W[_s_i_2.._s_i_2 exact]
+  SgForStatement for(_s_i_2 =((char )0);_s_i_2 <= 'c';++_s_i_2) {...}
+    int [10] a :  R[0..99 exact]
+    int [10] b :  R[0..0 exact]
+    int [10] c :  W[0..99 exact]
+  SgBasicBlock {c[_s_i0_0] = a[_s_i0_0] + b[j];}
+    int [10] a :  R[_s_i0_0.._s_i0_0 exact]
+    int [10] b :  R[1..1 exact]
+    int [10] c :  W[_s_i0_0.._s_i0_0 exact]
+  SgForStatement for(_s_i0_0 =((unsigned char )0);_s_i0_0 <= 99;++_s_i0_0) {...}
+    int [10] a :  R[0..99 exact]
+    int [10] b :  R[1..1 exact]
+    int [10] c :  W[0..99 exact]
+

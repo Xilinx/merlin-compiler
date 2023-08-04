@@ -1,0 +1,84 @@
+//(C) Copyright 2016-2021 Xilinx, Inc.
+//All Rights Reserved.
+//
+//Licensed to the Apache Software Foundation (ASF) under one
+//or more contributor license agreements.  See the NOTICE file
+//distributed with this work for additional information
+//regarding copyright ownership.  The ASF licenses this file
+//to you under the Apache License, Version 2.0 (the
+//"License"); you may not use this file except in compliance
+//with the License.  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//Unless required by applicable law or agreed to in writing,
+//software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+//KIND, either express or implied.  See the License for the
+//specific language governing permissions and limitations
+//under the License. (edited)
+#include <string.h> 
+#define GAP_PENALTY -1
+#define TRANSITION_PENALTY -2
+#define TRANSVERSION_PENALTY -4
+#define MATCH 2
+#define GAP 0
+//extern const char alignment_score_matrix[5][5];
+#include <stdio.h>
+#include <math.h>
+//enum Nucleotide {GAP=0, ADENINE, CYTOSINE, GUANINE, THYMINE};
+//signed char char_mapping ( char c ) {
+//    signed char to_be_returned = -1;
+//    switch(c) {
+//        case '_': to_be_returned = GAP; break;
+//        case 'A': to_be_returned = ADENINE; break;
+//        case 'C': to_be_returned = CYTOSINE; break;
+//        case 'G': to_be_returned = GUANINE; break;
+//        case 'T': to_be_returned = THYMINE; break;
+//    }
+//    return to_be_returned;
+//}
+#define alignment_score_matrix(x,y) ((x==0||y==0) ? GAP_PENALTY : (x==y)? MATCH: TRANSITION_PENALTY)
+#define VEC_SIZE 100
+#pragma ACCEL kernel
+void smithwaterman_kernel(int *string_1,int *string_2,int *score)
+{
+  int score_buf_0[10000];
+  int __memcpy_i_0;
+  int string_2_buf_0_0[99];
+  int __memcpy_i_1_0;
+  int string_1_buf_0_0[99];
+  int __memcpy_i_2_0;
+  int i_0;
+  int j_0;
+  signed char char_from_1_0_0;
+  signed char char_from_2_0_0;
+  int diag_score_0_0;
+  int left_score_0_0;
+  int top_score_0_0;
+  int bigger_of_left_top_0_0;
+  int __memcpy_i_3_0;
+  for (__memcpy_i_0 = 0; __memcpy_i_0 < sizeof(int ) * ((unsigned long )10000) / 4; ++__memcpy_i_0) {
+    score_buf_0[__memcpy_i_0 + 0] = score[__memcpy_i_0 + 0];
+  }
+  for (__memcpy_i_1_0 = 0; __memcpy_i_1_0 < sizeof(int ) * ((unsigned long )99) / 4; ++__memcpy_i_1_0) {
+    string_2_buf_0_0[__memcpy_i_1_0 + 0] = string_2[__memcpy_i_1_0 + 0];
+  }
+  for (__memcpy_i_2_0 = 0; __memcpy_i_2_0 < sizeof(int ) * ((unsigned long )99) / 4; ++__memcpy_i_2_0) {
+    string_1_buf_0_0[__memcpy_i_2_0 + 0] = string_1[__memcpy_i_2_0 + 0];
+  }
+  for (i_0 = 1; i_0 < 100; ++i_0) {
+    for (j_0 = 1; j_0 < 100; ++j_0) {
+      char_from_1_0_0 = ((signed char )(string_1_buf_0_0[- 1 + j_0] % 4 + 1));
+      char_from_2_0_0 = ((signed char )(string_2_buf_0_0[- 1 + i_0] % 4 + 1));
+      diag_score_0_0 = score_buf_0[- 101 + i_0 * 100 + j_0] + ((((int )char_from_2_0_0) == 0 || ((int )char_from_1_0_0) == 0?- 1 : ((((int )char_from_2_0_0) == ((int )char_from_1_0_0)?2 : - 2))));
+      left_score_0_0 = score_buf_0[- 1 + i_0 * 100 + j_0] + ((((int )char_from_1_0_0) == 0 || 0 == 0?- 1 : ((((int )char_from_1_0_0) == 0?2 : - 2))));
+      top_score_0_0 = score_buf_0[- 100 + i_0 * 100 + j_0] + ((0 == 0 || ((int )char_from_2_0_0) == 0?- 1 : ((0 == ((int )char_from_2_0_0)?2 : - 2))));
+      bigger_of_left_top_0_0 = (left_score_0_0 > top_score_0_0?left_score_0_0 : top_score_0_0);
+      score_buf_0[i_0 * 100 + j_0] = (bigger_of_left_top_0_0 > diag_score_0_0?bigger_of_left_top_0_0 : diag_score_0_0);
+    }
+  }
+  for (__memcpy_i_3_0 = 0; __memcpy_i_3_0 < sizeof(int ) * ((unsigned long )10000) / 4; ++__memcpy_i_3_0) {
+    score[__memcpy_i_3_0 + 0] = score_buf_0[__memcpy_i_3_0 + 0];
+  }
+}

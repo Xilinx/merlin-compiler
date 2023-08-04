@@ -1,0 +1,7 @@
+
+WARNING: [PROCS-202] Found a non-canonical loop 'while(i < 2){a_buf[i' (while_check.c:18) which may affect the quality of the result
+
+WARNING: [PROCS-224] Found multiple loops containing the accesses of an local array 'a_buf' (while_check.c:10).
+
+
+WARNING: [COMCK-207] While/do-while loop 'while(i < 2){a_buf[i] = aa[val * i + j] + bb[DIM11 * j + i];c[i] += a_buf[i];i++;}' (while_check.c:18) is not supported

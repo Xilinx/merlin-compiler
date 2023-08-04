@@ -1,0 +1,8 @@
+
+ERROR: [MDARR-304] Complex pointer reinterpretation on interface array/pointer is not supported : 
+    Array: int [40][40] a (add_test4.c:2)
+    Reference: *(((char *)a[2]) + 4) = 0; (add_test4.c:4)
+    In function: void top(int [40][40] a,int ** b) {...} (add_test4.c:2)
+
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'b' (add_test4.c:2)

@@ -1,0 +1,2 @@
+INFO: [FGPIP-102] Loop 'i' (test_struct_3.cpp:6) is fully parallelized
+INFO: [FGPIP-103] Loop 'i'  (test_struct_3.cpp:13) is pipelined

@@ -1,0 +1,4 @@
+
+ERROR: [INFTF-301] Kernel and all the functions used in a kernel cannot be declared in the header file, if it contains struct parameters
+    Function name  : void call_f4(struct f4 l_f4) {...}
+    File location  : (head.h:5)

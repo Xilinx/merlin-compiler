@@ -1,0 +1,198 @@
+Hello Program Analysis ... 
+**** Test Expression Generation **** 
+  [Exp SgGreaterOrEqualOp:2 * j >= 10]  @9 {2 * j >= 10:SgGreaterOrEqualOp 2 * j >= 10->1,0} : 2 * j >= 10..2 * j >= 10
+  loop variant
+  [Exp SgMultiplyOp:2 * j]  @9 {j * 2:SgForStatement j->2,0} : 0..198
+  loop variant
+  [Exp SgIntVal:2]  @9 2
+  loop invariant
+  [Exp SgVarRefExp:j]  @9 {j:SgForStatement j->1,0} : 0..99
+  loop variant
+  [Exp SgIntVal:10]  @9 10
+  loop invariant
+[Exp 9 SgGreaterOrEqualOp:2 * j >= 10] {2 * j >= 10:SgGreaterOrEqualOp 2 * j >= 10->1,0} : 2 * j >= 10..2 * j >= 10
+loop variant
+  [Exp SgVarRefExp:j]  @10 {j:SgForStatement j->1,0} : 5..99
+  loop variant
+[Exp 10 SgVarRefExp:j] {j:SgForStatement j->1,0} : 5..99
+loop variant
+  [Exp SgAddOp:j + 1]  @12 {1 + j:SgForStatement j->1,1} : 1..5
+  loop variant
+  [Exp SgVarRefExp:j]  @12 {j:SgForStatement j->1,0} : 0..4
+  loop variant
+  [Exp SgIntVal:1]  @12 1
+  loop invariant
+[Exp 12 SgAddOp:j + 1] {1 + j:SgForStatement j->1,1} : 1..5
+loop variant
+  [Exp SgLessOrEqualOp:2 * j <= 10]  @17 {2 * j <= 10:SgLessOrEqualOp 2 * j <= 10->1,0} : 2 * j <= 10..2 * j <= 10
+  loop variant
+  [Exp SgMultiplyOp:2 * j]  @17 {j * 2:SgForStatement j->2,0} : 0..198
+  loop variant
+  [Exp SgIntVal:2]  @17 2
+  loop invariant
+  [Exp SgVarRefExp:j]  @17 {j:SgForStatement j->1,0} : 0..99
+  loop variant
+  [Exp SgIntVal:10]  @17 10
+  loop invariant
+[Exp 17 SgLessOrEqualOp:2 * j <= 10] {2 * j <= 10:SgLessOrEqualOp 2 * j <= 10->1,0} : 2 * j <= 10..2 * j <= 10
+loop variant
+  [Exp SgVarRefExp:j]  @18 {j:SgForStatement j->1,0} : 0..5
+  loop variant
+[Exp 18 SgVarRefExp:j] {j:SgForStatement j->1,0} : 0..5
+loop variant
+  [Exp SgSubtractOp:j - 1]  @20 {-1 + j:SgForStatement j->1,-1} : 5..98
+  loop variant
+  [Exp SgVarRefExp:j]  @20 {j:SgForStatement j->1,0} : 6..99
+  loop variant
+  [Exp SgIntVal:1]  @20 1
+  loop invariant
+[Exp 20 SgSubtractOp:j - 1] {-1 + j:SgForStatement j->1,-1} : 5..98
+loop variant
+  [Exp SgGreaterThanOp:3 * j > 10]  @25 {3 * j > 10:SgGreaterThanOp 3 * j > 10->1,0} : 3 * j > 10..3 * j > 10
+  loop variant
+  [Exp SgMultiplyOp:3 * j]  @25 {j * 3:SgForStatement j->3,0} : 0..297
+  loop variant
+  [Exp SgIntVal:3]  @25 3
+  loop invariant
+  [Exp SgVarRefExp:j]  @25 {j:SgForStatement j->1,0} : 0..99
+  loop variant
+  [Exp SgIntVal:10]  @25 10
+  loop invariant
+[Exp 25 SgGreaterThanOp:3 * j > 10] {3 * j > 10:SgGreaterThanOp 3 * j > 10->1,0} : 3 * j > 10..3 * j > 10
+loop variant
+  [Exp SgVarRefExp:j]  @26 {j:SgForStatement j->1,0} : 0..99
+  loop variant
+[Exp 26 SgVarRefExp:j] {j:SgForStatement j->1,0} : 0..99
+loop variant
+  [Exp SgMultiplyOp:j * 2]  @28 {j * 2:SgForStatement j->2,0} : 0..198
+  loop variant
+  [Exp SgVarRefExp:j]  @28 {j:SgForStatement j->1,0} : 0..99
+  loop variant
+  [Exp SgIntVal:2]  @28 2
+  loop invariant
+[Exp 28 SgMultiplyOp:j * 2] {j * 2:SgForStatement j->2,0} : 0..198
+loop variant
+  [Exp SgLessThanOp:3 * j < 10]  @33 {3 * j < 10:SgLessThanOp 3 * j < 10->1,0} : 3 * j < 10..3 * j < 10
+  loop variant
+  [Exp SgMultiplyOp:3 * j]  @33 {j * 3:SgForStatement j->3,0} : 0..297
+  loop variant
+  [Exp SgIntVal:3]  @33 3
+  loop invariant
+  [Exp SgVarRefExp:j]  @33 {j:SgForStatement j->1,0} : 0..99
+  loop variant
+  [Exp SgIntVal:10]  @33 10
+  loop invariant
+[Exp 33 SgLessThanOp:3 * j < 10] {3 * j < 10:SgLessThanOp 3 * j < 10->1,0} : 3 * j < 10..3 * j < 10
+loop variant
+  [Exp SgVarRefExp:j]  @34 {j:SgForStatement j->1,0} : 0..99
+  loop variant
+[Exp 34 SgVarRefExp:j] {j:SgForStatement j->1,0} : 0..99
+loop variant
+  [Exp SgSubtractOp:j - 2]  @36 {-2 + j:SgForStatement j->1,-2} : -2..97
+  loop variant
+  [Exp SgVarRefExp:j]  @36 {j:SgForStatement j->1,0} : 0..99
+  loop variant
+  [Exp SgIntVal:2]  @36 2
+  loop invariant
+[Exp 36 SgSubtractOp:j - 2] {-2 + j:SgForStatement j->1,-2} : -2..97
+loop variant
+  [Exp SgEqualityOp:j == 10]  @41 {j == 10:SgEqualityOp j == 10->1,0} : j == 10..j == 10
+  loop variant
+  [Exp SgVarRefExp:j]  @41 {j:SgForStatement j->1,0} : 0..99
+  loop variant
+  [Exp SgIntVal:10]  @41 10
+  loop invariant
+[Exp 41 SgEqualityOp:j == 10] {j == 10:SgEqualityOp j == 10->1,0} : j == 10..j == 10
+loop variant
+  [Exp SgVarRefExp:j]  @42 {j:SgForStatement j->1,0} : 10..10
+  loop variant
+[Exp 42 SgVarRefExp:j] {j:SgForStatement j->1,0} : 10..10
+loop variant
+  [Exp SgSubtractOp:j - 2]  @44 {-2 + j:SgForStatement j->1,-2} : -2..97
+  loop variant
+  [Exp SgVarRefExp:j]  @44 {j:SgForStatement j->1,0} : 0..99
+  loop variant
+  [Exp SgIntVal:2]  @44 2
+  loop invariant
+[Exp 44 SgSubtractOp:j - 2] {-2 + j:SgForStatement j->1,-2} : -2..97
+loop variant
+  [Exp SgNotEqualOp:j != 99]  @49 {j != 99:SgNotEqualOp j != 99->1,0} : j != 99..j != 99
+  loop variant
+  [Exp SgVarRefExp:j]  @49 {j:SgForStatement j->1,0} : 0..99
+  loop variant
+  [Exp SgIntVal:99]  @49 99
+  loop invariant
+[Exp 49 SgNotEqualOp:j != 99] {j != 99:SgNotEqualOp j != 99->1,0} : j != 99..j != 99
+loop variant
+  [Exp SgVarRefExp:j]  @50 {j:SgForStatement j->1,0} : 0..98
+  loop variant
+[Exp 50 SgVarRefExp:j] {j:SgForStatement j->1,0} : 0..98
+loop variant
+  [Exp SgSubtractOp:j - 2]  @52 {-2 + j:SgForStatement j->1,-2} : 97..97
+  loop variant
+  [Exp SgVarRefExp:j]  @52 {j:SgForStatement j->1,0} : 99..99
+  loop variant
+  [Exp SgIntVal:2]  @52 2
+  loop invariant
+[Exp 52 SgSubtractOp:j - 2] {-2 + j:SgForStatement j->1,-2} : 97..97
+loop variant
+  [Exp SgNotEqualOp:j != 0]  @57 {j != 0:SgNotEqualOp j != 0->1,0} : j != 0..j != 0
+  loop variant
+  [Exp SgVarRefExp:j]  @57 {j:SgForStatement j->1,0} : 0..99
+  loop variant
+  [Exp SgIntVal:0]  @57 0
+  loop invariant
+[Exp 57 SgNotEqualOp:j != 0] {j != 0:SgNotEqualOp j != 0->1,0} : j != 0..j != 0
+loop variant
+  [Exp SgVarRefExp:j]  @58 {j:SgForStatement j->1,0} : 1..99
+  loop variant
+[Exp 58 SgVarRefExp:j] {j:SgForStatement j->1,0} : 1..99
+loop variant
+  [Exp SgSubtractOp:j - 2]  @60 {-2 + j:SgForStatement j->1,-2} : -2..-2
+  loop variant
+  [Exp SgVarRefExp:j]  @60 {j:SgForStatement j->1,0} : 0..0
+  loop variant
+  [Exp SgIntVal:2]  @60 2
+  loop invariant
+[Exp 60 SgSubtractOp:j - 2] {-2 + j:SgForStatement j->1,-2} : -2..-2
+loop variant
+  [Exp SgConditionalExp:0?0 : j]  @65 {j:SgForStatement j->1,0} : 0..99
+  loop variant
+  [Exp SgIntVal:0]  @65 0
+  loop invariant
+  [Exp SgIntVal:0]  @65 0
+  loop invariant
+  [Exp SgVarRefExp:j]  @65 {j:SgForStatement j->1,0} : 0..99
+  loop variant
+[Exp 65 SgConditionalExp:0?0 : j] {j:SgForStatement j->1,0} : 0..99
+loop variant
+  [Exp SgConditionalExp:1?j * 2 : 1]  @66 {j * 2:SgForStatement j->2,0} : 0..198
+  loop variant
+  [Exp SgIntVal:1]  @66 1
+  loop invariant
+  [Exp SgMultiplyOp:j * 2]  @66 {j * 2:SgForStatement j->2,0} : 0..198
+  loop variant
+  [Exp SgVarRefExp:j]  @66 {j:SgForStatement j->1,0} : 0..99
+  loop variant
+  [Exp SgIntVal:2]  @66 2
+  loop invariant
+  [Exp SgIntVal:1]  @66 1
+  loop invariant
+[Exp 66 SgConditionalExp:1?j * 2 : 1] {j * 2:SgForStatement j->2,0} : 0..198
+loop variant
+1.20000L (expected 1.2)
+1.20000 (expected 1.2)
+Warning: TransformationSupport::getFile(str_val) == NULL 
+"Hello World" (expected Hello World)
+'Z' (expected Z)
+90 (expected Z)
+12345678900000L (expected 12345678900000)
+j++ with unary op mode 1
+j++ with unary op mode 1
+j++ with unary op mode 1
+j++ with unary op mode 1
+j++ with unary op mode 1
+j++ with unary op mode 1
+j++ with unary op mode 1
+j++ with unary op mode 1
+

@@ -1,0 +1,355 @@
+#include "merlin_stream.h" 
+#include "merlin_stream.h" 
+#include "merlin_stream.h" 
+#include "merlin_stream.h" 
+#include "merlin_stream.h" 
+extern int __merlin_include__GB_merlin_stream_h_4;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=32 NODE=msm_node_4 PORT=msm_port_j_l10_l22_l36_l52_l69_msm_node_4_0 
+merlin_stream ch______j_l10_l22_l36_l52_l69_8;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=100 NODE=msm_node_4 PORT=msm_port_a_buf_msm_node_4_0 
+merlin_stream ch_a_buf_7;
+extern int __merlin_include__GB_merlin_stream_h_3;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=100 NODE=msm_node_3 PORT=msm_port_a_buf_msm_node_3_0 
+merlin_stream ch_a_buf_6;
+extern int __merlin_include__GB_merlin_stream_h_2;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=100 NODE=msm_node_2 PORT=msm_port_a_buf_msm_node_2_0 
+merlin_stream ch_a_buf_5;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=100 NODE=msm_node_2 PORT=msm_port_b_buf_msm_node_2_0 
+merlin_stream ch_b_buf_4;
+extern int __merlin_include__GB_merlin_stream_h_1;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=100 NODE=msm_node_1 PORT=msm_port_a_msm_node_1_0 
+merlin_stream ch_a_3;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=100 NODE=msm_node_1 PORT=msm_port_b_msm_node_1_0 
+merlin_stream ch_b_2;
+extern int __merlin_include__GB_merlin_stream_h_0;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=100 NODE=msm_node_0 PORT=msm_port_a_msm_node_0_0 
+merlin_stream ch_a_1;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=100 NODE=msm_node_0 PORT=msm_port_b_msm_node_0_0 
+merlin_stream ch_b_0;
+#include<string.h>
+
+void msm_node_0(int *b,int *a,int _j_l1)
+{
+  int __j_l1;
+  
+#pragma ACCEL spawn
+  for (int _____i_l2_l11_l23_l37_l53 = 0; _____i_l2_l11_l23_l37_l53 < 100; _____i_l2_l11_l23_l37_l53++) {
+    int a_sn_tmp_0;
+    int b_sn_tmp_0;
+    merlin_stream_read(&ch_b_0,&b_sn_tmp_0);
+    a_sn_tmp_0 = b_sn_tmp_0;
+    merlin_stream_write(&ch_a_1,&a_sn_tmp_0);
+  }
+}
+
+void msm_port_b_msm_node_0_0(int *b,int _j_l1)
+{
+  int __j_l1;
+  __j_l1 = _j_l1;
+  for (int _____i_l2_l12_l24_l38_l54 = 0; _____i_l2_l12_l24_l38_l54 < 100; _____i_l2_l12_l24_l38_l54++) {
+    int b_sp_tmp_0;
+    b_sp_tmp_0 = b[__j_l1 * 100 + _____i_l2_l12_l24_l38_l54];
+    merlin_stream_write(&ch_b_0,&b_sp_tmp_0);
+  }
+}
+
+void msm_port_a_msm_node_0_0(int *a,int _j_l1)
+{
+  int __j_l1;
+  __j_l1 = _j_l1;
+  for (int _____i_l2_l13_l25_l39_l55 = 0; _____i_l2_l13_l25_l39_l55 < 100; _____i_l2_l13_l25_l39_l55++) {
+    int a_sp_tmp_0;
+    merlin_stream_read(&ch_a_1,&a_sp_tmp_0);
+    a[__j_l1 * 100 + _____i_l2_l13_l25_l39_l55] = a_sp_tmp_0;
+  }
+}
+
+void msm_port_j_l1_msm_node_0_0(int _j_l1)
+{
+  int __j_l1;
+  __j_l1 = _j_l1;
+  __j_l1;
+}
+#pragma ACCEL kernel
+
+void kernel_top(int *a,int *b)
+{
+  for (int _____j_l1_l14_l26_l40_l56 = 0; _____j_l1_l14_l26_l40_l56 < 100; _____j_l1_l14_l26_l40_l56++) {{
+      merlin_stream_init(&ch_b_0,0,4);
+      
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=1 NODE=msm_node_0 VARIABLE=b 
+      msm_port_b_msm_node_0_0(b,_j_l1);
+    }
+    merlin_stream_init(&ch_a_1,0,4);
+{
+      
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=0 NODE=msm_node_0 VARIABLE=_j_l1 
+      msm_port_j_l1_msm_node_0_0(_j_l1);
+    }
+    
+#pragma ACCEL STREAM_NODE 
+    msm_node_0(b,a,_____j_l1_l14_l26_l40_l56);
+{
+      
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=write DIM_NUM=1 NODE=msm_node_0 VARIABLE=a 
+      msm_port_a_msm_node_0_0(a,_j_l1);
+      merlin_stream_reset(&ch_a_1);
+    }
+    merlin_stream_reset(&ch_b_0);
+  }
+}
+
+void msm_node_1(int *b,int *a)
+{
+  
+#pragma ACCEL spawn
+  for (int _____i_l4_l16_l27_l41_l57 = 0; _____i_l4_l16_l27_l41_l57 < 100; _____i_l4_l16_l27_l41_l57++) {
+    int a_sn_tmp_0;
+    int b_sn_tmp_0;
+    merlin_stream_read(&ch_b_2,&b_sn_tmp_0);
+    a_sn_tmp_0 = b_sn_tmp_0 + 1;
+    merlin_stream_write(&ch_a_3,&a_sn_tmp_0);
+  }
+}
+
+void msm_port_b_msm_node_1_0(int *b)
+{
+  for (int _____i_l4_l16_l28_l42_l58 = 0; _____i_l4_l16_l28_l42_l58 < 100; _____i_l4_l16_l28_l42_l58++) {
+    int b_sp_tmp_0;
+    b_sp_tmp_0 = b[_____i_l4_l16_l28_l42_l58];
+    merlin_stream_write(&ch_b_2,&b_sp_tmp_0);
+  }
+}
+
+void msm_port_a_msm_node_1_0(int *a)
+{
+  for (int _____i_l4_l16_l29_l43_l59 = 0; _____i_l4_l16_l29_l43_l59 < 100; _____i_l4_l16_l29_l43_l59++) {
+    int a_sp_tmp_0;
+    merlin_stream_read(&ch_a_3,&a_sp_tmp_0);
+    a[_____i_l4_l16_l29_l43_l59] = a_sp_tmp_0;
+  }
+}
+#pragma ACCEL kernel
+
+void kernel_top1(int *a,int *b)
+{
+  for (int _____j_l3_l15_l30_l44_l60 = 0; _____j_l3_l15_l30_l44_l60 < 100; _____j_l3_l15_l30_l44_l60++) {{
+      merlin_stream_init(&ch_b_2,0,4);
+      
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=1 NODE=msm_node_1 VARIABLE=b 
+      msm_port_b_msm_node_1_0(b);
+    }
+    merlin_stream_init(&ch_a_3,0,4);
+    
+#pragma ACCEL STREAM_NODE 
+    msm_node_1(b,a);
+{
+      
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=write DIM_NUM=1 NODE=msm_node_1 VARIABLE=a 
+      msm_port_a_msm_node_1_0(a);
+      merlin_stream_reset(&ch_a_3);
+    }
+    merlin_stream_reset(&ch_b_2);
+  }
+}
+
+void msm_node_2(int b_buf[10000],int a_buf[10000],int ___j_l5_l17_l31)
+{
+  int ____j_l5_l17_l31;
+  
+#pragma ACCEL spawn
+  for (int _____i_l6_l18_l32_l45_l61 = 0; _____i_l6_l18_l32_l45_l61 < 100; _____i_l6_l18_l32_l45_l61++) {
+    int a_buf_sn_tmp_0;
+    int b_buf_sn_tmp_0;
+    merlin_stream_read(&ch_b_buf_4,&b_buf_sn_tmp_0);
+    a_buf_sn_tmp_0 = b_buf_sn_tmp_0;
+    merlin_stream_write(&ch_a_buf_5,&a_buf_sn_tmp_0);
+  }
+}
+
+void msm_port_b_buf_msm_node_2_0(int b_buf[10000],int ___j_l5_l17_l31)
+{
+  int ____j_l5_l17_l31;
+  ____j_l5_l17_l31 = ___j_l5_l17_l31;
+  for (int _____i_l6_l18_l32_l46_l62 = 0; _____i_l6_l18_l32_l46_l62 < 100; _____i_l6_l18_l32_l46_l62++) {
+    int b_buf_sp_tmp_0;
+    b_buf_sp_tmp_0 = b_buf[____j_l5_l17_l31 * 100 + _____i_l6_l18_l32_l46_l62];
+    merlin_stream_write(&ch_b_buf_4,&b_buf_sp_tmp_0);
+  }
+}
+
+void msm_port_a_buf_msm_node_2_0(int a_buf[10000],int ___j_l5_l17_l31)
+{
+  int ____j_l5_l17_l31;
+  ____j_l5_l17_l31 = ___j_l5_l17_l31;
+  for (int _____i_l6_l18_l32_l47_l63 = 0; _____i_l6_l18_l32_l47_l63 < 100; _____i_l6_l18_l32_l47_l63++) {
+    int a_buf_sp_tmp_0;
+    merlin_stream_read(&ch_a_buf_5,&a_buf_sp_tmp_0);
+    a_buf[____j_l5_l17_l31 * 100 + _____i_l6_l18_l32_l47_l63] = a_buf_sp_tmp_0;
+  }
+}
+
+void msm_port_j_l5_l17_l31_msm_node_2_0(int ___j_l5_l17_l31)
+{
+  int ____j_l5_l17_l31;
+  ____j_l5_l17_l31 = ___j_l5_l17_l31;
+  ____j_l5_l17_l31;
+}
+#pragma ACCEL kernel
+
+void kernel_top2(int *a,int *b)
+{
+  int a_buf[10000];
+  int b_buf[10000];
+  memcpy(b_buf,b,sizeof(int ) * 10000);
+  for (int _____j_l5_l17_l31_l48_l64 = 0; _____j_l5_l17_l31_l48_l64 < 100; _____j_l5_l17_l31_l48_l64++) {{
+      merlin_stream_init(&ch_b_buf_4,10000,4);
+      
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=1 NODE=msm_node_2 VARIABLE=b_buf 
+      msm_port_b_buf_msm_node_2_0(b_buf,___j_l5_l17_l31);
+    }
+    merlin_stream_init(&ch_a_buf_5,10000,4);
+{
+      
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=0 NODE=msm_node_2 VARIABLE=___j_l5_l17_l31 
+      msm_port_j_l5_l17_l31_msm_node_2_0(___j_l5_l17_l31);
+    }
+    
+#pragma ACCEL STREAM_NODE 
+    msm_node_2(b_buf,a_buf,_____j_l5_l17_l31_l48_l64);
+{
+      
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=write DIM_NUM=1 NODE=msm_node_2 VARIABLE=a_buf 
+      msm_port_a_buf_msm_node_2_0(a_buf,___j_l5_l17_l31);
+      merlin_stream_reset(&ch_a_buf_5);
+    }
+    merlin_stream_reset(&ch_b_buf_4);
+  }
+  memcpy(a,a_buf,sizeof(int ) * 10000);
+}
+
+void func3(int a_buf[10000],int j)
+{
+  for (int _____i_l7_l19_l33_l49_l65 = 0; _____i_l7_l19_l33_l49_l65 < 100; _____i_l7_l19_l33_l49_l65++) {
+    int a_buf_sn_tmp_0;
+    a_buf_sn_tmp_0 = _____i_l7_l19_l33_l49_l65;
+    merlin_stream_write(&ch_a_buf_6,&a_buf_sn_tmp_0);
+  }
+}
+
+void msm_node_3(int a_buf[10000],int ____j_l8_l20_l34_l50)
+{
+  int _____j_l8_l20_l34_l50;
+  
+#pragma ACCEL spawn
+  func3(a_buf,_____j_l8_l20_l34_l50);
+}
+
+void msm_port_a_buf_msm_node_3_0(int a_buf[10000],int ____j_l8_l20_l34_l50)
+{
+  int _____j_l8_l20_l34_l50;
+  _____j_l8_l20_l34_l50 = ____j_l8_l20_l34_l50;
+  for (int _____i_l7_l19_l33_l49_l66 = 0; _____i_l7_l19_l33_l49_l66 < 100; _____i_l7_l19_l33_l49_l66++) {
+    int a_buf_sp_tmp_0;
+    merlin_stream_read(&ch_a_buf_6,&a_buf_sp_tmp_0);
+    a_buf[_____j_l8_l20_l34_l50 * 100 + _____i_l7_l19_l33_l49_l66] = a_buf_sp_tmp_0;
+  }
+}
+
+void msm_port_j_l8_l20_l34_l50_msm_node_3_0(int ____j_l8_l20_l34_l50)
+{
+  int _____j_l8_l20_l34_l50;
+  _____j_l8_l20_l34_l50 = ____j_l8_l20_l34_l50;
+  _____j_l8_l20_l34_l50;
+}
+#pragma ACCEL kernel
+
+void kernel_top3(int *a,int *b)
+{
+  int a_buf[10000];
+  for (int _____j_l8_l20_l34_l50_l67 = 0; _____j_l8_l20_l34_l50_l67 < 100; _____j_l8_l20_l34_l50_l67++) {
+    merlin_stream_init(&ch_a_buf_6,10000,4);
+{
+      
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=0 NODE=msm_node_3 VARIABLE=____j_l8_l20_l34_l50 
+      msm_port_j_l8_l20_l34_l50_msm_node_3_0(____j_l8_l20_l34_l50);
+    }
+    
+#pragma ACCEL STREAM_NODE 
+    msm_node_3(a_buf,_____j_l8_l20_l34_l50_l67);
+{
+      
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=write DIM_NUM=1 NODE=msm_node_3 VARIABLE=a_buf 
+      msm_port_a_buf_msm_node_3_0(a_buf,____j_l8_l20_l34_l50);
+      merlin_stream_reset(&ch_a_buf_6);
+    }
+  }
+  memcpy(a,a_buf,sizeof(int ) * 10000);
+}
+
+void func4(int a[100])
+{
+  for (int _____i_l9_l21_l35_l51_l68 = 0; _____i_l9_l21_l35_l51_l68 < 100; _____i_l9_l21_l35_l51_l68++) {
+    int a_buf_sn_tmp_0;
+    a_buf_sn_tmp_0 = _____i_l9_l21_l35_l51_l68;
+    merlin_stream_write(&ch_a_buf_7,&a_buf_sn_tmp_0);
+  }
+}
+
+void msm_node_4(int a_buf[100][100],int _____j_l10_l22_l36_l52_l69)
+{
+  int _j_l10_l22_l36_l52_l69_sn_tmp_0;
+  int ______j_l10_l22_l36_l52_l69;
+  merlin_stream_read(&ch______j_l10_l22_l36_l52_l69_8,&_j_l10_l22_l36_l52_l69_sn_tmp_0);
+  ______j_l10_l22_l36_l52_l69 = _j_l10_l22_l36_l52_l69_sn_tmp_0;
+  
+#pragma ACCEL spawn
+  func4(a_buf[______j_l10_l22_l36_l52_l69]);
+}
+
+void msm_port_a_buf_msm_node_4_0(int a_buf[100][100],int _____j_l10_l22_l36_l52_l69)
+{
+  int ______j_l10_l22_l36_l52_l69;
+  ______j_l10_l22_l36_l52_l69 = _____j_l10_l22_l36_l52_l69;
+  for (int _____i_l9_l21_l35_l51_l68 = 0; _____i_l9_l21_l35_l51_l68 < 100; _____i_l9_l21_l35_l51_l68++) {
+    int a_buf_sp_tmp_0;
+    merlin_stream_read(&ch_a_buf_7,&a_buf_sp_tmp_0);
+    a_buf[______j_l10_l22_l36_l52_l69][_____i_l9_l21_l35_l51_l68] = a_buf_sp_tmp_0;
+  }
+}
+
+void msm_port_j_l10_l22_l36_l52_l69_msm_node_4_0(int _____j_l10_l22_l36_l52_l69)
+{
+  int _j_l10_l22_l36_l52_l69_sp_tmp_0;
+  int ______j_l10_l22_l36_l52_l69;
+  _j_l10_l22_l36_l52_l69_sp_tmp_0 = _____j_l10_l22_l36_l52_l69;
+  merlin_stream_write(&ch______j_l10_l22_l36_l52_l69_8,&_j_l10_l22_l36_l52_l69_sp_tmp_0);
+  ______j_l10_l22_l36_l52_l69 = _____j_l10_l22_l36_l52_l69;
+  ______j_l10_l22_l36_l52_l69;
+}
+#pragma ACCEL kernel
+
+void kernel_top4(int *a,int *b)
+{
+  int a_buf[100][100];
+  for (int _____j_l10_l22_l36_l52_l69 = 0; _____j_l10_l22_l36_l52_l69 < 100; _____j_l10_l22_l36_l52_l69++) {
+    merlin_stream_init(&ch_a_buf_7,10000,4);
+{
+      merlin_stream_init(&ch______j_l10_l22_l36_l52_l69_8,1,4);
+      
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=0 NODE=msm_node_4 VARIABLE=_____j_l10_l22_l36_l52_l69 
+      msm_port_j_l10_l22_l36_l52_l69_msm_node_4_0(_____j_l10_l22_l36_l52_l69);
+    }
+    
+#pragma ACCEL STREAM_NODE 
+    msm_node_4(a_buf,_____j_l10_l22_l36_l52_l69);
+    merlin_stream_reset(&ch______j_l10_l22_l36_l52_l69_8);
+{
+      
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=write DIM_NUM=2 NODE=msm_node_4 VARIABLE=a_buf 
+      msm_port_a_buf_msm_node_4_0(a_buf,_____j_l10_l22_l36_l52_l69);
+      merlin_stream_reset(&ch_a_buf_7);
+    }
+  }
+  memcpy(a,a_buf,sizeof(int ) * 10000);
+}

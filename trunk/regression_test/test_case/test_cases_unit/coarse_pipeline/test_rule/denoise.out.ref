@@ -1,0 +1,366 @@
+#include "header.h"
+#include "math.h"
+#define uu(p, n, m) (u[(p)*DEFINE_N_PITCH*DEFINE_M_PITCH + (n)*DEFINE_M_PITCH + (m)])
+#define gg(p, n, m) (g[(p)*DEFINE_N_PITCH*DEFINE_M_PITCH + (n)*DEFINE_M_PITCH + (m)])
+#define ff(p, n, m) (f[(p)*DEFINE_N_PITCH*DEFINE_M_PITCH + (n)*DEFINE_M_PITCH + (m)])
+
+void mars_kernel_0_2_assign_g_0_0_buf(float target[512],float orig[512])
+{
+  int i0;
+  for (i0 = 0; i0 < 512; i0++) {
+    target[i0] = orig[i0];
+  }
+}
+
+void mars_kernel_0_2_assign_u_0_0_buf(float target[512],float orig[512])
+{
+  int i0;
+  for (i0 = 0; i0 < 512; i0++) {
+    target[i0] = orig[i0];
+  }
+}
+
+void mars_kernel_0_2_assign_u_0_1_buf(float target[512],float orig[512])
+{
+  int i0;
+  for (i0 = 0; i0 < 512; i0++) {
+    target[i0] = orig[i0];
+  }
+}
+
+void mars_kernel_0_2_assign_u_0_2_buf(float target[512],float orig[512])
+{
+  int i0;
+  for (i0 = 0; i0 < 512; i0++) {
+    target[i0] = orig[i0];
+  }
+}
+
+void mars_kernel_0_2_assign_u_0_3_buf(float target[512],float orig[512])
+{
+  int i0;
+  for (i0 = 0; i0 < 512; i0++) {
+    target[i0] = orig[i0];
+  }
+}
+
+void mars_kernel_0_2_assign_u_0_4_buf(float target[512],float orig[512])
+{
+  int i0;
+  for (i0 = 0; i0 < 512; i0++) {
+    target[i0] = orig[i0];
+  }
+}
+
+void mars_kernel_0_2_assign_u_0_5_buf(float target[512],float orig[512])
+{
+  int i0;
+  for (i0 = 0; i0 < 512; i0++) {
+    target[i0] = orig[i0];
+  }
+}
+
+void mars_kernel_0_2_assign_u_0_6_buf(float target[512],float orig[512])
+{
+  int i0;
+  for (i0 = 0; i0 < 512; i0++) {
+    target[i0] = orig[i0];
+  }
+}
+
+void mars_kernel_0_2_node_0_stage_0(int n,int exec,int p,float *u,float u_0_0_buf[512])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    memcpy((void *)(&u_0_0_buf[0]),(const void *)(&u[264196 * p + 514 * n + 1]),sizeof(float ) * ((unsigned long )512));
+  }
+}
+
+void mars_kernel_0_2_node_1_stage_1(int n,int exec,int p,float *u,float u_0_1_buf[512])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    memcpy((void *)(&u_0_1_buf[0]),(const void *)(&u[264196 * p + 514 * n - 1 + 1]),sizeof(float ) * ((unsigned long )512));
+  }
+}
+
+void mars_kernel_0_2_node_2_stage_2(int n,int exec,int p,float *u,float u_0_2_buf[512])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    memcpy((void *)(&u_0_2_buf[0]),(const void *)(&u[264196 * p + 514 * n + 1 + 1]),sizeof(float ) * ((unsigned long )512));
+  }
+}
+
+void mars_kernel_0_2_node_3_stage_3(int n,int exec,int p,float *u,float u_0_3_buf[512])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    memcpy((void *)(&u_0_3_buf[0]),(const void *)(&u[264196 * p + 514 * n - 514 + 1]),sizeof(float ) * ((unsigned long )512));
+  }
+}
+
+void mars_kernel_0_2_node_4_stage_4(int n,int exec,int p,float *u,float u_0_4_buf[512])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    memcpy((void *)(&u_0_4_buf[0]),(const void *)(&u[264196 * p + 514 * n + 514 + 1]),sizeof(float ) * ((unsigned long )512));
+  }
+}
+
+void mars_kernel_0_2_node_5_stage_5(int n,int exec,int p,float *u,float u_0_5_buf[512])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    memcpy((void *)(&u_0_5_buf[0]),(const void *)(&u[264196 * p + 514 * n - 264196 + 1]),sizeof(float ) * ((unsigned long )512));
+  }
+}
+
+void mars_kernel_0_2_node_6_stage_6(int n,int exec,int p,float *u,float u_0_6_buf[512])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    memcpy((void *)(&u_0_6_buf[0]),(const void *)(&u[264196 * p + 514 * n + 264196 + 1]),sizeof(float ) * ((unsigned long )512));
+  }
+}
+
+void mars_kernel_0_2_node_8_stage_8(int n,int exec,float *g,float g_0_0_buf[512],int p)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    memcpy((void *)(&g[264196 * p + 514 * n + 1]),(const void *)(&g_0_0_buf[0]),sizeof(float ) * ((unsigned long )512));
+  }
+}
+
+void mars_kernel_0_2_bus(int mars_n,int mars_init,int mars_cond,float mars_EPSILON_7,float *g,float mars_g_0_0_buf_7[512],float mars_g_0_0_buf_8[512],int mars_p_0,int mars_p_1,int mars_p_2,int mars_p_3,int mars_p_4,int mars_p_5,int mars_p_6,int mars_p_7,int mars_p_8,float *u,float mars_u_0_0_buf_0[512],float mars_u_0_0_buf_1[512],float mars_u_0_0_buf_2[512],float mars_u_0_0_buf_3[512],float mars_u_0_0_buf_4[512],float mars_u_0_0_buf_5[512],float mars_u_0_0_buf_6[512],float mars_u_0_0_buf_7[512],float mars_u_0_1_buf_1[512],float mars_u_0_1_buf_2[512],float mars_u_0_1_buf_3[512],float mars_u_0_1_buf_4[512],float mars_u_0_1_buf_5[512],float mars_u_0_1_buf_6[512],float mars_u_0_1_buf_7[512],float mars_u_0_2_buf_2[512],float mars_u_0_2_buf_3[512],float mars_u_0_2_buf_4[512],float mars_u_0_2_buf_5[512],float mars_u_0_2_buf_6[512],float mars_u_0_2_buf_7[512],float mars_u_0_3_buf_3[512],float mars_u_0_3_buf_4[512],float mars_u_0_3_buf_5[512],float mars_u_0_3_buf_6[512],float mars_u_0_3_buf_7[512],float mars_u_0_4_buf_4[512],float mars_u_0_4_buf_5[512],float mars_u_0_4_buf_6[512],float mars_u_0_4_buf_7[512],float mars_u_0_5_buf_5[512],float mars_u_0_5_buf_6[512],float mars_u_0_5_buf_7[512],float mars_u_0_6_buf_6[512],float mars_u_0_6_buf_7[512])
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_0_2_node_0_stage_0(mars_n - 0,(int )(mars_n >= mars_init + 0 & mars_n <= mars_cond + 0),mars_p_0,u,mars_u_0_0_buf_0);
+  mars_kernel_0_2_node_1_stage_1(mars_n - 1,(int )(mars_n >= mars_init + 1 & mars_n <= mars_cond + 1),mars_p_1,u,mars_u_0_1_buf_1);
+  mars_kernel_0_2_node_2_stage_2(mars_n - 2,(int )(mars_n >= mars_init + 2 & mars_n <= mars_cond + 2),mars_p_2,u,mars_u_0_2_buf_2);
+  mars_kernel_0_2_node_3_stage_3(mars_n - 3,(int )(mars_n >= mars_init + 3 & mars_n <= mars_cond + 3),mars_p_3,u,mars_u_0_3_buf_3);
+  mars_kernel_0_2_node_4_stage_4(mars_n - 4,(int )(mars_n >= mars_init + 4 & mars_n <= mars_cond + 4),mars_p_4,u,mars_u_0_4_buf_4);
+  mars_kernel_0_2_node_5_stage_5(mars_n - 5,(int )(mars_n >= mars_init + 5 & mars_n <= mars_cond + 5),mars_p_5,u,mars_u_0_5_buf_5);
+  mars_kernel_0_2_node_6_stage_6(mars_n - 6,(int )(mars_n >= mars_init + 6 & mars_n <= mars_cond + 6),mars_p_6,u,mars_u_0_6_buf_6);
+  mars_kernel_0_2_node_8_stage_8(mars_n - 8,(int )(mars_n >= mars_init + 8 & mars_n <= mars_cond + 8),g,mars_g_0_0_buf_8,mars_p_8);
+}
+
+void mars_kernel_0_2_node_7_stage_7(int n,int exec,float EPSILON,float g_0_0_buf[512],float u_0_0_buf[512],float u_0_1_buf[512],float u_0_2_buf[512],float u_0_3_buf[512],float u_0_4_buf[512],float u_0_5_buf[512],float u_0_6_buf[512])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int m;
+    for (m = 1; m < 512 + 1; m++) {
+      
+#pragma ACCEL pipeline
+      float u_center = u_0_0_buf[m - 1];
+      float u_1 = u_0_1_buf[m - 1];
+      float u_2 = u_0_2_buf[m - 1];
+      float u_3 = u_0_3_buf[m - 1];
+      float u_4 = u_0_4_buf[m - 1];
+      float u_5 = u_0_5_buf[m - 1];
+      float u_6 = u_0_6_buf[m - 1];
+      g_0_0_buf[m - 1] = 1.0f / sqrtf(EPSILON + (u_center - u_1) * (u_center - u_1) + (u_center - u_2) * (u_center - u_2) + (u_center - u_3) * (u_center - u_3) + (u_center - u_4) * (u_center - u_4) + (u_center - u_5) * (u_center - u_5) + (u_center - u_6) * (u_center - u_6));
+    }
+  }
+}
+
+void mars_kernel_0_2_comp(int mars_n,int mars_init,int mars_cond,float mars_EPSILON_7,float *g,float mars_g_0_0_buf_7[512],float mars_g_0_0_buf_8[512],int mars_p_0,int mars_p_1,int mars_p_2,int mars_p_3,int mars_p_4,int mars_p_5,int mars_p_6,int mars_p_7,int mars_p_8,float *u,float mars_u_0_0_buf_0[512],float mars_u_0_0_buf_1[512],float mars_u_0_0_buf_2[512],float mars_u_0_0_buf_3[512],float mars_u_0_0_buf_4[512],float mars_u_0_0_buf_5[512],float mars_u_0_0_buf_6[512],float mars_u_0_0_buf_7[512],float mars_u_0_1_buf_1[512],float mars_u_0_1_buf_2[512],float mars_u_0_1_buf_3[512],float mars_u_0_1_buf_4[512],float mars_u_0_1_buf_5[512],float mars_u_0_1_buf_6[512],float mars_u_0_1_buf_7[512],float mars_u_0_2_buf_2[512],float mars_u_0_2_buf_3[512],float mars_u_0_2_buf_4[512],float mars_u_0_2_buf_5[512],float mars_u_0_2_buf_6[512],float mars_u_0_2_buf_7[512],float mars_u_0_3_buf_3[512],float mars_u_0_3_buf_4[512],float mars_u_0_3_buf_5[512],float mars_u_0_3_buf_6[512],float mars_u_0_3_buf_7[512],float mars_u_0_4_buf_4[512],float mars_u_0_4_buf_5[512],float mars_u_0_4_buf_6[512],float mars_u_0_4_buf_7[512],float mars_u_0_5_buf_5[512],float mars_u_0_5_buf_6[512],float mars_u_0_5_buf_7[512],float mars_u_0_6_buf_6[512],float mars_u_0_6_buf_7[512])
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_0_2_node_7_stage_7(mars_n - 7,(int )(mars_n >= mars_init + 7 & mars_n <= mars_cond + 7),mars_EPSILON_7,mars_g_0_0_buf_7,mars_u_0_0_buf_7,mars_u_0_1_buf_7,mars_u_0_2_buf_7,mars_u_0_3_buf_7,mars_u_0_4_buf_7,mars_u_0_5_buf_7,mars_u_0_6_buf_7);
+}
+
+void mars_kernel_0_2(int mars_n,int mars_init,int mars_cond,float mars_EPSILON_7,float *g,float mars_g_0_0_buf_7[512],float mars_g_0_0_buf_8[512],int mars_p_0,int mars_p_1,int mars_p_2,int mars_p_3,int mars_p_4,int mars_p_5,int mars_p_6,int mars_p_7,int mars_p_8,float *u,float mars_u_0_0_buf_0[512],float mars_u_0_0_buf_1[512],float mars_u_0_0_buf_2[512],float mars_u_0_0_buf_3[512],float mars_u_0_0_buf_4[512],float mars_u_0_0_buf_5[512],float mars_u_0_0_buf_6[512],float mars_u_0_0_buf_7[512],float mars_u_0_1_buf_1[512],float mars_u_0_1_buf_2[512],float mars_u_0_1_buf_3[512],float mars_u_0_1_buf_4[512],float mars_u_0_1_buf_5[512],float mars_u_0_1_buf_6[512],float mars_u_0_1_buf_7[512],float mars_u_0_2_buf_2[512],float mars_u_0_2_buf_3[512],float mars_u_0_2_buf_4[512],float mars_u_0_2_buf_5[512],float mars_u_0_2_buf_6[512],float mars_u_0_2_buf_7[512],float mars_u_0_3_buf_3[512],float mars_u_0_3_buf_4[512],float mars_u_0_3_buf_5[512],float mars_u_0_3_buf_6[512],float mars_u_0_3_buf_7[512],float mars_u_0_4_buf_4[512],float mars_u_0_4_buf_5[512],float mars_u_0_4_buf_6[512],float mars_u_0_4_buf_7[512],float mars_u_0_5_buf_5[512],float mars_u_0_5_buf_6[512],float mars_u_0_5_buf_7[512],float mars_u_0_6_buf_6[512],float mars_u_0_6_buf_7[512])
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_0_2_bus(mars_n,mars_init,mars_cond,mars_EPSILON_7,g,mars_g_0_0_buf_7,mars_g_0_0_buf_8,mars_p_0,mars_p_1,mars_p_2,mars_p_3,mars_p_4,mars_p_5,mars_p_6,mars_p_7,mars_p_8,u,mars_u_0_0_buf_0,mars_u_0_0_buf_1,mars_u_0_0_buf_2,mars_u_0_0_buf_3,mars_u_0_0_buf_4,mars_u_0_0_buf_5,mars_u_0_0_buf_6,mars_u_0_0_buf_7,mars_u_0_1_buf_1,mars_u_0_1_buf_2,mars_u_0_1_buf_3,mars_u_0_1_buf_4,mars_u_0_1_buf_5,mars_u_0_1_buf_6,mars_u_0_1_buf_7,mars_u_0_2_buf_2,mars_u_0_2_buf_3,mars_u_0_2_buf_4,mars_u_0_2_buf_5,mars_u_0_2_buf_6,mars_u_0_2_buf_7,mars_u_0_3_buf_3,mars_u_0_3_buf_4,mars_u_0_3_buf_5,mars_u_0_3_buf_6,mars_u_0_3_buf_7,mars_u_0_4_buf_4,mars_u_0_4_buf_5,mars_u_0_4_buf_6,mars_u_0_4_buf_7,mars_u_0_5_buf_5,mars_u_0_5_buf_6,mars_u_0_5_buf_7,mars_u_0_6_buf_6,mars_u_0_6_buf_7);
+  mars_kernel_0_2_comp(mars_n,mars_init,mars_cond,mars_EPSILON_7,g,mars_g_0_0_buf_7,mars_g_0_0_buf_8,mars_p_0,mars_p_1,mars_p_2,mars_p_3,mars_p_4,mars_p_5,mars_p_6,mars_p_7,mars_p_8,u,mars_u_0_0_buf_0,mars_u_0_0_buf_1,mars_u_0_0_buf_2,mars_u_0_0_buf_3,mars_u_0_0_buf_4,mars_u_0_0_buf_5,mars_u_0_0_buf_6,mars_u_0_0_buf_7,mars_u_0_1_buf_1,mars_u_0_1_buf_2,mars_u_0_1_buf_3,mars_u_0_1_buf_4,mars_u_0_1_buf_5,mars_u_0_1_buf_6,mars_u_0_1_buf_7,mars_u_0_2_buf_2,mars_u_0_2_buf_3,mars_u_0_2_buf_4,mars_u_0_2_buf_5,mars_u_0_2_buf_6,mars_u_0_2_buf_7,mars_u_0_3_buf_3,mars_u_0_3_buf_4,mars_u_0_3_buf_5,mars_u_0_3_buf_6,mars_u_0_3_buf_7,mars_u_0_4_buf_4,mars_u_0_4_buf_5,mars_u_0_4_buf_6,mars_u_0_4_buf_7,mars_u_0_5_buf_5,mars_u_0_5_buf_6,mars_u_0_5_buf_7,mars_u_0_6_buf_6,mars_u_0_6_buf_7);
+}
+#pragma ACCEL kernel
+
+void denoise_0_kernel(float *u,float *g,float *f,float *u_out)
+{
+  float u_0_6_buf[512];
+  float u_0_5_buf[512];
+  float u_0_4_buf[512];
+  float u_0_3_buf[512];
+  float u_0_2_buf[512];
+  float u_0_1_buf[512];
+  float u_0_0_buf[512];
+  float g_0_0_buf[512];
+  float sigma = 0.05f;
+  float DT = 5.0f;
+  float lambda = 0.065f;
+  float EPSILON = 5e-5;
+  float sigma2 = sigma * sigma;
+  float gamma1 = lambda / sigma2;
+  int p;
+  int n;
+  int m;
+  for (p = 1; p < 8 + 1; p++) {
+    int mars_count_0_2 = 0;
+    float mars_kernel_0_2_g_0_0_buf_0[512];
+    mars_kernel_0_2_assign_g_0_0_buf(mars_kernel_0_2_g_0_0_buf_0,g_0_0_buf);
+    float mars_kernel_0_2_g_0_0_buf_1[512];
+    mars_kernel_0_2_assign_g_0_0_buf(mars_kernel_0_2_g_0_0_buf_1,g_0_0_buf);
+    float mars_kernel_0_2_g_0_0_buf_2[512];
+    mars_kernel_0_2_assign_g_0_0_buf(mars_kernel_0_2_g_0_0_buf_2,g_0_0_buf);
+    int mars_kernel_0_2_p_0 = p;
+    int mars_kernel_0_2_p_1 = p;
+    int mars_kernel_0_2_p_2 = p;
+    int mars_kernel_0_2_p_3 = p;
+    int mars_kernel_0_2_p_4 = p;
+    int mars_kernel_0_2_p_5 = p;
+    int mars_kernel_0_2_p_6 = p;
+    int mars_kernel_0_2_p_7 = p;
+    int mars_kernel_0_2_p_8 = p;
+    float mars_kernel_0_2_u_0_0_buf_0[512];
+    mars_kernel_0_2_assign_u_0_0_buf(mars_kernel_0_2_u_0_0_buf_0,u_0_0_buf);
+    float mars_kernel_0_2_u_0_0_buf_1[512];
+    mars_kernel_0_2_assign_u_0_0_buf(mars_kernel_0_2_u_0_0_buf_1,u_0_0_buf);
+    float mars_kernel_0_2_u_0_0_buf_2[512];
+    mars_kernel_0_2_assign_u_0_0_buf(mars_kernel_0_2_u_0_0_buf_2,u_0_0_buf);
+    float mars_kernel_0_2_u_0_0_buf_3[512];
+    mars_kernel_0_2_assign_u_0_0_buf(mars_kernel_0_2_u_0_0_buf_3,u_0_0_buf);
+    float mars_kernel_0_2_u_0_0_buf_4[512];
+    mars_kernel_0_2_assign_u_0_0_buf(mars_kernel_0_2_u_0_0_buf_4,u_0_0_buf);
+    float mars_kernel_0_2_u_0_0_buf_5[512];
+    mars_kernel_0_2_assign_u_0_0_buf(mars_kernel_0_2_u_0_0_buf_5,u_0_0_buf);
+    float mars_kernel_0_2_u_0_0_buf_6[512];
+    mars_kernel_0_2_assign_u_0_0_buf(mars_kernel_0_2_u_0_0_buf_6,u_0_0_buf);
+    float mars_kernel_0_2_u_0_0_buf_7[512];
+    mars_kernel_0_2_assign_u_0_0_buf(mars_kernel_0_2_u_0_0_buf_7,u_0_0_buf);
+    float mars_kernel_0_2_u_0_0_buf_8[512];
+    mars_kernel_0_2_assign_u_0_0_buf(mars_kernel_0_2_u_0_0_buf_8,u_0_0_buf);
+    float mars_kernel_0_2_u_0_1_buf_0[512];
+    mars_kernel_0_2_assign_u_0_1_buf(mars_kernel_0_2_u_0_1_buf_0,u_0_1_buf);
+    float mars_kernel_0_2_u_0_1_buf_1[512];
+    mars_kernel_0_2_assign_u_0_1_buf(mars_kernel_0_2_u_0_1_buf_1,u_0_1_buf);
+    float mars_kernel_0_2_u_0_1_buf_2[512];
+    mars_kernel_0_2_assign_u_0_1_buf(mars_kernel_0_2_u_0_1_buf_2,u_0_1_buf);
+    float mars_kernel_0_2_u_0_1_buf_3[512];
+    mars_kernel_0_2_assign_u_0_1_buf(mars_kernel_0_2_u_0_1_buf_3,u_0_1_buf);
+    float mars_kernel_0_2_u_0_1_buf_4[512];
+    mars_kernel_0_2_assign_u_0_1_buf(mars_kernel_0_2_u_0_1_buf_4,u_0_1_buf);
+    float mars_kernel_0_2_u_0_1_buf_5[512];
+    mars_kernel_0_2_assign_u_0_1_buf(mars_kernel_0_2_u_0_1_buf_5,u_0_1_buf);
+    float mars_kernel_0_2_u_0_1_buf_6[512];
+    mars_kernel_0_2_assign_u_0_1_buf(mars_kernel_0_2_u_0_1_buf_6,u_0_1_buf);
+    float mars_kernel_0_2_u_0_1_buf_7[512];
+    mars_kernel_0_2_assign_u_0_1_buf(mars_kernel_0_2_u_0_1_buf_7,u_0_1_buf);
+    float mars_kernel_0_2_u_0_1_buf_8[512];
+    mars_kernel_0_2_assign_u_0_1_buf(mars_kernel_0_2_u_0_1_buf_8,u_0_1_buf);
+    float mars_kernel_0_2_u_0_2_buf_0[512];
+    mars_kernel_0_2_assign_u_0_2_buf(mars_kernel_0_2_u_0_2_buf_0,u_0_2_buf);
+    float mars_kernel_0_2_u_0_2_buf_1[512];
+    mars_kernel_0_2_assign_u_0_2_buf(mars_kernel_0_2_u_0_2_buf_1,u_0_2_buf);
+    float mars_kernel_0_2_u_0_2_buf_2[512];
+    mars_kernel_0_2_assign_u_0_2_buf(mars_kernel_0_2_u_0_2_buf_2,u_0_2_buf);
+    float mars_kernel_0_2_u_0_2_buf_3[512];
+    mars_kernel_0_2_assign_u_0_2_buf(mars_kernel_0_2_u_0_2_buf_3,u_0_2_buf);
+    float mars_kernel_0_2_u_0_2_buf_4[512];
+    mars_kernel_0_2_assign_u_0_2_buf(mars_kernel_0_2_u_0_2_buf_4,u_0_2_buf);
+    float mars_kernel_0_2_u_0_2_buf_5[512];
+    mars_kernel_0_2_assign_u_0_2_buf(mars_kernel_0_2_u_0_2_buf_5,u_0_2_buf);
+    float mars_kernel_0_2_u_0_2_buf_6[512];
+    mars_kernel_0_2_assign_u_0_2_buf(mars_kernel_0_2_u_0_2_buf_6,u_0_2_buf);
+    float mars_kernel_0_2_u_0_2_buf_7[512];
+    mars_kernel_0_2_assign_u_0_2_buf(mars_kernel_0_2_u_0_2_buf_7,u_0_2_buf);
+    float mars_kernel_0_2_u_0_2_buf_8[512];
+    mars_kernel_0_2_assign_u_0_2_buf(mars_kernel_0_2_u_0_2_buf_8,u_0_2_buf);
+    float mars_kernel_0_2_u_0_3_buf_0[512];
+    mars_kernel_0_2_assign_u_0_3_buf(mars_kernel_0_2_u_0_3_buf_0,u_0_3_buf);
+    float mars_kernel_0_2_u_0_3_buf_1[512];
+    mars_kernel_0_2_assign_u_0_3_buf(mars_kernel_0_2_u_0_3_buf_1,u_0_3_buf);
+    float mars_kernel_0_2_u_0_3_buf_2[512];
+    mars_kernel_0_2_assign_u_0_3_buf(mars_kernel_0_2_u_0_3_buf_2,u_0_3_buf);
+    float mars_kernel_0_2_u_0_3_buf_3[512];
+    mars_kernel_0_2_assign_u_0_3_buf(mars_kernel_0_2_u_0_3_buf_3,u_0_3_buf);
+    float mars_kernel_0_2_u_0_3_buf_4[512];
+    mars_kernel_0_2_assign_u_0_3_buf(mars_kernel_0_2_u_0_3_buf_4,u_0_3_buf);
+    float mars_kernel_0_2_u_0_3_buf_5[512];
+    mars_kernel_0_2_assign_u_0_3_buf(mars_kernel_0_2_u_0_3_buf_5,u_0_3_buf);
+    float mars_kernel_0_2_u_0_3_buf_6[512];
+    mars_kernel_0_2_assign_u_0_3_buf(mars_kernel_0_2_u_0_3_buf_6,u_0_3_buf);
+    float mars_kernel_0_2_u_0_3_buf_7[512];
+    mars_kernel_0_2_assign_u_0_3_buf(mars_kernel_0_2_u_0_3_buf_7,u_0_3_buf);
+    float mars_kernel_0_2_u_0_3_buf_8[512];
+    mars_kernel_0_2_assign_u_0_3_buf(mars_kernel_0_2_u_0_3_buf_8,u_0_3_buf);
+    float mars_kernel_0_2_u_0_4_buf_0[512];
+    mars_kernel_0_2_assign_u_0_4_buf(mars_kernel_0_2_u_0_4_buf_0,u_0_4_buf);
+    float mars_kernel_0_2_u_0_4_buf_1[512];
+    mars_kernel_0_2_assign_u_0_4_buf(mars_kernel_0_2_u_0_4_buf_1,u_0_4_buf);
+    float mars_kernel_0_2_u_0_4_buf_2[512];
+    mars_kernel_0_2_assign_u_0_4_buf(mars_kernel_0_2_u_0_4_buf_2,u_0_4_buf);
+    float mars_kernel_0_2_u_0_4_buf_3[512];
+    mars_kernel_0_2_assign_u_0_4_buf(mars_kernel_0_2_u_0_4_buf_3,u_0_4_buf);
+    float mars_kernel_0_2_u_0_4_buf_4[512];
+    mars_kernel_0_2_assign_u_0_4_buf(mars_kernel_0_2_u_0_4_buf_4,u_0_4_buf);
+    float mars_kernel_0_2_u_0_4_buf_5[512];
+    mars_kernel_0_2_assign_u_0_4_buf(mars_kernel_0_2_u_0_4_buf_5,u_0_4_buf);
+    float mars_kernel_0_2_u_0_4_buf_6[512];
+    mars_kernel_0_2_assign_u_0_4_buf(mars_kernel_0_2_u_0_4_buf_6,u_0_4_buf);
+    float mars_kernel_0_2_u_0_4_buf_7[512];
+    mars_kernel_0_2_assign_u_0_4_buf(mars_kernel_0_2_u_0_4_buf_7,u_0_4_buf);
+    float mars_kernel_0_2_u_0_4_buf_8[512];
+    mars_kernel_0_2_assign_u_0_4_buf(mars_kernel_0_2_u_0_4_buf_8,u_0_4_buf);
+    float mars_kernel_0_2_u_0_5_buf_0[512];
+    mars_kernel_0_2_assign_u_0_5_buf(mars_kernel_0_2_u_0_5_buf_0,u_0_5_buf);
+    float mars_kernel_0_2_u_0_5_buf_1[512];
+    mars_kernel_0_2_assign_u_0_5_buf(mars_kernel_0_2_u_0_5_buf_1,u_0_5_buf);
+    float mars_kernel_0_2_u_0_5_buf_2[512];
+    mars_kernel_0_2_assign_u_0_5_buf(mars_kernel_0_2_u_0_5_buf_2,u_0_5_buf);
+    float mars_kernel_0_2_u_0_6_buf_0[512];
+    mars_kernel_0_2_assign_u_0_6_buf(mars_kernel_0_2_u_0_6_buf_0,u_0_6_buf);
+    float mars_kernel_0_2_u_0_6_buf_1[512];
+    mars_kernel_0_2_assign_u_0_6_buf(mars_kernel_0_2_u_0_6_buf_1,u_0_6_buf);
+    float mars_kernel_0_2_u_0_6_buf_2[512];
+    mars_kernel_0_2_assign_u_0_6_buf(mars_kernel_0_2_u_0_6_buf_2,u_0_6_buf);
+    for (n = 1; n < 512 + 1 + 8; n++) 
+/* Original: #pragma ACCEL pipeline */
+{
+      if (mars_count_0_2 == 0) 
+        mars_kernel_0_2(n,1,512,EPSILON,g,mars_kernel_0_2_g_0_0_buf_0,mars_kernel_0_2_g_0_0_buf_1,mars_kernel_0_2_p_0,mars_kernel_0_2_p_1,mars_kernel_0_2_p_2,mars_kernel_0_2_p_3,mars_kernel_0_2_p_4,mars_kernel_0_2_p_5,mars_kernel_0_2_p_6,mars_kernel_0_2_p_7,mars_kernel_0_2_p_8,u,mars_kernel_0_2_u_0_0_buf_0,mars_kernel_0_2_u_0_0_buf_1,mars_kernel_0_2_u_0_0_buf_2,mars_kernel_0_2_u_0_0_buf_3,mars_kernel_0_2_u_0_0_buf_4,mars_kernel_0_2_u_0_0_buf_5,mars_kernel_0_2_u_0_0_buf_6,mars_kernel_0_2_u_0_0_buf_7,mars_kernel_0_2_u_0_1_buf_0,mars_kernel_0_2_u_0_1_buf_1,mars_kernel_0_2_u_0_1_buf_2,mars_kernel_0_2_u_0_1_buf_3,mars_kernel_0_2_u_0_1_buf_4,mars_kernel_0_2_u_0_1_buf_5,mars_kernel_0_2_u_0_1_buf_6,mars_kernel_0_2_u_0_2_buf_0,mars_kernel_0_2_u_0_2_buf_1,mars_kernel_0_2_u_0_2_buf_2,mars_kernel_0_2_u_0_2_buf_3,mars_kernel_0_2_u_0_2_buf_4,mars_kernel_0_2_u_0_2_buf_5,mars_kernel_0_2_u_0_3_buf_0,mars_kernel_0_2_u_0_3_buf_1,mars_kernel_0_2_u_0_3_buf_2,mars_kernel_0_2_u_0_3_buf_3,mars_kernel_0_2_u_0_3_buf_4,mars_kernel_0_2_u_0_4_buf_0,mars_kernel_0_2_u_0_4_buf_1,mars_kernel_0_2_u_0_4_buf_2,mars_kernel_0_2_u_0_4_buf_3,mars_kernel_0_2_u_0_5_buf_0,mars_kernel_0_2_u_0_5_buf_1,mars_kernel_0_2_u_0_5_buf_2,mars_kernel_0_2_u_0_6_buf_0,mars_kernel_0_2_u_0_6_buf_1);
+       else if (mars_count_0_2 == 1) 
+        mars_kernel_0_2(n,1,512,EPSILON,g,mars_kernel_0_2_g_0_0_buf_2,mars_kernel_0_2_g_0_0_buf_0,mars_kernel_0_2_p_8,mars_kernel_0_2_p_0,mars_kernel_0_2_p_1,mars_kernel_0_2_p_2,mars_kernel_0_2_p_3,mars_kernel_0_2_p_4,mars_kernel_0_2_p_5,mars_kernel_0_2_p_6,mars_kernel_0_2_p_7,u,mars_kernel_0_2_u_0_0_buf_8,mars_kernel_0_2_u_0_0_buf_0,mars_kernel_0_2_u_0_0_buf_1,mars_kernel_0_2_u_0_0_buf_2,mars_kernel_0_2_u_0_0_buf_3,mars_kernel_0_2_u_0_0_buf_4,mars_kernel_0_2_u_0_0_buf_5,mars_kernel_0_2_u_0_0_buf_6,mars_kernel_0_2_u_0_1_buf_8,mars_kernel_0_2_u_0_1_buf_0,mars_kernel_0_2_u_0_1_buf_1,mars_kernel_0_2_u_0_1_buf_2,mars_kernel_0_2_u_0_1_buf_3,mars_kernel_0_2_u_0_1_buf_4,mars_kernel_0_2_u_0_1_buf_5,mars_kernel_0_2_u_0_2_buf_8,mars_kernel_0_2_u_0_2_buf_0,mars_kernel_0_2_u_0_2_buf_1,mars_kernel_0_2_u_0_2_buf_2,mars_kernel_0_2_u_0_2_buf_3,mars_kernel_0_2_u_0_2_buf_4,mars_kernel_0_2_u_0_3_buf_8,mars_kernel_0_2_u_0_3_buf_0,mars_kernel_0_2_u_0_3_buf_1,mars_kernel_0_2_u_0_3_buf_2,mars_kernel_0_2_u_0_3_buf_3,mars_kernel_0_2_u_0_4_buf_8,mars_kernel_0_2_u_0_4_buf_0,mars_kernel_0_2_u_0_4_buf_1,mars_kernel_0_2_u_0_4_buf_2,mars_kernel_0_2_u_0_5_buf_2,mars_kernel_0_2_u_0_5_buf_0,mars_kernel_0_2_u_0_5_buf_1,mars_kernel_0_2_u_0_6_buf_2,mars_kernel_0_2_u_0_6_buf_0);
+       else if (mars_count_0_2 == 2) 
+        mars_kernel_0_2(n,1,512,EPSILON,g,mars_kernel_0_2_g_0_0_buf_1,mars_kernel_0_2_g_0_0_buf_2,mars_kernel_0_2_p_7,mars_kernel_0_2_p_8,mars_kernel_0_2_p_0,mars_kernel_0_2_p_1,mars_kernel_0_2_p_2,mars_kernel_0_2_p_3,mars_kernel_0_2_p_4,mars_kernel_0_2_p_5,mars_kernel_0_2_p_6,u,mars_kernel_0_2_u_0_0_buf_7,mars_kernel_0_2_u_0_0_buf_8,mars_kernel_0_2_u_0_0_buf_0,mars_kernel_0_2_u_0_0_buf_1,mars_kernel_0_2_u_0_0_buf_2,mars_kernel_0_2_u_0_0_buf_3,mars_kernel_0_2_u_0_0_buf_4,mars_kernel_0_2_u_0_0_buf_5,mars_kernel_0_2_u_0_1_buf_7,mars_kernel_0_2_u_0_1_buf_8,mars_kernel_0_2_u_0_1_buf_0,mars_kernel_0_2_u_0_1_buf_1,mars_kernel_0_2_u_0_1_buf_2,mars_kernel_0_2_u_0_1_buf_3,mars_kernel_0_2_u_0_1_buf_4,mars_kernel_0_2_u_0_2_buf_7,mars_kernel_0_2_u_0_2_buf_8,mars_kernel_0_2_u_0_2_buf_0,mars_kernel_0_2_u_0_2_buf_1,mars_kernel_0_2_u_0_2_buf_2,mars_kernel_0_2_u_0_2_buf_3,mars_kernel_0_2_u_0_3_buf_7,mars_kernel_0_2_u_0_3_buf_8,mars_kernel_0_2_u_0_3_buf_0,mars_kernel_0_2_u_0_3_buf_1,mars_kernel_0_2_u_0_3_buf_2,mars_kernel_0_2_u_0_4_buf_7,mars_kernel_0_2_u_0_4_buf_8,mars_kernel_0_2_u_0_4_buf_0,mars_kernel_0_2_u_0_4_buf_1,mars_kernel_0_2_u_0_5_buf_1,mars_kernel_0_2_u_0_5_buf_2,mars_kernel_0_2_u_0_5_buf_0,mars_kernel_0_2_u_0_6_buf_1,mars_kernel_0_2_u_0_6_buf_2);
+       else if (mars_count_0_2 == 3) 
+        mars_kernel_0_2(n,1,512,EPSILON,g,mars_kernel_0_2_g_0_0_buf_0,mars_kernel_0_2_g_0_0_buf_1,mars_kernel_0_2_p_6,mars_kernel_0_2_p_7,mars_kernel_0_2_p_8,mars_kernel_0_2_p_0,mars_kernel_0_2_p_1,mars_kernel_0_2_p_2,mars_kernel_0_2_p_3,mars_kernel_0_2_p_4,mars_kernel_0_2_p_5,u,mars_kernel_0_2_u_0_0_buf_6,mars_kernel_0_2_u_0_0_buf_7,mars_kernel_0_2_u_0_0_buf_8,mars_kernel_0_2_u_0_0_buf_0,mars_kernel_0_2_u_0_0_buf_1,mars_kernel_0_2_u_0_0_buf_2,mars_kernel_0_2_u_0_0_buf_3,mars_kernel_0_2_u_0_0_buf_4,mars_kernel_0_2_u_0_1_buf_6,mars_kernel_0_2_u_0_1_buf_7,mars_kernel_0_2_u_0_1_buf_8,mars_kernel_0_2_u_0_1_buf_0,mars_kernel_0_2_u_0_1_buf_1,mars_kernel_0_2_u_0_1_buf_2,mars_kernel_0_2_u_0_1_buf_3,mars_kernel_0_2_u_0_2_buf_6,mars_kernel_0_2_u_0_2_buf_7,mars_kernel_0_2_u_0_2_buf_8,mars_kernel_0_2_u_0_2_buf_0,mars_kernel_0_2_u_0_2_buf_1,mars_kernel_0_2_u_0_2_buf_2,mars_kernel_0_2_u_0_3_buf_6,mars_kernel_0_2_u_0_3_buf_7,mars_kernel_0_2_u_0_3_buf_8,mars_kernel_0_2_u_0_3_buf_0,mars_kernel_0_2_u_0_3_buf_1,mars_kernel_0_2_u_0_4_buf_6,mars_kernel_0_2_u_0_4_buf_7,mars_kernel_0_2_u_0_4_buf_8,mars_kernel_0_2_u_0_4_buf_0,mars_kernel_0_2_u_0_5_buf_0,mars_kernel_0_2_u_0_5_buf_1,mars_kernel_0_2_u_0_5_buf_2,mars_kernel_0_2_u_0_6_buf_0,mars_kernel_0_2_u_0_6_buf_1);
+       else if (mars_count_0_2 == 4) 
+        mars_kernel_0_2(n,1,512,EPSILON,g,mars_kernel_0_2_g_0_0_buf_2,mars_kernel_0_2_g_0_0_buf_0,mars_kernel_0_2_p_5,mars_kernel_0_2_p_6,mars_kernel_0_2_p_7,mars_kernel_0_2_p_8,mars_kernel_0_2_p_0,mars_kernel_0_2_p_1,mars_kernel_0_2_p_2,mars_kernel_0_2_p_3,mars_kernel_0_2_p_4,u,mars_kernel_0_2_u_0_0_buf_5,mars_kernel_0_2_u_0_0_buf_6,mars_kernel_0_2_u_0_0_buf_7,mars_kernel_0_2_u_0_0_buf_8,mars_kernel_0_2_u_0_0_buf_0,mars_kernel_0_2_u_0_0_buf_1,mars_kernel_0_2_u_0_0_buf_2,mars_kernel_0_2_u_0_0_buf_3,mars_kernel_0_2_u_0_1_buf_5,mars_kernel_0_2_u_0_1_buf_6,mars_kernel_0_2_u_0_1_buf_7,mars_kernel_0_2_u_0_1_buf_8,mars_kernel_0_2_u_0_1_buf_0,mars_kernel_0_2_u_0_1_buf_1,mars_kernel_0_2_u_0_1_buf_2,mars_kernel_0_2_u_0_2_buf_5,mars_kernel_0_2_u_0_2_buf_6,mars_kernel_0_2_u_0_2_buf_7,mars_kernel_0_2_u_0_2_buf_8,mars_kernel_0_2_u_0_2_buf_0,mars_kernel_0_2_u_0_2_buf_1,mars_kernel_0_2_u_0_3_buf_5,mars_kernel_0_2_u_0_3_buf_6,mars_kernel_0_2_u_0_3_buf_7,mars_kernel_0_2_u_0_3_buf_8,mars_kernel_0_2_u_0_3_buf_0,mars_kernel_0_2_u_0_4_buf_5,mars_kernel_0_2_u_0_4_buf_6,mars_kernel_0_2_u_0_4_buf_7,mars_kernel_0_2_u_0_4_buf_8,mars_kernel_0_2_u_0_5_buf_2,mars_kernel_0_2_u_0_5_buf_0,mars_kernel_0_2_u_0_5_buf_1,mars_kernel_0_2_u_0_6_buf_2,mars_kernel_0_2_u_0_6_buf_0);
+       else if (mars_count_0_2 == 5) 
+        mars_kernel_0_2(n,1,512,EPSILON,g,mars_kernel_0_2_g_0_0_buf_1,mars_kernel_0_2_g_0_0_buf_2,mars_kernel_0_2_p_4,mars_kernel_0_2_p_5,mars_kernel_0_2_p_6,mars_kernel_0_2_p_7,mars_kernel_0_2_p_8,mars_kernel_0_2_p_0,mars_kernel_0_2_p_1,mars_kernel_0_2_p_2,mars_kernel_0_2_p_3,u,mars_kernel_0_2_u_0_0_buf_4,mars_kernel_0_2_u_0_0_buf_5,mars_kernel_0_2_u_0_0_buf_6,mars_kernel_0_2_u_0_0_buf_7,mars_kernel_0_2_u_0_0_buf_8,mars_kernel_0_2_u_0_0_buf_0,mars_kernel_0_2_u_0_0_buf_1,mars_kernel_0_2_u_0_0_buf_2,mars_kernel_0_2_u_0_1_buf_4,mars_kernel_0_2_u_0_1_buf_5,mars_kernel_0_2_u_0_1_buf_6,mars_kernel_0_2_u_0_1_buf_7,mars_kernel_0_2_u_0_1_buf_8,mars_kernel_0_2_u_0_1_buf_0,mars_kernel_0_2_u_0_1_buf_1,mars_kernel_0_2_u_0_2_buf_4,mars_kernel_0_2_u_0_2_buf_5,mars_kernel_0_2_u_0_2_buf_6,mars_kernel_0_2_u_0_2_buf_7,mars_kernel_0_2_u_0_2_buf_8,mars_kernel_0_2_u_0_2_buf_0,mars_kernel_0_2_u_0_3_buf_4,mars_kernel_0_2_u_0_3_buf_5,mars_kernel_0_2_u_0_3_buf_6,mars_kernel_0_2_u_0_3_buf_7,mars_kernel_0_2_u_0_3_buf_8,mars_kernel_0_2_u_0_4_buf_4,mars_kernel_0_2_u_0_4_buf_5,mars_kernel_0_2_u_0_4_buf_6,mars_kernel_0_2_u_0_4_buf_7,mars_kernel_0_2_u_0_5_buf_1,mars_kernel_0_2_u_0_5_buf_2,mars_kernel_0_2_u_0_5_buf_0,mars_kernel_0_2_u_0_6_buf_1,mars_kernel_0_2_u_0_6_buf_2);
+       else if (mars_count_0_2 == 6) 
+        mars_kernel_0_2(n,1,512,EPSILON,g,mars_kernel_0_2_g_0_0_buf_0,mars_kernel_0_2_g_0_0_buf_1,mars_kernel_0_2_p_3,mars_kernel_0_2_p_4,mars_kernel_0_2_p_5,mars_kernel_0_2_p_6,mars_kernel_0_2_p_7,mars_kernel_0_2_p_8,mars_kernel_0_2_p_0,mars_kernel_0_2_p_1,mars_kernel_0_2_p_2,u,mars_kernel_0_2_u_0_0_buf_3,mars_kernel_0_2_u_0_0_buf_4,mars_kernel_0_2_u_0_0_buf_5,mars_kernel_0_2_u_0_0_buf_6,mars_kernel_0_2_u_0_0_buf_7,mars_kernel_0_2_u_0_0_buf_8,mars_kernel_0_2_u_0_0_buf_0,mars_kernel_0_2_u_0_0_buf_1,mars_kernel_0_2_u_0_1_buf_3,mars_kernel_0_2_u_0_1_buf_4,mars_kernel_0_2_u_0_1_buf_5,mars_kernel_0_2_u_0_1_buf_6,mars_kernel_0_2_u_0_1_buf_7,mars_kernel_0_2_u_0_1_buf_8,mars_kernel_0_2_u_0_1_buf_0,mars_kernel_0_2_u_0_2_buf_3,mars_kernel_0_2_u_0_2_buf_4,mars_kernel_0_2_u_0_2_buf_5,mars_kernel_0_2_u_0_2_buf_6,mars_kernel_0_2_u_0_2_buf_7,mars_kernel_0_2_u_0_2_buf_8,mars_kernel_0_2_u_0_3_buf_3,mars_kernel_0_2_u_0_3_buf_4,mars_kernel_0_2_u_0_3_buf_5,mars_kernel_0_2_u_0_3_buf_6,mars_kernel_0_2_u_0_3_buf_7,mars_kernel_0_2_u_0_4_buf_3,mars_kernel_0_2_u_0_4_buf_4,mars_kernel_0_2_u_0_4_buf_5,mars_kernel_0_2_u_0_4_buf_6,mars_kernel_0_2_u_0_5_buf_0,mars_kernel_0_2_u_0_5_buf_1,mars_kernel_0_2_u_0_5_buf_2,mars_kernel_0_2_u_0_6_buf_0,mars_kernel_0_2_u_0_6_buf_1);
+       else if (mars_count_0_2 == 7) 
+        mars_kernel_0_2(n,1,512,EPSILON,g,mars_kernel_0_2_g_0_0_buf_2,mars_kernel_0_2_g_0_0_buf_0,mars_kernel_0_2_p_2,mars_kernel_0_2_p_3,mars_kernel_0_2_p_4,mars_kernel_0_2_p_5,mars_kernel_0_2_p_6,mars_kernel_0_2_p_7,mars_kernel_0_2_p_8,mars_kernel_0_2_p_0,mars_kernel_0_2_p_1,u,mars_kernel_0_2_u_0_0_buf_2,mars_kernel_0_2_u_0_0_buf_3,mars_kernel_0_2_u_0_0_buf_4,mars_kernel_0_2_u_0_0_buf_5,mars_kernel_0_2_u_0_0_buf_6,mars_kernel_0_2_u_0_0_buf_7,mars_kernel_0_2_u_0_0_buf_8,mars_kernel_0_2_u_0_0_buf_0,mars_kernel_0_2_u_0_1_buf_2,mars_kernel_0_2_u_0_1_buf_3,mars_kernel_0_2_u_0_1_buf_4,mars_kernel_0_2_u_0_1_buf_5,mars_kernel_0_2_u_0_1_buf_6,mars_kernel_0_2_u_0_1_buf_7,mars_kernel_0_2_u_0_1_buf_8,mars_kernel_0_2_u_0_2_buf_2,mars_kernel_0_2_u_0_2_buf_3,mars_kernel_0_2_u_0_2_buf_4,mars_kernel_0_2_u_0_2_buf_5,mars_kernel_0_2_u_0_2_buf_6,mars_kernel_0_2_u_0_2_buf_7,mars_kernel_0_2_u_0_3_buf_2,mars_kernel_0_2_u_0_3_buf_3,mars_kernel_0_2_u_0_3_buf_4,mars_kernel_0_2_u_0_3_buf_5,mars_kernel_0_2_u_0_3_buf_6,mars_kernel_0_2_u_0_4_buf_2,mars_kernel_0_2_u_0_4_buf_3,mars_kernel_0_2_u_0_4_buf_4,mars_kernel_0_2_u_0_4_buf_5,mars_kernel_0_2_u_0_5_buf_2,mars_kernel_0_2_u_0_5_buf_0,mars_kernel_0_2_u_0_5_buf_1,mars_kernel_0_2_u_0_6_buf_2,mars_kernel_0_2_u_0_6_buf_0);
+       else 
+        mars_kernel_0_2(n,1,512,EPSILON,g,mars_kernel_0_2_g_0_0_buf_1,mars_kernel_0_2_g_0_0_buf_2,mars_kernel_0_2_p_1,mars_kernel_0_2_p_2,mars_kernel_0_2_p_3,mars_kernel_0_2_p_4,mars_kernel_0_2_p_5,mars_kernel_0_2_p_6,mars_kernel_0_2_p_7,mars_kernel_0_2_p_8,mars_kernel_0_2_p_0,u,mars_kernel_0_2_u_0_0_buf_1,mars_kernel_0_2_u_0_0_buf_2,mars_kernel_0_2_u_0_0_buf_3,mars_kernel_0_2_u_0_0_buf_4,mars_kernel_0_2_u_0_0_buf_5,mars_kernel_0_2_u_0_0_buf_6,mars_kernel_0_2_u_0_0_buf_7,mars_kernel_0_2_u_0_0_buf_8,mars_kernel_0_2_u_0_1_buf_1,mars_kernel_0_2_u_0_1_buf_2,mars_kernel_0_2_u_0_1_buf_3,mars_kernel_0_2_u_0_1_buf_4,mars_kernel_0_2_u_0_1_buf_5,mars_kernel_0_2_u_0_1_buf_6,mars_kernel_0_2_u_0_1_buf_7,mars_kernel_0_2_u_0_2_buf_1,mars_kernel_0_2_u_0_2_buf_2,mars_kernel_0_2_u_0_2_buf_3,mars_kernel_0_2_u_0_2_buf_4,mars_kernel_0_2_u_0_2_buf_5,mars_kernel_0_2_u_0_2_buf_6,mars_kernel_0_2_u_0_3_buf_1,mars_kernel_0_2_u_0_3_buf_2,mars_kernel_0_2_u_0_3_buf_3,mars_kernel_0_2_u_0_3_buf_4,mars_kernel_0_2_u_0_3_buf_5,mars_kernel_0_2_u_0_4_buf_1,mars_kernel_0_2_u_0_4_buf_2,mars_kernel_0_2_u_0_4_buf_3,mars_kernel_0_2_u_0_4_buf_4,mars_kernel_0_2_u_0_5_buf_1,mars_kernel_0_2_u_0_5_buf_2,mars_kernel_0_2_u_0_5_buf_0,mars_kernel_0_2_u_0_6_buf_1,mars_kernel_0_2_u_0_6_buf_2);
+      mars_count_0_2++;
+      if (mars_count_0_2 == 9) 
+        mars_count_0_2 = 0;
+    }
+    mars_kernel_0_2_assign_u_0_6_buf(u_0_6_buf,mars_kernel_0_2_u_0_6_buf_0);
+    mars_kernel_0_2_assign_u_0_5_buf(u_0_5_buf,mars_kernel_0_2_u_0_5_buf_0);
+    mars_kernel_0_2_assign_u_0_4_buf(u_0_4_buf,mars_kernel_0_2_u_0_4_buf_0);
+    mars_kernel_0_2_assign_u_0_3_buf(u_0_3_buf,mars_kernel_0_2_u_0_3_buf_0);
+    mars_kernel_0_2_assign_u_0_2_buf(u_0_2_buf,mars_kernel_0_2_u_0_2_buf_0);
+    mars_kernel_0_2_assign_u_0_1_buf(u_0_1_buf,mars_kernel_0_2_u_0_1_buf_0);
+    mars_kernel_0_2_assign_u_0_0_buf(u_0_0_buf,mars_kernel_0_2_u_0_0_buf_0);
+    mars_kernel_0_2_assign_g_0_0_buf(g_0_0_buf,mars_kernel_0_2_g_0_0_buf_0);
+  }
+}

@@ -1,0 +1,34 @@
+<systolic>
+	<PE>
+		<name>cnn_pearray</name>
+		<PE_ROWS>4</PE_ROWS>
+		<PE_COLS>4</PE_COLS>
+		<PE_DSIZE>1</PE_DSIZE>
+		<reduce_op>+</reduce_op>
+		<map_op>*</map_op>
+	</PE>
+	<Loader_H></Loader_H>
+	<Loader_V></Loader_V>
+	<Feeder_H>
+		<name>Feeder_H</name>
+		<num>4</num>
+		<buffer_dim>1,4,4,32</buffer_dim>
+		<overlap_size>0</overlap_size>
+		<iteration_domain>32,4,4,16</iteration_domain>
+		<access_pattern>0,0,0,0,0;0,1,0,0,0;0,0,1,0,0;1,0,0,0,0</access_pattern>
+	</Feeder_H>
+	<Feeder_V>
+		<name>Feeder_V</name>
+		<num>4</num>
+		<buffer_dim>19,4,32</buffer_dim>
+		<overlap_size>384</overlap_size>
+		<iteration_domain>32,4,4,16</iteration_domain>
+		<access_pattern>0,1,0,1,0;0,0,1,0,0;1,0,0,0,0</access_pattern>
+	</Feeder_V>
+	<Drain_O>
+		<name>Drain_O</name>
+		<args>num_words</args>
+		<word_width>4</word_width>
+		<wnum>1,0</wnum>
+	</Drain_O>
+</systolic>

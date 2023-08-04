@@ -1,0 +1,23 @@
+
+struct ::S 
+{
+  int y;
+}
+;
+int _ZN1S1xE;
+
+void p_ZN1SC2Ev(struct S *this_)
+{
+  this_ -> y = _ZN1S1xE + 100;
+  _ZN1S1xE = 999;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_S_();
+#pragma ACCEL kernel
+
+int main(int argc,char *argv[])
+{
+  struct S s;
+  p_ZN1SC2Ev(&s);
+  ;
+  return 0;
+}

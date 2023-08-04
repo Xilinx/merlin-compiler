@@ -1,0 +1,153 @@
+#include <assert.h>
+#include <stdio.h>
+#define SIZE 10
+int g = 10;
+const int c_g = 11;
+
+void f()
+{
+  g++;
+}
+
+void f2(int *m)
+{
+   *m = 0;
+}
+
+void f3(int &n)
+{
+  n = 10;
+}
+
+void f4(int k)
+{
+  k++;
+}
+
+void f5_sub(int k)
+{
+  k--;
+}
+
+void f5(int k)
+{
+  f5_sub(k - 10);
+}
+
+void f6(int k)
+{
+  int k_copy = 10;
+  k_copy++;
+}
+
+void f7(int &a,int b)
+{
+  a = b;
+}
+
+void f8(int &a,int b)
+{
+  a = b;
+}
+
+void f9(int k)
+{
+  k++;
+}
+
+void f10(int &k)
+{
+  k++;
+}
+#pragma ACCEL kernel
+
+void top(int a,int b,int c)
+{
+  a = 10;
+  if (c) 
+    b = 5;
+  int i = 10;
+  int ii = 10;
+  int j = 0;
+  int k;
+  int m = 0;
+  int n = 100;
+  int n1 = 100;
+  int n2 = 100;
+  int n3 = 100;
+  int n4 = 100;
+  int n5 = 100;
+  int nn = (sizeof(n));
+  printf("%d",4);
+  int nn0 = 5;
+  int nn1 = 6;
+  nn1 = 0 + n - i * 0;
+  int nn3 = 0 + n - i * 0;
+  int nn4 = 1;
+  int nn5 = 0 + n - i * 0;
+  int nn6;
+  int val;
+  int val1;
+  int val2;
+  for (i = 0; i < 100; ++i) {
+    n1--;
+  }
+  for (; i < 10; ++i) {
+    n--;
+  }
+  n2--;
+  n3 = n3 + 1;
+  n4 += 1;
+  n5++;
+  int x;
+  int x1;
+  int yy = 100;
+  int y = (x = 3) + (x = 4);
+  int y1 = (x1 = y = 3) + (x = 4);
+  int y2 = (x1 = yy = 3) + (x = 4);
+  int nn2 = 0 + n - i * 0;
+  nn6 = nn4;
+  int h = k + 10;
+  f4(h);
+  f5(h + 100);
+  f6(10);
+  f7(val1,10);
+  f7(val2,val1);
+  f8(val,4);
+  f8(val,10);
+  f8(val,4 + nn1);
+  f8(val,4 + nn2);
+  f8(val,100);
+  f8(val,100);
+  f9(n);
+  f9(n1);
+  f9(n2);
+  f9(n3);
+  f9(n4);
+  f9(n5);
+  f9(y);
+  f9(x);
+  f9(x1);
+  f9(y2);
+  f9(y1);
+  f10(n);
+  int *x0 = &nn4;
+  int xx = x > 3?5 : 7;
+  if (3 < 4) 
+    xx = 8;
+  xx == 6?(static_cast < void  >  (0)) : __assert_fail("xx == 6","vec_add.cpp",96,__PRETTY_FUNCTION__);
+  f9(xx);
+  int xx1 = 100;
+  if (0) 
+    xx1 = 8;
+  f9(xx1);
+}
+
+int main()
+{
+  int a = 1;
+  int b = 1;
+  int c = 1;
+  top(a,b,c);
+  return 0;
+}

@@ -1,0 +1,48 @@
+#pragma ACCEL kernel
+
+void func_top_1()
+{
+  int a[100][100];
+  int b[100][100];
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    for (j = 0; j < 100; j++) {
+      
+#pragma ACCEL PIPELINE AUTO
+      a[i][j] = b[i][j];
+    }
+    for (j = 0; j < 8; j++) 
+// Original: #pragma ACCEL PARALLEL PRIORITY=logic
+{
+      
+#pragma ACCEL PARALLEL COMPLETE PRIORITY=logic
+      a[i + 1][j] = b[i][j + 1];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_2()
+{
+  int a[100][100];
+  int b[100][100];
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    
+#pragma ACCEL PIPELINE AUTO
+    for (j = 0; j < 8; j++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[i][j] = b[i][j];
+    }
+    for (j = 0; j < 8; j++) 
+// Original: #pragma ACCEL PARALLEL PRIORITY=logic
+{
+      
+#pragma ACCEL PARALLEL COMPLETE PRIORITY=logic
+      a[i + 1][j] = b[i][j + 1];
+    }
+  }
+}

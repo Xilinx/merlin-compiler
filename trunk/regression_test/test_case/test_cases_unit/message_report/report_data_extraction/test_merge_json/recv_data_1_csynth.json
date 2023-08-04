@@ -1,0 +1,28 @@
+{
+    "L,recv_data_1-L2": {
+        "II": "16", 
+        "iteration-latency": "84", 
+        "iteration-latency-min": "84", 
+        "latency-max": "?", 
+        "latency-min": "27203", 
+        "name": "L2", 
+        "pipelined": "yes", 
+        "trip-count": "?"
+    }, 
+    "recv_data_1": {
+        "interval-max": "?", 
+        "interval-min": "27205", 
+        "latency-max": "?", 
+        "latency-min": "27205", 
+        "total-BRAM": 0, 
+        "total-DSP": 63, 
+        "total-FF": 145754, 
+        "total-LUT": 110655, 
+        "total-URAM": 0, 
+        "util-BRAM": "0", 
+        "util-DSP": "~0", 
+        "util-FF": "4", 
+        "util-LUT": "6", 
+        "util-URAM": "0"
+    }
+}

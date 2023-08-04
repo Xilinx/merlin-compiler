@@ -1,0 +1,48 @@
+#include<assert.h>
+#include <string.h> 
+#include<assert.h>
+#define VEC_SIZE 10000
+extern int __merlin_include__GB_string_h_1;
+extern int __merlin_include__GB_assert_h_0;
+#pragma ACCEL kernel
+
+void vec_add_kernel(int *a,int *b,int *c,int inc,int n)
+{
+  int b_buf[999];
+  int a_buf[999];
+  int c_buf[999];
+{
+    unsigned long merlin_len_0 = n;
+    assert(merlin_len_0 <= 999L);
+    memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * merlin_len_0);
+  }
+{
+    unsigned long merlin_len_1 = n;
+    assert(merlin_len_1 <= 999L);
+    memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * merlin_len_1);
+  }
+  int j;
+  n >= 4 && n < 1000?((void )0) : __assert_fail("n >= 4 && n < 1000","vec_add_kernel_lab2.c",7,__PRETTY_FUNCTION__);
+//assert(n < 1000);
+  for (j = 0; j < n; j++) {
+    
+#pragma ACCEL pipeline_parallel factor = 10
+    c_buf[j] = a_buf[j] + b_buf[j] + inc;
+  }
+{
+    unsigned long merlin_len = n;
+    assert(merlin_len <= 999L);
+    memcpy((void *)(&c[0]),(const void *)(&c_buf[0]),sizeof(int ) * merlin_len);
+  }
+}
+
+int main()
+{
+  int *a;
+  int *b;
+  int *c;
+  int inc;
+  int n;
+  vec_add_kernel(a,b,c,inc,n);
+  return 0;
+}

@@ -1,0 +1,36 @@
+#ap_int/ap_fixed	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/ap_int/ap_fixed
+#because of STL header	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/because of STL header
+#burst bug	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/burst bug
+#cnn	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/cnn
+#denoise	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/denoise
+#fft-transpose	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_simple_xilinx/fft-transpose
+#flann	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/flann
+#kmp	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_opt_xilinx/kmp
+#kmp	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_simple_xilinx/kmp
+#logistic_64	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/logistic_64
+#logistic_L10	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/logistic_L10
+#md-grid	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_simple_xilinx/md-grid
+#namd	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/namd
+#running time is more than 20mins	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/running time is more than 20mins
+#segmentation	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/segmentation
+#twoNN	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/twoNN
+#vec_sum	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/vec_sum
+aes	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_opt_xilinx/aes
+backprop	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_simple_xilinx/backprop
+bfs-bulk	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_simple_xilinx/bfs-bulk
+bfs-queue	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_simple_xilinx/bfs-queue
+blackschole	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/blackschole
+dwt	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/dwt
+fft-strided	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_simple_xilinx/fft-strided
+gemm-blocked	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_opt_xilinx/gemm-blocked
+idct	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/idct
+matmul	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/matmul
+md-knn	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_simple_xilinx/md-knn
+normal	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/normal
+nw	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_simple_xilinx/nw
+smithwaterman	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/smithwaterman
+sort-merge	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_simple_xilinx/sort-merge
+sort-radix	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_simple_xilinx/sort-radix
+spmv-crs	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_simple_xilinx/spmv-crs
+stencil-2d	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_opt_xilinx/stencil-2d
+stencil-3d	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_machsuite_simple_xilinx/stencil-3d

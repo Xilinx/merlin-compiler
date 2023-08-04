@@ -1,0 +1,8 @@
+typedef double real;
+extern int f(double ,int );
+#pragma ACCEL kernel
+
+void k(double a1)
+{
+  f(a1,1);
+}

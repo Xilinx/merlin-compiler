@@ -1,0 +1,7 @@
+INFO: [LINEBUF-101] Applying line buffer on variable 'merlin_in' in loop 'L_0_0' (test_1d_sim.cpp:10) with a 1x5 stencil
+INFO: [LINEBUF-101] Applying line buffer on variable 'c' in loop 'L_0_0' (test_2d_sim.cpp:10) with a 3x3 stencil
+INFO: [LINEBUF-101] Applying line buffer on variable 'c' in loop 'L_0_0' (test_pointer_sim.cpp:11) with a 3x1 stencil
+INFO: [LINEBUF-101] Applying line buffer on variable 'merlin_input' in loop 'L_0_0_0' (test_parallel_sim.cpp:13) with a 1x5x5 stencil
+INFO: [LINEBUF-101] Applying line buffer on variable 'c' in loop 'L_0_0' (test_2d_sim.cpp:10) with a 2x2 stencil
+INFO: [LINEBUF-101] Applying line buffer on variable 'in' in loop 'L_0_0' (test_1x1_sim.cpp:12) with a 1x1 stencil
+INFO: [LINEBUF-101] Applying line buffer on variable 'in' in loop 'L_0_0' (test_5x1_sim.cpp:12) with a 1x5 stencil

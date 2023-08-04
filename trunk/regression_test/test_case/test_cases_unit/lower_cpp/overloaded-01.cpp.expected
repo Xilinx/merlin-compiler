@@ -1,0 +1,53 @@
+typedef struct {
+int a;}s_a;
+
+struct s_b 
+{
+  int b;
+}
+;
+
+void p_Z1fv()
+{
+  for (int i = 0; i < 10; ++i) {
+  }
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_f_();
+
+void p_Z1fb(bool a)
+{
+  int b;
+  p_Z1fv();
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_f_boo_();
+
+void p_Z1fbj(bool a,unsigned int b)
+{
+  p_Z1fb(a);
+  p_Z1fv();
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_f_boo_();
+
+void p_Z1fs_a(s_a a)
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_f_s_();
+
+void p_Z1f3s_b(struct s_b b)
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_f_str_();
+// Notice that since only one of the overloads are used by the kernel, mangling
+// is not required.
+#pragma ACCEL kernel
+
+int main()
+{
+  bool a;
+  unsigned int b;
+  s_a sa;
+  struct s_b sb;
+  p_Z1fs_a(sa);
+  p_Z1f3s_b(sb);
+  p_Z1fbj(a,b);
+}

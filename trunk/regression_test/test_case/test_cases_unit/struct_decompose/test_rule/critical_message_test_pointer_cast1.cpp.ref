@@ -1,0 +1,2 @@
+
+ERROR: [DISAG-302] statement 'count +=((struct student *)temp) -> id;' (transformation:0) which contains unsupported type cast: '((struct student *)temp)' is not decomposed

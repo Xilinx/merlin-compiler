@@ -1,0 +1,78 @@
+#define SIZE 10
+#pragma ACCEL kernel
+
+void top()
+{
+  int i = 10;
+  int ii = 10;
+  int j = 0;
+  int k;
+  int a[100];
+  int inc1 = 1;
+  int inc2;
+  int inc3;
+  int inc5 = 2;
+  for (int i = 0, inc = 0; i < 100; ++i) 
+    a[i] = i + 0;
+  for (int inc = 1; ii < 10; ++ii) 
+    a[ii] = 1;
+  for (int inc = 1; ii < 10; ++ii) {
+    a[ii] = inc;
+    inc++;
+  }
+  int inc4;
+  for (inc4 = 1; ii < 10; ++ii) {
+    a[ii] = 1;
+  }
+  for (; ii < 10; (--ii , inc1 = 1)) 
+    a[ii] = inc1;
+  for (; ii < 10; (--ii , 2)) 
+    a[ii] = 2;
+  for (; ((ii < 10 , inc2 = 1)); --ii) 
+    a[ii] = 1;
+  k = inc1;
+  int k1 = 1;
+  int b = 100;
+  int b1 = 100;
+  while(b){
+    b--;
+  }
+  while(((b1 , inc3 = 1))){
+    b1 -= 1;
+    ;
+  }
+  k = b;
+  k1 = b1;
+  int x = 0;
+  int x1;
+  do {
+    x = x + 1;
+  }while (0);
+  do {
+    x = x + 1;
+  }while (0 && (x1 = 0));
+  k = x + x1;
+{
+    int x2;
+    do {
+      x = x + 1;
+    }while (((0 , x2 = 0)));
+    k = 0;
+  }
+{
+    int x2;
+    do {
+      x = x + 1;
+    }while (0 || (x2 = 0));
+    k = x2;
+  }
+}
+
+int main()
+{
+  int a = 1;
+  int b = 1;
+  int c = 1;
+  top();
+  return 0;
+}

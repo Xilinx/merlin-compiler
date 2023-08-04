@@ -1,0 +1,48 @@
+#include <string.h> 
+// 1. loop structure
+// 2. function structure
+// 3. access pattern
+// 4. pragma modes
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void func_top_0(int *a,int *b)
+{
+  
+#pragma ACCEL interface variable=a max_burst_size=1000
+  int b_buf[100000];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 100000);
+  for (int i = 0; i < 100000; ++i) {
+    
+#pragma ACCEL pipeline
+    a[i] = b_buf[i] + 2;
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_1(int *a,int *b)
+{
+  
+#pragma ACCEL interface variable=a
+  for (int i = 0; i < 1000000; ++i) {
+    
+#pragma ACCEL pipeline
+    a[i] = b[i] + 2;
+  }
+}
+
+int main()
+{
+  int *a;
+  int *b;
+  int *c;
+  int *aa;
+  int *bb;
+  int *cc;
+  int a_s;
+  int b_s;
+  int c_s;
+  func_top_0(a,b);
+  func_top_1(a,b);
+  return 0;
+}

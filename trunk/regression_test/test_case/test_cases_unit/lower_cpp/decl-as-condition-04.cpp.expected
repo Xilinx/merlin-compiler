@@ -1,0 +1,34 @@
+
+struct ::A 
+{
+}
+;
+
+void p_ZN1AC2Ev(struct A *this_)
+{
+}
+
+void p_ZN1AC2ERK1A(struct A *this_,const struct A &a)
+{
+}
+
+int p_ZN1AcviEv(struct A *this_)
+{
+  return 1;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+#pragma ACCEL kernel
+
+void k()
+{
+  struct A a;
+  ;
+{
+    struct A a2;
+    ;
+    switch(p_ZN1AcviEv(&a2)){
+      case 1:
+      a2;
+    }
+  }
+}

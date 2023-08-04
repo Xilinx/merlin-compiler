@@ -1,0 +1,29 @@
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+static void __merlin_dummy_SgTemplateMemberFunctionDeclaration_return_m_();
+static void __merlin_dummy_SgTemplateMemberFunctionDeclaration_template_();
+
+struct ::Array5_int_ 
+{
+  int m_arr[5];
+}
+;
+int &p_ZN11Array5_int_ixIEEi(struct Array5_int_ *this_,int i);
+int *p_ZN11Array5_int_6getPtrIEEv(struct Array5_int_ *this_);
+
+int &p_ZN11Array5_int_ixIEEi(struct Array5_int_ *this_,int i)
+{
+  return this_ -> m_arr[i];
+}
+
+int *p_ZN11Array5_int_6getPtrIEEv(struct Array5_int_ *this_)
+{
+  return this_ -> m_arr;
+}
+#pragma ACCEL kernel
+
+void k()
+{
+  struct Array5_int_ a;
+  p_ZN11Array5_int_ixIEEi(&a,0);
+  p_ZN11Array5_int_6getPtrIEEv(&a);
+}

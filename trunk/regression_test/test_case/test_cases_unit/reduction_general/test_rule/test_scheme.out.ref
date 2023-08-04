@@ -1,0 +1,182 @@
+#define VEC_SIZE 10000
+#define VEC_DIM_SIZE 100
+#pragma ACCEL kernel
+
+void vec_add_kernel(int *a,int *b,int *c,int N)
+{
+  int sum = 0;
+  int sum1[10][10];
+  int _sum_rdc[10];
+{
+    for (int j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      _sum_rdc[j_sub] = 0;
+    }
+  }
+  for (int j = 0; j < 1000; j++) {
+    
+#pragma ACCEL PIPELINE
+    for (int j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL PARALLEL
+      _sum_rdc[j_sub] += a[j * 10 + j_sub];
+    }
+  }
+{
+    for (int j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      
+#pragma ACCEL PARALLEL COMPLETE
+      sum += _sum_rdc[j_sub];
+    }
+  }
+  for (int j_sub1 = 0; j_sub1 < 10; ++j_sub1) {
+    
+#pragma ACCEL PIPELINE
+    for (int j_sub2 = 0; j_sub2 < 10; ++j_sub2) {
+      
+#pragma ACCEL PARALLEL
+      for (int j_sub3 = 0; j_sub3 < 10; ++j_sub3) {
+        
+#pragma ACCEL PARALLEL
+        for (int j = 0; j < 1; j++) {
+          
+#pragma ACCEL PARALLEL
+          sum1[j_sub1][j_sub2] += a[j_sub1 * j_sub2 * j_sub3];
+        }
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void vec_add_kernel1(int *a,int *b,int *c,int N)
+{
+  int sum1[10][10];
+  int _sum1_rdc[10][10];
+  for (int j_sub11 = 0; j_sub11 < 10; ++j_sub11) {
+    
+#pragma ACCEL PIPELINE
+    int _sum1_rdc_t[10];
+{
+      for (int j_sub12 = 0; j_sub12 < 10; ++j_sub12) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        
+#pragma ACCEL ARRAY_PARTITION OFF
+        _sum1_rdc_t[j_sub12] = 0;
+      }
+    }
+    for (int j_sub12 = 0; j_sub12 < 10; ++j_sub12) {
+      
+#pragma ACCEL PARALLEL
+      for (int j_sub13 = 0; j_sub13 < 10; ++j_sub13) {
+        
+#pragma ACCEL PARALLEL
+        for (int j = 0; j < 1; j++) {
+          
+#pragma ACCEL PARALLEL
+          _sum1_rdc_t[j_sub12] += a[j_sub11 * j_sub12 * j_sub13];
+        }
+      }
+    }
+    for (int j_sub12 = 0; j_sub12 < 10; ++j_sub12) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      _sum1_rdc[j_sub11][j_sub12] = _sum1_rdc_t[j_sub12];
+    }
+  }
+{
+    for (int j_sub11 = 0; j_sub11 < 10; ++j_sub11) {
+      
+#pragma ACCEL PIPELINE
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      for (int j_sub12 = 0; j_sub12 < 10; ++j_sub12) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        
+#pragma ACCEL ARRAY_PARTITION OFF
+        sum1[j_sub11][j_sub12] += _sum1_rdc[j_sub11][j_sub12];
+      }
+    }
+  }
+  int _sum1_rdc_0[10][10][10][1];
+{
+    for (int j_sub1 = 0; j_sub1 < 10; ++j_sub1) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      for (int j_sub2 = 0; j_sub2 < 10; ++j_sub2) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        
+#pragma ACCEL ARRAY_PARTITION OFF
+        for (int j_sub3 = 0; j_sub3 < 10; ++j_sub3) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          
+#pragma ACCEL ARRAY_PARTITION OFF
+          for (int j = 0; j < 1; j++) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            
+#pragma ACCEL ARRAY_PARTITION OFF
+            _sum1_rdc_0[j_sub1][j_sub2][j_sub3][j] = 0;
+          }
+        }
+      }
+    }
+  }
+  for (int j_sub1 = 0; j_sub1 < 10; ++j_sub1) {
+    
+#pragma ACCEL pipeline
+    for (int j_sub2 = 0; j_sub2 < 10; ++j_sub2) {
+      
+#pragma ACCEL PARALLEL
+      for (int j_sub3 = 0; j_sub3 < 10; ++j_sub3) {
+        
+#pragma ACCEL PARALLEL
+        for (int j = 0; j < 1; j++) {
+          
+#pragma ACCEL PARALLEL
+          _sum1_rdc_0[j_sub1][j_sub2][j_sub3][j] += a[j_sub1 * j_sub2 * j_sub3];
+        }
+      }
+    }
+  }
+{
+    for (int j_sub1 = 0; j_sub1 < 10; ++j_sub1) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      for (int j_sub2 = 0; j_sub2 < 10; ++j_sub2) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        
+#pragma ACCEL ARRAY_PARTITION OFF
+        for (int j_sub3 = 0; j_sub3 < 10; ++j_sub3) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          
+#pragma ACCEL ARRAY_PARTITION OFF
+          for (int j = 0; j < 1; j++) {
+            
+#pragma ACCEL ARRAY_PARTITION OFF
+            
+#pragma ACCEL PARALLEL COMPLETE
+            sum1[j_sub1][j_sub2] += _sum1_rdc_0[j_sub1][j_sub2][j_sub3][j];
+          }
+        }
+      }
+    }
+  }
+}

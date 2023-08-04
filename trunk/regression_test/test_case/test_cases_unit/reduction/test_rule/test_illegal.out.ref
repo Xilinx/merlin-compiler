@@ -1,0 +1,80 @@
+#define VEC_SIZE 10000
+#define VEC_DIM_SIZE 100
+#pragma ACCEL kernel
+
+void func_top_2(int *a,int *b,int *c)
+{
+  int j;
+  int j_sub;
+  int k;
+  int sum = 0;
+  int sum1 = 0;
+  for (j = 0; j < 1000; j++) {
+    for (j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL pipeline
+      sum += a[j * 10 + j_sub];
+      sum1 += a[j * 10 + j_sub];
+    }
+  }
+  for (j_sub = 0; j_sub < 10; ++j_sub) {
+    
+#pragma ACCEL pipeline
+    sum += b[j_sub];
+  }
+  for (j = 0; j < 1000; j++) {
+    
+#pragma ACCEL pipeline
+    for (j_sub = 0; j_sub < 10; j_sub += a[j_sub]) {
+      
+#pragma ACCEL parallel
+      b[j_sub] = j_sub;
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_3(int *a,int *b,int *c)
+{
+  int j;
+  int j_sub;
+  int sum = 0;
+  int sum1 = 0;
+  for (j = 0; j < 1000; j++) {
+    for (j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL pipeline
+      sum += a[j * 10 + j_sub];
+      sum1 += sum;
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_4(int *a)
+{
+  int j;
+  int j_sub;
+  int sum;
+  int sum1 = 0;
+  for (j = 0; j < 1000; j++) {
+    
+#pragma ACCEL pipeline
+    for (j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL parallel
+      sum -= a[j * 10 + j_sub];
+      sum1 *= a[j * 10 + j_sub];
+    }
+  }
+  for (j = 0; j < 1000; j++) {
+    
+#pragma ACCEL pipeline
+    for ((sum = 0 , j_sub = 0); j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL parallel
+      sum -= a[j * 10 + j_sub];
+      sum1 *= a[j * 10 + j_sub];
+    }
+  }
+}

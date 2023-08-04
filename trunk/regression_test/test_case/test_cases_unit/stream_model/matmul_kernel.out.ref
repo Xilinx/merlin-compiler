@@ -1,0 +1,21 @@
+#define VEC_SIZE 256 
+#define aa(p, n) (a[(p)*VEC_SIZE + (n)])
+#define bb(p, n) (b[(p)*VEC_SIZE + (n)])
+#define cc(p, n) (c[(p)*VEC_SIZE + (n)])
+#pragma ACCEL kernel
+
+void matmul_kernel(float *a,float *b,float *c)
+{
+  int i;
+  int j;
+  int k;
+  for (k = 0; k < 256; k++) {
+    
+#pragma ACCEL spawn
+    for (i = 0; i < 256; i++) {
+      for (j = 0; j < 256; j++) {
+        c[i * 256 + j] += a[k * 256 + i] * b[k * 256 + j];
+      }
+    }
+  }
+}

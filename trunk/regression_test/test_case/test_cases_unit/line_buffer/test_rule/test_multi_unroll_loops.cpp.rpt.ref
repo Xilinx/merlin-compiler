@@ -1,0 +1,1 @@
+INFO: [LINEBUF-101] Applying line buffer on variable 'c' in loop 'L_0' (test_multi_unroll_loops.cpp:7) with a 55 stencil

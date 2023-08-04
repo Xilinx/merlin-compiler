@@ -1,0 +1,40 @@
+#define VEC_SIZE 10000
+#define VEC_DIM_SIZE 100
+#pragma ACCEL kernel
+
+void func_top_1(int *a)
+{
+  int j;
+  int j_sub;
+  int sum = 0;
+  int _sum_rdc[10];
+{
+    int j_sub_0;
+    for (j_sub_0 = 0; j_sub_0 <= 9; ++j_sub_0) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      _sum_rdc[j_sub_0] = 0;
+    }
+  }
+  for (j = 0; j < 1000; j++) {
+    
+#pragma ACCEL PIPELINE
+    for (j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL PARALLEL
+      _sum_rdc[j_sub] += a[j * 10 + j_sub];
+    }
+  }
+{
+    int j_sub_1;
+    for (j_sub_1 = 0; j_sub_1 <= 9; ++j_sub_1) {
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      
+#pragma ACCEL PARALLEL COMPLETE
+      sum += _sum_rdc[j_sub_1];
+    }
+  }
+}

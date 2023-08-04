@@ -1,0 +1,19 @@
+
+WARNING: [PROCS-203] Found a loop 'for(j = 0;j < n;j++)' (vec_add_kernel.c:14) with unknown loop tripcount. 
+INFO: [PROCS-102] Hint: you may specify the range of the variables in the loop bounds using 'assert'. Please refer to Merlin User Guide
+
+WARNING: [PROCS-245] Found a loop ' for(j = 0;j < n;j++)... ' (vec_add_kernel.c:14) without a bound on its tripcount. Please specify one using '#pragma HLS loop_tripcount max=?' or 'assert'.
+Use default max tripcount (2) for analysis
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'c' (vec_add_kernel.c:7) in scope (vec_add_kernel.c:14)
+  Reason: the bound of the access range is not determined (0..-1 + n exact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'a' (vec_add_kernel.c:7) in scope (vec_add_kernel.c:14)
+  Reason: the bound of the access range is not determined (0..-1 + n exact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+WARNING: [BURST-201] Memory burst NOT inferred: variable 'b' (vec_add_kernel.c:7) in scope (vec_add_kernel.c:14)
+  Reason: the bound of the access range is not determined (0..-1 + n exact)
+  Hint: please specify the bounds of the variables using 'assert'
+INFO: [FGPIP-103] Loop 'j'  (vec_add_kernel.c:14) is pipelined

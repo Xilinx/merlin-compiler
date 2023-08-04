@@ -1,0 +1,708 @@
+{
+    "X": {
+        "org_identifier": "X",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0": {
+        "org_identifier": "X_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0": {
+        "org_identifier": "X_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0": {
+        "org_identifier": "X_0_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 6,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_0": {
+        "org_identifier": "X_0_0_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_5\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_1": {
+        "org_identifier": "X_0_0_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_5\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_2": {
+        "org_identifier": "X_0_0_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_5\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_3": {
+        "org_identifier": "X_0_0_0_3",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_5\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_4": {
+        "org_identifier": "X_0_0_0_4",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_5\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_kernel_pragma() {...}\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5": {
+        "org_identifier": "X_0_0_0_5",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void vec_add_kernel(merlin_uint_512 * a,merlin_uint_512 * b,merlin_uint_512 * c)...\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void vec_add_kernel(merlin_uint_512 * a,merlin_uint_512 * b,merlin_uint_512 * c)...\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_0": {
+        "org_identifier": "X_0_0_0_5_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_5_2\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:merlin_uint_512 * a,merlin_uint_512 * b,merlin_uint_512 * c\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2": {
+        "org_identifier": "X_0_0_0_5_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"SgFunctionDefinition:function definition: void vec_add_kernel(merlin_uint_512 * a,merlin_uint_512 * b...\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDefinition:function definition: void vec_add_kernel(merlin_uint_512 * a,merlin_uint_512 * b...\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0": {
+        "org_identifier": "X_0_0_0_5_2_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 19,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 0,
+                "location": 4
+            },
+            {
+                "action": 0,
+                "location": 6
+            },
+            {
+                "action": 0,
+                "location": 8
+            },
+            {
+                "action": 1,
+                "location": 15
+            },
+            {
+                "action": 1,
+                "location": 16
+            },
+            {
+                "action": 1,
+                "location": 18
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma HLS array_partition variable=b_buf complete dim=2\\nfrom: SgVariableDeclaration:int b_buf[625][16];\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma HLS array_partition variable=a_buf complete dim=2\\nfrom: SgVariableDeclaration:int a_buf[625][16];\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma HLS array_partition variable=c_buf complete dim=2\\nfrom: SgVariableDeclaration:int c_buf[625][16];\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"Delete: SgPragmaDeclaration:#pragma HLS array_partition variable=a_buf cyclic factor = 16 dim=2\\nfrom: SgBasicBlock:{#pragma HLS DATA_PACK VARIABLE=c#pragma HLS DATA_PACK VARIABLE=b#pragma HLS DAT...\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"Delete: SgPragmaDeclaration:#pragma HLS array_partition variable=b_buf cyclic factor = 16 dim=2\\nfrom: SgBasicBlock:{#pragma HLS DATA_PACK VARIABLE=c#pragma HLS DATA_PACK VARIABLE=b#pragma HLS DAT...\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"Delete: SgPragmaDeclaration:#pragma HLS array_partition variable=c_buf cyclic factor = 16 dim=2\\nfrom: SgBasicBlock:{#pragma HLS DATA_PACK VARIABLE=c#pragma HLS DATA_PACK VARIABLE=b#pragma HLS DAT...\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{#pragma HLS DATA_PACK VARIABLE=c#pragma HLS DATA_PACK VARIABLE=b#pragma HLS DAT...\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_0": {
+        "org_identifier": "X_0_0_0_5_2_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS DATA_PACK VARIABLE=c\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_1": {
+        "org_identifier": "X_0_0_0_5_2_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS DATA_PACK VARIABLE=b\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_10": {
+        "org_identifier": "X_0_0_0_5_2_0_7",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL interface variable=b depth=10000 max_depth=10000\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_11": {
+        "org_identifier": "X_0_0_0_5_2_0_8",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL interface variable=a depth=10000 max_depth=10000\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_12": {
+        "org_identifier": "X_0_0_0_5_2_0_9",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:__merlin_access_range(c,0,9999UL);\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_13": {
+        "org_identifier": "X_0_0_0_5_2_0_10",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:__merlin_access_range(b,0,9999UL);\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_14": {
+        "org_identifier": "X_0_0_0_5_2_0_11",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:__merlin_access_range(a,0,9999UL);\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_15": {
+        "org_identifier": "X_0_0_0_5_2_0_13",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:memcpy_wide_bus_read_int_2d_16_512(a_buf,0,0,(merlin_uint_512 *)a,(0 * 4),sizeof...\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_16": {
+        "org_identifier": "X_0_0_0_5_2_0_15",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:memcpy_wide_bus_read_int_2d_16_512(b_buf,0,0,(merlin_uint_512 *)b,(0 * 4),sizeof...\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17": {
+        "org_identifier": "X_0_0_0_5_2_0_16",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 5,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"SgForStatement:for(int i = 0;i < 625;i++) {...}\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"fine_grained_opt_false_dependence\": \"b_buf,a_buf,c_buf,\",\n    \"fine_grained_pipeline\": \"on\",\n    \"fine_grained_pipeline_II\": \"\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgForStatement:for(int i = 0;i < 625;i++) {...}\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_0": {
+        "org_identifier": "X_0_0_0_5_2_0_16_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_17_3\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgForInitStatement:int i = 0;;\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_1": {
+        "org_identifier": "X_0_0_0_5_2_0_16_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_17_3\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:i < 625;\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_2": {
+        "org_identifier": "X_0_0_0_5_2_0_16_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_17_3\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgPlusPlusOp:i++\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_3": {
+        "org_identifier": "X_0_0_0_5_2_0_16_3",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 0,
+                "location": 0
+            },
+            {
+                "action": 1,
+                "location": 1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma HLS pipeline\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"Delete: SgPragmaDeclaration:#pragma ACCEL PIPELINE AUTO\\nfrom: SgBasicBlock:{#pragma HLS pipeline#pragma ACCEL PIPELINE AUTOfor(int i_sub = 0;i_sub < 16;++i...\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{#pragma HLS pipelinefor(int i_sub = 0;i_sub < 16;++i_sub) {#pragma HLS unrollc_...\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_3_0": {
+        "org_identifier": "BuiltInloop_parallel_2038",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9408 for 140574102263480\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS pipeline\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_3_1": {
+        "org_identifier": "X_0_0_0_5_2_0_16_3_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 5,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17_3_2\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"fine_grained_parallel\": \"on\",\n    \"fine_grained_parallel_complete\": \"on\",\n    \"fine_grained_parallel_factor\": \"16\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgForStatement:for(int i_sub = 0;i_sub < 16;++i_sub) {...}\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_3_1_3": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 0,
+                "location": 0
+            },
+            {
+                "action": 1,
+                "location": 1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma HLS unroll\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"Delete: SgPragmaDeclaration:#pragma ACCEL PARALLEL\\nfrom: SgBasicBlock:{#pragma HLS unroll#pragma ACCEL PARALLELc_buf[i][i_sub] = a_buf[i][i_sub] + b_b...\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{#pragma HLS unrollc_buf[i][i_sub] = a_buf[i][i_sub] + b_buf[i][i_sub];}\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_3_1_3_0": {
+        "org_identifier": "BuiltInloop_parallel_2175",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9408 for 140574102264064\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS unroll\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_18": {
+        "org_identifier": "X_0_0_0_5_2_0_18",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:memcpy_wide_bus_write_int_2d_16_512((merlin_uint_512 *)c,c_buf,0,0,(4 * 0),sizeo...\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_2": {
+        "org_identifier": "X_0_0_0_5_2_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS DATA_PACK VARIABLE=a\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_3": {
+        "org_identifier": "X_0_0_0_5_2_0_3",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:int b_buf[625][16];\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_4": {
+        "org_identifier": "BuiltInloop_parallel_2035",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9408 for 140574102261728\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS array_partition variable=b_buf complete dim=2\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_5": {
+        "org_identifier": "X_0_0_0_5_2_0_4",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:int a_buf[625][16];\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_6": {
+        "org_identifier": "BuiltInloop_parallel_2036",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9408 for 140574102262312\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS array_partition variable=a_buf complete dim=2\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_7": {
+        "org_identifier": "X_0_0_0_5_2_0_5",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:int c_buf[625][16];\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_8": {
+        "org_identifier": "BuiltInloop_parallel_2037",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9408 for 140574102262896\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS array_partition variable=c_buf complete dim=2\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_9": {
+        "org_identifier": "X_0_0_0_5_2_0_6",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL interface variable=c depth=10000 max_depth=10000\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_1": {
+        "org_identifier": "X_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    },
+    "X_0_2": {
+        "org_identifier": "X_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0\",\n    \"passname\": \"loop_parallel\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"loop_parallel\"\n}"
+        ]
+    }
+}

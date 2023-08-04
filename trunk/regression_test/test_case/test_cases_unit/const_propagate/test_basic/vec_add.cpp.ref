@@ -1,0 +1,108 @@
+#include<assert.h>
+#include <string.h>
+#define SIZE 10
+extern int __merlin_include__GB_assert_h_0;
+int g = 10;
+const int c_g = 11;
+
+void f()
+{
+  g++;
+}
+
+void f2(int *m)
+{
+   *m = 0;
+}
+
+void f3(int &n)
+{
+  n = 10;
+}
+
+void f4(int k)
+{
+  int k_copy = 110;
+  k_copy++;
+}
+
+void f5_sub(int k)
+{
+  int k_copy = 200;
+  k_copy--;
+}
+
+void f5(int k)
+{
+  int k_copy = 210;
+  f5_sub(210 - 10);
+}
+
+void f6(int k)
+{
+  int k_copy = 10;
+  k_copy++;
+}
+
+void f7(int k)
+{
+  assert(k <= 11L && k >= 10L);
+  k++;
+}
+
+void f8(int &a,int b)
+{
+  a = b;
+}
+#pragma ACCEL kernel
+
+void top(int a,int b,int c)
+{
+  a = 10;
+  if (c) 
+    b = 5;
+  int i = 10;
+  int ii = 10;
+  int j = 0;
+  int k;
+  int m = 0;
+  int n = 100;
+  int nn = (sizeof(n));
+  int nn1 = m + n - i * j;
+  int val;
+  char str[20] = "0123456789";
+  int a1 = (strlen(str));
+  int b1 = (sizeof(str));
+  float b2 = (sizeof(str));
+  if (c) {
+    int aa[2][2] = {{(1), (2)}, {(1), (2)}};
+    10;
+    a;
+    b;
+  }
+  for (i = 0; i < 100; ++i) {
+  }
+  for (; i < 10; ++i) {
+  }
+  j++;
+   *(&j) = 1;
+  k = 0;
+  k = 100;
+  f();
+  c + 11;
+  f2(&m);
+  f3(n);
+  int h = k + 10;
+  f4(110);
+  f5(110 + 100);
+  f6(10);
+  f6(10);
+  f7(10);
+  f7(11);
+  f8(val,4);
+  f8(val,10);
+  f8(val,4 + 100);
+  f8(val,a1);
+  f8(val,20);
+  f8(val,b2);
+}

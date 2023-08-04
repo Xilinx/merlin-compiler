@@ -1,0 +1,59 @@
+#pragma ACCEL kernel
+#include "channel_def.h"
+#pragma channel int _ch_c_dep_1 __attribute__((depth(5000)));
+typedef int __merlin_channel_typedef;
+__merlin_channel_typedef _ch_c_dep_1;
+
+void kernel_top(int *a)
+{
+  int i;
+  int j;
+  int k;
+  int m;
+  int i1;
+  int d[100];
+  int b[100][100];
+  int c[100][100][100];
+  int __ch_read_c_1;
+  int __ch_is_c_init_1;
+  int __ch_c_init_1;
+  for (m = 1; m < 3; m++) {
+    for (k = 0; k < 5; k++) {
+      for (j = 0; j < 10; j++) {
+        for (i = 0; i < 100; i++) {
+          __ch_is_c_init_1 = 0;
+          if (m > 1) 
+            __ch_read_c_1 = ((int )(read_channel_altera__ch_c_dep_1__merlinalterafuncend(_ch_c_dep_1)));
+//b[1][1] = 1;
+          if (k == 0) 
+            b[j][i] = 1;
+//a[i] += 0 + 1 + 2;
+          b[j][i] += 0 + 1 + 2;
+          c[i][j][k] = ((__ch_is_c_init_1?__ch_c_init_1 : __ch_read_c_1)) + (0 + 1 + 2);
+          if (m < 2) 
+            write_channel_altera__ch_c_dep_1__merlinalterafuncend(_ch_c_dep_1,c[i][j][k]);
+        }
+      }
+    }
+  }
+  for (k = 0; k < 5; k++) {
+    for (j = 0; j < 10; j++) {
+      for (i = 0; i < 100; i++) {
+//b[1][1] = 1;
+//if(k==0) 
+//    b[j][i] = 1;
+//a[i] += 0 + 1 + 2;
+        b[j][i] += 0 + 1 + 2;
+      }
+    }
+  }
+  for (i = 0; i < 100; i++) {
+    d[i] += 0 + 1 + 2;
+  }
+}
+
+void main()
+{
+  int *a;
+  kernel_top(a);
+}

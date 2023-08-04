@@ -1,0 +1,22 @@
+//#include <string.h>
+#define VEC_SIZE 10000
+#pragma ACCEL kernel
+
+void vec_add_kernel(int *a,int *b,int *c,int inc)
+{
+  int i;
+  int j;
+  for (j = 0; j < 10000 / 100; j++) {
+    int a_buf[100];
+    int b_buf[100];
+    int c_buf[100];
+    memcpy(a_buf,a + 100 * j,100 * sizeof(int ));
+    memcpy(b_buf,b + 100 * j,100 * sizeof(int ));
+    for (i = 0; i < 100; i++) {
+      
+#pragma ACCEL PIPELINE AUTO
+      c_buf[i] = a_buf[i] + b_buf[i] + inc;
+    }
+    memcpy(c + 100 * j,c_buf,100 * sizeof(int ));
+  }
+}

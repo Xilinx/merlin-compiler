@@ -1,0 +1,161 @@
+{
+    "X": {
+        "org_identifier": "X",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"postwrap_process\"\n}"
+        ]
+    },
+    "X_0": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"postwrap_process\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"postwrap_process\"\n}"
+        ]
+    },
+    "X_0_1": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"postwrap_process\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"postwrap_process\"\n}"
+        ]
+    },
+    "X_0_1_0": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 9,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 1,
+                "location": 3
+            },
+            {
+                "action": 0,
+                "location": 3
+            },
+            {
+                "action": 1,
+                "location": 2
+            },
+            {
+                "action": 0,
+                "location": 2
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Replace(1): SgVariableDeclaration:extern int __merlin_include__LE___merlinhead_kernel_top_h_0;\",\n    \"passname\": \"postwrap_process\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(2): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_L_() {...}\",\n    \"passname\": \"postwrap_process\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(1): SgVariableDeclaration:extern int __merlin_include__LB___merlinhead_kernel_top_h_0;\",\n    \"passname\": \"postwrap_process\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(2): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_L_() {...}\",\n    \"passname\": \"postwrap_process\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"postwrap_process\"\n}"
+        ]
+    },
+    "X_0_1_0_2": {
+        "org_identifier": "BuiltInpostwrap_process_3",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9109 for 140414479475968\",\n    \"passname\": \"postwrap_process\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_L_() {...}\",\n    \"passname\": \"postwrap_process\"\n}"
+        ]
+    },
+    "X_0_1_0_2_0": {
+        "org_identifier": "BuiltInpostwrap_process_2",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8723 for 140414483195504\",\n    \"passname\": \"postwrap_process\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"postwrap_process\"\n}"
+        ]
+    },
+    "X_0_1_0_3": {
+        "org_identifier": "BuiltInpostwrap_process_1",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9109 for 140414479474968\",\n    \"passname\": \"postwrap_process\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_L_() {...}\",\n    \"passname\": \"postwrap_process\"\n}"
+        ]
+    },
+    "X_0_1_0_3_0": {
+        "org_identifier": "BuiltInpostwrap_process_0",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 8723 for 140414483194904\",\n    \"passname\": \"postwrap_process\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"postwrap_process\"\n}"
+        ]
+    }
+}

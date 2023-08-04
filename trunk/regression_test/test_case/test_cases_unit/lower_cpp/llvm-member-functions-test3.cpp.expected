@@ -1,0 +1,17 @@
+// Bug2198: Always pass a floating node initializer to
+// CSageCodeGen::CreateVariableDecl.
+
+struct ::T 
+{
+}
+;
+struct T p_ZN1TplERK1T(struct T *this_,const struct T &);
+static void __merlin_dummy_SgClassDeclaration_struct_T_();
+#pragma ACCEL kernel name = "test3"
+
+void test3()
+{
+  struct T t1;
+  struct T t2;
+  struct T result = p_ZN1TplERK1T(&t1,t2);
+}

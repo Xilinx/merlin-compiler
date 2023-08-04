@@ -1,0 +1,16 @@
+#include "cmost.h"
+
+void sub(int a[100],int I)
+{
+  __merlin_access_range(a,0,99);
+  for (int J = 0; J < 10; ++J) {
+    a[I + J * 10];
+  }
+}
+
+void top(int a[100])
+{
+  for (int I = 0; I < 10; ++I) {
+    sub(a,I);
+  }
+}

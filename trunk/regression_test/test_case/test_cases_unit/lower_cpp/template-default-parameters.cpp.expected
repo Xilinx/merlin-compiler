@@ -1,0 +1,50 @@
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+static void __merlin_dummy_SgTemplateMemberFunctionDeclaration_return_m_();
+static void __merlin_dummy_SgTemplateMemberFunctionDeclaration_template_();
+
+struct ::Array_int_5_ 
+{
+  int m_arr[5];
+}
+;
+int &p_ZN12Array_int_5_ixIEEi(struct Array_int_5_ *this_,int i);
+int p_ZN12Array_int_5_7getSizeIEEv(struct Array_int_5_ *this_);
+
+int &p_ZN12Array_int_5_ixIEEi(struct Array_int_5_ *this_,int i)
+{
+  return this_ -> m_arr[i];
+}
+
+int p_ZN12Array_int_5_7getSizeIEEv(struct Array_int_5_ *this_)
+{
+  return 5;
+}
+
+struct ::Array_double_1_ 
+{
+  double m_arr[1];
+}
+;
+double &p_ZN15Array_double_1_ixIEEi(struct Array_double_1_ *this_,int i);
+int p_ZN15Array_double_1_7getSizeIEEv(struct Array_double_1_ *this_);
+
+double &p_ZN15Array_double_1_ixIEEi(struct Array_double_1_ *this_,int i)
+{
+  return this_ -> m_arr[i];
+}
+
+int p_ZN15Array_double_1_7getSizeIEEv(struct Array_double_1_ *this_)
+{
+  return 1;
+}
+#pragma ACCEL kernel
+
+void k()
+{
+  struct Array_int_5_ a;
+  p_ZN12Array_int_5_ixIEEi(&a,0);
+  p_ZN12Array_int_5_7getSizeIEEv(&a);
+  struct Array_double_1_ b;
+  p_ZN15Array_double_1_ixIEEi(&b,0);
+  p_ZN15Array_double_1_7getSizeIEEv(&b);
+}

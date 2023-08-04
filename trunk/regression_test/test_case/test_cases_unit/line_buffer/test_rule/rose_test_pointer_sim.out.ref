@@ -1,0 +1,79 @@
+#include<stdio.h>
+#include<string.h>
+#include"header.h"
+#define uu(n, m) (c[(n)*32 + (m)])
+#pragma ACCEL kernel
+
+void func_top_1(int *c)
+{
+  
+#pragma ACCEL INTERFACE VARIABLE=c DEPTH=1024 BURST_OFF
+  int sum;
+  int LineBuffer_c0[30];
+  int LineBuffer_c1[30];
+  int slide_wind_0[3][1];
+  for (int j = 0L; j < 32L; j++) {
+    for (int k = 1L; k < 31; k++) {{
+        int j_2;
+        int j_1;
+        int tmp_wind_0[3];
+        int j_0;
+        for (j_0 = 0L; j_0 <= 2L; ++j_0) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0[j_0][0] = slide_wind_0[j_0][0];
+        }
+        for (j_1 = 0; j_1 <= 2L; ++j_1) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          if (j_1 == 0L) {
+            tmp_wind_0[j_1] = LineBuffer_c0[k - 1L];
+          }
+           else {
+            if (j_1 == 1L) {
+              tmp_wind_0[j_1] = LineBuffer_c1[k - 1L];
+            }
+          }
+        }
+        tmp_wind_0[2UL] = c[(j + -1L + -1L + 2L) * 32L + (k + 0L + 0L) * 1L];
+        for (j_2 = 0; j_2 <= 2L; ++j_2) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0[j_2][0L] = tmp_wind_0[j_2];
+        }
+{
+          int j_3;
+          int tmp_c;
+          for (j_3 = 0; j_3 <= 1UL; ++j_3) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            tmp_c = tmp_wind_0[j_3 + 1];
+            if (j_3 == 0L) {
+              LineBuffer_c0[k - 1L + 0L] = tmp_c;
+            }
+             else {
+              if (j_3 == 1L) {
+                LineBuffer_c1[k - 1L + 0L] = tmp_c;
+              }
+            }
+          }
+        }
+      }
+      if (j + -1L >= 1L && j + -1L <= 30L && k >= 1L && k <= 30L) {
+        int u_0 = slide_wind_0[2L][0L];
+        int u_1 = slide_wind_0[0L][0L];
+        printf("%d, %d: %d, %d\n",j + -1L,k,u_0,u_1);
+      }
+    }
+  }
+}
+int c[1024];
+
+int main()
+{
+  for (int i = 0; i < 1024; i++) {
+    c[i] = i;
+  }
+  func_top_1(c);
+  return 0;
+}

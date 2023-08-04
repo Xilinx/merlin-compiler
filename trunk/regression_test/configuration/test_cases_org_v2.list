@@ -1,0 +1,19 @@
+matmul	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/matmul
+#denoise	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/denoise
+#segmentation	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/segmentation
+smithwaterman	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/smithwaterman
+idct	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/idct
+blackschole	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/blackschole
+dwt	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/dwt
+#logistic_64	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/logistic_64
+#twoNN	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/twoNN
+normal	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/normal
+#ap_int/ap_fixed	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/ap_int/ap_fixed
+#flann	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/flann
+#burst bug	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/burst bug
+#namd	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/namd
+#because of STL header	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/because of STL header
+#cnn	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/cnn
+#vec_sum	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/vec_sum
+#running time is more than 20mins	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/running time is more than 20mins
+#logistic_L10	$MERLIN_COMPILER_HOME/regression_test/test_case/sqa_test/./test_cases_org_v2/logistic_L10

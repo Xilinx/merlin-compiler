@@ -1,0 +1,47 @@
+
+ifeq ($(VERBOSE),1)
+ECHO := 
+else
+ECHO := @
+endif
+
+CXXFLAGS += -lm
+
+# Compiler
+CXX := gcc
+
+# OpenCL compile and link flags.
+# ifeq ($(XILINX_SDX),)
+LINK=-DALTERA_KERNEL
+DEF=ALTERA
+# else
+# LINK=-L$(XILINX_SDX)/runtime/lib/x86_64 -lxilinxopencl
+# DEF=XILINX
+# endif
+
+# Target
+TARGET := host_top
+
+# Files
+SRCS := $(wildcard *.cpp)
+#SRCS := vec_add.cpp
+LIBS := rt 
+
+host : $(TARGET)
+	@echo 'Generating host program'
+
+# Host executable target.
+$(TARGET) : Makefile $(SRCS) 
+	$(ECHO)$(CXX) $(CXXFLAGS) -fPIC \
+			$(SRCS) $(foreach L,$(LIBS),-l$L) $(LINK)\
+			-lpthread -lm -ldl -lrt -lstdc++ \
+			-D $(DEF) \
+			-o $(TARGET) \
+			-L./\
+			-Wl,-rpath=./ \
+			-lkernel 
+# Standard make targets
+clean :
+	$(ECHO)rm -f $(TARGET)
+
+.PHONY : all clean

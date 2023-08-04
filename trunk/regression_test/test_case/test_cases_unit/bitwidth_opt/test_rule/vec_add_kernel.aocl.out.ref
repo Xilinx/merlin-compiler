@@ -1,0 +1,40 @@
+#include <string.h>
+#define VEC_SIZE 10000
+#pragma ACCEL kernel
+
+void vec_add_kernel(int *a,int *b,int *c,int inc)
+{
+  int i;
+  int j;
+  for (j = 0; j < 10000 / 1000; j++) {
+    int a_buf[1000];
+    int b_buf[1000];
+    int c_buf[1000];
+    long _memcpy_i_0;
+    for (_memcpy_i_0 = 0; _memcpy_i_0 < ((unsigned long )1000) * sizeof(int ) / 4; ++_memcpy_i_0) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=50
+      long total_offset1 = 0 * 1000 + 0;
+      long total_offset2 = 0 * 0 + 1000 * j;
+      a_buf[total_offset1 + _memcpy_i_0] = a[total_offset2 + _memcpy_i_0];
+    }
+    long _memcpy_i_1;
+    for (_memcpy_i_1 = 0; _memcpy_i_1 < ((unsigned long )1000) * sizeof(int ) / 4; ++_memcpy_i_1) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=50
+      long total_offset1 = 0 * 1000 + 0;
+      long total_offset2 = 0 * 0 + 1000 * j;
+      b_buf[total_offset1 + _memcpy_i_1] = b[total_offset2 + _memcpy_i_1];
+    }
+    for (i = 0; i < 1000; i++) 
+      c_buf[i] = a_buf[i] + b_buf[i] + inc;
+    long _memcpy_i_2;
+    for (_memcpy_i_2 = 0; _memcpy_i_2 < ((unsigned long )1000) * sizeof(int ) / 4; ++_memcpy_i_2) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=50
+      long total_offset1 = 0 * 0 + 1000 * j;
+      long total_offset2 = 0 * 1000 + 0;
+      c[total_offset1 + _memcpy_i_2] = c_buf[total_offset2 + _memcpy_i_2];
+    }
+  }
+}

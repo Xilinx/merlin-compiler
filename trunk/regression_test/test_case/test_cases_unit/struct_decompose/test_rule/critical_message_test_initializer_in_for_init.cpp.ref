@@ -1,0 +1,5 @@
+
+ERROR: [DISAG-301] Cannot decompose interface port 'a' (test_initializer_in_for_init.cpp:16) with unsupported reference or initializer: 
+unsupported expression : a[0] (test_initializer_in_for_init.cpp:19)
+
+ Hint: complex pointer re-interpretation is not supported. Please rewrite

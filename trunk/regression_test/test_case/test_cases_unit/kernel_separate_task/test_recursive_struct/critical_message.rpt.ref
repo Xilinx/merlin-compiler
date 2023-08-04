@@ -1,0 +1,2 @@
+
+ERROR: [SEPAR-302] Recursive type is not supported: 'struct ::parentstruct' (vec_add.cpp:2)

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+brief introduction
+list all usable cases here
+in default mode, make unit_test will test all cases in case library
+-->
+<configs> 
+
+  <config>
+      <name>config1</name>
+      <case_off>case1 case2</case_off>
+  </config>  
+
+  <config>
+      <name>config2</name>
+      <case_off>case3 case5</case_off>
+  </config> 
+
+</configs>

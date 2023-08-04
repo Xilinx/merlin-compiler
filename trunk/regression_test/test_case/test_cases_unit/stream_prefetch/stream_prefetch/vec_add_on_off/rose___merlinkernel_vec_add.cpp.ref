@@ -1,0 +1,113 @@
+#include "merlin_stream.h" 
+extern int __merlin_include__GB_merlin_stream_h_0;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=32 NODE=vec_add PORT=msm_port_c_vec_add_0 
+merlin_stream ch_c_1;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=32 NODE=vec_add PORT=msm_port_b_vec_add_0 
+merlin_stream ch_b_0;
+#include "cmost.h"
+#include <math.h>
+#include "merlin_type_define.h"
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static void __merlin_dummy_kernel_pragma();
+// Original: #pragma ACCEL kernel
+
+void msm_port_b_vec_add_0(int b[1024])
+{
+  int _i_sub_1;
+// Original pramga:  ACCEL PARALLEL FACTOR=4 
+  for (int _i_l1 = 0; _i_l1 < 256; _i_l1++) 
+// Original: #pragma ACCEL parallel factor=4
+// Original: #pragma ACCEL PARALLEL FACTOR=4
+{
+    
+#pragma ACCEL PARALLEL FACTOR=1
+    for (_i_sub_1 = 0; _i_sub_1 < 4; ++_i_sub_1) 
+// Original: #pragma ACCEL parallel factor=4
+// Original: #pragma ACCEL PARALLEL FACTOR=4
+{
+      int b_sp_tmp_0;
+      
+#pragma ACCEL PARALLEL
+      b_sp_tmp_0 = b[_i_l1 * 4 + _i_sub_1];
+      merlin_stream_write(&ch_b_0,&b_sp_tmp_0);
+    }
+  }
+}
+
+void msm_port_c_vec_add_0(int c[1024])
+{
+  int _i_sub_2;
+// Original pramga:  ACCEL PARALLEL FACTOR=4 
+  for (int _i_l1 = 0; _i_l1 < 256; _i_l1++) 
+// Original: #pragma ACCEL parallel factor=4
+// Original: #pragma ACCEL PARALLEL FACTOR=4
+{
+    
+#pragma ACCEL PARALLEL FACTOR=1
+    for (_i_sub_2 = 0; _i_sub_2 < 4; ++_i_sub_2) 
+// Original: #pragma ACCEL parallel factor=4
+// Original: #pragma ACCEL PARALLEL FACTOR=4
+{
+      int c_sp_tmp_0;
+      
+#pragma ACCEL PARALLEL
+      merlin_stream_read(&ch_c_1,&c_sp_tmp_0);
+      c[_i_l1 * 4 + _i_sub_2] = c_sp_tmp_0;
+    }
+  }
+}
+
+void vec_add(int s,int a[1024],int b[1024],int c[1024])
+{
+  merlin_stream_init(&ch_c_1,1024,4);
+  merlin_stream_init(&ch_b_0,1024,4);
+{
+    
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=1 NODE=vec_add VARIABLE=b 
+    msm_port_b_vec_add_0(b);
+  }
+  int i_sub;
+  __merlin_access_range(c,0,1023UL);
+  __merlin_access_range(b,0,1023UL);
+  __merlin_access_range(a,0,1023UL);
+  
+#pragma ACCEL interface variable=a stream_prefetch=on max_depth=1024 depth=1024 stream_prefetch=off
+  
+#pragma ACCEL interface variable=b stream_prefetch=off max_depth=1024 depth=1024 stream_prefetch=on memory_burst=off
+  
+#pragma ACCEL interface variable=c stream_prefetch=on max_depth=1024 depth=1024 stream_prefetch=on memory_burst=off
+// Original pramga:  ACCEL PARALLEL FACTOR=4 
+  for (int _i_l1 = 0; _i_l1 < 256; _i_l1++) 
+// Original: #pragma ACCEL parallel factor=4
+// Original: #pragma ACCEL PARALLEL FACTOR=4
+{
+    
+#pragma ACCEL PARALLEL FACTOR=1
+    for (i_sub = 0; i_sub < 4; ++i_sub) 
+// Original: #pragma ACCEL parallel factor=4
+// Original: #pragma ACCEL PARALLEL FACTOR=4
+{
+      int c_sn_tmp_0;
+      int b_sn_tmp_0;
+      
+#pragma ACCEL PARALLEL
+      int a0 = a[_i_l1 * 4 + i_sub];
+      merlin_stream_read(&ch_b_0,&b_sn_tmp_0);
+      int b0 = b_sn_tmp_0;
+      int c0 = 0;
+      for (int _j_l2 = 0; _j_l2 < 1024 * 10; _j_l2++) {
+        c0 += ((int )(pow((double )(a0 * b0 + _j_l2),1.5))) % 7 + s;
+      }
+      c_sn_tmp_0 = c0;
+      merlin_stream_write(&ch_c_1,&c_sn_tmp_0);
+    }
+  }
+  merlin_stream_reset(&ch_b_0);
+{
+    
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=write DIM_NUM=1 NODE=vec_add VARIABLE=c 
+    msm_port_c_vec_add_0(c);
+  }
+  merlin_stream_reset(&ch_c_1);
+}

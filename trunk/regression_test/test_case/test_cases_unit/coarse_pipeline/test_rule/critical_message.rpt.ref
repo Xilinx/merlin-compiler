@@ -1,0 +1,288 @@
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'j' (test.cpp:19)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test.cpp:18).
+
+INFO: [CGPIP-101] Loop 'j' (test.cpp:45) is pipelined with 3 stages
+INFO: [CGPIP-101] Loop 'j' (test.cpp:71) is pipelined with 3 stages
+INFO: [CGPIP-101] Loop 'i' (test.cpp:90) is pipelined with 2 stages
+INFO: [CGPIP-101] Loop 'i' (test.cpp:109) is pipelined with 2 stages
+INFO: [CGPIP-101] Loop 'i' (test.cpp:129) is pipelined with 2 stages
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'j' (test.cpp:172)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test.cpp:171).
+
+INFO: [CGPIP-101] Loop 'j' (test.cpp:193) is pipelined with 2 stages
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test.cpp:253)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test.cpp:251).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test.cpp:270)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test.cpp:251).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test.cpp:295)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test.cpp:294).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test.cpp:328)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test.cpp:326).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test.cpp:356)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test.cpp:355).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test.cpp:397)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test.cpp:396).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'j' (test.cpp:454)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test.cpp:453).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test.cpp:484)
+  Reason: potential cross-iteration data dependence on variable 'a' (test.cpp:474).
+
+
+WARNING: [CGPIP-208] Coarse-grained pipelining NOT applied on loop 'k' (test.cpp:508)
+  Reason: there is only one statement in the loop. 
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test.cpp:518)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test.cpp:506).
+
+
+WARNING: [CGPIP-208] Coarse-grained pipelining NOT applied on loop 'k' (test.cpp:542)
+  Reason: there is only one statement in the loop. 
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test.cpp:552)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test.cpp:540).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test.cpp:584)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test.cpp:573).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'j' (test.cpp:413)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test.cpp:409).
+
+INFO: [CGPIP-101] Loop 'j' (test.cpp:435) is pipelined with 2 stages
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test.cpp:385)
+  Reason: potential cross-iteration data dependence on variable 'aa' (test.cpp:382).
+
+INFO: [CGPIP-101] Loop 'i' (test.cpp:212) is pipelined with 2 stages
+INFO: [CGPIP-101] Loop 'i' (test.cpp:231) is pipelined with 2 stages
+INFO: [CGPIP-101] Loop 'j' (test2.cpp:15) is pipelined with 2 stages
+
+WARNING: [CGPIP-202] Coarse-grained pipelining NOT applied on loop 'j' (test2.cpp:36)
+  Reason: continue statements are not allowed in coarse-grained pipeline (test2.cpp:46) 
+
+WARNING: [CGPIP-201] Pipelining NOT applied on loop 'j' (test2.cpp:56)
+  Reason: data dependency across loop iterations on variable 'a' (test2.cpp:51)
+  Hint:   try to move dependency into the same loop iteration
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test2.cpp:111)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test2.cpp:109).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test2.cpp:135)
+  Reason: potential cross-iteration data dependence on variable 'c_buf' (test2.cpp:134).
+
+
+WARNING: [CGPIP-202] Coarse-grained pipelining NOT applied on loop 'i' (test2.cpp:159)
+  Reason: continue statements are not allowed in coarse-grained pipeline (test2.cpp:166) 
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'j' (test2.cpp:184)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test2.cpp:182).
+
+INFO: [CGPIP-101] Loop 'j' (test2.cpp:210) is pipelined with 2 stages
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test2.cpp:236)
+  Reason: potential cross-iteration data dependence on variable 'c_buf' (test2.cpp:235).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test2.cpp:311)
+  Reason: potential cross-iteration data dependence on variable 'j' (test2.cpp:309).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test2.cpp:311)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test2.cpp:310).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test2.cpp:359)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test2.cpp:357).
+
+INFO: [CGPIP-101] Loop 'i' (test2.cpp:399) is pipelined with 3 stages
+INFO: [CGPIP-101] Loop 'i' (test2.cpp:426) is pipelined with 3 stages
+INFO: [CGPIP-101] Loop 'i' (test2.cpp:445) is pipelined with 3 stages
+
+WARNING: [CGPIP-208] Coarse-grained pipelining NOT applied on loop 'j' (test_iterator.cpp:10)
+  Reason: there is only one statement in the loop. 
+INFO: [CGPIP-101] Loop 'j' (test_iterator.cpp:31) is pipelined with 2 stages
+
+WARNING: [CGPIP-205] Coarse-grained pipelining NOT applied on loop 'j' (test_iterator.cpp:52)
+  Reason: the loop is non-canonical. 
+
+WARNING: [CGPIP-202] Coarse-grained pipelining NOT applied on loop 'i' (test_label.cpp:10)
+  Reason: goto statements are not allowed in coarse-grained pipeline (test_label.cpp:16) 
+
+WARNING: [CGPIP-205] Coarse-grained pipelining NOT applied on loop '' (test_label.cpp:28)
+  Reason: the loop is non-canonical. 
+INFO: [CGPIP-101] Loop 'i' (test_label.cpp:47) is pipelined with 2 stages
+
+WARNING: [CGPIP-205] Coarse-grained pipelining NOT applied on loop '' (test_label.cpp:63)
+  Reason: the loop is non-canonical. 
+
+WARNING: [CGPIP-205] Coarse-grained pipelining NOT applied on loop '' (test_label.cpp:81)
+  Reason: the loop is non-canonical. 
+
+WARNING: [CGPIP-205] Coarse-grained pipelining NOT applied on loop '' (test_label.cpp:97)
+  Reason: the loop is non-canonical. 
+
+WARNING: [CGPIP-202] Coarse-grained pipelining NOT applied on loop 'i' (test_label.cpp:111)
+  Reason: goto statements are not allowed in coarse-grained pipeline (test_label.cpp:123) 
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test_dowhile.cpp:7)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test_dowhile.cpp:6).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test_dowhile.cpp:29)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test_dowhile.cpp:28).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test_while.cpp:6)
+  Reason: potential cross-iteration data dependence on variable 'j' (test_while.cpp:4).
+
+INFO: [CGPIP-101] Loop 'i' (test_while.cpp:22) is pipelined with 3 stages
+INFO: [CGPIP-101] Loop 'i' (test_while.cpp:40) is pipelined with 2 stages
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test_while.cpp:64)
+  Reason: potential cross-iteration data dependence on variable 'c_buf' (test_while.cpp:63).
+
+
+WARNING: [CGPIP-205] Coarse-grained pipelining NOT applied on loop 'i' (test_imperfect.cpp:9)
+  Reason: the loop is non-canonical. 
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test_imperfect.cpp:37)
+  Reason: potential cross-iteration data dependence on variable 'a' (test_imperfect.cpp:32).
+
+INFO: [CGPIP-101] Loop 'i' (test_imperfect.cpp:70) is pipelined with 3 stages
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'j' (test_subfun1.cpp:12)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test_subfun1.cpp:11).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'j' (test_subfun1.cpp:30)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test_subfun1.cpp:29).
+
+INFO: [CGPIP-101] Loop 'j' (test_subfun1.cpp:48) is pipelined with 3 stages
+INFO: [CGPIP-101] Loop 'j' (test_subfun1.cpp:75) is pipelined with 3 stages
+INFO: [CGPIP-101] Loop 'j' (test_subfun1.cpp:102) is pipelined with 3 stages
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test_subfun3.cpp:24)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test_subfun3.cpp:22).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test_subfun3.cpp:39)
+  Reason: potential cross-iteration data dependence on variable 'c_buf' (test_subfun3.cpp:38).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test_subfun3.cpp:68)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test_subfun3.cpp:67).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test_subfun3.cpp:124)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test_subfun3.cpp:123).
+
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test_subfun3.cpp:146)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test_subfun3.cpp:145).
+
+INFO: [CGPIP-101] Loop 'i' (test_subfun3.cpp:200) is pipelined with 3 stages
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'j' (test_subfun3.cpp:127)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test_subfun3.cpp:123).
+
+INFO: [CGPIP-101] Loop 'j' (test_subfun3.cpp:149) is pipelined with 2 stages
+INFO: [CGPIP-101] Loop 'j' (test_subfun3.cpp:184) is pipelined with 2 stages
+INFO: [CGPIP-101] Loop 'j' (test_subfun3.cpp:235) is pipelined with 2 stages
+INFO: [CGPIP-101] Loop 'i' (test_subfun3.cpp:84) is pipelined with 2 stages
+INFO: [CGPIP-101] Loop 'i' (test_subfun3.cpp:103) is pipelined with 2 stages
+INFO: [CGPIP-101] Loop 'j' (test_if2.cpp:8) is pipelined with 2 stages
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'j' (test_if2.cpp:36)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test_if2.cpp:34).
+
+
+WARNING: [CGPIP-202] Coarse-grained pipelining NOT applied on loop 'i' (test_break.cpp:7)
+  Reason: continue statements are not allowed in coarse-grained pipeline (test_break.cpp:10) 
+INFO: [CGPIP-101] Loop 'i' (test_break.cpp:25) is pipelined with 2 stages
+
+WARNING: [CGPIP-202] Coarse-grained pipelining NOT applied on loop 'i' (test_break.cpp:46)
+  Reason: break statements are not allowed in coarse-grained pipeline (test_break.cpp:62) 
+INFO: [CGPIP-101] Loop 'i' (test_break.cpp:72) is pipelined with 2 stages
+INFO: [CGPIP-101] Loop 'i' (test_localdecl.cpp:17) is pipelined with 4 stages
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test_localdecl.cpp:33)
+  Reason: potential cross-iteration data dependence on variable 'c_buf' (test_localdecl.cpp:32).
+
+INFO: [CGPIP-101] Loop 'i' (test_localdecl.cpp:48) is pipelined with 3 stages
+INFO: [CGPIP-101] Loop 'i' (test_localdecl.cpp:64) is pipelined with 4 stages
+INFO: [CGPIP-101] Loop 'i' (test_localdecl.cpp:80) is pipelined with 3 stages
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test_localdecl.cpp:108)
+  Reason: potential cross-iteration data dependence on variable 'a_buf' (test_localdecl.cpp:105).
+
+INFO: [CGPIP-101] Loop 'i' (test_scalar.cpp:7) is pipelined with 3 stages
+INFO: [CGPIP-101] Loop 'i' (test_scalar.cpp:27) is pipelined with 4 stages
+
+WARNING: [CGPIP-201] Pipelining NOT applied on loop 'i' (test_scalar.cpp:49)
+  Reason: data dependency across loop iterations on variable 'val2' (test_scalar.cpp:47)
+  Hint:   try to move dependency into the same loop iteration
+
+WARNING: [CGPIP-201] Pipelining NOT applied on loop 'i' (test_postprocess.cpp:6)
+  Reason: data dependency across loop iterations on variable 'a' (test_postprocess.cpp:4)
+  Hint:   try to move dependency into the same loop iteration
+INFO: [CGPIP-101] Loop 'i' (test_postprocess.cpp:23) is pipelined with 2 stages
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test_range.cpp:8)
+  Reason: potential cross-iteration data dependence on variable 'c_buf' (test_range.cpp:5).
+
+INFO: [CGPIP-101] Loop 'i' (test_range.cpp:33) is pipelined with 2 stages
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'i' (test_range.cpp:49)
+  Reason: potential cross-iteration data dependence on variable 'b_buf' (test_range.cpp:31).
+
+INFO: [CGPIP-101] Loop 'i' (test_range.cpp:77) is pipelined with 2 stages
+INFO: [CGPIP-101] Loop 'j' (test_apint_initializer.cpp:11) is pipelined with 2 stages
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'tm' (seg_0_kernel.c:26)
+  Reason: potential cross-iteration data dependence on variable 'num' (seg_0_kernel.c:10).
+
+INFO: [CGPIP-101] Loop 'j' (vec_add_kernel.c:15) is pipelined with 3 stages
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'blk' (idct_kernel.c:26)
+  Reason: potential cross-iteration data dependence on variable 'row2col_data' (idct_kernel.c:18).
+
+INFO: [CGPIP-101] Loop 'i' (idct_kernel.c:114) is pipelined with 3 stages
+INFO: [CGPIP-101] Loop 'j' (idct_kernel.c:64) is pipelined with 4 stages
+
+WARNING: [CGPIP-208] Coarse-grained pipelining NOT applied on loop 'ip' (dwt3d_kernel.c:363)
+  Reason: there is only one statement in the loop. 
+INFO: [CGPIP-101] Loop 'i' (dwt3d_kernel.c:180) is pipelined with 8 stages
+INFO: [CGPIP-101] Loop 'i' (logistic_regression_kernel.c:97) is pipelined with 4 stages
+INFO: [CGPIP-101] Loop 'k' (matmul_kernel.c:24) is pipelined with 2 stages
+INFO: [CGPIP-101] Loop 'k' (bs_kernel.c:184) is pipelined with 3 stages
+INFO: [CGPIP-101] Loop 'n' (denoise.c:28) is pipelined with 9 stages
+INFO: [CGPIP-101] Loop 'k0' (gradient.cpp:53) is pipelined with 4 stages
+INFO: [CGPIP-101] Loop 'j0' (normal_kernel.cpp:297) is pipelined with 3 stages
+INFO: [CGPIP-101] Loop 'i' (twonn_kernel.c:56) is pipelined with 2 stages
+INFO: [CGPIP-101] Loop 'i' (twonn_kernel.c:79) is pipelined with 4 stages
+INFO: [CGPIP-101] Loop 'i' (twonn_kernel.c:95) is pipelined with 2 stages
+INFO: [CGPIP-101] Loop 'i' (twonn_kernel.c:112) is pipelined with 3 stages
+
+WARNING: [CGPIP-206] Coarse-grained pipelining NOT applied on loop 'j' (transformation:0)
+  Reason: potential cross-iteration data dependence on variable 'weights1' (transformation:0).
+
+INFO: [CGPIP-101] Loop 'p' (logistic64.cpp:15) is pipelined with 4 stages

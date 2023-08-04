@@ -1,0 +1,8 @@
+{
+    "vec_add_kernel1": {
+        "vec_add_kernel1": "subkernel"
+    },
+    "vec_add_kernel2": {
+        "vec_add_kernel2": "subkernel"
+    }
+}

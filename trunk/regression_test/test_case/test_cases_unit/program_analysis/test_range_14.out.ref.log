@@ -1,0 +1,57 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 0;i < 100;++i) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 1;i < 100;++i) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = 100;((int )j) >= 0;j += 4294967295u) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = 100;j < 4294967295u;++j) {...}
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void func(int M) {...}
+  SgBasicBlock {unsigned int index = 100 + 4294967295u * i;a[index] = i;}
+  SgForStatement for(i = 0;i < 100;++i) {...}
+  SgBasicBlock {unsigned int index = i + 4294967295u;a[index] = i;}
+  SgForStatement for(i = 1;i < 100;++i) {...}
+  SgBasicBlock {unsigned int _in_j = 100U + -1L * j;a[_in_j] = _in_j;}
+  SgForStatement for(j = 0;j <= 100U;j++) {...}
+  SgBasicBlock {a[j - 1] = j;}
+  SgForStatement for(j = 100;j < 4294967295u;++j) {...}
+
+Arrays: 
+  int [100] a
+
+Ranges: 
+  SgFunctionDeclaration void func(int M) {...}
+    int [100] a :  W[0..4294967293 exact]
+  SgBasicBlock {unsigned int index = 100 + 4294967295u * i;a[index] = i;}
+    int [100] a :  W[100U + i * 4294967295U..100U + i * 4294967295U exact]
+  SgForStatement for(i = 0;i < 100;++i) {...}
+    int [100] a :  W[1..100 exact]
+  SgBasicBlock {unsigned int index = i + 4294967295u;a[index] = i;}
+    int [100] a :  W[4294967295U + i..4294967295U + i exact]
+  SgForStatement for(i = 1;i < 100;++i) {...}
+    int [100] a :  W[0..98 exact]
+  SgBasicBlock {unsigned int _in_j = 100U + -1L * j;a[_in_j] = _in_j;}
+    int [100] a :  W[100U + -j..100U + -j exact]
+  SgForStatement for(j = 0;j <= 100U;j++) {...}
+    int [100] a :  W[0..100 exact]
+  SgBasicBlock {a[j - 1] = j;}
+    int [100] a :  W[4294967295U + j..4294967295U + j exact]
+  SgForStatement for(j = 100;j < 4294967295u;++j) {...}
+    int [100] a :  W[99..4294967293 exact]
+

@@ -1,0 +1,7 @@
+F_0 (name:test, CYCLE_UNIT:3)
+L_0 (name:loop1, CYCLE_UNIT:3)
+    X_0_1 (name:fun1, inline:yes, CYCLE_UNIT:3, type:callfunction, trip-count:?)
+L_1 (CYCLE_UNIT:3)
+F_1 (name:fun1, CYCLE_UNIT:3, comment:inlined)
+    L_3 (name:loop3, CYCLE_UNIT:3, flatten:yes)
+        L_3_1 (name:loop3_1, CYCLE_UNIT:-, flatten:yes, flatten-id:L_3)

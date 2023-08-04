@@ -1,0 +1,51 @@
+<directives>
+    <include_path> -I/curr/hanhu/unit_test/lab0/src  -I /curr/hanhu/WORK/Merlin_Compiler/trunk/mars-gen/lib/merlin</include_path>
+
+<!-- Platform setup -->
+<!--
+<platform_name>a10gx</platform_name><part_name>10ax115s2f45i2sges</part_name><arch_name>arria10</arch_name>
+<platform_name>a10gx</platform_name><part_name>5SGXEA7N2F45C2</part_name><arch_name>stratixv</arch_name>
+<pure_kernel>on</pure_kernel>
+-->
+<clock_period>5ns</clock_period>
+<platform_name>aocl</platform_name><part_name>10ax115s2f45i2sges</part_name><arch_name>arria10</arch_name>
+<!--
+<platform_name>a10gx</platform_name><part_name>10ax115s2f45i2sges</part_name><arch_name>arria10</arch_name>
+-->
+
+<!-- optimization schemes -->
+<memory_burst     >       on  </memory_burst>
+<memory_coalescing>       on  </memory_coalescing>
+<altera_opt>              on </altera_opt>
+<false_dep_removal>       off </false_dep_removal>
+<comm_refine>             on </comm_refine>
+<comm_sync>               on </comm_sync>
+<comm_rename>             on </comm_rename>
+<comm_dead_remove>        on </comm_dead_remove>
+<memory_reduce>           on </memory_reduce>
+<value_prop>              on </value_prop>
+<loop_flatten>            on </loop_flatten>
+<loop_tiling>             on </loop_tiling>
+<reduction_altera>        off </reduction_altera>
+<opt_effort>        standard </opt_effort>
+<cstd></cstd>
+<!-- design flow -->
+<high_level_synthesis> off </high_level_synthesis>
+<simulation>           off </simulation>
+<implementation>       off </implementation>
+
+<!-- auto testing -->
+<testing        > off </testing>
+<testing_run_ref> on </testing_run_ref>
+<testing_run_opt> on </testing_run_opt>
+<testing_run_sim> on </testing_run_sim>
+<testing_run_bit> on </testing_run_bit>
+
+<!-- misc -->
+<implementation_tool> aocl </implementation_tool>
+<!-- 
+-->
+<ihatebug>debug-level2</ihatebug>
+<skip_syntax_check>on</skip_syntax_check>
+</directives>
+

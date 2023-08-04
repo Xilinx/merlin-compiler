@@ -1,0 +1,37 @@
+
+struct st 
+{
+  int a;
+  int b;
+}
+;
+void f(int a);
+
+int main()
+{
+  int a;
+  int b;
+  int c;
+  struct st sa;
+  struct st sb;
+  struct st sc;
+  (c = 42 , ((b = c , a = b)));
+  (b = c , (a > b?a : b) = b);
+  if (((b = c , a = b))) {
+  }
+  while(((b = c , a = b))){
+  }
+  f((b = c , a = b));
+  (sb = sc , sa = sb);
+  ((((sb = sc , sa = sb) , a) , b) , c);
+  for ((b = c , a = b); ((b = c , a = b)); (b = c , a = b)) {
+  }
+  int a1 = (c = 99 , b = c);
+  int d = 100;
+  int e = 101;
+  a = (b = c = d) = e = 102;
+  int arr[3] = {(0), (1), (2)};
+  (arr[1] = 103 , ((arr[0] = arr[1] , a = arr[0])));
+  a = arr[(e = 2 , d = e)] = 104;
+  return 0;
+}

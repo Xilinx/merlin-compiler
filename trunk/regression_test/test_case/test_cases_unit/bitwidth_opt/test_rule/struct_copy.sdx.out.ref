@@ -1,0 +1,20 @@
+#include "memcpy_512_1d.h"
+#include<string.h>
+extern int __merlin_include__GB_memcpy_512_1d_h_0;
+
+struct A 
+{
+  int a;
+}
+;
+#pragma ACCEL kernel
+
+void top(ap_uint<512> *a)
+{
+  
+#pragma HLS DATA_PACK VARIABLE=a
+  struct A a_buf[100];
+  
+#pragma  HLS array_partition  variable=a_buf cyclic factor = 16 dim=1
+  memcpy_wide_bus_read_struct_512(a_buf,(ap_uint<512> *)a,0 * 4,sizeof(struct A ) * ((unsigned long )100),100L);
+}

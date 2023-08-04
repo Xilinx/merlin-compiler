@@ -1,0 +1,32 @@
+Hello Program Analysis ... 
+**** Test Variable Reference **** 
+[Ref i] i int i; 
+[Ref i] i int i; 
+[Ref i] i int i; 
+[Ref j] j int j; 
+[Ref j] j int j; 
+[Ref j] j int j; 
+[Ref a] a[i] void func_1(float * a) {...} 
+[Ref i] a[i] int i; 
+[Ref a] a int a[1024]; 
+[Ref k] k int k; 
+[Ref k] k int k; 
+[Ref k] k int k; 
+[Ref a] a void func_2(float * a) {...} 
+[Ref i] i int i; 
+[Ref i] i int i; 
+[Ref i] i int i; 
+[Ref j] j int j; 
+[Ref j] j int j; 
+[Ref j] j int j; 
+[Ref b] b[i][j * 100] int b[10][10]; 
+[Ref i] b[i][j * 100] int i; 
+[Ref j] b[i][j * 100] int j; 
+[Ref a] a[i * 10 + j] void func_2(float * a) {...} 
+[Ref i] a[i * 10 + j] int i; 
+[Ref j] a[i * 10 + j] int j; 
+[Ref ii] ii int ii; 
+[Ref ii] ii int ii; 
+[Ref ii] ii int ii; 
+[Ref a] a void func_0(float * a) {...} 
+

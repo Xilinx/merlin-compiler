@@ -1,0 +1,16 @@
+
+struct ::B 
+{
+}
+;
+const int _ZN1B1xE = 1;
+static void __merlin_dummy_SgClassDeclaration_struct_B_();
+#pragma ACCEL kernel
+
+void k()
+{
+  struct B b;
+  struct B *pb = &b;
+  _ZN1B1xE;
+  _ZN1B1xE;
+}

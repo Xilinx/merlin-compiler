@@ -1,0 +1,26 @@
+
+struct ::A 
+{
+  int a[4];
+}
+;
+
+void p_ZN1AC2Ei(struct A *this_,int v)
+{
+  this_ -> a[0] = v;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+#pragma ACCEL kernel
+
+int k()
+{
+  struct A temp;
+  p_ZN1AC2Ei(&temp,1);
+  struct A array[6];
+{
+    int _i0;
+    for (_i0 = 0; _i0 <= 5UL; ++_i0) {
+      array[_i0] = temp;
+    }
+  }
+}

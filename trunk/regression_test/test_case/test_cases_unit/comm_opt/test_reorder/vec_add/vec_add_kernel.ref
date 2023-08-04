@@ -1,0 +1,61 @@
+#include "channel_def.h"
+#pragma channel int __ch_reorder_w_c_buf __attribute__((depth(32)));
+typedef int __merlin_channel_typedef;
+#define VEC_SIZE 10000
+#define TILE 16
+__merlin_channel_typedef __ch_reorder_w_c_buf;
+#include "channel_def.h"
+#pragma channel int __ch_reorder_r_c_buf __attribute__((depth(32)));
+typedef int __merlin_channel_typedef;
+__merlin_channel_typedef __ch_reorder_r_c_buf;
+
+void vec_add_kernel(int *a,int *b,int *c,int inc)
+{
+  int c_buf_j_w;
+  int c_buf_j_r;
+  int c_buf_total_i;
+  int c_buf__outer_i;
+  int c_buf_reorder_buffer[2][10000];
+  int c_buf_rf1[10000];
+  int c_buf_rf0[10000];
+  int j;
+  int j0;
+  int jj;
+  int i;
+  int c_buf[10000];
+  for (i = 0; i < 10; ++i) {
+    for (j = 0; j < 10000; ++j) {
+      c_buf_rf0[10000 - j - 1] = a[j] + b[j] + inc;
+      if (i == 9) {
+        write_channel_altera___ch_reorder_r_c_buf__merlinalterafuncend(__ch_reorder_r_c_buf,c_buf_rf0[10000 - j - 1]);
+      }
+    }
+  }
+  for (i = 0; i < 10; ++i) {
+    for (j = 0; j < 10000; ++j) {
+      if (i == 0) {
+        c_buf_rf1[j] = read_channel_altera___ch_reorder_w_c_buf__merlinalterafuncend(__ch_reorder_w_c_buf);
+      }
+      c[j] = c_buf_rf1[j];
+    }
+  }
+  for (c_buf_total_i = 0,c_buf__outer_i = 0,c_buf_j_r = 0,c_buf_j_w = 0; c_buf_total_i <= (1 + 1) * 10000 - 1; ++c_buf_total_i) {
+    if (c_buf__outer_i > 0) {
+      write_channel_altera___ch_reorder_w_c_buf__merlinalterafuncend(__ch_reorder_w_c_buf,c_buf_reorder_buffer[(c_buf__outer_i - 1) % 2][c_buf_j_w * 1LL + 0LL]);
+    }
+    if (c_buf__outer_i < 1) {
+      c_buf_reorder_buffer[c_buf__outer_i % 2][c_buf_j_r * -1LL + 9999LL] = read_channel_altera___ch_reorder_r_c_buf__merlinalterafuncend(__ch_reorder_r_c_buf);
+    }
+{
+      ++c_buf_j_r;
+      if (c_buf_j_r > 9999) {
+        ++c_buf__outer_i;
+        c_buf_j_r = 0;
+      }
+      ++c_buf_j_w;
+      if (c_buf_j_w > 9999) {
+        c_buf_j_w = 0;
+      }
+    }
+  }
+}

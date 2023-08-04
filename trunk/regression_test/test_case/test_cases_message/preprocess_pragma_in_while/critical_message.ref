@@ -1,0 +1,24 @@
+
+WARNING: [PROCS-202] Found a non-canonical loop 'while(j < n){c[j] = ' (vec_add_kernel.c:17) which may affect the quality of the result
+
+WARNING: [PROCS-202] Found a non-canonical loop 'do {c[j] = a[j] + b[' (vec_add_kernel.c:23) which may affect the quality of the result
+
+WARNING: [PROCS-245] Found a loop ' do {#pragma ACCEL PI... ' (vec_add_kernel.c:23) without a bound on its tripcount. Please specify one using '#pragma HLS loop_tripcount max=?' or 'assert'.
+Use default max tripcount (2) for analysis
+
+WARNING: [PROCS-245] Found a loop ' while(j < n){#pragma... ' (vec_add_kernel.c:17) without a bound on its tripcount. Please specify one using '#pragma HLS loop_tripcount max=?' or 'assert'.
+Use default max tripcount (2) for analysis
+INFO: [BURST-101] Memory burst inferred: variable 'c' (vec_add_kernel.c:8) in scope (vec_add_kernel.c:9)
+  burst buffer size = 3996 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (vec_add_kernel.c:8) in scope (vec_add_kernel.c:9)
+  burst buffer size = 3996 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (vec_add_kernel.c:8) in scope (vec_add_kernel.c:9)
+  burst buffer size = 3996 bytes
+INFO: [WDBUS-101] Memory coalescing inferred: variable 'a' (vec_add_kernel.c:8)
+  interface bitwidth = 512 bits
+INFO: [WDBUS-101] Memory coalescing inferred: variable 'b' (vec_add_kernel.c:8)
+  interface bitwidth = 512 bits
+INFO: [WDBUS-101] Memory coalescing inferred: variable 'c' (vec_add_kernel.c:8)
+  interface bitwidth = 512 bits
+INFO: [FGPIP-103] Loop 'while(j < n){#pragma'  (vec_add_kernel.c:17) is pipelined
+INFO: [FGPIP-103] Loop 'do {#pragma HLS pipe'  (vec_add_kernel.c:23) is pipelined

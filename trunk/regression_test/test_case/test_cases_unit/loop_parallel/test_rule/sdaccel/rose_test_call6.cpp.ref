@@ -1,0 +1,31 @@
+
+int add_func_2(int a[2],int *v1,int *v2)
+{
+   *v1 = a[0];
+   *v2 = a[1];
+}
+#pragma ACCEL kernel
+
+void func_top_0(int a1[2])
+{
+  int a[2];
+  
+#pragma HLS array_partition variable=a complete dim=1
+  int v1;
+  int v2;
+  for (int i = 0; i < 2; i++) 
+// Original: #pragma ACCEL pipeline
+{
+    
+#pragma HLS pipeline
+    for (int j = 0; j < 2; j++) 
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+      
+#pragma HLS unroll
+      a[j] = a1[j];
+    }
+    add_func_2(a,&v1,&v2);
+    a1[0] = v1 + v2;
+  }
+}

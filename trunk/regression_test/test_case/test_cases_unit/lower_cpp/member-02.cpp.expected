@@ -1,0 +1,37 @@
+
+struct ::B 
+{
+  char c;
+}
+;
+
+int p_ZNK1B3getEv(const struct B *this_)
+{
+  return (int )(this_ -> c);
+}
+
+void p_ZN1B3incEi(struct B *this_,int a)
+{
+  this_ -> c += a;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_B_();
+
+struct ::A 
+{
+  struct B data;
+}
+;
+
+void p_ZN1A3addEi(struct A *this_,int a)
+{
+  p_ZN1B3incEi(&this_ -> data,a);
+}
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+#pragma ACCEL KERNEL
+
+int main()
+{
+  struct A a;
+  p_ZN1A3addEi(&a,10);
+  return 0;
+}

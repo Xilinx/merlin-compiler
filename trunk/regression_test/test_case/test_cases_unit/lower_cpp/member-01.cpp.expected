@@ -1,0 +1,22 @@
+// Basic member function lowering tests.
+
+struct ::A 
+{
+  int data;
+}
+;
+
+void p_ZN1A3addEv(struct A *this_)
+{
+  this_ -> data++;
+}
+void p_ZN1A1fEv(struct A *this_);
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+#pragma ACCEL kernel
+
+int main()
+{
+  struct A a;
+  p_ZN1A3addEv(&a);
+  p_ZN1A1fEv(&a);
+}

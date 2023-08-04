@@ -1,0 +1,51 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = 1;j < 100;++j) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = 1;j < 100;++j) {...}
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+[Exp SgVarRefExp:i] {i:SgVarRefExp i->1,0} : 0..1, constant bound: {i:SgVarRefExp i->1,0} : 0..1
+[Exp SgVarRefExp:ii] 1, constant bound: 1
+[Exp SgPlusPlusOp:a++] {a++:SgPlusPlusOp a++->1,0} : a++..a++, constant bound: {a++:SgPlusPlusOp a++->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[5]] {a[5]:SgPntrArrRefExp a[5]->1,0} : a[5]..a[5], constant bound: {a[5]:SgPntrArrRefExp a[5]->1,0} : neg_inf..pos_inf
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void f() {...}
+  SgFunctionDeclaration void f2(int a) {...}
+  SgFunctionDeclaration void f3() {...}
+  SgFunctionDeclaration void f4() {...}
+  SgBasicBlock {i;}
+  SgForStatement for(j = 1;j < 100;++j) {...}
+  SgBasicBlock {ii;}
+  SgForStatement for(j = 1;j < 100;++j) {...}
+
+Arrays: 
+  int [2][2] a
+  int [2][2] a
+  int [100] a
+  int [10][100] a
+
+Ranges: 
+  SgFunctionDeclaration void f() {...}
+  SgFunctionDeclaration void f2(int a) {...}
+  SgFunctionDeclaration void f3() {...}
+    int [100] a :  R[0..1 exact]
+  SgFunctionDeclaration void f4() {...}
+    int [10][100] a :  R[0..9 inexact][0..99 inexact] W[0..9 inexact][0..99 inexact]
+    intersect: 0..9 inexact
+    union: 0..9 inexact
+    intersect: 0..99 inexact
+    union: 0..99 inexact
+  SgBasicBlock {i;}
+  SgForStatement for(j = 1;j < 100;++j) {...}
+  SgBasicBlock {ii;}
+  SgForStatement for(j = 1;j < 100;++j) {...}
+

@@ -1,0 +1,230 @@
+// ifelse
+#pragma ACCEL kernel
+
+void func_top_6()
+{
+  int a[100][100];
+  int b[100][100];
+  
+#pragma HLS array_partition variable=b cyclic factor=8 dim=2
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    for (j = 0; j < 100; j++) 
+// Original: #pragma ACCEL PARALLEL FACTOR = 10
+{
+      
+#pragma HLS unroll factor=10
+      if (a[0][0]) {
+        a[i][j] = b[i][j];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_6_1(int cond)
+{
+  int a[100][100];
+  
+#pragma HLS array_partition variable=a cyclic factor=8 dim=2
+  int b[100][100];
+  
+#pragma HLS array_partition variable=b cyclic factor=8 dim=2
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    for (j = 0; j < 100; j++) 
+// Original: #pragma ACCEL PARALLEL FACTOR = 10
+{
+      
+#pragma HLS unroll factor=10
+      if (cond) {
+        a[i][j] = b[i][j];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_7()
+{
+  int a[100][100];
+  
+#pragma HLS array_partition variable=a complete dim=2
+  
+#pragma HLS array_partition variable=a cyclic factor=2 dim=1
+  int b[100][100];
+  
+#pragma HLS array_partition variable=b complete dim=2
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) 
+// Original: #pragma ACCEL PIPELINE II = 1
+{
+    
+#pragma HLS pipeline II=1
+    if (a[0][0]) {
+      for (j = 0; j < 100; j++) 
+// Original: #pragma ACCEL PARALLEL complete
+{
+        
+#pragma HLS unroll
+        a[i][j] = b[i][j];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_8(int cond)
+{
+  int a[100][100];
+  
+#pragma HLS array_partition variable=a complete dim=2
+  int b[100][100];
+  
+#pragma HLS array_partition variable=b complete dim=2
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) 
+// Original: #pragma ACCEL PIPELINE II = 1
+{
+    
+#pragma HLS dependence variable=a array inter false 
+    
+#pragma HLS pipeline II=1
+    if (cond) {
+      for (j = 0; j < 100; j++) 
+// Original: #pragma ACCEL PARALLEL complete
+{
+        
+#pragma HLS unroll
+        a[i][j] = b[i][j];
+      }
+    }
+  }
+}
+// sub function
+
+void sub_0(int a[100][100],int b[100][100])
+{
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    if (a[0][0]) {
+      for (j = 0; j < 100; j++) 
+// Original: #pragma ACCEL PARALLEL FACTOR = 10
+{
+        
+#pragma HLS unroll factor=10
+        a[i][j] = b[i][j];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_9()
+{
+  int a[100][100];
+  
+#pragma HLS array_partition variable=a cyclic factor=8 dim=2
+  int b[100][100];
+  
+#pragma HLS array_partition variable=b cyclic factor=8 dim=2
+  sub_0(a,b);
+}
+#pragma ACCEL kernel
+
+void func_top_10(int *min)
+{
+  int dst[1024];
+  
+#pragma HLS array_partition variable=dst cyclic factor=32 dim=1
+  int n_sub_0;
+  for (n_sub_0 = 0; n_sub_0 < 64; ++n_sub_0) 
+// Original: #pragma ACCEL PARALLEL
+{
+    
+#pragma HLS unroll
+     *min = dst[n_sub_0];
+    if (n_sub_0 > 0) {
+      if ( *min <= dst[- 1 + n_sub_0]) {
+         *min =  *min;
+      }
+       else {
+         *min = dst[- 1 + n_sub_0];
+      }
+    }
+    if (n_sub_0 < 63) {
+      if ( *min <= dst[1 + n_sub_0]) {
+         *min =  *min;
+      }
+       else {
+         *min = dst[1 + n_sub_0];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_11(int qlen)
+{
+  int eh_e[32][2];
+  
+#pragma HLS array_partition variable=eh_e complete dim=2
+  int eh_h[64];
+  int j;
+  int j_sub;
+  for (j = 0; j < 18; j++) 
+// Original: #pragma ACCEL PIPELINE AUTO
+{
+    
+#pragma HLS dependence variable=eh_e array inter false 
+    
+#pragma HLS pipeline
+    for (j_sub = 0; j_sub < 2; ++j_sub) 
+// Original: #pragma ACCEL PARALLEL
+{
+      
+#pragma HLS unroll
+      if (j * 2 + j_sub < qlen) {
+        int h;
+        int M = eh_h[j * 2 + j_sub];
+        int e = eh_e[j][j_sub];
+        if (M > e) {
+          h = M;
+        }
+         else {
+          h = e;
+        }
+        eh_e[j][j_sub] = h;
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_12(int var)
+{
+  int a[100][64];
+  
+#pragma HLS array_partition variable=a cyclic factor=8 dim=2
+  int b[100][64];
+  
+#pragma HLS array_partition variable=b cyclic factor=8 dim=2
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    for (j = 0; j < 8; j++) 
+// Original: #pragma ACCEL PARALLEL
+{
+      
+#pragma HLS unroll
+      if (j < var) {
+        a[i][8 * j] = b[i][8 * j];
+      }
+    }
+  }
+}

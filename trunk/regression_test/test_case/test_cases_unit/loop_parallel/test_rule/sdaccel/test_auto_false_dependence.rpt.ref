@@ -1,0 +1,7 @@
+INFO: [FGPIP-103] Loop 'j'  (test_auto_false_dependence.cpp:2) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (test_auto_false_dependence.cpp:19) is pipelined
+INFO: [FGPIP-103] Loop 'while(t > 0){#pragma'  (test_auto_false_dependence.cpp:31) is pipelined
+INFO: [FGPIP-103] Loop 'w'  (test_auto_false_dependence.cpp:52) is pipelined
+INFO: [FGPIP-102] Loop 'iter' (test_auto_false_dependence.cpp:55) is fully parallelized
+INFO: [FGPIP-102] Loop 'p' (test_auto_false_dependence.cpp:58) is fully parallelized
+INFO: [FGPIP-102] Loop 'q' (test_auto_false_dependence.cpp:61) is fully parallelized

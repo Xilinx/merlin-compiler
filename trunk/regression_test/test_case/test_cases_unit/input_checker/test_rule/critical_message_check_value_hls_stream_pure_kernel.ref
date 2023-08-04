@@ -1,0 +1,3 @@
+
+ERROR: [SYNCHK-338] hls::stream<> used as non-reference or in non-pure kernel flow is not supported:
+argument: 'a' (test_hls_stream_value.cpp:4)

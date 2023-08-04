@@ -1,0 +1,61 @@
+
+void func1(int _a)
+{
+}
+
+void func2(int &_a)
+{
+  _a = 1;
+}
+
+void func3(int *_a)
+{
+   *_a = 1;
+}
+int c[10] = {(0)};
+
+int main(int M)
+{
+  int a;
+  int b[10];
+{
+    int _i0;
+    for (_i0 = 0; _i0 <= 9UL; ++_i0) {
+      int b_tmp = 0;
+      b[_i0] = b_tmp;
+    }
+  }
+  int c;
+  int *pos;
+  a = 0;
+  a + 123;
+// expressions
+{
+    func2(a);
+    a = 0;
+    a;
+    a + M;
+    b[0];
+    func1(a);
+  }
+//positions
+  pos[0];
+  a = c;
+  pos[1];
+  a = b[0];
+  pos[2];
+  a++;
+  pos[3];
+  b[1] = b[2];
+  pos[4];
+  b[a] = b[2];
+  pos[41];
+  func3(b);
+  pos[42];
+  func1(a);
+  pos[5];
+  func2(a);
+  pos[6];
+  func3(&a);
+  pos[7];
+}

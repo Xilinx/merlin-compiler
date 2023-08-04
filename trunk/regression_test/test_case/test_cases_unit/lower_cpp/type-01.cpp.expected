@@ -1,0 +1,30 @@
+
+struct ::st_A 
+{
+}
+;
+typedef int st_integer;
+enum _st_my_em {MERLIN_MAX_ENUM_0=1L} ;
+namespace st
+{
+static void __merlin_dummy_SgEnumDeclaration_enum_my_em_();
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+static void __merlin_dummy_SgTypedefDeclaration_typedef_in_();
+}
+#pragma ACCEL kernel
+
+void k()
+{
+int f = 1;
+enum _st_my_em a = (enum _st_my_em )f;
+int s = (sizeof(struct st_A ));
+int s1 = (sizeof(struct st_A **));
+int s2 = (sizeof(struct st_A *));
+int s3 = (sizeof(struct st_A [2]));
+int s4 = (sizeof(const struct st_A [2][3]));
+int t = (sizeof(::st_integer ));
+int t2 = (sizeof(::st_integer [2]));
+int t3 = (sizeof(::st_integer *));
+const struct st_A arr[2];
+struct st_A *p = (struct st_A *)arr;
+}

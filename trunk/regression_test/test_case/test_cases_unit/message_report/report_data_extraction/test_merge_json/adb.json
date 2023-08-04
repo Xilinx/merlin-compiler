@@ -1,0 +1,44 @@
+{
+    "logistic_regression_kernel":{
+        "4":"pipeline "
+    },
+    "mars_kernel_0_8_1":{
+        "2":"mars_kernel_0_8_node_0_stage_0 mars_kernel_0_8_node_1_stage_1 mars_kernel_0_8_node_2_stage_2.1 mars_kernel_0_8_node_3_stage_3.1 "
+    },
+    "mars_kernel_0_8_2":{
+        "2":"mars_kernel_0_8_node_0_stage_0 mars_kernel_0_8_node_1_stage_1.1 mars_kernel_0_8_node_2_stage_2 mars_kernel_0_8_node_3_stage_3.1 "
+    },
+    "mars_kernel_0_8_3":{
+        "2":"mars_kernel_0_8_node_0_stage_0.1 mars_kernel_0_8_node_1_stage_1 mars_kernel_0_8_node_2_stage_2 mars_kernel_0_8_node_3_stage_3.1 "
+    },
+    "mars_kernel_0_8_node_0_stage_0_1":{
+        "5":"recv_data.1 "
+    },
+    "mars_kernel_0_8_node_0_stage_0":{
+        "5":"recv_data "
+    },
+    "mars_kernel_0_8_node_1_stage_1_1":{
+        "1":"compute1.1 "
+    },
+    "mars_kernel_0_8_node_1_stage_1":{
+        "1":"compute1 "
+    },
+    "mars_kernel_0_8_node_2_stage_2_1":{
+        "1":"compute2.1 "
+    },
+    "mars_kernel_0_8_node_2_stage_2":{
+        "1":"compute2 "
+    },
+    "mars_kernel_0_8_node_3_stage_3_1":{
+        "1":"compute3.1 "
+    },
+    "mars_kernel_0_8_node_3_stage_3":{
+        "1":"compute3 "
+    },
+    "mars_kernel_0_8":{
+        "2":"mars_kernel_0_8_node_0_stage_0 mars_kernel_0_8_node_1_stage_1 mars_kernel_0_8_node_2_stage_2 mars_kernel_0_8_node_3_stage_3 "
+    },
+    "pipeline":{
+        "2":"mars_kernel_0_8 mars_kernel_0_8.1 mars_kernel_0_8.2 mars_kernel_0_8.3 "
+    }
+}

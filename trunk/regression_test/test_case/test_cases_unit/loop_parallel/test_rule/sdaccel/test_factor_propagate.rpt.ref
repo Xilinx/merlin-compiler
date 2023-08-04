@@ -1,0 +1,2 @@
+INFO: [FGPIP-103] Loop 'i'  (test_factor_propagate.cpp:36) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_factor_propagate.cpp:39) is fully parallelized

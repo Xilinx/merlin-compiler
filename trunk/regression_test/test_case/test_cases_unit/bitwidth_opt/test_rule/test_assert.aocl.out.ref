@@ -1,0 +1,96 @@
+#include<string.h>
+#include<assert.h>
+//1d dimension
+#pragma ACCEL kernel
+
+void top(int *a,char *b,unsigned int *c,float *d,size_t n,size_t m,size_t l,size_t k,size_t g,size_t h)
+{
+  int a_buf[1000];
+  n < 1000?(static_cast < void  >  (0)) : __assert_fail("n < 1000","test_assert.cpp",8,__PRETTY_FUNCTION__);
+  long _memcpy_i_0;
+  for (_memcpy_i_0 = 0; _memcpy_i_0 < sizeof(int ) * n / 4; ++_memcpy_i_0) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+    
+#pragma HLS LOOP_TRIPCOUNT max=999
+    long total_offset1 = 0 * 1000 + 100;
+    long total_offset2 = 0 * 0 + 0;
+    a_buf[total_offset1 + _memcpy_i_0] = a[total_offset2 + _memcpy_i_0];
+  }
+  char b_buf[100][6400];
+  m < 6400?(static_cast < void  >  (0)) : __assert_fail("m < 6400","test_assert.cpp",12,__PRETTY_FUNCTION__);
+  long _memcpy_i_1;
+  for (_memcpy_i_1 = 0; _memcpy_i_1 < sizeof(char ) * m / 1; ++_memcpy_i_1) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=64
+    
+#pragma HLS LOOP_TRIPCOUNT max=6399
+    long total_offset1 = (0 * 100 + 0) * 6400 + 64;
+    long total_offset2 = 0 * 0 + 0;
+    b_buf[(total_offset1 + _memcpy_i_1) / 6400][(total_offset1 + _memcpy_i_1) % 6400] = b[total_offset2 + _memcpy_i_1];
+  }
+  unsigned int c_buf[2][20][40];
+  l < 800?(static_cast < void  >  (0)) : __assert_fail("l < 800","test_assert.cpp",16,__PRETTY_FUNCTION__);
+  long _memcpy_i_3;
+  for (_memcpy_i_3 = 0; _memcpy_i_3 < sizeof(unsigned int ) * l / 4; ++_memcpy_i_3) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+    
+#pragma HLS LOOP_TRIPCOUNT max=799
+    long total_offset1 = ((0 * 2 + 0) * 20 + 2) * 40 + 4;
+    long total_offset2 = 0 * 0 + 0;
+    c_buf[(total_offset1 + _memcpy_i_3) / 40 / 20][(total_offset1 + _memcpy_i_3) / 40 % 20][(total_offset1 + _memcpy_i_3) % 40] = c[total_offset2 + _memcpy_i_3];
+  }
+  float d_buf[100][4][20][20];
+  k < 500?(static_cast < void  >  (0)) : __assert_fail("k < 500","test_assert.cpp",20,__PRETTY_FUNCTION__);
+  long _memcpy_i_4;
+  for (_memcpy_i_4 = 0; _memcpy_i_4 < sizeof(float ) * k / 4; ++_memcpy_i_4) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+    
+#pragma HLS LOOP_TRIPCOUNT max=499
+    long total_offset1 = ((0 * 4 + 2) * 20 + 10) * 20 + 10;
+    long total_offset2 = 0 * 0 + 0;
+    d_buf[0][(total_offset1 + _memcpy_i_4) / 20 / 20][(total_offset1 + _memcpy_i_4) / 20 % 20][(total_offset1 + _memcpy_i_4) % 20] = d[total_offset2 + _memcpy_i_4];
+  }
+  char b_buf_1[9][640];
+  g < 640?(static_cast < void  >  (0)) : __assert_fail("g < 640","test_assert.cpp",24,__PRETTY_FUNCTION__);
+  long _memcpy_i_2;
+  for (_memcpy_i_2 = 0; _memcpy_i_2 < sizeof(char ) * g / 1; ++_memcpy_i_2) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=64
+    
+#pragma HLS LOOP_TRIPCOUNT max=639
+    long total_offset1 = 0 * 0 + 0;
+    long total_offset2 = (0 * 9 + 1) * 640 + 64;
+    b[total_offset1 + _memcpy_i_2] = b_buf_1[(total_offset2 + _memcpy_i_2) / 640][(total_offset2 + _memcpy_i_2) % 640];
+  }
+  float d_buf_1[32][20][20][2];
+  h < 800?(static_cast < void  >  (0)) : __assert_fail("h < 800","test_assert.cpp",29,__PRETTY_FUNCTION__);
+  long _memcpy_i_5;
+  for (_memcpy_i_5 = 0; _memcpy_i_5 < sizeof(float ) * h / 4; ++_memcpy_i_5) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+    
+#pragma HLS LOOP_TRIPCOUNT max=799
+    long total_offset1 = 0 * 0 + 8;
+    long total_offset2 = (((0 * 32 + 0) * 20 + 2) * 20 + 2) * 2 + 0;
+    d[total_offset1 + _memcpy_i_5] = d_buf_1[(total_offset2 + _memcpy_i_5) / 2 / 20 / 20][(total_offset2 + _memcpy_i_5) / 2 / 20 % 20][(total_offset2 + _memcpy_i_5) / 2 % 20][(total_offset2 + _memcpy_i_5) % 2];
+  }
+}
+
+int main()
+{
+  int *a;
+  char *b;
+  unsigned int *c;
+  float *d;
+  int n;
+  int m;
+  int l;
+  int k;
+  int g;
+  int h;
+  top(a,b,c,d,n,m,l,k,g,h);
+  return 0;
+}

@@ -1,0 +1,65 @@
+// test pragma parameter
+#pragma ACCEL kernel
+
+void func_top_32()
+{
+  const int NN1 = 10;
+  int a[100];
+// Existing HLS partition: #pragma HLS array_partition variable=a cyclic factor=NN1
+  int b[100];
+// Existing HLS partition: #pragma HLS array_partition variable = b cyclic factor = 10 dim = 0
+  
+#pragma HLS array_partition variable=b cyclic factor=10 dim=1
+  int i;
+  for (i = 0; i < 100; i++) 
+// Original: #pragma ACCEL PARALLEL FACTOR = 0
+{
+    a[i] = b[i];
+  }
+  for (i = 0; i < 100; i++) 
+// Original: #pragma ACCEL PIPELINE
+{
+    
+#pragma HLS dependence variable=a array inter false 
+    
+#pragma HLS pipeline
+    a[i] = b[i];
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_33()
+{
+  int a[100];
+  int b[100];
+  int i;
+  for (i = 0; i < 100; i++) 
+// Original: #pragma ACCEL PARALLEL FACTOR = -1
+{
+    a[i] = b[i];
+  }
+  for (i = 0; i < 100; i++) 
+// Original: #pragma ACCEL PIPELINE
+// Original: #pragma ACCEL PARALLEL FACTOR = -1
+{
+    
+#pragma HLS dependence variable=a array inter false 
+    
+#pragma HLS pipeline
+    a[i] = b[i];
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_34()
+{
+  int a[100];
+  int b[100];
+  int i;
+  int NN = 100;
+  for (i = 0; i < NN; i++) 
+// Original: #pragma ACCEL PARALLEL FACTOR = NN
+{
+    a[i] = b[i];
+  }
+}

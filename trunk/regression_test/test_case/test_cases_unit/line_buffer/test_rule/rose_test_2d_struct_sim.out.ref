@@ -1,0 +1,288 @@
+#include<stdio.h>
+#include<string.h>
+#include"header.h"
+
+struct RGB 
+{
+  float r;
+  float g;
+  float b;
+}
+;
+#pragma ACCEL kernel
+
+void func_top_1(const struct RGB inFrame[100][100])
+{
+  
+#pragma ACCEL interface VARIABLE=inFrame BURST_OFF
+//#pragma ACCEL interface variable=c  max_depth=1024 depth=1024
+  int h = 100;
+  int w = 100;
+  struct RGB LineBuffer_inFrame0[118];
+  struct RGB LineBuffer_inFrame1[118];
+  struct RGB LineBuffer_inFrame2[118];
+  struct RGB LineBuffer_inFrame3[118];
+  struct RGB LineBuffer_inFrame4[118];
+  struct RGB LineBuffer_inFrame5[118];
+  struct RGB LineBuffer_inFrame6[118];
+  struct RGB LineBuffer_inFrame7[118];
+  struct RGB LineBuffer_inFrame8[118];
+  struct RGB LineBuffer_inFrame9[118];
+  struct RGB LineBuffer_inFrame10[118];
+  struct RGB LineBuffer_inFrame11[118];
+  struct RGB LineBuffer_inFrame12[118];
+  struct RGB LineBuffer_inFrame13[118];
+  struct RGB LineBuffer_inFrame14[118];
+  struct RGB LineBuffer_inFrame15[118];
+  struct RGB LineBuffer_inFrame16[118];
+  struct RGB LineBuffer_inFrame17[118];
+  struct RGB slide_wind_0[19][19];
+  for (int i = -9L; i < 109L; i++) {
+    for (int j = -9L; j < 109L; j++) {{
+        int i_2;
+        int i_1;
+        struct RGB tmp_wind_0[19];
+        int j_0;
+        int i_0;
+        for (i_0 = 0L; i_0 <= 18L; ++i_0) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          for (j_0 = 1L; j_0 <= 18L; ++j_0) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            slide_wind_0[i_0][j_0 + -1] = slide_wind_0[i_0][j_0];
+          }
+        }
+        for (i_1 = 0; i_1 <= 18L; ++i_1) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          if (i_1 == 0L) {
+            tmp_wind_0[i_1] = LineBuffer_inFrame0[j + -9L - 0L + 18L];
+          }
+           else {
+            if (i_1 == 1L) {
+              tmp_wind_0[i_1] = LineBuffer_inFrame1[j + -9L - 0L + 18L];
+            }
+             else {
+              if (i_1 == 2L) {
+                tmp_wind_0[i_1] = LineBuffer_inFrame2[j + -9L - 0L + 18L];
+              }
+               else {
+                if (i_1 == 3L) {
+                  tmp_wind_0[i_1] = LineBuffer_inFrame3[j + -9L - 0L + 18L];
+                }
+                 else {
+                  if (i_1 == 4L) {
+                    tmp_wind_0[i_1] = LineBuffer_inFrame4[j + -9L - 0L + 18L];
+                  }
+                   else {
+                    if (i_1 == 5L) {
+                      tmp_wind_0[i_1] = LineBuffer_inFrame5[j + -9L - 0L + 18L];
+                    }
+                     else {
+                      if (i_1 == 6L) {
+                        tmp_wind_0[i_1] = LineBuffer_inFrame6[j + -9L - 0L + 18L];
+                      }
+                       else {
+                        if (i_1 == 7L) {
+                          tmp_wind_0[i_1] = LineBuffer_inFrame7[j + -9L - 0L + 18L];
+                        }
+                         else {
+                          if (i_1 == 8L) {
+                            tmp_wind_0[i_1] = LineBuffer_inFrame8[j + -9L - 0L + 18L];
+                          }
+                           else {
+                            if (i_1 == 9L) {
+                              tmp_wind_0[i_1] = LineBuffer_inFrame9[j + -9L - 0L + 18L];
+                            }
+                             else {
+                              if (i_1 == 10L) {
+                                tmp_wind_0[i_1] = LineBuffer_inFrame10[j + -9L - 0L + 18L];
+                              }
+                               else {
+                                if (i_1 == 11L) {
+                                  tmp_wind_0[i_1] = LineBuffer_inFrame11[j + -9L - 0L + 18L];
+                                }
+                                 else {
+                                  if (i_1 == 12L) {
+                                    tmp_wind_0[i_1] = LineBuffer_inFrame12[j + -9L - 0L + 18L];
+                                  }
+                                   else {
+                                    if (i_1 == 13L) {
+                                      tmp_wind_0[i_1] = LineBuffer_inFrame13[j + -9L - 0L + 18L];
+                                    }
+                                     else {
+                                      if (i_1 == 14L) {
+                                        tmp_wind_0[i_1] = LineBuffer_inFrame14[j + -9L - 0L + 18L];
+                                      }
+                                       else {
+                                        if (i_1 == 15L) {
+                                          tmp_wind_0[i_1] = LineBuffer_inFrame15[j + -9L - 0L + 18L];
+                                        }
+                                         else {
+                                          if (i_1 == 16L) {
+                                            tmp_wind_0[i_1] = LineBuffer_inFrame16[j + -9L - 0L + 18L];
+                                          }
+                                           else {
+                                            if (i_1 == 17L) {
+                                              tmp_wind_0[i_1] = LineBuffer_inFrame17[j + -9L - 0L + 18L];
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        if (i + -9L + -9L + 18L < 100L && i + -9L + -9L + 18L >= 0L && j + -9L + -9L + 18L < 100L && j + -9L + -9L + 18L >= 0L) {
+          tmp_wind_0[18UL] = inFrame[i + -9L + -9L + 18L][j + -9L + -9L + 18L];
+        }
+        for (i_2 = 0; i_2 <= 18L; ++i_2) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0[i_2][18L] = tmp_wind_0[i_2];
+        }
+{
+          int i_3;
+          struct RGB tmp_inFrame;
+          for (i_3 = 0; i_3 <= 17UL; ++i_3) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            tmp_inFrame = tmp_wind_0[i_3 + 1];
+            if (i_3 == 0L) {
+              LineBuffer_inFrame0[j + -9L - 0L + 18L] = tmp_inFrame;
+            }
+             else {
+              if (i_3 == 1L) {
+                LineBuffer_inFrame1[j + -9L - 0L + 18L] = tmp_inFrame;
+              }
+               else {
+                if (i_3 == 2L) {
+                  LineBuffer_inFrame2[j + -9L - 0L + 18L] = tmp_inFrame;
+                }
+                 else {
+                  if (i_3 == 3L) {
+                    LineBuffer_inFrame3[j + -9L - 0L + 18L] = tmp_inFrame;
+                  }
+                   else {
+                    if (i_3 == 4L) {
+                      LineBuffer_inFrame4[j + -9L - 0L + 18L] = tmp_inFrame;
+                    }
+                     else {
+                      if (i_3 == 5L) {
+                        LineBuffer_inFrame5[j + -9L - 0L + 18L] = tmp_inFrame;
+                      }
+                       else {
+                        if (i_3 == 6L) {
+                          LineBuffer_inFrame6[j + -9L - 0L + 18L] = tmp_inFrame;
+                        }
+                         else {
+                          if (i_3 == 7L) {
+                            LineBuffer_inFrame7[j + -9L - 0L + 18L] = tmp_inFrame;
+                          }
+                           else {
+                            if (i_3 == 8L) {
+                              LineBuffer_inFrame8[j + -9L - 0L + 18L] = tmp_inFrame;
+                            }
+                             else {
+                              if (i_3 == 9L) {
+                                LineBuffer_inFrame9[j + -9L - 0L + 18L] = tmp_inFrame;
+                              }
+                               else {
+                                if (i_3 == 10L) {
+                                  LineBuffer_inFrame10[j + -9L - 0L + 18L] = tmp_inFrame;
+                                }
+                                 else {
+                                  if (i_3 == 11L) {
+                                    LineBuffer_inFrame11[j + -9L - 0L + 18L] = tmp_inFrame;
+                                  }
+                                   else {
+                                    if (i_3 == 12L) {
+                                      LineBuffer_inFrame12[j + -9L - 0L + 18L] = tmp_inFrame;
+                                    }
+                                     else {
+                                      if (i_3 == 13L) {
+                                        LineBuffer_inFrame13[j + -9L - 0L + 18L] = tmp_inFrame;
+                                      }
+                                       else {
+                                        if (i_3 == 14L) {
+                                          LineBuffer_inFrame14[j + -9L - 0L + 18L] = tmp_inFrame;
+                                        }
+                                         else {
+                                          if (i_3 == 15L) {
+                                            LineBuffer_inFrame15[j + -9L - 0L + 18L] = tmp_inFrame;
+                                          }
+                                           else {
+                                            if (i_3 == 16L) {
+                                              LineBuffer_inFrame16[j + -9L - 0L + 18L] = tmp_inFrame;
+                                            }
+                                             else {
+                                              if (i_3 == 17L) {
+                                                LineBuffer_inFrame17[j + -9L - 0L + 18L] = tmp_inFrame;
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      if (i + -9L >= 0L && i + -9L <= 99L && j + -9L >= 0L && j + -9L <= 99L) {
+        for (int m = 0; m < 19; m++) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          for (int n = 0; n < 19; n++) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            int ii = i + -9L + m - 9;
+            int jj = j + -9L + n - 9;
+            if (ii >= 0 && ii < h && jj >= 0 && jj < w) {
+              float sum_r = slide_wind_0[m][n] . r;
+              float sum_g = slide_wind_0[m][n] . g;
+              float sum_b = slide_wind_0[m][n] . b;
+              printf("%d, %d: %f, %f, %f\n",ii,jj,(double )sum_r,(double )sum_g,(double )sum_b);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+struct RGB c[100][100];
+
+int main()
+{
+  for (int i = 0; i < 100; i++) {
+    for (int j = 0; j < 100; j++) {
+      c[i][j] . r = (i + j + 1);
+      c[i][j] . g = ((i + j) + 0.5);
+      c[i][j] . b = ((i + j) + 0.2);
+    }
+  }
+  func_top_1(c);
+  return 0;
+}

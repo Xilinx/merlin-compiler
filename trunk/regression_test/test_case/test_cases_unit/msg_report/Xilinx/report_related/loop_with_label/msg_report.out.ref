@@ -1,0 +1,60 @@
+================================================================================
+Kernel : mykernel(loop_with_label.cpp:4)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+orig            512      (loop_with_label.cpp:4) memory burst and coalescing 
+out             512      (loop_with_label.cpp:4) memory burst and coalescing 
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++-------------------------------------------------------------+------+----------+----------+------+------+------+------+-------------------------------------------------------------------------+
+|                          hierarchy                          |  TC  |    AC    |   CPC    | LUT  |  FF  | BRAM | DSP  |                                 comment                                 |
++-------------------------------------------------------------+------+----------+----------+------+------+------+------+-------------------------------------------------------------------------+
+|mykernel (loop_with_label.cpp:4)                             |      |  12855707|  12855707|  1.45|  0.61|  2.87|  0.00|kernel                                                                   |
+|    auto memory burst read and coalescing for 'merlin_out'   |      |         -|       134|      |      |      |      |                                                                         |
+|    auto memory burst read and coalescing for 'orig'         |      |         -|       134|      |      |      |      |                                                                         |
+|    loop l (loop_with_label.cpp:8)                           |  2048|  12855296|  12855296|      |      |      |      |                                                                         |
+|        loop i (loop_with_label.cpp:9)                       |      |          |          |      |      |      |      |optimized in loop flatten                                                |
+|            loop j (loop_with_label.cpp:10)                  |   128|    262144|       128|      |      |      |      |IL=2, fully pipelined                                                    |
+|                loop k (loop_with_label.cpp:12)              |    16|         -|         -|      |      |      |      |16x parallelized                                                         |
+|        loop i (loop_with_label.cpp:18)                      |    64|  12582912|      6144|      |      |      |      |                                                                         |
+|            loop j (loop_with_label.cpp:20)                  |    32|      6144|      6144|      |      |      |      |flattened with loop i (loop_with_label.cpp:18), IL=4, pipelined II=3[1]  |
+|    auto memory burst write and coalescing for 'merlin_out'  |      |         -|       134|      |      |      |      |                                                                         |
++-------------------------------------------------------------+------+----------+----------+------+------+------+------+-------------------------------------------------------------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++-------------------------------------------+----------+----------+
+|                   Name                    |  Cycles  | Activity |
++-------------------------------------------+----------+----------+
+| mykernel:loop i (loop_with_label.cpp:18)  | 12576768 |  97.83%  |
+|  mykernel:loop l (loop_with_label.cpp:8)  |  272384  |  2.12%   |
+| mykernel:loop j (loop_with_label.cpp:10)  |  262144  |  2.04%   |
+| mykernel:loop j (loop_with_label.cpp:20)  |   6144   |  0.05%   |
+|     mykernel (loop_with_label.cpp:4)      |   411    |  0.00%   |
+| auto memory burst (loop_with_label.cpp:4) |    0     |  0.00%   |
+| auto memory burst (loop_with_label.cpp:4) |    0     |  0.00%   |
+| auto memory burst (loop_with_label.cpp:4) |    0     |  0.00%   |
++-------------------------------------------+----------+----------+
+
++----------------------------------+------+------+------+------+
+|               Name               | BRAM | DSP  |  FF  | LUT  |
++----------------------------------+------+------+------+------+
+| mykernel (loop_with_label.cpp:4) | 2.87 | 0.00 | 0.61 | 1.45 |
++----------------------------------+------+------+------+------+
+[1] 'merlin_out_buf_0' has no loop carried-dependence on loop 'j'  (loop_with_label.cpp:20).
+Hint: applying Merlin false_dependence pragma for 'merlin_out_buf_0' on loop 'j' may help enhance the performance.
+
+
+
+

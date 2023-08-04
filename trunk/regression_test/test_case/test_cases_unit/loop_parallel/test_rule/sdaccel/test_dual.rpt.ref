@@ -1,0 +1,47 @@
+INFO: [FGPIP-105] Loop 'i' (test_dual.cpp:11) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:28) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:43) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:59) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:65) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:80) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:89) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:100) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:107) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:118) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:143) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:169) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:197) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:215) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:233) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:251) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:269) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:288) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:307) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:332) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:351) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:369) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:379) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:396) is parallelized with a factor of 10
+INFO: [FGPIP-103] Loop 'i'  (test_dual.cpp:413) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_dual.cpp:415) is fully parallelized
+INFO: [FGPIP-108] Loop 'j'  (test_dual.cpp:433) is pipelined with a target II of 1
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:450) is parallelized with a factor of 10
+INFO: [FGPIP-102] Loop 'j' (test_dual.cpp:485) is fully parallelized
+INFO: [FGPIP-108] Loop 'j'  (test_dual.cpp:503) is pipelined with a target II of 1
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:518) is parallelized with a factor of 4
+
+WARNING: [FGPIP-209] Loop fine-grained parallelization applied: loop 'L_0' (test_dual.cpp:532)
+  Hint: parallel factor 1000 is adjusted to the loop tripcount 100.
+INFO: [FGPIP-105] Loop 'i' (test_dual.cpp:547) is parallelized with a factor of 100
+INFO: [FGPIP-103] Loop 'i'  (test_dual.cpp:563) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_dual.cpp:568) is fully parallelized
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:589) is parallelized with a factor of 10
+
+WARNING: [FGPIP-202] Loop fine-grained parallelization CANNOT be applied: loop 'k'
+  (test_dual.cpp:626),  because the loop contains subloop(s) not being parallelized.
+INFO: [FGPIP-105] Loop 'i' (test_dual.cpp:647) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:663) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:672) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_dual.cpp:707) is parallelized with a factor of 4
+INFO: [FGPIP-105] Loop 'k' (test_dual.cpp:730) is parallelized with a factor of 2
+INFO: [FGPIP-108] Loop 'k'  (test_dual.cpp:730) is pipelined with a target II of 1

@@ -1,0 +1,31 @@
+
+void init_b(int b[32])
+{
+  for (int j = 0; j < 32; ++j) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    b[j] = 1;
+  }
+}
+#pragma ACCEL kernel
+
+void top(int *a,int b[32])
+{
+  for (int j = 0; j < 32; ++j) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    a[j] = 0;
+  }
+  init_b(b);
+  for (int k = 0; k < 10; ++k) {
+    for (int i = 0; i < 100; ++i) {
+      
+#pragma ACCEL PIPELINE AUTO
+      for (int j = 0; j < 32; ++j) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        a[j] += b[j];
+      }
+    }
+  }
+}

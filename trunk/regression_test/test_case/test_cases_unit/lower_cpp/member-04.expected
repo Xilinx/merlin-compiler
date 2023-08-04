@@ -1,0 +1,16 @@
+
+struct __merlinc_C 
+{
+  unsigned int u;
+}
+;
+
+void __merlinc_C__scope__f____MFb_C__Fb_v_Gb__Ui__Fe___L0R(struct __merlinc_C *this_0,unsigned int this_)
+{
+}
+
+void __merlinc_C__scope__g____MFb_C__Fb_v_Gb__b__Fe___L742R(struct __merlinc_C *this_0,bool this_)
+{
+  this_0 -> u += ((unsigned int )1);
+  this_ = !this_;
+}

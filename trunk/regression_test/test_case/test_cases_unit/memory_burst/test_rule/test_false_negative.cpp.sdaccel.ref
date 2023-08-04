@@ -1,0 +1,44 @@
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+
+void sub(int *a,int offset)
+// Original: #pragma ACCEL cache
+{
+  int a_buf[100];
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[offset * 100]),sizeof(int ) * 100);
+  for (int i = 0; i < 100; ++i) {
+    a_buf[i] += 100;
+  }
+  memcpy((void *)(&a[offset * 100]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+  for (int i = 0; i < 100; ++i) {
+    sub(a,i);
+  }
+}
+
+void sub2(int *a,int offset)
+// Original: #pragma ACCEL cache
+{
+  int a_8_0_buf[199];
+{
+    memcpy((void *)(&a_8_0_buf[0]),(const void *)(&a[0]),sizeof(int ) * offset);
+  }
+  for (int i = 0; i < offset; ++i) {
+    a_8_0_buf[i] += 100;
+  }
+{
+    memcpy((void *)(&a[0]),(const void *)(&a_8_0_buf[0]),sizeof(int ) * offset);
+  }
+}
+#pragma ACCEL kernel
+
+void top2(int *a)
+{
+  for (int i = 100; i < 200; ++i) {
+    sub2(a,i);
+  }
+}

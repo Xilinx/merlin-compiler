@@ -1,0 +1,59 @@
+[print] top loop info
+Loop : for(i = 0;i < 99;i++) {...}
+  port : sum, 0
+Loop : for(i = 0;i < 99;i++) {...}
+  port : N, 1
+  port : sum, 0
+node0:
+(sync point = 0) {
+  Ports: 
+  SgVariableDeclaration:int a[100];
+  SgVariableDeclaration:int aa[100];
+  SgVariableDeclaration:int b[100];
+  SgVariableDeclaration:int bb[100];
+  SgVariableDeclaration:int i;
+  SgVariableDeclaration:int j;
+  SgVariableDeclaration:int sum = 0;
+}
+
+sub loop: nullptr
+sub loop: SgForStatement:for(i = 0;i < 99;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 99;i++) {...}
+0 ... loops are dead
+1 ... has sub loops
+2 ... has sub loops
+node1:
+(sync point, pipeline stage) = (1,0) SgForStatement:for(i = 0;i < 99;i++) {...}
+  (sync point, pipeline stage) = (0,0) SgForStatement:for(j = 0;j < 90;j++) {...}
+    (sync point = 0) {
+      Ports: (SgInitializedName:sum, readwrite)
+      SgPragmaDeclaration:#pragma ACCEL PIPELINE II = 1
+      SgExprStatement:sum += add_func_1(a[j],b[j + 1]);
+      SgExprStatement:sum += add_func_1(a[j + 2],b[j + 3]);
+    }
+
+sub loop: nullptr
+sub loop: SgForStatement:for(i = 0;i < 99;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 99;i++) {...}
+0 ... loops are dead
+1 ... has sub loops
+2 ... has sub loops
+node2:
+(sync point, pipeline stage) = (2,0) SgForStatement:for(i = 0;i < 99;i++) {...}
+  (sync point = 0) {
+    Ports: (SgInitializedName:N, readonly), (SgInitializedName:sum, readwrite)
+    SgPragmaDeclaration:#pragma ACCEL PIPELINE II = 1
+    SgExprStatement:N == 99?(static_cast < void > (0)) : __assert_fail("N==99","test_call.cpp",29,__PRETTY_FUNCTION__);
+    SgForStatement:for(j = 0;j < N;j++) {...}
+  }
+
+sub loop: nullptr
+sub loop: SgForStatement:for(i = 0;i < 99;i++) {...}
+sub loop: SgForStatement:for(i = 0;i < 99;i++) {...}
+0 ... loops are dead
+1 ... has sub loops
+2 ... has sub loops
+node 0 ... remove_all_statements
+node 1 ... remove_all_statements
+node 2 ... remove_all_statements
+[TESTING] Total file number is: 3

@@ -1,0 +1,10 @@
+
+WARNING: [LINEBUF-202] Stopping line buffer optimization on variable 'c' in loop 'L_0_0_0' (test_3d.cpp:10): the accesses are not stencil.
+
+
+WARNING: [LINEBUF-202] Stopping line buffer optimization on variable 'c' in loop 'L_0_0_0' (test_3d.cpp:26): the accesses are not stencil.
+
+INFO: [LINEBUF-101] Applying line buffer on variable 'c' in loop 'L_0_0_0' (test_3d.cpp:42) with a 2 stencil
+
+WARNING: [LINEBUF-202] Stopping line buffer optimization on variable 'c' in loop 'L_0_0_0' (test_3d.cpp:57): the accesses are not stencil.
+

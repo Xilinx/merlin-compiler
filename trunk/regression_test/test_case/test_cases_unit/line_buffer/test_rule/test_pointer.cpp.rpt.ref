@@ -1,0 +1,1 @@
+INFO: [LINEBUF-101] Applying line buffer on variable 'c' in loop 'L_0_0' (test_pointer.cpp:6) with a 3x2 stencil

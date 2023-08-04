@@ -1,0 +1,2 @@
+F_0 (1:2, name:test, CYCLE_UNIT:12, trip-count:10, pipelined:YES, II:1)
+L_0_1 (3:4, name:loop1, CYCLE_UNIT:3)

@@ -1,0 +1,102 @@
+#define VEC_SIZE 10000
+#define VEC_DIM_SIZE 100
+
+void _merlin_reduc_init_distance_rdc(double _distance_rdc[1000][10])
+{
+  
+#pragma HLS INLINE
+{
+    int j_0;
+    for (j_0 = 0; j_0 <= 999; ++j_0) {
+      for (int k = 0; k < 10; k++) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        _distance_rdc[j_0][k] = 0;
+      }
+    }
+  }
+}
+
+void _merlin_reduc_init_distance_rdc_t(double _distance_rdc_t[10])
+{
+  
+#pragma HLS INLINE
+{
+    for (int k = 0; k < 10; k++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      _distance_rdc_t[k] = 0;
+    }
+  }
+}
+
+void _merlin_reduc_proc_distance(double _distance_rdc_t[10],int k,double diff)
+{
+  
+#pragma HLS INLINE
+  _distance_rdc_t[k] += diff * diff;
+}
+
+void _merlin_reduc_post_distance_rdc_t(double _distance_rdc[1000][10],int j,double _distance_rdc_t[10])
+{
+  
+#pragma HLS INLINE
+  for (int k = 0; k < 10; k++) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    
+#pragma HLS dependence variable=_distance_rdc array inter false
+{
+      _distance_rdc[j][k] += _distance_rdc_t[k];
+    }
+  }
+}
+
+void _merlin_reduc_post_distance_rdc(double distance[10],double _distance_rdc[1000][10])
+{
+  
+#pragma HLS INLINE
+{
+    int j_0;
+    for (j_0 = 0; j_0 <= 999; ++j_0) {
+      
+#pragma ACCEL PIPELINE
+      for (int k = 0; k < 10; k++) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+{
+          distance[k] += _distance_rdc[j_0][k];
+        }
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void vec_add_kernel(double distance[10],int centers[10][1000][10],int data[1000][10])
+{
+  int j;
+  int j_sub;
+  int sum = 0;
+  double _distance_rdc[1000][10];
+  _merlin_reduc_init_distance_rdc(_distance_rdc);
+  for (j = 0; j < 1000; j++) {
+    double _distance_rdc_t[10];
+    _merlin_reduc_init_distance_rdc_t(_distance_rdc_t);
+    for (j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL PARALLEL
+      for (int k = 0; k < 10; k++) {
+        
+#pragma HLS dependence variable=_distance_rdc_t array inter false
+        
+#pragma ACCEL PARALLEL COMPLETE
+        double diff;
+        diff = (centers[k][j][j_sub] - data[j][j_sub]);
+        _merlin_reduc_proc_distance(_distance_rdc_t,k,diff);
+      }
+    }
+    _merlin_reduc_post_distance_rdc_t(_distance_rdc,j,_distance_rdc_t);
+  }
+  _merlin_reduc_post_distance_rdc(distance,_distance_rdc);
+}

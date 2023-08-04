@@ -1,0 +1,10 @@
+Hello Program Analysis ... 
+**** Test Loop Flatten **** 
+Start loop flattening
+flatten: SgForStatement:for(i = 1;i < 33;i++) {...}
+for(i = 1;i < 33;i++) {...}
+Flattening the loop 'L_0' and  'L_0_0' (test_flatten.cpp:17)
+flatten: SgForStatement:for(int i = 1;i < 33;i++) {...}
+for(int i = 1;i < 33;i++) {...}
+Flattening the loop 'L_1' and  'L_1_0' (test_flatten.cpp:29)
+

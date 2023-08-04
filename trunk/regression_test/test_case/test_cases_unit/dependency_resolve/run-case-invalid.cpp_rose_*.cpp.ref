@@ -1,0 +1,24 @@
+float x;
+
+void simple_float()
+{
+  int i;
+  for (i = 0; i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    x *= 8;
+  }
+  float xx = 1;
+  float &y = xx;
+  for (i = 0; i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    y *= 8;
+  }
+}
+#pragma ACCEL kernel
+
+void g()
+{
+  simple_float();
+}

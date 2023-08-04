@@ -1,0 +1,14 @@
+enum _ram_type {RAM_1P_BRAM=5} ;
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+  for (int i = 0; i < 10; ++i) 
+// Original: #pragma ACCEL pipeline II=RAM_1P_BRAM
+{
+    
+#pragma ACCEL PIPELINE II=RAM_1P_BRAM 
+    a[i] = 1 + RAM_1P_BRAM;
+  }
+}
+// do not report error for option 'II'

@@ -1,0 +1,40 @@
+#define N 5
+#define n 100
+#pragma ACCEL kernel
+
+void func_top_0()
+{
+  int a[100][100];
+  int b[101][101];
+  int k;
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    
+#pragma unroll 5
+    for (j = 0; j < 100; j++) {
+      a[i][j] = b[i][j] + b[i + 1][j + 1];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_1(int ee)
+{
+  
+#pragma ACCEL attribute variable=a bankwidth=8
+  int a[100][100];
+  
+#pragma ACCEL attribute variable=b bankwidth=4
+  int b[100][100];
+  int k;
+  int i;
+  int j;
+  for (i = 0; i < 99; i++) {
+    
+#pragma unroll 4
+    for (j = 50; j < 100; j++) {
+      a[i][j] = b[i][j + - 1 * ee] + b[i + 1][j + - 4 * ee + 1];
+    }
+  }
+}

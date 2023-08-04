@@ -1,0 +1,74 @@
+#include<hls_stream.h>
+#pragma ACCEL kernel
+
+void func_top_0(int *b,class hls::stream< int  > &c)
+{
+  class hls::stream< int  > a;
+  for (int i = 0; i < 8; ++i) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    a . write(i);
+  }
+  for (int i = 0; i < 8; ++i) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    b[i] = c . read();
+  }
+  for (int i = 0; i < 8; ++i) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    a << i;
+  }
+  for (int i = 0; i < 8; ++i) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    c >> b[i];
+  }
+  class hls::stream< int  > arr[8];
+  for (int i = 0; i < 8; ++i) {
+    
+#pragma ACCEL PARALLEL
+    arr[i] . write(i);
+  }
+// trip count = 1
+  class hls::stream< int  > arr2[1];
+  for (int k = 0; k < 1; ++k) {
+    
+#pragma ACCEL PARALLEL
+    arr2[k] . write(k);
+  }
+}
+
+void sub(class hls::stream< int  > &a,class hls::stream< int  > &b)
+{
+  a << b . read();
+}
+#pragma ACCEL kernel
+
+void func_top_1(class hls::stream< int  > a[8],class hls::stream< int  > b[8])
+{
+  for (int i = 0; i < 8; ++i) {
+    
+#pragma ACCEL PARALLEL
+    sub(a[i],b[i]);
+  }
+}
+
+void sub_1(class hls::stream< int  > a[8],class hls::stream< int  > b[8])
+{
+  for (int i = 0; i < 8; ++i) {
+    
+#pragma ACCEL PARALLEL
+    a[i] . write((b[i] . read()));
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_2(class hls::stream< int  > a[4][8],class hls::stream< int  > b[4][8])
+{
+  for (int i = 0; i < 4; ++i) {
+    
+#pragma ACCEL PARALLEL
+    sub_1(a[i],b[i]);
+  }
+}

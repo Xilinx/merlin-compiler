@@ -1,0 +1,95 @@
+#pragma ACCEL kernel
+
+void kernel1(float *A,float *B)
+{
+  int k;
+  
+#pragma ACCEL interface variable=A max_depth=4096 depth=4096 BURST_OFF
+  float LineBuffer_A0[30];
+  float LineBuffer_A1[30];
+  float slide_wind_0[3][1];
+  for (int j = 0L; j < 32L; j++) {
+    for (k = 1L; k < 32 - 1; k++) {{
+        int j_2;
+        int j_1;
+        float tmp_wind_0[3];
+        int j_0;
+        for (j_0 = 0L; j_0 <= 2L; ++j_0) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0[j_0][0] = slide_wind_0[j_0][0];
+        }
+        for (j_1 = 0; j_1 <= 2L; ++j_1) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          if (j_1 == 0L) {
+            tmp_wind_0[j_1] = LineBuffer_A0[k - 1L];
+          }
+           else {
+            if (j_1 == 1L) {
+              tmp_wind_0[j_1] = LineBuffer_A1[k - 1L];
+            }
+          }
+        }
+        tmp_wind_0[2UL] = A[(j + -1L + -1L + 2L) * 32L + (k + 0L + 0L) * 1L];
+        for (j_2 = 0; j_2 <= 2L; ++j_2) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0[j_2][0L] = tmp_wind_0[j_2];
+        }
+{
+          int j_3;
+          float tmp_A;
+          for (j_3 = 0; j_3 <= 1UL; ++j_3) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            tmp_A = tmp_wind_0[j_3 + 1];
+            if (j_3 == 0L) {
+              LineBuffer_A0[k - 1L + 0L] = tmp_A;
+            }
+             else {
+              if (j_3 == 1L) {
+                LineBuffer_A1[k - 1L + 0L] = tmp_A;
+              }
+            }
+          }
+        }
+      }
+      if (j + -1L >= 1L && j + -1L <= 30L && k >= 1L && k <= 30L) {
+        B[(j + -1L) * 32 + k] = slide_wind_0[0L][0L] + slide_wind_0[2L][0L];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void kernel2(float *A,float *B)
+{
+  int i;
+  int j;
+  int k;
+  
+#pragma ACCEL interface variable=A max_depth=4096 depth=4096
+  for (j = 1; j < 32 - 1; j++) {
+    for (k = 1; k < 32 - 1; k++) {
+      B[j * 32 + k] = A[(j + 0) * 32 + (k + 0)] + A[(j - 1) * 32 + (k - 1)];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void kernel3(float *A,float *B)
+{
+  int i;
+  int j;
+  int k;
+  
+#pragma ACCEL interface variable=A max_depth=4096 depth=4096
+  for (j = 1; j < 32 - 1; j++) {
+    for (k = 0; k < 26; k++) {
+      for (i = 0; i < 4; i++) {
+        B[j * 32 + k] = A[(j + 0) * 32 + (k + i)] + A[(j + 1) * 32 + (k + i + 1)];
+      }
+    }
+  }
+}

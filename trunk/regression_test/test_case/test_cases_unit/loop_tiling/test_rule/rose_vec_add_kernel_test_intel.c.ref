@@ -1,0 +1,45 @@
+#include <assert.h>
+#define VEC_SIZE 10000
+#pragma ACCEL kernel
+
+void vec_add_kernel(int *a,int *b,int *c,int inc,int n,int m)
+{
+  int j;
+  n == 10?((void )0) : __assert_fail("n == 10","vec_add_kernel_test_intel.c",6,__PRETTY_FUNCTION__);
+  for (j = 0; j < n / 2L; j++) {
+    
+#pragma ACCEL TILED_TAG
+    for (int j_sub_2 = 0; j_sub_2 < 2; ++j_sub_2) {
+      c[j * 2 + j_sub_2] = a[j * 2 + j_sub_2] + b[j * 2 + j_sub_2] + inc;
+    }
+  }
+  for (j = 0; j < 5; j++) {
+    
+#pragma ACCEL TILED_TAG
+    for (int j_sub_1 = 0; j_sub_1 < 6; ++j_sub_1) {
+      c[j * 6 + j_sub_1] = a[j * 6 + j_sub_1] + b[j * 6 + j_sub_1] + inc;
+    }
+  }
+  
+#pragma ACCEL PARALLEL FACTOR=1 SKIP
+  for (j = 0; j < n / 2L; j++) {
+    
+#pragma ACCEL PARALLEL 
+    
+#pragma ACCEL PARTIAL_PARALLEL_TAG
+    for (int j_sub_0 = 0; j_sub_0 < 2; ++j_sub_0) {
+      c[j * 2 + j_sub_0] = a[j * 2 + j_sub_0] + b[j * 2 + j_sub_0] + inc;
+    }
+  }
+  
+#pragma ACCEL PARALLEL FACTOR=1 SKIP
+  for (j = 0; j < 5; j++) {
+    
+#pragma ACCEL PARALLEL 
+    
+#pragma ACCEL PARTIAL_PARALLEL_TAG
+    for (int j_sub = 0; j_sub < 6; ++j_sub) {
+      c[j * 6 + j_sub] = a[j * 6 + j_sub] + b[j * 6 + j_sub] + inc;
+    }
+  }
+}

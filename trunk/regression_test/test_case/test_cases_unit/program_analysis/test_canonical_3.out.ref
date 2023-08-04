@@ -1,0 +1,127 @@
+// Testing different increments
+#pragma ACCEL kernel
+
+void func_loop()
+{
+  int a[10];
+  int b[10];
+  int c[10];
+  int i = 0;
+  int j = 0;
+  int x;
+  int y;
+  int z;
+  int N = 100;
+  for (i = 0; i < N; i += b[0]) {
+/* block 1*/
+    c[i] = a[i] + b[i];
+  }
+// Standardize from: for(i = 0;i >= 0;i += - 1) {...}
+  for (i = 0; i <= 0; i++) {
+    int _in_i = 0 + -1L * i;
+/* block 2*/
+    c[_in_i] = a[_in_i] + b[_in_i];
+  }
+  i = 0 + -1L;
+// range: [-INF,+INF]
+  for (i = 0; i >= 0; i -= - 1) {
+/* block 2.1*/
+    c[i] = a[i] + b[i];
+  }
+  for (i = 1; i >= 0; i -= - 1) {
+/* block 2.2*/
+    c[i] = a[i] + b[i];
+  }
+// Standardize from: for(i = 0;i < N;i += 2) {...}
+  for (i = 0; i <= 49; i++) {
+    int _in_i_0 = 0 + 2L * i;
+/* block 3*/
+    c[_in_i_0] = a[_in_i_0] + b[_in_i_0];
+  }
+  i = 98 + 2L;
+// Standardize from: for(i = 0;i >= 0;i -= 1) {...}
+  for (i = 0; i <= 0; i++) {
+    int _in_i_1 = 0 + -1L * i;
+/* block 4*/
+    c[_in_i_1] = a[_in_i_1] + b[_in_i_1];
+  }
+  i = 0 + -1L;
+  for (i = 0; i < N; i -= 2) {
+/* block 5*/
+    c[i] = a[i] + b[i];
+  }
+// Standardize from: for(i = N;i >= 0;i--) {...}
+  for (i = 0; i <= 100; i++) {
+    int _in_i_2 = 100 + -1 * i;
+/* block 6*/
+    c[_in_i_2] = a[_in_i_2] + b[_in_i_2];
+  }
+  i = 0 + -1;
+// range: [-INF,+INF]
+  for (i = 0; i >= N; i--) {
+/* block 6.1*/
+    c[i] = a[i] + b[i];
+  }
+  j = 3;
+// Canonicalized from: for((i = N , j = 3);i >= 0;--i) {...}
+// Standardize from: for(i = N;i >= 0;--i) {...}
+  for (i = 0; i <= 100; i++) {
+    int _in_i_3 = 100 + -1 * i;
+/* block 7*/
+    c[_in_i_3] = a[_in_i_3] + b[_in_i_3];
+  }
+  i = 0 + -1;
+  for ((i = N , j = 3); i >= 0; i++) {
+/* block 8*/
+    c[i] = a[i] + b[i];
+  }
+  for ((i = N , j = 3); i >= 0; ++i) {
+/* block 9*/
+    c[i] = a[i] + b[i];
+  }
+  j = 3;
+// Canonicalized from: for((i = 0 , j = 3);i >= N;(i -= 2 , j--)) {...}
+  for (i = 0; i >= 100; i -= 2) {
+/* block 10*/
+    c[i] = a[i] + b[i];
+    j--;
+  }
+  for (i = 0; i >= N; (i *= 2 , j *= 2)) {
+/* block 11*/
+    c[i] = a[i] + b[i];
+  }
+  for ((i = N , j = 3); i >= 0; i *= 2) {
+/* block 12*/
+    c[i] = a[i] + b[i];
+  }
+  for (i = 0; i >= N; i = i + 4 * 5 / 2) {
+/* block 13*/
+    c[i] = a[i] + b[i];
+  }
+// range: [-INF,+INF], step: 11
+  for (i = 0; i >= N; i += 1 + 4 * 5 / 2) {
+/* block 14*/
+    c[i] = a[i] + b[i];
+  }
+// Standardize from: for(i = 0;i <= N;i += 1 + 4 * 5 / 2) {...}
+  for (i = 0; i <= 9; i++) {
+    int _in_i_4 = 0 + 11L * i;
+/* block 14.1*/
+    c[_in_i_4] = a[_in_i_4] + b[_in_i_4];
+  }
+  i = 99 + 11L;
+  for (i = 0; i >= N; i = i + 2) {
+/* block 15*/
+    c[i] = a[i] + b[i];
+  }
+  for (i = 0; i >= N; i >> 1) {
+/* block 16*/
+    c[i] = a[i] + b[i];
+  }
+}
+
+int main()
+{
+  func_loop();
+  return 0;
+}

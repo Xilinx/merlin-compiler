@@ -1,0 +1,54 @@
+================================================================================
+Kernel : mykernel(flatten_loop_with_pipeline.cpp:4)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+orig            512      (flatten_loop_with_pipeline.cpp:4) memory burst and coalescing 
+out             512      (flatten_loop_with_pipeline.cpp:4) memory burst and coalescing 
+len             32       (flatten_loop_with_pipeline.cpp:4) scalar
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++-------------------------------------------------------------+------+---------+---------+------+------+------+------+---------------------------------------------------------------------------------+
+|                          hierarchy                          |  TC  |   AC    |   CPC   | LUT  |  FF  | BRAM | DSP  |                                     comment                                     |
++-------------------------------------------------------------+------+---------+---------+------+------+------+------+---------------------------------------------------------------------------------+
+|mykernel (flatten_loop_with_pipeline.cpp:4)                  |      |  4194583|  4194583|  1.19|  0.50|  2.87|  0.00|kernel                                                                           |
+|    auto memory burst read and coalescing for 'orig'         |      |        -|      134|      |      |      |      |                                                                                 |
+|    loop l (flatten_loop_with_pipeline.cpp:7)                |  2048|  4194307|  4194307|      |      |      |      |                                                                                 |
+|        loop i (flatten_loop_with_pipeline.cpp:8)            |    64|  4194307|  4194307|      |      |      |      |flattened with loop l (flatten_loop_with_pipeline.cpp:7)                         |
+|            loop j (flatten_loop_with_pipeline.cpp:9)        |     2|  4194307|  4194307|      |      |      |      |flattened with loop i (flatten_loop_with_pipeline.cpp:8)                         |
+|                loop k (flatten_loop_with_pipeline.cpp:11)   |    16|  4194307|  4194307|      |      |      |      |flattened with loop j (flatten_loop_with_pipeline.cpp:9), IL=5, fully pipelined  |
+|    auto memory burst write and coalescing for 'merlin_out'  |      |        -|      134|      |      |      |      |                                                                                 |
++-------------------------------------------------------------+------+---------+---------+------+------+------+------+---------------------------------------------------------------------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++------------------------------------------------------+---------+----------+
+|                         Name                         | Cycles  | Activity |
++------------------------------------------------------+---------+----------+
+| mykernel:loop k (flatten_loop_with_pipeline.cpp:11)  | 4194307 |  99.99%  |
+|     mykernel (flatten_loop_with_pipeline.cpp:4)      |   276   |  0.01%   |
+| auto memory burst (flatten_loop_with_pipeline.cpp:4) |    0    |  0.00%   |
+| auto memory burst (flatten_loop_with_pipeline.cpp:4) |    0    |  0.00%   |
+|  mykernel:loop l (flatten_loop_with_pipeline.cpp:7)  |    0    |  0.00%   |
+|  mykernel:loop i (flatten_loop_with_pipeline.cpp:8)  |    0    |  0.00%   |
+|  mykernel:loop j (flatten_loop_with_pipeline.cpp:9)  |    0    |  0.00%   |
++------------------------------------------------------+---------+----------+
+
++---------------------------------------------+------+------+------+------+
+|                    Name                     | BRAM | DSP  |  FF  | LUT  |
++---------------------------------------------+------+------+------+------+
+| mykernel (flatten_loop_with_pipeline.cpp:4) | 2.87 | 0.00 | 0.50 | 1.19 |
++---------------------------------------------+------+------+------+------+
+
+
+

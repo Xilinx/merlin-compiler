@@ -1,0 +1,15 @@
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'a' (test_a_fail.c:17)
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'b' (test_a_fail.c:31)
+
+ERROR: [SYNCHK-301] Found an out-of-bound write access on argument 'c' (test_a_fail.c:31) : access range=[0..99]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+ERROR: [SYNCHK-302] Found an out-of-bound read access on argument 'c' (test_a_fail.c:31) : access range=[0..99]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'a' (test_a_fail.c:51)
+
+ERROR: [SYNCHK-301] Found an out-of-bound write access on argument 'a' (test_a_fail.c:57) : access range=[0..99]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.

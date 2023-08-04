@@ -1,0 +1,270 @@
+#include<hls_stream.h>
+#include "cmost.h"
+extern int __merlin_include__GB_hls_stream_h_0;
+static hls::stream<int > __merlinstencil3d_kernel_orig_ch[16];
+static hls::stream<int > __merlinstencil3d_kernel_sol_ch[512];
+
+void __merlinstencil3d_kernel_orig_streaming(int orig[16385024])
+{
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 1024064L; ++merlin_it_0) {
+    
+#pragma ACCEL pipeline
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 16; ++merlin_it_1) {
+      
+#pragma ACCEL parallel
+      int merlin_tmp_2;
+      merlin_tmp_2 = orig[0 + merlin_it_0 * 16 + merlin_it_1];
+      __merlinstencil3d_kernel_orig_ch[merlin_it_1] .  write (merlin_tmp_2);
+    }
+  }
+}
+
+void __merlinstencil3d_kernel_sol_streaming(int sol[16385024])
+{
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 1024000L; ++merlin_it_0) {
+    
+#pragma ACCEL pipeline
+    long merlin_it_0_mod = merlin_it_0 % 32;
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 16; ++merlin_it_1) {
+      
+#pragma ACCEL parallel
+      int merlin_tmp_2;
+      if (merlin_it_0_mod == 0) {
+        merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 0] .  read ();
+      }
+       else {
+        if (merlin_it_0_mod == 1) {
+          merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 16] .  read ();
+        }
+         else {
+          if (merlin_it_0_mod == 2) {
+            merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 32] .  read ();
+          }
+           else {
+            if (merlin_it_0_mod == 3) {
+              merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 48] .  read ();
+            }
+             else {
+              if (merlin_it_0_mod == 4) {
+                merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 64] .  read ();
+              }
+               else {
+                if (merlin_it_0_mod == 5) {
+                  merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 80] .  read ();
+                }
+                 else {
+                  if (merlin_it_0_mod == 6) {
+                    merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 96] .  read ();
+                  }
+                   else {
+                    if (merlin_it_0_mod == 7) {
+                      merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 112] .  read ();
+                    }
+                     else {
+                      if (merlin_it_0_mod == 8) {
+                        merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 128] .  read ();
+                      }
+                       else {
+                        if (merlin_it_0_mod == 9) {
+                          merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 144] .  read ();
+                        }
+                         else {
+                          if (merlin_it_0_mod == 10) {
+                            merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 160] .  read ();
+                          }
+                           else {
+                            if (merlin_it_0_mod == 11) {
+                              merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 176] .  read ();
+                            }
+                             else {
+                              if (merlin_it_0_mod == 12) {
+                                merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 192] .  read ();
+                              }
+                               else {
+                                if (merlin_it_0_mod == 13) {
+                                  merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 208] .  read ();
+                                }
+                                 else {
+                                  if (merlin_it_0_mod == 14) {
+                                    merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 224] .  read ();
+                                  }
+                                   else {
+                                    if (merlin_it_0_mod == 15) {
+                                      merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 240] .  read ();
+                                    }
+                                     else {
+                                      if (merlin_it_0_mod == 16) {
+                                        merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 256] .  read ();
+                                      }
+                                       else {
+                                        if (merlin_it_0_mod == 17) {
+                                          merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 272] .  read ();
+                                        }
+                                         else {
+                                          if (merlin_it_0_mod == 18) {
+                                            merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 288] .  read ();
+                                          }
+                                           else {
+                                            if (merlin_it_0_mod == 19) {
+                                              merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 304] .  read ();
+                                            }
+                                             else {
+                                              if (merlin_it_0_mod == 20) {
+                                                merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 320] .  read ();
+                                              }
+                                               else {
+                                                if (merlin_it_0_mod == 21) {
+                                                  merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 336] .  read ();
+                                                }
+                                                 else {
+                                                  if (merlin_it_0_mod == 22) {
+                                                    merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 352] .  read ();
+                                                  }
+                                                   else {
+                                                    if (merlin_it_0_mod == 23) {
+                                                      merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 368] .  read ();
+                                                    }
+                                                     else {
+                                                      if (merlin_it_0_mod == 24) {
+                                                        merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 384] .  read ();
+                                                      }
+                                                       else {
+                                                        if (merlin_it_0_mod == 25) {
+                                                          merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 400] .  read ();
+                                                        }
+                                                         else {
+                                                          if (merlin_it_0_mod == 26) {
+                                                            merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 416] .  read ();
+                                                          }
+                                                           else {
+                                                            if (merlin_it_0_mod == 27) {
+                                                            merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 432] .  read ();
+                                                            }
+                                                             else {
+                                                            if (merlin_it_0_mod == 28) {
+                                                            merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 448] .  read ();
+                                                            }
+                                                             else {
+                                                            if (merlin_it_0_mod == 29) {
+                                                            merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 464] .  read ();
+                                                            }
+                                                             else {
+                                                            if (merlin_it_0_mod == 30) {
+                                                            merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 480] .  read ();
+                                                            }
+                                                             else {
+                                                            merlin_tmp_2 = __merlinstencil3d_kernel_sol_ch[merlin_it_1 + 496] .  read ();
+                                                            }
+                                                            }
+                                                            }
+                                                            }
+                                                          }
+                                                        }
+                                                      }
+                                                    }
+                                                  }
+                                                }
+                                              }
+                                            }
+                                          }
+                                        }
+                                      }
+                                    }
+                                  }
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      sol[0 + merlin_it_0 * 16 + merlin_it_1] = merlin_tmp_2;
+    }
+  }
+}
+
+void __merlinstencil3d_kernel_computation(int C[2],int orig[16385024],int sol[16385024])
+{
+  
+#pragma HLS inline off
+  __merlin_access_range(sol,0,16385023UL);
+  __merlin_access_range(orig,0,16385023UL);
+  __merlin_access_range(C,0,1UL);
+  int i;
+  int j;
+  int k;
+  int sum0;
+  int sum1;
+  int mul0;
+  int mul1;
+  int shift_square_0[32][16];
+  int shift_square_1[32][16];
+  int shift_square_2[32][16];
+  int sol_temp[32][16];
+  __merlin_streaming_range(orig,0,16385024);
+  __merlin_streaming_range(sol,0,16384000);
+  for (i = 0; i < 16001; i++) {
+    for (int i_sub = 0; i_sub < 2; ++i_sub) {
+      
+#pragma ACCEL PIPELINE AUTO
+      
+#pragma ACCEL TILED_TAG
+      for (j = 0; j < 32 + 2; j++) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        if (j < 32) {
+          for (k = 0; k < 16; k++) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            shift_square_2[j][k] = __merlinstencil3d_kernel_orig_ch[k] .  read () + 1;
+          }
+        }
+        if (j >= 1 && j <= 32 && i * 2 + i_sub >= 1 && i * 2 + i_sub <= 32000) {
+          for (k = 0; k < 16; k++) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            __merlinstencil3d_kernel_sol_ch[k + (j - 1L) * 16L] .  write ((sol_temp[j - 1][k] + 1));
+          }
+        }
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void stencil3d_kernel(int C[2],int orig[16385024],int sol[16385024])
+{
+  __merlin_access_range(sol,0,16385023UL);
+  __merlin_access_range(orig,0,16385023UL);
+  __merlin_access_range(C,0,1UL);
+  
+#pragma ACCEL interface variable=C depth=2 max_depth=2
+  
+#pragma ACCEL interface variable=orig depth=16385024 max_depth=16385024 BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=512
+  
+#pragma ACCEL interface variable=sol depth=16385024 max_depth=16385024 BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=512
+  
+#pragma HLS dataflow
+  
+#pragma HLS stream variable=__merlinstencil3d_kernel_orig_ch
+  __merlinstencil3d_kernel_orig_streaming(orig);
+  __merlinstencil3d_kernel_computation(C,0,0);
+  
+#pragma HLS stream variable=__merlinstencil3d_kernel_sol_ch
+  __merlinstencil3d_kernel_sol_streaming(sol);
+}

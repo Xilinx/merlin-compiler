@@ -1,0 +1,76 @@
+#include "merlin_type_define.h"
+extern int __merlin_include__GB_merlin_type_define_h_0;
+
+static void p_ZN1SC2Ev_1(struct S *this_)
+{
+  this_ -> x = 168;
+  this_ -> y = 0;
+}
+
+static int p_Zpl1Si_1(struct S x,int y)
+{
+  return x . x + y + 10000;
+}
+
+static struct S p_Zpl1S1S_1(struct S x,struct S y)
+{
+  struct S s;
+  p_ZN1SC2Ev_1(&s);
+  ;
+  s . x = x . x + y . x;
+  s . y = x . y + y . y;
+  return s;
+}
+
+static void p_ZN1SC2E2S1_1(struct S *this_,struct S1 s1)
+{
+  this_ -> x = s1 . x;
+  this_ -> y = s1 . y;
+}
+
+static int p_ZN1ScviEv_1(struct S *this_)
+{
+  return this_ -> x;
+}
+
+static void g1_1(struct S1 s1,int y)
+{
+  struct S s;
+  p_ZN1SC2E2S1_1(&s,s1);
+  ;
+  p_ZN1ScviEv_1(&s) + y;
+#if PRINT
+#endif
+}
+
+static void g2_1(struct S1 s1,int y)
+{
+  struct S s;
+  p_ZN1SC2E2S1_1(&s,s1);
+  ;
+  p_Zpl1Si_1(s,y);
+#if PRINT
+#endif
+}
+#pragma ACCEL kernel
+
+void f()
+{
+  struct S s1;
+  p_ZN1SC2Ev_1(&s1);
+  ;
+  struct S s2;
+  p_ZN1SC2Ev_1(&s2);
+  ;
+  int x;
+  int y = 8;
+  p_Zpl1Si_1(s1,y);
+  p_Zpl1S1S_1(s1,s2);
+  struct S1 ss;
+  ss . x = 168;
+  ss . y = 0;
+  g1_1(ss,y);
+  g2_1(ss,y);
+#if PRINT
+#endif
+}

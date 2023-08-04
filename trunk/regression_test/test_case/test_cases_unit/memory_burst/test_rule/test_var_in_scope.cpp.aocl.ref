@@ -1,0 +1,26 @@
+#include <string.h> 
+#include<assert.h>
+#include<string.h>
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void top(int *b,int *c)
+{
+  int b_buf[10];
+  memcpy(b_buf,b,sizeof(int ) * 10);
+  for (int i = 0; i < 10; ++i) {
+    for (int k = 0; k < 10; ++k) {
+      int index = b_buf[i];
+      index >= 0?(static_cast < void  >  (0)) : __assert_fail("index >= 0","test_var_in_scope.cpp",10,__PRETTY_FUNCTION__);
+{
+        int c_buf[100];
+        for (int j = 0; j < 100; ++j) {
+          
+#pragma ACCEL parallel
+          c_buf[j] = j;
+        }
+        memcpy((void *)(&c[index * 1000 + k * 100]),(const void *)(&c_buf[0]),sizeof(int ) * 100);
+      }
+    }
+  }
+}

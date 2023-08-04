@@ -1,0 +1,164 @@
+//void pipeline( int n_samples, float *global_data, float *global_data2, float weights[784+1][16], float gradient[784+1][16] )
+//void pipeline( int n_samples, float *global_data, float *global_data2, float * global_weights, float * global_gradient )
+//{
+//    int i;
+//    int n_stage;
+//    //n_stage = n_samples / 32;
+//    //for(i = 0; i < n_stage; i++ )
+//    for(i = 0; i < n_samples / 32; i++ )
+//    {
+//        float data[32][784];
+//        float data2[32][16];
+//        float result1[32][16];
+//        float result2[32][16];
+//
+//        //recv_data( global_data, i * 32 * 784, data );
+//        //recv_data2( global_data2, i * 32 * 16, data2 );
+//        memcpy( *data, (void*)(global_data + i * 32 * 784), 784*32*4 );
+//        memcpy( *data2, (void*)(global_data2 + i * 32 * 16), 16*32*4 );
+//        //int __i_fcs_2;
+//        //for (__i_fcs_2 = 0; __i_fcs_2 < ((size_t )(784 * 32 * 4)) / 4 - 1; ++__i_fcs_2) {
+//        //  data[(__i_fcs_2 + 0) / 784][(__i_fcs_2 + 0) % 784] = global_data[__i_fcs_2 + i * 32 * 784];
+//        //}
+//        //int __i_fcs_3;
+//        //for (__i_fcs_3 = 0; __i_fcs_3 < ((size_t )(16 * 32 * 4)) / 4 - 1; ++__i_fcs_3) {
+//        //  data2[(__i_fcs_3 + 0) / 16][(__i_fcs_3 + 0) % 16] = global_data2[__i_fcs_3 + i * 32 * 16];
+//        //}
+//        compute1( data, global_weights, result1 );
+//        compute2( result1, data2, result2 );
+//        compute3( result2, data, global_gradient );
+//    }
+//}
+//void compute3(float result2[32][16], float data[32][784], float gradient[784+1][16])
+#include<string.h>
+#include "logistic.h"
+//1. split input global_data to global_data and global_data2
+//2. input global_weight, global gradient array index sequence changed
+//3. directly transfer weight and gradient instead of shift-register
+//void recv_data( volatile float *global_data, unsigned int offset, float data[32][784] )
+//{
+//    memcpy( *data, (void*)(global_data + offset), 784*32*4 );
+//}
+//
+//void recv_data2( volatile float *global_data2, unsigned int offset, float data2[32][16] )
+//{
+//    memcpy( *data2, (void*)(global_data2 + offset), 16*32*4 );
+//}
+//void compute1( float data[32][784], float weights[784+1][16], float result1[32][16] )
+#pragma ACCEL kernel
+
+void logistic_regression_kernel(int n_samples,float *global_weights,float *global_data,float *global_data2,float *global_gradient)
+{
+  float data_tmp_0;
+  float data_rn_0[32][784];
+  float data_tmp;
+  float data_rn[32][784];
+  int _memcpy_i1_1;
+  int _memcpy_i1_0;
+  int _memcpy_i0_1;
+  int _memcpy_i0_0;
+  float weights[785][16];
+//float gradient[784+1][16];
+  int i;
+  int j;
+  int k;
+  float regs[16];
+  float buffer[785];
+//for(i=0; i < 16; i++)
+//{
+//    int j;
+//    for(j = 0; j < 784+1; j++) {
+//        gradient[i][j] = 0.f;
+//    }
+//}
+//for(i=0; i < 16; i++)
+//{
+//    int j;
+//    for(j = 0; j < 784+1; j++) {
+//        weights[j][i] = global_weights[i*784+j];
+//    }
+//}
+//pipeline( n_samples, global_data, global_data2, weights, gradient);
+//pipeline( n_samples, global_data, global_data2, global_weights, global_gradient);
+  for (i = 0; i < n_samples / 32; i++) {
+    float data[32][784];
+    float data2[32][16];
+    float result1[32][16];
+    float result2[32][16];
+    for (_memcpy_i0_1 = 0; _memcpy_i0_1 < 32; ++_memcpy_i0_1) {
+      for (_memcpy_i0_0 = 0; _memcpy_i0_0 < 784; ++_memcpy_i0_0) {
+        data_tmp = global_data[i * 32 * 784 + ((0 * 32 + _memcpy_i0_1) * 784 + _memcpy_i0_0)];
+        data_tmp_0 = data_tmp;
+        data[_memcpy_i0_1][_memcpy_i0_0] = data_tmp_0;
+        data_rn_0[_memcpy_i0_1][_memcpy_i0_0] = data_tmp_0;
+        data_rn[_memcpy_i0_1][_memcpy_i0_0] = data_tmp;
+      }
+    }
+    for (_memcpy_i1_1 = 0; _memcpy_i1_1 < 32; ++_memcpy_i1_1) {
+      for (_memcpy_i1_0 = 0; _memcpy_i1_0 < 16; ++_memcpy_i1_0) {
+        data2[_memcpy_i1_1][_memcpy_i1_0] = global_data2[i * 32 * 16 + ((0 * 32 + _memcpy_i1_1) * 16 + _memcpy_i1_0)];
+      }
+    }
+{
+      int i__compute1;
+      int j__compute1;
+      int k__compute1;
+      float result1_t__compute1[32][16];
+      for (i__compute1 = 0; i__compute1 < 784; i__compute1++) {
+        for (j__compute1 = 0; j__compute1 < 32; j__compute1++) {
+          for (k__compute1 = 0; k__compute1 < 16; k__compute1++) {
+            if (i__compute1 == 0) {
+              result1_t__compute1[j__compute1][k__compute1] = global_weights[k__compute1 * 785];
+            }
+//result1[j][k] += weights[i+1][k] * data[j][i];
+            result1_t__compute1[j__compute1][k__compute1] += global_weights[k__compute1 * 785 + (i__compute1 + 1)] * data_rn[j__compute1][i__compute1];
+            if (i__compute1 == 783) {
+              result1[j__compute1][k__compute1] = result1_t__compute1[j__compute1][k__compute1];
+            }
+          }
+        }
+      }
+    }
+{
+      int j__compute2;
+      int k__compute2;
+      for (k__compute2 = 0; k__compute2 < 16; k__compute2++) {
+        for (j__compute2 = 0; j__compute2 < 32; j__compute2++) {
+          float temp__compute2;
+          temp__compute2 = ((float )1) + result1[j__compute2][k__compute2] * result1[j__compute2][k__compute2];
+          result2[j__compute2][k__compute2] = result1[j__compute2][k__compute2] / temp__compute2 - (2.f * data2[j__compute2][k__compute2] - 1.f) / sqrtf(temp__compute2);
+        }
+      }
+    }
+{
+      int i__compute3;
+      int j__compute3;
+      int k__compute3;
+      float gradient__compute3[785][16];
+      float result2_t__compute3[32][16];
+      for (j__compute3 = 0; j__compute3 < 32; j__compute3++) {
+        for (i__compute3 = 0; i__compute3 < 784 + 1; i__compute3++) {
+          for (k__compute3 = 0; k__compute3 < 16; k__compute3++) {
+            if (i__compute3 == 0) {
+              result2_t__compute3[j__compute3][k__compute3] = result2[j__compute3][k__compute3];
+            }
+            if (k__compute3 == 0) {
+              gradient__compute3[i__compute3][k__compute3] = 0.f;
+            }
+            gradient__compute3[i__compute3][k__compute3] += result2_t__compute3[j__compute3][k__compute3] * ((i__compute3 == 0?1.f : data_rn_0[j__compute3][i__compute3 - 1]));
+            if (k__compute3 == 16 - 1) {
+              global_gradient[k__compute3 * 784 + i__compute3] = gradient__compute3[i__compute3][k__compute3];
+            }
+          }
+        }
+      }
+    }
+  }
+//for(i=0; i < 16; i++)
+//{
+//    int j;
+//    for(j = 0; j < 784+1; j++) {
+//        global_gradient[i*784+j] = gradient[j][i];
+//    }
+//}
+}

@@ -1,0 +1,77 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#pragma ACCEL kernel
+
+void func_top(double a[100],double *val)
+{
+  int j;
+  int j_sub;
+  double sum =  *val;
+  double _sum_rdc[10];
+{
+    int j_sub_0;
+    for (j_sub_0 = 0; j_sub_0 <= 9; ++j_sub_0) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      _sum_rdc[j_sub_0] = 1;
+    }
+  }
+  for (j = 0; j < 10; j++) {
+    
+#pragma ACCEL pipeline
+    for (j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL PARALLEL
+      _sum_rdc[j_sub] *= a[j * 10 + j_sub] / 5;
+    }
+  }
+{
+    int j_sub_1;
+    for (j_sub_1 = 0; j_sub_1 <= 9; ++j_sub_1) {
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      
+#pragma ACCEL PARALLEL COMPLETE
+      sum *= _sum_rdc[j_sub_1];
+    }
+  }
+   *val = sum;
+}
+
+void func_top_sw(double a[100],double *val)
+{
+  int j;
+  int j_sub;
+  double sum =  *val;
+  for (j = 0; j < 10; j++) {
+    for (j_sub = 0; j_sub < 10; ++j_sub) {
+      sum *= a[j * 10 + j_sub] / 5;
+    }
+  }
+   *val = sum;
+}
+
+int main()
+{
+  double c[100];
+  for (int i = 0; i < 100; i++) {
+    c[i] = (rand() % 10 + 1);
+  }
+  double sum = 1;
+  double sum_sw = 1;
+  func_top(c,&sum);
+  func_top_sw(c,&sum_sw);
+  int err = 0;
+  double larger = fmax((fabs(sum)),(fabs(sum_sw)));
+  if (larger > 0) 
+    if (fabs(sum - sum_sw) / larger > 1e-5) {
+      printf("[ERROR] out=%lf exp=%lf\n",sum,sum_sw);
+      printf("Error.\n");
+      return 1;
+    }
+  printf("Success.\n");
+  return 0;
+}

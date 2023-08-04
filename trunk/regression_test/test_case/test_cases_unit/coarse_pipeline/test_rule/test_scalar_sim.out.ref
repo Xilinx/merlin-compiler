@@ -1,0 +1,171 @@
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+
+void mars_kernel_0_1_assign_c_buf(float target[10][10],float orig[10][10])
+{
+  int i1;
+  int i0;
+  for (i0 = 0; i0 < 10; i0++) {
+    for (i1 = 0; i1 < 10; i1++) {
+      target[i0][i1] = orig[i0][i1];
+    }
+  }
+}
+
+void mars_kernel_0_1_node_1_stage_1(int i,int exec,float a[10][10],float c_buf[10][10],int val2_0,float val3)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int j;
+    for (j = 0; j < 10; j++) {
+      c_buf[i][j] = a[i][j] + ((float )val2_0) + val3;
+    }
+  }
+}
+
+void mars_kernel_0_1_node_3_stage_3(int i,int exec,float b[10][10],float c_buf[10][10],int val1_0,int val2_0,const int val_0)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int j;
+    for (j = 0; j < 10; j++) {
+      b[i][j] = c_buf[i][j] + ((float )val_0) + ((float )(val1_0 * 10)) + ((float )val2_0);
+    }
+  }
+}
+
+void mars_kernel_0_1_bus(int mars_i,int mars_init,int mars_cond,float a[10][10],float b[10][10],float mars_c_buf_1[10][10],float mars_c_buf_2[10][10],float mars_c_buf_3[10][10],int *mars_val1_0_2,int *mars_val1_0_3,int *mars_val2_0_0,int *mars_val2_0_1,int *mars_val2_0_2,int *mars_val2_0_3,float mars_val3_1,float mars_val3_2,const int mars_val_0_3)
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_0_1_node_1_stage_1(mars_i - 1,(int )(mars_i >= mars_init + 1 & mars_i <= mars_cond + 1),a,mars_c_buf_1, *mars_val2_0_1,mars_val3_1);
+  mars_kernel_0_1_node_3_stage_3(mars_i - 3,(int )(mars_i >= mars_init + 3 & mars_i <= mars_cond + 3),b,mars_c_buf_3, *mars_val1_0_3, *mars_val2_0_3,mars_val_0_3);
+}
+
+void mars_kernel_0_1_node_0_stage_0(int i,int exec,int *val2_0)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+     *val2_0 = 1;
+  }
+}
+
+void mars_kernel_0_1_node_2_stage_2(int i,int exec,int *val1_0,float val3)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+     *val1_0 = ((int )val3);
+  }
+}
+
+void mars_kernel_0_1_comp(int mars_i,int mars_init,int mars_cond,float a[10][10],float b[10][10],float mars_c_buf_1[10][10],float mars_c_buf_2[10][10],float mars_c_buf_3[10][10],int *mars_val1_0_2,int *mars_val1_0_3,int *mars_val2_0_0,int *mars_val2_0_1,int *mars_val2_0_2,int *mars_val2_0_3,float mars_val3_1,float mars_val3_2,const int mars_val_0_3)
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_0_1_node_0_stage_0(mars_i - 0,(int )(mars_i >= mars_init + 0 & mars_i <= mars_cond + 0),mars_val2_0_0);
+  mars_kernel_0_1_node_2_stage_2(mars_i - 2,(int )(mars_i >= mars_init + 2 & mars_i <= mars_cond + 2),mars_val1_0_2,mars_val3_2);
+}
+
+void mars_kernel_0_1(int mars_i,int mars_init,int mars_cond,float a[10][10],float b[10][10],float mars_c_buf_1[10][10],float mars_c_buf_2[10][10],float mars_c_buf_3[10][10],int *mars_val1_0_2,int *mars_val1_0_3,int *mars_val2_0_0,int *mars_val2_0_1,int *mars_val2_0_2,int *mars_val2_0_3,float mars_val3_1,float mars_val3_2,const int mars_val_0_3)
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_0_1_bus(mars_i,mars_init,mars_cond,a,b,mars_c_buf_1,mars_c_buf_2,mars_c_buf_3,mars_val1_0_2,mars_val1_0_3,mars_val2_0_0,mars_val2_0_1,mars_val2_0_2,mars_val2_0_3,mars_val3_1,mars_val3_2,mars_val_0_3);
+  mars_kernel_0_1_comp(mars_i,mars_init,mars_cond,a,b,mars_c_buf_1,mars_c_buf_2,mars_c_buf_3,mars_val1_0_2,mars_val1_0_3,mars_val2_0_0,mars_val2_0_1,mars_val2_0_2,mars_val2_0_3,mars_val3_1,mars_val3_2,mars_val_0_3);
+}
+#pragma ACCEL kernel
+
+void func_top(float a[10][10],float b[10][10])
+{
+  int i;
+  int j;
+  float c_buf[10][10];
+  float val3 = 0;
+  val3 = a[1][5];
+  int val2_0;
+  const int val_0 = 5;
+  int val1_0;
+  int mars_count_0_1 = 0;
+  float mars_kernel_0_1_c_buf_0[10][10];
+  mars_kernel_0_1_assign_c_buf(mars_kernel_0_1_c_buf_0,c_buf);
+  float mars_kernel_0_1_c_buf_1[10][10];
+  mars_kernel_0_1_assign_c_buf(mars_kernel_0_1_c_buf_1,c_buf);
+  float mars_kernel_0_1_c_buf_2[10][10];
+  mars_kernel_0_1_assign_c_buf(mars_kernel_0_1_c_buf_2,c_buf);
+  float mars_kernel_0_1_c_buf_3[10][10];
+  mars_kernel_0_1_assign_c_buf(mars_kernel_0_1_c_buf_3,c_buf);
+  int mars_kernel_0_1_val1_0_0 = val1_0;
+  int mars_kernel_0_1_val1_0_1 = val1_0;
+  int mars_kernel_0_1_val2_0_0 = val2_0;
+  int mars_kernel_0_1_val2_0_1 = val2_0;
+  int mars_kernel_0_1_val2_0_2 = val2_0;
+  int mars_kernel_0_1_val2_0_3 = val2_0;
+  float mars_kernel_0_1_val3_0 = val3;
+  float mars_kernel_0_1_val3_1 = val3;
+  for (i = 0; i < 10 + 3; i++) 
+// Original: #pragma ACCEL pipeline
+{
+    if (mars_count_0_1 == 0) 
+      mars_kernel_0_1(i,0,9,a,b,mars_kernel_0_1_c_buf_0,mars_kernel_0_1_c_buf_1,mars_kernel_0_1_c_buf_2,&mars_kernel_0_1_val1_0_0,&mars_kernel_0_1_val1_0_1,&mars_kernel_0_1_val2_0_0,&mars_kernel_0_1_val2_0_1,&mars_kernel_0_1_val2_0_2,&mars_kernel_0_1_val2_0_3,mars_kernel_0_1_val3_0,mars_kernel_0_1_val3_1,val_0);
+     else if (mars_count_0_1 == 1) 
+      mars_kernel_0_1(i,0,9,a,b,mars_kernel_0_1_c_buf_3,mars_kernel_0_1_c_buf_0,mars_kernel_0_1_c_buf_1,&mars_kernel_0_1_val1_0_1,&mars_kernel_0_1_val1_0_0,&mars_kernel_0_1_val2_0_3,&mars_kernel_0_1_val2_0_0,&mars_kernel_0_1_val2_0_1,&mars_kernel_0_1_val2_0_2,mars_kernel_0_1_val3_1,mars_kernel_0_1_val3_0,val_0);
+     else if (mars_count_0_1 == 2) 
+      mars_kernel_0_1(i,0,9,a,b,mars_kernel_0_1_c_buf_2,mars_kernel_0_1_c_buf_3,mars_kernel_0_1_c_buf_0,&mars_kernel_0_1_val1_0_0,&mars_kernel_0_1_val1_0_1,&mars_kernel_0_1_val2_0_2,&mars_kernel_0_1_val2_0_3,&mars_kernel_0_1_val2_0_0,&mars_kernel_0_1_val2_0_1,mars_kernel_0_1_val3_0,mars_kernel_0_1_val3_1,val_0);
+     else 
+      mars_kernel_0_1(i,0,9,a,b,mars_kernel_0_1_c_buf_1,mars_kernel_0_1_c_buf_2,mars_kernel_0_1_c_buf_3,&mars_kernel_0_1_val1_0_1,&mars_kernel_0_1_val1_0_0,&mars_kernel_0_1_val2_0_1,&mars_kernel_0_1_val2_0_2,&mars_kernel_0_1_val2_0_3,&mars_kernel_0_1_val2_0_0,mars_kernel_0_1_val3_1,mars_kernel_0_1_val3_0,val_0);
+    mars_count_0_1++;
+    if (mars_count_0_1 == 4) 
+      mars_count_0_1 = 0;
+  }
+}
+
+void func_top_sw(float a[10][10],float b[10][10])
+{
+  int i;
+  int j;
+  float c_buf[10][10];
+  float val3 = 0;
+  val3 = a[1][5];
+  for (i = 0; i < 10; i++) {
+    
+#pragma ACCEL pipeline
+    int val2 = 1;
+    for (j = 0; j < 10; j++) {
+      c_buf[i][j] = a[i][j] + val2 + val3;
+    }
+    const int val = 5;
+    int val1 = val3;
+    for (j = 0; j < 10; j++) {
+      b[i][j] = c_buf[i][j] + val + (val1 * 10) + val2;
+    }
+  }
+}
+
+int main()
+{
+  float a[10][10];
+  for (int i = 0; i < 10; i++) 
+    for (int i0 = 0; i0 < 10; i0++) {
+      a[i][i0] = (i + i0);
+    }
+  float b[10][10];
+  float b_sw[10][10];
+  func_top(a,b);
+  func_top_sw(a,b_sw);
+  for (int i = 0; i < 10; i++) 
+    for (int i0 = 0; i0 < 10; i0++) {
+      float larger = b[i][i0] - b_sw[i][i0];
+      if (fabs(larger) > 1e-5) {
+        printf("[ERROR] out=%f exp=%f\n",b[i][i0],b_sw[i][i0]);
+        printf("Error.\n");
+        return 1;
+      }
+    }
+  printf("Success.\n");
+  return 0;
+}

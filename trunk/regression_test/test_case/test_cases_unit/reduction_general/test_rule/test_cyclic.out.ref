@@ -1,0 +1,106 @@
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<math.h>
+#pragma ACCEL kernel
+
+void func_top(int a[1000],int sum[100])
+{
+  int j;
+  int j_sub;
+  int _sum_rdc[100][10][1];
+{
+    int j_sub_0;
+    int j_0;
+    for (j_0 = 0; j_0 <= 99; ++j_0) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      for (j_sub_0 = 0; j_sub_0 <= 9; ++j_sub_0) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        
+#pragma ACCEL ARRAY_PARTITION OFF
+        for (int j_sub1 = 0; j_sub1 < 1; ++j_sub1) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          
+#pragma ACCEL ARRAY_PARTITION OFF
+          _sum_rdc[j_0][j_sub_0][j_sub1] = 0;
+        }
+      }
+    }
+  }
+  for (j = 0; j < 100; j++) {
+    
+#pragma ACCEL PIPELINE
+    for (j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL PARALLEL
+      for (int j_sub1 = 0; j_sub1 < 1; ++j_sub1) {
+        
+#pragma ACCEL PARALLEL
+        _sum_rdc[j][j_sub][j_sub1] += a[j * 10 + j_sub];
+      }
+    }
+  }
+{
+    int j_sub_1;
+    int j_1;
+    for (j_1 = 0; j_1 <= 99; ++j_1) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      for (j_sub_1 = 0; j_sub_1 <= 9; ++j_sub_1) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        
+#pragma ACCEL ARRAY_PARTITION OFF
+        for (int j_sub1 = 0; j_sub1 < 1; ++j_sub1) {
+          
+#pragma ACCEL ARRAY_PARTITION OFF
+          
+#pragma ACCEL PARALLEL COMPLETE
+          sum[j_1] += _sum_rdc[j_1][j_sub_1][j_sub1];
+        }
+      }
+    }
+  }
+}
+
+void func_top_sw(int a[1000],int sum[100])
+{
+  int j;
+  int j_sub;
+  for (j = 0; j < 100; j++) {
+    for (j_sub = 0; j_sub < 10; ++j_sub) {
+      for (int j_sub1 = 0; j_sub1 < 1; ++j_sub1) {
+        sum[j] += a[j * 10 + j_sub];
+      }
+    }
+  }
+}
+
+int main()
+{
+  int c[1000];
+  for (int i = 0; i < 1000; i++) {
+    c[i] = i;
+  }
+  int sum[100] = {(0)};
+  int sum_sw[100] = {(0)};
+  func_top(c,sum);
+  func_top_sw(c,sum_sw);
+  for (int j = 0; j < 100; j++) {
+    int larger = sum[j] - sum_sw[j];
+    if (larger != 0) {
+      printf("[ERROR] out=%d exp=%d\n",sum[j],sum_sw[j]);
+      printf("Error.\n");
+      return 1;
+    }
+  }
+  printf("Success.\n");
+  return 0;
+}

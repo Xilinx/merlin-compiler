@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs> 
+  <config>
+      <name>cov_a</name>
+      <case_type>coverage</case_type>
+      <case>all</case>
+      <flow>no_bit_test_hls</flow>
+      <platform_name>a10gx</platform_name>
+      <implementation_tool > aocl </implementation_tool>
+        <opt_effort>standard</opt_effort>
+      <cstd>c99</cstd>
+  </config>  
+    <config>
+        <name>f_a_s</name>
+        <case_type>tune_altera_v2</case_type>
+        <case>all</case>
+        <flow>no_bit_test_hls</flow>
+        <platform_name>a10gx</platform_name>
+        <opt_effort>standard</opt_effort>
+        <implementation_tool > aocl </implementation_tool>
+        <testing        > off </testing>
+        <testing_run_ref> on </testing_run_ref>
+        <testing_run_opt> on </testing_run_opt>
+        <testing_run_sim> on </testing_run_sim>
+        <testing_run_bit> on </testing_run_bit>
+      <cstd>c99</cstd>
+    </config>  
+    <config>
+        <name>m_a_s</name>
+        <case_type>machsuite_simple</case_type>
+        <case>all</case>
+        <flow>no_bit_test_hls</flow>
+        <platform_name>a10gx</platform_name>
+        <implementation_tool > aocl </implementation_tool>
+        <opt_effort>standard</opt_effort>
+        <testing        > off </testing>
+        <testing_run_ref> on </testing_run_ref>
+        <testing_run_opt> on </testing_run_opt>
+        <testing_run_sim> on </testing_run_sim>
+        <testing_run_bit> on </testing_run_bit>
+      <cstd>c99</cstd>
+    </config> 
+    <config>
+        <name>c_a_s</name>
+        <case_type>chstone_simple</case_type>
+        <case>all</case>
+        <flow>no_bit_test_hls</flow>
+        <platform_name>a10gx</platform_name>
+        <implementation_tool > aocl </implementation_tool>
+        <opt_effort>standard</opt_effort>
+        <testing        > off </testing>
+        <testing_run_ref> on </testing_run_ref>
+        <testing_run_opt> on </testing_run_opt>
+        <testing_run_sim> on </testing_run_sim>
+        <testing_run_bit> on </testing_run_bit>
+      <cstd>c99</cstd>
+    </config>  
+  <config>
+      <name>f_x</name>
+      <case_type>org_v2</case_type>
+      <case>all</case>
+      <flow>no_bit_test_hls</flow>
+      <platform_name>xilinx_vcu1525_dynamic_5_0</platform_name>
+      <testing        > off </testing>
+      <testing_run_ref> on </testing_run_ref>
+      <testing_run_opt> on </testing_run_opt>
+      <testing_run_sim> on </testing_run_sim>
+      <testing_run_bit> on </testing_run_bit>
+      <cstd>c99</cstd>
+  </config>  
+  <config>
+      <name>f_x_nowidebus</name>
+      <case_type>org_v2</case_type>
+      <case>all</case>
+      <flow>no_bit_test_hls</flow>
+      <memory_coalescing>off</memory_coalescing>
+      <platform_name>xilinx_vcu1525_dynamic_5_0</platform_name>
+      <testing        > off </testing>
+      <testing_run_ref> on </testing_run_ref>
+      <testing_run_opt> on </testing_run_opt>
+      <testing_run_sim> on </testing_run_sim>
+      <testing_run_bit> on </testing_run_bit>
+      <cstd>c99</cstd>
+  </config>  
+  <config>
+      <name>m_x</name>
+      <case_type>machsuite_simple_xilinx</case_type>
+      <case>all</case>
+      <flow>no_bit_test_hls</flow>
+      <platform_name>xilinx_vcu1525_dynamic_5_0</platform_name>
+      <testing        > off </testing>
+      <testing_run_ref> on </testing_run_ref>
+      <testing_run_opt> on </testing_run_opt>
+      <testing_run_sim> on </testing_run_sim>
+      <testing_run_bit> on </testing_run_bit>
+      <cstd>c99</cstd>
+  </config>  
+  <config>
+      <name>m_x_opt</name>
+      <case_type>machsuite_opt_xilinx</case_type>
+      <case>all</case>
+      <flow>no_bit_test_hls</flow>
+      <platform_name>xilinx_vcu1525_dynamic_5_0</platform_name>
+      <testing        > off </testing>
+      <testing_run_ref> on </testing_run_ref>
+      <testing_run_opt> on </testing_run_opt>
+      <testing_run_sim> on </testing_run_sim>
+      <testing_run_bit> on </testing_run_bit>
+      <cstd>c99</cstd>
+  </config>  
+</configs>

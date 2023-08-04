@@ -1,0 +1,332 @@
+#include<assert.h>
+#include<stdlib.h>
+
+/*unsigned long long ull,*/
+void func(int M,int N,int K,unsigned char uc,unsigned short us,unsigned int ui,unsigned long ul,size_t ust)
+{
+  N > 100?((void )0) : __assert_fail("N > 100","test_assert_range.c",6,__PRETTY_FUNCTION__);
+  N < 200?((void )0) : __assert_fail("N < 200","test_assert_range.c",7,__PRETTY_FUNCTION__);
+  uc < 100?((void )0) : __assert_fail("uc < 100","test_assert_range.c",8,__PRETTY_FUNCTION__);
+  us < 100?((void )0) : __assert_fail("us < 100","test_assert_range.c",9,__PRETTY_FUNCTION__);
+  ui < 100?((void )0) : __assert_fail("ui < 100","test_assert_range.c",10,__PRETTY_FUNCTION__);
+  ul < 100?((void )0) : __assert_fail("ul < 100","test_assert_range.c",11,__PRETTY_FUNCTION__);
+//assert(ull < 100);
+  ust < 100?((void )0) : __assert_fail("ust < 100","test_assert_range.c",13,__PRETTY_FUNCTION__);
+  int a[100];
+  int i;
+  int j;
+  for (i = 0; i < uc; ++i) {
+    i;
+  }
+  for (i = 0; i < us; ++i) {
+    i;
+  }
+  for (i = 0; i < ui; ++i) {
+    i;
+  }
+  for (i = 0; i < ul; ++i) {
+    i;
+  }
+//for(i = 0; i < ull; ++i) {i;}
+  for (i = 0; i < ust; ++i) {
+    i;
+  }
+  for (i = 0; i < N; ++i) {
+    for (j = i; j < 2 * i; ++j) 
+      ;
+  }
+  j = 23;
+/* Canonicalized from: for((i = 0 , j = 23);i <= N;i++) for(j = - 50;j < 1;j++) {...} */
+  for (i = 0; i <= N; ++i) {
+    for (j = - 50; j < 1; j++) {
+      a[i] = i;
+      i;
+      i + j;
+      i * j;
+      2 * i - 2 * j;
+      -i + j;
+    }
+  }
+  0;
+  0;
+  K > 50 && K < 100?((void )0) : __assert_fail("K > 50 && K < 100","test_assert_range.c",38,__PRETTY_FUNCTION__);
+  for (i = 100; i <= K; i++) {
+    for (j = 100; j <= K + 2 * i; j++) {
+      a[i] = i;
+      i;
+      i + j;
+      i * j;
+      2 * i - 2 * j;
+      -i + j;
+    }
+  }
+  K = a[1];
+  K < 200?((void )0) : __assert_fail("K < 200","test_assert_range.c",50,__PRETTY_FUNCTION__);
+  M = a[0];
+  M > 50?((void )0) : __assert_fail("M > 50","test_assert_range.c",52,__PRETTY_FUNCTION__);
+  for (i = M; i < K; i++) {
+    i + 1;
+  }
+  if (M) {
+    K = a[2];
+  }
+   else 
+    K = a[3];
+  K > 10 && K < 30?((void )0) : __assert_fail("K > 10 && K < 30","test_assert_range.c",61,__PRETTY_FUNCTION__);
+  for (i = 0; i < K; i++) {
+    i + 3;
+    i * 2;
+  }
+  K = a[4];
+  K > 20 / 2 + 10 && K < 30?((void )0) : __assert_fail("K > 20/2 + 10 && K < 30","test_assert_range.c",67,__PRETTY_FUNCTION__);
+  for (i = 0; i < K; i++) {
+    i + 3;
+    i * 2;
+  }
+{
+    int b;
+    b <= 1024?((void )0) : __assert_fail("b <= 1024","test_assert_range.c",75,__PRETTY_FUNCTION__);
+    b + 1;
+    b / 2;
+  }
+{
+    int c;
+    c <= 5?((void )0) : __assert_fail("c <= 5","test_assert_range.c",81,__PRETTY_FUNCTION__);
+    int d;
+    d >= - 5?((void )0) : __assert_fail("d >= -5","test_assert_range.c",83,__PRETTY_FUNCTION__);
+    int e;
+    e <= - 5?((void )0) : __assert_fail("e <= -5","test_assert_range.c",85,__PRETTY_FUNCTION__);
+    c + 1;
+    c / 2;
+    c / - 2;
+    d / 2;
+    d / - 2;
+    e / 2;
+    e / - 2;
+  }
+{
+//bug1676
+    int bb;
+    bb == 100?((void )0) : __assert_fail("bb == 100","test_assert_range.c",97,__PRETTY_FUNCTION__);
+    bb + 1;
+  }
+}
+
+void f()
+{
+  (char )88;
+  (signed char )88;
+  (short )88;
+  (int )88;
+  (long )88;
+//(long long) 88;
+  (char )0x1ffffffffLL;
+  (signed char )0x1ffffffffLL;
+  (short )0x1ffffffffLL;
+  (int )0x1ffffffffLL;
+  (long )0x1ffffffffLL;
+//(long long) 0x1ffffffffLL;
+  (char )(- 1);
+  (signed char )(- 1);
+  (short )(- 1);
+  (int )(- 1);
+  (long )(- 1);
+//(long long) -1;
+  (unsigned char )88;
+  (unsigned short )88;
+  (unsigned int )88;
+  (unsigned long )88;
+//(unsigned long long) 88;
+  (unsigned char )0x1ffffffffLL;
+  (unsigned short )0x1ffffffffLL;
+  (unsigned int )0x1ffffffffLL;
+  (unsigned long )0x1ffffffffLL;
+//(unsigned long long) 0x1ffffffffLL;
+  (unsigned char )(- 1);
+  (unsigned short )(- 1);
+  (unsigned int )(- 1);
+  (unsigned long )(- 1);
+//(unsigned long long) -1;
+}
+#if 0
+#endif
+
+void f1()
+{
+  int i;
+  int x;
+  for (i = - 1; i <= - 1; i++) {
+    i;
+  }
+}
+
+void f2()
+{
+  int i;
+  int x;
+  for (i = - 1; i <= - 1; ++i) {
+    i;
+  }
+}
+
+void f3()
+{
+  int i;
+  int x;
+  for (i = - 1; i >= - 1; i--) {
+    i;
+  }
+}
+
+void f4()
+{
+  int i;
+  int x;
+  for (i = - 1; i >= - 1; --i) {
+    i;
+  }
+}
+
+void f5()
+{
+  int i;
+  int x;
+  for (i = - 1; i >= - 1; i += - 1) {
+    i;
+  }
+}
+
+void f6()
+{
+  int i;
+  int x;
+  for (i = - 1; i <= - 1; i += 1) {
+    i;
+  }
+}
+
+void f7()
+{
+  int i;
+  int x;
+  for (i = - 1; i <= - 1; i -= - 1) {
+    i;
+  }
+}
+
+void f8()
+{
+  int i;
+  int x;
+  for (i = - 1; i >= - 1; i -= 1) {
+    i;
+  }
+}
+
+void f9()
+{
+  int i;
+  int x;
+  for (i = - 1; i >= - 1; i = i - 1) {
+    i;
+  }
+}
+
+void f10()
+{
+  int i;
+  int x;
+  for (i = - 1; i <= - 1; i = i + 1) {
+    i;
+  }
+}
+
+void g1()
+{
+  int i;
+  int x;
+  for (i = - 1; i >= - 1; i++) {
+    i;
+  }
+}
+
+void g2()
+{
+  int i;
+  int x;
+  for (i = - 1; i >= - 1; ++i) {
+    i;
+  }
+}
+
+void g3()
+{
+  int i;
+  int x;
+  for (i = - 1; i <= - 1; i--) {
+    i;
+  }
+}
+
+void g4()
+{
+  int i;
+  int x;
+  for (i = - 1; i <= - 1; --i) {
+    i;
+  }
+}
+
+void g5()
+{
+  int i;
+  int x;
+  for (i = - 1; i <= - 1; i += - 1) {
+    i;
+  }
+}
+
+void g6()
+{
+  int i;
+  int x;
+  for (i = - 1; i >= - 1; i += 1) {
+    i;
+  }
+}
+
+void g7()
+{
+  int i;
+  int x;
+  for (i = - 1; i >= - 1; i -= - 1) {
+    i;
+  }
+}
+
+void g8()
+{
+  int i;
+  int x;
+  for (i = - 1; i <= - 1; i -= 1) {
+    i;
+  }
+}
+
+void g9()
+{
+  int i;
+  int x;
+  for (i = - 1; i <= - 1; i = i - 1) {
+    i;
+  }
+}
+
+void g10()
+{
+  int i;
+  int x;
+  for (i = - 1; i >= - 1; i = i + 1) {
+    i;
+  }
+}

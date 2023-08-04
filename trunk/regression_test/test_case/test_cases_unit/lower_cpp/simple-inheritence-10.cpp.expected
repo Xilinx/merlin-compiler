@@ -1,0 +1,55 @@
+
+struct ::Root 
+{
+}
+;
+
+void p_ZN4Root1fEv(struct Root *this_)
+{
+}
+static void __merlin_dummy_SgClassDeclaration_struct_Roo_();
+
+struct ::S 
+{
+  struct Root Root;
+}
+;
+static void __merlin_dummy_SgClassDeclaration_struct_S_();
+
+struct ::A 
+{
+  struct Root Root;
+  struct S s;
+}
+;
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+
+struct ::B 
+{
+  struct A a;
+  struct A *pa;
+}
+;
+
+void p_ZN1BC2Ev(struct B *this_)
+{
+  this_ -> pa = &this_ -> a;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_B_();
+#pragma ACCEL kernel
+
+void k()
+{
+  struct B bo;
+  p_ZN1BC2Ev(&bo);
+  ;
+  p_ZN4Root1fEv(&bo . a . Root);
+  p_ZN4Root1fEv(&bo . pa -> Root);
+  p_ZN4Root1fEv(&bo . a . s . Root);
+  p_ZN4Root1fEv(&bo . pa -> s . Root);
+  struct B *pb = &bo;
+  p_ZN4Root1fEv(&pb -> a . Root);
+  p_ZN4Root1fEv(&pb -> pa -> Root);
+  p_ZN4Root1fEv(&pb -> a . s . Root);
+  p_ZN4Root1fEv(&pb -> pa -> s . Root);
+}

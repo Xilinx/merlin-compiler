@@ -1,0 +1,106 @@
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:410)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-213] Loop 'i'  (test.cpp:413) probably cannot be fully-pipelined as array 'b' has an irregular access pattern and cannot be split into different sub-arrays.
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:211)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:229)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:247)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:265)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:303)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test.cpp:392)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test.cpp:409)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test.cpp:429)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test.cpp:446)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test.cpp:480)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:499)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:514)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test.cpp:529)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:530)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test.cpp:544)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:545)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test.cpp:559)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:560)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'A' (test.cpp:682)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test.cpp:722)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'aa' (test.cpp:746)
+ Reason: multiple accesses or complex access pattern. 
+INFO: [FGPIP-105] Loop 'i' (test.cpp:11) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:28) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:43) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:59) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:65) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:80) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:89) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:100) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:107) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:118) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:143) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:169) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:197) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:215) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:233) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:251) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:269) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:288) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:307) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:332) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:351) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:369) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:379) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:396) is parallelized with a factor of 10
+INFO: [FGPIP-102] Loop 'j' (test.cpp:415) is fully parallelized
+INFO: [FGPIP-105] Loop 'j' (test.cpp:450) is parallelized with a factor of 10
+INFO: [FGPIP-102] Loop 'j' (test.cpp:485) is fully parallelized
+INFO: [FGPIP-105] Loop 'j' (test.cpp:518) is parallelized with a factor of 4
+INFO: [FGPIP-105] Loop 'i' (test.cpp:532) is parallelized with a factor of 1000
+INFO: [FGPIP-105] Loop 'i' (test.cpp:547) is parallelized with a factor of 100
+INFO: [FGPIP-102] Loop 'j' (test.cpp:568) is fully parallelized
+INFO: [FGPIP-105] Loop 'j' (test.cpp:589) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'k' (test.cpp:626) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'i' (test.cpp:647) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:663) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:672) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test.cpp:707) is parallelized with a factor of 4
+INFO: [FGPIP-105] Loop 'k' (test.cpp:730) is parallelized with a factor of 2

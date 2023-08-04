@@ -1,0 +1,65 @@
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+
+void sub(int *a,int i,long a_offset)
+{
+  int j = 0;
+  for (j = 0; j < 10000; j++) {
+    a[i * 10000 + j + a_offset] = 0;
+  }
+}
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+  int i;
+  for (i = 0; i < 100; ++i) {
+    int a_buf[10000];
+    sub(a_buf,i,i * -10000);
+    sub(a_buf,i,i * -10000);
+    memcpy((void *)(&a[i * 10000]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+  }
+}
+
+void sub_0_0(int *a,int i,long a_offset)
+{
+  int j = 0;
+  for (j = 0; j < 10000; j++) {
+    a[i * 10000 + j + a_offset] = 0;
+  }
+}
+
+void sub_0(int *a,int i,long a_offset)
+{
+  sub_0_0(a,i,a_offset);
+}
+#pragma ACCEL kernel
+
+void top_0(int *a)
+{
+  int i;
+  for (i = 0; i < 100; ++i) {
+    int a_buf[10000];
+    sub_0(a_buf,i,i * -10000);
+    memcpy((void *)(&a[i * 10000]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+  }
+}
+
+void sub_2(int *a)
+{
+  int j = 0;
+  for (j = 0; j < 10000; j++) {
+    a[j] = 0;
+  }
+}
+#pragma ACCEL kernel
+
+void top_2(int *a,int *b)
+{
+  int i;
+  for (i = 0; i < 100; ++i) {
+    int a_buf[10000];
+    sub_2(a_buf);
+    memcpy((void *)(&a[i * 10000]),(const void *)(&a_buf[0]),sizeof(int ) * 10000);
+  }
+}

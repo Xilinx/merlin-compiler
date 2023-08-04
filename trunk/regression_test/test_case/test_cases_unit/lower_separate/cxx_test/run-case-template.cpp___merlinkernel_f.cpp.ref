@@ -1,0 +1,14 @@
+#include "merlin_type_define.h"
+extern int __merlin_include__GB_merlin_type_define_h_0;
+
+static void p_Z1fIiERi_1(int &t)
+{
+  t += 1;
+}
+#pragma ACCEL kernel
+
+void f()
+{
+  int x = 168;
+  p_Z1fIiERi_1(x);
+}

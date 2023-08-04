@@ -1,0 +1,2 @@
+INFO: [FGPIP-102] Loop 'i' (test_scope_range.cpp:8) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_scope_range.cpp:23) is fully parallelized

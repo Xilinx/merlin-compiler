@@ -1,0 +1,17 @@
+
+<directives>
+<pcie_transfer_opt>on</pcie_transfer_opt>
+<platform_name>/curr/software/Vitis/Vitis/2019.2/platforms/xilinx_u250_xdma_201830_2/xilinx_u250_xdma_201830_2.xpfm</platform_name>
+<opt_effort>standard</opt_effort>
+<tool_version>vitis</tool_version>
+<ihatebug>debug-level2</ihatebug>
+<merlincc>on</merlincc>
+<implementation_tool>sdaccel</implementation_tool>
+<evaluate>on</evaluate>
+<source_file> vec_add_kernel.cpp</source_file>
+<clock_period>5ns</clock_period>
+<include_path> -I/home/hanhu/test/merlin-examples/vec_add_1d/build -I/home/hanhu/test/merlin-examples/vec_add_1d/build/../src/ -I/home/hanhu/test/merlin-examples/vec_add_1d/build/../include -I/home/hanhu/test/merlin-examples/vec_add_1d/build/./ -I/home/hanhu/Merlin_Compiler/trunk//mars-gen/lib/merlin</include_path>
+<debug_info>on</debug_info>
+<macro_define> -D XILINX </macro_define>
+</directives>
+

@@ -1,0 +1,174 @@
+#define VEC_SIZE 10000
+#define VEC_DIM_SIZE 100
+
+void _merlin_reduc_init_sum_rdc(int _sum_rdc[1000])
+{
+  
+#pragma HLS INLINE
+{
+    for (int j = 0; j < 1000; j++) {
+      
+#pragma ACCEL PIPELINE
+      _sum_rdc[j] = 0;
+    }
+  }
+}
+
+void _merlin_reduc_init_sum_rdc_t(int *_sum_rdc_t)
+{
+  
+#pragma HLS INLINE
+{
+     *_sum_rdc_t = 0;
+  }
+}
+
+void _merlin_reduc_proc_sum(int *_sum_rdc_t,int *a,int j,int j_sub)
+{
+  
+#pragma HLS INLINE
+   *_sum_rdc_t += a[j * 10 + j_sub];
+}
+
+void _merlin_reduc_post_sum_rdc_t(int _sum_rdc[1000],int j,int _sum_rdc_t)
+{
+  
+#pragma HLS INLINE
+{
+    
+#pragma HLS dependence variable=_sum_rdc array inter false
+{
+      _sum_rdc[j] += _sum_rdc_t;
+    }
+  }
+}
+
+void _merlin_reduc_post_sum_rdc(int *sum,int _sum_rdc[1000])
+{
+  
+#pragma HLS INLINE
+{
+    for (int j = 0; j < 1000; j++) {
+      
+#pragma ACCEL PIPELINE
+{
+         *sum += _sum_rdc[j];
+      }
+    }
+  }
+}
+
+void _merlin_reduc_init_sum1_rdc(int _sum1_rdc[10])
+{
+  
+#pragma HLS INLINE
+{
+    for (int j_sub3 = 0; j_sub3 < 10; ++j_sub3) {
+      
+#pragma ACCEL PARALLEL
+      _sum1_rdc[j_sub3] = 0;
+    }
+  }
+}
+
+void _merlin_reduc_init_sum1_rdc_t(int *_sum1_rdc_t)
+{
+  
+#pragma HLS INLINE
+{
+     *_sum1_rdc_t = 0;
+  }
+}
+
+void _merlin_reduc_proc_sum1(int *_sum1_rdc_t,int *a,int j_sub1,int j_sub2,int j_sub3)
+{
+  
+#pragma HLS INLINE
+   *_sum1_rdc_t += a[j_sub1 * j_sub2 * j_sub3];
+}
+
+void _merlin_reduc_post_sum1_rdc_t(int _sum1_rdc[10],int j_sub3,int _sum1_rdc_t)
+{
+  
+#pragma HLS INLINE
+{
+    
+#pragma HLS dependence variable=_sum1_rdc array inter false
+{
+      _sum1_rdc[j_sub3] += _sum1_rdc_t;
+    }
+  }
+}
+
+void _merlin_reduc_post_sum1_rdc(int sum1[10][10],int j_sub1,int j_sub2,int _sum1_rdc[10])
+{
+  
+#pragma HLS INLINE
+{
+    for (int j_sub3 = 0; j_sub3 < 10; ++j_sub3) {
+      
+#pragma ACCEL PIPELINE
+{
+        sum1[j_sub1][j_sub2] += _sum1_rdc[j_sub3];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void vec_add_kernel(int *a,int *b,int *c,int N)
+{
+  int sum = 0;
+  int sum1[10][10];
+  int _sum_rdc[1000];
+  _merlin_reduc_init_sum_rdc(_sum_rdc);
+  for (int j = 0; j < 1000; j++) {
+    int _sum_rdc_t;
+    _merlin_reduc_init_sum_rdc_t(&_sum_rdc_t);
+    
+#pragma ACCEL PIPELINE
+    for (int j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma HLS dependence variable=_sum_rdc_t array inter false
+      
+#pragma ACCEL PARALLEL
+      _merlin_reduc_proc_sum(&_sum_rdc_t,a,j,j_sub);
+    }
+    _merlin_reduc_post_sum_rdc_t(_sum_rdc,j,_sum_rdc_t);
+  }
+  _merlin_reduc_post_sum_rdc(&sum,_sum_rdc);
+  for (int j_sub1 = 0; j_sub1 < 10; ++j_sub1) {
+    
+#pragma ACCEL PARALLEL
+    for (int j_sub2 = 0; j_sub2 < 10; ++j_sub2) {
+      
+#pragma ACCEL PARALLEL
+      int _sum1_rdc[10];
+      _merlin_reduc_init_sum1_rdc(_sum1_rdc);
+      for (int j_sub3 = 0; j_sub3 < 10; ++j_sub3) {
+        int _sum1_rdc_t;
+        _merlin_reduc_init_sum1_rdc_t(&_sum1_rdc_t);
+        
+#pragma ACCEL PARALLEL
+        for (int j = 0; j < 1; j++) {
+          
+#pragma HLS dependence variable=_sum1_rdc_t array inter false
+          
+#pragma ACCEL PARALLEL
+          _merlin_reduc_proc_sum1(&_sum1_rdc_t,a,j_sub1,j_sub2,j_sub3);
+        }
+        _merlin_reduc_post_sum1_rdc_t(_sum1_rdc,j_sub3,_sum1_rdc_t);
+      }
+      _merlin_reduc_post_sum1_rdc(sum1,j_sub1,j_sub2,_sum1_rdc);
+    }
+  }
+  for (int j = 0; j < N / 10; j++) {
+    
+#pragma ACCEL PIPELINE
+    for (int j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL PARALLEL
+      sum += a[j * 10 + j_sub];
+    }
+  }
+}

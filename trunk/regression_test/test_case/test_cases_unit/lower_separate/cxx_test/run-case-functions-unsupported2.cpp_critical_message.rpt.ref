@@ -1,0 +1,2 @@
+
+ERROR: [PROCS-317] Recursive function '::rec_dead' (case-functions-unsupported2.cpp:5) is not supported

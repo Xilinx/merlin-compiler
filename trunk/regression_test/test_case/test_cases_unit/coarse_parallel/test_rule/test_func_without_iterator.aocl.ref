@@ -1,0 +1,36 @@
+#include <string.h> 
+#define FACTOR 100
+
+void func(int *a)
+{
+//int i;
+  for (int _i0_l1 = 0; _i0_l1 < 10; ++_i0_l1) {
+    for (int _ii_l2 = 0; _ii_l2 < 10; ++_ii_l2) {
+      
+#pragma ACCEL parallel
+      int i = _i0_l1 * 10 + _ii_l2;
+      a[i] = i;
+    }
+  }
+}
+
+void msm_node_0()
+{
+  int a_buf[100];
+  func(a_buf);
+}
+#pragma ACCEL kernel
+
+void top(int *a,int *b,int *c)
+{
+  for (int _i_l3 = 0; _i_l3 < 10000 / 100; ++_i_l3) {
+    for (int _j_l4 = 0; _j_l4 < 100; ++_j_l4) {
+      
+#pragma ACCEL parallel
+// Original pragma: ACCEL STREAM_NODE 
+      
+#pragma ACCEL STREAM_NODE PARALLEL_FACTOR=100 
+      msm_node_0();
+    }
+  }
+}

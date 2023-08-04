@@ -1,0 +1,14 @@
+
+WARNING: [PROCS-208] Ignoring parallel pragma "ACCEL parallel flatten" (test.cpp:47) on the outer loop 'L_0' (test.cpp:48) when its sub-loops are not fully parallelized.
+  Hint: use "parallel flatten" clause to parallelize all the sub-loops
+
+ERROR: [PROCS-345] Kernel 'sub' (include.h:4) which is called by another kernel 'top' ((test.cpp:6) is not supported
+
+WARNING: [PROCS-203] Found a loop 'for(int i = 0;i < le' (include.h:5) with unknown loop tripcount. 
+
+WARNING: [PROCS-203] Found a loop 'for(int i = 0;i < le' (test.cpp:8) with unknown loop tripcount. 
+
+WARNING: [PROCS-203] Found a loop 'for(int i = 0;i < le' (test.cpp:24) with unknown loop tripcount. 
+
+WARNING: [PROCS-203] Found a loop 'for(int i = 0;i < le' (test.cpp:38) with unknown loop tripcount. 
+INFO: [PROCS-102] Hint: you may specify the range of the variables in the loop bounds using 'assert'. Please refer to Merlin User Guide

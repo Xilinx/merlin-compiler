@@ -1,0 +1,17 @@
+
+<directives>
+<reduction_opt>off</reduction_opt>
+<platform_name>a10gx</platform_name>
+<opt_effort>standard</opt_effort>
+<ihatebug>debug-level2</ihatebug>
+<merlincc>on</merlincc>
+<implementation_tool>aocl</implementation_tool>
+<clock_period>5ns</clock_period>
+<part_name></part_name>
+<reduction_altera>off</reduction_altera>
+<include_path> -I/curr/lzou/v10/intel_sim -I/curr/lzou/v10/intel_sim/../src/  -I/curr/lzou/v10/intel_sim/../src/  -I/curr/lzou/v10/intel_sim -I/curr/lzou/v10/intel_sim/./ -I/curr/lzou/v10/intel_sim/../src/  -I/curr/lzou/projects/Merlin_Compiler/trunk/build/..//mars-gen/lib/merlin</include_path>
+<auto_false_dependence>off</auto_false_dependence>
+<library_path> </library_path>
+<macro_define> -D MCC_SIM  -D INTEL </macro_define>
+</directives>
+

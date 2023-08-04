@@ -1,0 +1,86 @@
+#define VEC_SIZE 10000
+#define VEC_DIM_SIZE 100
+
+void _merlin_reduc_init_sum_rdc(int _sum_rdc[1000])
+{
+  
+#pragma HLS INLINE
+{
+    int j_0;
+    for (j_0 = 0; j_0 <= 999; ++j_0) {
+      
+#pragma ACCEL PIPELINE
+      _sum_rdc[j_0] = 0;
+    }
+  }
+}
+
+void _merlin_reduc_init_sum_rdc_t(int *_sum_rdc_t)
+{
+  
+#pragma HLS INLINE
+{
+     *_sum_rdc_t = 0;
+  }
+}
+
+void _merlin_reduc_proc_sum(int *_sum_rdc_t,int *a,int j,int j_sub)
+{
+  
+#pragma HLS INLINE
+   *_sum_rdc_t += a[j * 10 + j_sub];
+}
+
+void _merlin_reduc_post_sum_rdc_t(int _sum_rdc[1000],int j,int _sum_rdc_t)
+{
+  
+#pragma HLS INLINE
+{
+    
+#pragma HLS dependence variable=_sum_rdc array inter false
+{
+      _sum_rdc[j] += _sum_rdc_t;
+    }
+  }
+}
+
+void _merlin_reduc_post_sum_rdc(int *sum,int _sum_rdc[1000])
+{
+  
+#pragma HLS INLINE
+{
+    int j_0;
+    for (j_0 = 0; j_0 <= 999; ++j_0) {
+      
+#pragma ACCEL PIPELINE
+{
+         *sum += _sum_rdc[j_0];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void vec_add_kernel(int *a,int *b,int *c)
+{
+  int j;
+  int j_sub;
+  int sum = 0;
+  int _sum_rdc[1000];
+  _merlin_reduc_init_sum_rdc(_sum_rdc);
+  for (j = 0; j < 1000; j++) {
+    int _sum_rdc_t;
+    _merlin_reduc_init_sum_rdc_t(&_sum_rdc_t);
+    
+#pragma ACCEL PIPELINE
+    for (j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma HLS dependence variable=_sum_rdc_t array inter false
+      
+#pragma ACCEL PARALLEL
+      _merlin_reduc_proc_sum(&_sum_rdc_t,a,j,j_sub);
+    }
+    _merlin_reduc_post_sum_rdc_t(_sum_rdc,j,_sum_rdc_t);
+  }
+  _merlin_reduc_post_sum_rdc(&sum,_sum_rdc);
+}

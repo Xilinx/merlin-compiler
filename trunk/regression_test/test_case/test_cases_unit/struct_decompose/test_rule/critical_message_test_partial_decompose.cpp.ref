@@ -1,0 +1,8 @@
+
+ERROR: [DISAG-305] Variable 'ret_var' (transformation:0) contains unsupported references:
+  'SgAddressOfOp:&ret_var' (transformation:0) in ExprListExp
+
+
+ERROR: [DISAG-305] Variable 'tmp2' (test_partial_decompose.cpp:15) contains unsupported references:
+  'SgVarRefExp:tmp2' (transformation:0) in ExprListExp
+

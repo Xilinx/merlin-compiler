@@ -1,0 +1,21 @@
+enum st {MERLIN_MAX_ENUM_0=1L} ;
+
+void p_ZN2ns1fEv()
+{
+  ;
+  enum st next;
+  label:
+  if ((bool )1) {
+    next = ((enum st )0);
+  }
+}
+namespace ns
+{
+static void __merlin_dummy_SgFunctionDeclaration_void_ns_f_();
+}
+#pragma ACCEL kernel
+
+void k()
+{
+p_ZN2ns1fEv();
+}

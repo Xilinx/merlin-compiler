@@ -1,0 +1,106 @@
+[
+    {
+        "src_line": 175,
+        "src_col": 1,
+        "src_filename": "aes.cpp",
+        "src_topo_id": "F_0_0_0_47",
+        "type": "kernel",
+        "name": "aes256_encrypt_ecb_kernel",
+        "interfaces": [
+            {
+                "src_line": 175,
+                "src_col": 40,
+                "src_filename": "aes.cpp",
+                "src_topo_id": "X_0_0_0_47_0_0",
+                "type": "interface",
+                "name": "key",
+                "interface_bitwidth": "8",
+                "var_type": "array"
+            }
+        ],
+        "new": {
+            "src_line": 185,
+            "src_col": 29,
+            "src_filename": "aes.cpp",
+            "src_topo_id": "X_0_0_0_49_2",
+            "type": "var_ref",
+            "name": "key"
+        },
+        "arrays": [
+            {
+                "src_line": 185,
+                "src_col": 29,
+                "src_filename": "aes.cpp",
+                "src_topo_id": "X_0_0_0_49_2",
+                "type": "var_ref",
+                "name": "key"
+            }
+        ],
+        "var_refs": [
+            {
+                "src_line": 185,
+                "src_col": 29,
+                "src_filename": "aes.cpp",
+                "src_topo_id": "X_0_0_0_47_2_0_2_3_1_3_1_0_1_0",
+                "type": "var_ref",
+                "name": "key"
+            }
+        ],
+        "stmts": [
+            {
+                "src_line": 175,
+                "src_col": 1,
+                "src_filename": "aes.cpp",
+                "src_topo_id": "F_0_0_0_44",
+                "map_to_id": "F_0_0_0",
+                "type": "stmt"
+            }
+        ],
+        "childs": [
+            {
+                "src_line": 180,
+                "src_col": 5,
+                "src_filename": "aes.cpp",
+                "src_topo_id": "L_0_0_0_47_2_0_2",
+                "map_to_id": "L_0_0_0_11",
+                "type": "loop",
+                "name": "i1",
+                "trip-count": "256",
+                "src_func_name": "aes256_encrypt_ecb_kernel",
+                "childs": [
+                    {
+                        "src_col": 5,
+                        "src_filename": "aes.cpp",
+                        "src_topo_id": "L_0_0_0_47_2_0_2_3_1",
+                        "type": "loop",
+                        "name": "i2",
+                        "trip-count": "4096",
+                        "parent_loop": "L_0_0_0_47_2_0_2",
+                        "src_func_name": "aes256_encrypt_ecb_kernel"
+                    }
+                ]
+            }
+        ],
+        "sub_functions": [
+            {
+                "src_line": 140,
+                "src_col": 1,
+                "src_filename": "aes.cpp",
+                "src_topo_id": "F_0_0_0_45",
+                "type": "function",
+                "name": "aes256_encrypt_ecb"
+            }
+        ],
+        "call_functions": [
+            {
+                "src_line": 185,
+                "src_col": 27,
+                "src_filename": "aes.cpp",
+                "src_topo_id": "X_0_0_0_47_2_0_2_3_1_3_1_0",
+                "type": "callfunction",
+                "name": "aes256_encrypt_ecb",
+                "function_id": "F_0_0_0_111"
+            }
+        ]
+    }
+]

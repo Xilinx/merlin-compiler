@@ -1,0 +1,27 @@
+#include <string.h> 
+#include "cmost.h"
+extern int __merlin_include__GB_string_h_0;
+const int rom[10] = {(1), (2), (3), (4), (5), (6), (7), (8), (9), (10)};
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+  __merlin_access_range(a,0,1000000);
+  for (int i = 0; i < 10; ++i) {
+    int a_buf[16];
+    int start = rom[i] * 16;
+    for (int j = 0; j < 16; ++j) {
+      
+#pragma ACCEL parallel
+      a_buf[j] = j * i;
+    }
+    long _memcpy_i_0;
+    for (_memcpy_i_0 = 0; _memcpy_i_0 < sizeof(int ) * 16 / 4; ++_memcpy_i_0) {
+      
+#pragma ACCEL PARALLEL SKIP COMPLETE
+      long total_offset1 = 0 * 0 + rom[i] * 16;
+      long total_offset2 = 0 * 16 + 0;
+      a[total_offset1 + _memcpy_i_0] = a_buf[total_offset2 + _memcpy_i_0];
+    }
+  }
+}

@@ -1,0 +1,37 @@
+#include<stdio.h>
+#include<string.h>
+#include"header.h"
+#define uu(p, n, m) (c[(p)*16*16 + (n)*16 + (m)])
+#pragma ACCEL kernel
+
+void func_top_1(int *c)
+{
+  
+#pragma ACCEL interface variable=c max_depth=4096 depth=4096
+  for (int p = 1; p < 15; p++) {
+    for (int n = 1; n < 15; n++) {
+      for (int m = 1; m < 15; m++) {
+        
+#pragma ACCEL pipeline
+        int u_center = c[p * 16 * 16 + n * 16 + m];
+        int u_1 = c[p * 16 * 16 + n * 16 + (m - 1)];
+        int u_2 = c[p * 16 * 16 + n * 16 + (m + 1)];
+        int u_3 = c[p * 16 * 16 + (n - 1) * 16 + m];
+        int u_4 = c[p * 16 * 16 + (n + 1) * 16 + m];
+        int u_5 = c[(p - 1) * 16 * 16 + n * 16 + m];
+        int u_6 = c[(p + 1) * 16 * 16 + n * 16 + m];
+        printf("%d, %d, %d: %d,%d,%d,%d,%d,%d,%d\n",p,n,m,u_center,u_1,u_2,u_3,u_4,u_5,u_6);
+      }
+    }
+  }
+}
+int c[4096];
+
+int main()
+{
+  for (int i = 0; i < 4096; i++) {
+    c[i] = i;
+  }
+  func_top_1(c);
+  return 0;
+}

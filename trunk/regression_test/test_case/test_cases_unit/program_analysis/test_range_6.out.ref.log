@@ -1,0 +1,128 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i1 = 0;i1 < 100;++i1) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i2 = 0;i2 < 10;++i2) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j2 = 0;j2 < 10;++j2) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i3 = 0;i3 < 10;++i3) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j3 = 0;j3 < 10;++j3) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i4 = 0;i4 < 10;++i4) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j4 = 0;j4 < 10;++j4) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i5 = 0;i5 < 10;++i5) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j5 = 0;j5 < 10;++j5) {...}
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+[Exp SgGreaterThanOp:i1 > 10] {i1 > 10:SgGreaterThanOp i1 > 10->1,0} : i1 > 10..i1 > 10, constant bound: {i1 > 10:SgGreaterThanOp i1 > 10->1,0} : neg_inf..pos_inf
+[Exp SgGreaterThanOp:j2 > 2] {j2 > 2:SgGreaterThanOp j2 > 2->1,0} : j2 > 2..j2 > 2, constant bound: {j2 > 2:SgGreaterThanOp j2 > 2->1,0} : neg_inf..pos_inf
+[Exp SgGreaterThanOp:i3 > 2] {i3 > 2:SgGreaterThanOp i3 > 2->1,0} : i3 > 2..i3 > 2, constant bound: {i3 > 2:SgGreaterThanOp i3 > 2->1,0} : neg_inf..pos_inf
+[Exp SgGreaterThanOp:j4 > n] {j4 > n:SgGreaterThanOp j4 > n->1,0} : j4 > n..j4 > n, constant bound: {j4 > n:SgGreaterThanOp j4 > n->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j5 == 0] {j5 == 0:SgEqualityOp j5 == 0->1,0} : j5 == 0..j5 == 0, constant bound: {j5 == 0:SgEqualityOp j5 == 0->1,0} : neg_inf..pos_inf
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void test1(int [100] a) {...}
+  SgFunctionDeclaration void test2(int [100] a) {...}
+  SgFunctionDeclaration void test3(int [100] a) {...}
+  SgFunctionDeclaration void test4(int [100] a,int n) {...}
+  SgFunctionDeclaration void test5(int [100] a) {...}
+  SgBasicBlock {if(i1 > 10) {a[i1] = i1;}}
+  SgForStatement for(i1 = 0;i1 < 100;++i1) {...}
+  SgBasicBlock {for(i2 = 0;i2 < 10;++i2) {if(j2 > 2) a[j2 * 10 + i2] = i2;}}
+  SgForStatement for(j2 = 0;j2 < 10;++j2) {...}
+  SgBasicBlock {if(j2 > 2) a[j2 * 10 + i2] = i2;}
+  SgForStatement for(i2 = 0;i2 < 10;++i2) {...}
+  SgBasicBlock {for(i3 = 0;i3 < 10;++i3) {if(i3 > 2) {a[j3 * 10 + i3] = i3;}}}
+  SgForStatement for(j3 = 0;j3 < 10;++j3) {...}
+  SgBasicBlock {if(i3 > 2) {a[j3 * 10 + i3] = i3;}}
+  SgForStatement for(i3 = 0;i3 < 10;++i3) {...}
+  SgBasicBlock {for(i4 = 0;i4 < 10;++i4) {if(j4 > n) {a[j4 * 10 + i4] = i4;}}}
+  SgForStatement for(j4 = 0;j4 < 10;++j4) {...}
+  SgBasicBlock {if(j4 > n) {a[j4 * 10 + i4] = i4;}}
+  SgForStatement for(i4 = 0;i4 < 10;++i4) {...}
+  SgBasicBlock {for(i5 = 0;i5 < 10;++i5) {if(j5 == 0) {a[j5 * 10 + i5] = i5;}}}
+  SgForStatement for(j5 = 0;j5 < 10;++j5) {...}
+  SgBasicBlock {if(j5 == 0) {a[j5 * 10 + i5] = i5;}}
+  SgForStatement for(i5 = 0;i5 < 10;++i5) {...}
+
+Arrays: 
+  int [100] a
+  int [100] a
+  int [100] a
+  int [100] a
+  int [100] a
+
+Ranges: 
+  SgFunctionDeclaration void test1(int [100] a) {...}
+    int [100] a :  W[11..99 exact]
+  SgFunctionDeclaration void test2(int [100] a) {...}
+    int [100] a :  W[30..99 exact]
+  SgFunctionDeclaration void test3(int [100] a) {...}
+    int [100] a :  W[3..99 inexact]
+  SgFunctionDeclaration void test4(int [100] a,int n) {...}
+    int [100] a :  W[0..99 inexact]
+  SgFunctionDeclaration void test5(int [100] a) {...}
+    int [100] a :  W[0..9 exact]
+  SgBasicBlock {if(i1 > 10) {a[i1] = i1;}}
+    int [100] a :  W[i1..i1 inexact]
+  SgForStatement for(i1 = 0;i1 < 100;++i1) {...}
+    int [100] a :  W[11..99 exact]
+  SgBasicBlock {for(i2 = 0;i2 < 10;++i2) {if(j2 > 2) a[j2 * 10 + i2] = i2;}}
+    int [100] a :  W[j2 * 10..9 + j2 * 10 inexact]
+  SgForStatement for(j2 = 0;j2 < 10;++j2) {...}
+    int [100] a :  W[30..99 exact]
+  SgBasicBlock {if(j2 > 2) a[j2 * 10 + i2] = i2;}
+    int [100] a :  W[j2 * 10 + i2..j2 * 10 + i2 inexact]
+  SgForStatement for(i2 = 0;i2 < 10;++i2) {...}
+    int [100] a :  W[j2 * 10..9 + j2 * 10 inexact]
+  SgBasicBlock {for(i3 = 0;i3 < 10;++i3) {if(i3 > 2) {a[j3 * 10 + i3] = i3;}}}
+    int [100] a :  W[3 + j3 * 10..9 + j3 * 10 exact]
+  SgForStatement for(j3 = 0;j3 < 10;++j3) {...}
+    int [100] a :  W[3..99 inexact]
+  SgBasicBlock {if(i3 > 2) {a[j3 * 10 + i3] = i3;}}
+    int [100] a :  W[j3 * 10 + i3..j3 * 10 + i3 inexact]
+  SgForStatement for(i3 = 0;i3 < 10;++i3) {...}
+    int [100] a :  W[3 + j3 * 10..9 + j3 * 10 exact]
+  SgBasicBlock {for(i4 = 0;i4 < 10;++i4) {if(j4 > n) {a[j4 * 10 + i4] = i4;}}}
+    int [100] a :  W[j4 * 10..9 + j4 * 10 inexact]
+  SgForStatement for(j4 = 0;j4 < 10;++j4) {...}
+    int [100] a :  W[0..99 inexact]
+  SgBasicBlock {if(j4 > n) {a[j4 * 10 + i4] = i4;}}
+    int [100] a :  W[j4 * 10 + i4..j4 * 10 + i4 inexact]
+  SgForStatement for(i4 = 0;i4 < 10;++i4) {...}
+    int [100] a :  W[j4 * 10..9 + j4 * 10 inexact]
+  SgBasicBlock {for(i5 = 0;i5 < 10;++i5) {if(j5 == 0) {a[j5 * 10 + i5] = i5;}}}
+    int [100] a :  W[j5 * 10..9 + j5 * 10 inexact]
+  SgForStatement for(j5 = 0;j5 < 10;++j5) {...}
+    int [100] a :  W[0..9 exact]
+  SgBasicBlock {if(j5 == 0) {a[j5 * 10 + i5] = i5;}}
+    int [100] a :  W[j5 * 10 + i5..j5 * 10 + i5 inexact]
+  SgForStatement for(i5 = 0;i5 < 10;++i5) {...}
+    int [100] a :  W[j5 * 10..9 + j5 * 10 inexact]
+

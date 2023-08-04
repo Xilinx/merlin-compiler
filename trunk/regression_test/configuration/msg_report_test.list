@@ -1,0 +1,12 @@
+#msg_report                          $MERLIN_COMPILER_HOME/regression_test/msg_report
+msg_report_vec_add                   $MERLIN_COMPILER_HOME/regression_test/msg_report/vec_add
+msg_report_vec_add_variable_tc                   $MERLIN_COMPILER_HOME/regression_test/msg_report/vec_add_variable_tc
+msg_report_idct                      $MERLIN_COMPILER_HOME/regression_test/msg_report/idct
+msg_report_logistic_64               $MERLIN_COMPILER_HOME/regression_test/msg_report/logistic_64
+msg_report_aes                       $MERLIN_COMPILER_HOME/regression_test/msg_report/aes
+msg_report_kmp                       $MERLIN_COMPILER_HOME/regression_test/msg_report/kmp
+msg_report_global_vec_add            $MERLIN_COMPILER_HOME/regression_test/msg_report/global_vec_add
+msg_report_gemm-ncubed               $MERLIN_COMPILER_HOME/regression_test/msg_report/gemm-ncubed
+# msg_report_call_class                $MERLIN_COMPILER_HOME/regression_test/msg_report/call_class
+msg_report_class_member_function     $MERLIN_COMPILER_HOME/regression_test/msg_report/class_member_function
+# msg_report_struct_interface          $MERLIN_COMPILER_HOME/regression_test/msg_report/struct_interface

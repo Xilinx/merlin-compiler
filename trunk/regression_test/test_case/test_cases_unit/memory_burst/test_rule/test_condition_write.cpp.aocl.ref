@@ -1,0 +1,60 @@
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+  for (int i = 0; i < 10000; ++i) {
+    int a_buf[1000];
+    memcpy((void *)(&a_buf[0]),(const void *)(&a[i * 1000]),sizeof(int ) * 1000);
+    if ((i & 1)) {
+      for (int j = 0; j < 1000; ++j) {
+        a_buf[j] = 0;
+      }
+//expected write-only burst here    
+    }
+    memcpy((void *)(&a[i * 1000]),(const void *)(&a_buf[0]),sizeof(int ) * 1000);
+  }
+}
+#pragma ACCEL kernel
+
+void top2(int *a)
+{
+  for (int i = 0; i < 10000; ++i) {
+    int a_buf[1000];
+    if ((i & 1)) {
+      for (int j = 0; j < 1000; ++j) {
+        a_buf[j] = 0;
+      }
+    }
+     else {
+      for (int j = 0; j < 1000; ++j) {
+        a_buf[j] = 0;
+      }
+    }
+    memcpy((void *)(&a[i * 1000]),(const void *)(&a_buf[0]),sizeof(int ) * 1000);
+//expected write-only burst here
+  }
+}
+#pragma ACCEL kernel
+
+void top3(int *a)
+{
+  for (int i = 0; i < 10000; ++i) {
+    int a_buf[1000];
+    memcpy((void *)(&a_buf[0]),(const void *)(&a[i * 1000]),sizeof(int ) * 1000);
+//expected read burst here   
+    if ((i & 1)) {
+      for (int j = 0; j < 100; ++j) {
+        a_buf[j] = 0;
+      }
+    }
+     else {
+      for (int j = 0; j < 1000; ++j) {
+        a_buf[j] = 0;
+      }
+    }
+    memcpy((void *)(&a[i * 1000]),(const void *)(&a_buf[0]),sizeof(int ) * 1000);
+//expected write burst here    
+  }
+}

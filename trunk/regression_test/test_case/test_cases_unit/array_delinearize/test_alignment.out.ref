@@ -1,0 +1,112 @@
+#include<string.h>
+#include<assert.h>
+#pragma ACCEL kernel
+
+void foo1(int a)
+{
+  unsigned long off = ((unsigned long )a) * ((unsigned long )2);
+  off >= 0 && off <= 24?(static_cast < void  >  (0)) : __assert_fail("off >= 0 && off <= 24","test_alignment.cpp",8,__PRETTY_FUNCTION__);
+  int arr[10][10][36][16];
+  for (int k = 0; k < 10; k++) {
+    for (int j = 0; j < 6; j++) {
+      arr[1][k][j + off][0]++;
+    }
+  }
+}
+//////
+
+void bar2(int *arr)
+{
+}
+#pragma ACCEL kernel
+
+void foo2(int a)
+{
+  unsigned long off = ((unsigned long )a) * ((unsigned long )2);
+  off >= 0 && off <= 24?(static_cast < void  >  (0)) : __assert_fail("off >= 0 && off <= 24","test_alignment.cpp",24,__PRETTY_FUNCTION__);
+  int arr[10][10][36][16];
+  for (int k = 0; k < 10; k++) {
+    for (int j = 0; j < 6; j++) {
+// potential bugs if I put 10 instead of a
+      bar2((int *)arr[a][k][j + off]);
+    }
+  }
+}
+//////
+
+void bar3_1(int *arr)
+{
+}
+
+void bar3(int *arr,int a)
+{
+  unsigned long off = ((unsigned long )a) * ((unsigned long )2);
+  off >= 0 && off <= 24?(static_cast < void  >  (0)) : __assert_fail("off >= 0 && off <= 24","test_alignment.cpp",40,__PRETTY_FUNCTION__);
+  for (int k = 0; k < 10; k++) {
+    for (int j = 0; j < 6; j++) {
+      bar3_1(&arr[j * 16L + k * 576L + off * 16L]);
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void foo3(int a,int *profbuf_vec_data)
+{
+  int arr[10][354][16];
+  for (int i_sub = 0; i_sub < 10; i_sub++) {
+    memcpy(arr[i_sub][0],(const void *)(&profbuf_vec_data[i_sub * 57600 + i_sub * 5760]),sizeof(int ) * 5664);
+    bar3((int *)arr[i_sub][0],a);
+  }
+}
+////
+
+void bar4(int a)
+{
+}
+#pragma ACCEL kernel
+
+void foo4(int a,int *profbuf_vec_data)
+{
+  int arr[10][36][16];
+  unsigned long off = ((unsigned long )a) * ((unsigned long )2);
+  off >= 0 && off <= 24?(static_cast < void  >  (0)) : __assert_fail("off >= 0 && off <= 24","test_alignment.cpp",65,__PRETTY_FUNCTION__);
+  memcpy(arr[0][0],(const void *)profbuf_vec_data,sizeof(int ) * 5664);
+  for (int k = 0; k < 10; k++) {
+    for (int j = 0; j < 6; j++) {
+      bar4(arr[k][j + off][0]);
+    }
+  }
+}
+////
+#pragma ACCEL kernel
+
+void foo5(int a,int *profbuf_vec_data)
+{
+  int arr[10][354][16];
+  unsigned long off = ((unsigned long )a) * ((unsigned long )2);
+  off >= 0 && off <= 24?(static_cast < void  >  (0)) : __assert_fail("off >= 0 && off <= 24","test_alignment.cpp",79,__PRETTY_FUNCTION__);
+  for (int i_sub = 0; i_sub < 10; i_sub++) {
+    memcpy(arr[i_sub][0],(const void *)(&profbuf_vec_data[i_sub * 57600 + i_sub * 5760]),sizeof(int ) * 5664);
+    for (int k = 0; k < 10; k++) {
+      for (int j = 0; j < 6; j++) {
+        arr[i_sub][k * 36L + j + off][0]++;
+      }
+    }
+  }
+}
+////
+#pragma ACCEL kernel
+
+void foo6(int a,int *profbuf_vec_data)
+{
+  int arr[10][10][36][16];
+  unsigned long off = ((unsigned long )a) * ((unsigned long )2);
+  off >= 0 && off <= 24?(static_cast < void  >  (0)) : __assert_fail("off >= 0 && off <= 24","test_alignment.cpp",95,__PRETTY_FUNCTION__);
+  for (int i_sub = 0; i_sub < 10; i_sub++) {
+    for (int k = 0; k < 10; k++) {
+      for (int j = 0; j < 6; j++) {
+        arr[i_sub][k][j + off][0]++;
+      }
+    }
+  }
+}

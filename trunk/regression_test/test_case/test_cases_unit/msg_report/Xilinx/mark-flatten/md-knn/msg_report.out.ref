@@ -1,0 +1,64 @@
+================================================================================
+Kernel : md_kernel(md.cpp:62)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+force_x         512      (md.cpp:62) memory burst and coalescing 
+force_y         512      (md.cpp:63) memory burst and coalescing 
+force_z         512      (md.cpp:64) memory burst and coalescing 
+position_x      512      (md.cpp:65) memory burst and coalescing 
+position_y      512      (md.cpp:66) memory burst and coalescing 
+position_z      512      (md.cpp:67) memory burst and coalescing 
+NL              512      (md.cpp:68) memory burst and coalescing 
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++------------------------------------------------------------+-----+-------+-------+-------+-------+-------+------+-----------------------------------+
+|                         hierarchy                          | TC  |  AC   |  CPC  |  LUT  |  FF   | BRAM  | DSP  |              comment              |
++------------------------------------------------------------+-----+-------+-------+-------+-------+-------+------+-----------------------------------+
+|md_kernel (md.cpp:62)                                       |     |  27929|  27929|  10.59|  10.05|  22.59|  9.71|kernel                             |
+|    auto memory burst read and coalescing for 'NL'          |     |      -|   2560|       |       |       |      |                                   |
+|    auto memory burst read and coalescing for 'position_x'  |     |      -|    336|       |       |       |      |                                   |
+|    auto memory burst read and coalescing for 'position_y'  |     |      -|    336|       |       |       |      |                                   |
+|    auto memory burst read and coalescing for 'position_z'  |     |      -|    336|       |       |       |      |                                   |
+|    loop i (md.cpp:80)                                      |   10|  23353|  23353|       |       |       |      |                                   |
+|        md (md.cpp:81)                                      |     |      -|      -|       |       |       |      |inlined                            |
+|    auto memory burst write and coalescing for 'force_x'    |     |      -|    336|       |       |       |      |                                   |
+|    auto memory burst write and coalescing for 'force_y'    |     |      -|    336|       |       |       |      |                                   |
+|    auto memory burst write and coalescing for 'force_z'    |     |      -|    336|       |       |       |      |                                   |
+|md (md.cpp:10)                                              |     |      -|      -|       |       |       |      |inlined                            |
+|    loop i (md.cpp:25)                                      |  256|  23353|  23353|       |       |       |      |flattened, IL=323, pipelined II=9  |
+|        loop j (md.cpp:32)                                  |   16|      -|      -|       |       |       |      |16x parallelized                   |
++------------------------------------------------------------+-----+-------+-------+-------+-------+-------+------+-----------------------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++-------------------------------+--------+----------+
+|             Name              | Cycles | Activity |
++-------------------------------+--------+----------+
+| md_kernel:loop i (md.cpp:80)  | 23353  |  83.62%  |
+|     md_kernel (md.cpp:62)     |  4576  |  16.38%  |
+| auto memory burst (md.cpp:62) |   0    |  0.00%   |
+| auto memory burst (md.cpp:62) |   0    |  0.00%   |
+| auto memory burst (md.cpp:62) |   0    |  0.00%   |
+| auto memory burst (md.cpp:62) |   0    |  0.00%   |
+| auto memory burst (md.cpp:62) |   0    |  0.00%   |
++-------------------------------+--------+----------+
+
++-----------------------+-------+------+-------+-------+
+|         Name          | BRAM  | DSP  |  FF   |  LUT  |
++-----------------------+-------+------+-------+-------+
+| md_kernel (md.cpp:62) | 22.59 | 9.71 | 10.05 | 10.59 |
++-----------------------+-------+------+-------+-------+
+
+
+

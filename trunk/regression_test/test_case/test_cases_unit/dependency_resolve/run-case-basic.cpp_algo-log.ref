@@ -1,0 +1,42 @@
+[DER ALGO][getPipelinedLoops]find a pipelined loop: SgForStatement:for((i = 0 , x *= 8);i < 100;++i) {...}
+[DER ALGO][getPipelinedLoops]find a pipelined loop: SgForStatement:for(i = 0;i < 100 &&(x *= 8);++i) {...}
+[DER ALGO][getPipelinedLoops]find a pipelined loop: SgForStatement:for(i = 0;i < 100;(++i , x *= 8)) {...}
+[DER ALGO][getPipelinedLoops]find a pipelined loop: SgForStatement:for(i = 0;i < 100;++i) {...}
+[DER ALGO][getPipelinedLoops]find a pipelined loop: SgForStatement:for(i = 0;i < 100;++i) {...}
+[DER ALGO][getPipelinedLoops]find a pipelined loop: SgForStatement:for(i = 0;i < 100;++i) {...}
+[DER ALGO][getPipelinedLoops]find a pipelined loop: SgForStatement:for((i = 0 , x *= 8);i < 100;++i) {...}
+[DER ALGO][getPipelinedLoops]find a pipelined loop: SgForStatement:for(i = 0;i < 100 &&(x *= 8);++i) {...}
+[DER ALGO][getPipelinedLoops]find a pipelined loop: SgForStatement:for(i = 0;i < 100;(++i , x *= 8)) {...}
+[DER ALGO][getPipelinedLoops]find a pipelined loop: SgForStatement:for(i = 0;i < 100;++i) {...}
+[DER ALGO][getPipelinedLoops]find a pipelined loop: SgForStatement:for((i = 0 , x *= y + z + f(y,z));i < 100;++i) {...}
+[DER ALGO][getPipelinedLoops]find a pipelined loop: SgForStatement:for(i = 0;i < 100 &&(x *= y + z + f(y,z));++i) {...}
+[DER ALGO][getPipelinedLoops]find a pipelined loop: SgForStatement:for(i = 0;i < 100;(++i , x *= y + z + f(y,z))) {...}
+[DER ALGO][getPipelinedLoops]find a pipelined loop: SgForStatement:for(i = 0;i < 100;++i) {...}
+[DER ALGO][getSuitableVariables]find variable: SgInitializedName:x
+[DER ALGO][getSuitableVariables]in stmt: SgMultAssignOp:x *= 8
+[DER ALGO][getSuitableVariables]find variable: SgInitializedName:x
+[DER ALGO][getSuitableVariables]in stmt: SgMultAssignOp:(x *= 8)
+[DER ALGO][getSuitableVariables]find variable: SgInitializedName:x
+[DER ALGO][getSuitableVariables]in stmt: SgMultAssignOp:x *= 8
+[DER ALGO][getSuitableVariables]find variable: SgInitializedName:x
+[DER ALGO][getSuitableVariables]in stmt: SgMultAssignOp:x *= 8
+[DER ALGO][getSuitableVariables]find variable: SgInitializedName:x
+[DER ALGO][getSuitableVariables]in stmt: SgAssignOp:x = 8 * x
+[DER ALGO][getSuitableVariables]find variable: SgInitializedName:x
+[DER ALGO][getSuitableVariables]in stmt: SgAssignOp:x = x * 8
+[DER ALGO][getSuitableVariables]find variable: SgInitializedName:x
+[DER ALGO][getSuitableVariables]in stmt: SgMultAssignOp:x *= 8
+[DER ALGO][getSuitableVariables]find variable: SgInitializedName:x
+[DER ALGO][getSuitableVariables]in stmt: SgMultAssignOp:(x *= 8)
+[DER ALGO][getSuitableVariables]find variable: SgInitializedName:x
+[DER ALGO][getSuitableVariables]in stmt: SgMultAssignOp:x *= 8
+[DER ALGO][getSuitableVariables]find variable: SgInitializedName:x
+[DER ALGO][getSuitableVariables]in stmt: SgMultAssignOp:x *= 8
+[DER ALGO][getSuitableVariables]find variable: SgInitializedName:x
+[DER ALGO][getSuitableVariables]in stmt: SgMultAssignOp:x *= y + z + f(y,z)
+[DER ALGO][getSuitableVariables]find variable: SgInitializedName:x
+[DER ALGO][getSuitableVariables]in stmt: SgMultAssignOp:(x *= y + z + f(y,z))
+[DER ALGO][getSuitableVariables]find variable: SgInitializedName:x
+[DER ALGO][getSuitableVariables]in stmt: SgMultAssignOp:x *= y + z + f(y,z)
+[DER ALGO][getSuitableVariables]find variable: SgInitializedName:x
+[DER ALGO][getSuitableVariables]in stmt: SgMultAssignOp:x *= y + z + f(y,z)

@@ -1,0 +1,128 @@
+#pragma ACCEL kernel
+
+void func_top_1(int N)
+{
+  int a[10];
+  int b[10];
+  int i;
+  int j;
+  for (i = 0; i < 1; i++) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    
+#pragma HLS loop_tripcount max=1
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[j] = b[j];
+    }
+  }
+  for (i = 0; i < 1; i++) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    int var1 = 1;
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[j] = b[j] + 1;
+    }
+  }
+  for (i = 0; i < 1; i++) 
+// Original: #pragma ACCEL pipeline
+{
+    
+#pragma ACCEL PIPELINE
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[j] = b[j];
+    }
+  }
+  for (i = 0; i < N; i++) {
+    
+#pragma ACCEL PIPELINE AUTO
+    
+#pragma HLS loop_tripcount max=1
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[j] = b[j];
+    }
+  }
+  for (i = 0; i < 1; i++) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    if (N > 0) {
+      for (j = 0; j < 10; j++) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        a[j] = b[j];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_4()
+{
+  int a[100][100];
+  int b[100][100];
+  int i;
+  int j;
+  for (i = 0; i < 1; i++) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    for (j = 0; j < 8; j++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[i][j] = b[i][j];
+    }
+    for (j = 0; j < 8; j++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[i + 1][j] = b[i][j + 1];
+    }
+  }
+  for (i = 0; i < 1; i++) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    for (int k = 0; k < 1; k++) 
+// Original: #pragma ACCEL parallel
+{
+      
+#pragma ACCEL PARALLEL COMPLETE
+      for (j = 0; j < 8; j++) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        a[i + 1][j] = b[i][j + 1];
+      }
+    }
+  }
+}
+
+void sub_0(int a[100],int b[100][100])
+{
+  int i;
+  int j;
+  for (i = 0; i < 1; i++) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    for (j = 0; j < 8; j++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[i] = b[i][j];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_9()
+{
+  int a[100][100];
+  int b[100][100];
+  for (int i = 0; i < 2; i++) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    sub_0(a[i],b);
+  }
+}

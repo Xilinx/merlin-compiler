@@ -1,0 +1,26 @@
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+static void __merlin_dummy_SgTemplateMemberFunctionDeclaration_();
+static void __merlin_dummy_SgTemplateMemberFunctionDeclaration_f_();
+
+struct ::Y_0_ 
+{
+}
+;
+void p_ZN4Y_0_1fIEEi(struct Y_0_ *this_,int x);
+void p_ZN4Y_0_1gIEEv(struct Y_0_ *this_);
+
+void p_ZN4Y_0_1fIEEi(struct Y_0_ *this_,int x)
+{
+}
+
+void p_ZN4Y_0_1gIEEv(struct Y_0_ *this_)
+{
+  p_ZN4Y_0_1fIEEi(this_,0);
+}
+#pragma ACCEL kernel
+
+void k()
+{
+  struct Y_0_ y;
+  p_ZN4Y_0_1gIEEv(&y);
+}

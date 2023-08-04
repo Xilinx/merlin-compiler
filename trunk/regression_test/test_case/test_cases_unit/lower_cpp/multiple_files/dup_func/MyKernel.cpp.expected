@@ -1,0 +1,23 @@
+
+struct ::MyClass 
+{
+  int MyValue;
+}
+;
+void p_ZN7MyClass14ProcessMyValueEi(struct MyClass *this_,int x);
+void p_ZN7MyClass25ProcessMyValueDifferentlyEi(struct MyClass *this_,int x);
+void p_ZN7MyClassC2Ei(struct MyClass *this_,int x);
+int p_ZN7MyClass8getValueEv(struct MyClass *this_);
+static void __merlin_dummy_SgClassDeclaration_struct_MyC_();
+#include "MyKernel.h"
+#include "MyClass.h"
+#pragma ACCEL kernel
+
+void MyKernel(int x,int my_result[1])
+{
+  struct MyClass my_fancy_object;
+  p_ZN7MyClassC2Ei(&my_fancy_object,1234);
+  ;
+  p_ZN7MyClass14ProcessMyValueEi(&my_fancy_object,x);
+   *my_result = my_fancy_object . MyValue;
+}

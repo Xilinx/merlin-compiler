@@ -1,0 +1,83 @@
+#include <ap_int.h>
+typedef class ap_uint< 8 > _DataType_0_1_name;
+
+void mars_kernel_0_1_node_1_stage_0(int j,int exec,int bram_read_count,_DataType_0_1_name linebuffer[5][3840],_DataType_0_1_name *packed_read1_0)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int i;
+    for (i = 0; i < 5; i++) {
+      ( *packed_read1_0) = linebuffer[(long )i][bram_read_count];
+    }
+  }
+}
+
+void mars_kernel_0_1_node_2_stage_1(int j,int exec,int bram_read_count,_DataType_0_1_name linebuffer1[5][3840],_DataType_0_1_name *packed_read2_0)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int i;
+    for (i = 0; i < 5; i++) {
+      ( *packed_read2_0) = linebuffer1[(long )i][bram_read_count];
+    }
+  }
+}
+
+void mars_kernel_0_1_bus(int mars_j,int mars_init,int mars_cond,int bram_read_count,_DataType_0_1_name mars_linebuffer_0[5][3840],_DataType_0_1_name mars_linebuffer1_1[5][3840],_DataType_0_1_name *mars_packed_read1_0_0,_DataType_0_1_name *mars_packed_read2_0_0,_DataType_0_1_name *mars_packed_read2_0_1)
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_0_1_node_1_stage_0(mars_j - 0,(int )(mars_j >= mars_init + 0 & mars_j <= mars_cond + 0),bram_read_count,mars_linebuffer_0,mars_packed_read1_0_0);
+  mars_kernel_0_1_node_2_stage_1(mars_j - 1,(int )(mars_j >= mars_init + 1 & mars_j <= mars_cond + 1),bram_read_count,mars_linebuffer1_1,mars_packed_read2_0_1);
+}
+
+void mars_kernel_0_1_node_0_stage_0(int j,int exec,_DataType_0_1_name *packed_read2_0)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+     *packed_read2_0 = (1);
+  }
+}
+
+void mars_kernel_0_1_comp(int mars_j,int mars_init,int mars_cond,int bram_read_count,_DataType_0_1_name mars_linebuffer_0[5][3840],_DataType_0_1_name mars_linebuffer1_1[5][3840],_DataType_0_1_name *mars_packed_read1_0_0,_DataType_0_1_name *mars_packed_read2_0_0,_DataType_0_1_name *mars_packed_read2_0_1)
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_0_1_node_0_stage_0(mars_j - 0,(int )(mars_j >= mars_init + 0 & mars_j <= mars_cond + 0),mars_packed_read2_0_0);
+}
+
+void mars_kernel_0_1(int mars_j,int mars_init,int mars_cond,int bram_read_count,_DataType_0_1_name mars_linebuffer_0[5][3840],_DataType_0_1_name mars_linebuffer1_1[5][3840],_DataType_0_1_name *mars_packed_read1_0_0,_DataType_0_1_name *mars_packed_read2_0_0,_DataType_0_1_name *mars_packed_read2_0_1)
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_0_1_bus(mars_j,mars_init,mars_cond,bram_read_count,mars_linebuffer_0,mars_linebuffer1_1,mars_packed_read1_0_0,mars_packed_read2_0_0,mars_packed_read2_0_1);
+  mars_kernel_0_1_comp(mars_j,mars_init,mars_cond,bram_read_count,mars_linebuffer_0,mars_linebuffer1_1,mars_packed_read1_0_0,mars_packed_read2_0_0,mars_packed_read2_0_1);
+}
+#pragma ACCEL kernel
+
+void func_top_3_0(int bram_read_count)
+{
+  int i;
+  int j;
+  _DataType_0_1_name linebuffer[5][3840];
+  _DataType_0_1_name linebuffer1[5][3840];
+  _DataType_0_1_name packed_read1_0;
+  _DataType_0_1_name packed_read2_0;
+  int mars_count_0_1 = 0;
+  _DataType_0_1_name mars_kernel_0_1_packed_read2_0_0 = packed_read2_0;
+  _DataType_0_1_name mars_kernel_0_1_packed_read2_0_1 = packed_read2_0;
+  for (j = 0; j < 100 + 1; j++) 
+// Original: #pragma ACCEL pipeline
+{
+    if (mars_count_0_1 == 0) 
+      mars_kernel_0_1(j,0,99,bram_read_count,linebuffer,linebuffer1,&packed_read1_0,&mars_kernel_0_1_packed_read2_0_0,&mars_kernel_0_1_packed_read2_0_1);
+     else 
+      mars_kernel_0_1(j,0,99,bram_read_count,linebuffer,linebuffer1,&packed_read1_0,&mars_kernel_0_1_packed_read2_0_1,&mars_kernel_0_1_packed_read2_0_0);
+    mars_count_0_1++;
+    if (mars_count_0_1 == 2) 
+      mars_count_0_1 = 0;
+  }
+}

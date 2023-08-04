@@ -1,0 +1,169 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int j = 1;j < 10;j++) memcpy((b + 100),a,(j * 8));
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = 1;j < 10;j++) memcpy((b4 + 100),b5,(j * 4));
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = 0;j < 10;j++) memcpy((b8 + 5 * j),b9,(4 * 4));
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i = 0;i < 100;i++) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i = 10;i < bb[3];i++) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i = 0;i < 100;i++) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int j = 0;j < 10;j++) {...}
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+[Exp SgPntrArrRefExp:cc[101]] {cc[101]:SgPntrArrRefExp cc[101]->1,0} : cc[101]..cc[101], constant bound: {cc[101]:SgPntrArrRefExp cc[101]->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[10 * i + j]] {a[10 * i + j]:SgPntrArrRefExp a[10 * i + j]->1,0} : a[10 * i + j]..a[10 * i + j], constant bound: {a[10 * i + j]:SgPntrArrRefExp a[10 * i + j]->1,0} : neg_inf..pos_inf
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void test(int * a) {...}
+  SgFunctionDeclaration void func1(int * a) {...}
+  SgFunctionDeclaration void func2(int * bb) {...}
+  SgFunctionDeclaration void func3(int * bb) {...}
+  SgFunctionDeclaration void func4() {...}
+  SgFunctionDeclaration void func5(int i,int * a) {...}
+  SgExprStatement memcpy((b + 100),a,(j * 8));
+  SgForStatement for(int j = 1;j < 10;j++) memcpy((b + 100),a,(j * 8));
+  SgExprStatement memcpy((b4 + 100),b5,(j * 4));
+  SgForStatement for(j = 1;j < 10;j++) memcpy((b4 + 100),b5,(j * 4));
+  SgExprStatement memcpy((b8 + 5 * j),b9,(4 * 4));
+  SgForStatement for(j = 0;j < 10;j++) memcpy((b8 + 5 * j),b9,(4 * 4));
+  SgBasicBlock {int *d = b;int a = d[i];int a1 = d[i + 1];func2(b);}
+  SgForStatement for(int i = 0;i < 100;i++) {...}
+  SgBasicBlock {cc[2] = 0;func3(cc);}
+  SgForStatement for(int i = 10;i < bb[3];i++) {...}
+  SgBasicBlock {func5(i,arr);}
+  SgForStatement for(int i = 0;i < 100;i++) {...}
+  SgBasicBlock {a[10 * i + j];}
+  SgForStatement for(int j = 0;j < 10;j++) {...}
+
+Arrays: 
+  int * a
+  double [1000] b
+  int * a
+  int [1000] b
+  int [1000] b1
+  int [1000] b2
+  double [1000] b3
+  int [1000] b4
+  int [1000] b5
+  int [1000] b6
+  int [1000] b7
+  int [1000] b8
+  int [1000] b9
+  int * c
+  int * c1
+  int * d
+  int * bb
+  int * cc
+  int * bb
+  int * cc
+  int [1000] arr
+  int * a
+
+Ranges: 
+  SgFunctionDeclaration void test(int * a) {...}
+    int * a :  R[0..17 exact]
+    double [1000] b :  W[100..108 exact]
+  SgFunctionDeclaration void func1(int * a) {...}
+    int [1000] b :  R[0..101 inexact] W[0..2 inexact]
+    intersect: 0..2 inexact
+    union: 0..101 inexact
+    int [1000] b1 :  R[1..1 exact] W[0..0 exact]
+    intersect: empty
+    union: 0..1 exact
+    int [1000] b2 :  W[0..99 exact]
+    double [1000] b3 :  R[0..49 exact]
+    int [1000] b4 :  W[100..108 exact]
+    int [1000] b5 :  R[0..8 exact]
+    int [1000] b6 :  W[300..399 exact]
+    int [1000] b7 :  R[600..699 exact]
+    int [1000] b8 :  W[0..48 inexact]
+    int [1000] b9 :  R[0..3 exact]
+    int * c :  R[0..0 exact] W[-1..-1 exact]
+    intersect: empty
+    union: -1..0 exact
+    int * c1 :  R[0..0 exact] W[-1..-1 exact]
+    intersect: empty
+    union: -1..0 exact
+    int * d :  R[0..100 exact]
+  SgFunctionDeclaration void func2(int * bb) {...}
+    int * bb :  R[3..101 inexact] W[1..2 inexact]
+    intersect: empty
+    union: 1..101 inexact
+    int * cc :  R[101..101 inexact] W[2..2 inexact]
+    intersect: empty
+    union: 2..101 inexact
+  SgFunctionDeclaration void func3(int * bb) {...}
+    int * bb :  R[101..101 exact]
+    int * cc :  R[101..101 exact]
+  SgFunctionDeclaration void func4() {...}
+    int [1000] arr :  R[0..999 exact]
+  SgFunctionDeclaration void func5(int i,int * a) {...}
+    int * a :  R[i * 10..9 + i * 10 exact]
+  SgExprStatement memcpy((b + 100),a,(j * 8));
+    int * a :  R[0..-1 + j * 2L exact]
+    double [1000] b :  W[100..99 + j exact]
+  SgForStatement for(int j = 1;j < 10;j++) memcpy((b + 100),a,(j * 8));
+    int * a :  R[0..17 exact]
+    double [1000] b :  W[100..108 exact]
+  SgExprStatement memcpy((b4 + 100),b5,(j * 4));
+    int [1000] b4 :  W[100..99 + j exact]
+    int [1000] b5 :  R[0..-1 + j exact]
+  SgForStatement for(j = 1;j < 10;j++) memcpy((b4 + 100),b5,(j * 4));
+    int [1000] b4 :  W[100..108 exact]
+    int [1000] b5 :  R[0..8 exact]
+  SgExprStatement memcpy((b8 + 5 * j),b9,(4 * 4));
+    int [1000] b8 :  W[j * 5..3 + j * 5 exact]
+    int [1000] b9 :  R[0..3 exact]
+  SgForStatement for(j = 0;j < 10;j++) memcpy((b8 + 5 * j),b9,(4 * 4));
+    int [1000] b8 :  W[0..48 inexact]
+    int [1000] b9 :  R[0..3 exact]
+  SgBasicBlock {int *d = b;int a = d[i];int a1 = d[i + 1];func2(b);}
+    int [1000] b :  R[min(i,3)..101 inexact] W[1..2 inexact]
+    intersect: min(i,1)..2 inexact
+    union: min(i,1)..101 inexact
+    int * d :  R[i..1 + i exact]
+  SgForStatement for(int i = 0;i < 100;i++) {...}
+    int [1000] b :  R[0..101 inexact] W[1..2 inexact]
+    intersect: 1..2 inexact
+    union: 0..101 inexact
+    int * d :  R[0..100 exact]
+  SgBasicBlock {cc[2] = 0;func3(cc);}
+    int * cc :  R[101..101 exact] W[2..2 exact]
+    intersect: empty
+    union: 2..101 inexact
+  SgForStatement for(int i = 10;i < bb[3];i++) {...}
+    int * bb :  R[3..3 exact]
+    int * cc :  R[101..101 inexact] W[2..2 inexact]
+    intersect: empty
+    union: 2..101 inexact
+  SgBasicBlock {func5(i,arr);}
+    int [1000] arr :  R[i * 10..9 + i * 10 exact]
+  SgForStatement for(int i = 0;i < 100;i++) {...}
+    int [1000] arr :  R[0..999 exact]
+  SgBasicBlock {a[10 * i + j];}
+    int * a :  R[i * 10 + j..i * 10 + j exact]
+  SgForStatement for(int j = 0;j < 10;j++) {...}
+    int * a :  R[i * 10..9 + i * 10 exact]
+

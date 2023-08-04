@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include "t.h"
+
+class A 
+{
+  
+
+  public: inline void sub()
+{
+  }
+}
+;
+namespace ns
+{
+
+void foo()
+{
+}
+}
+template < int I >
+void foo_t ( int a [ I ] ) { }
+void sub();
+#pragma ACCEL kernel name="foo"
+
+void foo()
+{
+return ;
+}
+#pragma ACCEL kernel name="bar"
+
+void bar()
+{
+foo();
+return ;
+}

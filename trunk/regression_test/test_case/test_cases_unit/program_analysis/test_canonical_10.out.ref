@@ -1,0 +1,57 @@
+
+void foo_loop(int n)
+{
+  int a[100];
+  int k;
+  k = 0;
+// Canonicalized from: for(;k < 10;++k) {...}
+  for (k = 0; k <= 9; ++k) {
+    a[k] = k;
+  }
+  unsigned short k1 = 0;
+// Canonicalized from: for(;k1 < 10;++k1) {...}
+  for (k1 = 0; k1 <= 9; ++k1) {
+    a[k1] = ((int )k1);
+  }
+  unsigned int k2 = 10;
+// Canonicalized from: for(;k2 >= 0;--k2) {...}
+// Standardize from: for(k2 = 10U;k2 >= 0;--k2) {...}
+  for (k2 = 0; k2 <= 10U; k2++) {
+    unsigned int _in_k2 = 10U + -1 * k2;
+    a[_in_k2] = ((int )_in_k2);
+  }
+  k2 = 0U + -1;
+  if (a[0] > 0) 
+    k = 10;
+   else 
+    k = 11;
+  for (; k >= 0; --k) {
+    a[k] = k;
+  }
+  char k6 = n;
+// Canonicalized from: for(;k6 <= 10;++k6) {...}
+  for (k6 = ((char )n); k6 <= '\n'; ++k6) {
+    a[k6] = ((int )k6);
+  }
+  unsigned char k3 = n;
+// Canonicalized from: for(;k3 <= 10;++k3) {...}
+  for (k3 = ((unsigned char )n); k3 <= 10; ++k3) {
+    a[k3] = ((int )k3);
+  }
+  unsigned long k4 = n;
+// Canonicalized from: for(;k4 <= 10;++k4) {...}
+  for (k4 = ((unsigned long )n); k4 <= 10UL; ++k4) {
+    a[k4] = ((int )k4);
+  }
+  signed char k5 = n;
+// Canonicalized from: for(;k5 <= 10;++k5) {...}
+  for (k5 = ((signed char )n); k5 <= '\n'; ++k5) {
+    a[k5] = ((int )k5);
+  }
+}
+
+int main()
+{
+  foo_loop(2);
+  return 0;
+}

@@ -1,0 +1,19 @@
+// Ensure that namespaced template functions are correctly mangled.
+unsigned int p_ZN5inner9factorialIjEEj(unsigned int n);
+
+unsigned int p_ZN5inner9factorialIjEEj(unsigned int n)
+{
+  return n > ((unsigned int )0)?n * p_ZN5inner9factorialIjEEj(n - ((unsigned int )1)) : ((unsigned int )1);
+}
+namespace inner
+{
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+}
+// namespace inner
+#pragma ACCEL kernel
+
+int main()
+{
+unsigned int arg = 23;
+p_ZN5inner9factorialIjEEj(arg);
+}

@@ -1,0 +1,6 @@
+{
+    "vec_add_kernel": {
+        "msm_node_0": "autokernel",
+        "vec_add_kernel": "subkernel"
+    }
+}

@@ -1,0 +1,39 @@
+//(C) Copyright 2016-2021 Xilinx, Inc.
+//All Rights Reserved.
+//
+//Licensed to the Apache Software Foundation (ASF) under one
+//or more contributor license agreements.  See the NOTICE file
+//distributed with this work for additional information
+//regarding copyright ownership.  The ASF licenses this file
+//to you under the Apache License, Version 2.0 (the
+//"License"); you may not use this file except in compliance
+//with the License.  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//Unless required by applicable law or agreed to in writing,
+//software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+//KIND, either express or implied.  See the License for the
+//specific language governing permissions and limitations
+//under the License. (edited)
+void sub_d(int *a) {
+  a[0]++;
+}
+void sub_c(int *aa) {
+  sub_d(aa + 1);
+}
+
+void sub_b(int *b) {
+  sub_d(b + 10);
+}
+
+void sub_a(int *a) {
+  sub_c(a);
+  sub_b(a);
+}
+
+#pragma ACCEL kernel
+void top(int *a) {
+  sub_a(a);
+}

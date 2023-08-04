@@ -1,0 +1,20 @@
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+
+struct ::B_1_ 
+{
+}
+;
+const int _ZN4B_1_3valE = _ZN4A_1_5val_aE;
+
+struct ::A_1_ 
+{
+}
+;
+const int _ZN4A_1_5val_aE = 1;
+#pragma ACCEL kernel
+
+void top()
+{
+  int t = _ZN4B_1_3valE;
+}

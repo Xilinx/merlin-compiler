@@ -1,0 +1,5 @@
+
+WARNING: [STREAM-201] stream ports cannot be separated:
+    'void vec_add(int s,int [1024] ...' (__merlinkernel_vec_add.cpp:8)
+    Access to variable 'a2' (__merlinkernel_vec_add.cpp:8) has possible data dependence in function 'vec_add' (__merlinkernel_vec_add.cpp:8)
+

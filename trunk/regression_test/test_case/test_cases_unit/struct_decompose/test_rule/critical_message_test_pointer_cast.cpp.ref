@@ -1,0 +1,2 @@
+
+ERROR: [DISAG-302] statement 'count +=((class Student *)temp) -> id;' (transformation:0) which contains unsupported type cast: '((class Student *)temp)' is not decomposed

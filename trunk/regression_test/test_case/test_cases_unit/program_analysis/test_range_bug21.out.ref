@@ -1,0 +1,15 @@
+#include "cmost.h"
+
+void sub(int *a,int I)
+{
+  for (int J = 0; J < I; ++J) {
+    a[I + J * 10];
+  }
+}
+
+void top(int a[100])
+{
+  for (int I = 0; I < 10; ++I) {
+    sub(a,I + 1);
+  }
+}

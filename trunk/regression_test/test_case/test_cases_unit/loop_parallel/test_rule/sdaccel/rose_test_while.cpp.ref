@@ -1,0 +1,30 @@
+#pragma ACCEL kernel
+
+void func_top_1()
+{
+  int b[100][100];
+  int t = 10;
+  int aa[100];
+  int ab[100];
+  
+#pragma HLS array_partition variable=ab cyclic factor=2 dim=1
+  int a[4];
+  
+#pragma HLS array_partition variable=a complete dim=1
+  while(t > 1)
+// Original: #pragma ACCEL pipeline
+{
+    
+#pragma HLS pipeline
+    aa[t] += ab[t] + ab[t - 1] + a[0] + ab[t + 1] + t--;
+    aa[t] = a[1] + a[2];
+  }
+  do 
+// Original: #pragma ACCEL parallel
+{
+    
+#pragma HLS unroll
+    b[t][t] = ab[t] + ab[t + 1] + ab[t - 1];
+    t++;
+  }while (t < 99);
+}

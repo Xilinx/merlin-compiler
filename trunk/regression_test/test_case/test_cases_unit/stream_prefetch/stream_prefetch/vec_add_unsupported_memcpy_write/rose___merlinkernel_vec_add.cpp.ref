@@ -1,0 +1,24 @@
+#include "cmost.h"
+#include <string.h>
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static void __merlin_dummy_kernel_pragma();
+// Original: #pragma ACCEL kernel
+
+void vec_add(int s,int a1[1024],int a2[1024])
+{
+  __merlin_access_range(a2,0,1023UL);
+  __merlin_access_range(a1,0,1023UL);
+  
+#pragma ACCEL interface variable=a1 max_depth=1024 depth=1024
+  
+#pragma ACCEL interface variable=a2 max_depth=1024 depth=1024
+  int a1_buf[1024];
+  int a2_buf[1024];
+  memcpy((void *)a1_buf,(const void *)a1,4 * ((unsigned long )1024));
+  memcpy((void *)a2_buf,a2,(4 * 1024));
+  for (int _i_l1 = 0; _i_l1 < 1024; ++_i_l1) {
+    a2_buf[_i_l1] = a1_buf[1023 - _i_l1] + a1[_i_l1] + a2[_i_l1];
+  }
+  memcpy(a2,a2_buf,(4 * 1024));
+}

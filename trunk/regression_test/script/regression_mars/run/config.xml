@@ -1,0 +1,16 @@
+
+
+<regression_test>
+    <case_set_list>
+        <case_set dir="./test_cases/apollo-sda"></>
+            <case>lab1</case>
+            <case>lab2</case>
+            <case>denoise</case>
+        </case_set>
+    </case_set_list>
+    <platform>alphadata_pcie_7v3</platform>
+    <design_flow>full</design_flow>
+</regression_test>
+
+ 
+

@@ -1,0 +1,12 @@
+void p_Z1fILi0EEi(int x);
+
+void p_Z1fILi0EEi(int x)
+{
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+#pragma ACCEL kernel
+
+void k()
+{
+  p_Z1fILi0EEi(0);
+}

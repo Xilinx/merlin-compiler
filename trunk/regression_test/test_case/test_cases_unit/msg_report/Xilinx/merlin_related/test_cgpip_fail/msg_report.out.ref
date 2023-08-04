@@ -1,0 +1,76 @@
+================================================================================
+Kernel : top(test_cgpip_fail.cpp:2)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+a               32       (test_cgpip_fail.cpp:2) memory burst[1] [2] [3]
+b               32       (test_cgpip_fail.cpp:2) memory burst[4] [5] [6]
+c               32       (test_cgpip_fail.cpp:2) memory burst[7] [8] [9]
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++-----------------------------------------------------+-----+------+------+------+------+------+------+-----------------------+
+|                      hierarchy                      | TC  |  AC  | CPC  | LUT  |  FF  | BRAM | DSP  |        comment        |
++-----------------------------------------------------+-----+------+------+------+------+------+------+-----------------------+
+|top (test_cgpip_fail.cpp:2)                          |     |  2761|  2761|  0.94|  0.23|  0.51|  0.00|kernel                 |
+|    loop i (test_cgpip_fail.cpp:5)                   |   12|  2760|  2760|      |      |      |      |pipelined              |
+|        auto memory burst read for 'a'               |     |     -|   105|      |      |      |      |                       |
+|        auto memory burst read for 'b'               |     |     -|   105|      |      |      |      |                       |
+|        tilied loop: loop i (test_cgpip_fail.cpp:5)  |  100|   101|   101|      |      |      |      |IL=3, fully pipelined  |
+|        auto memory burst write for 'c'              |     |     -|   105|      |      |      |      |                       |
++-----------------------------------------------------+-----+------+------+------+------+------+------+-----------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++-------------------------------------------------------+--------+----------+
+|                         Name                          | Cycles | Activity |
++-------------------------------------------------------+--------+----------+
+|          top:loop i (test_cgpip_fail.cpp:5)           |  2659  |  96.31%  |
+| top:tilied loop tiled loop: i (test_cgpip_fail.cpp:5) |  101   |  3.66%   |
+|              top (test_cgpip_fail.cpp:2)              |   1    |  0.04%   |
+|       auto memory burst (test_cgpip_fail.cpp:5)       |   0    |  0.00%   |
+|       auto memory burst (test_cgpip_fail.cpp:5)       |   0    |  0.00%   |
+|       auto memory burst (test_cgpip_fail.cpp:5)       |   0    |  0.00%   |
++-------------------------------------------------------+--------+----------+
+
++-----------------------------+------+------+------+------+
+|            Name             | BRAM | DSP  |  FF  | LUT  |
++-----------------------------+------+------+------+------+
+| top (test_cgpip_fail.cpp:2) | 0.51 | 0.00 | 0.23 | 0.94 |
++-----------------------------+------+------+------+------+
+[1] Memory coalescing variable 'a' (test_cgpip_fail.cpp:2) may cause long compilation time of downstream tool.
+  Reason: the access offset is not divisible by 16
+[2] Memory coalescing NOT inferred: variable 'a' (test_cgpip_fail.cpp:2)
+  Reason: burst length is less than threshold (1024 bytes).
+  Hint: reset threshold by using --attribute bus_length_threshold=?
+[3] Low bandwidth efficiency of memory burst: variable 'a' (test_cgpip_fail.cpp:2) in scope (test_cgpip_fail.cpp:5).
+  Reason: short burst length = 400 bytes
+  Hint: increase tile factor
+[4] Memory coalescing variable 'b' (test_cgpip_fail.cpp:2) may cause long compilation time of downstream tool.
+  Reason: the access offset is not divisible by 16
+[5] Memory coalescing NOT inferred: variable 'b' (test_cgpip_fail.cpp:2)
+  Reason: burst length is less than threshold (1024 bytes).
+  Hint: reset threshold by using --attribute bus_length_threshold=?
+[6] Low bandwidth efficiency of memory burst: variable 'b' (test_cgpip_fail.cpp:2) in scope (test_cgpip_fail.cpp:5).
+  Reason: short burst length = 400 bytes
+  Hint: increase tile factor
+[7] Memory coalescing variable 'c' (test_cgpip_fail.cpp:2) may cause long compilation time of downstream tool.
+  Reason: the access offset is not divisible by 16
+[8] Memory coalescing NOT inferred: variable 'c' (test_cgpip_fail.cpp:2)
+  Reason: burst length is less than threshold (1024 bytes).
+  Hint: reset threshold by using --attribute bus_length_threshold=?
+[9] Low bandwidth efficiency of memory burst: variable 'c' (test_cgpip_fail.cpp:2) in scope (test_cgpip_fail.cpp:5).
+  Reason: short burst length = 400 bytes
+  Hint: increase tile factor
+
+
+

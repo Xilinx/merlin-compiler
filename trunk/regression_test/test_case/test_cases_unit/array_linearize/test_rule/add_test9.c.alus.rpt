@@ -1,0 +1,6 @@
+
+WARNING: [MDARR-201] OpenCL host library generation is disabled because some of the dimension sizes of the interface variable 'b' (add_test9.c:5) of type 'int *' is not determined.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=b max_depth=?
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'b' (add_test9.c:5)

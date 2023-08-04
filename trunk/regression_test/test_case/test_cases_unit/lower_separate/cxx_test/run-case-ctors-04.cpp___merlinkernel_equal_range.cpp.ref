@@ -1,0 +1,16 @@
+#include "merlin_type_define.h"
+extern int __merlin_include__GB_merlin_type_define_h_0;
+
+static void p_ZN4pairC2ERK8iterator_1(struct pair *this_,const struct iterator &a)
+{
+  this_ -> first = a;
+}
+#pragma ACCEL kernel
+
+void equal_range()
+{
+  struct iterator temp;
+  struct pair temp_0;
+  p_ZN4pairC2ERK8iterator_1(&temp_0,temp);
+  (void )(temp_0);
+}

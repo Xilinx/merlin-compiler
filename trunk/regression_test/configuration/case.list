@@ -1,0 +1,15 @@
+matmul         
+denoise        
+segmentation   
+namd           
+smithwaterman  
+idct           
+blackschole    
+dwt            
+logistic_64    
+twoNN          
+normal         
+#flann          
+logistic_L10   
+cnn            
+#vec_sum        

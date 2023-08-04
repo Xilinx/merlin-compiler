@@ -1,0 +1,4 @@
+
+ERROR: [SYNCHK-309] Do not support empty array size for variable 'n_a' (vec_add.c:5)
+
+ERROR: [SYNCHK-309] Do not support empty array size for variable 'b' (vec_add.c:6)

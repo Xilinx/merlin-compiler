@@ -1,0 +1,3 @@
+
+ERROR: [SEPAR-314] Task pragma scope should filled by more than one kernel call
+#pragma ACCEL task

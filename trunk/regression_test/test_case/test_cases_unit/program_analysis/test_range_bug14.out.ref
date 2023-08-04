@@ -1,0 +1,15 @@
+
+void sub(int I)
+{
+  int a[100];
+  for (int J = 0; J < 10; ++J) {
+    a[I * 10 + J];
+  }
+}
+
+void top()
+{
+  for (int I = 0; I < 10; ++I) {
+    sub(I);
+  }
+}

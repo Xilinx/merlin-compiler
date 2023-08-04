@@ -1,0 +1,33 @@
+
+struct ::A 
+{
+  int a;
+}
+;
+
+void p_ZN1A3setEi(struct A *this_,int aa)
+{
+  this_ -> a = aa;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+
+struct ::B 
+{
+  struct A A;
+  int b;
+}
+;
+
+void p_ZN1B4set2Eii(struct B *this_,int aa,int bb)
+{
+  p_ZN1A3setEi(&this_ -> A,aa);
+  this_ -> b = bb;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_B_();
+#pragma ACCEL kernel
+
+void k()
+{
+  struct B bo;
+  p_ZN1B4set2Eii(&bo,1,2);
+}

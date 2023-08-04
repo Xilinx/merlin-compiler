@@ -1,0 +1,23 @@
+void p_Z1fILi20EEPA20_i(int a[][20]);
+
+void p_Z1fILi20EEPA20_i(int a[][20])
+{
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+// Correctly mangle negative integer template params
+int p_Z1gILin42EEv();
+
+int p_Z1gILin42EEv()
+{
+  return -42;
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+#pragma ACCEL kernel
+
+int main()
+{
+  int a[10][20];
+// implicit instantiation.
+  p_Z1fILi20EEPA20_i(a);
+  p_Z1gILin42EEv();
+}

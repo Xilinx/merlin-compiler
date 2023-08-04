@@ -1,0 +1,16 @@
+
+void sub(int &c,int &a,int &b)
+{
+  c = 0;
+  b += a;
+}
+
+void func()
+{
+  int a[100];
+  int b[100];
+  int c[100];
+  for (int i = 0; i < 100; ++i) 
+    sub(c[i],a[i],b[i]);
+  return ;
+}

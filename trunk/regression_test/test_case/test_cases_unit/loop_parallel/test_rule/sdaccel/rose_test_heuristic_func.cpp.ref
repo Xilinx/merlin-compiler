@@ -1,0 +1,49 @@
+
+void update(int src_height,int src_width,unsigned char *Data,int dest_height,int dest_width,unsigned char IMG1_data[240][320])
+{
+  int j;
+  int i;
+  for (i = 0; i < 240; i++) {
+    for (j = 0; j < 320; j++) 
+// Original: #pragma ACCEL parallel
+{
+      
+#pragma HLS unroll
+      Data[(j * (1 + 20971520 / dest_width) / 65536) + (i * (1 + 15728640 / dest_height) / 65536) * 320L] += i;
+      IMG1_data[i][j] = Data[(j * (1 + 20971520 / dest_width) / 65536) + (i * (1 + 15728640 / dest_height) / 65536) * 320L];
+      IMG1_data[i][j] = Data[(j * (2 + 20971520 / dest_width) / 65536) + (i * (1 + 15728641 / dest_height) / 65536) * 320L];
+    }
+  }
+}
+// update1 is the copy of update
+
+void update1(int src_height,int src_width,unsigned char *Data,int dest_height,int dest_width,unsigned char IMG1_data[240][320])
+{
+  int j;
+  int i;
+  for (i = 0; i < 240; i++) {
+    for (j = 0; j < 320; j++) 
+// Original: #pragma ACCEL pipeline
+{
+      
+#pragma HLS dependence variable=IMG1_data array inter false 
+      
+#pragma HLS pipeline
+      Data[(j * (1 + 20971520 / dest_width) / 65536) + (i * (1 + 15728640 / dest_height) / 65536) * 320L] += i;
+      IMG1_data[i][j] = Data[(j * (1 + 20971520 / dest_width) / 65536) + (i * (1 + 15728640 / dest_height) / 65536) * 320L];
+      IMG1_data[i][j] = Data[(j * (2 + 20971520 / dest_width) / 65536) + (i * (1 + 15728641 / dest_height) / 65536) * 320L];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top()
+{
+  unsigned char IMG1_data[240][320];
+  
+#pragma HLS array_partition variable=IMG1_data complete dim=2
+  unsigned char Data_buf_0[76800];
+  unsigned char Data_buf_1[2][76800];
+  update(240,320,(unsigned char *)Data_buf_0,240,320,IMG1_data);
+  update1(240,320,(unsigned char *)Data_buf_1[0],240,320,IMG1_data);
+}

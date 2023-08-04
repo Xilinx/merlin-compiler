@@ -1,0 +1,17 @@
+ 16 total
+  1 ./s_vec_add_all/pass.e
+  1 ./s_vec_add_all/pass.s
+  1 ./s_vec_add_in_out/pass.e
+  1 ./s_vec_add_in_out/pass.s
+  1 ./s_vec_add_in/pass.e
+  1 ./s_vec_add_in/pass.s
+  1 ./s_vec_add_out/pass.e
+  1 ./s_vec_add_out/pass.s
+  1 ./vec_add_all/pass.e
+  1 ./vec_add_all/pass.s
+  1 ./vec_add_in_out/pass.e
+  1 ./vec_add_in_out/pass.s
+  1 ./vec_add_in/pass.e
+  1 ./vec_add_in/pass.s
+  1 ./vec_add_out/pass.e
+  1 ./vec_add_out/pass.s

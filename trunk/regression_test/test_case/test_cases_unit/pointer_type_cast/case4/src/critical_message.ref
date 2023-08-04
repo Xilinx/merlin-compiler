@@ -1,0 +1,2 @@
+
+ERROR: [PROCS-378] Found pointer type casting from char * to signed short * in (vec_add_kernel.cpp:11).

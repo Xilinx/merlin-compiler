@@ -1,0 +1,9 @@
+
+WARNING: [WDBUS-213] Memory coalescing NOT inferred: variable 'a' (test_invalid_bitwidth.c:15)
+  because of invalid bus bitwidth (16 bits).
+
+WARNING: [WDBUS-213] Memory coalescing NOT inferred: variable 'b' (test_invalid_bitwidth.c:15)
+  because of invalid bus bitwidth (34 bits).
+
+WARNING: [WDBUS-213] Memory coalescing NOT inferred: variable 'c' (test_invalid_bitwidth.c:15)
+  because of invalid bus bitwidth (1024 bits).

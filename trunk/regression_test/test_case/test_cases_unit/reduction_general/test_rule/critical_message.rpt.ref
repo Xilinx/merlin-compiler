@@ -1,0 +1,77 @@
+INFO: [REDUC-101] Applying reduction on operation 'sum += a[j * 10 + j_ ...' (test_plus.cpp:17)
+INFO: [REDUC-101] Applying reduction on operation 'sum -= a[j * 10 + j_ ...' (test_minus.cpp:18)
+INFO: [REDUC-101] Applying reduction on operation 'sum *= a[j * 10 + j_ ...' (test_mult.cpp:17)
+INFO: [REDUC-101] Applying reduction on operation 'sum /= a[j * 10 + j_ ...' (test_div.cpp:17)
+INFO: [REDUC-101] Applying reduction on operation 'sum[j] += a[j * 10 + ...' (test_cyclic.cpp:19)
+INFO: [REDUC-101] Applying reduction on operation 'Cout[r][c][o] += one ...' (test_multi_loop.cpp:29)
+INFO: [REDUC-101] Applying reduction on operation 'Cout[r][c][o] += one ...' (test_multi_loop.cpp:59)
+INFO: [REDUC-101] Applying reduction on operation 'Cout[r][c][o] += one ...' (test_multi_loop.cpp:87)
+INFO: [REDUC-101] Applying reduction on operation 'sum += a[j * 10 + j_ ...' (test_illegal.cpp:19)
+INFO: [REDUC-101] Applying reduction on operation 'sum += a[j * 10 + j_ ...' (test_illegal.cpp:39)
+INFO: [REDUC-101] Applying reduction on operation 'sum1 += a[j * 10 + j ...' (test_illegal.cpp:40)
+
+WARNING: [REDUC-206] Reduction on variable 'sum' in loop 'L_0' (test_illegal.cpp:52) not applied: multiple accesses on the variable exist in the loop.
+Hint: try to reduce the accesses to the variable in the loop or change the scope of reduction optimization. 
+INFO: [REDUC-101] Applying reduction on operation 'sum1 += sum' (test_illegal.cpp:62)
+
+WARNING: [REDUC-206] Reduction on variable 'sum' in loop 'L_0' (test_illegal.cpp:74) not applied: multiple accesses on the variable exist in the loop.
+Hint: try to reduce the accesses to the variable in the loop or change the scope of reduction optimization. 
+
+WARNING: [REDUC-209] Reduction on variable 'sum' in loop 'L_0' (test_illegal.cpp:93) not applied: unsupported reduction operation 'sum |= a[j * 10 + j_sub]'
+
+WARNING: [REDUC-203] Reduction in loop 'for(;i <= 100;i++) { ...' (test_illegal.cpp:119) not applied: noncanonical loop.
+INFO: [REDUC-101] Applying reduction on operation 'sum += a[j * 10 + j_ ...' (test_pragma.cpp:19)
+
+WARNING: [REDUC-206] Reduction on variable 'sum' in loop 'L_0' (test_iter.cpp:11) not applied: multiple accesses on the variable exist in the loop.
+Hint: try to reduce the accesses to the variable in the loop or change the scope of reduction optimization. 
+
+WARNING: [REDUC-206] Reduction on variable 'j_sub1' in loop 'L_1' (test_iter.cpp:21) not applied: multiple accesses on the variable exist in the loop.
+Hint: try to reduce the accesses to the variable in the loop or change the scope of reduction optimization. 
+
+WARNING: [REDUC-206] Reduction on variable 'j_sub1' in loop 'L_2' (test_iter.cpp:31) not applied: multiple accesses on the variable exist in the loop.
+Hint: try to reduce the accesses to the variable in the loop or change the scope of reduction optimization. 
+INFO: [REDUC-101] Applying reduction on operation 'sum += a[j * 10 + j_ ...' (test_scheme.cpp:19)
+INFO: [REDUC-101] Applying reduction on operation 'sum1[j_sub11][j_sub1 ...' (test_scheme.cpp:54)
+
+WARNING: [REDUC-207] Reduction on variable 'sum1' in loop 'L_2_0_0_0' test_scheme.cpp:67 may has no performance benefit.
+Hint: using parallel factor to apply loop tiling may help enhance the performance. 
+INFO: [REDUC-101] Applying reduction on operation 'sum1[j_sub1][j_sub2] ...' (test_scheme.cpp:69)
+
+WARNING: [REDUC-210] Ignoring reduction in loop 'L_3_0_0' (test_scheme.cpp:26) as it is fully parallelized
+
+WARNING: [REDUC-211] Ignoring reduction request on variable 'sum' in loop 'L_0' (test_arg.cpp:11): the variable is declared in the loop scope
+
+INFO: [REDUC-101] Applying reduction on operation 'sum1 += a[j * 10 + j ...' (test_arg.cpp:31)
+INFO: [REDUC-101] Applying reduction on operation 'sum += a[i + 100 * j ...' (test_2.cpp:25)
+
+WARNING: [REDUC-207] Reduction on variable 'sum' in loop 'L_0_0' test_2.cpp:7 may has no performance benefit.
+Hint: using parallel factor to apply loop tiling may help enhance the performance. 
+INFO: [REDUC-101] Applying reduction on operation 'distance[k] += diff  ...' (test_1.cpp:22)
+INFO: [REDUC-101] Applying reduction on operation 'sum += a[j * 10 + j_ ...' (test.c:19)
+
+WARNING: [TILE-211] The tripcount of loop for(int k = 0;k < j;k++) {...} (rose_test_trip_count.cpp:13)
+ may not be divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+ Hint: Please rewrite the tripcount as a multiple of the factor.
+
+WARNING: [TILE-211] The tripcount of loop for(int k = 0;k < j;k++) {...} (rose_test_trip_count.cpp:38)
+ may not be divisible by the factor '64'. This will negatively impact both resource utilization and performance.
+ Hint: Please rewrite the tripcount as a multiple of the factor.
+
+WARNING: [PROCS-245] Found a loop ' for(int j = 0;j < si... ' (rose_test_trip_count.cpp:11) without a bound on its tripcount. Please specify one using '#pragma HLS loop_tripcount max=?' or 'assert'.
+Use default max tripcount (2) for analysis
+
+WARNING: [PROCS-245] Found a loop ' for(int k = 0;k < j ... ' (rose_test_trip_count.cpp:13) without a bound on its tripcount. Please specify one using '#pragma HLS loop_tripcount max=?' or 'assert'.
+Use default max tripcount (2) for analysis
+
+WARNING: [PROCS-245] Found a loop ' for(int j = 0;j < si... ' (rose_test_trip_count.cpp:89) without a bound on its tripcount. Please specify one using '#pragma HLS loop_tripcount max=?' or 'assert'.
+Use default max tripcount (2) for analysis
+
+WARNING: [PROCS-245] Found a loop ' for(int k = 0;k < j;... ' (rose_test_trip_count.cpp:97) without a bound on its tripcount. Please specify one using '#pragma HLS loop_tripcount max=?' or 'assert'.
+Use default max tripcount (2) for analysis
+
+WARNING: [REDUC-208] Reduction on variable 'tmp' in loop 'L_0_0' rose_rose_test_trip_count.cpp:149 not applied: unknown tripcount.
+  Hint: please specify the bounds of the tripcount using 'assert' 
+INFO: [REDUC-101] Applying reduction on operation 'tmp += data[i][k * 6 ...' (rose_rose_test_trip_count.cpp:29)
+INFO: [REDUC-101] Applying reduction on operation 'tmp += data[i][k * 6 ...' (rose_rose_test_trip_count.cpp:77)
+INFO: [REDUC-101] Applying reduction on operation 'tmp += data[i][k * 6 ...' (rose_rose_test_trip_count.cpp:124)
+INFO: [REDUC-101] Applying reduction on operation 'distance[k] += diff  ...' (kmeans_kernel.cpp:72)

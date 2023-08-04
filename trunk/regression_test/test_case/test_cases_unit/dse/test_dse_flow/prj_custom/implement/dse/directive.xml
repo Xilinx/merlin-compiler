@@ -1,0 +1,22 @@
+
+<directives>
+<platform_name>xilinx_vcu1525_dynamic_5_0</platform_name>
+<merlincc>on</merlincc>
+<dse_time>20</dse_time>
+<dse_hls_time>4</dse_hls_time>
+<dse_thread>2</dse_thread>
+<dse_algo>heuristic_100</dse_algo>
+<include_path></include_path>
+<part_name></part_name>
+<library_path> </library_path>
+<reduction_opt>off</reduction_opt>
+<opt_effort>standard</opt_effort>
+<merlincc_debug>on</merlincc_debug>
+<ihatebug>debug-level2</ihatebug>
+<implementation_tool>sdaccel</implementation_tool>
+<auto_dse>custom</auto_dse>
+<clock_period>4.16ns</clock_period>
+<reduction_altera>off</reduction_altera>
+<macro_define> -D XILINX </macro_define>
+</directives>
+

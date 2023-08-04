@@ -1,0 +1,22 @@
+// Constructor tests.
+// Initializer lists.
+
+struct ::B 
+{
+  int a;
+}
+;
+
+void p_ZN1BC2Ev(struct B *this_)
+{
+  this_ -> a = 0;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_B_();
+#pragma ACCEL kernel
+
+int main()
+{
+  struct B b;
+  p_ZN1BC2Ev(&b);
+  ;
+}

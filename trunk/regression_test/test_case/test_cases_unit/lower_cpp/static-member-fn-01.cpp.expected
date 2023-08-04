@@ -1,0 +1,29 @@
+
+struct A 
+{
+  int x;
+}
+;
+
+struct ::B 
+{
+}
+;
+struct A *p_ZN1B1fEv();
+
+struct A *p_ZN1B1fEv()
+{
+  return &a;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_B_();
+struct A a;
+static void __merlin_dummy_SgMemberFunctionDeclaration_struct_A_();
+#pragma ACCEL kernel
+
+void k()
+{
+  struct B b;
+  struct B *pb = &b;
+  p_ZN1B1fEv() -> x;
+  p_ZN1B1fEv() -> x;
+}

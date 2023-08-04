@@ -1,0 +1,16 @@
+none
+preprocess
+kernel_pragma_gen
+kernel_separate
+kernel_wrapper
+postwrap_process
+postwrap_process_1
+interface_transform
+midend_preprocess
+memory_burst
+coarse_parallel
+mars_gen_preproc
+block
+outline
+tldm_gen
+opencl_gen_pcie

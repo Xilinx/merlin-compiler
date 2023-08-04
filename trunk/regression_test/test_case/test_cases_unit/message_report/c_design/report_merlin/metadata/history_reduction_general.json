@@ -1,0 +1,161 @@
+{
+    "X": {
+        "org_identifier": "X",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"reduction_general\"\n}"
+        ]
+    },
+    "X_0": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"reduction_general\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"reduction_general\"\n}"
+        ]
+    },
+    "X_0_0": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"reduction_general\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"reduction_general\"\n}"
+        ]
+    },
+    "X_0_0_0": {
+        "org_identifier": "",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 6,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 1,
+                "location": 0
+            },
+            {
+                "action": 0,
+                "location": 0
+            },
+            {
+                "action": 1,
+                "location": 1
+            },
+            {
+                "action": 0,
+                "location": 1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Replace(1): SgVariableDeclaration:extern int __merlin_include__GB_memcpy_512_2d_h_1;\",\n    \"passname\": \"reduction_general\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(2): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"reduction_general\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(1): SgVariableDeclaration:extern int __merlin_include__GB_memcpy_512_1d_h_0;\",\n    \"passname\": \"reduction_general\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(2): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"reduction_general\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"reduction_general\"\n}"
+        ]
+    },
+    "X_0_0_0_0": {
+        "org_identifier": "BuiltInreduction_general_1",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10645 for 140148806078040\",\n    \"passname\": \"reduction_general\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"reduction_general\"\n}"
+        ]
+    },
+    "X_0_0_0_0_0": {
+        "org_identifier": "BuiltInreduction_general_0",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10237 for 140148809741112\",\n    \"passname\": \"reduction_general\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"reduction_general\"\n}"
+        ]
+    },
+    "X_0_0_0_1": {
+        "org_identifier": "BuiltInreduction_general_3",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10645 for 140148806079040\",\n    \"passname\": \"reduction_general\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"reduction_general\"\n}"
+        ]
+    },
+    "X_0_0_0_1_0": {
+        "org_identifier": "BuiltInreduction_general_2",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10237 for 140148809741712\",\n    \"passname\": \"reduction_general\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"reduction_general\"\n}"
+        ]
+    }
+}

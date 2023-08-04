@@ -1,0 +1,2 @@
+
+ERROR: [SEPAR-303] Function pointer is not supported : 'fcnPtr1' (vec_add.cpp:28)

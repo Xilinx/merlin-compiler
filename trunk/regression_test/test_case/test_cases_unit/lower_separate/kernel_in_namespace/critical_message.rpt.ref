@@ -1,0 +1,4 @@
+
+ERROR: [LWCPP-302] kernel cannot reside within a namespace: int ::g() {...} (vec_add.cpp:4)
+
+ERROR: [LWCPP-302] kernel cannot reside within a namespace: int XX::f() {...} (vec_add.cpp:8)

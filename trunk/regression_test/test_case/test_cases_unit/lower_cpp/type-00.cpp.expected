@@ -1,0 +1,24 @@
+#include<complex.h>
+
+struct ::A 
+{
+  double _Complex a[100];
+}
+;
+
+void p_ZN1A1gEv(struct A *this_)
+{
+}
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+#pragma ACCEL kernel
+
+void p_Z3topPCd(double _Complex *a)
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_top_d_();
+#pragma ACCEL kernel
+
+void p_Z3topP1A(struct A *a)
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_top_s_();

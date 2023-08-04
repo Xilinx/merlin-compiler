@@ -1,0 +1,8 @@
+
+#ifndef __MERLIN_TYPE_DEFINE_H__
+
+#define __MERLIN_TYPE_DEFINE_H__
+struct Foo {};
+struct Bar {};
+
+#endif

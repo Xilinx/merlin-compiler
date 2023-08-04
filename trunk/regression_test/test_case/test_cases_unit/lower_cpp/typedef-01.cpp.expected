@@ -1,0 +1,21 @@
+#include<ap_int.h>
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+::A_5_INT p_Z3subILi5EE6ap_intILi5EE(A_5_INT res);
+
+::A_5_INT p_Z3subILi5EE6ap_intILi5EE(::A_5_INT res)
+{
+  return res;
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+
+struct ::A_5_ 
+{
+}
+;
+typedef class ap_int< 5 > A_5_INT;
+#pragma ACCEL kernel
+
+void top(::A_5_INT *a)
+{
+  ::A_5_INT res = p_Z3subILi5EE6ap_intILi5EE(a[0]);
+}

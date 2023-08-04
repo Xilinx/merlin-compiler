@@ -1,0 +1,48 @@
+#pragma ACCEL kernel
+
+void func_top_0(int *a,int *b)
+{
+  int i;
+  int j;
+  for (i = 0; i < 10; ++i) {
+    
+#pragma ACCEL parallel complete
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL parallel complete priority = logic
+      a[i * 10 + j] = b[j];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_1(int *a,int *b)
+{
+  int i;
+  int j;
+  for (i = 0; i < 10; ++i) {
+    
+#pragma ACCEL parallel complete
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL parallel complete priority = logic
+      a[i * 11 + j] = b[j];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_2(int *a,int *b)
+{
+  int i;
+  int j;
+  for (i = 0; i < 10; ++i) {
+    
+#pragma ACCEL parallel complete
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL parallel complete priority = logic
+      a[i * 9 + j] = b[j];
+    }
+  }
+}

@@ -1,0 +1,16 @@
+
+<directives>
+<reduction_opt>off</reduction_opt>
+<platform_name>/curr/software/Xilinx/SDx/2018.2/platforms/xilinx_vcu1525_dynamic_5_1/xilinx_vcu1525_dynamic_5_1.xpfm</platform_name>
+<opt_effort>standard</opt_effort>
+<ihatebug>debug-level2</ihatebug>
+<merlincc>on</merlincc>
+<implementation_tool>sdaccel</implementation_tool>
+<pure_kernel>on</pure_kernel>
+<clock_period>5ns</clock_period>
+<part_name></part_name>
+<reduction_altera>off</reduction_altera>
+<include_path> -I/space/scratch/hanhu/Xilinx/xql6 -I/home/hanhu/Merlin_Compiler/trunk/build/..//mars-gen/lib/merlin</include_path>
+<macro_define></macro_define>
+</directives>
+

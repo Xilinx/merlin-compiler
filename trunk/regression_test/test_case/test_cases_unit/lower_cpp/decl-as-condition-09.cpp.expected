@@ -1,0 +1,22 @@
+
+struct ::A 
+{
+}
+;
+
+bool p_ZN1AcvbEv(struct A *this_)
+{
+  return false;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+#pragma ACCEL kernel
+
+void k()
+{
+  struct A a;
+{
+    struct A a2 = a;
+    if (p_ZN1AcvbEv(&a2)) {
+    }
+  }
+}

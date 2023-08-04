@@ -1,0 +1,1311 @@
+#include <string.h> 
+#include<assert.h>
+// 1. loop structure
+// 2. function structure
+// 3. access pattern
+// 4. pragma modes
+extern int __merlin_include__GB_assert_h_1;
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void func_top_0(int *a,int *b)
+{
+  int a_buf[100];
+  int i;
+  for (i = 0; i < 100; i++) {
+    
+#pragma ACCEL pipeline_parallel factor = 10
+    a_buf[i] = b[i];
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_1(int a[100],int b[100])
+{
+  int a_buf[100];
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) {
+//bracelet
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline
+      a_buf[i * 10 + j] = b[i * 10 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_2(int a[100],int b[100])
+{
+  int a_buf[100];
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a_buf[i * 10 + j] = b[i * 10 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+//Loop structure 
+#pragma ACCEL kernel
+
+void func_top_3(int a[100],int b[100])
+{
+  int b_buf[100];
+  int a_buf[100];
+  int i;
+  int j;
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 100);
+  for (j = 0; j < 10; j++) {
+    for (i = 0; i < 10; i++) {
+      
+#pragma ACCEL pipeline
+      a_buf[i * 10 + j] = b_buf[i * 10 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_4(int a[100],int b[100])
+{
+  int a_buf[110];
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline
+      a_buf[i * 10 + j] = b[i * 10 + j];
+    }
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a_buf[10 + i * 10 + j] = b[i * 10 + j + 1];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 110);
+}
+#pragma ACCEL kernel
+
+void func_top_4_0(int a[100],int b[100])
+{
+  int b_buf[101];
+  int a_buf[110];
+  int i;
+  int j;
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 101);
+  for (j = 0; j < 10; j++) {
+    for (i = 0; i < 10; i++) {
+      
+#pragma ACCEL pipeline
+      a_buf[i * 10 + j] = b_buf[i * 10 + j];
+    }
+    for (i = 0; i < 10; i++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a_buf[10 + i * 10 + j] = b_buf[1 + i * 10 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 110);
+}
+#pragma ACCEL kernel
+
+void func_top_5(int a[100],int b[100])
+{
+  int b_buf[100];
+  int a_buf[100];
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 100);
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 100);
+  int i = 0;
+  int j = 0;
+  for (j = 0; j < 10; j++) {
+    
+#pragma ACCEL pipeline_parallel factor = 10
+    a_buf[10 + j] = b_buf[1 + j];
+  }
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline
+      a_buf[i * 10 + j] = b_buf[i * 10 + j];
+    }
+    for (j = 0; j < 10; j++) {
+      a_buf[20 + i * 10 + j] = b_buf[20 + i * 10 + j];
+    }
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline
+      a_buf[10 + i * 10 + j] = b_buf[1 + i * 10 + j];
+    }
+  }
+  for (j = 0; j < 10; j++) {
+    
+#pragma ACCEL parallel factor = 10
+    a_buf[10 + i * 10 + j] = b_buf[1 + i * 10 + j];
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+//ifelse
+#pragma ACCEL kernel
+
+void func_top_6(int a[100],int b[100])
+{
+  int b_buf[100];
+  int a_buf[100];
+  int i;
+  int j;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 100);
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 100);
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      if (a_buf[0]) {
+        a_buf[i * 10 + j] = b_buf[i * 10 + j];
+      }
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_7(int a[100],int b[100])
+{
+  int a_buf[100];
+  int i;
+  int j;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 100);
+  for (i = 0; i < 10; i++) {
+    if (a_buf[0]) {
+      for (j = 0; j < 10; j++) {
+        
+#pragma ACCEL pipeline_parallel factor = 10
+        a_buf[i * 10 + j] = b[i * 10 + j];
+      }
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_8(int a[100],int b[100])
+{
+  int a_buf[100];
+  int i;
+  int j;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 100);
+  for (i = 0; i < 10; i++) {
+    if (a_buf[0]) {
+      for (j = 0; j < 10; j++) {
+        
+#pragma ACCEL pipeline
+        a_buf[i * 10 + j] = b[i * 10 + j];
+      }
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+// sub function
+
+void sub_0(int a[100],int b[100])
+{
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) {
+    if (a[0 * 10 + 0]) {
+      for (j = 0; j < 10; j++) {
+        
+#pragma ACCEL pipeline
+        a[i * 10 + j] = b[i * 10 + j];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_9(int a[100],int b[100])
+{
+  int a_buf[100];
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 100);
+  sub_0(a_buf,b);
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+
+int sub_0_0(int a[100],int b[100],int c)
+{
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a[i] = b[i * 10 + j] + c;
+    }
+  }
+  return 1024;
+}
+#pragma ACCEL kernel
+
+void func_top_10(int a[100],int b[100])
+{
+  int b_buf[100];
+  int a_buf[10];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 100);
+  int c = 1;
+  int sum = sub_0_0(a_buf,b_buf,c);
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10);
+}
+
+void sub_1(int a[100],int b[100])
+{
+  int a_buf[100];
+  int i;
+  int j;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 100);
+  for (i = 0; i < 10; i++) {
+    if (a_buf[0]) {
+      for (j = 0; j < 10; j++) {
+        
+#pragma ACCEL pipeline_parallel factor = 10
+        a_buf[i * 10 + j] = b[i * 10 + j];
+      }
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_11(int a[100],int b[100])
+{
+  sub_1(a,b);
+  sub_1(a,b);
+}
+
+int sub_2(int b[100],int i,int j)
+{
+  return b[i * 10 + j] + b[i * 10 + j + 1];
+}
+
+int sub_00(int a[100],int b[100],int c)
+{
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a[i] = sub_2(b,i,j);
+    }
+  }
+  return 1024;
+}
+#pragma ACCEL kernel
+
+void func_top_12(int a[100],int b[100])
+{
+  int b_buf[101];
+  int a_buf[10];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 101);
+  int c = 1;
+  int sum = sub_00(a_buf,b_buf,c);
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10);
+}
+// Acccess pattern
+#pragma ACCEL kernel
+
+void func_top_13(int a[100],int b[10000])
+{
+  int a_buf[100];
+  int i;
+  int j;
+  int k;
+  for (i = 0; i < 10; i++) {
+    for (k = 0; k < 10; k++) {
+      for (j = 0; j < 10; j++) {
+        
+#pragma ACCEL pipeline_parallel factor = 10
+        a_buf[i * 10 + j] = b[100 * i + j];
+      }
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_14(int a[100],int b[100])
+{
+  int b_buf[110];
+  int a_buf[100];
+  int i;
+  int j;
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * (120 + -10));
+  for (j = 0; j < 10; j++) {
+    for (i = 0; i < 10; i++) {
+      
+#pragma ACCEL pipeline_parallel factor = 4
+      a_buf[i * 10 + j] = b_buf[i * 10 + j] + b_buf[10 + i * 10 + j] + b_buf[-10 + i * 10 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_15(int a[100],int b[100])
+{
+  int b_buf[200];
+  int a_buf[100];
+  int i;
+  int j;
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * (210 + -10));
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline
+      a_buf[i * 10 + j] = b_buf[i * 20 + j] + b_buf[10 + i * 20 + j] + b_buf[-10 + i * 20 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_16(int a[100],int b[100])
+{
+  int b_buf[1460];
+  int a_buf[100];
+  int i;
+  int j;
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * (1470 + -10));
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a_buf[i * 10 + j] = b_buf[i * 160 + j] + b_buf[10 + i * 160 + j] + b_buf[-10 + i * 160 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_17(int a[100],int b[100])
+{
+  int a_buf[100];
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) {
+    int b_buf[30];
+    memcpy((void *)(&b_buf[0]),(const void *)(&b[-10 + i * 105879460]),sizeof(int ) * 30);
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline
+      a_buf[i * 10 + j] = b_buf[10 + j] + b_buf[20 + j] + b_buf[j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_18(int a[100],int b[100])
+{
+  int a_buf[100];
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) {
+    int b_151_2_buf[10];
+    int b_151_1_buf[10];
+    int b_151_0_buf[10];
+{
+      if (((-10 + i * 434530450 >= 0?10 : 10 + (-10 + i * 434530450))) >= 0) {
+        memcpy((void *)(&b_151_0_buf[0]),(const void *)(&b[(-10 + i * 434530450 >= 0?-10 + i * 434530450 : 0)]),sizeof(int ) * ((-10 + i * 434530450 >= 0?10 : 10 + (-10 + i * 434530450))));
+      }
+      memcpy((void *)(&b_151_1_buf[0]),(const void *)(&b[10 + i * 359352210]),sizeof(int ) * 10);
+      memcpy((void *)(&b_151_2_buf[0]),(const void *)(&b[i * 105879460]),sizeof(int ) * 10);
+    }
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a_buf[i * 10 + j] = b_151_2_buf[j] + b_151_1_buf[j] + b_151_0_buf[-10 + -((-10 + i * 434530450 >= 0?-10 + i * 434530450 : 0)) + i * 434530450 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_19(int a[100],int b[1024])
+{
+  int b_buf[9226];
+  int a_buf[100];
+  int i;
+  int j;
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * (10250 + -1024));
+  for (j = 0; j < 10; j++) {
+    for (i = 0; i < 10; i++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a_buf[i * 10 + j] = b_buf[i * 1024 + j] + b_buf[1024 + j] + b_buf[-1024 + i * 1024 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_20(int a[100],int b[100])
+{
+  int b_buf[400];
+  int a_buf[100];
+  int i;
+  int j;
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 400);
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a_buf[i * 10 + j] = b_buf[i * 10 + j] + b_buf[10 + i * 10 + j] + b_buf[20 + i * 10 + j] + b_buf[30 + i * 10 + j] + b_buf[40 + i * 10 + j] + b_buf[50 + i * 10 + j] + b_buf[60 + i * 10 + j] + b_buf[70 + i * 10 + j] + b_buf[80 + i * 10 + j] + b_buf[90 + i * 10 + j] + b_buf[100 + i * 10 + j] + b_buf[110 + i * 10 + j] + b_buf[120 + i * 10 + j] + b_buf[130 + i * 10 + j] + b_buf[140 + i * 10 + j] + b_buf[150 + i * 10 + j] + b_buf[160 + i * 10 + j] + b_buf[170 + i * 10 + j] + b_buf[180 + i * 10 + j] + b_buf[190 + i * 10 + j] + b_buf[200 + i * 10 + j] + b_buf[210 + i * 10 + j] + b_buf[220 + i * 10 + j] + b_buf[230 + i * 10 + j] + b_buf[240 + i * 10 + j] + b_buf[250 + i * 10 + j] + b_buf[260 + i * 10 + j] + b_buf[270 + i * 10 + j] + b_buf[280 + i * 10 + j] + b_buf[290 + i * 10 + j] + b_buf[300 + i * 10 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_21(int a[100],int b[10000])
+{
+  int b_buf[10][10][1];
+  int a_buf[100];
+  int i;
+  int j;
+{
+    int i;
+    int j;
+    for (j = 0; j < 10; j++) {
+      for (i = 0; i < 10; i++) {
+        memcpy((void *)b_buf[i][j],(const void *)(&b[i * 10587946 + j]),sizeof(int ) * 1);
+      }
+    }
+  }
+  for (j = 0; j < 10; j++) {
+    for (i = 0; i < 10; i++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a_buf[i * 10 + j] = b_buf[i][j][0];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_22(int a[100],int b[100])
+{
+  int b_buf[280];
+  int a_buf[100];
+  int i;
+  int j;
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * (290 + -10));
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a_buf[i * 10 + j] = b_buf[i * 30 + j] + b_buf[i * 20 + j] + b_buf[-10 + i * 10 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_23(int a[100],int b[100])
+{
+  int b_buf[280];
+  int a_buf[100];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 280);
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a_buf[i * 10 + j] = b_buf[i * 30 + j];
+    }
+  }
+  for (j = 0; j < 10; j++) {
+    for (i = 0; i < 10; i++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a_buf[i * 10 + j] = b_buf[i * 30 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_24(int b[100])
+{
+  int b_buf[100];
+  int a[100];
+  int i;
+  int j;
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * (110 + -10));
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a[i * 10 + j] += b_buf[i * 10 + j] * b_buf[-10 + i * 10 + j];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_25(int *a,int *b)
+{
+  int b_buf[911];
+  int a_buf[919];
+  int i;
+  int j;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 919);
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * (922 + -11));
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline
+      a_buf[i * 100 + j * 2] = b_buf[1 + i * 100 + j] * b_buf[-11 + i * 100 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 919);
+}
+// pragma modes
+#pragma ACCEL kernel
+
+void func_top_26(int *a,int *b)
+{
+  int b_buf[910];
+  int a_buf[910];
+  int i;
+  int j;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 910);
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[10]),sizeof(int ) * 910);
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline
+      a_buf[i * 100 + j] += b_buf[i * 100 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 910);
+}
+#pragma ACCEL kernel
+
+void func_top_26_1(int *a,int *b)
+{
+  int b_buf[919];
+  int a_buf[910];
+  int i;
+  int j;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 910);
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[10]),sizeof(int ) * 919);
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline
+      a_buf[i * 100 + j] += b_buf[i * 100 + j * 2];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 910);
+}
+#pragma ACCEL kernel
+
+void func_top_26_2(int *a,int *b)
+{
+  int b_buf[918];
+  int a_buf[919];
+  int i;
+  int j;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 919);
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * (919 + -1));
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline
+      a_buf[i * 100 + j * 2] = b_buf[-1 + i * 100 + j * 2];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 919);
+}
+// pragma modes
+#pragma ACCEL kernel
+
+void func_top_27(int a[100])
+{
+  int a_buf[110];
+  int i;
+  int j;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 110);
+  for (j = 0; j < 10; j++) {
+    for (i = 0; i < 10; i++) {
+      
+#pragma ACCEL parallel factor = 10
+      a_buf[i * 10 + j] += a_buf[10 + i * 10 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_28(int a[100],int b[100])
+{
+  int a_buf[110];
+  int i;
+  int j;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * (120 + -10));
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline
+      a_buf[i * 10 + j] += a_buf[10 + i * 10 + j] * a_buf[-10 + i * 10 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0 - 0]),sizeof(int ) * 100);
+}
+// pragma modes
+#pragma ACCEL kernel
+
+void func_top_29(int a[100],int b[100])
+{
+  int a_buf[110];
+  int i;
+  int j;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * (120 + -10));
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL parallel complete
+      a_buf[i * 10 + j] += a_buf[10 + i * 10 + j] * a_buf[-10 + i * 10 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0 - 0]),sizeof(int ) * 100);
+}
+// pragma modes
+#pragma ACCEL kernel
+
+void func_top_30(int a[100],int b[100])
+{
+  int b_buf[110];
+  int a_buf[100];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * (120 + -10));
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL parallel complete priority = logic
+      a_buf[i * 10 + j] = b_buf[-10 + i * 10 + j];
+    }
+  }
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline
+      a_buf[i * 10 + j] = b_buf[10 + i * 10 + j];
+    }
+  }
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL parallel complete priority = logic
+      a_buf[i * 10 + j] = b_buf[i * 10 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+// test priority
+#pragma ACCEL kernel
+
+void func_top_31(int a[100],int b[100])
+{
+  int b_buf[110];
+  int a_buf[100];
+  int i;
+  int j;
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * (120 + -10));
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline_parallel factor=4 priority=logic
+      a_buf[i * 10 + j] = b_buf[-10 + i * 10 + j] + b_buf[10 + i * 10 + j] + b_buf[i * 10 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+//test pragma parameter
+#pragma ACCEL kernel
+
+void func_top_32(int a[100],int b[100])
+{
+  int a_buf[10];
+  int i;
+  for (i = 0; i < 10; i++) {
+    
+#pragma ACCEL pipeline
+{
+      a_buf[i] = b[i];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10);
+}
+#pragma ACCEL kernel
+
+void func_top_33(int *a,int *b)
+{
+  int a_buf[10];
+  int i;
+  for (i = 0; i < 10; i++) {
+    
+#pragma ACCEL pipeline_parallel factor = - 1
+    a_buf[i] = b[i];
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10);
+}
+#pragma ACCEL kernel
+
+void func_top_33_1(int *a,int *b)
+{
+  int a_buf[10];
+  int i;
+  int NN = 10;
+  for (i = 0; i < 10; i++) {
+    
+#pragma ACCEL pipeline_parallel factor = NN
+    a_buf[i] = b[i];
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10);
+}
+#pragma ACCEL kernel
+
+void func_top_34(int a[100],int b[100])
+{
+  int a_buf[10];
+  int i;
+  int NN = 10;
+  for (i = 0; i < NN; i++) {
+    
+#pragma ACCEL pipeline_parallel factor = NN
+    a_buf[i] = b[i];
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10);
+}
+//test loop range
+#pragma ACCEL kernel
+
+void func_top_35(int *a,int *b)
+{
+  int a_buf[9];
+  int i;
+  for (i = - 1; i < 9; i++) {
+    
+#pragma ACCEL pipeline_parallel factor = 10
+    a_buf[i] = b[i];
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * (10 + -1));
+}
+#pragma ACCEL kernel
+
+void func_top_35_1(int *a,int *b)
+{
+  int b_105_0_buf[9];
+  int a_105_0_buf[9];
+  int i;
+  int j;
+{
+    memcpy((void *)(&b_105_0_buf[0]),(const void *)(&b[0]),sizeof(int ) * (10 + -1));
+  }
+  for (j = - 1; j < 10 - 1; j++) {
+    
+#pragma ACCEL parallel complete priority = logic
+    a_105_0_buf[j] = b_105_0_buf[j];
+  }
+{
+    memcpy((void *)(&a[0]),(const void *)(&a_105_0_buf[0]),sizeof(int ) * (10 + -1));
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_36(int a[100],int b[100])
+{
+  int a_buf[10];
+  int i;
+  for (i = 0; i < 10; i++) {
+    
+#pragma ACCEL pipeline
+    a_buf[i] = b[i];
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10);
+}
+#pragma ACCEL kernel
+
+void func_top_37(int a[100],int b[100])
+{
+  int a_buf[10];
+  int i;
+  for (i = 0; i < 10; i++) {
+    
+#pragma ACCEL pipeline_parallel factor = 10
+    a_buf[i] = b[i];
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 10);
+}
+#pragma ACCEL kernel
+
+void func_top_38(int a[100],int b[100])
+{
+  int b_buf[100];
+  int a_buf[100];
+  int i;
+  int j;
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 100);
+  for (j = 0; j < 10; j++) {
+    
+#pragma ACCEL pipeline
+    for (i = 0; i < 10; i++) {
+      
+#pragma ACCEL parallel complete
+      a_buf[i * 10 + j] = b_buf[i * 10 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_39(int a[100],int b[100])
+{
+  int b_buf[100];
+  int a_buf[100];
+  int i;
+  int j;
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 100);
+  for (i = 0; i < 10; i++) {
+    
+#pragma ACCEL pipeline
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL parallel factor=10
+      a_buf[i * 10 + j] = b_buf[i * 10 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_40(int a[100],int b[100])
+{
+  int b_buf[100];
+  int a_buf[100];
+  int i;
+  int j;
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 100);
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline
+      
+#pragma ACCEL parallel factor=complete
+      a_buf[i * 10 + j] = b_buf[i * 10 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_41(int a[100],int b[100])
+{
+  int a_buf[100];
+  int i;
+  int j;
+  int k;
+  for (k = 0; k < 10; k++) {
+    
+#pragma ACCEL pipeline
+    for (i = 0; i < 10; i++) {
+      for (j = 0; j < 10; j++) {
+        a_buf[i * 10 + j] = b[i * 10 + j];
+      }
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_42(int a[100],int b[100])
+{
+  int a_buf[100];
+  int i;
+  int j;
+  int k;
+  for (k = 0; k < 10; k++) 
+/* Original: #pragma ACCEL parallel factor = 10 */
+{
+    for (i = 0; i < 10; i++) {
+      for (j = 0; j < 10; j++) {
+        a_buf[i * 10 + j] = b[i * 10 + j];
+      }
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_43(int a[100],int b[100])
+{
+  int b_buf[10];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10);
+  int i;
+  for (i = 0; i < 10; i++) {
+    b_buf[i] = i;
+  }
+  for (i = 0; i < 10; i++) {
+    
+#pragma ACCEL pipeline_parallel factor = 10
+    a[i] = b_buf[i];
+  }
+  memcpy((void *)(&b[0]),(const void *)(&b_buf[0]),sizeof(int ) * 10);
+}
+#pragma ACCEL kernel
+
+void func_top_44(int a[100],int b[100])
+{
+  int b_buf[289];
+  int a_buf[100];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * (299 + -10));
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a_buf[i * 10 + j] = b_buf[i * 30 + j] + b_buf[i * 20 + j] + b_buf[-10 + i * 10 + j];
+    }
+  }
+  for (i = 0; i < 10; i++) {
+    int k;
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a_buf[i * 10 + j] = b_buf[i * 31 + j] + b_buf[i * 21 + j] + b_buf[-9 + i * 11 + j];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#define _PB_N 5
+#define n 5
+#pragma ACCEL kernel
+
+void func_top_45(int A_out[5],int k)
+{
+  int A_out_buf[4];
+  int A[3125];
+  int i0;
+  int i1;
+  int i2;
+  int i3;
+  int i4;
+  int j;
+//	for( i0 = 0 ; i0 <  n-1; i0++){
+  for (i1 = 0; i1 < 5 - 1; i1++) {
+    for (i2 = 0; i2 < 5 - 1; i2++) {
+      for (i3 = 0; i3 < 5 - 1; i3++) {
+        for (i4 = 0; i4 < 5 - 1; i4++) {
+          for (j = 0; j < 5 - 1; j++) {
+            A[i1 * 625 + i2 * 125 + i3 * 25 + i4 * 5 + j] = j;
+          }
+        }
+      }
+    }
+  }
+  for (i1 = 0; i1 < 5 - 1; i1++) {
+    for (i2 = 0; i2 < 5 - 1; i2++) {
+      for (i3 = 0; i3 < 5 - 1; i3++) {
+        for (i4 = 0; i4 < 5 - 1; i4++) {
+          for (j = 0; j < 5 - 1; j++) {
+            
+#pragma ACCEL parallel factor=4
+            int r0 = A[i1 * 625 + i2 * 125 + i3 * 25 + i4 * 5 + j];
+            A_out_buf[j] = r0 / 8;
+          }
+        }
+      }
+    }
+  }
+  memcpy((void *)(&A_out[0]),(const void *)(&A_out_buf[0]),sizeof(int ) * 4);
+}
+#pragma ACCEL kernel
+
+void func_top_46(int a[100])
+{
+  int a_buf[100];
+  int b[100];
+  int i;
+  int j;
+  int k;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[10]),sizeof(int ) * 100);
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      int var1 = i + 1;
+//        int var0=i;
+      for (k = 0; k < 10; k++) {
+        
+#pragma ACCEL pipeline_parallel factor=2
+        a_buf[i * 10 + k] += b[var1 * 10 + j + k];
+//            a[(var0) *  10 + k] += b[(var0) *  10 + j+k];
+      }
+    }
+  }
+  memcpy((void *)(&a[10]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+#pragma ACCEL kernel
+
+void func_top_47(int *a,int sum)
+{
+  int a_buf[920];
+  int i;
+  int j;
+  int k;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * (1021 + -101));
+  for (j = - 1; j < 10; j++) {
+    for (k = - 1; k < 10; k++) {
+      
+#pragma ACCEL pipeline_parallel factor=2
+      sum += a_buf[j * 100 + k];
+      sum += a_buf[10 + j * 100 + k];
+      sum += a_buf[1 + j * 100 + k];
+    }
+  }
+}
+#define N_size -2
+#pragma ACCEL kernel
+
+void func_top_48(int *a,int sum)
+{
+  int a_buf[718];
+  int i;
+  int j;
+  int k;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * (920 + -202));
+  for (j = - 2; j < - 2 + 10; j++) {
+    for (k = - 2; k < - 2 + 10; k++) {
+      
+#pragma ACCEL pipeline_parallel factor=2
+      sum += a_buf[j * 100 + k];
+      sum += a_buf[10 + j * 100 + k];
+      sum += a_buf[1 + j * 100 + k];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_49(int *a,int sum,int N)
+{
+  int a_buf[920];
+  int i;
+  int j;
+  int k;
+{
+    unsigned long merlin_len = N * 101 >= 0?920 : 920 + N * 101;
+    if (((N * 101 >= 0?920 : 920 + N * 101)) >= 0) {
+      assert(merlin_len <= 920L);
+      memcpy((void *)(&a_buf[0]),(const void *)(&a[(N * 101 >= 0?N * 101 : 0)]),sizeof(int ) * merlin_len);
+    }
+  }
+  for (j = N; j < N + 10; j++) {
+    for (k = N; k < N + 10; k++) {
+      
+#pragma ACCEL pipeline_parallel factor=2
+      sum += a_buf[-((N * 101 >= 0?N * 101 : 0)) + j * 100 + k];
+      sum += a_buf[10 + -((N * 101 >= 0?N * 101 : 0)) + j * 100 + k];
+      sum += a_buf[1 + -((N * 101 >= 0?N * 101 : 0)) + j * 100 + k];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_50(int *a,int sum,int N)
+{
+  int a_buf[920];
+  int i;
+  int j;
+  int k;
+  int i0;
+  int i1;
+  int i2;
+  int i3;
+  int i4;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 920);
+  for (i1 = 0; i1 < 551; i1++) {
+    for (i2 = 0; i2 < 551; i2++) {
+      for (i3 = 0; i3 < 551; i3++) {
+        for (i4 = 0; i4 < 551; i4++) {
+          for (j = 0; j < 10; j++) {
+            for (k = 0; k < 10; k++) {
+              
+#pragma ACCEL pipeline_parallel factor=2
+              sum += a_buf[j * 100 + k];
+              sum += a_buf[10 + j * 100 + k];
+              sum += a_buf[1 + j * 100 + k];
+            }
+          }
+        }
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_51(int *a,int sum,int N)
+{
+  int a_buf[920];
+  int i;
+  int j;
+  int k;
+  int i0;
+  int i1;
+  int i2;
+  int i3;
+  int i4;
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 920);
+  for (j = 0; j < 10; j++) {
+    for (k = 0; k < 10; k++) {
+      for (i1 = 0; i1 < 551; i1++) {
+        for (i2 = 0; i2 < 551; i2++) {
+          for (i3 = 0; i3 < 551; i3++) {
+            for (i4 = 0; i4 < 551; i4++) {
+              
+#pragma ACCEL pipeline_parallel factor=2
+              sum += a_buf[j * 100 + k];
+            }
+          }
+        }
+      }
+      sum += a_buf[10 + j * 100 + k];
+      sum += a_buf[1 + j * 100 + k];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_52(int *sum,int a[100],int b[100])
+{
+  int a_buf[100];
+  int sum_buf[10];
+  int b_buf[100];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 100);
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a_buf[i * 10 + j] = b_buf[i];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+  for (j = 0; j < 10; j++) {
+    
+#pragma ACCEL pipeline_parallel factor = 10
+    sum_buf[j] = b_buf[i];
+  }
+  memcpy((void *)(&sum[0]),(const void *)(&sum_buf[0]),sizeof(int ) * 10);
+}
+#pragma ACCEL kernel
+
+void func_top_53(int a[100],int b[100])
+{
+  int b_buf[10];
+  int a_buf[100];
+  int i;
+  int j;
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10);
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL pipeline_parallel factor = 10
+      a_buf[i * 10 + j] = b_buf[i];
+    }
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+  for (j = 0; j < 10; j++) {
+  }
+}
+
+int main()
+{
+  int *a;
+  int *b;
+  int *c;
+  int *aa;
+  int *bb;
+  int *cc;
+  int a_s;
+  int b_s;
+  int c_s;
+  func_top_0(a,b);
+  func_top_1(aa,bb);
+  func_top_2(aa,bb);
+  func_top_3(aa,bb);
+  func_top_4(aa,bb);
+  func_top_4_0(aa,bb);
+  func_top_5(aa,bb);
+  func_top_6(aa,bb);
+  func_top_7(aa,bb);
+  func_top_8(aa,bb);
+  func_top_9(aa,bb);
+  func_top_10(aa,bb);
+  func_top_11(aa,bb);
+  func_top_12(aa,bb);
+  func_top_13(aa,b);
+  func_top_14(aa,bb);
+  func_top_15(aa,bb);
+  func_top_16(aa,bb);
+  func_top_17(aa,bb);
+  func_top_18(aa,bb);
+  func_top_19(aa,b);
+  func_top_20(aa,bb);
+  func_top_21(aa,b);
+  func_top_22(aa,bb);
+  func_top_23(aa,bb);
+  func_top_24(aa);
+  func_top_25(a,b);
+  func_top_26(a,b);
+  func_top_26_1(a,b);
+  func_top_26_2(a,b);
+  func_top_27(aa);
+  func_top_28(aa,bb);
+  func_top_29(aa,bb);
+  func_top_30(aa,bb);
+  func_top_31(aa,bb);
+  func_top_32(a,b);
+  func_top_33(a,b);
+  func_top_33_1(a,b);
+  func_top_34(a,b);
+  func_top_35(a,b);
+  func_top_35_1(a,b);
+  func_top_36(a,b);
+  func_top_37(a,b);
+  func_top_38(aa,bb);
+  func_top_39(aa,bb);
+  func_top_40(aa,bb);
+  func_top_41(aa,bb);
+  func_top_42(aa,bb);
+  func_top_43(a,b);
+  func_top_44(aa,bb);
+  func_top_45(a,b_s);
+  func_top_47(a,a_s);
+  func_top_48(a,a_s);
+  func_top_49(a,a_s,b_s);
+  func_top_50(a,a_s,b_s);
+  func_top_51(a,a_s,b_s);
+  func_top_52(a,aa,b);
+  func_top_53(aa,b);
+  func_top_46(aa);
+  return 0;
+}

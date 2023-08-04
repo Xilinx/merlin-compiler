@@ -1,0 +1,132 @@
+#define VEC_SIZE 100
+
+void _merlin_reduc_init_sum_rdc(int _sum_rdc[100])
+{
+  
+#pragma HLS INLINE
+{
+    for (int i = 0; i < 100; i++) {
+      
+#pragma ACCEL pipeline
+      _sum_rdc[i] = 0;
+    }
+  }
+}
+
+void _merlin_reduc_proc_sum(int _sum_rdc[100],int i,int *a,int j)
+{
+  
+#pragma HLS INLINE
+  _sum_rdc[i] += a[i + 100 * j];
+}
+
+void _merlin_reduc_post_sum_rdc(int *sum,int _sum_rdc[100])
+{
+  
+#pragma HLS INLINE
+{
+    for (int i = 0; i < 100; i++) {
+      
+#pragma ACCEL PIPELINE
+{
+         *sum += _sum_rdc[i];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void vec_add_kernel(int *a,int *c)
+{
+  int sum = 0;
+  int _sum_rdc[100];
+  _merlin_reduc_init_sum_rdc(_sum_rdc);
+  for (int j = 0; j < 100; j++) {
+    for (int i = 0; i < 100; i++) {
+      
+#pragma HLS dependence variable=_sum_rdc array inter false
+      
+#pragma ACCEL pipeline
+      _merlin_reduc_proc_sum(_sum_rdc,i,a,j);
+    }
+  }
+  _merlin_reduc_post_sum_rdc(&sum,_sum_rdc);
+  c[0] = sum;
+}
+
+void _merlin_reduc_init_sum_rdc_0(int _sum_rdc[100])
+{
+  
+#pragma HLS INLINE
+{
+    for (int j = 0; j < 100; j++) {
+      _sum_rdc[j] = 0;
+    }
+  }
+}
+
+void _merlin_reduc_init_sum_rdc_t(int *_sum_rdc_t)
+{
+  
+#pragma HLS INLINE
+{
+     *_sum_rdc_t = 0;
+  }
+}
+
+void _merlin_reduc_proc_sum_0(int *_sum_rdc_t,int *a,int i,int j)
+{
+  
+#pragma HLS INLINE
+   *_sum_rdc_t += a[i + 100 * j];
+}
+
+void _merlin_reduc_post_sum_rdc_t(int _sum_rdc[100],int j,int _sum_rdc_t)
+{
+  
+#pragma HLS INLINE
+{
+    
+#pragma HLS dependence variable=_sum_rdc array inter false
+{
+      _sum_rdc[j] += _sum_rdc_t;
+    }
+  }
+}
+
+void _merlin_reduc_post_sum_rdc_0(int *sum,int _sum_rdc[100])
+{
+  
+#pragma HLS INLINE
+{
+    for (int j = 0; j < 100; j++) {
+      
+#pragma ACCEL PIPELINE
+{
+         *sum += _sum_rdc[j];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void vec_add1_kernel(int *a,int *c)
+{
+  int sum = 0;
+  int _sum_rdc[100];
+  _merlin_reduc_init_sum_rdc_0(_sum_rdc);
+  for (int j = 0; j < 100; j++) {
+    int _sum_rdc_t;
+    _merlin_reduc_init_sum_rdc_t(&_sum_rdc_t);
+    for (int i = 0; i < 100; i++) {
+      
+#pragma HLS dependence variable=_sum_rdc_t array inter false
+      
+#pragma ACCEL parallel
+      _merlin_reduc_proc_sum_0(&_sum_rdc_t,a,i,j);
+    }
+    _merlin_reduc_post_sum_rdc_t(_sum_rdc,j,_sum_rdc_t);
+  }
+  _merlin_reduc_post_sum_rdc_0(&sum,_sum_rdc);
+  c[0] = sum;
+}

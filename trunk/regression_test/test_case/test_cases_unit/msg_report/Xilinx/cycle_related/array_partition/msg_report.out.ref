@@ -1,0 +1,56 @@
+================================================================================
+Kernel : top(array_partition.cpp:2)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+a               32       (array_partition.cpp:2) memory burst[1]
+b               32       (array_partition.cpp:2) memory burst[2]
+c               32       (array_partition.cpp:2) memory burst[3]
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++-----------------------------------------+-----+------+------+------+------+------+------+-----------------------+
+|                hierarchy                | TC  |  AC  | CPC  | LUT  |  FF  | BRAM | DSP  |        comment        |
++-----------------------------------------+-----+------+------+------+------+------+------+-----------------------+
+|top (array_partition.cpp:2)              |     |  3254|  3254|  1.35|  0.28|  1.48|  0.00|kernel                 |
+|    auto memory burst read for 'a'       |     |     -|  1050|      |      |      |      |                       |
+|    auto memory burst read for 'b'       |     |     -|  1050|      |      |      |      |                       |
+|    loop i (array_partition.cpp:4)       |     |     -|     -|  0.38|  0.09|  0.00|  0.00|10x parallelized       |
+|        loop i0 (array_partition.cpp:5)  |  100|     -|     -|      |      |      |      |IL=3, fully pipelined  |
+|    auto memory burst write for 'c'      |     |     -|  1050|      |      |      |      |                       |
++-----------------------------------------+-----+------+------+------+------+------+------+-----------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++-------------------------------------------+--------+----------+
+|                   Name                    | Cycles | Activity |
++-------------------------------------------+--------+----------+
+|        top (array_partition.cpp:2)        |  3254  | 100.00%  |
+| auto memory burst (array_partition.cpp:2) |   0    |  0.00%   |
+| auto memory burst (array_partition.cpp:2) |   0    |  0.00%   |
+| auto memory burst (array_partition.cpp:2) |   0    |  0.00%   |
++-------------------------------------------+--------+----------+
+
++-----------------------------+------+------+------+------+
+|            Name             | BRAM | DSP  |  FF  | LUT  |
++-----------------------------+------+------+------+------+
+| top (array_partition.cpp:2) | 1.48 | 0.00 | 0.28 | 1.35 |
++-----------------------------+------+------+------+------+
+[1] Suboptimal memory coalescing: variable 'a' (array_partition.cpp:2)
+  Reason: the lowest dimension size of on-chip buffer is not divisible by 16
+[2] Suboptimal memory coalescing: variable 'b' (array_partition.cpp:2)
+  Reason: the lowest dimension size of on-chip buffer is not divisible by 16
+[3] Suboptimal memory coalescing: variable 'c' (array_partition.cpp:2)
+  Reason: the lowest dimension size of on-chip buffer is not divisible by 16
+
+
+

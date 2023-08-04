@@ -1,0 +1,4 @@
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test_call2.cpp:17)
+ Reason: multiple accesses or complex access pattern. 
+INFO: [FGPIP-102] Loop 'j' (test_call2.cpp:30) is fully parallelized

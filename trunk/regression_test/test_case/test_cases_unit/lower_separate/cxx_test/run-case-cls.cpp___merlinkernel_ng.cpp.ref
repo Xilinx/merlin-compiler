@@ -1,0 +1,25 @@
+#include "merlin_type_define.h"
+extern int __merlin_include__GB_merlin_type_define_h_1;
+
+static void p_ZN3yyy2fyEv_1()
+{
+}
+
+static void p_ZN3xxx2fyEv_1()
+{
+}
+int _ZN3xxx1xE;
+int _ZN3yyy1yE;
+#pragma ACCEL kernel
+
+void ng()
+{
+//  xxx::S s;
+  _ZN3xxx1xE = 0;
+  _ZN3yyy1yE = 168;
+  p_ZN3yyy2fyEv_1();
+  p_ZN3xxx2fyEv_1();
+  p_ZN3yyy2fyEv_1();
+  int x;
+  (const int &)x;
+}

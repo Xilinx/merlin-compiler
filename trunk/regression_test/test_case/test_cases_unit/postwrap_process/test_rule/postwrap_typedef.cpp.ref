@@ -1,0 +1,149 @@
+#include <stdio.h>
+#include <stdlib.h>
+typedef int INT_IIIII;
+typedef INT_IIIII INT_IIII;
+typedef INT_IIII INT_III;
+typedef INT_III INT_II;
+typedef INT_II INT_I;
+typedef INT_I int32;
+typedef int32 *int32_ptr;
+typedef int32 &int32_ref;
+typedef const int32 const_int32;
+typedef const int32 *int32_ptr_const;
+typedef const int32 *const int32_const_ptr_const;
+
+struct st_a 
+{
+  int a;
+}
+;
+typedef struct st_a st_b;
+typedef struct {
+int32_ptr a;
+const int32_ptr b[1];
+int32_ref c;}st;
+
+int get_zero()
+{
+  return 0;
+}
+void g0();
+int sum(const int ar[6],int n);
+int func_1(int a);
+int g6(int a);
+int g5();
+static int g4();
+extern int g8();
+
+void g7(const int *const a)
+{
+}
+#pragma ACCEL kernel
+
+void fun()
+{
+  const int a0 = 99;
+  int o = 88;
+  int *p = &o;
+  int *&p_ref = p;
+  const int b0 = 77;
+  const int *const b1 = &b0;
+  const int *const b2 = &b0;
+  g7(b2);
+  double num = 0.92;
+  union {
+  int a;
+  int *b;}u;
+  int a = 0;
+  for (int &b = a; b < 1024; ++b) {
+    printf("%d\n",(int )num);
+    while(int c = get_zero()){
+      printf("%p\n",(int *)((int )num));
+      if (int d = get_zero()) {
+        printf("%p\n",(int *)((int )num));
+      }
+    }
+    int e;
+    do {
+      printf("%p\n",(int *)((int )num));
+    }while ((e = get_zero()));
+  }
+  printf("%p\n",(int *)((int )num));
+  g0();
+}
+
+int g6(int a)
+{
+  int *p = 0L;
+  return 0;
+}
+
+int g5()
+{
+  int *p = 0L;
+  int a;
+  g6(a);
+  return 0;
+}
+
+static int g4()
+{
+  int *p = 0L;
+  g5();
+  return 0;
+}
+
+int g3()
+{
+  int *p = 0L;
+  g4();
+  return 0;
+}
+
+int g2()
+{
+  int *p = 0L;
+  g3();
+  return 0;
+}
+
+int g1()
+{
+  int *p = 0L;
+  g2();
+  return 0;
+}
+
+void g0()
+{
+  g1();
+}
+
+int main()
+{
+  fun();
+  return 0;
+}
+
+int sum(const int ar[6])
+{
+  int total = 0;
+  int val = (sizeof(int ));
+  for (int i = 0; i < 6; i++) 
+    total += ar[i] + val;
+  return total;
+}
+#pragma ACCEL kernel
+
+int func_1(int a)
+{
+  int tot;
+  (int [2]){(10), (20)};
+  int arr[6] = {(1), (2), (3), (4), (5), (6)};
+  tot = sum(arr);
+}
+
+st func_2(st_b aa)
+{
+  aa . a = 0;
+}

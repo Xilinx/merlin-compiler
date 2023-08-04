@@ -1,0 +1,6 @@
+
+WARNING: [LINEBUF-202] Stopping line buffer optimization on variable 'b' in loop 'L_0_0' (test_multi_variable_diff.cpp:12): the accesses are not stencil.
+
+
+WARNING: [LINEBUF-202] Stopping line buffer optimization on variable 'a' in loop 'L_0_0' (test_multi_variable_diff.cpp:12): the accesses are not stencil.
+

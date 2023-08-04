@@ -1,0 +1,25 @@
+SgFunctionDeclaration:int f() {...}
+SgFunctionParameterList:
+SgFunctionDeclaration:int f(int ) {...}
+SgFunctionParameterList:int 
+SgInitializedName:
+SgTemplateFunctionDeclaration:template < typename T >
+int f ( T );
+SgFunctionParameterList:T 
+SgInitializedName:
+SgFunctionDeclaration:int g() {...}
+SgFunctionParameterList:
+SgFunctionDefinition:function definition: int g() {...}
+SgBasicBlock:{({int a;a = 0;});return 0;}
+SgExprStatement:({int a;a = 0;});
+SgStatementExpression:({int a;a = 0;})
+SgBasicBlock:{int a;a = 0;}
+SgVariableDeclaration:int a;
+SgInitializedName:a
+SgExprStatement:a = 0;
+SgAssignOp:a = 0
+SgVarRefExp:a
+SgIntVal:0
+SgReturnStmt:return 0;
+SgIntVal:0
+

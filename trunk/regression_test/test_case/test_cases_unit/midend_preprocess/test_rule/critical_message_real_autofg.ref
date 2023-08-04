@@ -1,0 +1,9 @@
+
+WARNING: [PROCS-239] Pragma "ACCEL PARALLEL FACTOR=auto{options: P1=range(1, 101); default: 1} auto{options: R=["", "reduction=a"]; default:""} " (transformation:0) with 'auto' value is not supported.
+  Hint: please enable custom DSE flow
+
+WARNING: [PROCS-239] Pragma "ACCEL TILE FACTOR=auto{options: T1=[2**x for x in range(7) if x==0 or (2**x)*T2<100]; default: 1} PARALLEL_FACTOR=4 " (transformation:0) with 'auto' value is not supported.
+  Hint: please enable custom DSE flow
+
+WARNING: [PROCS-239] Pragma "ACCEL TILE FACTOR=auto{options: T2=[2**x for x in range(7) if x==0 or (2**x)*T1 < 100]; default:1} " (transformation:0) with 'auto' value is not supported.
+  Hint: please enable custom DSE flow

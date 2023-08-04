@@ -1,0 +1,6 @@
+
+WARNING: [LWCPP-201] kernel's type signature is not reference C-like or global-namespace types. Down stream simulation may have compilation problem: void k(class ::globalID{pub... g) {...} (unsupported-interface.cpp:15)
+
+WARNING: [LWCPP-201] kernel's type signature is not reference C-like or global-namespace types. Down stream simulation may have compilation problem: void k2(class ::hls::stream ... out) {...} (unsupported-interface.cpp:22)
+
+WARNING: [LWCPP-201] kernel's type signature is not reference C-like or global-namespace types. Down stream simulation may have compilation problem: void k3(class ::globalID{pub... out) {...} (unsupported-interface.cpp:29)

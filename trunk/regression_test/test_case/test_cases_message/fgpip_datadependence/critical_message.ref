@@ -1,0 +1,12 @@
+
+ERROR: [SYNCHK-302] Found an out-of-bound read access on argument 'a' (vec_add_kernel.cpp:7) : access range=[0..16383]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+ERROR: [SYNCHK-302] Found an out-of-bound read access on argument 'b' (vec_add_kernel.cpp:7) : access range=[0..16383]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+ERROR: [SYNCHK-301] Found an out-of-bound write access on argument 'c' (vec_add_kernel.cpp:7) : access range=[0..16383]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+ERROR: [SYNCHK-302] Found an out-of-bound read access on argument 'c' (vec_add_kernel.cpp:7) : access range=[0..16383]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.

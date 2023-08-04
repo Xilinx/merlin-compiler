@@ -1,0 +1,61 @@
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+
+void sub(int *a,int i)
+{
+  int j = 0;
+  for (j = 0; j < 10000; j++) {
+    a[i * 10000 + j] = 0;
+  }
+}
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+  int i;
+  for (i = 0; i < 100; ++i) {
+    sub(a,i);
+    sub(a,i);
+  }
+}
+
+void sub_0_0(int *a,int i)
+{
+  int j = 0;
+  for (j = 0; j < 10000; j++) {
+    a[i * 10000 + j] = 0;
+  }
+}
+
+void sub_0(int *a,int i)
+{
+  sub_0_0(a,i);
+}
+#pragma ACCEL kernel
+
+void top_0(int *a)
+{
+  int i;
+  for (i = 0; i < 100; ++i) {
+    sub_0(a,i);
+  }
+}
+
+void sub_2(int *a)
+{
+  int j = 0;
+  for (j = 0; j < 10000; j++) {
+    a[j] = 0;
+  }
+}
+#pragma ACCEL kernel
+
+void top_2(int *a,int *b)
+{
+  int a_buf[1000000];
+  int i;
+  for (i = 0; i < 100; ++i) {
+    sub_2(&a_buf[i * 10000]);
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 1000000);
+}

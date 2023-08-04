@@ -1,0 +1,34 @@
+#include<ap_int.h>
+
+void top(int *a,int *b,class ap_int< 10 > *c,class ap_uint< 10 > *d,int *e,int *f,int *g)
+{
+  for (class ap_int< 4 > i(0); i<10;  ++ i) {
+    a[100-2*i] = i;
+  }
+  class ap_uint< 5 > j;
+// Standardize from: for(j = 0;j<10;j+=1) {...}
+  for (j = 0; j <= 9L; j++) {
+    class ap_uint< 5 > _in_j = 0L + 1L * j;
+    b[(_in_j*2+1)] = _in_j;
+  }
+  j = 9L + 1L;
+  for (class ap_int< 5 > k(1); k<10; k = k+1) {
+    c[k*2+3] = k;
+  }
+  for (class ap_int< 5 > m(10); m>=0; m = m-1) {
+    d[m*4+2] = m;
+  }
+  class ap_int< 10 > bound = (5);
+  for (int i0 = 0; i0<bound; ++i0) {
+    e[i0] = i0;
+  }
+  bound = 10;
+  for (class ap_int< 10 > i1(0); i1<bound+1;  ++ i1) {
+    f[i1] = i1;
+  }
+  for (class ap_int< 10 > i(0); i<100;  ++ i) {
+    for (class ap_int< 10 > j(0); j<i/2;  ++ j) {
+      g[j] = 0;
+    }
+  }
+}

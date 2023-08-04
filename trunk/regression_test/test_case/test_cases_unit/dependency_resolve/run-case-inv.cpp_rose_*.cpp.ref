@@ -1,0 +1,126 @@
+#include <math.h>
+extern int __merlin_include__GB_math_h_0;
+
+void simple_float()
+{
+  int i;
+  float x;
+  for ((i = 0 , x *= i); i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100 && (x *= i); ++i) {
+    
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100; (++i , x *= i)) {
+    
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    x *= i;
+  }
+  while(1){
+    
+#pragma ACCEL pipeline
+    x *= i;
+  }
+  while((x *= i)){
+    
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    x = x * i;
+  }
+  for (i = 0; i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    x = i * x;
+  }
+}
+
+void simple_double()
+{
+  int i;
+  double x;
+  for ((i = 0 , x *= i); i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100 && (x *= i); ++i) {
+    
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100; (++i , x *= i)) {
+    
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    x *= i;
+  }
+  while(1){
+    
+#pragma ACCEL pipeline
+    x *= i;
+  }
+  while((x *= i)){
+    
+#pragma ACCEL pipeline
+  }
+}
+
+double f(double x,double y)
+{
+  return x + y;
+}
+
+void complicated()
+{
+  int i;
+  double x;
+  double y;
+  double z;
+  int __merlin_mul_assign_reduce_1 = 0;
+  double __merlin_mul_assign_reduce_2 = x;
+  for ((i = 0 , x = __merlin_mul_assign_reduce_2 * pow(y + z + f(x,z),(double )(__merlin_mul_assign_reduce_1 + 1))); i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    ++__merlin_mul_assign_reduce_1;
+  }
+  for (i = 0; i < 100 && (x *= y + z + f(x,z)); ++i) {
+    
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100; (++i , x *= y + z + f(x,z))) {
+    
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100; ++i) {
+    
+#pragma ACCEL pipeline
+    x *= y + z + f(x,z);
+  }
+  while(1){
+    
+#pragma ACCEL pipeline
+    x *= y + z + f(x,z);
+  }
+  while((x *= y + z + f(x,z))){
+    
+#pragma ACCEL pipeline
+  }
+}
+#pragma ACCEL kernel
+
+void g()
+{
+  simple_float();
+  simple_double();
+  complicated();
+}

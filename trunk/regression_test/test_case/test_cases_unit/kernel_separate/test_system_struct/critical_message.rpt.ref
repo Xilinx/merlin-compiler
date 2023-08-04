@@ -1,0 +1,4 @@
+
+ERROR: [SEPAR-307] System type is not supported: 'struct ::stat' (stat.h:46)
+
+ERROR: [SEPAR-307] System type is not supported: 'struct ::timespec' (time.h:120)

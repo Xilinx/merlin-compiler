@@ -1,0 +1,6 @@
+
+WARNING: [SYNCHK-201] Found a potential out-of-bound write access on the argument 'a' (add_test3.c:2) : access range=[-1..99]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+WARNING: [SYNCHK-202] Found a potential out-of-bound read access on the argument 'a' (add_test3.c:2) : access range=[-1..-1]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.

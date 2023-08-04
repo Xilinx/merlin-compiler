@@ -1,0 +1,52 @@
+#include<stdio.h>
+#include<string.h>
+#define HS 64
+#define WS 64
+#define FW 1
+#define FH 1
+#pragma ACCEL kernel
+
+void conv1d(float in[64][64],float filter[1][1],float out[64][64])
+{
+  
+#pragma ACCEL interface VARIABLE=in BURST_OFF
+  for (int i = 0; i < 64 - 1 + 1; i++) {
+    float slide_wind_0[1];
+    for (int j = 0L; j < 64 - 1 + 1; j++) {{
+        float tmp_wind_0;
+        tmp_wind_0 = in[0L + i * 1L][j + 0L + 0L];
+        slide_wind_0[0L] = tmp_wind_0;
+      }
+      if (j >= 0L && j <= 63L) {
+        float tmp = 0.0f;
+        for (int p = 0; p < 1; p++) 
+          for (int q = 0; q < 1; q++) {
+            tmp += slide_wind_0[q] * filter[p][q];
+            printf("%d, %d, %d, %d : %f\n",i,j,p,q,(double )tmp);
+          }
+        out[i][j] = tmp;
+      }
+    }
+  }
+}
+float in[64][64];
+float filter[1][1];
+float out[64][64];
+
+int main()
+{
+  for (int i = 0; i < 64; i++) 
+    for (int j = 0; j < 64; j++) {
+      in[i][j] = ((j + 1) * (i + 1));
+    }
+  for (int i = 0; i < 1; i++) 
+    for (int j = 0; j < 1; j++) {
+      filter[i][j] = 1;
+    }
+  for (int i = 0; i < 64 - 1 + 1; i++) 
+    for (int j = 0; j < 64 - 1 + 1; j++) {
+      out[i][j] = 0;
+    }
+  conv1d(in,filter,out);
+  return 0;
+}

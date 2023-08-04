@@ -1,0 +1,7 @@
+void foo(int *);
+#pragma ACCEL kernel
+
+void top()
+{
+  foo(0);
+}

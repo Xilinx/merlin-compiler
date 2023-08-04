@@ -1,0 +1,5 @@
+
+ERROR: [SEPAR-317] Share memory in task kernels should use the same bank number:
+ #pragma ACCEl interface variable=a depth=100 bank=0
+#pragma ACCEl interface variable=a depth=100 bank=1
+

@@ -1,0 +1,43 @@
+#include<string.h>
+//1d dimension
+#pragma ACCEL kernel
+
+void top(int *a,char *b,unsigned int *c,float *d,double *f,signed short *g,short *h)
+{
+  int _memcpy_i0_1;
+  int _memcpy_i0_0;
+  int a_buf[1000];
+  memcpy(a_buf,a,sizeof(int ) * 1000);
+  char b_buf[100][64];
+  for (_memcpy_i0_1 = 0; _memcpy_i0_1 < 100; ++_memcpy_i0_1) {
+    
+#pragma HLS COALESCING_WIDTH=16
+    for (_memcpy_i0_0 = 0; _memcpy_i0_0 < 64; ++_memcpy_i0_0) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=2
+      b_buf[_memcpy_i0_1][_memcpy_i0_0] = b[0 + ((0 * 100 + _memcpy_i0_1) * 64 + _memcpy_i0_0)];
+    }
+  }
+  unsigned int c_buf[100][200][16];
+  memcpy(c_buf[0][0],c,sizeof(unsigned int ) * 100 * 200 * 16);
+  float d_buf[100][200][300][16];
+  memcpy(d_buf[0][0][0],d,sizeof(float ) * 100 * 200 * 300 * 16);
+  double f_buf[100][200];
+  memcpy(f_buf[0],f,sizeof(double ) * 100 * 200);
+  signed short g_buf[2000];
+  memcpy(g_buf,g,sizeof(signed short ) * 2000);
+  short h_buf[25][4][128][8][32];
+  memcpy(h_buf,h,sizeof(short ) * 25 * 4 * 128 * 8 * 32);
+}
+
+int main()
+{
+  int *a;
+  char *b;
+  unsigned int *c;
+  float *d;
+  double *f;
+  signed short *g;
+  short *h;
+  top(a,b,c,d,f,g,h);
+}

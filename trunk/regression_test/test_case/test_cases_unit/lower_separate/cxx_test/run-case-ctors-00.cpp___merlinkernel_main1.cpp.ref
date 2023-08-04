@@ -1,0 +1,79 @@
+#include "merlin_type_define.h"
+extern int __merlin_include__GB_merlin_type_define_h_0;
+
+static void p_ZN1BC2Ev_1(struct B *this_)
+{
+  this_ -> u = ((unsigned int )21);
+}
+
+static void p_ZN1CC2Ev_1(struct C *this_)
+{
+  this_ -> u = ((unsigned int )42);
+  this_ -> bob = ((char )84);
+  this_ -> bob += 1;
+}
+
+static void p_ZN1DC2Ev_1(struct D *this_)
+{
+  this_ -> u = ((unsigned int )12);
+}
+
+static void p_ZN1D1fEv_1(struct D *this_)
+{
+}
+
+static void p_ZN1DC2Ej_1(struct D *this_,unsigned int u)
+{
+  this_ -> u = u;
+  p_ZN1D1fEv_1(this_);
+}
+
+static void p_ZN1EC2Ej_1(struct E *this_,unsigned int u)
+{
+  p_ZN1DC2Ej_1(&this_ -> d,u);
+  p_ZN1D1fEv_1(&this_ -> d);
+}
+
+static void p_ZN1FC2Ec_1(struct F *this_,char c)
+{
+  this_ -> u = ((unsigned int )42);
+  this_ -> c = c;
+  p_ZN1EC2Ej_1(&this_ -> e,(unsigned int )c);
+  ;
+}
+
+static struct F make_f_1()
+{
+  struct G g;
+  struct D d;
+  p_ZN1DC2Ev_1(&d);
+  ;
+  struct E e;
+  p_ZN1EC2Ej_1(&e,(unsigned int )46);
+  ;
+  struct F temp;
+  p_ZN1FC2Ec_1(&temp,(char )94);
+  return temp;
+}
+
+static unsigned int anonymous_decl_1()
+{
+  struct E temp;
+  p_ZN1EC2Ej_1(&temp,(unsigned int )23);
+  return (temp) . d . u;
+}
+#pragma ACCEL kernel
+
+int main1()
+{
+  struct A a;
+  ;
+  struct B b;
+  p_ZN1BC2Ev_1(&b);
+  ;
+  struct C c;
+  p_ZN1CC2Ev_1(&c);
+  ;
+  make_f_1();
+  anonymous_decl_1();
+}

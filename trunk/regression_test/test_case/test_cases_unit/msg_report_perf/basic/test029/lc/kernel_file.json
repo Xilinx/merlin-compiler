@@ -1,0 +1,5 @@
+{
+    "test": {
+        "test": "__merlinkernel_test.cpp"
+    }
+}

@@ -1,0 +1,115 @@
+//(C) Copyright 2016-2021 Xilinx, Inc.
+//All Rights Reserved.
+//
+//Licensed to the Apache Software Foundation (ASF) under one
+//or more contributor license agreements.  See the NOTICE file
+//distributed with this work for additional information
+//regarding copyright ownership.  The ASF licenses this file
+//to you under the Apache License, Version 2.0 (the
+//"License"); you may not use this file except in compliance
+//with the License.  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//Unless required by applicable law or agreed to in writing,
+//software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+//KIND, either express or implied.  See the License for the
+//specific language governing permissions and limitations
+//under the License. (edited)
+void simple_float() {
+  int i;
+  float x;
+
+  for (i = 0, (x *= i); i < 100; ++i) {
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100 && (x *= i); ++i) {
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100; ++i, (x *= i)) {
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100; ++i) {
+#pragma ACCEL pipeline
+    (x *= i);
+  }
+  while (1) {
+#pragma ACCEL pipeline
+    x *= i;
+  }
+  while (x *= i) {
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100; ++i) {
+#pragma ACCEL pipeline
+    x = x * i;
+  }
+  for (i = 0; i < 100; ++i) {
+#pragma ACCEL pipeline
+    x = i * x;
+  }
+}
+
+void simple_double() {
+  int i;
+  double x;
+
+  for (i = 0, (x *= i); i < 100; ++i) {
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100 && (x *= i); ++i) {
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100; ++i, (x *= i)) {
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100; ++i) {
+#pragma ACCEL pipeline
+    (x *= i);
+  }
+  while (1) {
+#pragma ACCEL pipeline
+    x *= i;
+  }
+  while (x *= i) {
+#pragma ACCEL pipeline
+  }
+}
+
+double f(double x, double y) {
+  return x + y;
+}
+
+void complicated() {
+  int i;
+  double x, y, z;
+
+  for (i = 0, (x *= y + z + f(x, z)); i < 100; ++i) {
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100 && (x *= y + z + f(x, z)); ++i) {
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100; ++i, (x *= y + z + f(x, z))) {
+#pragma ACCEL pipeline
+  }
+  for (i = 0; i < 100; ++i) {
+#pragma ACCEL pipeline
+    (x *= y + z + f(x, z));
+  }
+  while (1) {
+#pragma ACCEL pipeline
+    x *= y + z + f(x, z);
+  }
+  while (x *= y + z + f(x, z)) {
+#pragma ACCEL pipeline
+  }
+}
+
+#pragma ACCEL kernel
+void g() {
+  simple_float();
+  simple_double();
+  complicated();
+}

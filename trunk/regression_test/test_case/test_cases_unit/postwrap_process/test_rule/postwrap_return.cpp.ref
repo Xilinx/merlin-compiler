@@ -1,0 +1,108 @@
+#include <stdio.h>
+#include <stdlib.h>
+void handle(int b,int merlin_return_value[1]);
+#pragma ACCEL kernel
+
+void handle(int b,int merlin_return_value[1])
+{
+  
+#pragma ACCEL interface variable=merlin_return_value io=WO scope_type=return 
+  int a = 89;
+  if (!a) {
+    merlin_return_value[0] = ++a;
+    return ;
+  }
+  switch(b){
+    case 0:
+    merlin_return_value[0] = b--;
+    return ;
+    break; 
+    case 1:
+{
+      merlin_return_value[0] = a + b;
+      return ;
+      break; 
+    }
+    default:
+{
+      merlin_return_value[0] = ((a , b));
+      return ;
+      break; 
+    }
+  }
+  for (int i = 0; i <= 10; ++i) {
+    do {
+      while(i > 5){
+        merlin_return_value[0] = i * i * i;
+        return ;
+      }
+    }while (0);
+  }
+  merlin_return_value[0] = a * b;
+  return ;
+}
+#pragma ACCEL kernel
+
+void fun(int merlin_return_value[1])
+{
+  
+#pragma ACCEL interface variable=merlin_return_value io=WO scope_type=return 
+  int a = 0;
+  int b = 1;
+  merlin_return_value[0] = (a > b?a : b);
+  return ;
+}
+#pragma ACCEL kernel
+
+static void fun_1(int merlin_return_value[1])
+{
+  
+#pragma ACCEL interface variable=merlin_return_value io=WO scope_type=return 
+  int a = 0;
+  int b = 1;
+  merlin_return_value[0] = (a > b?a : b);
+  return ;
+}
+
+int g1(int &a)
+{
+  int *p = &a;
+  return  *p;
+}
+#pragma ACCEL kernel
+
+void g0(int &a,int merlin_return_value[1])
+{
+  
+#pragma ACCEL interface variable=merlin_return_value io=WO scope_type=return 
+  int *p = &a;
+  merlin_return_value[0] = g1( *p);
+  return ;
+}
+
+int main()
+{
+  int a = 0;
+  int merlin_return_value_2;
+  g0(a,&merlin_return_value_2);
+  int b = merlin_return_value_2;
+  int merlin_return_value_0;
+  fun(&merlin_return_value_0);
+  if (const int c = merlin_return_value_0) {
+    printf("hello\n");
+  }
+  int d = 0;
+  int merlin_return_value;
+  
+#pragma ACCEL kernel
+  handle(b,&merlin_return_value);
+  d = merlin_return_value;
+  int merlin_return_value_1;
+  fun_1(&merlin_return_value_1);
+  if ((a = merlin_return_value_1)) {
+    int merlin_return_value_3;
+    g0(d,&merlin_return_value_3);
+    merlin_return_value_3;
+  }
+  return 0;
+}

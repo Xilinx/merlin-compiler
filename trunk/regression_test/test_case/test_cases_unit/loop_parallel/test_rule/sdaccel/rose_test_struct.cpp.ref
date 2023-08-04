@@ -1,0 +1,125 @@
+#include "header.h"
+
+struct DATA32 
+{
+  unsigned int data[32];
+}
+;
+
+class type_a 
+{
+  private: int a;
+  
+
+  public: inline void write(int val)
+{
+    (this) -> a = val;
+  }
+}
+;
+typedef union {
+int b;
+short s[4];}bus_to_short_t;
+class type_a c_a;
+
+struct st 
+{
+  int data[4];
+}
+;
+
+static void sub1(struct st_0 *this_)
+{
+  long state = 1;
+  for (int round_counter = 1; round_counter <= 14; round_counter++) 
+// Original: #pragma ACCEL PARALLEL
+{
+    
+#pragma HLS unroll
+    state ^= this_ -> key_list[(long )round_counter];
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_0(int a[32])
+{
+  struct DATA32 burst;
+  
+#pragma HLS array_partition variable=burst.data complete dim=1
+  struct st_0 cipher;
+// Existing HLS partition: #pragma HLS array_partition variable=cipher complete dim=0
+  
+#pragma HLS array_partition variable=cipher.key_list complete dim=1
+  class type_a *c_b = &c_a;
+  for (int i = 0; i < 32; i++) 
+// Original: #pragma ACCEL PARALLEL
+{
+    
+#pragma HLS unroll
+    burst . data[i] = a[i];
+    c_b ->  write (a[i]);
+  }
+  sub1(&cipher);
+  bus_to_short_t val;
+  short out[4];
+  
+#pragma HLS array_partition variable=out complete dim=1
+  for (int i = 0; i < 4; i++) 
+// Original: #pragma ACCEL PARALLEL
+{
+    
+#pragma HLS unroll
+    out[i] = val . s[i];
+  }
+  struct st st_a;
+  
+#pragma HLS array_partition variable=st_a.data complete dim=1
+  struct st st_b[3];
+  
+#pragma HLS array_partition variable=st_b complete dim=1
+  
+#pragma HLS array_partition variable=st_b[2].data complete dim=1
+  
+#pragma HLS array_partition variable=st_b[1].data complete dim=1
+  
+#pragma HLS array_partition variable=st_b[0].data complete dim=1
+  struct st st_c[2][3];
+  
+#pragma HLS array_partition variable=st_c complete dim=2
+  
+#pragma HLS array_partition variable=st_c complete dim=1
+  
+#pragma HLS array_partition variable=st_c[1][2].data complete dim=1
+  
+#pragma HLS array_partition variable=st_c[0][2].data complete dim=1
+  
+#pragma HLS array_partition variable=st_c[1][1].data complete dim=1
+  
+#pragma HLS array_partition variable=st_c[0][1].data complete dim=1
+  
+#pragma HLS array_partition variable=st_c[1][0].data complete dim=1
+  
+#pragma HLS array_partition variable=st_c[0][0].data complete dim=1
+  for (int j = 0; j < 3; j++) 
+// Original: #pragma ACCEL parallel
+{
+    
+#pragma HLS unroll
+    for (int i = 0; i < 4; ++i) 
+// Original: #pragma ACCEL parallel
+{
+      
+#pragma HLS unroll
+      st_a . data[i] = 0;
+      st_a . data[i] += 1;
+      st_b[j] . data[i] = 0;
+      for (int k = 0; k < 2; ++k) 
+// Original: #pragma ACCEL parallel
+{
+        
+#pragma HLS unroll
+        st_c[k][j] . data[i] = 0;
+      }
+    }
+  }
+}

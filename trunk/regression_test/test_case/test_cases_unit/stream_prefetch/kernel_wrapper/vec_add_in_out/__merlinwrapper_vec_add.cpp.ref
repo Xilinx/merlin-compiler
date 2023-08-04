@@ -1,0 +1,38 @@
+#include <assert.h>
+#include <math.h>
+#include "merlin_type_define.h"
+static void __merlin_dummy_4029();
+void vec_add(int s,int a[1024],int b[1024],int c[1024]);
+extern int __merlin_include__LB___merlinhead_kernel_top_h_0;
+#include "__merlinhead_kernel_top.h"
+extern int __merlin_include__LE___merlinhead_kernel_top_h_0;
+
+void __merlinwrapper_vec_add(int s,int a[1024],int b[1024],int c[1024])
+{
+  
+#pragma ACCEL kernel
+  vec_add(s,a,b,c);
+}
+
+void __merlin_vec_add(int s,int a[1024],int b[1024],int c[1024])
+{
+  
+#pragma ACCEL string __merlin_check_opencl();
+  
+#pragma ACCEL string __merlin_init_vec_add();
+  __merlinwrapper_vec_add(s,a,b,c);
+  
+#pragma ACCEL string __merlin_release_vec_add();
+}
+
+void __merlin_write_buffer_vec_add(int s,int a[1024],int b[1024],int c[1024])
+{
+}
+
+void __merlin_read_buffer_vec_add(int s,int a[1024],int b[1024],int c[1024])
+{
+}
+
+void __merlin_execute_vec_add(int s,int a[1024],int b[1024],int c[1024])
+{
+}

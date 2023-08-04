@@ -1,0 +1,92 @@
+#include "merlin_type_define.h"
+extern int __merlin_include__GB_merlin_type_define_h_0;
+int var;
+
+static void p_Z1fv_1()
+{
+  var++;
+}
+
+static void p_Z1fi_1(int x)
+{
+  var += x;
+}
+
+static void p_Z1fiii_1(int x,int y,int z)
+{
+  var += x + y + z;
+}
+
+static void p_Z2ogv_1()
+{
+  var++;
+}
+
+static void p_ZN6CommonC2Ei_1(struct Common *this_,int val)
+{
+  this_ -> y = 168;
+  this_ -> x = val;
+}
+
+static void p_Z2og6Commoni_1(struct Common x,int y)
+{
+  var += x . x + y;
+}
+
+static void p_Z2og6Common6Common6Common_1(struct Common x,struct Common y,struct Common z)
+{
+  var += x . x + y . x + z . x;
+}
+
+static void fc_1()
+{
+  var += 1;
+}
+
+static void mid1_1()
+{
+  fc_1();
+}
+
+static void mid2_1()
+{
+  fc_1();
+}
+
+static void start_1()
+{
+  mid1_1();
+  mid2_1();
+}
+#pragma ACCEL kernel
+
+void g()
+{
+  p_Z1fv_1();
+  p_Z1fi_1(1);
+  p_Z1fiii_1(2,3,100);
+  p_Z1fiii_1(4,5,6);
+  p_Z2ogv_1();
+  struct Common temp;
+  p_ZN6CommonC2Ei_1(&temp,1);
+  p_Z2og6Commoni_1(temp,100);
+  struct Common temp_0;
+  p_ZN6CommonC2Ei_1(&temp_0,1);
+  p_Z2og6Commoni_1(temp_0,2);
+  struct Common temp_1;
+  p_ZN6CommonC2Ei_1(&temp_1,2);
+  struct Common temp_2;
+  p_ZN6CommonC2Ei_1(&temp_2,3);
+  struct Common temp_3;
+  p_ZN6CommonC2Ei_1(&temp_3,100);
+  p_Z2og6Common6Common6Common_1(temp_1,temp_2,temp_3);
+  struct Common temp_4;
+  p_ZN6CommonC2Ei_1(&temp_4,4);
+  struct Common temp_5;
+  p_ZN6CommonC2Ei_1(&temp_5,5);
+  struct Common temp_6;
+  p_ZN6CommonC2Ei_1(&temp_6,6);
+  p_Z2og6Common6Common6Common_1(temp_4,temp_5,temp_6);
+  fc_1();
+  start_1();
+}

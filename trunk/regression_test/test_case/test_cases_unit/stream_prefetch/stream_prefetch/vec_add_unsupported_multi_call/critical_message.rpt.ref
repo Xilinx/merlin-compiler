@@ -1,0 +1,6 @@
+
+WARNING: [STREAM-201] stream ports cannot be separated:
+    'void vec_add(int [1024] a,int ...' (__merlinkernel_vec_add.cpp:34)
+    Reference parsing fails for variable 'a' (__merlinkernel_vec_add.cpp:34) in function 'vec_add' (__merlinkernel_vec_add.cpp:34)
+    Reference parsing fails for variable 'b' (__merlinkernel_vec_add.cpp:34) in function 'vec_add' (__merlinkernel_vec_add.cpp:34)
+

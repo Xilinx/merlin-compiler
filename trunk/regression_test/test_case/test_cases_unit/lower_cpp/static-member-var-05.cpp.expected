@@ -1,0 +1,13 @@
+
+struct ::B 
+{
+}
+;
+static void __merlin_dummy_SgClassDeclaration_struct_B_();
+#pragma ACCEL kernel
+
+void k()
+{
+  struct B b;
+  struct B *pb = &b;
+}

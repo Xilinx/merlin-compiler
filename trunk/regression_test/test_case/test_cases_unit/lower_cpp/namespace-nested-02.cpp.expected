@@ -1,0 +1,17 @@
+int _ZN1a1b3valE = 5;
+namespace a
+{
+namespace b
+{
+static void __merlin_dummy_SgVariableDeclaration_int_val_();
+}
+}
+#pragma ACCEL kernel
+
+void k()
+{
+using namespace a;
+_ZN1a1b3valE;
+using namespace b;
+_ZN1a1b3valE;
+}

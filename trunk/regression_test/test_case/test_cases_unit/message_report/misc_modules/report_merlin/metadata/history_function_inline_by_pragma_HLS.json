@@ -1,0 +1,3244 @@
+{
+    "X": {
+        "org_identifier": "X",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0": {
+        "org_identifier": "X_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0": {
+        "org_identifier": "X_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0": {
+        "org_identifier": "X_0_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 6,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 1,
+                "location": 0
+            },
+            {
+                "action": 0,
+                "location": 0
+            },
+            {
+                "action": 1,
+                "location": 1
+            },
+            {
+                "action": 0,
+                "location": 1
+            },
+            {
+                "action": 1,
+                "location": 2
+            },
+            {
+                "action": 0,
+                "location": 2
+            },
+            {
+                "action": 1,
+                "location": 3
+            },
+            {
+                "action": 0,
+                "location": 3
+            },
+            {
+                "action": 1,
+                "location": 4
+            },
+            {
+                "action": 0,
+                "location": 4
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(1): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(2): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(1): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(2): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(1): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(2): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(1): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(2): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(1): SgFunctionDeclaration:void __merlin_dummy_kernel_pragma() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(2): SgFunctionDeclaration:void __merlin_dummy_kernel_pragma() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_0": {
+        "org_identifier": "B_0_0_0_0",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10420 for 140228469318456\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_0_0": {
+        "org_identifier": "B_0_0_0_0",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9961 for 140228437111976\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_1": {
+        "org_identifier": "B_0_0_0_1",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10420 for 140228469319456\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_1_0": {
+        "org_identifier": "B_0_0_0_1",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9961 for 140228437112576\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_2": {
+        "org_identifier": "B_0_0_0_2",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10420 for 140228469320456\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_2_0": {
+        "org_identifier": "B_0_0_0_2",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9961 for 140228437113176\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_3": {
+        "org_identifier": "B_0_0_0_3",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10420 for 140228469321456\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_3_0": {
+        "org_identifier": "B_0_0_0_3",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9961 for 140228437113776\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_4": {
+        "org_identifier": "B_0_0_0_4",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10420 for 140228469322456\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_kernel_pragma() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_4_0": {
+        "org_identifier": "B_0_0_0_4",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9961 for 140228437114376\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5": {
+        "org_identifier": "X_0_0_0_5",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void vec_add_kernel(::merlin_uint_512* a,::merlin_uint_512* b,::merlin_uint_512*...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_0": {
+        "org_identifier": "X_0_0_0_5_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_5_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:::merlin_uint_512* a,::merlin_uint_512* b,::merlin_uint_512* c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_0_0": {
+        "org_identifier": "X_0_0_0_5_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_0_1": {
+        "org_identifier": "X_0_0_0_5_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_0_2": {
+        "org_identifier": "X_0_0_0_5_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2": {
+        "org_identifier": "X_0_0_0_5_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_5_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDefinition:function definition: void vec_add_kernel(::merlin_uint_512* a,::merlin_uint_512*...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0": {
+        "org_identifier": "X_0_0_0_5_2_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 19,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{#pragma HLS DATA_PACK VARIABLE=c#pragma HLS DATA_PACK VARIABLE=b#pragma HLS DAT...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_0": {
+        "org_identifier": "X_0_0_0_5_2_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS DATA_PACK VARIABLE=c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_1": {
+        "org_identifier": "X_0_0_0_5_2_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS DATA_PACK VARIABLE=b\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_10": {
+        "org_identifier": "X_0_0_0_5_2_0_10",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:__merlin_access_range(b,0,9999UL);\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_11": {
+        "org_identifier": "X_0_0_0_5_2_0_11",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:__merlin_access_range(a,0,9999UL);\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_12": {
+        "org_identifier": "X_0_0_0_5_2_0_12",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:memcpy_wide_bus_read_int_2d_16_512(a_buf_0,0,0,(merlin_uint_512 *)a,(0 * 4),size...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_13": {
+        "org_identifier": "X_0_0_0_5_2_0_13",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:memcpy_wide_bus_read_int_2d_16_512(b_buf_0,0,0,(merlin_uint_512 *)b,(0 * 4),size...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_14": {
+        "org_identifier": "X_0_0_0_5_2_0_14",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL interface variable=c max_depth=10000 depth=10000\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_15": {
+        "org_identifier": "X_0_0_0_5_2_0_15",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL interface variable=b max_depth=10000 depth=10000\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_16": {
+        "org_identifier": "X_0_0_0_5_2_0_16",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL interface variable=a max_depth=10000 depth=10000\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17": {
+        "org_identifier": "X_0_0_0_5_2_0_17",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 5,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgForStatement:for(int i = 0;i < 625;i++) {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_0": {
+        "org_identifier": "X_0_0_0_5_2_0_17_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_17_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgForInitStatement:int i = 0;;\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_0_0": {
+        "org_identifier": "X_0_0_0_5_2_0_17_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_0_0_5_2_0_17_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:int i = 0;\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_0_0_1": {
+        "org_identifier": "X_0_0_0_5_2_0_17_0_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_17_0_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:i\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_1": {
+        "org_identifier": "X_0_0_0_5_2_0_17_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_17_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:i < 625;\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_2": {
+        "org_identifier": "X_0_0_0_5_2_0_17_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_17_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPlusPlusOp:i++\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_3": {
+        "org_identifier": "X_0_0_0_5_2_0_17_3",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_17_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{#pragma HLS pipelinefor(int i_sub = 0;i_sub < 16;++i_sub) {#pragma HLS unrollc_...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_3_0": {
+        "org_identifier": "X_0_0_0_5_2_0_17_3_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17_3_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS pipeline\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_3_1": {
+        "org_identifier": "X_0_0_0_5_2_0_17_3_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 5,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17_3_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgForStatement:for(int i_sub = 0;i_sub < 16;++i_sub) {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_3_1_0": {
+        "org_identifier": "X_0_0_0_5_2_0_17_3_1_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_17_3_1_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgForInitStatement:int i_sub = 0;;\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_3_1_0_0": {
+        "org_identifier": "X_0_0_0_5_2_0_17_3_1_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_0_0_5_2_0_17_3_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:int i_sub = 0;\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_3_1_0_0_1": {
+        "org_identifier": "X_0_0_0_5_2_0_17_3_1_0_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_17_3_1_0_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:i_sub\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_3_1_1": {
+        "org_identifier": "X_0_0_0_5_2_0_17_3_1_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_17_3_1_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:i_sub < 16;\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_3_1_2": {
+        "org_identifier": "X_0_0_0_5_2_0_17_3_1_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_17_3_1_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPlusPlusOp:++i_sub\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17_3_1_3": {
+        "org_identifier": "X_0_0_0_5_2_0_17_3_1_3",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_17_3_1_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{#pragma HLS unrollc_buf_0[i][i_sub] = a_buf_0[i][i_sub] + b_buf_0[i][i_sub];}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_18": {
+        "org_identifier": "X_0_0_0_5_2_0_18",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:memcpy_wide_bus_write_int_2d_16_512((merlin_uint_512 *)c,c_buf_0,0,0,(4 * 0),siz...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_2": {
+        "org_identifier": "X_0_0_0_5_2_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS DATA_PACK VARIABLE=a\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_3": {
+        "org_identifier": "X_0_0_0_5_2_0_3",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:int b_buf_0[625][16];\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_3_1": {
+        "org_identifier": "X_0_0_0_5_2_0_3_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_3_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b_buf_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_4": {
+        "org_identifier": "X_0_0_0_5_2_0_4",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS array_partition variable=b_buf_0 complete dim=2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_5": {
+        "org_identifier": "X_0_0_0_5_2_0_5",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:int a_buf_0[625][16];\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_5_1": {
+        "org_identifier": "X_0_0_0_5_2_0_5_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_5_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a_buf_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_6": {
+        "org_identifier": "X_0_0_0_5_2_0_6",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS array_partition variable=a_buf_0 complete dim=2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_7": {
+        "org_identifier": "X_0_0_0_5_2_0_7",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:int c_buf_0[625][16];\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_7_1": {
+        "org_identifier": "X_0_0_0_5_2_0_7_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_7_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c_buf_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_8": {
+        "org_identifier": "X_0_0_0_5_2_0_8",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS array_partition variable=c_buf_0 complete dim=2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_9": {
+        "org_identifier": "X_0_0_0_5_2_0_9",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother L_0_0_0_5_2_0_17\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:__merlin_access_range(c,0,9999UL);\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1": {
+        "org_identifier": "X_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0": {
+        "org_identifier": "X_0_1_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 13,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 1,
+                "location": 0
+            },
+            {
+                "action": 0,
+                "location": 0
+            },
+            {
+                "action": 1,
+                "location": 1
+            },
+            {
+                "action": 0,
+                "location": 1
+            },
+            {
+                "action": 1,
+                "location": 2
+            },
+            {
+                "action": 0,
+                "location": 2
+            },
+            {
+                "action": 1,
+                "location": 3
+            },
+            {
+                "action": 0,
+                "location": 3
+            },
+            {
+                "action": 1,
+                "location": 4
+            },
+            {
+                "action": 0,
+                "location": 4
+            },
+            {
+                "action": 1,
+                "location": 5
+            },
+            {
+                "action": 0,
+                "location": 5
+            },
+            {
+                "action": 1,
+                "location": 6
+            },
+            {
+                "action": 0,
+                "location": 6
+            },
+            {
+                "action": 1,
+                "location": 7
+            },
+            {
+                "action": 0,
+                "location": 7
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(1): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(2): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(1): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(2): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(1): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(2): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(1): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(2): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(1): SgFunctionDeclaration:void __merlin_dummy_431() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(2): SgFunctionDeclaration:void __merlin_dummy_431() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(1): SgFunctionDeclaration:void vec_add_kernel(::merlin_uint_512* a,::merlin_uint_512* b,::merlin_uint_512*...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(2): SgFunctionDeclaration:void vec_add_kernel(::merlin_uint_512* a,::merlin_uint_512* b,::merlin_uint_512*...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(1): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_L_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(2): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_L_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(1): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_L_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"Replace(2): SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_L_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_0": {
+        "org_identifier": "B_0_1_0_0",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10420 for 140228469310456\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_0_0": {
+        "org_identifier": "B_0_1_0_0",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9961 for 140228437107176\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_1": {
+        "org_identifier": "B_0_1_0_1",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10420 for 140228469311456\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10": {
+        "org_identifier": "X_0_1_0_10",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_write_buffer_vec_add_kernel(int [10000] a,int [10000] b,int [10000...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_0": {
+        "org_identifier": "X_0_1_0_10_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_10_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:int [10000] a,int [10000] b,int [10000] c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_0_0": {
+        "org_identifier": "X_0_1_0_10_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_0_1": {
+        "org_identifier": "X_0_1_0_10_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_0_2": {
+        "org_identifier": "X_0_1_0_10_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2": {
+        "org_identifier": "X_0_1_0_10_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_10_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDefinition:function definition: void __merlin_write_buffer_vec_add_kernel(int [10000] a,int...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0": {
+        "org_identifier": "X_0_1_0_10_2_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 5,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{static int __m_a[10000];static int __m_b[10000];static int __m_c[10000];{#pragm...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_0": {
+        "org_identifier": "X_0_1_0_10_2_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_3\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:static int __m_a[10000];\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_0_1": {
+        "org_identifier": "X_0_1_0_10_2_0_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:__m_a\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_1": {
+        "org_identifier": "X_0_1_0_10_2_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_3\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:static int __m_b[10000];\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_1_1": {
+        "org_identifier": "X_0_1_0_10_2_0_1_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_1_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:__m_b\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_2": {
+        "org_identifier": "X_0_1_0_10_2_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_3\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:static int __m_c[10000];\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_2_1": {
+        "org_identifier": "X_0_1_0_10_2_0_2_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:__m_c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_3": {
+        "org_identifier": "X_0_1_0_10_2_0_3",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 5,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_3\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{#pragma ACCEL debug printf(\\\"[Merlin Info] Start %s data for %s, data size = %s....\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_3_0": {
+        "org_identifier": "X_0_1_0_10_2_0_3_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_3_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug printf(\\\"[Merlin Info] Start %s data for %s, data size = %s.....\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_3_1": {
+        "org_identifier": "X_0_1_0_10_2_0_3_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_3_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug fflush(stdout);\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_3_2": {
+        "org_identifier": "X_0_1_0_10_2_0_3_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_3_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgIfStmt:if(a != 0) {memcpy((void *)(__m_a + 0),(const void *)a,10000 * sizeof(int ));}el...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_3_2_0": {
+        "org_identifier": "X_0_1_0_10_2_0_3_2_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_3_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:a != 0;\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_3_2_1": {
+        "org_identifier": "X_0_1_0_10_2_0_3_2_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_3_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{memcpy((void *)(__m_a + 0),(const void *)a,10000 * sizeof(int ));}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_3_2_1_0": {
+        "org_identifier": "X_0_1_0_10_2_0_3_2_1_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_3_2_1_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:memcpy((void *)(__m_a + 0),(const void *)a,10000 * sizeof(int ));\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_3_2_2": {
+        "org_identifier": "X_0_1_0_10_2_0_3_2_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_3_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{printf(\\\"Error! Detected null pointer 'a' for external memory.\\\\n\\\");exit(1);}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_3_3": {
+        "org_identifier": "X_0_1_0_10_2_0_3_3",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_3_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug printf(\\\"[Merlin Info] Finish %s data for %s.\\\\n\\\", \\\"copy in\\\", ...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_3_4": {
+        "org_identifier": "X_0_1_0_10_2_0_3_4",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_3_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug fflush(stdout);\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_4": {
+        "org_identifier": "X_0_1_0_10_2_0_4",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 5,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_3\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{#pragma ACCEL debug printf(\\\"[Merlin Info] Start %s data for %s, data size = %s....\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_4_0": {
+        "org_identifier": "X_0_1_0_10_2_0_4_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_4_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug printf(\\\"[Merlin Info] Start %s data for %s, data size = %s.....\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_4_1": {
+        "org_identifier": "X_0_1_0_10_2_0_4_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_4_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug fflush(stdout);\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_4_2": {
+        "org_identifier": "X_0_1_0_10_2_0_4_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_4_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgIfStmt:if(b != 0) {memcpy((void *)(__m_b + 0),(const void *)b,10000 * sizeof(int ));}el...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_4_2_0": {
+        "org_identifier": "X_0_1_0_10_2_0_4_2_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_4_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:b != 0;\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_4_2_1": {
+        "org_identifier": "X_0_1_0_10_2_0_4_2_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_4_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{memcpy((void *)(__m_b + 0),(const void *)b,10000 * sizeof(int ));}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_4_2_1_0": {
+        "org_identifier": "X_0_1_0_10_2_0_4_2_1_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_4_2_1_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:memcpy((void *)(__m_b + 0),(const void *)b,10000 * sizeof(int ));\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_4_2_2": {
+        "org_identifier": "X_0_1_0_10_2_0_4_2_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_4_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{printf(\\\"Error! Detected null pointer 'b' for external memory.\\\\n\\\");exit(1);}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_4_3": {
+        "org_identifier": "X_0_1_0_10_2_0_4_3",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_4_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug printf(\\\"[Merlin Info] Finish %s data for %s.\\\\n\\\", \\\"copy in\\\", ...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_10_2_0_4_4": {
+        "org_identifier": "X_0_1_0_10_2_0_4_4",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_10_2_0_4_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug fflush(stdout);\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11": {
+        "org_identifier": "X_0_1_0_11",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_read_buffer_vec_add_kernel(int [10000] a,int [10000] b,int [10000]...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_0": {
+        "org_identifier": "X_0_1_0_11_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_11_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:int [10000] a,int [10000] b,int [10000] c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_0_0": {
+        "org_identifier": "X_0_1_0_11_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_0_1": {
+        "org_identifier": "X_0_1_0_11_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_0_2": {
+        "org_identifier": "X_0_1_0_11_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2": {
+        "org_identifier": "X_0_1_0_11_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_11_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDefinition:function definition: void __merlin_read_buffer_vec_add_kernel(int [10000] a,int ...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2_0": {
+        "org_identifier": "X_0_1_0_11_2_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_2_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{static int __m_a[10000];static int __m_b[10000];static int __m_c[10000];{#pragm...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2_0_0": {
+        "org_identifier": "X_0_1_0_11_2_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_2_0_3\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:static int __m_a[10000];\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2_0_0_1": {
+        "org_identifier": "X_0_1_0_11_2_0_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_2_0_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:__m_a\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2_0_1": {
+        "org_identifier": "X_0_1_0_11_2_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_2_0_3\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:static int __m_b[10000];\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2_0_1_1": {
+        "org_identifier": "X_0_1_0_11_2_0_1_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_2_0_1_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:__m_b\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2_0_2": {
+        "org_identifier": "X_0_1_0_11_2_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_2_0_3\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:static int __m_c[10000];\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2_0_2_1": {
+        "org_identifier": "X_0_1_0_11_2_0_2_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_2_0_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:__m_c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2_0_3": {
+        "org_identifier": "X_0_1_0_11_2_0_3",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 5,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_2_0_3\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{#pragma ACCEL debug printf(\\\"[Merlin Info] Start %s data for %s, data size = %s....\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2_0_3_0": {
+        "org_identifier": "X_0_1_0_11_2_0_3_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_2_0_3_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug printf(\\\"[Merlin Info] Start %s data for %s, data size = %s.....\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2_0_3_1": {
+        "org_identifier": "X_0_1_0_11_2_0_3_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_2_0_3_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug fflush(stdout);\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2_0_3_2": {
+        "org_identifier": "X_0_1_0_11_2_0_3_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_2_0_3_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgIfStmt:if(c != 0) {memcpy((void *)c,(const void *)(__m_c + 0),10000 * sizeof(int ));}el...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2_0_3_2_0": {
+        "org_identifier": "X_0_1_0_11_2_0_3_2_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_2_0_3_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:c != 0;\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2_0_3_2_1": {
+        "org_identifier": "X_0_1_0_11_2_0_3_2_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_2_0_3_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{memcpy((void *)c,(const void *)(__m_c + 0),10000 * sizeof(int ));}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2_0_3_2_1_0": {
+        "org_identifier": "X_0_1_0_11_2_0_3_2_1_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_2_0_3_2_1_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:memcpy((void *)c,(const void *)(__m_c + 0),10000 * sizeof(int ));\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2_0_3_2_2": {
+        "org_identifier": "X_0_1_0_11_2_0_3_2_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_2_0_3_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{printf(\\\"Error! Detected null pointer 'c' for external memory.\\\\n\\\");exit(1);}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2_0_3_3": {
+        "org_identifier": "X_0_1_0_11_2_0_3_3",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_2_0_3_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug printf(\\\"[Merlin Info] Finish %s data for %s.\\\\n\\\", \\\"copy out\\\",...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_11_2_0_3_4": {
+        "org_identifier": "X_0_1_0_11_2_0_3_4",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_11_2_0_3_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug fflush(stdout);\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_12": {
+        "org_identifier": "X_0_1_0_12",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_execute_vec_add_kernel(int [10000] a,int [10000] b,int [10000] c) ...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_12_0": {
+        "org_identifier": "X_0_1_0_12_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_12_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:int [10000] a,int [10000] b,int [10000] c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_12_0_0": {
+        "org_identifier": "X_0_1_0_12_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_12_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_12_0_1": {
+        "org_identifier": "X_0_1_0_12_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_12_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_12_0_2": {
+        "org_identifier": "X_0_1_0_12_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_12_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_12_2": {
+        "org_identifier": "X_0_1_0_12_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_12_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDefinition:function definition: void __merlin_execute_vec_add_kernel(int [10000] a,int [100...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_1_0": {
+        "org_identifier": "B_0_1_0_1",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9961 for 140228437107776\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_2": {
+        "org_identifier": "B_0_1_0_2",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10420 for 140228469312456\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_2_0": {
+        "org_identifier": "B_0_1_0_2",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9961 for 140228437108376\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_3": {
+        "org_identifier": "B_0_1_0_3",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10420 for 140228469313456\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_3_0": {
+        "org_identifier": "B_0_1_0_3",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9961 for 140228437108976\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_4": {
+        "org_identifier": "B_0_1_0_4",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10420 for 140228469314456\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_431() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_4_0": {
+        "org_identifier": "B_0_1_0_4",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9961 for 140228437109576\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_5": {
+        "org_identifier": "B_0_1_0_5",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10420 for 140228469315456\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void vec_add_kernel(::merlin_uint_512* a,::merlin_uint_512* b,::merlin_uint_512*...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_5_0": {
+        "org_identifier": "B_0_1_0_5",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9961 for 140228437110176\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:::merlin_uint_512* a,::merlin_uint_512* b,::merlin_uint_512* c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_5_0_0": {
+        "org_identifier": "B_0_1_0_5_0_0",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9860 for 140228421268848\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_5_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_5_0_1": {
+        "org_identifier": "B_0_1_0_5_0_1",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9860 for 140228421269176\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_5_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_5_0_2": {
+        "org_identifier": "B_0_1_0_5_0_2",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9860 for 140228421269504\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_5_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_6": {
+        "org_identifier": "B_0_1_0_6",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10420 for 140228469316456\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_L_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_6_0": {
+        "org_identifier": "B_0_1_0_6",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9961 for 140228437110776\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_7": {
+        "org_identifier": "B_0_1_0_7",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 3,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10420 for 140228469317456\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_L_() {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_7_0": {
+        "org_identifier": "B_0_1_0_7",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9961 for 140228437111376\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8": {
+        "org_identifier": "X_0_1_0_8",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlinwrapper_vec_add_kernel(int [10000] a,int [10000] b,int [10000] c) {...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_0": {
+        "org_identifier": "X_0_1_0_8_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_8_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:int [10000] a,int [10000] b,int [10000] c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_0_0": {
+        "org_identifier": "X_0_1_0_8_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_0_1": {
+        "org_identifier": "X_0_1_0_8_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_0_2": {
+        "org_identifier": "X_0_1_0_8_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2": {
+        "org_identifier": "X_0_1_0_8_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_8_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDefinition:function definition: void __merlinwrapper_vec_add_kernel(int [10000] a,int [1000...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0": {
+        "org_identifier": "X_0_1_0_8_2_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 8,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{{#pragma ACCEL wrapper variable=a port=a depth=10000 max_depth=10000 data_type=...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_0": {
+        "org_identifier": "X_0_1_0_8_2_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_1_0_8_2_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{#pragma ACCEL wrapper variable=a port=a depth=10000 max_depth=10000 data_type=i...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_1": {
+        "org_identifier": "X_0_1_0_8_2_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_1_0_8_2_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:static int __m_a[10000];\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_1_1": {
+        "org_identifier": "X_0_1_0_8_2_0_1_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_1_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:__m_a\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_2": {
+        "org_identifier": "X_0_1_0_8_2_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_1_0_8_2_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:static int __m_b[10000];\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_2_1": {
+        "org_identifier": "X_0_1_0_8_2_0_2_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:__m_b\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_3": {
+        "org_identifier": "X_0_1_0_8_2_0_3",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_1_0_8_2_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:static int __m_c[10000];\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_3_1": {
+        "org_identifier": "X_0_1_0_8_2_0_3_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_3_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:__m_c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4": {
+        "org_identifier": "X_0_1_0_8_2_0_4",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_1_0_8_2_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{{#pragma ACCEL debug printf(\\\"[Merlin Info] Start %s data for %s, data size = %s...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_0": {
+        "org_identifier": "X_0_1_0_8_2_0_4_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 5,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{#pragma ACCEL debug printf(\\\"[Merlin Info] Start %s data for %s, data size = %s....\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_0_0": {
+        "org_identifier": "X_0_1_0_8_2_0_4_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_0_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug printf(\\\"[Merlin Info] Start %s data for %s, data size = %s.....\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_0_1": {
+        "org_identifier": "X_0_1_0_8_2_0_4_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_0_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug fflush(stdout);\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_0_2": {
+        "org_identifier": "X_0_1_0_8_2_0_4_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_0_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgIfStmt:if(a != 0) {memcpy((void *)(__m_a + 0),(const void *)a,10000 * sizeof(int ));}el...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_0_2_0": {
+        "org_identifier": "X_0_1_0_8_2_0_4_0_2_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_0_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:a != 0;\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_0_2_1": {
+        "org_identifier": "X_0_1_0_8_2_0_4_0_2_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_0_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{memcpy((void *)(__m_a + 0),(const void *)a,10000 * sizeof(int ));}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_0_2_1_0": {
+        "org_identifier": "X_0_1_0_8_2_0_4_0_2_1_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_0_2_1_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:memcpy((void *)(__m_a + 0),(const void *)a,10000 * sizeof(int ));\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_0_2_2": {
+        "org_identifier": "X_0_1_0_8_2_0_4_0_2_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_0_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{printf(\\\"Error! Detected null pointer 'a' for external memory.\\\\n\\\");exit(1);}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_0_3": {
+        "org_identifier": "X_0_1_0_8_2_0_4_0_3",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_0_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug printf(\\\"[Merlin Info] Finish %s data for %s.\\\\n\\\", \\\"copy in\\\", ...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_0_4": {
+        "org_identifier": "X_0_1_0_8_2_0_4_0_4",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_0_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug fflush(stdout);\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_1": {
+        "org_identifier": "X_0_1_0_8_2_0_4_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 5,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{#pragma ACCEL debug printf(\\\"[Merlin Info] Start %s data for %s, data size = %s....\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_1_0": {
+        "org_identifier": "X_0_1_0_8_2_0_4_1_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_1_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug printf(\\\"[Merlin Info] Start %s data for %s, data size = %s.....\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_1_1": {
+        "org_identifier": "X_0_1_0_8_2_0_4_1_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_1_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug fflush(stdout);\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_1_2": {
+        "org_identifier": "X_0_1_0_8_2_0_4_1_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_1_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgIfStmt:if(b != 0) {memcpy((void *)(__m_b + 0),(const void *)b,10000 * sizeof(int ));}el...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_1_2_0": {
+        "org_identifier": "X_0_1_0_8_2_0_4_1_2_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_1_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:b != 0;\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_1_2_1": {
+        "org_identifier": "X_0_1_0_8_2_0_4_1_2_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_1_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{memcpy((void *)(__m_b + 0),(const void *)b,10000 * sizeof(int ));}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_1_2_1_0": {
+        "org_identifier": "X_0_1_0_8_2_0_4_1_2_1_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_1_2_1_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:memcpy((void *)(__m_b + 0),(const void *)b,10000 * sizeof(int ));\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_1_2_2": {
+        "org_identifier": "X_0_1_0_8_2_0_4_1_2_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_1_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{printf(\\\"Error! Detected null pointer 'b' for external memory.\\\\n\\\");exit(1);}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_1_3": {
+        "org_identifier": "X_0_1_0_8_2_0_4_1_3",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_1_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug printf(\\\"[Merlin Info] Finish %s data for %s.\\\\n\\\", \\\"copy in\\\", ...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_4_1_4": {
+        "org_identifier": "X_0_1_0_8_2_0_4_1_4",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_4_1_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug fflush(stdout);\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_5": {
+        "org_identifier": "X_0_1_0_8_2_0_5",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_1_0_8_2_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL kernel\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_6": {
+        "org_identifier": "X_0_1_0_8_2_0_6",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_1_0_8_2_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:vec_add_kernel((merlin_uint_512 *)__m_a,(merlin_uint_512 *)__m_b,(merlin_uint_51...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_7": {
+        "org_identifier": "X_0_1_0_8_2_0_7",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 5,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_1_0_8_2_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{#pragma ACCEL debug printf(\\\"[Merlin Info] Start %s data for %s, data size = %s....\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_7_0": {
+        "org_identifier": "X_0_1_0_8_2_0_7_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_7_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug printf(\\\"[Merlin Info] Start %s data for %s, data size = %s.....\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_7_1": {
+        "org_identifier": "X_0_1_0_8_2_0_7_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_7_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug fflush(stdout);\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_7_2": {
+        "org_identifier": "X_0_1_0_8_2_0_7_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_7_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgIfStmt:if(c !=((int *)0)) {memcpy((void *)c,(const void *)(__m_c + 0),((unsigned long )...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_7_2_0": {
+        "org_identifier": "X_0_1_0_8_2_0_7_2_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_7_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:c !=((int *)0);\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_7_2_1": {
+        "org_identifier": "X_0_1_0_8_2_0_7_2_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_7_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{memcpy((void *)c,(const void *)(__m_c + 0),((unsigned long )10000) * sizeof(int...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_7_2_1_0": {
+        "org_identifier": "X_0_1_0_8_2_0_7_2_1_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_7_2_1_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:memcpy((void *)c,(const void *)(__m_c + 0),((unsigned long )10000) * sizeof(int ...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_7_2_2": {
+        "org_identifier": "X_0_1_0_8_2_0_7_2_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_7_2_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{printf(\\\"Error! Detected null pointer 'c' for external memory.\\\\n\\\");exit(1);}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_7_3": {
+        "org_identifier": "X_0_1_0_8_2_0_7_3",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_7_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug printf(\\\"[Merlin Info] Finish %s data for %s.\\\\n\\\", \\\"copy out\\\",...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_8_2_0_7_4": {
+        "org_identifier": "X_0_1_0_8_2_0_7_4",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_8_2_0_7_2\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL debug fflush(stdout);\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_9": {
+        "org_identifier": "X_0_1_0_9",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_1_0_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_vec_add_kernel(int [10000] a,int [10000] b,int [10000] c) {...}\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_9_0": {
+        "org_identifier": "X_0_1_0_9_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_9_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:int [10000] a,int [10000] b,int [10000] c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_9_0_0": {
+        "org_identifier": "X_0_1_0_9_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_9_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_9_0_1": {
+        "org_identifier": "X_0_1_0_9_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_9_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_9_0_2": {
+        "org_identifier": "X_0_1_0_9_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_9_0_1\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    },
+    "X_0_1_0_9_2": {
+        "org_identifier": "X_0_1_0_9_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_1_0_9_0\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDefinition:function definition: void __merlin_vec_add_kernel(int [10000] a,int [10000] b,in...\",\n    \"passname\": \"function_inline_by_pragma_HLS\"\n}"
+        ]
+    }
+}

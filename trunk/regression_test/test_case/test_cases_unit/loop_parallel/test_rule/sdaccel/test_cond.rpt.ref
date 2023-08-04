@@ -1,0 +1,11 @@
+INFO: [FGPIP-105] Loop 'j' (test_cond.cpp:10) is parallelized with a factor of 10
+INFO: [FGPIP-105] Loop 'j' (test_cond.cpp:27) is parallelized with a factor of 10
+INFO: [FGPIP-108] Loop 'i'  (test_cond.cpp:42) is pipelined with a target II of 1
+INFO: [FGPIP-102] Loop 'j' (test_cond.cpp:45) is fully parallelized
+INFO: [FGPIP-108] Loop 'i'  (test_cond.cpp:61) is pipelined with a target II of 1
+INFO: [FGPIP-102] Loop 'j' (test_cond.cpp:64) is fully parallelized
+INFO: [FGPIP-105] Loop 'j' (test_cond.cpp:79) is parallelized with a factor of 10
+INFO: [FGPIP-102] Loop 'n_sub_0' (test_cond.cpp:98) is fully parallelized
+INFO: [FGPIP-103] Loop 'j'  (test_cond.cpp:124) is pipelined
+INFO: [FGPIP-102] Loop 'j_sub' (test_cond.cpp:126) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_cond.cpp:152) is fully parallelized

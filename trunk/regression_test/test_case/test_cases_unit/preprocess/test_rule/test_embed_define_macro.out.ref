@@ -1,0 +1,20 @@
+#define B_MAX A_MAX*(6/3+1-1)
+#define C_MAX B_MAX*2
+#pragma ACCEL kernel
+
+void gemm_cpu(int *A,int *B)
+{
+  
+#pragma ACCEL interface variable = A depth = 2048 max_depth = 512
+// Need better tokenizer if I want to write C_MAX * 2 * (3 + 12) or data structure
+// This is too fine-grain and no impact. 
+  
+#pragma ACCEL INTERFACE DEPTH=2048 MAX_DEPTH=65536 VARIABLE=B 
+  for (int i = 0; i < 2048; i++) 
+// Original: #pragma ACCEL tiling factor=16 parallel_factor=4
+{
+    
+#pragma ACCEL TILING FACTOR=16 PARALLEL_FACTOR=4 
+    A[i] = B[i] + 10;
+  }
+}

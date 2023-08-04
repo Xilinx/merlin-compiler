@@ -1,0 +1,20 @@
+#pragma ACCEL kernel
+
+void k(int sol[16384000])
+{
+  
+#pragma ACCEL interface variable = sol max_depth = 16384000 depth = 16384000
+  for (int i = 0; i < 32000 + 2; i++) {
+    for (int j = 0; j < 32 + 2; j++) {
+      
+#pragma ACCEL PIPELINE
+      if (j >= 1 && j <= 32 && i >= 1 && i <= 32000) {
+        for (int k = 0; k < 16; k++) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          sol[k + 16 * (j - 1 + 32 * (i - 1))];
+        }
+      }
+    }
+  }
+}

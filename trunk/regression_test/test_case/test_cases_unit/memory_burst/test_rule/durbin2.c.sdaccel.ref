@@ -1,0 +1,64 @@
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void kernel_durbin(int n,int yy[1056],int sum[1056],int sumi[1056],int alpha[32],int beta[32],int r[32],int out[32])
+{
+  int sum_buf[991];
+  int sumi_buf[991];
+  int alpha_buf[33];
+  int r_buf[32];
+  int yy_buf[1023];
+  int beta_buf[32];
+  memcpy((void *)(&beta_buf[0]),(const void *)(&beta[0]),sizeof(int ) * 32);
+  memcpy((void *)(&yy_buf[0]),(const void *)(&yy[1]),sizeof(int ) * 1023);
+  memcpy((void *)(&r_buf[0]),(const void *)(&r[0]),sizeof(int ) * 32);
+  memcpy((void *)(&alpha_buf[0]),(const void *)(&alpha[0]),sizeof(int ) * 33);
+  int i;
+  int k;
+  int y[1056];
+  y[0 * 32 + 0] = r_buf[0];
+  beta_buf[0] = 1;
+  alpha_buf[0] = r_buf[0];
+  memcpy((void *)(&sumi_buf[0]),(const void *)(&sumi[33]),sizeof(int ) * 991);
+  memcpy((void *)(&sum_buf[0]),(const void *)(&sum[1]),sizeof(int ) * 991);
+  for (k = 1; k < 32; k++) {
+    beta_buf[k] = beta_buf[-1 + k] - alpha_buf[-1 + k] * alpha_buf[-1 + k] * beta_buf[-1 + k];
+    sum_buf[-1 + k] = r_buf[k];
+    for (i = 0; i <= k - 1; i++) {
+      
+#pragma ACCEL pipeline II=1
+      sumi_buf[-1 + i * 32 + k] = sum_buf[-1 + i * 32 + k] + r_buf[-1 + -i + k] * y[i * 32 + k - 1];
+    }
+    alpha_buf[k] = -sumi_buf[-33 + k * 33] * beta_buf[k];
+    for (i = 0; i <= k - 1; i = i + 2) {
+      
+#pragma ACCEL pipeline
+      yy_buf[-1 + i * 32 + k] = y[i * 32 + k - 1] + alpha_buf[k] * y[(k - i - 1) * 32 + k - 1];
+      yy_buf[i * 32 + k] = y[i * 32 + k] + alpha_buf[1 + k] * y[(k - i) * 32 + k];
+    }
+    yy_buf[-1 + k * 33] = alpha_buf[k];
+  }
+  memcpy((void *)(&sum[1]),(const void *)(&sum_buf[0]),sizeof(int ) * 31);
+  memcpy((void *)(&sumi[33]),(const void *)(&sumi_buf[0]),sizeof(int ) * 991);
+  for (i = 0; i < 32; i++) {
+    out[i] = yy_buf[30 + i * 32];
+  }
+  memcpy((void *)(&beta[0]),(const void *)(&beta_buf[0]),sizeof(int ) * 32);
+  memcpy((void *)(&yy[1]),(const void *)(&yy_buf[0]),sizeof(int ) * 1023);
+  memcpy((void *)(&alpha[0]),(const void *)(&alpha_buf[0]),sizeof(int ) * 32);
+}
+
+int main()
+{
+  int n;
+  int yy[1056];
+  int sum[1056];
+  int sumi[1056];
+  int alpha[32];
+  int beta[32];
+  int r[32];
+  int out[32];
+  kernel_durbin(n,yy,sum,sumi,alpha,beta,r,out);
+  return 0;
+}

@@ -1,0 +1,9 @@
+
+WARNING: [SEPAR-204] Stream channel 'ch_a_0' is write-only in the task, which may lead to deadlock.
+
+
+WARNING: [SEPAR-202] Stream channel 'ch_b_0' lacks the 'channel_depth' attribute. Set as 32 by default.
+
+
+WARNING: [SEPAR-203] Stream channel 'ch_b_0' is read-only in the task, which may lead to deadlock.
+

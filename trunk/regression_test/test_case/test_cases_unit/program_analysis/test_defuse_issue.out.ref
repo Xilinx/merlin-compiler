@@ -1,0 +1,39 @@
+#pragma ACCEL kernel
+
+void vec_add_kernel()
+{
+  for (int i = 0; i; i = i + 1) {
+    int a[1][1] = {(0)};
+  }
+}
+#pragma ACCEL kernel
+
+void defuse_error_1()
+{
+  int i;
+  for (i = 0; i < 1; i++) {
+  }
+  for (i = 0; i < 1; i++) {
+    int a;
+  }
+  int j = 0;
+  for (; j < 1; j = j + 1) {
+    int c[1][1] = {(&j)};
+  }
+}
+#pragma ACCEL kernel
+
+void defuse_error_2()
+{
+  int i;
+  for (i = 0; i < 1; i++) {
+  }
+  for (i = 0; i < 1; i++) {
+    int a;
+  }
+  int j = 0;
+  for (; j < 1; ) {
+    int c[1][1] = {(&j)};
+    j = j + 1;
+  }
+}

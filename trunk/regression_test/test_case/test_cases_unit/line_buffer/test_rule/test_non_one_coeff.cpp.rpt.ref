@@ -1,0 +1,4 @@
+INFO: [LINEBUF-101] Applying line buffer on variable 'in' in loop 'L_0_0' (test_non_one_coeff.cpp:9) with a 2x5 stencil
+
+WARNING: [LINEBUF-202] Stopping line buffer optimization on variable 'c' in loop 'L_0_0' (test_non_one_coeff.cpp:28): the accesses are not stencil.
+

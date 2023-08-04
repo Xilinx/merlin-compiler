@@ -1,0 +1,6 @@
+
+WARNING: [FGPIP-212] Complete parallelization of loop 'j  (test_assert.cpp:23)
+ may be ignored or lead to vendor tool errors because its tripcount is variable.
+INFO: [FGPIP-103] Loop 'j'  (test_assert.cpp:9) is pipelined
+INFO: [FGPIP-103] Loop 'k'  (test_assert.cpp:21) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_assert.cpp:23) is fully parallelized

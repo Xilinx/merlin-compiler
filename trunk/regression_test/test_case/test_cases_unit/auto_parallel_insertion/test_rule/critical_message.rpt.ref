@@ -1,0 +1,9 @@
+
+WARNING: [PROCS-245] Found a loop ' while(j < 50){a[i][j... ' (test.cpp:263) without a bound on its tripcount. Please specify one using '#pragma HLS loop_tripcount max=?' or 'assert'.
+Use default max tripcount (2) for analysis
+
+WARNING: [PROCS-245] Found a loop ' for(int i = 0;i < N;... ' (test_sub.cpp:5) without a bound on its tripcount. Please specify one using '#pragma HLS loop_tripcount max=?' or 'assert'.
+Use default max tripcount (2) for analysis
+
+WARNING: [PROCS-245] Found a loop ' do {j++;foo_top_8();... ' (test_do_while.cpp:16) without a bound on its tripcount. Please specify one using '#pragma HLS loop_tripcount max=?' or 'assert'.
+Use default max tripcount (2) for analysis

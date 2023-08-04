@@ -1,0 +1,60 @@
+#include <string.h> 
+#include<assert.h>
+#include<assert.h>
+extern int __merlin_include__GB_assert_h_1;
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void top(int *a,int *b)
+{
+  int b_buf[1000];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 1000);
+  for (int i = 0; i < 1000; ++i) 
+/* Original: #pragma ACCEL cache variable=a */
+{
+    int a_buf[999];
+    memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * 999);
+    int len = b_buf[i];
+    len < 1000?((void )0) : __assert_fail("len < 1000","test_cache_with_local_variable_address.c",8,__PRETTY_FUNCTION__);
+    for (int j = 0; j < len; ++j) {
+      
+#pragma ACCEL pipeline
+      a_buf[j] += j;
+    }
+    memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 999);
+  }
+}
+#pragma ACCEL kernel
+
+void top2(int *a,int *b)
+{
+  int b_buf[1000];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 1000);
+  for (int i = 0; i < 1000; ++i) {
+    int len = b_buf[i];
+    len < 1000?((void )0) : __assert_fail("len < 1000","test_cache_with_local_variable_address.c",20,__PRETTY_FUNCTION__);
+/* Original: #pragma ACCEL cache variable=a */
+{
+      int a_buf[999];
+{
+        unsigned long merlin_len = len;
+        if (len >= 0) {
+          assert(merlin_len <= 999L);
+          memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(int ) * merlin_len);
+        }
+      }
+      for (int j = 0; j < len; ++j) {
+        
+#pragma ACCEL pipeline
+        a_buf[j] += j;
+      }
+{
+        unsigned long merlin_len_0 = len;
+        if (len >= 0) {
+          assert(merlin_len_0 <= 999L);
+          memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * merlin_len_0);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,2 @@
+
+ERROR: [LWCPP-301] Try-catch clause is not supported: try {z = division(x,y);}catch(const char *msg){} (case-exception-unsupported.cpp:15)

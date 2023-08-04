@@ -1,0 +1,2 @@
+INFO: [FGPIP-108] Loop 'i'  (test_flatten_off.cpp:9) is pipelined with a target II of 1
+INFO: [FGPIP-103] Loop 'i'  (test_flatten_off.cpp:16) is pipelined

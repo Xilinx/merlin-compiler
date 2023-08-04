@@ -1,0 +1,39 @@
+[
+    {
+        "childs": [
+            {
+                "CYCLE_UNIT": "-",
+                "childs": [
+                    {
+                        "childs": [],
+                        "org_identifier": "X_1_2",
+                        "src_topo_id": "L_0_2",
+                        "type": "loop"
+                    }
+                ],
+                "comment": "flattened",
+                "flatten-id": "merlin_flatten",
+                "flatten": "yes",
+                "org_identifier": "L_1_1",
+                "src_topo_id": "L_0_1",
+                "total-BRAM": "-",
+                "total-DSP": "-",
+                "total-FF": "-",
+                "total-LUT": "-",
+                "total-URAM": "-",
+                "type": "loop"
+            },
+            {
+                "childs": [],
+                "org_identifier": "V_1_3",
+                "src_topo_id": "X_0_3",
+                "type": "callfunction"
+            }
+        ],
+        "interfaces": [],
+        "org_identifier": "F_1_0",
+        "src_topo_id": "F_0",
+        "sub_functions": [],
+        "type": "kernel"
+    }
+]

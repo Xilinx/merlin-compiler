@@ -1,0 +1,34 @@
+#include "header.h"
+const int val1[100] = {(0)};
+// Existing HLS partition: #pragma HLS array_partition variable=val1 cyclic factor=9 dim=1
+#pragma ACCEL kernel
+
+void func_top_0()
+{
+  
+#pragma HLS array_partition variable=val1 cyclic factor=9 dim=1
+  
+#pragma HLS array_partition variable=val cyclic factor=9 dim=1
+  int a[100][100];
+  
+#pragma HLS array_partition variable=a cyclic factor=2 dim=2
+  int b[100][100];
+  
+#pragma HLS array_partition variable=b cyclic factor=4 dim=2
+  
+#pragma HLS array_partition variable=b cyclic factor=2 dim=1
+  int k;
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    for (k = 0; k < 99; k++) {
+      for (j = 0; j < 100; j++) 
+// Original: #pragma ACCEL parallel factor=4
+{
+        
+#pragma HLS unroll factor=4
+        a[i][j] = b[k][j] + b[k + 1][j] + val[j] - val1[j];
+      }
+    }
+  }
+}

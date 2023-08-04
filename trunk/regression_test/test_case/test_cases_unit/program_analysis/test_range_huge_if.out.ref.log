@@ -1,0 +1,235 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int j = 0;j < 100;++j) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i = 0;i < 100;++i) {...}
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+[Exp SgEqualityOp:j == 0] {j == 0:SgEqualityOp j == 0->1,0} : j == 0..j == 0, constant bound: {j == 0:SgEqualityOp j == 0->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 0]] {a[i + 0]:SgPntrArrRefExp a[i + 0]->1,0} : a[i + 0]..a[i + 0], constant bound: {a[i + 0]:SgPntrArrRefExp a[i + 0]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 1] {j == 1:SgEqualityOp j == 1->1,0} : j == 1..j == 1, constant bound: {j == 1:SgEqualityOp j == 1->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 1]] {a[i + 1]:SgPntrArrRefExp a[i + 1]->1,0} : a[i + 1]..a[i + 1], constant bound: {a[i + 1]:SgPntrArrRefExp a[i + 1]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 2] {j == 2:SgEqualityOp j == 2->1,0} : j == 2..j == 2, constant bound: {j == 2:SgEqualityOp j == 2->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 2]] {a[i + 2]:SgPntrArrRefExp a[i + 2]->1,0} : a[i + 2]..a[i + 2], constant bound: {a[i + 2]:SgPntrArrRefExp a[i + 2]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 3] {j == 3:SgEqualityOp j == 3->1,0} : j == 3..j == 3, constant bound: {j == 3:SgEqualityOp j == 3->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 3]] {a[i + 3]:SgPntrArrRefExp a[i + 3]->1,0} : a[i + 3]..a[i + 3], constant bound: {a[i + 3]:SgPntrArrRefExp a[i + 3]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 4] {j == 4:SgEqualityOp j == 4->1,0} : j == 4..j == 4, constant bound: {j == 4:SgEqualityOp j == 4->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 4]] {a[i + 4]:SgPntrArrRefExp a[i + 4]->1,0} : a[i + 4]..a[i + 4], constant bound: {a[i + 4]:SgPntrArrRefExp a[i + 4]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 5] {j == 5:SgEqualityOp j == 5->1,0} : j == 5..j == 5, constant bound: {j == 5:SgEqualityOp j == 5->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 5]] {a[i + 5]:SgPntrArrRefExp a[i + 5]->1,0} : a[i + 5]..a[i + 5], constant bound: {a[i + 5]:SgPntrArrRefExp a[i + 5]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 6] {j == 6:SgEqualityOp j == 6->1,0} : j == 6..j == 6, constant bound: {j == 6:SgEqualityOp j == 6->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 6]] {a[i + 6]:SgPntrArrRefExp a[i + 6]->1,0} : a[i + 6]..a[i + 6], constant bound: {a[i + 6]:SgPntrArrRefExp a[i + 6]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 7] {j == 7:SgEqualityOp j == 7->1,0} : j == 7..j == 7, constant bound: {j == 7:SgEqualityOp j == 7->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 7]] {a[i + 7]:SgPntrArrRefExp a[i + 7]->1,0} : a[i + 7]..a[i + 7], constant bound: {a[i + 7]:SgPntrArrRefExp a[i + 7]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 8] {j == 8:SgEqualityOp j == 8->1,0} : j == 8..j == 8, constant bound: {j == 8:SgEqualityOp j == 8->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 8]] {a[i + 8]:SgPntrArrRefExp a[i + 8]->1,0} : a[i + 8]..a[i + 8], constant bound: {a[i + 8]:SgPntrArrRefExp a[i + 8]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 9] {j == 9:SgEqualityOp j == 9->1,0} : j == 9..j == 9, constant bound: {j == 9:SgEqualityOp j == 9->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 9]] {a[i + 9]:SgPntrArrRefExp a[i + 9]->1,0} : a[i + 9]..a[i + 9], constant bound: {a[i + 9]:SgPntrArrRefExp a[i + 9]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 10] {j == 10:SgEqualityOp j == 10->1,0} : j == 10..j == 10, constant bound: {j == 10:SgEqualityOp j == 10->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 10]] {a[i + 10]:SgPntrArrRefExp a[i + 10]->1,0} : a[i + 10]..a[i + 10], constant bound: {a[i + 10]:SgPntrArrRefExp a[i + 10]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 11] {j == 11:SgEqualityOp j == 11->1,0} : j == 11..j == 11, constant bound: {j == 11:SgEqualityOp j == 11->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 11]] {a[i + 11]:SgPntrArrRefExp a[i + 11]->1,0} : a[i + 11]..a[i + 11], constant bound: {a[i + 11]:SgPntrArrRefExp a[i + 11]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 12] {j == 12:SgEqualityOp j == 12->1,0} : j == 12..j == 12, constant bound: {j == 12:SgEqualityOp j == 12->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 12]] {a[i + 12]:SgPntrArrRefExp a[i + 12]->1,0} : a[i + 12]..a[i + 12], constant bound: {a[i + 12]:SgPntrArrRefExp a[i + 12]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 13] {j == 13:SgEqualityOp j == 13->1,0} : j == 13..j == 13, constant bound: {j == 13:SgEqualityOp j == 13->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 13]] {a[i + 13]:SgPntrArrRefExp a[i + 13]->1,0} : a[i + 13]..a[i + 13], constant bound: {a[i + 13]:SgPntrArrRefExp a[i + 13]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 14] {j == 14:SgEqualityOp j == 14->1,0} : j == 14..j == 14, constant bound: {j == 14:SgEqualityOp j == 14->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 14]] {a[i + 14]:SgPntrArrRefExp a[i + 14]->1,0} : a[i + 14]..a[i + 14], constant bound: {a[i + 14]:SgPntrArrRefExp a[i + 14]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 15] {j == 15:SgEqualityOp j == 15->1,0} : j == 15..j == 15, constant bound: {j == 15:SgEqualityOp j == 15->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 15]] {a[i + 15]:SgPntrArrRefExp a[i + 15]->1,0} : a[i + 15]..a[i + 15], constant bound: {a[i + 15]:SgPntrArrRefExp a[i + 15]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 16] {j == 16:SgEqualityOp j == 16->1,0} : j == 16..j == 16, constant bound: {j == 16:SgEqualityOp j == 16->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 16]] {a[i + 16]:SgPntrArrRefExp a[i + 16]->1,0} : a[i + 16]..a[i + 16], constant bound: {a[i + 16]:SgPntrArrRefExp a[i + 16]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 17] {j == 17:SgEqualityOp j == 17->1,0} : j == 17..j == 17, constant bound: {j == 17:SgEqualityOp j == 17->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 17]] {a[i + 17]:SgPntrArrRefExp a[i + 17]->1,0} : a[i + 17]..a[i + 17], constant bound: {a[i + 17]:SgPntrArrRefExp a[i + 17]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 18] {j == 18:SgEqualityOp j == 18->1,0} : j == 18..j == 18, constant bound: {j == 18:SgEqualityOp j == 18->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 18]] {a[i + 18]:SgPntrArrRefExp a[i + 18]->1,0} : a[i + 18]..a[i + 18], constant bound: {a[i + 18]:SgPntrArrRefExp a[i + 18]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 19] {j == 19:SgEqualityOp j == 19->1,0} : j == 19..j == 19, constant bound: {j == 19:SgEqualityOp j == 19->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 19]] {a[i + 19]:SgPntrArrRefExp a[i + 19]->1,0} : a[i + 19]..a[i + 19], constant bound: {a[i + 19]:SgPntrArrRefExp a[i + 19]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 20] {j == 20:SgEqualityOp j == 20->1,0} : j == 20..j == 20, constant bound: {j == 20:SgEqualityOp j == 20->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 20]] {a[i + 20]:SgPntrArrRefExp a[i + 20]->1,0} : a[i + 20]..a[i + 20], constant bound: {a[i + 20]:SgPntrArrRefExp a[i + 20]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 21] {j == 21:SgEqualityOp j == 21->1,0} : j == 21..j == 21, constant bound: {j == 21:SgEqualityOp j == 21->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 21]] {a[i + 21]:SgPntrArrRefExp a[i + 21]->1,0} : a[i + 21]..a[i + 21], constant bound: {a[i + 21]:SgPntrArrRefExp a[i + 21]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 22] {j == 22:SgEqualityOp j == 22->1,0} : j == 22..j == 22, constant bound: {j == 22:SgEqualityOp j == 22->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 22]] {a[i + 22]:SgPntrArrRefExp a[i + 22]->1,0} : a[i + 22]..a[i + 22], constant bound: {a[i + 22]:SgPntrArrRefExp a[i + 22]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 23] {j == 23:SgEqualityOp j == 23->1,0} : j == 23..j == 23, constant bound: {j == 23:SgEqualityOp j == 23->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 23]] {a[i + 23]:SgPntrArrRefExp a[i + 23]->1,0} : a[i + 23]..a[i + 23], constant bound: {a[i + 23]:SgPntrArrRefExp a[i + 23]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 24] {j == 24:SgEqualityOp j == 24->1,0} : j == 24..j == 24, constant bound: {j == 24:SgEqualityOp j == 24->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 24]] {a[i + 24]:SgPntrArrRefExp a[i + 24]->1,0} : a[i + 24]..a[i + 24], constant bound: {a[i + 24]:SgPntrArrRefExp a[i + 24]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 25] {j == 25:SgEqualityOp j == 25->1,0} : j == 25..j == 25, constant bound: {j == 25:SgEqualityOp j == 25->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 25]] {a[i + 25]:SgPntrArrRefExp a[i + 25]->1,0} : a[i + 25]..a[i + 25], constant bound: {a[i + 25]:SgPntrArrRefExp a[i + 25]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 26] {j == 26:SgEqualityOp j == 26->1,0} : j == 26..j == 26, constant bound: {j == 26:SgEqualityOp j == 26->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 26]] {a[i + 26]:SgPntrArrRefExp a[i + 26]->1,0} : a[i + 26]..a[i + 26], constant bound: {a[i + 26]:SgPntrArrRefExp a[i + 26]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 27] {j == 27:SgEqualityOp j == 27->1,0} : j == 27..j == 27, constant bound: {j == 27:SgEqualityOp j == 27->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 27]] {a[i + 27]:SgPntrArrRefExp a[i + 27]->1,0} : a[i + 27]..a[i + 27], constant bound: {a[i + 27]:SgPntrArrRefExp a[i + 27]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 28] {j == 28:SgEqualityOp j == 28->1,0} : j == 28..j == 28, constant bound: {j == 28:SgEqualityOp j == 28->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 28]] {a[i + 28]:SgPntrArrRefExp a[i + 28]->1,0} : a[i + 28]..a[i + 28], constant bound: {a[i + 28]:SgPntrArrRefExp a[i + 28]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 29] {j == 29:SgEqualityOp j == 29->1,0} : j == 29..j == 29, constant bound: {j == 29:SgEqualityOp j == 29->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 29]] {a[i + 29]:SgPntrArrRefExp a[i + 29]->1,0} : a[i + 29]..a[i + 29], constant bound: {a[i + 29]:SgPntrArrRefExp a[i + 29]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 30] {j == 30:SgEqualityOp j == 30->1,0} : j == 30..j == 30, constant bound: {j == 30:SgEqualityOp j == 30->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 30]] {a[i + 30]:SgPntrArrRefExp a[i + 30]->1,0} : a[i + 30]..a[i + 30], constant bound: {a[i + 30]:SgPntrArrRefExp a[i + 30]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 31] {j == 31:SgEqualityOp j == 31->1,0} : j == 31..j == 31, constant bound: {j == 31:SgEqualityOp j == 31->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 31]] {a[i + 31]:SgPntrArrRefExp a[i + 31]->1,0} : a[i + 31]..a[i + 31], constant bound: {a[i + 31]:SgPntrArrRefExp a[i + 31]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 32] {j == 32:SgEqualityOp j == 32->1,0} : j == 32..j == 32, constant bound: {j == 32:SgEqualityOp j == 32->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 32]] {a[i + 32]:SgPntrArrRefExp a[i + 32]->1,0} : a[i + 32]..a[i + 32], constant bound: {a[i + 32]:SgPntrArrRefExp a[i + 32]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 33] {j == 33:SgEqualityOp j == 33->1,0} : j == 33..j == 33, constant bound: {j == 33:SgEqualityOp j == 33->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 33]] {a[i + 33]:SgPntrArrRefExp a[i + 33]->1,0} : a[i + 33]..a[i + 33], constant bound: {a[i + 33]:SgPntrArrRefExp a[i + 33]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 34] {j == 34:SgEqualityOp j == 34->1,0} : j == 34..j == 34, constant bound: {j == 34:SgEqualityOp j == 34->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 34]] {a[i + 34]:SgPntrArrRefExp a[i + 34]->1,0} : a[i + 34]..a[i + 34], constant bound: {a[i + 34]:SgPntrArrRefExp a[i + 34]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 35] {j == 35:SgEqualityOp j == 35->1,0} : j == 35..j == 35, constant bound: {j == 35:SgEqualityOp j == 35->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 35]] {a[i + 35]:SgPntrArrRefExp a[i + 35]->1,0} : a[i + 35]..a[i + 35], constant bound: {a[i + 35]:SgPntrArrRefExp a[i + 35]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 36] {j == 36:SgEqualityOp j == 36->1,0} : j == 36..j == 36, constant bound: {j == 36:SgEqualityOp j == 36->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 36]] {a[i + 36]:SgPntrArrRefExp a[i + 36]->1,0} : a[i + 36]..a[i + 36], constant bound: {a[i + 36]:SgPntrArrRefExp a[i + 36]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 37] {j == 37:SgEqualityOp j == 37->1,0} : j == 37..j == 37, constant bound: {j == 37:SgEqualityOp j == 37->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 37]] {a[i + 37]:SgPntrArrRefExp a[i + 37]->1,0} : a[i + 37]..a[i + 37], constant bound: {a[i + 37]:SgPntrArrRefExp a[i + 37]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 38] {j == 38:SgEqualityOp j == 38->1,0} : j == 38..j == 38, constant bound: {j == 38:SgEqualityOp j == 38->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 38]] {a[i + 38]:SgPntrArrRefExp a[i + 38]->1,0} : a[i + 38]..a[i + 38], constant bound: {a[i + 38]:SgPntrArrRefExp a[i + 38]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 39] {j == 39:SgEqualityOp j == 39->1,0} : j == 39..j == 39, constant bound: {j == 39:SgEqualityOp j == 39->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 39]] {a[i + 39]:SgPntrArrRefExp a[i + 39]->1,0} : a[i + 39]..a[i + 39], constant bound: {a[i + 39]:SgPntrArrRefExp a[i + 39]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 40] {j == 40:SgEqualityOp j == 40->1,0} : j == 40..j == 40, constant bound: {j == 40:SgEqualityOp j == 40->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 40]] {a[i + 40]:SgPntrArrRefExp a[i + 40]->1,0} : a[i + 40]..a[i + 40], constant bound: {a[i + 40]:SgPntrArrRefExp a[i + 40]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 41] {j == 41:SgEqualityOp j == 41->1,0} : j == 41..j == 41, constant bound: {j == 41:SgEqualityOp j == 41->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 41]] {a[i + 41]:SgPntrArrRefExp a[i + 41]->1,0} : a[i + 41]..a[i + 41], constant bound: {a[i + 41]:SgPntrArrRefExp a[i + 41]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 42] {j == 42:SgEqualityOp j == 42->1,0} : j == 42..j == 42, constant bound: {j == 42:SgEqualityOp j == 42->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 42]] {a[i + 42]:SgPntrArrRefExp a[i + 42]->1,0} : a[i + 42]..a[i + 42], constant bound: {a[i + 42]:SgPntrArrRefExp a[i + 42]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 43] {j == 43:SgEqualityOp j == 43->1,0} : j == 43..j == 43, constant bound: {j == 43:SgEqualityOp j == 43->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 43]] {a[i + 43]:SgPntrArrRefExp a[i + 43]->1,0} : a[i + 43]..a[i + 43], constant bound: {a[i + 43]:SgPntrArrRefExp a[i + 43]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 44] {j == 44:SgEqualityOp j == 44->1,0} : j == 44..j == 44, constant bound: {j == 44:SgEqualityOp j == 44->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 44]] {a[i + 44]:SgPntrArrRefExp a[i + 44]->1,0} : a[i + 44]..a[i + 44], constant bound: {a[i + 44]:SgPntrArrRefExp a[i + 44]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 45] {j == 45:SgEqualityOp j == 45->1,0} : j == 45..j == 45, constant bound: {j == 45:SgEqualityOp j == 45->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 45]] {a[i + 45]:SgPntrArrRefExp a[i + 45]->1,0} : a[i + 45]..a[i + 45], constant bound: {a[i + 45]:SgPntrArrRefExp a[i + 45]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 46] {j == 46:SgEqualityOp j == 46->1,0} : j == 46..j == 46, constant bound: {j == 46:SgEqualityOp j == 46->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 46]] {a[i + 46]:SgPntrArrRefExp a[i + 46]->1,0} : a[i + 46]..a[i + 46], constant bound: {a[i + 46]:SgPntrArrRefExp a[i + 46]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 47] {j == 47:SgEqualityOp j == 47->1,0} : j == 47..j == 47, constant bound: {j == 47:SgEqualityOp j == 47->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 47]] {a[i + 47]:SgPntrArrRefExp a[i + 47]->1,0} : a[i + 47]..a[i + 47], constant bound: {a[i + 47]:SgPntrArrRefExp a[i + 47]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 48] {j == 48:SgEqualityOp j == 48->1,0} : j == 48..j == 48, constant bound: {j == 48:SgEqualityOp j == 48->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 48]] {a[i + 48]:SgPntrArrRefExp a[i + 48]->1,0} : a[i + 48]..a[i + 48], constant bound: {a[i + 48]:SgPntrArrRefExp a[i + 48]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 49] {j == 49:SgEqualityOp j == 49->1,0} : j == 49..j == 49, constant bound: {j == 49:SgEqualityOp j == 49->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 49]] {a[i + 49]:SgPntrArrRefExp a[i + 49]->1,0} : a[i + 49]..a[i + 49], constant bound: {a[i + 49]:SgPntrArrRefExp a[i + 49]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 50] {j == 50:SgEqualityOp j == 50->1,0} : j == 50..j == 50, constant bound: {j == 50:SgEqualityOp j == 50->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 50]] {a[i + 50]:SgPntrArrRefExp a[i + 50]->1,0} : a[i + 50]..a[i + 50], constant bound: {a[i + 50]:SgPntrArrRefExp a[i + 50]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 51] {j == 51:SgEqualityOp j == 51->1,0} : j == 51..j == 51, constant bound: {j == 51:SgEqualityOp j == 51->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 51]] {a[i + 51]:SgPntrArrRefExp a[i + 51]->1,0} : a[i + 51]..a[i + 51], constant bound: {a[i + 51]:SgPntrArrRefExp a[i + 51]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 52] {j == 52:SgEqualityOp j == 52->1,0} : j == 52..j == 52, constant bound: {j == 52:SgEqualityOp j == 52->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 52]] {a[i + 52]:SgPntrArrRefExp a[i + 52]->1,0} : a[i + 52]..a[i + 52], constant bound: {a[i + 52]:SgPntrArrRefExp a[i + 52]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 53] {j == 53:SgEqualityOp j == 53->1,0} : j == 53..j == 53, constant bound: {j == 53:SgEqualityOp j == 53->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 53]] {a[i + 53]:SgPntrArrRefExp a[i + 53]->1,0} : a[i + 53]..a[i + 53], constant bound: {a[i + 53]:SgPntrArrRefExp a[i + 53]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 54] {j == 54:SgEqualityOp j == 54->1,0} : j == 54..j == 54, constant bound: {j == 54:SgEqualityOp j == 54->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 54]] {a[i + 54]:SgPntrArrRefExp a[i + 54]->1,0} : a[i + 54]..a[i + 54], constant bound: {a[i + 54]:SgPntrArrRefExp a[i + 54]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 55] {j == 55:SgEqualityOp j == 55->1,0} : j == 55..j == 55, constant bound: {j == 55:SgEqualityOp j == 55->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 55]] {a[i + 55]:SgPntrArrRefExp a[i + 55]->1,0} : a[i + 55]..a[i + 55], constant bound: {a[i + 55]:SgPntrArrRefExp a[i + 55]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 56] {j == 56:SgEqualityOp j == 56->1,0} : j == 56..j == 56, constant bound: {j == 56:SgEqualityOp j == 56->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 56]] {a[i + 56]:SgPntrArrRefExp a[i + 56]->1,0} : a[i + 56]..a[i + 56], constant bound: {a[i + 56]:SgPntrArrRefExp a[i + 56]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 57] {j == 57:SgEqualityOp j == 57->1,0} : j == 57..j == 57, constant bound: {j == 57:SgEqualityOp j == 57->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 57]] {a[i + 57]:SgPntrArrRefExp a[i + 57]->1,0} : a[i + 57]..a[i + 57], constant bound: {a[i + 57]:SgPntrArrRefExp a[i + 57]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 58] {j == 58:SgEqualityOp j == 58->1,0} : j == 58..j == 58, constant bound: {j == 58:SgEqualityOp j == 58->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 58]] {a[i + 58]:SgPntrArrRefExp a[i + 58]->1,0} : a[i + 58]..a[i + 58], constant bound: {a[i + 58]:SgPntrArrRefExp a[i + 58]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 59] {j == 59:SgEqualityOp j == 59->1,0} : j == 59..j == 59, constant bound: {j == 59:SgEqualityOp j == 59->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 59]] {a[i + 59]:SgPntrArrRefExp a[i + 59]->1,0} : a[i + 59]..a[i + 59], constant bound: {a[i + 59]:SgPntrArrRefExp a[i + 59]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 60] {j == 60:SgEqualityOp j == 60->1,0} : j == 60..j == 60, constant bound: {j == 60:SgEqualityOp j == 60->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 60]] {a[i + 60]:SgPntrArrRefExp a[i + 60]->1,0} : a[i + 60]..a[i + 60], constant bound: {a[i + 60]:SgPntrArrRefExp a[i + 60]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 61] {j == 61:SgEqualityOp j == 61->1,0} : j == 61..j == 61, constant bound: {j == 61:SgEqualityOp j == 61->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 61]] {a[i + 61]:SgPntrArrRefExp a[i + 61]->1,0} : a[i + 61]..a[i + 61], constant bound: {a[i + 61]:SgPntrArrRefExp a[i + 61]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 62] {j == 62:SgEqualityOp j == 62->1,0} : j == 62..j == 62, constant bound: {j == 62:SgEqualityOp j == 62->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 62]] {a[i + 62]:SgPntrArrRefExp a[i + 62]->1,0} : a[i + 62]..a[i + 62], constant bound: {a[i + 62]:SgPntrArrRefExp a[i + 62]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 63] {j == 63:SgEqualityOp j == 63->1,0} : j == 63..j == 63, constant bound: {j == 63:SgEqualityOp j == 63->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 63]] {a[i + 63]:SgPntrArrRefExp a[i + 63]->1,0} : a[i + 63]..a[i + 63], constant bound: {a[i + 63]:SgPntrArrRefExp a[i + 63]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 64] {j == 64:SgEqualityOp j == 64->1,0} : j == 64..j == 64, constant bound: {j == 64:SgEqualityOp j == 64->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 64]] {a[i + 64]:SgPntrArrRefExp a[i + 64]->1,0} : a[i + 64]..a[i + 64], constant bound: {a[i + 64]:SgPntrArrRefExp a[i + 64]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 65] {j == 65:SgEqualityOp j == 65->1,0} : j == 65..j == 65, constant bound: {j == 65:SgEqualityOp j == 65->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 65]] {a[i + 65]:SgPntrArrRefExp a[i + 65]->1,0} : a[i + 65]..a[i + 65], constant bound: {a[i + 65]:SgPntrArrRefExp a[i + 65]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 66] {j == 66:SgEqualityOp j == 66->1,0} : j == 66..j == 66, constant bound: {j == 66:SgEqualityOp j == 66->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 66]] {a[i + 66]:SgPntrArrRefExp a[i + 66]->1,0} : a[i + 66]..a[i + 66], constant bound: {a[i + 66]:SgPntrArrRefExp a[i + 66]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 67] {j == 67:SgEqualityOp j == 67->1,0} : j == 67..j == 67, constant bound: {j == 67:SgEqualityOp j == 67->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 67]] {a[i + 67]:SgPntrArrRefExp a[i + 67]->1,0} : a[i + 67]..a[i + 67], constant bound: {a[i + 67]:SgPntrArrRefExp a[i + 67]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 68] {j == 68:SgEqualityOp j == 68->1,0} : j == 68..j == 68, constant bound: {j == 68:SgEqualityOp j == 68->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 68]] {a[i + 68]:SgPntrArrRefExp a[i + 68]->1,0} : a[i + 68]..a[i + 68], constant bound: {a[i + 68]:SgPntrArrRefExp a[i + 68]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 69] {j == 69:SgEqualityOp j == 69->1,0} : j == 69..j == 69, constant bound: {j == 69:SgEqualityOp j == 69->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 69]] {a[i + 69]:SgPntrArrRefExp a[i + 69]->1,0} : a[i + 69]..a[i + 69], constant bound: {a[i + 69]:SgPntrArrRefExp a[i + 69]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 70] {j == 70:SgEqualityOp j == 70->1,0} : j == 70..j == 70, constant bound: {j == 70:SgEqualityOp j == 70->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 70]] {a[i + 70]:SgPntrArrRefExp a[i + 70]->1,0} : a[i + 70]..a[i + 70], constant bound: {a[i + 70]:SgPntrArrRefExp a[i + 70]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 71] {j == 71:SgEqualityOp j == 71->1,0} : j == 71..j == 71, constant bound: {j == 71:SgEqualityOp j == 71->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 71]] {a[i + 71]:SgPntrArrRefExp a[i + 71]->1,0} : a[i + 71]..a[i + 71], constant bound: {a[i + 71]:SgPntrArrRefExp a[i + 71]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 72] {j == 72:SgEqualityOp j == 72->1,0} : j == 72..j == 72, constant bound: {j == 72:SgEqualityOp j == 72->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 72]] {a[i + 72]:SgPntrArrRefExp a[i + 72]->1,0} : a[i + 72]..a[i + 72], constant bound: {a[i + 72]:SgPntrArrRefExp a[i + 72]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 73] {j == 73:SgEqualityOp j == 73->1,0} : j == 73..j == 73, constant bound: {j == 73:SgEqualityOp j == 73->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 73]] {a[i + 73]:SgPntrArrRefExp a[i + 73]->1,0} : a[i + 73]..a[i + 73], constant bound: {a[i + 73]:SgPntrArrRefExp a[i + 73]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 74] {j == 74:SgEqualityOp j == 74->1,0} : j == 74..j == 74, constant bound: {j == 74:SgEqualityOp j == 74->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 74]] {a[i + 74]:SgPntrArrRefExp a[i + 74]->1,0} : a[i + 74]..a[i + 74], constant bound: {a[i + 74]:SgPntrArrRefExp a[i + 74]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 75] {j == 75:SgEqualityOp j == 75->1,0} : j == 75..j == 75, constant bound: {j == 75:SgEqualityOp j == 75->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 75]] {a[i + 75]:SgPntrArrRefExp a[i + 75]->1,0} : a[i + 75]..a[i + 75], constant bound: {a[i + 75]:SgPntrArrRefExp a[i + 75]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 76] {j == 76:SgEqualityOp j == 76->1,0} : j == 76..j == 76, constant bound: {j == 76:SgEqualityOp j == 76->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 76]] {a[i + 76]:SgPntrArrRefExp a[i + 76]->1,0} : a[i + 76]..a[i + 76], constant bound: {a[i + 76]:SgPntrArrRefExp a[i + 76]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 77] {j == 77:SgEqualityOp j == 77->1,0} : j == 77..j == 77, constant bound: {j == 77:SgEqualityOp j == 77->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 77]] {a[i + 77]:SgPntrArrRefExp a[i + 77]->1,0} : a[i + 77]..a[i + 77], constant bound: {a[i + 77]:SgPntrArrRefExp a[i + 77]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 78] {j == 78:SgEqualityOp j == 78->1,0} : j == 78..j == 78, constant bound: {j == 78:SgEqualityOp j == 78->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 78]] {a[i + 78]:SgPntrArrRefExp a[i + 78]->1,0} : a[i + 78]..a[i + 78], constant bound: {a[i + 78]:SgPntrArrRefExp a[i + 78]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 79] {j == 79:SgEqualityOp j == 79->1,0} : j == 79..j == 79, constant bound: {j == 79:SgEqualityOp j == 79->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 79]] {a[i + 79]:SgPntrArrRefExp a[i + 79]->1,0} : a[i + 79]..a[i + 79], constant bound: {a[i + 79]:SgPntrArrRefExp a[i + 79]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 80] {j == 80:SgEqualityOp j == 80->1,0} : j == 80..j == 80, constant bound: {j == 80:SgEqualityOp j == 80->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 80]] {a[i + 80]:SgPntrArrRefExp a[i + 80]->1,0} : a[i + 80]..a[i + 80], constant bound: {a[i + 80]:SgPntrArrRefExp a[i + 80]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 81] {j == 81:SgEqualityOp j == 81->1,0} : j == 81..j == 81, constant bound: {j == 81:SgEqualityOp j == 81->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 81]] {a[i + 81]:SgPntrArrRefExp a[i + 81]->1,0} : a[i + 81]..a[i + 81], constant bound: {a[i + 81]:SgPntrArrRefExp a[i + 81]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 82] {j == 82:SgEqualityOp j == 82->1,0} : j == 82..j == 82, constant bound: {j == 82:SgEqualityOp j == 82->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 82]] {a[i + 82]:SgPntrArrRefExp a[i + 82]->1,0} : a[i + 82]..a[i + 82], constant bound: {a[i + 82]:SgPntrArrRefExp a[i + 82]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 83] {j == 83:SgEqualityOp j == 83->1,0} : j == 83..j == 83, constant bound: {j == 83:SgEqualityOp j == 83->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 83]] {a[i + 83]:SgPntrArrRefExp a[i + 83]->1,0} : a[i + 83]..a[i + 83], constant bound: {a[i + 83]:SgPntrArrRefExp a[i + 83]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 84] {j == 84:SgEqualityOp j == 84->1,0} : j == 84..j == 84, constant bound: {j == 84:SgEqualityOp j == 84->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 84]] {a[i + 84]:SgPntrArrRefExp a[i + 84]->1,0} : a[i + 84]..a[i + 84], constant bound: {a[i + 84]:SgPntrArrRefExp a[i + 84]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 85] {j == 85:SgEqualityOp j == 85->1,0} : j == 85..j == 85, constant bound: {j == 85:SgEqualityOp j == 85->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 85]] {a[i + 85]:SgPntrArrRefExp a[i + 85]->1,0} : a[i + 85]..a[i + 85], constant bound: {a[i + 85]:SgPntrArrRefExp a[i + 85]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 86] {j == 86:SgEqualityOp j == 86->1,0} : j == 86..j == 86, constant bound: {j == 86:SgEqualityOp j == 86->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 86]] {a[i + 86]:SgPntrArrRefExp a[i + 86]->1,0} : a[i + 86]..a[i + 86], constant bound: {a[i + 86]:SgPntrArrRefExp a[i + 86]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 87] {j == 87:SgEqualityOp j == 87->1,0} : j == 87..j == 87, constant bound: {j == 87:SgEqualityOp j == 87->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 87]] {a[i + 87]:SgPntrArrRefExp a[i + 87]->1,0} : a[i + 87]..a[i + 87], constant bound: {a[i + 87]:SgPntrArrRefExp a[i + 87]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 88] {j == 88:SgEqualityOp j == 88->1,0} : j == 88..j == 88, constant bound: {j == 88:SgEqualityOp j == 88->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 88]] {a[i + 88]:SgPntrArrRefExp a[i + 88]->1,0} : a[i + 88]..a[i + 88], constant bound: {a[i + 88]:SgPntrArrRefExp a[i + 88]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 89] {j == 89:SgEqualityOp j == 89->1,0} : j == 89..j == 89, constant bound: {j == 89:SgEqualityOp j == 89->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 89]] {a[i + 89]:SgPntrArrRefExp a[i + 89]->1,0} : a[i + 89]..a[i + 89], constant bound: {a[i + 89]:SgPntrArrRefExp a[i + 89]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 90] {j == 90:SgEqualityOp j == 90->1,0} : j == 90..j == 90, constant bound: {j == 90:SgEqualityOp j == 90->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 90]] {a[i + 90]:SgPntrArrRefExp a[i + 90]->1,0} : a[i + 90]..a[i + 90], constant bound: {a[i + 90]:SgPntrArrRefExp a[i + 90]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 91] {j == 91:SgEqualityOp j == 91->1,0} : j == 91..j == 91, constant bound: {j == 91:SgEqualityOp j == 91->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 91]] {a[i + 91]:SgPntrArrRefExp a[i + 91]->1,0} : a[i + 91]..a[i + 91], constant bound: {a[i + 91]:SgPntrArrRefExp a[i + 91]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 92] {j == 92:SgEqualityOp j == 92->1,0} : j == 92..j == 92, constant bound: {j == 92:SgEqualityOp j == 92->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 92]] {a[i + 92]:SgPntrArrRefExp a[i + 92]->1,0} : a[i + 92]..a[i + 92], constant bound: {a[i + 92]:SgPntrArrRefExp a[i + 92]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 93] {j == 93:SgEqualityOp j == 93->1,0} : j == 93..j == 93, constant bound: {j == 93:SgEqualityOp j == 93->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 93]] {a[i + 93]:SgPntrArrRefExp a[i + 93]->1,0} : a[i + 93]..a[i + 93], constant bound: {a[i + 93]:SgPntrArrRefExp a[i + 93]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 94] {j == 94:SgEqualityOp j == 94->1,0} : j == 94..j == 94, constant bound: {j == 94:SgEqualityOp j == 94->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 94]] {a[i + 94]:SgPntrArrRefExp a[i + 94]->1,0} : a[i + 94]..a[i + 94], constant bound: {a[i + 94]:SgPntrArrRefExp a[i + 94]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 95] {j == 95:SgEqualityOp j == 95->1,0} : j == 95..j == 95, constant bound: {j == 95:SgEqualityOp j == 95->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 95]] {a[i + 95]:SgPntrArrRefExp a[i + 95]->1,0} : a[i + 95]..a[i + 95], constant bound: {a[i + 95]:SgPntrArrRefExp a[i + 95]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 96] {j == 96:SgEqualityOp j == 96->1,0} : j == 96..j == 96, constant bound: {j == 96:SgEqualityOp j == 96->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 96]] {a[i + 96]:SgPntrArrRefExp a[i + 96]->1,0} : a[i + 96]..a[i + 96], constant bound: {a[i + 96]:SgPntrArrRefExp a[i + 96]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 97] {j == 97:SgEqualityOp j == 97->1,0} : j == 97..j == 97, constant bound: {j == 97:SgEqualityOp j == 97->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 97]] {a[i + 97]:SgPntrArrRefExp a[i + 97]->1,0} : a[i + 97]..a[i + 97], constant bound: {a[i + 97]:SgPntrArrRefExp a[i + 97]->1,0} : neg_inf..pos_inf
+[Exp SgEqualityOp:j == 98] {j == 98:SgEqualityOp j == 98->1,0} : j == 98..j == 98, constant bound: {j == 98:SgEqualityOp j == 98->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i + 98]] {a[i + 98]:SgPntrArrRefExp a[i + 98]->1,0} : a[i + 98]..a[i + 98], constant bound: {a[i + 98]:SgPntrArrRefExp a[i + 98]->1,0} : neg_inf..pos_inf
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void func() {...}
+  SgBasicBlock {for(int j = 0;j < 100;++j) {if(j == 0) {a[i + 0];}else if(j == 1) {a[i + 1];}else if(j == 2) {a[i + 2];}else if(j == 3) {a[i + 3];}else if(j == 4) {a[i + 4];}else if(j == 5) {a[i + 5];}else if(j == 6) {a[i + 6];}else if(j == 7) {a[i + 7];}else if(j == 8) {a[i + 8];}else if(j == 9) {a[i + 9];}else if(j == 10) {a[i + 10];}else if(j == 11) {a[i + 11];}else if(j == 12) {a[i + 12];}else if(j == 13) {a[i + 13];}else if(j == 14) {a[i + 14];}else if(j == 15) {a[i + 15];}else if(j == 16) {a[i + 16];}else if(j == 17) {a[i + 17];}else if(j == 18) {a[i + 18];}else if(j == 19) {a[i + 19];}else if(j == 20) {a[i + 20];}else if(j == 21) {a[i + 21];}else if(j == 22) {a[i + 22];}else if(j == 23) {a[i + 23];}else if(j == 24) {a[i + 24];}else if(j == 25) {a[i + 25];}else if(j == 26) {a[i + 26];}else if(j == 27) {a[i + 27];}else if(j == 28) {a[i + 28];}else if(j == 29) {a[i + 29];}else if(j == 30) {a[i + 30];}else if(j == 31) {a[i + 31];}else if(j == 32) {a[i + 32];}else if(j == 33) {a[i + 33];}else if(j == 34) {a[i + 34];}else if(j == 35) {a[i + 35];}else if(j == 36) {a[i + 36];}else if(j == 37) {a[i + 37];}else if(j == 38) {a[i + 38];}else if(j == 39) {a[i + 39];}else if(j == 40) {a[i + 40];}else if(j == 41) {a[i + 41];}else if(j == 42) {a[i + 42];}else if(j == 43) {a[i + 43];}else if(j == 44) {a[i + 44];}else if(j == 45) {a[i + 45];}else if(j == 46) {a[i + 46];}else if(j == 47) {a[i + 47];}else if(j == 48) {a[i + 48];}else if(j == 49) {a[i + 49];}else if(j == 50) {a[i + 50];}else if(j == 51) {a[i + 51];}else if(j == 52) {a[i + 52];}else if(j == 53) {a[i + 53];}else if(j == 54) {a[i + 54];}else if(j == 55) {a[i + 55];}else if(j == 56) {a[i + 56];}else if(j == 57) {a[i + 57];}else if(j == 58) {a[i + 58];}else if(j == 59) {a[i + 59];}else if(j == 60) {a[i + 60];}else if(j == 61) {a[i + 61];}else if(j == 62) {a[i + 62];}else if(j == 63) {a[i + 63];}else if(j == 64) {a[i + 64];}else if(j == 65) {a[i + 65];}else if(j == 66) {a[i + 66];}else if(j == 67) {a[i + 67];}else if(j == 68) {a[i + 68];}else if(j == 69) {a[i + 69];}else if(j == 70) {a[i + 70];}else if(j == 71) {a[i + 71];}else if(j == 72) {a[i + 72];}else if(j == 73) {a[i + 73];}else if(j == 74) {a[i + 74];}else if(j == 75) {a[i + 75];}else if(j == 76) {a[i + 76];}else if(j == 77) {a[i + 77];}else if(j == 78) {a[i + 78];}else if(j == 79) {a[i + 79];}else if(j == 80) {a[i + 80];}else if(j == 81) {a[i + 81];}else if(j == 82) {a[i + 82];}else if(j == 83) {a[i + 83];}else if(j == 84) {a[i + 84];}else if(j == 85) {a[i + 85];}else if(j == 86) {a[i + 86];}else if(j == 87) {a[i + 87];}else if(j == 88) {a[i + 88];}else if(j == 89) {a[i + 89];}else if(j == 90) {a[i + 90];}else if(j == 91) {a[i + 91];}else if(j == 92) {a[i + 92];}else if(j == 93) {a[i + 93];}else if(j == 94) {a[i + 94];}else if(j == 95) {a[i + 95];}else if(j == 96) {a[i + 96];}else if(j == 97) {a[i + 97];}else if(j == 98) {a[i + 98];}}}
+  SgForStatement for(int i = 0;i < 100;++i) {...}
+  SgBasicBlock {if(j == 0) {a[i + 0];}else if(j == 1) {a[i + 1];}else if(j == 2) {a[i + 2];}else if(j == 3) {a[i + 3];}else if(j == 4) {a[i + 4];}else if(j == 5) {a[i + 5];}else if(j == 6) {a[i + 6];}else if(j == 7) {a[i + 7];}else if(j == 8) {a[i + 8];}else if(j == 9) {a[i + 9];}else if(j == 10) {a[i + 10];}else if(j == 11) {a[i + 11];}else if(j == 12) {a[i + 12];}else if(j == 13) {a[i + 13];}else if(j == 14) {a[i + 14];}else if(j == 15) {a[i + 15];}else if(j == 16) {a[i + 16];}else if(j == 17) {a[i + 17];}else if(j == 18) {a[i + 18];}else if(j == 19) {a[i + 19];}else if(j == 20) {a[i + 20];}else if(j == 21) {a[i + 21];}else if(j == 22) {a[i + 22];}else if(j == 23) {a[i + 23];}else if(j == 24) {a[i + 24];}else if(j == 25) {a[i + 25];}else if(j == 26) {a[i + 26];}else if(j == 27) {a[i + 27];}else if(j == 28) {a[i + 28];}else if(j == 29) {a[i + 29];}else if(j == 30) {a[i + 30];}else if(j == 31) {a[i + 31];}else if(j == 32) {a[i + 32];}else if(j == 33) {a[i + 33];}else if(j == 34) {a[i + 34];}else if(j == 35) {a[i + 35];}else if(j == 36) {a[i + 36];}else if(j == 37) {a[i + 37];}else if(j == 38) {a[i + 38];}else if(j == 39) {a[i + 39];}else if(j == 40) {a[i + 40];}else if(j == 41) {a[i + 41];}else if(j == 42) {a[i + 42];}else if(j == 43) {a[i + 43];}else if(j == 44) {a[i + 44];}else if(j == 45) {a[i + 45];}else if(j == 46) {a[i + 46];}else if(j == 47) {a[i + 47];}else if(j == 48) {a[i + 48];}else if(j == 49) {a[i + 49];}else if(j == 50) {a[i + 50];}else if(j == 51) {a[i + 51];}else if(j == 52) {a[i + 52];}else if(j == 53) {a[i + 53];}else if(j == 54) {a[i + 54];}else if(j == 55) {a[i + 55];}else if(j == 56) {a[i + 56];}else if(j == 57) {a[i + 57];}else if(j == 58) {a[i + 58];}else if(j == 59) {a[i + 59];}else if(j == 60) {a[i + 60];}else if(j == 61) {a[i + 61];}else if(j == 62) {a[i + 62];}else if(j == 63) {a[i + 63];}else if(j == 64) {a[i + 64];}else if(j == 65) {a[i + 65];}else if(j == 66) {a[i + 66];}else if(j == 67) {a[i + 67];}else if(j == 68) {a[i + 68];}else if(j == 69) {a[i + 69];}else if(j == 70) {a[i + 70];}else if(j == 71) {a[i + 71];}else if(j == 72) {a[i + 72];}else if(j == 73) {a[i + 73];}else if(j == 74) {a[i + 74];}else if(j == 75) {a[i + 75];}else if(j == 76) {a[i + 76];}else if(j == 77) {a[i + 77];}else if(j == 78) {a[i + 78];}else if(j == 79) {a[i + 79];}else if(j == 80) {a[i + 80];}else if(j == 81) {a[i + 81];}else if(j == 82) {a[i + 82];}else if(j == 83) {a[i + 83];}else if(j == 84) {a[i + 84];}else if(j == 85) {a[i + 85];}else if(j == 86) {a[i + 86];}else if(j == 87) {a[i + 87];}else if(j == 88) {a[i + 88];}else if(j == 89) {a[i + 89];}else if(j == 90) {a[i + 90];}else if(j == 91) {a[i + 91];}else if(j == 92) {a[i + 92];}else if(j == 93) {a[i + 93];}else if(j == 94) {a[i + 94];}else if(j == 95) {a[i + 95];}else if(j == 96) {a[i + 96];}else if(j == 97) {a[i + 97];}else if(j == 98) {a[i + 98];}}
+  SgForStatement for(int j = 0;j < 100;++j) {...}
+
+Arrays: 
+  int [200] a
+
+Ranges: 
+  SgFunctionDeclaration void func() {...}
+    int [200] a :  R[0..197 exact]
+  SgBasicBlock {for(int j = 0;j < 100;++j) {if(j == 0) {a[i + 0];}else if(j == 1) {a[i + 1];}else if(j == 2) {a[i + 2];}else if(j == 3) {a[i + 3];}else if(j == 4) {a[i + 4];}else if(j == 5) {a[i + 5];}else if(j == 6) {a[i + 6];}else if(j == 7) {a[i + 7];}else if(j == 8) {a[i + 8];}else if(j == 9) {a[i + 9];}else if(j == 10) {a[i + 10];}else if(j == 11) {a[i + 11];}else if(j == 12) {a[i + 12];}else if(j == 13) {a[i + 13];}else if(j == 14) {a[i + 14];}else if(j == 15) {a[i + 15];}else if(j == 16) {a[i + 16];}else if(j == 17) {a[i + 17];}else if(j == 18) {a[i + 18];}else if(j == 19) {a[i + 19];}else if(j == 20) {a[i + 20];}else if(j == 21) {a[i + 21];}else if(j == 22) {a[i + 22];}else if(j == 23) {a[i + 23];}else if(j == 24) {a[i + 24];}else if(j == 25) {a[i + 25];}else if(j == 26) {a[i + 26];}else if(j == 27) {a[i + 27];}else if(j == 28) {a[i + 28];}else if(j == 29) {a[i + 29];}else if(j == 30) {a[i + 30];}else if(j == 31) {a[i + 31];}else if(j == 32) {a[i + 32];}else if(j == 33) {a[i + 33];}else if(j == 34) {a[i + 34];}else if(j == 35) {a[i + 35];}else if(j == 36) {a[i + 36];}else if(j == 37) {a[i + 37];}else if(j == 38) {a[i + 38];}else if(j == 39) {a[i + 39];}else if(j == 40) {a[i + 40];}else if(j == 41) {a[i + 41];}else if(j == 42) {a[i + 42];}else if(j == 43) {a[i + 43];}else if(j == 44) {a[i + 44];}else if(j == 45) {a[i + 45];}else if(j == 46) {a[i + 46];}else if(j == 47) {a[i + 47];}else if(j == 48) {a[i + 48];}else if(j == 49) {a[i + 49];}else if(j == 50) {a[i + 50];}else if(j == 51) {a[i + 51];}else if(j == 52) {a[i + 52];}else if(j == 53) {a[i + 53];}else if(j == 54) {a[i + 54];}else if(j == 55) {a[i + 55];}else if(j == 56) {a[i + 56];}else if(j == 57) {a[i + 57];}else if(j == 58) {a[i + 58];}else if(j == 59) {a[i + 59];}else if(j == 60) {a[i + 60];}else if(j == 61) {a[i + 61];}else if(j == 62) {a[i + 62];}else if(j == 63) {a[i + 63];}else if(j == 64) {a[i + 64];}else if(j == 65) {a[i + 65];}else if(j == 66) {a[i + 66];}else if(j == 67) {a[i + 67];}else if(j == 68) {a[i + 68];}else if(j == 69) {a[i + 69];}else if(j == 70) {a[i + 70];}else if(j == 71) {a[i + 71];}else if(j == 72) {a[i + 72];}else if(j == 73) {a[i + 73];}else if(j == 74) {a[i + 74];}else if(j == 75) {a[i + 75];}else if(j == 76) {a[i + 76];}else if(j == 77) {a[i + 77];}else if(j == 78) {a[i + 78];}else if(j == 79) {a[i + 79];}else if(j == 80) {a[i + 80];}else if(j == 81) {a[i + 81];}else if(j == 82) {a[i + 82];}else if(j == 83) {a[i + 83];}else if(j == 84) {a[i + 84];}else if(j == 85) {a[i + 85];}else if(j == 86) {a[i + 86];}else if(j == 87) {a[i + 87];}else if(j == 88) {a[i + 88];}else if(j == 89) {a[i + 89];}else if(j == 90) {a[i + 90];}else if(j == 91) {a[i + 91];}else if(j == 92) {a[i + 92];}else if(j == 93) {a[i + 93];}else if(j == 94) {a[i + 94];}else if(j == 95) {a[i + 95];}else if(j == 96) {a[i + 96];}else if(j == 97) {a[i + 97];}else if(j == 98) {a[i + 98];}}}
+    int [200] a :  R[i..98 + i exact]
+  SgForStatement for(int i = 0;i < 100;++i) {...}
+    int [200] a :  R[0..197 exact]
+  SgBasicBlock {if(j == 0) {a[i + 0];}else if(j == 1) {a[i + 1];}else if(j == 2) {a[i + 2];}else if(j == 3) {a[i + 3];}else if(j == 4) {a[i + 4];}else if(j == 5) {a[i + 5];}else if(j == 6) {a[i + 6];}else if(j == 7) {a[i + 7];}else if(j == 8) {a[i + 8];}else if(j == 9) {a[i + 9];}else if(j == 10) {a[i + 10];}else if(j == 11) {a[i + 11];}else if(j == 12) {a[i + 12];}else if(j == 13) {a[i + 13];}else if(j == 14) {a[i + 14];}else if(j == 15) {a[i + 15];}else if(j == 16) {a[i + 16];}else if(j == 17) {a[i + 17];}else if(j == 18) {a[i + 18];}else if(j == 19) {a[i + 19];}else if(j == 20) {a[i + 20];}else if(j == 21) {a[i + 21];}else if(j == 22) {a[i + 22];}else if(j == 23) {a[i + 23];}else if(j == 24) {a[i + 24];}else if(j == 25) {a[i + 25];}else if(j == 26) {a[i + 26];}else if(j == 27) {a[i + 27];}else if(j == 28) {a[i + 28];}else if(j == 29) {a[i + 29];}else if(j == 30) {a[i + 30];}else if(j == 31) {a[i + 31];}else if(j == 32) {a[i + 32];}else if(j == 33) {a[i + 33];}else if(j == 34) {a[i + 34];}else if(j == 35) {a[i + 35];}else if(j == 36) {a[i + 36];}else if(j == 37) {a[i + 37];}else if(j == 38) {a[i + 38];}else if(j == 39) {a[i + 39];}else if(j == 40) {a[i + 40];}else if(j == 41) {a[i + 41];}else if(j == 42) {a[i + 42];}else if(j == 43) {a[i + 43];}else if(j == 44) {a[i + 44];}else if(j == 45) {a[i + 45];}else if(j == 46) {a[i + 46];}else if(j == 47) {a[i + 47];}else if(j == 48) {a[i + 48];}else if(j == 49) {a[i + 49];}else if(j == 50) {a[i + 50];}else if(j == 51) {a[i + 51];}else if(j == 52) {a[i + 52];}else if(j == 53) {a[i + 53];}else if(j == 54) {a[i + 54];}else if(j == 55) {a[i + 55];}else if(j == 56) {a[i + 56];}else if(j == 57) {a[i + 57];}else if(j == 58) {a[i + 58];}else if(j == 59) {a[i + 59];}else if(j == 60) {a[i + 60];}else if(j == 61) {a[i + 61];}else if(j == 62) {a[i + 62];}else if(j == 63) {a[i + 63];}else if(j == 64) {a[i + 64];}else if(j == 65) {a[i + 65];}else if(j == 66) {a[i + 66];}else if(j == 67) {a[i + 67];}else if(j == 68) {a[i + 68];}else if(j == 69) {a[i + 69];}else if(j == 70) {a[i + 70];}else if(j == 71) {a[i + 71];}else if(j == 72) {a[i + 72];}else if(j == 73) {a[i + 73];}else if(j == 74) {a[i + 74];}else if(j == 75) {a[i + 75];}else if(j == 76) {a[i + 76];}else if(j == 77) {a[i + 77];}else if(j == 78) {a[i + 78];}else if(j == 79) {a[i + 79];}else if(j == 80) {a[i + 80];}else if(j == 81) {a[i + 81];}else if(j == 82) {a[i + 82];}else if(j == 83) {a[i + 83];}else if(j == 84) {a[i + 84];}else if(j == 85) {a[i + 85];}else if(j == 86) {a[i + 86];}else if(j == 87) {a[i + 87];}else if(j == 88) {a[i + 88];}else if(j == 89) {a[i + 89];}else if(j == 90) {a[i + 90];}else if(j == 91) {a[i + 91];}else if(j == 92) {a[i + 92];}else if(j == 93) {a[i + 93];}else if(j == 94) {a[i + 94];}else if(j == 95) {a[i + 95];}else if(j == 96) {a[i + 96];}else if(j == 97) {a[i + 97];}else if(j == 98) {a[i + 98];}}
+    int [200] a :  R[i..98 + i inexact]
+  SgForStatement for(int j = 0;j < 100;++j) {...}
+    int [200] a :  R[i..98 + i exact]
+

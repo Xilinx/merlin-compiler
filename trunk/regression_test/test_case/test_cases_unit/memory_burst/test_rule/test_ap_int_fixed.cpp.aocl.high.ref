@@ -1,0 +1,22 @@
+#include <string.h> 
+#include<ap_int.h>
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void top(class ap_int< 10 > *a,class ap_uint< 10 > *b,class ap_fixed< 10 , 20 , AP_TRN , AP_WRAP , 0 > *c,class ap_ufixed< 10 , 20 , AP_TRN , AP_WRAP , 0 > *d)
+{
+  class ap_ufixed< 10 , 20 , AP_TRN , AP_WRAP , 0 > d_buf[100];
+  class ap_fixed< 10 , 20 , AP_TRN , AP_WRAP , 0 > c_buf[100];
+  class ap_uint< 10 > b_buf[100];
+  class ap_int< 10 > a_buf[100];
+  for (int i = 0; i < 100; ++i) {
+    a_buf[i] = i;
+    b_buf[i] = i;
+    c_buf[i] = i;
+    d_buf[i] = i;
+  }
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(class ap_int< 10 > ) * 100);
+  memcpy((void *)(&b[0]),(const void *)(&b_buf[0]),sizeof(class ap_uint< 10 > ) * 100);
+  memcpy((void *)(&c[0]),(const void *)(&c_buf[0]),sizeof(class ap_fixed< 10 , 20 , AP_TRN , AP_WRAP , 0 > ) * 100);
+  memcpy((void *)(&d[0]),(const void *)(&d_buf[0]),sizeof(class ap_ufixed< 10 , 20 , AP_TRN , AP_WRAP , 0 > ) * 100);
+}

@@ -1,0 +1,25 @@
+
+WARNING: [MDARR-201] OpenCL host library generation is disabled because some of the dimension sizes of the interface variable 'a' (test_array_dim.c:6) of type 'int **' is not determined.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=a max_depth=?,?
+
+ERROR: [INFTF-304] Incorrect pragma : #pragma ACCEL interface variable=a depth=b,c (test_array_dim.c:11)
+    depth defined as variable, so the max_depth must be set
+Example : #pragma ACCEL interface variable=a depth=b,c max_depth=?,?
+
+
+WARNING: [MDARR-201] OpenCL host library generation is disabled because some of the dimension sizes of the interface variable 'a' (test_array_dim.c:10) of type 'int **' is not determined.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=a max_depth=?,?
+
+ERROR: [INFTF-305] Invalid interface max_depth value : b
+    max_depth can only be constant integer number, do not support expression.
+
+
+WARNING: [MDARR-201] OpenCL host library generation is disabled because some of the dimension sizes of the interface variable 'a' (test_array_dim.c:16) of type 'int **' is not determined.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=a max_depth=?,?
+
+WARNING: [MDARR-201] OpenCL host library generation is disabled because some of the dimension sizes of the interface variable 'a' (test_array_dim.c:22) of type 'int **' is not determined.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=a max_depth=?,

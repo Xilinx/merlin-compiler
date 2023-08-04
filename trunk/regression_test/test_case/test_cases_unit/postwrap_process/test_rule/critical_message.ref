@@ -1,0 +1,46 @@
+
+ERROR: [POSTW-302] Kernel return expresion can not be aggregate initilizer:     Return expression : return {((int *)0), {},((double *)0)}; (false_case_0.cpp:12)
+
+
+ERROR: [POSTW-301] Kernel function 'fun' (false_case_1.cpp:2) with reference return type is not supported: int &
+
+ERROR: [GLOBL-301] Kernel and all the functions used in a kernel cannot be declared in the header file, if it contains global variable
+    Function 'func' (t.h:1)
+    Global variable: int sumv; (false_case_2.cpp:2)
+
+
+ERROR: [GLOBL-301] Kernel and all the functions used in a kernel cannot be declared in the header file, if it contains global variable
+    Function 'sum' (t.h:2)
+    Global variable: int sumv; (false_case_2.cpp:2)
+
+
+ERROR: [GLOBL-302] Kernel and all the functions used in a kernel cannot be shared by host, if it contains global variable
+    Function 'sum' (false_case_2.cpp:3)
+    Global variable: int sumv; (false_case_2.cpp:2)
+
+
+ERROR: [GLOBL-304] Global variable name conflicts with a local variable or argument
+    Function 'g8' (false_case_3.cpp:13)
+    Global variable: int g_8 = 99;(false_case_3.cpp:4)
+
+
+ERROR: [GLOBL-303] Cannot modify global pointer in the kernel
+    File location  : false_case_3.cpp
+    Global variable: int *g_5;
+
+
+WARNING: [GLOBL-201] Intel SDK cannot support more than 32 arguments.
+Current number of final arguments is 33 (32 (original arguments) + 1 (original global variables)).
+Please try to change global variables into local variables or merge multiple scalar global variables into a single array global variable
+
+ERROR: [GLOBL-305] Uninitialized constant global variable 'extern const int x;' (postwrap_non_initialized_const_global.cpp:1)
+ is not supported
+
+ERROR: [GLOBL-305] Uninitialized constant global variable 'extern const char y[10];' (postwrap_non_initialized_const_global.cpp:2)
+ is not supported
+
+ERROR: [GLOBL-305] Uninitialized constant global variable 'extern const int z[];' (postwrap_non_initialized_const_global.cpp:3)
+ is not supported
+
+ERROR: [GLOBL-306] Global array variable 'extern int a[];' (postwrap_external_global_array.c:1)
+ with undetermined size is not supported

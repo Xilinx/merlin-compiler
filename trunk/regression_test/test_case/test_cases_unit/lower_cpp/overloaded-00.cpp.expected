@@ -1,0 +1,23 @@
+
+void p_Z1fv()
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_f_();
+
+void p_Z1fb(bool )
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_f_boo_();
+
+void p_Z1fbj(bool ,unsigned int )
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_f_boo_();
+#pragma ACCEL kernel
+
+int main()
+{
+  p_Z1fv();
+  p_Z1fb(false);
+  p_Z1fbj(false,0);
+}

@@ -1,0 +1,48 @@
+Hello Program Analysis ... 
+SgTemplateInstantiationFunctionDecl:void f < 3 > () {...} original location test_original_node.cpp:1
+SgTemplateInstantiationDecl:template<> class A< 2 > {public: template < int W >int f3( int A [ 10 ] );}; original location compilerGenerated:0
+SgTemplateInstantiationDefn:template<> class A< 2 > {public: template < int W >int f3( int A [ 10 ] );} original location compilerGenerated:0
+SgTemplateInstantiationMemberFunctionDecl:int f2() {...} original location test_original_node.cpp:14
+SgTemplateMemberFunctionDeclaration:template < int W >
+      int f3 ( int A [ 10 ] ); original location compilerGenerated:0
+SgFunctionParameterList:int [10] A original location compilerGenerated:0
+SgTemplateInstantiationFunctionDecl:void f < 3 > () {...} original location test_original_node.cpp:1
+SgFunctionDefinition:function definition: void f < 3 > () {...} original location test_original_node.cpp:2
+SgBasicBlock:{int a[3];} original location test_original_node.cpp:2
+SgVariableDeclaration:int a[3]; original location test_original_node.cpp:3
+SgTemplateInstantiationMemberFunctionDecl:int f2() {...} original location test_original_node.cpp:14
+SgFunctionDefinition:function definition: int f2() {...} original location compilerGenerated:0
+SgBasicBlock:{int sum = 0;for(int i = 0;i < 100;++i) {sum += i;}return sum;} original location compilerGenerated:0
+SgVariableDeclaration:int sum = 0; original location compilerGenerated:0
+SgForStatement:for(int i = 0;i < 100;++i) {...} original location compilerGenerated:0
+SgForInitStatement:int i = 0;; original location compilerGenerated:0
+SgVariableDeclaration:int i = 0; original location compilerGenerated:0
+SgExprStatement:i < 100; original location compilerGenerated:0
+SgBasicBlock:{sum += i;} original location compilerGenerated:0
+SgExprStatement:sum += i; original location compilerGenerated:0
+SgReturnStmt:return sum; original location compilerGenerated:0
+SgTemplateInstantiationMemberFunctionDecl:int f3 < 10 > (int [10] A) {...} original location compilerGenerated:0
+SgFunctionParameterList:int [10] A original location compilerGenerated:0
+SgFunctionDefinition:function definition: int f3 < 10 > (int [10] A) {...} original location compilerGenerated:0
+SgBasicBlock:{int sum = 0;L3:for(int j = 0;j < 10;++j) {sum += A[j];}return sum;} original location compilerGenerated:0
+SgVariableDeclaration:int sum = 0; original location compilerGenerated:0
+SgLabelStatement:L3:for(int j = 0;j < 10;++j) {sum += A[j];} original location compilerGenerated:0
+SgForStatement:for(int j = 0;j < 10;++j) {...} original location compilerGenerated:0
+SgForInitStatement:int j = 0;; original location compilerGenerated:0
+SgVariableDeclaration:int j = 0; original location compilerGenerated:0
+SgExprStatement:j < 10; original location compilerGenerated:0
+SgBasicBlock:{sum += A[j];} original location compilerGenerated:0
+SgExprStatement:sum += A[j]; original location compilerGenerated:0
+SgReturnStmt:return sum; original location compilerGenerated:0
+SgTemplateInstantiationMemberFunctionDecl:int f4 < 20 > () {...} original location test_original_node.cpp:32
+SgFunctionDefinition:function definition: int f4 < 20 > () {...} original location test_original_node.cpp:33
+SgBasicBlock:{int sum = 0;for(int k = 0;k < 20;++k) {sum += k;}return sum;} original location test_original_node.cpp:33
+SgVariableDeclaration:int sum = 0; original location test_original_node.cpp:34
+SgForStatement:for(int k = 0;k < 20;++k) {...} original location test_original_node.cpp:35
+SgForInitStatement:int k = 0;; original location test_original_node.cpp:35
+SgVariableDeclaration:int k = 0; original location test_original_node.cpp:35
+SgExprStatement:k < 20; original location test_original_node.cpp:35
+SgBasicBlock:{sum += k;} original location test_original_node.cpp:35
+SgExprStatement:sum += k; original location test_original_node.cpp:36
+SgReturnStmt:return sum; original location test_original_node.cpp:38
+

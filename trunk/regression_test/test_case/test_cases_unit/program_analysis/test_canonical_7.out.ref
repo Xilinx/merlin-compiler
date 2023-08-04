@@ -1,0 +1,217 @@
+// Testing multi-level loops
+#pragma ACCEL kernel
+
+void func_loop()
+{
+  int a[10];
+  int b[10];
+  int c[10];
+  int i = 0;
+  int j = 0;
+  int k = 0;
+  int x;
+  int y;
+  int z;
+  int N = 100;
+  for ((i = N , j = 3); i >= 0; i--) {
+    for (j = N; i >= 0; i--) {
+/* block 1*/
+      c[i] = a[i] + b[i];
+    }
+  }
+  for ((i = N , j = 3); i >= 0; i--) {
+    for (j = N; i >= 0; i--) 
+/* block 2*/
+      c[i] = a[i] + b[i];
+  }
+  int i0;
+  int i1;
+  int i2;
+  int i3;
+  int i4;
+  j = 0;
+// Canonicalized from: for((i0 = N , j = 0);i0 >= 0;i0--) {...}
+// Standardize from: for(i0 = N;i0 >= 0;--i0) {...}
+  for (i0 = 0; i0 <= 100; i0++) {
+    int _in_i0 = 100 + -1 * i0;
+    j = 1;
+// Canonicalized from: for((i1 = N , j = 1);i1 >= 0;i1--) {...}
+// Standardize from: for(i1 = N;i1 >= 0;--i1) {...}
+    for (i1 = 0; i1 <= 100; i1++) {
+      int _in_i1 = 100 + -1 * i1;
+      j = 2;
+// Canonicalized from: for((i2 = N , j = 2);i2 >= 0;i2--) {...}
+// Standardize from: for(i2 = N;i2 >= 0;--i2) {...}
+      for (i2 = 0; i2 <= 100; i2++) {
+        int _in_i2 = 100 + -1 * i2;
+        j = 3;
+// Canonicalized from: for((i3 = N , j = 3);i3 >= 0;i3--) {...}
+// Standardize from: for(i3 = N;i3 >= 0;--i3) {...}
+        for (i3 = 0; i3 <= 100; i3++) {
+          int _in_i3 = 100 + -1 * i3;
+          j = 4;
+// Canonicalized from: for((i4 = N , j = 4);i4 >= 0;i4--) {...}
+// Standardize from: for(i4 = N;i4 >= 0;--i4) {...}
+          for (i4 = 0; i4 <= 100; i4++) {
+            int _in_i4 = 100 + -1 * i4;
+/* block 2*/
+            c[_in_i0 + _in_i1 + _in_i2 + _in_i3 + _in_i4] = a[_in_i0 + _in_i1 + _in_i2 + _in_i3 + _in_i4] + b[_in_i0 + _in_i1 + _in_i2 + _in_i3 + _in_i4];
+          }
+          i4 = 0 + -1;
+        }
+        i3 = 0 + -1;
+      }
+      i2 = 0 + -1;
+    }
+    i1 = 0 + -1;
+  }
+  i0 = 0 + -1;
+  int _l_i0 = 100;
+  int _l_j_3 = 0;
+// Canonicalized from: for(int i0 = N, j = 0;i0 >= 0;i0--) {...}
+// Standardize from: for(_l_i0 = N;_l_i0 >= 0;--_l_i0) {...}
+  for (_l_i0 = 0; _l_i0 <= 100; _l_i0++) {
+    int _in_l_i0 = 100 + -1 * _l_i0;
+    int _l_i1 = 100;
+    int _l_j_2 = 1;
+// Canonicalized from: for(int i1 = N, j = 1;i1 >= 0;i1--) {...}
+// Standardize from: for(_l_i1 = N;_l_i1 >= 0;--_l_i1) {...}
+    for (_l_i1 = 0; _l_i1 <= 100; _l_i1++) {
+      int _in_l_i1 = 100 + -1 * _l_i1;
+      int _l_i2 = 100;
+      int _l_j_1 = 2;
+// Canonicalized from: for(int i2 = N, j = 2;i2 >= 0;i2--) {...}
+// Standardize from: for(_l_i2 = N;_l_i2 >= 0;--_l_i2) {...}
+      for (_l_i2 = 0; _l_i2 <= 100; _l_i2++) {
+        int _in_l_i2 = 100 + -1 * _l_i2;
+        int _l_i3 = 100;
+        int _l_j_0 = 3;
+// Canonicalized from: for(int i3 = N, j = 3;i3 >= 0;i3--) {...}
+// Standardize from: for(_l_i3 = N;_l_i3 >= 0;--_l_i3) {...}
+        for (_l_i3 = 0; _l_i3 <= 100; _l_i3++) {
+          int _in_l_i3 = 100 + -1 * _l_i3;
+          int _l_i4 = 100;
+          int _l_j = 4;
+// Canonicalized from: for(int i4 = N, j = 4;i4 >= 0;i4--) {...}
+// Standardize from: for(_l_i4 = N;_l_i4 >= 0;--_l_i4) {...}
+          for (_l_i4 = 0; _l_i4 <= 100; _l_i4++) {
+            int _in_l_i4 = 100 + -1 * _l_i4;
+/* block 2.1*/
+            c[_l_j + _in_l_i0 + _in_l_i1 + _in_l_i2 + _in_l_i3 + _in_l_i4] = a[_in_l_i0 + _in_l_i1 + _in_l_i2 + _in_l_i3 + _in_l_i4] + b[_in_l_i0 + _in_l_i1 + _in_l_i2 + _in_l_i3 + _in_l_i4];
+          }
+          _l_i4 = 0 + -1;
+        }
+        _l_i3 = 0 + -1;
+      }
+      _l_i2 = 0 + -1;
+    }
+    _l_i1 = 0 + -1;
+  }
+  _l_i0 = 0 + -1;
+  int _l_i0_0 = 100;
+  int _l_j0 = 0;
+// Canonicalized from: for(int i0 = N, j0 = 0;i0 >= 0;i0--) {...}
+// Standardize from: for(_l_i0_0 = N;_l_i0_0 >= 0;--_l_i0_0) {...}
+  for (_l_i0_0 = 0; _l_i0_0 <= 100; _l_i0_0++) {
+    int _in_l_i0_0 = 100 + -1 * _l_i0_0;
+    int _l_i1_0 = 100;
+    int _l_j1 = 1;
+// Canonicalized from: for(int i1 = N, j1 = 1;i1 >= 0;i1--) {...}
+// Standardize from: for(_l_i1_0 = N;_l_i1_0 >= 0;--_l_i1_0) {...}
+    for (_l_i1_0 = 0; _l_i1_0 <= 100; _l_i1_0++) {
+      int _in_l_i1_0 = 100 + -1 * _l_i1_0;
+      int _l_i2_0 = 100;
+      int _l_j2 = 2;
+// Canonicalized from: for(int i2 = N, j2 = 2;i2 >= 0;i2--) {...}
+// Standardize from: for(_l_i2_0 = N;_l_i2_0 >= 0;--_l_i2_0) {...}
+      for (_l_i2_0 = 0; _l_i2_0 <= 100; _l_i2_0++) {
+        int _in_l_i2_0 = 100 + -1 * _l_i2_0;
+        int _l_i3_0 = 100;
+        int _l_j3 = 3;
+// Canonicalized from: for(int i3 = N, j3 = 3;i3 >= 0;i3--) {...}
+// Standardize from: for(_l_i3_0 = N;_l_i3_0 >= 0;--_l_i3_0) {...}
+        for (_l_i3_0 = 0; _l_i3_0 <= 100; _l_i3_0++) {
+          int _in_l_i3_0 = 100 + -1 * _l_i3_0;
+          int _l_i4_0 = 100;
+          int _l_j4 = 4;
+// Canonicalized from: for(int i4 = N, j4 = 4;i4 >= 0;i4--) {...}
+// Standardize from: for(_l_i4_0 = N;_l_i4_0 >= 0;--_l_i4_0) {...}
+          for (_l_i4_0 = 0; _l_i4_0 <= 100; _l_i4_0++) {
+            int _in_l_i4_0 = 100 + -1 * _l_i4_0;
+/* block 2.2*/
+            c[_l_j0 + _in_l_i0_0 + _in_l_i1_0 + _in_l_i2_0 + _in_l_i3_0 + _in_l_i4_0] = a[_l_j3 + _in_l_i0_0 + _in_l_i1_0 + _in_l_i2_0 + _in_l_i3_0 + _in_l_i4_0] + b[_in_l_i0_0 + _in_l_i1_0 + _in_l_i2_0 + _in_l_i3_0 + _in_l_i4_0];
+          }
+          _l_i4_0 = 0 + -1;
+        }
+        _l_i3_0 = 0 + -1;
+      }
+      _l_i2_0 = 0 + -1;
+    }
+    _l_i1_0 = 0 + -1;
+  }
+  _l_i0_0 = 0 + -1;
+// Standardize from: for(i = N;i >= 0;i--) {...}
+  for (i = 0; i <= 100; i++) {
+    int _in_i = 100 + -1 * i;
+    j = _in_i;
+// Canonicalized from: for(;j < 10;j++) {...}
+    for (j = _in_i; j <= 9; ++j) {
+/* block 3*/
+      c[_in_i] = a[j] + b[j];
+    }
+  }
+  i = 0 + -1;
+// Standardize from: for(i = N;i >= 0;i--) {...}
+  for (i = 0; i <= 100; i++) {
+    int _in_i_0 = 100 + -1 * i;
+    for (j = _in_i_0; j < 100; j += 2) 
+      if (j < 10) {
+        for (k = 3; k < 10; k++) {
+/* block 4*/
+          c[_in_i_0] = a[k] + b[j];
+        }
+      }
+  }
+  i = 0 + -1;
+  for (i = N; i >= 0; i--) {
+    for (j = i0; j < 100; j += 2) 
+      if (j < 10) {
+        for (k = 3; k < 10; k++) {
+/* block 5*/
+          c[i] = a[k] + b[j];
+        }
+      }
+    break; 
+  }
+// Standardize from: for(i = N;i >= 0;i--) {...}
+  for (i = 0; i <= 100; i++) {
+    int _in_i_1 = 100 + -1 * i;
+    k = 3;
+// Canonicalized from: for((j = i , k = 3);j < 100;j += 2) if(j < 10) {...}
+    for (j = _in_i_1; j <= 99; j += 2) {
+      if (j < 10) {
+        for (; k < 10; k++) {
+          c[_in_i_1] = a[k] + b[j];
+        }
+      }
+    }
+  }
+  i = 0 + -1;
+  for (i = N; i >= 0; i--) {
+    loop1:
+    for (j = i; j < 100; j += 2) 
+      if (j < 10) {
+        for (k = 3; k < 10; k++) {
+          c[i] = a[k] + b[j];
+        }
+      }
+    if (c[0] == 1) 
+      goto loop1;
+  }
+}
+
+int main()
+{
+  func_loop();
+  return 0;
+}

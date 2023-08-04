@@ -1,0 +1,4 @@
+
+ERROR: [DISAG-303] Intel SDK cannot support more than 128 arguments.
+Current number of final arguments is 144.
+Please try to pack struct/class members to reduce the number of the kernel interface variables

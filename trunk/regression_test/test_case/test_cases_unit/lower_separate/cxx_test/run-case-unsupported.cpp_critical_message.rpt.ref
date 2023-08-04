@@ -1,0 +1,21 @@
+
+ERROR: [LWCPP-301] Bit-fields is not supported: struct Foo {class Inner {private: inline Inner(){}inline Foo f(){return Foo();}}... (case-unsupported.cpp:3)
+
+ERROR: [LWCPP-301] Destructor is not supported: void ~X() {...} (case-unsupported.cpp:13)
+
+ERROR: [LWCPP-301] Reference-typed member variable is not supported: struct A {int &x;int y;inline A() : x((this) -> y){}inline static void *operator... (case-unsupported.cpp:20)
+
+ERROR: [LWCPP-301] Operator new expression is not supported: void * operator new(::size_t i) {...} (case-unsupported.cpp:24)
+
+ERROR: [LWCPP-301] Operator delete expression is not supported: void operator delete(void * p) {...} (case-unsupported.cpp:25)
+
+ERROR: [LWCPP-301] Virtual function declaration is not supported: void f() {...} (case-unsupported.cpp:29)
+
+ERROR: [LWCPP-301] Inline struct definition is not supported: struct {int x;inline int f(){return(this) -> x + 1;}} (case-unsupported.cpp:41)
+INFO: [LWCPP-102] Hint: Consider separating the aggregate definition from variable declaration.
+
+ERROR: [LWCPP-301] Delegated ctor is not supported: void SSS(int yy) {...} (case-unsupported.cpp:50)
+
+WARNING: [LWCPP-201] kernel's type signature is not reference C-like or global-namespace types. Down stream simulation may have compilation problem: void g(struct ::Foo foo) {...} (case-unsupported.cpp:34)
+
+ERROR: [LWCPP-302] kernel cannot reside within a namespace: void ::ng() {...} (case-unsupported.cpp:55)

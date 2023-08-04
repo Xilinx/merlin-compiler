@@ -1,0 +1,22 @@
+#include "merlin_type_define.h"
+extern int __merlin_include__GB_merlin_type_define_h_0;
+
+static void p_ZN1A3setEi_1(struct A *this_,int aa)
+{
+  this_ -> a = aa;
+}
+
+static void p_ZN1B4set2Eii_1(struct B *this_,int aa,int bb)
+{
+  p_ZN1A3setEi_1(&this_ -> A,aa);
+  this_ -> b = bb;
+}
+#pragma ACCEL kernel
+
+void k()
+{
+  struct B bo;
+  p_ZN1A3setEi_1(&bo . A,0);
+  struct B bo2;
+  p_ZN1B4set2Eii_1(&bo2,0,1);
+}

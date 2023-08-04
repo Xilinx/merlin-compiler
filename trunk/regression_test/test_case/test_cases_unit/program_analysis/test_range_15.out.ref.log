@@ -1,0 +1,49 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int k = 0;k < 16;k++) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int j = 0;j < 32 + 2;j++) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i = 0;i < 32000 + 2;i++) {...}
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+[Exp SgAndOp:j >= 1 && j <= 32 && i >= 1 && i <= 32000] {j >= 1 && j <= 32 && i >= 1 && i <= 32000:SgAndOp j >= 1 && j <= 32 && i >= 1 && i <= 32000->1,0} : j >= 1 && j <= 32 && i >= 1 && i <= 32000..j >= 1 && j <= 32 && i >= 1 && i <= 32000, constant bound: {j >= 1 && j <= 32 && i >= 1 && i <= 32000:SgAndOp j >= 1 && j <= 32 && i >= 1 && i <= 32000->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:sol[k + 16 *(j - 1 + 32 *(i - 1))]] {sol[k + 16 *(j - 1 + 32 *(i - 1))]:SgPntrArrRefExp sol[k + 16 *(j - 1 + 32 *(i - 1))]->1,0} : sol[k + 16 *(j - 1 + 32 *(i - 1))]..sol[k + 16 *(j - 1 + 32 *(i - 1))], constant bound: {sol[k + 16 *(j - 1 + 32 *(i - 1))]:SgPntrArrRefExp sol[k + 16 *(j - 1 + 32 *(i - 1))]->1,0} : neg_inf..pos_inf
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void k(int [16384000] sol) {...}
+  SgBasicBlock {for(int j = 0;j < 32 + 2;j++) {#pragma ACCEL PIPELINEif(j >= 1 && j <= 32 && i >= 1 && i <= 32000) {for(int k = 0;k < 16;k++) {#pragma ACCEL PARALLEL COMPLETEsol[k + 16 *(j - 1 + 32 *(i - 1))];}}}}
+  SgForStatement for(int i = 0;i < 32000 + 2;i++) {...}
+  SgBasicBlock {#pragma ACCEL PIPELINEif(j >= 1 && j <= 32 && i >= 1 && i <= 32000) {for(int k = 0;k < 16;k++) {#pragma ACCEL PARALLEL COMPLETEsol[k + 16 *(j - 1 + 32 *(i - 1))];}}}
+  SgForStatement for(int j = 0;j < 32 + 2;j++) {...}
+  SgBasicBlock {#pragma ACCEL PARALLEL COMPLETEsol[k + 16 *(j - 1 + 32 *(i - 1))];}
+  SgForStatement for(int k = 0;k < 16;k++) {...}
+
+Arrays: 
+  int [16384000] sol
+
+Ranges: 
+  SgFunctionDeclaration void k(int [16384000] sol) {...}
+    int [16384000] sol :  R[0..16383999 exact]
+  SgBasicBlock {for(int j = 0;j < 32 + 2;j++) {#pragma ACCEL PIPELINEif(j >= 1 && j <= 32 && i >= 1 && i <= 32000) {for(int k = 0;k < 16;k++) {#pragma ACCEL PARALLEL COMPLETEsol[k + 16 *(j - 1 + 32 *(i - 1))];}}}}
+    int [16384000] sol :  R[min(-512 + i * 512,0)..max(-1 + i * 512,16383999) inexact]
+  SgForStatement for(int i = 0;i < 32000 + 2;i++) {...}
+    int [16384000] sol :  R[0..16383999 exact]
+  SgBasicBlock {#pragma ACCEL PIPELINEif(j >= 1 && j <= 32 && i >= 1 && i <= 32000) {for(int k = 0;k < 16;k++) {#pragma ACCEL PARALLEL COMPLETEsol[k + 16 *(j - 1 + 32 *(i - 1))];}}}
+    int [16384000] sol :  R[min(-528 + i * 512 + j * 16,0)..max(-513 + i * 512 + j * 16,16383999) inexact]
+  SgForStatement for(int j = 0;j < 32 + 2;j++) {...}
+    int [16384000] sol :  R[min(-512 + i * 512,0)..max(-1 + i * 512,16383999) inexact]
+  SgBasicBlock {#pragma ACCEL PARALLEL COMPLETEsol[k + 16 *(j - 1 + 32 *(i - 1))];}
+    int [16384000] sol :  R[-528 + i * 512 + j * 16 + k..-528 + i * 512 + j * 16 + k exact]
+  SgForStatement for(int k = 0;k < 16;k++) {...}
+    int [16384000] sol :  R[-528 + i * 512 + j * 16..-513 + i * 512 + j * 16 exact]
+

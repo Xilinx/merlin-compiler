@@ -1,0 +1,32 @@
+
+struct ::A 
+{
+  int a;
+}
+;
+
+void p_ZN1AC2Eii(struct A *this_,int i,int j)
+{
+  this_ -> a = i + j;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+
+struct ::B 
+{
+  struct A A;
+}
+;
+
+void p_ZN1BC2Eii(struct B *this_,int i,int j)
+{
+  p_ZN1AC2Eii(&this_ -> A,i + j,i - j);
+}
+static void __merlin_dummy_SgClassDeclaration_struct_B_();
+#pragma ACCEL kernel
+
+void k()
+{
+  struct B bo;
+  p_ZN1BC2Eii(&bo,1,2);
+  ;
+}

@@ -1,0 +1,23 @@
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void top(int *a,int *b)
+{
+  
+#pragma ACCEl interface variable=a depth=1000
+  
+#pragma ACCEl interface variable=b depth=1000
+  int b_ptr_buf[100];
+  int a_ptr_buf[100];
+  int *a_ptr = &a[10];
+  int *b_ptr = &b[10];
+  memcpy((void *)(&b_ptr_buf[0]),(const void *)(&b_ptr[0]),sizeof(int ) * 100);
+  for (int i = 0; i < 100; ++i) {
+    a_ptr_buf[i] = b_ptr_buf[i] + 2;
+  }
+  memcpy((void *)(&a_ptr[0]),(const void *)(&a_ptr_buf[0]),sizeof(int ) * 100);
+  if (b_ptr[100] > 0) {
+    a_ptr[100] = 100;
+  }
+}

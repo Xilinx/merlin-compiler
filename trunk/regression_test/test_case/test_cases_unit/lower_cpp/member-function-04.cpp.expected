@@ -1,0 +1,25 @@
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+static void __merlin_dummy_SgTemplateMemberFunctionDeclaration_template_();
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+
+struct ::A_int_ 
+{
+}
+;
+
+struct ::xFMinSAD_2_ 
+{
+}
+;
+
+void p_ZN11xFMinSAD_2_4findI1AIiEEER1AIiE(struct xFMinSAD_2_ *this_,struct A_int_ &loc)
+{
+}
+#pragma ACCEL kernel
+
+void stereoBM_accel()
+{
+  struct A_int_ a;
+  struct xFMinSAD_2_ f;
+  p_ZN11xFMinSAD_2_4findI1AIiEEER1AIiE(&f,a);
+}

@@ -1,0 +1,288 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 0;i < N;i += 1) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 0;i <= N;i += 1) {...}
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for((i = 0 , j = 3);(i != N , j != N);i += 2) {...}
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(i = 0;i != N;i += 2) {...}
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for((i = N , j = 1);j > i && i > 0;i--) {...}
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for((i = 0 , j = 3);10 > i;i++) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for((i = N , j = 3);0 < i;--i) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for((i = N , j = 3);i > b[i];--i) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = N;i > b[0];--i) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = N;i >= b[0];i -= 0.99) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = N;i <= 101;i += 1.28) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = N;i <= 120;i += 1.51) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = N;i > 95;i -= 1.51) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 0;i > - 5;i -= 1.51) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 5;i <= 0;i += 1.51) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 10;i <= 10;i += 1.51) {...}
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for((i = N , j = 3);i > b[i] * 2;--i) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for((i = 0 , j = 3);2 + 3 * 4 / 6 > i;i++) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+[Exp SgMinusMinusOp:j--] {j--:SgMinusMinusOp j--->1,0} : j--..j--, constant bound: {j--:SgMinusMinusOp j--->1,0} : neg_inf..pos_inf
+[Exp SgFunctionCallExp:printf("1) %d\n",i)] Warning: TransformationSupport::getFile(str_val) == NULL 
+Warning: TransformationSupport::getFile(str_val) == NULL 
+Warning: TransformationSupport::getFile(str_val) == NULL 
+{printf("1) %d\n",i):SgFunctionCallExp printf("1) %d\n",i)->1,0} : printf("1) %d\n",i)..printf("1) %d\n",i), constant bound: Warning: TransformationSupport::getFile(str_val) == NULL 
+{printf("1) %d\n",i):SgFunctionCallExp printf("1) %d\n",i)->1,0} : neg_inf..pos_inf
+[Exp SgFunctionCallExp:printf("2) %d\n",i)] Warning: TransformationSupport::getFile(str_val) == NULL 
+Warning: TransformationSupport::getFile(str_val) == NULL 
+Warning: TransformationSupport::getFile(str_val) == NULL 
+{printf("2) %d\n",i):SgFunctionCallExp printf("2) %d\n",i)->1,0} : printf("2) %d\n",i)..printf("2) %d\n",i), constant bound: Warning: TransformationSupport::getFile(str_val) == NULL 
+{printf("2) %d\n",i):SgFunctionCallExp printf("2) %d\n",i)->1,0} : neg_inf..pos_inf
+[Exp SgFunctionCallExp:printf("3) %d\n",i)] Warning: TransformationSupport::getFile(str_val) == NULL 
+Warning: TransformationSupport::getFile(str_val) == NULL 
+Warning: TransformationSupport::getFile(str_val) == NULL 
+{printf("3) %d\n",i):SgFunctionCallExp printf("3) %d\n",i)->1,0} : printf("3) %d\n",i)..printf("3) %d\n",i), constant bound: Warning: TransformationSupport::getFile(str_val) == NULL 
+{printf("3) %d\n",i):SgFunctionCallExp printf("3) %d\n",i)->1,0} : neg_inf..pos_inf
+[Exp SgFunctionCallExp:printf("4) %d\n",i)] Warning: TransformationSupport::getFile(str_val) == NULL 
+Warning: TransformationSupport::getFile(str_val) == NULL 
+Warning: TransformationSupport::getFile(str_val) == NULL 
+{printf("4) %d\n",i):SgFunctionCallExp printf("4) %d\n",i)->1,0} : printf("4) %d\n",i)..printf("4) %d\n",i), constant bound: Warning: TransformationSupport::getFile(str_val) == NULL 
+{printf("4) %d\n",i):SgFunctionCallExp printf("4) %d\n",i)->1,0} : neg_inf..pos_inf
+[Exp SgFunctionCallExp:printf("5) %d\n",i)] Warning: TransformationSupport::getFile(str_val) == NULL 
+Warning: TransformationSupport::getFile(str_val) == NULL 
+Warning: TransformationSupport::getFile(str_val) == NULL 
+{printf("5) %d\n",i):SgFunctionCallExp printf("5) %d\n",i)->1,0} : printf("5) %d\n",i)..printf("5) %d\n",i), constant bound: Warning: TransformationSupport::getFile(str_val) == NULL 
+{printf("5) %d\n",i):SgFunctionCallExp printf("5) %d\n",i)->1,0} : neg_inf..pos_inf
+[Exp SgFunctionCallExp:printf("6) %d\n",i)] Warning: TransformationSupport::getFile(str_val) == NULL 
+Warning: TransformationSupport::getFile(str_val) == NULL 
+Warning: TransformationSupport::getFile(str_val) == NULL 
+{printf("6) %d\n",i):SgFunctionCallExp printf("6) %d\n",i)->1,0} : printf("6) %d\n",i)..printf("6) %d\n",i), constant bound: Warning: TransformationSupport::getFile(str_val) == NULL 
+{printf("6) %d\n",i):SgFunctionCallExp printf("6) %d\n",i)->1,0} : neg_inf..pos_inf
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void func_loop() {...}
+  SgFunctionDeclaration int main() {...}
+  SgBasicBlock {int _in_i = 0 + 1L * i;c[_in_i] = a[_in_i] + b[_in_i];}
+  SgForStatement for(i = 0;i <= 99;i++) {...}
+  SgBasicBlock {int _in_i_0 = 0 + 1L * i;c[_in_i_0] = a[_in_i_0] + b[_in_i_0];}
+  SgForStatement for(i = 0;i <= 100;i++) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];}
+  SgForStatement for((i = 0 , j = 3);(i != N , j != N);i += 2) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];}
+  SgForStatement for(i = 0;i != N;i += 2) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];j--;}
+  SgForStatement for((i = N , j = 1);j > i && i > 0;i--) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];}
+  SgForStatement for(i = 0;i <= 9;++i) {...}
+  SgBasicBlock {int _in_i_1 = 100 + -1 * i;c[_in_i_1] = a[_in_i_1] + b[_in_i_1];}
+  SgForStatement for(i = 0;i <= 99;i++) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];}
+  SgForStatement for(i = N;i >= 1 + b[i];--i) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];}
+  SgForStatement for(i = N;i > b[0];--i) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];}
+  SgForStatement for(i = N;i >= b[0];i -= 0.99) {...}
+  SgBasicBlock {printf("1) %d\n",i);}
+  SgForStatement for(i = N;i <= 101;i += 1.28) {...}
+  SgBasicBlock {printf("2) %d\n",i);}
+  SgForStatement for(i = N;i <= 120;i += 1.51) {...}
+  SgBasicBlock {printf("3) %d\n",i);}
+  SgForStatement for(i = N;i > 95;i -= 1.51) {...}
+  SgBasicBlock {printf("4) %d\n",i);}
+  SgForStatement for(i = 0;i > - 5;i -= 1.51) {...}
+  SgBasicBlock {printf("5) %d\n",i);}
+  SgForStatement for(i = - 5;i <= 0;i += 1.51) {...}
+  SgBasicBlock {printf("6) %d\n",i);}
+  SgForStatement for(i = - 10;i <= 10;i += 1.51) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];}
+  SgForStatement for(i = N;i >= 1 + b[i] * 2;--i) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];}
+  SgForStatement for(i = 0;i <= 3;++i) {...}
+
+Arrays: 
+  int [10] a
+  int [10] b
+  int [10] c
+
+Ranges: 
+  SgFunctionDeclaration void func_loop() {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgFunctionDeclaration int main() {...}
+  SgBasicBlock {int _in_i = 0 + 1L * i;c[_in_i] = a[_in_i] + b[_in_i];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(i = 0;i <= 99;i++) {...}
+    int [10] a :  R[0..99 exact]
+    int [10] b :  R[0..99 exact]
+    int [10] c :  W[0..99 exact]
+  SgBasicBlock {int _in_i_0 = 0 + 1L * i;c[_in_i_0] = a[_in_i_0] + b[_in_i_0];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(i = 0;i <= 100;i++) {...}
+    int [10] a :  R[0..100 exact]
+    int [10] b :  R[0..100 exact]
+    int [10] c :  W[0..100 exact]
+  SgBasicBlock {c[i] = a[i] + b[i];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for((i = 0 , j = 3);(i != N , j != N);i += 2) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {c[i] = a[i] + b[i];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(i = 0;i != N;i += 2) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {c[i] = a[i] + b[i];j--;}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for((i = N , j = 1);j > i && i > 0;i--) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {c[i] = a[i] + b[i];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(i = 0;i <= 9;++i) {...}
+    int [10] a :  R[0..9 exact]
+    int [10] b :  R[0..9 exact]
+    int [10] c :  W[0..9 exact]
+  SgBasicBlock {int _in_i_1 = 100 + -1 * i;c[_in_i_1] = a[_in_i_1] + b[_in_i_1];}
+    int [10] a :  R[100 + -i..100 + -i exact]
+    int [10] b :  R[100 + -i..100 + -i exact]
+    int [10] c :  W[100 + -i..100 + -i exact]
+  SgForStatement for(i = 0;i <= 99;i++) {...}
+    int [10] a :  R[1..100 exact]
+    int [10] b :  R[1..100 exact]
+    int [10] c :  W[1..100 exact]
+  SgBasicBlock {c[i] = a[i] + b[i];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(i = N;i >= 1 + b[i];--i) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {c[i] = a[i] + b[i];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(i = N;i > b[0];--i) {...}
+    int [10] a :  R[min(1 + b[0],0)..9 inexact]
+    int [10] b :  R[min(1 + b[0],0)..9 inexact]
+    int [10] c :  W[min(1 + b[0],0)..9 inexact]
+  SgBasicBlock {c[i] = a[i] + b[i];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(i = N;i >= b[0];i -= 0.99) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {printf("1) %d\n",i);}
+  SgForStatement for(i = N;i <= 101;i += 1.28) {...}
+  SgBasicBlock {printf("2) %d\n",i);}
+  SgForStatement for(i = N;i <= 120;i += 1.51) {...}
+  SgBasicBlock {printf("3) %d\n",i);}
+  SgForStatement for(i = N;i > 95;i -= 1.51) {...}
+  SgBasicBlock {printf("4) %d\n",i);}
+  SgForStatement for(i = 0;i > - 5;i -= 1.51) {...}
+  SgBasicBlock {printf("5) %d\n",i);}
+  SgForStatement for(i = - 5;i <= 0;i += 1.51) {...}
+  SgBasicBlock {printf("6) %d\n",i);}
+  SgForStatement for(i = - 10;i <= 10;i += 1.51) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(i = N;i >= 1 + b[i] * 2;--i) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {c[i] = a[i] + b[i];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(i = 0;i <= 3;++i) {...}
+    int [10] a :  R[0..3 exact]
+    int [10] b :  R[0..3 exact]
+    int [10] c :  W[0..3 exact]
+

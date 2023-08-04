@@ -1,0 +1,43 @@
+int p_Z3subILi10EEi(int c);
+
+int p_Z3subILi10EEi(int c)
+{
+  
+#pragma hls tripcount max=10
+  return c;
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+
+struct ::util 
+{
+}
+;
+
+int p_ZN4util4sub2ILi20EEEi(struct util *this_,int c)
+{
+  
+#pragma hls tripcount max=20
+  return c;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_uti_();
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+
+struct ::tc_30_ 
+{
+}
+;
+
+int p_ZN6tc_30_4sub3ILi40EEEi(struct tc_30_ *this_,int c)
+{
+  
+#pragma HLS tripcount max=30+40
+  return c;
+}
+#pragma ACCEL kernel
+
+int top(int c)
+{
+  struct util tmp;
+  struct tc_30_ tmp2;
+  return p_Z3subILi10EEi(c) + p_ZN4util4sub2ILi20EEEi(&tmp,c) + p_ZN6tc_30_4sub3ILi40EEEi(&tmp2,c);
+}

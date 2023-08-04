@@ -1,0 +1,60 @@
+[print] top loop info
+Loop : for(j = 0;j < 100;j++) {...}
+  port : a, 1
+  port : b, 1
+  port : c, 1
+  port : c2, 1
+Loop : for(j = 0;j < 100;j++) {...}
+  port : c, 1
+node0:
+(sync point, pipeline stage) = (1,0) SgForStatement:for(j = 0;j < 100;j++) {...}
+  (sync point, pipeline stage) = (1,0) SgForStatement:for(i = 0;i < 100;i++) {...}
+    (sync point = 0) {
+      Ports: (SgInitializedName:a_buf, writeonly), (SgInitializedName:b, readonly), (SgInitializedName:c_buf, writeonly)
+      SgExprStatement:a_buf[i][j] = b[i][j];
+      SgExprStatement:c_buf[i / 2] = b[i][j];
+    }
+
+sub loop: SgForStatement:for(j = 0;j < 100;j++) {...}
+0 ... has sub loops
+1 ... has sub loops
+2 ... has sub loops
+node1:
+(sync point, pipeline stage) = (1,0) SgForStatement:for(j = 0;j < 100;j++) {...}
+  (sync point, pipeline stage) = (2,0) SgForStatement:for(i = 0;i < 100;i++) {...}
+    (sync point = 0) {
+      Ports: (SgInitializedName:a, writeonly), (SgInitializedName:a_buf, readonly), (SgInitializedName:c2, readonly)
+      SgExprStatement:a[i][j] = a_buf[i][j];
+    }
+
+sub loop: SgForStatement:for(j = 0;j < 100;j++) {...}
+0 ... has sub loops
+1 ... has sub loops
+2 ... has sub loops
+node2:
+(sync point, pipeline stage) = (1,0) SgForStatement:for(j = 0;j < 100;j++) {...}
+  (sync point, pipeline stage) = (3,0) SgForStatement:for(i = 0;i < 50;i++) {...}
+    (sync point = 0) {
+      Ports: (SgInitializedName:c, writeonly), (SgInitializedName:c_buf, readonly)
+      SgExprStatement:c[i] = c_buf[i];
+    }
+
+sub loop: SgForStatement:for(j = 0;j < 100;j++) {...}
+0 ... has sub loops
+1 ... has sub loops
+2 ... has sub loops
+node3:
+(sync point, pipeline stage) = (1,0) SgForStatement:for(j = 0;j < 100;j++) {...}
+  (sync point, pipeline stage) = (2,0) SgForStatement:for(i = 0;i < 50;i++) {...}
+    (sync point = 0) {
+      Ports: (SgInitializedName:c, writeonly)
+      SgExprStatement:c[i] = c_buf[i];
+    }
+
+sub loop: SgForStatement:for(j = 0;j < 100;j++) {...}
+3 ... has sub loops
+node 0 ... remove_all_statements
+node 1 ... remove_all_statements
+node 2 ... remove_all_statements
+node 3 ... remove_all_statements
+[TESTING] Total file number is: 4

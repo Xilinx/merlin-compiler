@@ -1,0 +1,90 @@
+// Ensure that calls to default constructors (implicit or otherwise) are
+// lowered.
+
+struct ::S 
+{
+  unsigned int u;
+}
+;
+
+unsigned int p_ZN1S1fEv(struct S *this_)
+{
+}
+static void __merlin_dummy_SgClassDeclaration_struct_S_();
+
+struct T 
+{
+  unsigned int u;
+  
+
+  inline unsigned int f()
+{
+  }
+}
+;
+
+struct U 
+{
+  struct T t;
+  
+
+  inline U() : t()
+{
+  }
+}
+;
+
+void f(unsigned int )
+{
+}
+// We use tfn insts to create SgConstructorInitializer calls to builtin types.
+struct Unlowered p_Z20invoke_implicit_ctorI9UnloweredEv();
+unsigned int p_Z20invoke_implicit_ctorIjEv();
+
+struct Unlowered p_Z20invoke_implicit_ctorI9UnloweredEv()
+{
+  struct Unlowered temp;
+  return temp;
+}
+
+unsigned int p_Z20invoke_implicit_ctorIjEv()
+{
+  unsigned int temp;
+  return temp;
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+// We use tfn insts to create SgConstructorInitializer calls to builtin types.
+struct Unlowered p_Z16invoke_copy_ctorI9UnloweredE9Unlowered(struct Unlowered t);
+unsigned int p_Z16invoke_copy_ctorIjEj(unsigned int t);
+
+struct Unlowered p_Z16invoke_copy_ctorI9UnloweredE9Unlowered(struct Unlowered t)
+{
+  return t;
+}
+
+unsigned int p_Z16invoke_copy_ctorIjEj(unsigned int t)
+{
+  return (unsigned int )t;
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+
+struct Unlowered 
+{
+}
+;
+#pragma ACCEL kernel
+
+void kernel()
+{
+// Implicit call to implicit default ctor. Nothing to lower.
+  struct S r;
+// Explicit call to implict default ctor. This needs to be lowered despite
+// no explicit decl/def of default ctor.
+  struct S temp;
+  f((p_ZN1S1fEv(&(temp))));
+  p_Z20invoke_implicit_ctorI9UnloweredEv();
+  p_Z20invoke_implicit_ctorIjEv();
+  struct Unlowered temp_0;
+  p_Z16invoke_copy_ctorI9UnloweredE9Unlowered(temp_0);
+  p_Z16invoke_copy_ctorIjEj(3);
+}

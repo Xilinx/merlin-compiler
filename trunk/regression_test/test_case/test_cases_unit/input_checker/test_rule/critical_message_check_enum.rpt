@@ -1,0 +1,6 @@
+
+ERROR: [SYNCHK-313] Top function argument 'm' (test.c:3) with type 'CCTestEnum [1] which contains an array or pointer of enum type (enum CCTestEnum)
+
+ERROR: [SYNCHK-313] Top function argument 'n' (test.c:3) with type 'CCTestEnum * which contains an array or pointer of enum type (enum CCTestEnum)
+
+ERROR: [SYNCHK-313] Return type 'CCTestEnum' of 'test' (test.c:3) which contains enum type (enum CCTestEnum)

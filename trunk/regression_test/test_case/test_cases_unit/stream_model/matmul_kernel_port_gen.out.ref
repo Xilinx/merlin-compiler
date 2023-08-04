@@ -1,0 +1,102 @@
+
+void msm_port_a_matmul_kernel_0(int *a)
+{
+  int _k_1;
+  int _i_2;
+  int _j_3;
+  for (_k_1 = 0; _k_1 < 256; _k_1++) {
+    
+#pragma ACCEL spawn
+    for (_i_2 = 0; _i_2 < 256; _i_2++) {
+      for (_j_3 = 0; _j_3 < 256; _j_3++) {
+        a[_k_1 * 256 + _i_2];
+      }
+    }
+  }
+}
+
+void msm_port_b_matmul_kernel_0(int *b)
+{
+  int _k_4;
+  int _i_5;
+  int _j_6;
+  for (_k_4 = 0; _k_4 < 256; _k_4++) {
+    
+#pragma ACCEL spawn
+    for (_i_5 = 0; _i_5 < 256; _i_5++) {
+      for (_j_6 = 0; _j_6 < 256; _j_6++) {
+        b[_k_4 * 256 + _j_6];
+      }
+    }
+  }
+}
+
+void msm_port_c_in_matmul_kernel_0(int *c_in)
+{
+  int _k_7;
+  int _j_8;
+  for (_k_7 = 0; _k_7 < 256; _k_7++) {
+    for (_j_8 = 0; _j_8 < 256; _j_8++) {
+      c_in[_k_7 * 256 + _j_8];
+    }
+  }
+}
+
+void msm_port_c_out_matmul_kernel_0(int *c_out)
+{
+  int _k_9;
+  int _j_10;
+  for (_k_9 = 0; _k_9 < 256; _k_9++) {
+    for (_j_10 = 0; _j_10 < 256; _j_10++) {
+      c_out[_k_9 * 256 + _j_10] = 0;
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void matmul_kernel(int *a,int *b,int *c_in,int *c_out)
+{
+{
+    
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=1 NODE=matmul_kernel VARIABLE=c_in 
+    msm_port_c_in_matmul_kernel_0(c_in);
+  }
+{
+    
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=1 NODE=matmul_kernel VARIABLE=b 
+    msm_port_b_matmul_kernel_0(b);
+  }
+{
+    
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=read DIM_NUM=1 NODE=matmul_kernel VARIABLE=a 
+    msm_port_a_matmul_kernel_0(a);
+  }
+  int i;
+  int j;
+  int k;
+  int c_buf[256][256];
+  for (k = 0; k < 256; k++) {
+    for (j = 0; j < 256; j++) {
+      c_buf[k][j] = c_in[k * 256 + j];
+    }
+  }
+  for (k = 0; k < 256; k++) {
+    
+#pragma ACCEL spawn
+    for (i = 0; i < 256; i++) {
+      for (j = 0; j < 256; j++) {
+        c_buf[i][j] += a[k * 256 + i] * b[k * 256 + j];
+      }
+    }
+  }
+  for (k = 0; k < 256; k++) {
+    for (j = 0; j < 256; j++) {
+      c_out[k * 256 + j] = c_buf[k][j];
+    }
+  }
+{
+    
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=write DIM_NUM=1 NODE=matmul_kernel VARIABLE=c_out 
+    msm_port_c_out_matmul_kernel_0(c_out);
+  }
+}

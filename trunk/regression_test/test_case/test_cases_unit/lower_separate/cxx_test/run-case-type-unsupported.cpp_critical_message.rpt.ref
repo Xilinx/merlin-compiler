@@ -1,0 +1,2 @@
+
+ERROR: [SYNCHK-321] Unsupported function usage 'f1' (case-type-unsupported.cpp:7), possible reasons: through a function pointer or function reference

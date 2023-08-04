@@ -1,0 +1,91 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int j = 0;j < 98;++j) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int j = 0;j < 100;++j) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i = 0;i < 10;++i) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int j = 0;j < 100;++j) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int j = 0;j < 98;++j) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i = 0;i < 10;++i) {...}
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+[Exp SgLessThanOp:i < 5] {i < 5:SgLessThanOp i < 5->1,0} : i < 5..i < 5, constant bound: {i < 5:SgLessThanOp i < 5->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i * 100 + j]] {a[i * 100 + j]:SgPntrArrRefExp a[i * 100 + j]->1,0} : a[i * 100 + j]..a[i * 100 + j], constant bound: {a[i * 100 + j]:SgPntrArrRefExp a[i * 100 + j]->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i * 100 + 98]] {a[i * 100 + 98]:SgPntrArrRefExp a[i * 100 + 98]->1,0} : a[i * 100 + 98]..a[i * 100 + 98], constant bound: {a[i * 100 + 98]:SgPntrArrRefExp a[i * 100 + 98]->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i * 100 + 99]] {a[i * 100 + 99]:SgPntrArrRefExp a[i * 100 + 99]->1,0} : a[i * 100 + 99]..a[i * 100 + 99], constant bound: {a[i * 100 + 99]:SgPntrArrRefExp a[i * 100 + 99]->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i * 100 + j]] {a[i * 100 + j]:SgPntrArrRefExp a[i * 100 + j]->1,0} : a[i * 100 + j]..a[i * 100 + j], constant bound: {a[i * 100 + j]:SgPntrArrRefExp a[i * 100 + j]->1,0} : neg_inf..pos_inf
+[Exp SgLessThanOp:i < 5] {i < 5:SgLessThanOp i < 5->1,0} : i < 5..i < 5, constant bound: {i < 5:SgLessThanOp i < 5->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i * 100 + j]] {a[i * 100 + j]:SgPntrArrRefExp a[i * 100 + j]->1,0} : a[i * 100 + j]..a[i * 100 + j], constant bound: {a[i * 100 + j]:SgPntrArrRefExp a[i * 100 + j]->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i * 100 + j]] {a[i * 100 + j]:SgPntrArrRefExp a[i * 100 + j]->1,0} : a[i * 100 + j]..a[i * 100 + j], constant bound: {a[i * 100 + j]:SgPntrArrRefExp a[i * 100 + j]->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i * 100 + 98]] {a[i * 100 + 98]:SgPntrArrRefExp a[i * 100 + 98]->1,0} : a[i * 100 + 98]..a[i * 100 + 98], constant bound: {a[i * 100 + 98]:SgPntrArrRefExp a[i * 100 + 98]->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i * 100 + 99]] {a[i * 100 + 99]:SgPntrArrRefExp a[i * 100 + 99]->1,0} : a[i * 100 + 99]..a[i * 100 + 99], constant bound: {a[i * 100 + 99]:SgPntrArrRefExp a[i * 100 + 99]->1,0} : neg_inf..pos_inf
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void top() {...}
+  SgFunctionDeclaration void top_2() {...}
+  SgBasicBlock {if(i < 5) {for(int j = 0;j < 98;++j) {a[i * 100 + j];}a[i * 100 + 98];a[i * 100 + 99];}else {for(int j = 0;j < 100;++j) {a[i * 100 + j];}}}
+  SgForStatement for(int i = 0;i < 10;++i) {...}
+  SgBasicBlock {a[i * 100 + j];}
+  SgForStatement for(int j = 0;j < 98;++j) {...}
+  SgBasicBlock {a[i * 100 + j];}
+  SgForStatement for(int j = 0;j < 100;++j) {...}
+  SgBasicBlock {if(i < 5) {for(int j = 0;j < 100;++j) {a[i * 100 + j];}}else {for(int j = 0;j < 98;++j) {a[i * 100 + j];}a[i * 100 + 98];a[i * 100 + 99];}}
+  SgForStatement for(int i = 0;i < 10;++i) {...}
+  SgBasicBlock {a[i * 100 + j];}
+  SgForStatement for(int j = 0;j < 100;++j) {...}
+  SgBasicBlock {a[i * 100 + j];}
+  SgForStatement for(int j = 0;j < 98;++j) {...}
+
+Arrays: 
+  int [1000] a
+  int [1000] a
+
+Ranges: 
+  SgFunctionDeclaration void top() {...}
+    int [1000] a :  R[0..999 exact]
+  SgFunctionDeclaration void top_2() {...}
+    int [1000] a :  R[0..999 exact]
+  SgBasicBlock {if(i < 5) {for(int j = 0;j < 98;++j) {a[i * 100 + j];}a[i * 100 + 98];a[i * 100 + 99];}else {for(int j = 0;j < 100;++j) {a[i * 100 + j];}}}
+    int [1000] a :  R[i * 100..99 + i * 100 exact]
+  SgForStatement for(int i = 0;i < 10;++i) {...}
+    int [1000] a :  R[0..999 exact]
+  SgBasicBlock {a[i * 100 + j];}
+    int [1000] a :  R[i * 100 + j..i * 100 + j exact]
+  SgForStatement for(int j = 0;j < 98;++j) {...}
+    int [1000] a :  R[i * 100..97 + i * 100 exact]
+  SgBasicBlock {a[i * 100 + j];}
+    int [1000] a :  R[i * 100 + j..i * 100 + j exact]
+  SgForStatement for(int j = 0;j < 100;++j) {...}
+    int [1000] a :  R[i * 100..99 + i * 100 exact]
+  SgBasicBlock {if(i < 5) {for(int j = 0;j < 100;++j) {a[i * 100 + j];}}else {for(int j = 0;j < 98;++j) {a[i * 100 + j];}a[i * 100 + 98];a[i * 100 + 99];}}
+    int [1000] a :  R[i * 100..99 + i * 100 exact]
+  SgForStatement for(int i = 0;i < 10;++i) {...}
+    int [1000] a :  R[0..999 exact]
+  SgBasicBlock {a[i * 100 + j];}
+    int [1000] a :  R[i * 100 + j..i * 100 + j exact]
+  SgForStatement for(int j = 0;j < 100;++j) {...}
+    int [1000] a :  R[i * 100..99 + i * 100 exact]
+  SgBasicBlock {a[i * 100 + j];}
+    int [1000] a :  R[i * 100 + j..i * 100 + j exact]
+  SgForStatement for(int j = 0;j < 98;++j) {...}
+    int [1000] a :  R[i * 100..97 + i * 100 exact]
+

@@ -1,0 +1,29 @@
+// Unions can have members.
+
+union ::U 
+{
+  unsigned int u;
+  float f;
+}
+;
+
+bool p_ZN1U1gEv(union U *this_)
+{
+  return true;
+}
+static void __merlin_dummy_SgClassDeclaration_union_U_u_();
+// Shouldn't be mangled.
+
+union Untouched 
+{
+  char c;
+  bool b;
+}
+;
+#pragma ACCEL kernel
+
+void top()
+{
+  union U u0;
+  union Untouched u1;
+}

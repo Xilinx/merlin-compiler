@@ -1,0 +1,123 @@
+#include <string.h> 
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void func1_kernel(int *a,int *b,int *c)
+{
+  for (int i = 0; i < 64; ++i) {
+    int c_buf[16];
+    int b_buf[16];
+    int a_buf[16];
+    long _memcpy_i_1;
+    for (_memcpy_i_1 = 0; _memcpy_i_1 < sizeof(int ) * 16 / 4; ++_memcpy_i_1) {
+      
+#pragma ACCEL PARALLEL SKIP COMPLETE
+      long total_offset1 = 0 * 16 + 0;
+      long total_offset2 = 0 * 0 + i * 16;
+      b_buf[total_offset1 + _memcpy_i_1] = b[total_offset2 + _memcpy_i_1];
+    }
+    long _memcpy_i_2;
+    for (_memcpy_i_2 = 0; _memcpy_i_2 < sizeof(int ) * 16 / 4; ++_memcpy_i_2) {
+      
+#pragma ACCEL PARALLEL SKIP COMPLETE
+      long total_offset1 = 0 * 16 + 0;
+      long total_offset2 = 0 * 0 + i * 16;
+      c_buf[total_offset1 + _memcpy_i_2] = c[total_offset2 + _memcpy_i_2];
+    }
+    for (int j = 0; j < 16; ++j) {
+      
+#pragma ACCEL parallel
+      a_buf[j] = b_buf[j] + c_buf[j];
+    }
+    long _memcpy_i_0;
+    for (_memcpy_i_0 = 0; _memcpy_i_0 < sizeof(int ) * 16 / 4; ++_memcpy_i_0) {
+      
+#pragma ACCEL PARALLEL SKIP COMPLETE
+      long total_offset1 = 0 * 0 + i * 16;
+      long total_offset2 = 0 * 16 + 0;
+      a[total_offset1 + _memcpy_i_0] = a_buf[total_offset2 + _memcpy_i_0];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func2_kernel(int *a,int *b,int *c)
+{
+  for (int i = 0; i < 64; ++i) {
+    int c_buf[16];
+    int b_buf[16];
+    int a_buf[16];
+    long _memcpy_i_4;
+    for (_memcpy_i_4 = 0; _memcpy_i_4 < sizeof(int ) * 16 / 4; ++_memcpy_i_4) {
+      
+#pragma ACCEL PARALLEL SKIP COMPLETE
+      long total_offset1 = 0 * 16 + 0;
+      long total_offset2 = 0 * 0 + i * 16;
+      b_buf[total_offset1 + _memcpy_i_4] = b[total_offset2 + _memcpy_i_4];
+    }
+    long _memcpy_i_5;
+    for (_memcpy_i_5 = 0; _memcpy_i_5 < sizeof(int ) * 16 / 4; ++_memcpy_i_5) {
+      
+#pragma ACCEL PARALLEL SKIP COMPLETE
+      long total_offset1 = 0 * 16 + 0;
+      long total_offset2 = 0 * 0 + i * 16;
+      c_buf[total_offset1 + _memcpy_i_5] = c[total_offset2 + _memcpy_i_5];
+    }
+    a_buf[0] = b_buf[0] + c_buf[0];
+    a_buf[1] = b_buf[1] + c_buf[1];
+    a_buf[2] = b_buf[2] + c_buf[2];
+    a_buf[3] = b_buf[3] + c_buf[3];
+    a_buf[4] = b_buf[4] + c_buf[4];
+    a_buf[5] = b_buf[5] + c_buf[5];
+    a_buf[6] = b_buf[6] + c_buf[6];
+    a_buf[7] = b_buf[7] + c_buf[7];
+    a_buf[8] = b_buf[8] + c_buf[8];
+    a_buf[9] = b_buf[9] + c_buf[9];
+    a_buf[10] = b_buf[10] + c_buf[10];
+    a_buf[11] = b_buf[11] + c_buf[11];
+    a_buf[12] = b_buf[12] + c_buf[12];
+    a_buf[13] = b_buf[13] + c_buf[13];
+    a_buf[14] = b_buf[14] + c_buf[14];
+    a_buf[15] = b_buf[15] + c_buf[15];
+    long _memcpy_i_3;
+    for (_memcpy_i_3 = 0; _memcpy_i_3 < sizeof(int ) * 16 / 4; ++_memcpy_i_3) {
+      
+#pragma ACCEL PARALLEL SKIP COMPLETE
+      long total_offset1 = 0 * 0 + i * 16;
+      long total_offset2 = 0 * 16 + 0;
+      a[total_offset1 + _memcpy_i_3] = a_buf[total_offset2 + _memcpy_i_3];
+    }
+  }
+}
+//auto lifting 
+#pragma ACCEL kernel
+
+void top(int *a,int *b)
+{
+  int b_buf[16];
+  long _memcpy_i_7;
+  for (_memcpy_i_7 = 0; _memcpy_i_7 < sizeof(int ) * 16 / 4; ++_memcpy_i_7) {
+    
+#pragma ACCEL PARALLEL SKIP COMPLETE
+    long total_offset1 = 0 * 16 + 0;
+    long total_offset2 = 0 * 0 + 0;
+    b_buf[total_offset1 + _memcpy_i_7] = b[total_offset2 + _memcpy_i_7];
+  }
+  for (int i = 0; i < 100; ++i) {
+    int a_buf[16];
+    for (int j = 0; j < 16; ++j) {
+      
+#pragma ACCEL parallel
+      a_buf[j] = b_buf[j] + 2;
+    }
+    long _memcpy_i_6;
+    for (_memcpy_i_6 = 0; _memcpy_i_6 < sizeof(int ) * 16 / 4; ++_memcpy_i_6) {
+      
+#pragma ACCEL PARALLEL SKIP COMPLETE
+      long total_offset1 = 0 * 0 + i * 16;
+      long total_offset2 = 0 * 16 + 0;
+      a[total_offset1 + _memcpy_i_6] = a_buf[total_offset2 + _memcpy_i_6];
+    }
+  }
+}

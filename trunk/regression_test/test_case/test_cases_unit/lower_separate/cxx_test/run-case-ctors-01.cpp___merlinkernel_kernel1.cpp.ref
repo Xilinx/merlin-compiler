@@ -1,0 +1,48 @@
+#include "merlin_type_define.h"
+extern int __merlin_include__GB_merlin_type_define_h_0;
+
+static void f_1(unsigned int )
+{
+}
+
+static unsigned int p_ZN1S1fEv_1(struct S *this_)
+{
+}
+
+static struct Unlowered p_Z20invoke_implicit_ctorI9UnloweredEv_1()
+{
+  struct Unlowered temp;
+  return temp;
+}
+
+static unsigned int p_Z20invoke_implicit_ctorIjEv_1()
+{
+  unsigned int temp;
+  return temp;
+}
+
+static struct Unlowered p_Z16invoke_copy_ctorI9UnloweredE9Unlowered_1(struct Unlowered t)
+{
+  return t;
+}
+
+static unsigned int p_Z16invoke_copy_ctorIjEj_1(unsigned int t)
+{
+  return (unsigned int )t;
+}
+#pragma ACCEL kernel
+
+void kernel1()
+{
+// Implicit call to implicit default ctor. Nothing to lower.
+  struct S r;
+// Explicit call to implict default ctor. This needs to be lowered despite
+// no explicit decl/def of default ctor.
+  struct S temp;
+  f_1((p_ZN1S1fEv_1(&(temp))));
+  p_Z20invoke_implicit_ctorI9UnloweredEv_1();
+  p_Z20invoke_implicit_ctorIjEv_1();
+  struct Unlowered temp_0;
+  p_Z16invoke_copy_ctorI9UnloweredE9Unlowered_1(temp_0);
+  p_Z16invoke_copy_ctorIjEj_1((unsigned int )3);
+}

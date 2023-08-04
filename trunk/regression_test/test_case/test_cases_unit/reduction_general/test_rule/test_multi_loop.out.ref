@@ -1,0 +1,193 @@
+#define NUM 128
+#define NUM1 256
+#define IMROW 64
+#define IMCOL 64
+#define INIMROW 66
+#define INIMCOL 66
+#define KERNEL 3
+#pragma ACCEL kernel
+
+void cnn_kernel1(float Cout1[64][64][256],float Cin[66][66][128],float weight[3][3][256][128])
+{
+  float Cout[64][64][256];
+  for (int c = 0; c < 64; c++) {
+    for (int r = 0; r < 64; r++) {
+      for (int p = 0; p < 3; p++) {
+        for (int o = 0; o < 256; o++) {
+          float _Cout_rdc[32];
+{
+            for (int i_sub = 0; i_sub < 32; i_sub++) {
+              
+#pragma ACCEL PARALLEL COMPLETE
+              
+#pragma ACCEL ARRAY_PARTITION OFF
+              _Cout_rdc[i_sub] = 0;
+            }
+          }
+          for (int q = 0; q < 3; q++) {
+            for (int ii = 0; ii < 128 / 32; ii++) {
+              
+#pragma ACCEL pipeline
+              for (int i_sub = 0; i_sub < 32; i_sub++) {
+                
+#pragma ACCEL parallel
+                int i = ii * 32 + i_sub;
+                float one_sub = weight[p][q][o][i] * Cin[r + p][c + q][i];
+                _Cout_rdc[i_sub] += one_sub;
+              }
+            }
+          }
+{
+            for (int i_sub = 0; i_sub < 32; i_sub++) {
+              
+#pragma ACCEL ARRAY_PARTITION OFF
+              
+#pragma ACCEL PARALLEL COMPLETE
+              Cout[r][c][o] += _Cout_rdc[i_sub];
+            }
+          }
+        }
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void cnn_kernel2(float Cout1[64][64][256],float Cin[66][66][128],float weight[3][3][256][128])
+{
+  float Cout[64][64][256];
+  for (int r = 0; r < 64; r++) {
+    for (int c = 0; c < 64; c++) {
+      float _Cout_rdc[8][32][16];
+{
+        for (int oo = 0; oo < 8; oo++) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          
+#pragma ACCEL ARRAY_PARTITION OFF
+          for (int o_sub = 0; o_sub < 32; ++o_sub) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            
+#pragma ACCEL ARRAY_PARTITION OFF
+            for (int i_sub = 0; i_sub < 16; i_sub++) {
+              
+#pragma ACCEL PARALLEL COMPLETE
+              
+#pragma ACCEL ARRAY_PARTITION OFF
+              _Cout_rdc[oo][o_sub][i_sub] = 0;
+            }
+          }
+        }
+      }
+      for (int p = 0; p < 3; p++) {
+        for (int q = 0; q < 3; q++) {
+          for (int ii = 0; ii < 8; ii++) {
+            for (int oo = 0; oo < 8; oo++) {
+              
+#pragma ACCEL pipeline
+              for (int o_sub = 0; o_sub < 32; ++o_sub) {
+                
+#pragma ACCEL parallel
+                for (int i_sub = 0; i_sub < 16; i_sub++) {
+                  
+#pragma ACCEL parallel
+                  int o = oo * 32 + o_sub;
+                  int i = ii * 16 + i_sub;
+                  float one_sub = weight[p][q][o][i] * Cin[r + p][c + q][i];
+                  _Cout_rdc[oo][o_sub][i_sub] += one_sub;
+                }
+              }
+            }
+          }
+        }
+      }
+{
+        for (int oo = 0; oo < 8; oo++) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          
+#pragma ACCEL ARRAY_PARTITION OFF
+          for (int o_sub = 0; o_sub < 32; ++o_sub) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            
+#pragma ACCEL ARRAY_PARTITION OFF
+            for (int i_sub = 0; i_sub < 16; i_sub++) {
+              
+#pragma ACCEL ARRAY_PARTITION OFF
+              
+#pragma ACCEL PARALLEL COMPLETE
+              Cout[r][c][oo * 32 + o_sub] += _Cout_rdc[oo][o_sub][i_sub];
+            }
+          }
+        }
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void cnn_kernel3(float Cout1[64][64][256],float Cin[66][66][128],float weight[3][3][256][128])
+{
+  float Cout[64][64][256];
+  for (int r = 0; r < 64; r++) {
+    for (int c = 0; c < 64; c++) {
+      float _Cout_rdc[8][32];
+      for (int p = 0; p < 3; p++) {
+        for (int q = 0; q < 3; q++) {
+          for (int ii = 0; ii < 8; ii++) {
+            for (int oo = 0; oo < 8; oo++) {
+              
+#pragma ACCEL pipeline
+              float _Cout_rdc_t[32];
+{
+                for (int o_sub = 0; o_sub < 32; ++o_sub) {
+                  
+#pragma ACCEL PARALLEL COMPLETE
+                  
+#pragma ACCEL ARRAY_PARTITION OFF
+                  _Cout_rdc_t[o_sub] = 0;
+                }
+              }
+              for (int o_sub = 0; o_sub < 32; ++o_sub) {
+                
+#pragma ACCEL parallel
+                for (int i_sub = 0; i_sub < 16; i_sub++) {
+                  
+#pragma ACCEL parallel
+                  int o = oo * 32 + o_sub;
+                  int i = ii * 16 + i_sub;
+                  float one_sub = weight[p][q][o][i] * Cin[r + p][c + q][i];
+                  _Cout_rdc_t[o_sub] += one_sub;
+                }
+              }
+              for (int o_sub = 0; o_sub < 32; ++o_sub) {
+                
+#pragma ACCEL PARALLEL COMPLETE
+                
+#pragma ACCEL ARRAY_PARTITION OFF
+                _Cout_rdc[oo][o_sub] = _Cout_rdc_t[o_sub];
+              }
+            }
+          }
+        }
+      }
+{
+        for (int oo = 0; oo < 8; oo++) {
+          
+#pragma ACCEL PIPELINE
+          
+#pragma ACCEL ARRAY_PARTITION OFF
+          for (int o_sub = 0; o_sub < 32; ++o_sub) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            
+#pragma ACCEL ARRAY_PARTITION OFF
+            Cout[r][c][oo * 32 + o_sub] += _Cout_rdc[oo][o_sub];
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+
+ERROR: [PROCS-322] Cannot find the kernel function '::func_top_1'
+
+ERROR: [PROCS-314] Cannot find a kernel function following the kernel pragma 'ACCEL kernel' (test_err_2.cpp:7).
+  Hint: the kernel pragma should be placed right before its specified kernel function
+
+
+WARNING: [PROCS-216] Found an unknown pragma: ACCEL factor=-1 (test_pragma_err.cpp:19)
+
+WARNING: [PROCS-216] Found an unknown pragma: ACCEL pipeline_parallel (test_pragma_err.cpp:24)
+
+ERROR: [PROCS-319] Cannot find kernel pragma in the program.
+ Hint: please add a kernel pragma right before the kernel function
+
+ERROR: [PROCS-316] Cannot find the function definition of '::func_top_1'
+
+ERROR: [PROCS-314] Cannot find a kernel function following the kernel pragma (test_err_2.cpp:7).
+  Hint: the kernel pragma should be placed right before its specified kernel function
+
+
+ERROR: [PROCS-347] Kernel 'main' ((test_err_3.cpp:6) with name 'main' is not supported

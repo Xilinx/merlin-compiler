@@ -1,0 +1,225 @@
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <string.h>
+////#include <hls_video.h>
+//#include <my_window.h>
+#include <math.h>
+//#include "cmost.h"
+#define DUMP 0
+#define learning_rate 0.01f
+#define LABEL_SIZE		10
+#define HIDDEN_SIZE     100
+#define FEATURE_SIZE	784
+#define CHUNK_SIZE 20
+#define lambda 0.0001f
+#define two_lambda 0.0002f
+#define two_lambda_learning_rate 0.000002f
+#define learning_rate_CHUNK_SIZE 0.0005f
+#define WEIGHTS_SIZE 238510 //(FEATURE_SIZE+1)*HIDDEN_SIZE+(HIDDEN_SIZE+1)*LABEL_SIZE
+#define TOTAL_SIZE 60000
+#define DATA_SIZE 47640000
+#pragma ACCEL kernel
+
+void pipeline(int n_samples,float weights1[78500],float bias2[10],float weights2[1000])
+//        hls::Window<1,HIDDEN_SIZE,float>& regs,
+//        hls::Window<1,HIDDEN_SIZE,float>& regs2,
+//        hls::Window<1,HIDDEN_SIZE,float>& regs3
+{
+  float data[20][794];
+  float neuron1[20][100];
+//#pragma HLS ARRAY_PARTITION variable="neuron1" complete dim="2"
+  float error2[20][10];
+  float error1[20][100];
+//#pragma HLS ARRAY_PARTITION variable="error1" complete dim="2"
+  int i;
+  int j;
+  int k;
+  int p;
+  int n_stage = n_samples / 20;
+  for (i = 0; i < n_stage; i++) {{
+//     memcpy( (void*)*data, (const void*)(global_data + i * CHUNK_SIZE * (FEATURE_SIZE+LABEL_SIZE)), (LABEL_SIZE+FEATURE_SIZE)*CHUNK_SIZE*4 );
+    }
+    for (j = 0; j < 20; j++) {
+//#pragma HLS PIPELINE
+      for (k = 0; k < 100; k++) {
+        
+#pragma ACCEL PIPELINE AUTO
+//#pragma HLS UNROLL
+        neuron1[j][k] = weights1[k * (784 + 1) + 0];
+      }
+    }
+    for (p = 0; p < 784; p++) {
+      for (j = 0; j < 20; j++) {
+//#pragma HLS PIPELINE
+        for (k = 0; k < 100; k++) {
+          
+#pragma ACCEL PIPELINE AUTO
+//#pragma HLS UNROLL
+          neuron1[j][k] += data[j][10 + p] * weights1[k * (784 + 1) + p + 1];
+        }
+      }
+    }
+/*
+        for(j=0; j < CHUNK_SIZE; j++)
+        {
+            for(k=0; k < HIDDEN_SIZE; k++)
+            {
+#pragma HLS UNROLL
+                regs.insert(neuron1[j][k],0,k);
+            }
+            for(k=0; k < HIDDEN_SIZE; k++)
+            {
+#pragma HLS PIPELINE
+                float a=regs.getval(0,0);
+                regs.shift_left();
+                float b= (a/sqrtf(1.f+a*a)+1.f)/2.f;
+                regs3.shift_left();
+                regs3.insert(b,0,HIDDEN_SIZE-1);
+            }
+            for(k=0; k < HIDDEN_SIZE; k++)
+            {
+#pragma HLS UNROLL
+                neuron1[j][k]=regs3.getval(0,k);
+            }
+        }*/
+#if DUMP
+#endif
+    for (j = 0; j < 20; j++) {
+      for (k = 0; k < 10; k++) {
+        
+#pragma ACCEL PIPELINE AUTO
+        error2[j][k] = bias2[k];
+      }
+    }
+    for (j = 0; j < 20; j++) {
+      for (k = 0; k < 10; k++) {
+//#pragma HLS PIPELINE
+        for (p = 0; p < 100; p++) {
+          
+#pragma ACCEL PIPELINE AUTO
+//#pragma HLS UNROLL
+          error2[j][k] += neuron1[j][p] * weights2[k * 100 + p];
+        }
+      }
+    }
+    for (j = 0; j < 20; j++) {
+      for (k = 0; k < 10; k++) {
+        
+#pragma ACCEL PIPELINE AUTO
+//#pragma HLS PIPELINE
+        
+#pragma HLS DEPENDENCE variable="error2" inter false
+        error2[j][k] = (error2[j][k] / sqrtf(1.f + error2[j][k] * error2[j][k]) + 1.f) / 2.f - data[j][k];
+//error2[j][k] = 1.f / ( 1.f + exp(-pre_neuron2[j][k]) )-data[j][k];
+      }
+    }
+#if DUMP
+#endif
+    for (j = 0; j < 20; j++) {
+//#pragma HLS PIPELINE
+      for (p = 0; p < 100; p++) {
+        
+#pragma ACCEL PIPELINE AUTO
+//#pragma HLS UNROLL
+        error1[j][p] = 0.f;
+      }
+    }
+    for (k = 0; k < 10; k++) {
+      for (j = 0; j < 20; j++) {
+//#pragma HLS PIPELINE
+        for (p = 0; p < 100; p++) {
+          
+#pragma ACCEL PIPELINE AUTO
+//#pragma HLS UNROLL
+          error1[j][p] += error2[j][k] * weights2[k * 100 + p];
+        }
+      }
+    }
+/*
+        for(j=0; j < CHUNK_SIZE; j++)
+        {
+            for(p=0; p < HIDDEN_SIZE; p++)
+            {
+#pragma HLS UNROLL
+                regs.insert(error1[j][p],0,p);
+                regs2.insert(neuron1[j][p],0,p);
+            }
+            for(p=0; p < HIDDEN_SIZE; p++)
+            {
+#pragma HLS PIPELINE
+                float a = regs.getval(0,0);
+                regs.shift_left();
+                float b = regs2.getval(0,0);
+                regs2.shift_left();
+                float c = a * b * (1.f - b) * learning_rate_CHUNK_SIZE;
+                regs3.shift_left();
+                regs3.insert(c,0,HIDDEN_SIZE-1);
+            }
+            for(p=0; p < HIDDEN_SIZE; p++)
+            {
+#pragma HLS UNROLL
+                error1[j][p]=regs3.getval(0,p);
+            }
+        } */
+#if DUMP
+#endif
+    for (j = 0; j < 20; j++) {
+      for (k = 0; k < 10; k++) {
+        
+#pragma ACCEL PIPELINE AUTO
+        error2[j][k] *= 0.0005f;
+      }
+    }
+    for (k = 0; k < 10; k++) {
+//#pragma HLS PIPELINE
+      for (p = 0; p < 100; p++) {
+        
+#pragma ACCEL PIPELINE AUTO
+//#pragma HLS UNROLL
+        weights2[k * 100 + p] -= weights2[k * 100 + p] * 0.000002f;
+      }
+    }
+    for (j = 0; j < 20; j++) {
+      for (k = 0; k < 10; k++) {
+        
+#pragma ACCEL PIPELINE AUTO
+        bias2[k] -= error2[j][k];
+      }
+    }
+    for (j = 0; j < 20; j++) {
+      for (k = 0; k < 10; k++) {
+//#pragma HLS PIPELINE
+        for (p = 0; p < 100; p++) {
+          
+#pragma ACCEL PIPELINE AUTO
+//#pragma HLS UNROLL
+          weights2[k * 100 + p] -= error2[j][k] * neuron1[j][p];
+        }
+      }
+    }
+#if DUMP
+#endif
+    for (p = 1; p < 784 + 1; p++) {
+//#pragma HLS PIPELINE
+      for (k = 0; k < 100; k++) {
+        
+#pragma ACCEL PIPELINE AUTO
+//#pragma HLS UNROLL
+        weights1[k * (784 + 1) + p] -= weights1[k * (784 + 1) + p] * 0.000002f;
+      }
+    }
+    for (j = 0; j < 20; j++) {
+      for (p = 0; p < 784 + 1; p++) {
+//#pragma HLS PIPELINE
+        for (k = 0; k < 100; k++) {
+          
+#pragma ACCEL PIPELINE AUTO
+//#pragma HLS UNROLL
+          weights1[k * (784 + 1) + p] -= error1[j][k] * ((p == 0?1.f : data[j][10 + p - 1]));
+        }
+      }
+    }
+#if DUMP
+#endif
+  }
+}

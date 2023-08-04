@@ -1,0 +1,185 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(char jc = ic;jc < 100;jc += 2) {...}
+SgForStatement:for(char jc = ic;_s_jc < 100;_s_jc += 2) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(char ic = N;ic >= 0;ic--) {...}
+SgForStatement:for(char ic = N;_s_ic >= 0;_s_ic--) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(char jc =(((char )cc) - 1);jc < 100;jc += 2) {...}
+SgForStatement:for(char jc =(((char )cc) - 1);_s_jc_0 < 100;_s_jc_0 += 2) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(char ic = N;ic >= 0;ic--) {...}
+SgForStatement:for(char ic = N;_s_ic_0 >= 0;_s_ic_0--) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(char jc = cc;jc < 100;jc += 2) {...}
+SgForStatement:for(char jc = cc;_s_jc_1 < 100;_s_jc_1 += 2) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(char ic = N;ic >= 0;ic--) {...}
+SgForStatement:for(char ic = N;_s_ic_1 >= 0;_s_ic_1--) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(char jc = ic;jc < 100;jc += 2) {...}
+SgForStatement:for(char jc = ic;_s_jc_2 < 100;_s_jc_2 += 2) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(char ic = N;ic >= 0;ic--) {...}
+SgForStatement:for(char ic = N;_s_ic_2 >= 0;_s_ic_2--) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void func_loop() {...}
+  SgFunctionDeclaration int main() {...}
+  SgBasicBlock {int _in_s_ic = 100 + -1 * _s_ic;int _s_jc = _in_s_ic;char _l_jc = _in_s_ic;l2:for(_s_jc = _in_s_ic;_s_jc <= 'c';_s_jc += 2) {c[_in_s_ic] = a[_in_s_ic] + b[_s_jc];}}
+  SgForStatement for(_s_ic = 0;_s_ic <= 100;_s_ic++) {...}
+  SgBasicBlock {c[_in_s_ic] = a[_in_s_ic] + b[_s_jc];}
+  SgForStatement for(_s_jc = _in_s_ic;_s_jc <= 'c';_s_jc += 2) {...}
+  SgBasicBlock {int _in_s_ic_0 = 100 + -1 * _s_ic_0;int cc = 10;int _s_jc_0 = 9;char _l_jc_0 = 9;l4:for(_s_jc_0 = 0;_s_jc_0 <= 45;_s_jc_0++) {int _in_s_jc_0 = 9 + 2L * _s_jc_0;c[_in_s_ic_0] = a[_in_s_ic_0] + b[_in_s_jc_0];}_s_jc_0 = 99 + 2L;}
+  SgForStatement for(_s_ic_0 = 0;_s_ic_0 <= 100;_s_ic_0++) {...}
+  SgBasicBlock {int _in_s_jc_0 = 9 + 2L * _s_jc_0;c[_in_s_ic_0] = a[_in_s_ic_0] + b[_in_s_jc_0];}
+  SgForStatement for(_s_jc_0 = 0;_s_jc_0 <= 45;_s_jc_0++) {...}
+  SgBasicBlock {int _in_s_ic_1 = 100 + -1 * _s_ic_1;int cc = c[0];int _s_jc_1 =(char )cc;char _l_jc_1 =(char )cc;l6:for(_s_jc_1 =((char )cc);_s_jc_1 <= 'c';_s_jc_1 += 2) {c[_in_s_ic_1] = a[_in_s_ic_1] + b[_s_jc_1];}}
+  SgForStatement for(_s_ic_1 = 0;_s_ic_1 <= 100;_s_ic_1++) {...}
+  SgBasicBlock {c[_in_s_ic_1] = a[_in_s_ic_1] + b[_s_jc_1];}
+  SgForStatement for(_s_jc_1 =((char )cc);_s_jc_1 <= 'c';_s_jc_1 += 2) {...}
+  SgBasicBlock {int _in_s_ic_2 = 100 + -1 * _s_ic_2;int _s_jc_2 = _in_s_ic_2;char _l_jc_2 = _in_s_ic_2;l8:for(_s_jc_2 = _in_s_ic_2;_s_jc_2 <= 'c';_s_jc_2 += 2) {c[_in_s_ic_2] = a[_in_s_ic_2] + b[_s_jc_2];}}
+  SgForStatement for(_s_ic_2 = 0;_s_ic_2 <= 100;_s_ic_2++) {...}
+  SgBasicBlock {c[_in_s_ic_2] = a[_in_s_ic_2] + b[_s_jc_2];}
+  SgForStatement for(_s_jc_2 = _in_s_ic_2;_s_jc_2 <= 'c';_s_jc_2 += 2) {...}
+
+Arrays: 
+  int [101] a
+  int [101] b
+  int [101] c
+  int [100][100] aa
+  int [100][100] bb
+  int [100][100] cc
+  int * a
+  int * b
+  int * c
+  float [100][100] aa_f
+  float [100][100] bb_f
+  float [100][100] cc_f
+  float * a_f
+  float * b_f
+  float * c_f
+
+Ranges: 
+  SgFunctionDeclaration void func_loop() {...}
+    int [101] a :  R[0..100 exact]
+    int [101] b :  R[0..100 inexact]
+    int [101] c :  R[0..0 exact] W[0..100 exact]
+    intersect: 0..0 exact
+    union: 0..100 exact
+  SgFunctionDeclaration int main() {...}
+  SgBasicBlock {int _in_s_ic = 100 + -1 * _s_ic;int _s_jc = _in_s_ic;char _l_jc = _in_s_ic;l2:for(_s_jc = _in_s_ic;_s_jc <= 'c';_s_jc += 2) {c[_in_s_ic] = a[_in_s_ic] + b[_s_jc];}}
+    int [101] a :  R[100 + -_s_ic..100 + -_s_ic inexact]
+    int [101] b :  R[100 + -_s_ic..99 inexact]
+    int [101] c :  W[100 + -_s_ic..100 + -_s_ic inexact]
+  SgForStatement for(_s_ic = 0;_s_ic <= 100;_s_ic++) {...}
+    int [101] a :  R[0..100 inexact]
+    int [101] b :  R[0..99 inexact]
+    int [101] c :  W[0..100 inexact]
+  SgBasicBlock {c[_in_s_ic] = a[_in_s_ic] + b[_s_jc];}
+    int [101] a :  R[100 + -_s_ic..100 + -_s_ic exact]
+    int [101] b :  R[_s_jc.._s_jc exact]
+    int [101] c :  W[100 + -_s_ic..100 + -_s_ic exact]
+  SgForStatement for(_s_jc = _in_s_ic;_s_jc <= 'c';_s_jc += 2) {...}
+    int [101] a :  R[100 + -_s_ic..100 + -_s_ic inexact]
+    int [101] b :  R[100 + -_s_ic..99 inexact]
+    int [101] c :  W[100 + -_s_ic..100 + -_s_ic inexact]
+  SgBasicBlock {int _in_s_ic_0 = 100 + -1 * _s_ic_0;int cc = 10;int _s_jc_0 = 9;char _l_jc_0 = 9;l4:for(_s_jc_0 = 0;_s_jc_0 <= 45;_s_jc_0++) {int _in_s_jc_0 = 9 + 2L * _s_jc_0;c[_in_s_ic_0] = a[_in_s_ic_0] + b[_in_s_jc_0];}_s_jc_0 = 99 + 2L;}
+    int [101] a :  R[100 + -_s_ic_0..100 + -_s_ic_0 exact]
+    int [101] b :  R[9..99 inexact]
+    int [101] c :  W[100 + -_s_ic_0..100 + -_s_ic_0 exact]
+  SgForStatement for(_s_ic_0 = 0;_s_ic_0 <= 100;_s_ic_0++) {...}
+    int [101] a :  R[0..100 exact]
+    int [101] b :  R[9..99 inexact]
+    int [101] c :  W[0..100 exact]
+  SgBasicBlock {int _in_s_jc_0 = 9 + 2L * _s_jc_0;c[_in_s_ic_0] = a[_in_s_ic_0] + b[_in_s_jc_0];}
+    int [101] a :  R[100 + -_s_ic_0..100 + -_s_ic_0 exact]
+    int [101] b :  R[9 + _s_jc_0 * 2L..9 + _s_jc_0 * 2L exact]
+    int [101] c :  W[100 + -_s_ic_0..100 + -_s_ic_0 exact]
+  SgForStatement for(_s_jc_0 = 0;_s_jc_0 <= 45;_s_jc_0++) {...}
+    int [101] a :  R[100 + -_s_ic_0..100 + -_s_ic_0 exact]
+    int [101] b :  R[9..99 inexact]
+    int [101] c :  W[100 + -_s_ic_0..100 + -_s_ic_0 exact]
+  SgBasicBlock {int _in_s_ic_1 = 100 + -1 * _s_ic_1;int cc = c[0];int _s_jc_1 =(char )cc;char _l_jc_1 =(char )cc;l6:for(_s_jc_1 =((char )cc);_s_jc_1 <= 'c';_s_jc_1 += 2) {c[_in_s_ic_1] = a[_in_s_ic_1] + b[_s_jc_1];}}
+    int [101] a :  R[100 + -_s_ic_1..100 + -_s_ic_1 inexact]
+    int [101] b :  R[0..100 inexact]
+    int [101] c :  R[0..0 exact] W[100 + -_s_ic_1..100 + -_s_ic_1 inexact]
+    intersect: 100 + -_s_ic_1..0 inexact
+    union: 0..100 + -_s_ic_1 inexact
+  SgForStatement for(_s_ic_1 = 0;_s_ic_1 <= 100;_s_ic_1++) {...}
+    int [101] a :  R[0..100 inexact]
+    int [101] b :  R[0..100 inexact]
+    int [101] c :  R[0..0 exact] W[0..100 inexact]
+    intersect: 0..0 exact
+    union: 0..100 inexact
+  SgBasicBlock {c[_in_s_ic_1] = a[_in_s_ic_1] + b[_s_jc_1];}
+    int [101] a :  R[100 + -_s_ic_1..100 + -_s_ic_1 exact]
+    int [101] b :  R[_s_jc_1.._s_jc_1 exact]
+    int [101] c :  W[100 + -_s_ic_1..100 + -_s_ic_1 exact]
+  SgForStatement for(_s_jc_1 =((char )cc);_s_jc_1 <= 'c';_s_jc_1 += 2) {...}
+    int [101] a :  R[100 + -_s_ic_1..100 + -_s_ic_1 inexact]
+    int [101] b :  R[min((char )cc,0)..99 inexact]
+    int [101] c :  W[100 + -_s_ic_1..100 + -_s_ic_1 inexact]
+  SgBasicBlock {int _in_s_ic_2 = 100 + -1 * _s_ic_2;int _s_jc_2 = _in_s_ic_2;char _l_jc_2 = _in_s_ic_2;l8:for(_s_jc_2 = _in_s_ic_2;_s_jc_2 <= 'c';_s_jc_2 += 2) {c[_in_s_ic_2] = a[_in_s_ic_2] + b[_s_jc_2];}}
+    int [101] a :  R[100 + -_s_ic_2..100 + -_s_ic_2 inexact]
+    int [101] b :  R[100 + -_s_ic_2..99 inexact]
+    int [101] c :  W[100 + -_s_ic_2..100 + -_s_ic_2 inexact]
+  SgForStatement for(_s_ic_2 = 0;_s_ic_2 <= 100;_s_ic_2++) {...}
+    int [101] a :  R[0..100 inexact]
+    int [101] b :  R[0..99 inexact]
+    int [101] c :  W[0..100 inexact]
+  SgBasicBlock {c[_in_s_ic_2] = a[_in_s_ic_2] + b[_s_jc_2];}
+    int [101] a :  R[100 + -_s_ic_2..100 + -_s_ic_2 exact]
+    int [101] b :  R[_s_jc_2.._s_jc_2 exact]
+    int [101] c :  W[100 + -_s_ic_2..100 + -_s_ic_2 exact]
+  SgForStatement for(_s_jc_2 = _in_s_ic_2;_s_jc_2 <= 'c';_s_jc_2 += 2) {...}
+    int [101] a :  R[100 + -_s_ic_2..100 + -_s_ic_2 inexact]
+    int [101] b :  R[100 + -_s_ic_2..99 inexact]
+    int [101] c :  W[100 + -_s_ic_2..100 + -_s_ic_2 inexact]
+

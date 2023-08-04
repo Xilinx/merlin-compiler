@@ -1,0 +1,10 @@
+
+ERROR: [DISAG-301] Cannot decompose interface port 'a' (test_mem_call.cpp:12) with unsupported reference or initializer: 
+non-field access : a -> inc (test_mem_call.cpp:14)
+
+ Hint: complex pointer re-interpretation is not supported. Please rewrite
+
+ERROR: [DISAG-301] Cannot decompose interface port 'b' (test_mem_call.cpp:12) with unsupported reference or initializer: 
+non-field access : b . inc (test_mem_call.cpp:15)
+
+ Hint: complex pointer re-interpretation is not supported. Please rewrite

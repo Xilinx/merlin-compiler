@@ -1,0 +1,304 @@
+
+void sub_0(int b[100][100])
+{
+  for (int i = 0; i < 100; i++) {
+    for (int k = 0; k < 100; k++) 
+// Original: #pragma ACCEL pipeline
+// Original: #pragma ACCEL FALSE_DEPENDENCE VARIABLE=a
+{
+      
+#pragma HLS dependence variable=b array inter false 
+      
+#pragma HLS pipeline
+      b[i][k] = 0;
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_0()
+{
+  int a[100][100];
+  
+#pragma HLS array_partition variable=a complete dim=2
+  int b[101][100];
+  
+#pragma HLS array_partition variable=b complete dim=2
+  
+#pragma HLS array_partition variable=b cyclic factor=2 dim=1
+  int c[100][100];
+  int k;
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) 
+// Original: #pragma ACCEL FALSE_DEPENDENCE VARIABLE=a
+{
+    
+#pragma HLS dependence variable=a array inter false 
+    for (k = 0; k < 10; k++) 
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+      
+#pragma HLS unroll
+      for (j = 0; j < 99; j++) 
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+        
+#pragma HLS unroll
+        a[i][j] = b[i * k][j] + b[i * k + 1][j + 1];
+      }
+    }
+  }
+  sub_0(c);
+}
+#pragma ACCEL kernel
+
+void func_top_1()
+{
+  int a[100][100];
+  
+#pragma HLS array_partition variable=a complete dim=2
+  
+#pragma HLS array_partition variable=a cyclic factor=10 dim=1
+  int b[102][100];
+  
+#pragma HLS array_partition variable=b complete dim=2
+  
+#pragma HLS array_partition variable=b cyclic factor=2 dim=1
+  int k;
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) 
+// Original: #pragma ACCEL FALSE_DEPENDENCE VARIABLE=a
+{
+    
+#pragma HLS dependence variable=a array inter false 
+    for (k = 0; k < 10; k++) 
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+      
+#pragma HLS unroll
+      for (j = 0; j < 99; j++) 
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+        
+#pragma HLS unroll
+        a[k][j] += b[i * k][j] + b[i * k + 1][j + 1];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_2()
+{
+  int a[100][100];
+  
+#pragma HLS array_partition variable=a complete dim=2
+  int b[101][100];
+  
+#pragma HLS array_partition variable=b complete dim=2
+  
+#pragma HLS array_partition variable=b cyclic factor=2 dim=1
+  int k;
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) 
+// Original: #pragma ACCEL FALSE_DEPENDENCE
+{
+    for (k = 0; k < 10; k++) 
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+      
+#pragma HLS unroll
+      for (j = 0; j < 99; j++) 
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+        
+#pragma HLS unroll
+        a[i][j] = b[i * k][j] + b[i * k + 1][j + 1];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_3()
+{
+  int a[100][100];
+  
+#pragma HLS array_partition variable=a complete dim=2
+  int b[100][100];
+  
+#pragma HLS array_partition variable=b complete dim=2
+  
+#pragma HLS array_partition variable=b cyclic factor=2 dim=1
+  int k;
+  int j;
+  for (int i = 0; i < 10; i++) 
+// Original: #pragma ACCEL FALSE_DEPENDENCE VARIABLE = a_buf FORCE=off
+{
+    for (k = 0; k < 99; k++) 
+// Original: #pragma ACCEL PIPELINE
+{
+      
+#pragma HLS dependence variable=a array inter false 
+      
+#pragma HLS pipeline
+      for (j = 0; j < 99; j++) 
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+        
+#pragma HLS unroll
+        a[k][j] += b[k][j] + b[k + 1][j + 1];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_4()
+{
+  int a[100][100];
+  int bb[100][100];
+  
+#pragma HLS array_partition variable=bb cyclic factor=2 dim=2
+  int k;
+  int j;
+  for (int i = 0; i < 10; i++) 
+// Original: #pragma ACCEL FALSE_DEPENDENCE VARIABLE = a
+// Original: #pragma ACCEL FALSE_DEPENDENCE VARIABLE = bb
+{
+    
+#pragma HLS LOOP_FLATTEN OFF
+    
+#pragma HLS dependence variable=a array inter false 
+    
+#pragma HLS dependence variable=bb array inter false 
+    for (k = 0; k < 9; k++) {
+      for (j = 0; j < 99; j++) 
+// Original: #pragma ACCEL PIPELINE
+{
+        
+#pragma HLS dependence variable=a array inter false 
+        
+#pragma HLS pipeline
+        a[k][j] += bb[i * k][j] + bb[i * k + 1][j + 1];
+        bb[i * k][j] += a[k][j];
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_5(int a[100])
+{
+  int j;
+  for (j = 0; j < 99; j++) 
+// Original: #pragma ACCEL FALSE_DEPENDENCE VARIABLE = a
+// Original: #pragma ACCEL PIPELINE
+{
+    
+#pragma HLS pipeline
+    
+#pragma HLS dependence variable=a array inter false 
+    a[j + 1] = a[j] + a[j + 1];
+  }
+  for (j = 0; j < 99; j++) 
+// Original: #pragma ACCEL FALSE_DEPENDENCE VARIABLE = a force = on
+// Original: #pragma ACCEL PIPELINE
+{
+    
+#pragma HLS pipeline
+    
+#pragma HLS dependence variable=a array inter false 
+    a[j + 1] = a[j] + a[j + 1];
+  }
+}
+// False dependency with alias
+// FIXME: CMarsExpression cannot reconganize
+// the alias access
+#pragma ACCEL kernel
+
+void func_top_6(int a[100])
+{
+  int j;
+  int *b = &a[0];
+  int *bb = a;
+  for (j = 0; j < 99; j++) 
+// Original: #pragma ACCEL FALSE_DEPENDENCE VARIABLE=a
+// Original: #pragma ACCEL PIPELINE
+{
+    
+#pragma HLS dependence variable=b array inter false 
+    
+#pragma HLS pipeline
+    
+#pragma HLS dependence variable=a array inter false 
+    b[j + 1] = a[j] + a[j + 1];
+  }
+  for (j = 0; j < 99; j++) 
+// Original: #pragma ACCEL FALSE_DEPENDENCE VARIABLE=b
+// Original: #pragma ACCEL PIPELINE
+{
+    
+#pragma HLS pipeline
+    
+#pragma HLS dependence variable=b array inter false 
+    b[j + 1] = b[j] + b[j + 1];
+  }
+  for (j = 0; j < 99; j++) 
+// Original: #pragma ACCEL FALSE_DEPENDENCE VARIABLE=a
+// Original: #pragma ACCEL PIPELINE
+{
+    
+#pragma HLS pipeline
+    
+#pragma HLS dependence variable=a array inter false 
+    b[j + 1] = b[j] + b[j + 1];
+  }
+  for (j = 0; j < 99; j++) 
+// Original: #pragma ACCEL FALSE_DEPENDENCE VARIABLE=a
+// Original: #pragma ACCEL PIPELINE
+{
+    
+#pragma HLS dependence variable=bb array inter false 
+    
+#pragma HLS pipeline
+    
+#pragma HLS dependence variable=a array inter false 
+    bb[j + 1] = a[j] + a[j + 1];
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_7()
+{
+  int b[100][100];
+  
+#pragma HLS array_partition variable=b complete dim=2
+  int k;
+  int i;
+  int j;
+  int sum = 0;
+  for (i = 0; i < 100; i++) 
+// Original: #pragma ACCEL pipeline
+// Original: #pragma ACCEL FALSE_DEPENDENCE VARIABLE=a00
+{
+    
+#pragma HLS pipeline
+    int a00[100][100];
+    
+#pragma HLS array_partition variable=a00 complete dim=2
+    
+#pragma HLS dependence variable=a00 array inter false 
+    for (j = 0; j < 100; j++) 
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+      
+#pragma HLS unroll
+      a00[i][j] = b[i][j];
+    }
+    sum += a00[i][j];
+  }
+}

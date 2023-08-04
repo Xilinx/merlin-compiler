@@ -1,0 +1,28 @@
+{
+    "L,compute2-STAGE2uL0_STAGE2un0": {
+        "II": "1", 
+        "iteration-latency": "45", 
+        "iteration-latency-min": "45", 
+        "latency-max": "2091", 
+        "latency-min": "2091", 
+        "name": "STAGE2uL0_STAGE2un0", 
+        "pipelined": "yes", 
+        "trip-count": "2048"
+    }, 
+    "compute2": {
+        "interval-max": "2093", 
+        "interval-min": "2093", 
+        "latency-max": "2093", 
+        "latency-min": "2093", 
+        "total-BRAM": 0, 
+        "total-DSP": 13, 
+        "total-FF": 3634, 
+        "total-LUT": 3213, 
+        "total-URAM": 0, 
+        "util-BRAM": "0", 
+        "util-DSP": "~0", 
+        "util-FF": "~0", 
+        "util-LUT": "~0", 
+        "util-URAM": "0"
+    }
+}

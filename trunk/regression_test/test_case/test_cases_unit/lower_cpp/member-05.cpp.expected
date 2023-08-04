@@ -1,0 +1,42 @@
+
+struct _D 
+{
+  unsigned int u;
+}
+;
+
+void p_ZN1D1fEj(struct _D *this_0,unsigned int this_)
+{
+}
+
+void p_ZN1D1gEb(struct _D *this_0,bool this_)
+{
+  this_0 -> u += ((unsigned int )1);
+  this_ = !this_;
+}
+static void __merlin_dummy_SgTypedefDeclaration_typedef_st_();
+// Typedef-ed to an anonymous struct.
+
+struct _E 
+{
+  unsigned int u;
+}
+;
+
+void p_ZN1E1fEj(struct _E *this_0,unsigned int this_)
+{
+}
+
+void p_ZN1E1gEb(struct _E *this_0,bool this_)
+{
+  this_0 -> u += ((unsigned int )1);
+  this_ = !this_;
+}
+static void __merlin_dummy_SgTypedefDeclaration_typedef_st_();
+#pragma ACCEL kernel
+
+void foo()
+{
+  struct _D d;
+  struct _E e;
+}

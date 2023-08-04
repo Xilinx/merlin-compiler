@@ -1,0 +1,4 @@
+INFO: [FGPIP-103] Loop 'j'  (test_index_transform1.cpp:6) is pipelined
+INFO: [FGPIP-103] Loop 'j'  (test_index_transform1.cpp:19) is pipelined
+INFO: [FGPIP-103] Loop 'k'  (test_index_transform1.cpp:34) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_index_transform1.cpp:36) is fully parallelized

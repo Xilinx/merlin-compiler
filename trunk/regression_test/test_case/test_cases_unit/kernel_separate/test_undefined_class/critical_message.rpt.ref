@@ -1,0 +1,2 @@
+
+ERROR: [SEPAR-308] Inlined or undefined type is not supported : 'struct ::st3' (vec_add.cpp:6)

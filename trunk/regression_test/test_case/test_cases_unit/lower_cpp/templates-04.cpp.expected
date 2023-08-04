@@ -1,0 +1,11 @@
+void p_Z1fIjEv();
+extern void p_Z1fIjEv();
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+static void __merlin_dummy_SgTemplateInstantiationDirectiveStatement_extern_tem_();
+#pragma ACCEL kernel
+
+int main()
+{
+  p_Z1fIjEv();
+}
+extern void f_mangled();

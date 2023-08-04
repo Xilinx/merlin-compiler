@@ -1,0 +1,106 @@
+#include <string.h> 
+// 1. loop structure
+// 2. function structure
+// 3. access pattern
+// 4. pragma modes
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void func_top_0(int *a,int *b)
+{
+  
+#pragma ACCEL interface variable=a max_burst_size=10
+  int b_buf[100];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 100);
+  for (int i0 = 0; i0 < 10; i0++) {
+    for (int i1 = 0; i1 < 10; i1++) {
+      int i = i0 * 10 + i1;
+      a[i] = b_buf[i0 * 10 + i1];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_1(volatile int *a,int *b)
+{
+  int b_buf[100];
+  int i;
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 100);
+  for (i = 0; i < 100; i++) {
+    
+#pragma ACCEL pipeline
+    a[i] = b_buf[i];
+  }
+}
+// sub function
+
+void sub_0(int a[100],int b[100])
+{
+  int i;
+  int j;
+  for (i = 0; i < 10; i++) {
+    if (a[0 * 10 + 0]) {
+      int a_buf[10];
+      for (j = 0; j < 10; j++) {
+        
+#pragma ACCEL pipeline
+        a_buf[j] = b[i * 10 + j] + 1;
+      }
+      memcpy((void *)(&a[i * 10]),(const void *)(&a_buf[0]),sizeof(int ) * 10);
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_9(int a[100],int b[100])
+{
+  
+#pragma ACCEL interface variable=a max_burst_size=10
+  int b_buf[100];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 100);
+  sub_0(a,b_buf);
+}
+
+void sub_1(int a[100],int b[100])
+{
+  int b_buf[100];
+  int i;
+  int j;
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 100);
+  for (i = 0; i < 10; i++) {
+    if (a[0 * 10 + 0]) {
+      int a_buf[10];
+      for (j = 0; j < 10; j++) {
+        a_buf[j] = b_buf[i * 10 + j] + 1;
+      }
+      memcpy((void *)(&a[i * 10]),(const void *)(&a_buf[0]),sizeof(int ) * 10);
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_11(int a[100],int b[100])
+{
+  
+#pragma ACCEL interface variable=a max_burst_size=10
+  sub_1(a,b);
+  sub_1(a,b);
+}
+
+int main()
+{
+  int *a;
+  int *b;
+  int *c;
+  int *aa;
+  int *bb;
+  int *cc;
+  int a_s;
+  int b_s;
+  int c_s;
+  func_top_0(a,b);
+  func_top_1(a,b);
+  func_top_9(aa,bb);
+  func_top_11(aa,bb);
+  return 0;
+}

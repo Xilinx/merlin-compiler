@@ -1,0 +1,102 @@
+
+struct ::S 
+{
+  int y;
+}
+;
+
+void p_ZN1SC2Ev(struct S *this_)
+{
+  this_ -> y = 100;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_S_();
+#pragma ACCEL kernel
+
+int top()
+{
+  static struct S s;
+  static int merlin_static_flag_s = 0;
+  if (!merlin_static_flag_s) {
+    merlin_static_flag_s = 1;
+    p_ZN1SC2Ev(&s);
+  }
+  ;
+  struct S temp;
+  static int merlin_static_flag_s1 = 0;
+  static struct S s1[10];
+  if (!merlin_static_flag_s1) {
+    merlin_static_flag_s1 = 1;
+    p_ZN1SC2Ev(&temp);
+{
+      int _i0;
+      for (_i0 = 0; _i0 <= 9UL; ++_i0) {
+        s1[_i0] = temp;
+      }
+    }
+  }
+  struct S temp_0;
+  static int merlin_static_flag_s2 = 0;
+  static struct S s2[2][3];
+  if (!merlin_static_flag_s2) {
+    merlin_static_flag_s2 = 1;
+    p_ZN1SC2Ev(&temp_0);
+{
+      int _i0;
+      int _i1;
+      for (_i0 = 0; _i0 <= 1UL; ++_i0) {
+        for (_i1 = 0; _i1 <= 2UL; ++_i1) {
+          s2[_i0][_i1] = temp_0;
+        }
+      }
+    }
+  }
+  struct S s3;
+  p_ZN1SC2Ev(&s3);
+  ;
+  struct S temp_1;
+  p_ZN1SC2Ev(&temp_1);
+  struct S s4[10];
+{
+    int _i0;
+    for (_i0 = 0; _i0 <= 9UL; ++_i0) {
+      s4[_i0] = temp_1;
+    }
+  }
+  struct S temp_2;
+  p_ZN1SC2Ev(&temp_2);
+  struct S s5[2][3];
+{
+    int _i0;
+    int _i1;
+    for (_i0 = 0; _i0 <= 1UL; ++_i0) {
+      for (_i1 = 0; _i1 <= 2UL; ++_i1) {
+        s5[_i0][_i1] = temp_2;
+      }
+    }
+  }
+  return 0;
+}
+
+struct ::SS 
+{
+  int y;
+}
+;
+
+void p_ZN2SS3setEi(struct SS *this_,int a)
+{
+  this_ -> y = a;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_SS_();
+#pragma ACCEL kernel
+
+int top2()
+{
+  static struct SS s;
+  static struct SS s1[10];
+  static struct SS s2[1][2];
+  struct SS s3;
+  struct SS s4[10];
+  struct SS s5[1][2];
+  return 0;
+}

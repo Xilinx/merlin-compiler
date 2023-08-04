@@ -1,0 +1,31 @@
+
+struct st 
+{
+  int data[4];
+}
+;
+
+struct st2 
+{
+  struct st t;
+}
+;
+#pragma ACCEL kernel
+
+void top()
+{
+  struct st2 a;
+  
+#pragma HLS array_partition variable=a.t.data complete dim=1
+  struct st2 b;
+  
+#pragma HLS array_partition variable=b.t.data complete dim=1
+  for (int i = 0; i < 4; ++i) 
+// Original: #pragma ACCEL parallel
+{
+    
+#pragma HLS unroll
+    a . t . data[i] = 0;
+    b . t . data[i] = 0;
+  }
+}

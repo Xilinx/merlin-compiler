@@ -1,0 +1,51 @@
+
+<directives>
+
+<!-- Platform setup -->
+<!--
+<clock_period>4.16ns</clock_period>
+<timing_slack_ratio>0.2</timing_slack_ratio>
+<platform_name>alphadata_pcie7v3</platform_name><part_name>xc7vx690tffg1761-2</part_name><arch_name>virtex7</arch_name>
+<platform_name>alphadata_pcieku3</platform_name><part_name>xcku060-ffva1156-2-e</part_name><arch_name>ultra_kintex7</arch_name>
+<platform_name>baidu_kintex7</platform_name><part_name>xc7k480tiffg1156-2L</part_name><arch_name>kintex7</arch_name>
+<platform_name>baidu_kintex7</platform_name><part_name>xc7k480tffg1156-1</part_name><arch_name>kintex7</arch_name>
+-->
+<clock_period>4.16ns</clock_period>
+<platform_name>alphadata_pcieku3</platform_name><part_name>xcku060-ffva1156-2-e</part_name><arch_name>ultra_kintex7</arch_name>
+
+<!-- optimization schemes -->
+<pipeline_parallel> on </pipeline_parallel>
+<memory_burst     > on </memory_burst>
+<bitwidth_opt     > on </bitwidth_opt>
+<reduction_opt    > on </reduction_opt>
+<pcie_transfer_opt> on </pcie_transfer_opt>
+<coarse_grained_pipeline> on </coarse_grained_pipeline>
+<naive_hls> off </naive_hls>
+ 
+<!-- design flow -->
+<high_level_synthesis> off </high_level_synthesis>
+<simulation>           off </simulation>
+<implementation>       off </implementation>
+
+<!-- run bitstream  -->
+<normal>on</normal>
+<static>off</static>
+<kernel>off</kernel>
+
+<!-- auto testing -->
+<testing        > off </testing>
+<testing_run_ref> on </testing_run_ref>
+<testing_run_opt> on </testing_run_opt>
+<testing_run_sim> on </testing_run_sim>
+<testing_run_bit> on </testing_run_bit>
+
+<!-- misc -->
+<!-- 
+<kernel_timeoue> 300 </kernel_timeout>
+<implementation_tool > sdaccel </implementation_tool>
+<runtime_integration> on </runtime_integration>
+<implementation_tool > built-in </implementation_tool>
+-->
+<implementation_tool > sdaccel </implementation_tool>
+</directives>
+

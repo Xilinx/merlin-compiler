@@ -1,0 +1,10 @@
+
+WARNING: [STREAM-201] stream ports cannot be separated:
+    'void vec_add(int s,int [1024] ...' (__merlinkernel_vec_add.cpp:7)
+    Can not have while statment surrounding variable reference 'a2[i]' (__merlinkernel_vec_add.cpp:48) in function 'vec_add' (__merlinkernel_vec_add.cpp:7) : while(i < 100){ret += a2[i];}
+    Can not have non-canonical loop surrounding variable reference 'a3[i]' (__merlinkernel_vec_add.cpp:52) in function 'vec_add' (__merlinkernel_vec_add.cpp:7) : for(i = 0;i < 100 && i > - 100;++i) {...}
+    Can not have non-canonical loop surrounding variable reference 'a4[i]' (__merlinkernel_vec_add.cpp:56) in function 'vec_add' (__merlinkernel_vec_add.cpp:7) : for(i = 0;i < 100;++i) {...}
+    Can not have break statment in a loop surrounding variable reference 'a6[i]' (__merlinkernel_vec_add.cpp:67) in function 'vec_add' (__merlinkernel_vec_add.cpp:7) : break;
+    Can not have break statment in a loop surrounding variable reference 'a7[i]' (__merlinkernel_vec_add.cpp:73) in function 'vec_add' (__merlinkernel_vec_add.cpp:7) : break;
+    Can not have switch statment surrounding variable reference 'a8[0]' (__merlinkernel_vec_add.cpp:78) in function 'vec_add' (__merlinkernel_vec_add.cpp:7) : switch(2){case 0:ret += a8[0];break;}
+

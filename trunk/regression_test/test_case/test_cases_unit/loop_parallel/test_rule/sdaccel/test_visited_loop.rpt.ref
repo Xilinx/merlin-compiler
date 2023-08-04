@@ -1,0 +1,2 @@
+INFO: [FGPIP-103] Loop 'i'  (test_visited_loop.cpp:7) is pipelined
+INFO: [FGPIP-102] Loop 't' (test_visited_loop.cpp:9) is fully parallelized

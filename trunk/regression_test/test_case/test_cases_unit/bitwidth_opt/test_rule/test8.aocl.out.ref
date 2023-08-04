@@ -1,0 +1,102 @@
+#include<string.h>
+//1d dimension
+#pragma ACCEL kernel
+
+void top(int *a,char *b,unsigned int *c,float *d,int n)
+{
+  int _memcpy_i4_3;
+  int _memcpy_i4_2;
+  int _memcpy_i4_1;
+  int _memcpy_i4_0;
+  int _memcpy_i3_2;
+  int _memcpy_i3_1;
+  int _memcpy_i3_0;
+  int a_buf[1000];
+  long _memcpy_i_0;
+  for (_memcpy_i_0 = 0; _memcpy_i_0 < sizeof(int ) * ((unsigned long )1000) / 4; ++_memcpy_i_0) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=50
+    long total_offset1 = 0 * 1000 + 0;
+    long total_offset2 = 0 * 0 + 0;
+    a_buf[total_offset1 + _memcpy_i_0] = a[total_offset2 + _memcpy_i_0];
+  }
+  for (int i = 0; i < 64; ++i) {
+    char b_buf[100][64];
+    long _memcpy_i_1;
+    for (_memcpy_i_1 = 0; _memcpy_i_1 < sizeof(char ) * ((unsigned long )100) * ((unsigned long )i) / 1; ++_memcpy_i_1) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=64
+      
+#pragma HLS LOOP_TRIPCOUNT max=6300
+      long total_offset1 = (0 * 100 + 0) * 64 + 0;
+      long total_offset2 = 0 * 0 + 0;
+      b_buf[(total_offset1 + _memcpy_i_1) / 64][(total_offset1 + _memcpy_i_1) % 64] = b[total_offset2 + _memcpy_i_1];
+    }
+  }
+  unsigned int c_buf[2][20][4];
+  for (_memcpy_i3_2 = 0; _memcpy_i3_2 < 2; ++_memcpy_i3_2) {
+    
+#pragma HLS COALESCING_WIDTH=512
+    for (_memcpy_i3_1 = 0; _memcpy_i3_1 < 20; ++_memcpy_i3_1) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=4
+      for (_memcpy_i3_0 = 0; _memcpy_i3_0 < 4; ++_memcpy_i3_0) {
+        
+#pragma ACCEL PARALLEL SKIP COMPLETE
+        c_buf[_memcpy_i3_2][_memcpy_i3_1][_memcpy_i3_0] = c[0 + (((0 * 2 + _memcpy_i3_2) * 20 + _memcpy_i3_1) * 4 + _memcpy_i3_0)];
+      }
+    }
+  }
+  float d_buf[100][4][2][2];
+  for (_memcpy_i4_3 = 0; _memcpy_i4_3 < 100; ++_memcpy_i4_3) {
+    
+#pragma HLS COALESCING_WIDTH=512
+    for (_memcpy_i4_2 = 0; _memcpy_i4_2 < 4; ++_memcpy_i4_2) {
+      
+#pragma ACCEL PARALLEL SKIP COMPLETE
+      for (_memcpy_i4_1 = 0; _memcpy_i4_1 < 2; ++_memcpy_i4_1) {
+        
+#pragma ACCEL PARALLEL SKIP COMPLETE
+        for (_memcpy_i4_0 = 0; _memcpy_i4_0 < 2; ++_memcpy_i4_0) {
+          
+#pragma ACCEL PARALLEL SKIP COMPLETE
+          d_buf[_memcpy_i4_3][_memcpy_i4_2][_memcpy_i4_1][_memcpy_i4_0] = d[0 + ((((0 * 100 + _memcpy_i4_3) * 4 + _memcpy_i4_2) * 2 + _memcpy_i4_1) * 2 + _memcpy_i4_0)];
+        }
+      }
+    }
+  }
+  char b_buf_1[9][64];
+  long _memcpy_i_2;
+  for (_memcpy_i_2 = 0; _memcpy_i_2 < sizeof(char ) * ((unsigned long )n) / 1; ++_memcpy_i_2) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=64
+    
+#pragma HLS LOOP_TRIPCOUNT max=576
+    long total_offset1 = (0 * 9 + 0) * 64 + 0;
+    long total_offset2 = 0 * 0 + 0;
+    b_buf_1[(total_offset1 + _memcpy_i_2) / 64][(total_offset1 + _memcpy_i_2) % 64] = b[total_offset2 + _memcpy_i_2];
+  }
+  float d_buf_1[32][2][2][2];
+  for (int i = 0; i < 32; ++i) {
+    long _memcpy_i_5;
+    for (_memcpy_i_5 = 0; _memcpy_i_5 < sizeof(float ) * ((unsigned long )i) * ((unsigned long )8) / 4; ++_memcpy_i_5) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+      
+#pragma HLS LOOP_TRIPCOUNT max=248
+      long total_offset1 = (((0 * 32 + i) * 2 + 0) * 2 + 0) * 2 + 0;
+      long total_offset2 = 0 * 0 + i * 8;
+      d_buf_1[(total_offset1 + _memcpy_i_5) / 2 / 2 / 2][(total_offset1 + _memcpy_i_5) / 2 / 2 % 2][(total_offset1 + _memcpy_i_5) / 2 % 2][(total_offset1 + _memcpy_i_5) % 2] = d[total_offset2 + _memcpy_i_5];
+    }
+  }
+}
+
+int main()
+{
+  int *a;
+  char *b;
+  unsigned int *c;
+  float *d;
+  int n;
+  top(a,b,c,d,n);
+}

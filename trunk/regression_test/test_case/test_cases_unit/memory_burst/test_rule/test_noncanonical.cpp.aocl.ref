@@ -1,0 +1,36 @@
+#include <string.h> 
+#include<assert.h>
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void verify(int merlin_return_value[1],int *i,int *j,float *c,float *c2)
+{
+  
+#pragma ACCEL interface variable=c2 scope_type=global depth=1,1024,1024 max_depth=1,1024,1024
+  
+#pragma ACCEL interface variable=c scope_type=global depth=1,1024,1024 max_depth=1,1024,1024
+  
+#pragma ACCEL interface variable=j scope_type=global depth=1 max_depth=1
+  
+#pragma ACCEL interface variable=i scope_type=global depth=1 max_depth=1
+  int j_buf[1];
+  int i_buf[1];
+  float sum = (float )0.0;
+  float sum2 = (float )0.0;
+  memcpy((void *)(&i_buf[0]),(const void *)(&i[0]),sizeof(int ) * 1);
+  memcpy((void *)(&j_buf[0]),(const void *)(&j[0]),sizeof(int ) * 1);
+  for (i_buf[0] = 0; i_buf[0] < 1024; i_buf[0]++) {
+    for (j_buf[0] = 0; j_buf[0] < 1024; j_buf[0]++) {
+      
+#pragma ACCEL PIPELINE AUTO
+      float c2_buf[1];
+      float c_buf[1];
+      memcpy((void *)(&c_buf[0]),(const void *)(&c[i_buf[0] * 1024L + j_buf[0]]),sizeof(float ) * 1L);
+      memcpy((void *)(&c2_buf[0]),(const void *)(&c2[i_buf[0] * 1024L + j_buf[0]]),sizeof(float ) * 1L);
+      sum += c_buf[0];
+      sum2 += c2_buf[0];
+    }
+  }
+  memcpy((void *)(&j[0]),(const void *)(&j_buf[0]),sizeof(int ) * 1);
+  memcpy((void *)(&i[0]),(const void *)(&i_buf[0]),sizeof(int ) * 1);
+}

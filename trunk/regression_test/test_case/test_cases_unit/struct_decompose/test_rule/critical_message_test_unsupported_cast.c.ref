@@ -1,0 +1,2 @@
+
+ERROR: [DISAG-302] statement 'st *p =(st *)( *a_a);' (transformation:0) which contains unsupported type cast: '(st *)( *a_a)' is not decomposed

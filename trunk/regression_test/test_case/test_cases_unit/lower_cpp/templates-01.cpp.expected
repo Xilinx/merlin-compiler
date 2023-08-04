@@ -1,0 +1,27 @@
+extern void printf(const char *,... );
+unsigned char p_Z9factorialIhEh(unsigned char n);
+unsigned int p_Z9factorialIjEj(unsigned int n);
+
+unsigned int p_Z9factorialIjEj(unsigned int n)
+{
+  return n > ((unsigned int )0)?n * p_Z9factorialIjEj(n - ((unsigned int )1)) : ((unsigned int )1);
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+unsigned int p_Z9factorialIjbEjb(unsigned int n,bool u);
+
+unsigned int p_Z9factorialIjbEjb(unsigned int n,bool u)
+{
+  return n > ((unsigned int )0)?n * p_Z9factorialIjEj(n - ((unsigned int )1)) * p_Z9factorialIjbEjb(n - ((unsigned int )1),u) : ((unsigned int )1);
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+// should be ignored.
+static void __merlin_dummy_SgTemplateInstantiationFunctionDecl_unsigned_c_();
+#pragma ACCEL kernel
+
+int main()
+{
+  unsigned int arg = 23;
+// implicit instantiation.
+  printf("%d\n",(p_Z9factorialIjEj(arg)));
+  printf("%d\n",(p_Z9factorialIjbEjb(arg,true)));
+}

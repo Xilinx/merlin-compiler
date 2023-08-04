@@ -1,0 +1,60 @@
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: const char ** p (write_interface_fail.c:1)
+    Reference: *p += 10; (write_interface_fail.c:3)
+    In function: void sub_func1(const char ** p) {...} (write_interface_fail.c:1)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char ** p (write_interface_fail.c:13)
+    Reference: *p += count; (write_interface_fail.c:15)
+    In function: void sub_func2(char ** p,int count) {...} (write_interface_fail.c:13)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char ** p (write_interface_fail.c:25)
+    Reference: *p += count; (write_interface_fail.c:27)
+    In function: void sub_sub_func3(char ** p,int count) {...} (write_interface_fail.c:25)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char * b (write_interface_fail.c:72)
+    Reference: b += 10; (write_interface_fail.c:75)
+    In function: void func6(char * b) {...} (write_interface_fail.c:72)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char * b (write_interface_fail.c:84)
+    Reference: char **c = &b; (write_interface_fail.c:87)
+    In function: void func7(char * b) {...} (write_interface_fail.c:84)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char *** b (write_interface_fail.c:92)
+    Reference: *b += 1; (write_interface_fail.c:95)
+    In function: void func8(char *** b) {...} (write_interface_fail.c:92)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char *** b (write_interface_fail.c:100)
+    Reference: *b = g9; (write_interface_fail.c:102)
+    In function: void sub_func9(char *** b) {...} (write_interface_fail.c:100)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: const char ** p (write_interface_fail.c:112)
+    Reference: p += 10; (write_interface_fail.c:114)
+    In function: void sub_func10(const char ** p) {...} (write_interface_fail.c:112)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char *** b (write_interface_fail.c:135)
+    Reference: b += 1; (write_interface_fail.c:138)
+    In function: void func12(char *** b) {...} (write_interface_fail.c:135)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char * b (write_interface_fail.c:147)
+    Reference: char **c = &b; (write_interface_fail.c:150)
+    In function: void func13(char * b) {...} (write_interface_fail.c:147)
+

@@ -1,0 +1,36 @@
+
+struct ::A 
+{
+  int a[10];
+}
+;
+
+void p_ZN1AC2Ev(struct A *this_)
+{
+// the following 'a' should be updated into "this_->a"
+  
+#pragma HLS array_patition variable=this_->a complete
+  this_ -> a[0] = 1;
+}
+
+int p_ZN1A3getEi(struct A *this_,int i)
+{
+  return this_ -> a[i];
+}
+
+void p_ZN1A3setEii(struct A *this_,int i,int val)
+{
+  this_ -> a[i] = val;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+  struct A tmp;
+  p_ZN1AC2Ev(&tmp);
+  ;
+  for (int i = 0; i < 10; ++i) {
+    p_ZN1A3setEii(&tmp,i,a[i]);
+  }
+}

@@ -1,0 +1,81 @@
+#include <stdio.h>
+#include <stdlib.h>
+int handle(int b);
+#pragma ACCEL kernel
+
+int handle(int b)
+{
+  int a = 89;
+  if (!a) {
+    return ++a;
+  }
+  switch(b){
+    case 0:
+    return b--;
+    break; 
+    case 1:
+{
+      return a + b;
+      break; 
+    }
+    default:
+{
+      return (a , b);
+      break; 
+    }
+  }
+  for (int i = 0; i <= 10; ++i) {
+    do {
+      while(i > 5){
+        return i * i * i;
+      }
+    }while (0);
+  }
+  return a * b;
+}
+#pragma ACCEL kernel
+
+int fun()
+{
+  int a = 0;
+  int b = 1;
+  return a > b?a : b;
+}
+#pragma ACCEL kernel
+
+static int fun_1()
+{
+  int a = 0;
+  int b = 1;
+  return a > b?a : b;
+}
+
+int g1(int &a)
+{
+  int *p = &a;
+  return  *p;
+}
+#pragma ACCEL kernel
+
+int g0(int &a)
+{
+  int *p = &a;
+  return g1( *p);
+}
+
+int main()
+{
+  int a = 0;
+  int b = g0(a);
+  if (const int c = fun()) {
+    printf("hello\n");
+  }
+  int d = 0;
+  
+#pragma ACCEL kernel
+  d = handle(b);
+  if ((a = fun_1())) {
+    g0(d);
+  }
+  return 0;
+}

@@ -1,0 +1,16 @@
+#include<string.h>
+#pragma ACCEL kernel
+
+void func1_kernel(int *a)
+{
+  int a_buf_0[34];
+  int a_buf_1[65];
+  int a_buf_2[1021];
+  int a_buf_3[10][3][15];
+  int a_buf_4[3][20][7];
+  memcpy(a_buf_0,a,sizeof(int ) * 34);
+  memcpy(a_buf_1,a,sizeof(int ) * 65);
+  memcpy(a_buf_2,a,sizeof(int ) * 1021);
+  memcpy(a_buf_3,a,sizeof(int ) * 450);
+  memcpy(a_buf_4,a,sizeof(int ) * 420);
+}

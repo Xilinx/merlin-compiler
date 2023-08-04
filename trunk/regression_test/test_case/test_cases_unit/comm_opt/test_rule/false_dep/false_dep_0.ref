@@ -1,0 +1,49 @@
+int __merlin_ivdep_c(int t[100][100][100]);
+#pragma ACCEL kernel
+
+void kernel_top(int *a)
+{
+  int i;
+  int j;
+  int k;
+  int m;
+  int i1;
+  int d[100];
+  int b[100][100];
+  int c[100][100][100];
+  for (m = 1; m < 3; m++) {
+    for (k = 0; k < 5; k++) {
+      for (j = 0; j < 10; j++) {
+        for (i = 0; i < 100; i++) {
+//b[1][1] = 1;
+          if (k == 0) 
+            b[j][i] = 1;
+//a[i] += 0 + 1 + 2;
+          b[j][i] += 0 + 1 + 2;
+          c[i][j][k] += 0 + 1 + 2;
+          __merlin_ivdep_c(c);
+        }
+      }
+    }
+  }
+  for (k = 0; k < 5; k++) {
+    for (j = 0; j < 10; j++) {
+      for (i = 0; i < 100; i++) {
+//b[1][1] = 1;
+//if(k==0) 
+//    b[j][i] = 1;
+//a[i] += 0 + 1 + 2;
+        b[j][i] += 0 + 1 + 2;
+      }
+    }
+  }
+  for (i = 0; i < 100; i++) {
+    d[i] += 0 + 1 + 2;
+  }
+}
+
+void main()
+{
+  int *a;
+  kernel_top(a);
+}

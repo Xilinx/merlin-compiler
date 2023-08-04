@@ -1,0 +1,50 @@
+// Don't lower C-like aggregates.
+
+struct A 
+{
+  unsigned int u;
+}
+;
+typedef struct {
+bool b;}B;
+
+struct C 
+{
+  char *c;
+}
+;
+
+struct ::D 
+{
+  char *c;
+}
+;
+static void __merlin_dummy_SgClassDeclaration_struct_D_();
+
+B untouched(struct C c)
+{
+  B ret;
+  ret . b = c . c != 0;
+  return ret;
+}
+struct S ;
+
+struct ::S 
+{
+}
+;
+
+void p_ZN1S1fEv(struct S *this_)
+{
+}
+static void __merlin_dummy_SgClassDeclaration_struct_S_();
+#pragma ACCEL kernel
+
+void top()
+{
+  struct A a;
+  struct C c;
+  B b = untouched(c);
+  struct D d;
+  struct S s;
+}

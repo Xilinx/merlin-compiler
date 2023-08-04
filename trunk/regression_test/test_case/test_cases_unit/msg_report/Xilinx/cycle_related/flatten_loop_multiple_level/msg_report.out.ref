@@ -1,0 +1,70 @@
+================================================================================
+Kernel : mykernel(flatten_loop_multiple_level.cpp:4)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+orig            512      (flatten_loop_multiple_level.cpp:4) memory burst and coalescing 
+out             512      (flatten_loop_multiple_level.cpp:4) memory burst and coalescing 
+len             32       (flatten_loop_multiple_level.cpp:4) scalar
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++-------------------------------------------------------------+-----+------+------+------+------+------+------+-------------------------------------------------------------------------------------+
+|                          hierarchy                          | TC  |  AC  | CPC  | LUT  |  FF  | BRAM | DSP  |                                       comment                                       |
++-------------------------------------------------------------+-----+------+------+------+------+------+------+-------------------------------------------------------------------------------------+
+|mykernel (flatten_loop_multiple_level.cpp:4)                 |     |  8994|  8994|  2.25|  0.82|  2.87|  0.00|kernel                                                                               |
+|    auto memory burst read and coalescing for 'merlin_out'   |     |     -|   134|      |      |      |      |                                                                                     |
+|    auto memory burst read and coalescing for 'orig'         |     |     -|   134|      |      |      |      |                                                                                     |
+|    loop i (flatten_loop_multiple_level.cpp:7)               |   64|  2050|  2050|      |      |      |      |                                                                                     |
+|        loop j (flatten_loop_multiple_level.cpp:8)           |     |      |      |      |      |      |      |optimized in loop flatten                                                            |
+|            loop k (flatten_loop_multiple_level.cpp:10)      |   32|  2050|  2050|      |      |      |      |flattened with loop i (flatten_loop_multiple_level.cpp:7), IL=4, fully pipelined     |
+|    loop i (flatten_loop_multiple_level.cpp:15)              |     |      |      |      |      |      |      |optimized in loop flatten                                                            |
+|        loop j (flatten_loop_multiple_level.cpp:17)          |  128|   384|   384|      |      |      |      |IL=3, pipelined II=3[1]                                                              |
+|            loop k (flatten_loop_multiple_level.cpp:18)      |   16|     -|     -|      |      |      |      |16x parallelized                                                                     |
+|    loop i (flatten_loop_multiple_level.cpp:23)              |   64|  6144|  6144|      |      |      |      |                                                                                     |
+|        loop j (flatten_loop_multiple_level.cpp:24)          |    2|  6144|  6144|      |      |      |      |flattened with loop i (flatten_loop_multiple_level.cpp:23)                           |
+|            loop k (flatten_loop_multiple_level.cpp:25)      |     |      |      |      |      |      |      |optimized in loop flatten                                                            |
+|                loop l (flatten_loop_multiple_level.cpp:27)  |   16|  6144|  6144|      |      |      |      |flattened with loop j (flatten_loop_multiple_level.cpp:24), IL=4, pipelined II=3[2]  |
+|    auto memory burst write and coalescing for 'merlin_out'  |     |     -|   134|      |      |      |      |                                                                                     |
++-------------------------------------------------------------+-----+------+------+------+------+------+------+-------------------------------------------------------------------------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++-------------------------------------------------------+--------+----------+
+|                         Name                          | Cycles | Activity |
++-------------------------------------------------------+--------+----------+
+| mykernel:loop j (flatten_loop_multiple_level.cpp:24)  |  6144  |  68.31%  |
+| mykernel:loop l (flatten_loop_multiple_level.cpp:27)  |  6144  |  68.31%  |
+|  mykernel:loop i (flatten_loop_multiple_level.cpp:7)  |  2050  |  22.79%  |
+| mykernel:loop k (flatten_loop_multiple_level.cpp:10)  |  2050  |  22.79%  |
+|     mykernel (flatten_loop_multiple_level.cpp:4)      |  800   |  8.89%   |
+| mykernel:loop j (flatten_loop_multiple_level.cpp:17)  |  384   |  4.27%   |
+| auto memory burst (flatten_loop_multiple_level.cpp:4) |   0    |  0.00%   |
+| auto memory burst (flatten_loop_multiple_level.cpp:4) |   0    |  0.00%   |
+| auto memory burst (flatten_loop_multiple_level.cpp:4) |   0    |  0.00%   |
+| mykernel:loop i (flatten_loop_multiple_level.cpp:23)  |   0    |  0.00%   |
++-------------------------------------------------------+--------+----------+
+
++----------------------------------------------+------+------+------+------+
+|                     Name                     | BRAM | DSP  |  FF  | LUT  |
++----------------------------------------------+------+------+------+------+
+| mykernel (flatten_loop_multiple_level.cpp:4) | 2.87 | 0.00 | 0.82 | 2.25 |
++----------------------------------------------+------+------+------+------+
+[1] 'merlin_out_buf_0' has no loop carried-dependence on loop 'j'  (flatten_loop_multiple_level.cpp:17).
+Hint: applying Merlin false_dependence pragma for 'merlin_out_buf_0' on loop 'j' may help enhance the performance.
+
+[2] 'merlin_out_buf_0' has no loop carried-dependence on loop 'l'  (flatten_loop_multiple_level.cpp:27).
+Hint: applying Merlin false_dependence pragma for 'merlin_out_buf_0' on loop 'l' may help enhance the performance.
+
+
+
+

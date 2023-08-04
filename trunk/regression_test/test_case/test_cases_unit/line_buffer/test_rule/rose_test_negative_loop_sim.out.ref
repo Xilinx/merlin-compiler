@@ -1,0 +1,88 @@
+#include<stdio.h>
+#include<string.h>
+#define HS 256
+#define WS 64
+#define FH 2
+#define FW 3
+#pragma ACCEL kernel
+
+void conv1d(float in[256][64],float filter[2][3],float out[255][62])
+{
+  
+#pragma ACCEL interface VARIABLE=in BURST_OFF
+  float LineBuffer_in0[64];
+  float slide_wind_0[2][3];
+  for (int i = 1L; i < 257L; i++) 
+    for (int j = 2L; j < 66L; j++) {{
+        int i_2;
+        int i_1;
+        float tmp_wind_0[2];
+        int j_0;
+        int i_0;
+        for (i_0 = 0L; i_0 <= 1L; ++i_0) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          for (j_0 = 1L; j_0 <= 2L; ++j_0) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            slide_wind_0[i_0][j_0 + -1] = slide_wind_0[i_0][j_0];
+          }
+        }
+        for (i_1 = 0; i_1 <= 1L; ++i_1) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          if (i_1 == 0L) {
+            tmp_wind_0[i_1] = LineBuffer_in0[j + -2L - 2L + 2L];
+          }
+        }
+        tmp_wind_0[1UL] = in[i + -1L + -1L + 1L][j + -2L + -2L + 2L];
+        for (i_2 = 0; i_2 <= 1L; ++i_2) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0[i_2][2L] = tmp_wind_0[i_2];
+        }
+{
+          int i_3;
+          float tmp_in;
+          for (i_3 = 0; i_3 <= 0UL; ++i_3) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            tmp_in = tmp_wind_0[i_3 + 1];
+            if (i_3 == 0L) {
+              LineBuffer_in0[j + -2L - 2L + 2L] = tmp_in;
+            }
+          }
+        }
+      }
+      if (i + -1L >= 1L && i + -1L <= 255L && j + -2L >= 2L && j + -2L <= 63L) {
+        float tmp = 0.0f;
+        for (int p = 0; p < 2; p++) 
+          for (int q = 0; q < 3; q++) {
+            tmp += slide_wind_0[p * -1L + 1L][q * -1L + 2L] * filter[p][q];
+            printf("%d, %d, %d, %d : %f\n",i + -1L,j + -2L,p,q,(double )tmp);
+          }
+        out[i + -1L - 2 + 1][j + -2L - 3 + 1] = tmp;
+      }
+    }
+}
+float in[256][64];
+float filter[2][3];
+float out[255][62];
+
+int main()
+{
+  for (int i = 0; i < 256; i++) 
+    for (int j = 0; j < 64; j++) {
+      in[i][j] = ((j + 1) * (i + 1));
+    }
+  for (int i = 0; i < 2; i++) 
+    for (int j = 0; j < 3; j++) {
+      filter[i][j] = 1;
+    }
+  for (int i = 0; i < 256 - 2 + 1; i++) 
+    for (int j = 0; j < 64 - 3 + 1; j++) {
+      out[i][j] = 0;
+    }
+  conv1d(in,filter,out);
+  return 0;
+}

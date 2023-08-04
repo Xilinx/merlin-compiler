@@ -1,0 +1,30 @@
+#include <string.h> 
+#define FACTOR 100
+#define A_BUF a_buf
+#define A_BUF_DECL  int A_BUF[100];
+
+void func(int *a)
+{
+//int i;
+  for (int i0 = 0; i0 < 10; ++i0) {
+    for (int ii = 0; ii < 10; ++ii) {
+      
+#pragma ACCEL parallel
+      int i = i0 * 10 + ii;
+      a[i] = i;
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void top(int *a,int *b,int *c)
+{
+  for (int i = 0; i < 10000 / 100; ++i) {
+    int a_buf[100];
+    for (int j = 0; j < 100; ++j) 
+// Original: #pragma ACCEL parallel
+{
+      func(a_buf);
+    }
+  }
+}

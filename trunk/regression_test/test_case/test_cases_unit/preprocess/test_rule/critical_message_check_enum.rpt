@@ -1,0 +1,6 @@
+
+ERROR: [PROCS-353] The argument 'm' contains on array or pointer of enum type(enum CCTestEnum)
+
+ERROR: [PROCS-353] The argument 'n' contains on array or pointer of enum type(enum CCTestEnum)
+
+ERROR: [PROCS-353] Return type 'CCTestEnum' of 'test' (test.c:3) contains enum type (enum CCTestEnum)

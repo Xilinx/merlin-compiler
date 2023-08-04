@@ -1,0 +1,29 @@
+INFO: [LINEBUF-101] Applying line buffer on variable 'c' in loop 'L_0_0' (test_1.cpp:26)
+INFO: [LINEBUF-101] Applying line buffer on variable 'c' in loop 'L_0_0_0' (test_1.cpp:9)
+INFO: [LINEBUF-101] Applying line buffer on variable 'c' in loop 'L_0_0_0' (test_3d.cpp:10)
+INFO: [LINEBUF-101] Applying line buffer on variable 'c' in loop 'L_0_0_0' (test_3d.cpp:26)
+INFO: [LINEBUF-101] Applying line buffer on variable 'c' in loop 'L_0_0_0' (test_3d.cpp:42)
+INFO: [LINEBUF-101] Applying line buffer on variable 'cc' in loop 'L_2_0' (test_basic.cpp:28)
+
+WARNING: [LINEBUF-202] Stopping line buffer optimization on variable 'c' in loop 'L_0_0_0' (test_basic.cpp:9): the accesses are not stencil.
+
+
+WARNING: [LINEBUF-202] Stopping line buffer optimization on variable 'c' in loop 'L_1_0_0' (test_basic.cpp:20): the accesses are not stencil.
+
+
+WARNING: [LINEBUF-202] Stopping line buffer optimization on variable 'c' in loop 'L_0_0_0' (test_bound.cpp:6): the accesses are not stencil.
+
+INFO: [LINEBUF-101] Applying line buffer on variable 'A' in loop 'L_0_0_0' (test_loop.cpp:9)
+INFO: [LINEBUF-101] Applying line buffer on variable 'A' in loop 'L_0_0_0' (test_loop.cpp:30)
+
+WARNING: [LINEBUF-202] Stopping line buffer optimization on variable 'b' in loop 'L_0_0' (test_nonstencil.cpp:12): the accesses are not stencil.
+
+
+WARNING: [LINEBUF-201] Stopping line buffer optimization on variable 'a' in loop 'L_0_0' (test_nonstencil.cpp:12): line buffer is only for off-chip memory accesses.
+
+
+WARNING: [LINEBUF-202] Stopping line buffer optimization on variable 'c' in loop 'L_1_0' (test_nonstencil.cpp:21): the accesses are not stencil.
+
+INFO: [LINEBUF-101] Applying line buffer on variable 'b' in loop 'L_0_0' (test_reuse_distance.cpp:13)
+INFO: [LINEBUF-101] Applying line buffer on variable 'c' in loop 'L_1_0_0' (test_reuse_distance.cpp:22)
+INFO: [LINEBUF-101] Applying line buffer on variable 'b' in loop 'L_0_0' (test_report.cpp:12)

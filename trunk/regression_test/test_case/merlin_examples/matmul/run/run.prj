@@ -1,0 +1,10 @@
+<project name="run">
+  <source_file_set>
+    <file type="c">../src/mm_host.c</file>
+    <file type="h">../src/config.h</file>
+    <file type="c">../src/mm_kernel.c</file>
+  </source_file_set>
+  <aux_file_set>
+  </aux_file_set>
+  <spec_file>../run/spec/directive.xml</spec_file>
+</project>

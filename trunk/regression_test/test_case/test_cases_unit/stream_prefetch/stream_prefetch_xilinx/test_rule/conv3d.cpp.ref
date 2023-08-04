@@ -1,0 +1,86 @@
+#include<hls_stream.h>
+extern int __merlin_include__GB_hls_stream_h_0;
+static hls::stream<int > __merlintop_a_ch;
+static hls::stream<int > __merlintop_b_ch;
+
+void sub(int *a,int *b,int s,int p)
+{
+  for (int i = 0; i < 10000000; ++i) {
+    __merlintop_a_ch .  write ((__merlintop_b_ch .  read ()));
+  }
+}
+
+void __merlintop_a_streaming(int *a)
+{
+  
+#pragma HLS INLINE off
+  for (long merlin_it_0 = 0L; merlin_it_0 <= 9L; merlin_it_0 += 1L) {
+    for (long merlin_it_1 = 0L; merlin_it_1 <= 4L; merlin_it_1 += 1L) {
+      long merlin_it_2;
+      for (merlin_it_2 = 0L; merlin_it_2 < 10000000L; ++merlin_it_2) {
+        
+#pragma ACCEL pipeline
+        long merlin_it_3;
+        for (merlin_it_3 = 0L; merlin_it_3 < 1; ++merlin_it_3) {
+          
+#pragma ACCEL parallel
+          int merlin_tmp_4;
+          merlin_tmp_4 = __merlintop_a_ch .  read ();
+          a[merlin_it_0 * 1000 + merlin_it_1 * 1000 + merlin_it_2 * 1 + merlin_it_3] = merlin_tmp_4;
+        }
+      }
+    }
+  }
+}
+
+void __merlintop_b_streaming(int *b)
+{
+  
+#pragma HLS INLINE off
+  for (long merlin_it_0 = 0L; merlin_it_0 <= 9L; merlin_it_0 += 1L) {
+    for (long merlin_it_1 = 0L; merlin_it_1 <= 4L; merlin_it_1 += 1L) {
+      long merlin_it_2;
+      for (merlin_it_2 = 0L; merlin_it_2 < 10000000L; ++merlin_it_2) {
+        
+#pragma ACCEL pipeline
+        long merlin_it_3;
+        for (merlin_it_3 = 0L; merlin_it_3 < 1; ++merlin_it_3) {
+          
+#pragma ACCEL parallel
+          int merlin_tmp_4;
+          merlin_tmp_4 = b[merlin_it_0 * merlin_it_1 * 100 + merlin_it_2 * 1 + merlin_it_3];
+          __merlintop_b_ch .  write (merlin_tmp_4);
+        }
+      }
+    }
+  }
+}
+
+void __merlintop_computation(int *a,int *b)
+{
+  
+#pragma HLS inline off
+  for (int i = 0; i < 10; ++i) {
+    for (int j = 0; j < 5; ++j) {
+      sub(a,b,i + j,i * j);
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void top(int *a,int *b)
+{
+  
+#pragma ACCEL interface variable=a BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=32
+  
+#pragma ACCEL interface variable=b BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=32
+  
+#pragma HLS dataflow
+  
+#pragma HLS stream variable=__merlintop_b_ch
+  __merlintop_b_streaming(b);
+  __merlintop_computation(0,0);
+  
+#pragma HLS stream variable=__merlintop_a_ch
+  __merlintop_a_streaming(a);
+}

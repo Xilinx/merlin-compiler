@@ -1,0 +1,31 @@
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+
+struct ::ns_B_10_ 
+{
+  int b[10];
+}
+;
+namespace ns
+{
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+}
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+
+void sub(class stream< A_10_  > &data,class stream< ns_B_10_  > &out)
+{
+}
+
+struct ::A_10_ 
+{
+int a[10];
+}
+;
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+class stream< A_10_  > data;
+class stream< ns_B_10_  > data_a[10];
+struct A_10_ tmp;
+sub(data,data_a[0]);
+}

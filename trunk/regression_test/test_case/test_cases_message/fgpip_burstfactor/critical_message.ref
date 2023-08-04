@@ -1,0 +1,14 @@
+INFO: [BURST-101] Memory burst inferred: variable 'c' (vec_add_kernel.cpp:7) in scope (vec_add_kernel.cpp:12)
+  burst buffer size = 4096 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (vec_add_kernel.cpp:7) in scope (vec_add_kernel.cpp:12)
+  burst buffer size = 4092 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (vec_add_kernel.cpp:7) in scope (vec_add_kernel.cpp:12)
+  burst buffer size = 4092 bytes
+INFO: [WDBUS-101] Memory coalescing inferred: variable 'a' (vec_add_kernel.cpp:7)
+  interface bitwidth = 512 bits
+INFO: [WDBUS-101] Memory coalescing inferred: variable 'b' (vec_add_kernel.cpp:7)
+  interface bitwidth = 512 bits
+INFO: [WDBUS-101] Memory coalescing inferred: variable 'c' (vec_add_kernel.cpp:7)
+  interface bitwidth = 512 bits
+INFO: [FGPIP-105] Loop 'j' (vec_add_kernel.cpp:15) is parallelized with a factor of 2
+INFO: [FGPIP-103] Loop 'j'  (vec_add_kernel.cpp:15) is pipelined

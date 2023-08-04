@@ -1,0 +1,28 @@
+#include<assert.h>
+#define VEC_SIZE 10000
+#pragma ACCEL kernel
+
+void vec_add_kernel(int *a,int *b,int *c,int inc,int n)
+{
+  int j;
+  n >= 4 && n < 1000?((void )0) : __assert_fail("n >= 4 && n < 1000","vec_add_kernel_lab3.c",7,__PRETTY_FUNCTION__);
+//assert(n < 1000);
+  for (j = 1; j < n; j += 3) {
+    
+#pragma ACCEL pipeline_parallel factor = 10
+    c[j] = a[j] + b[j] + inc;
+    c[j + 1] = a[j + 1] + b[j + 1] + inc;
+    c[j - 1] = a[j - 1] + b[j - 1] + inc;
+  }
+}
+
+int main()
+{
+  int *a;
+  int *b;
+  int *c;
+  int inc;
+  int n;
+  vec_add_kernel(a,b,c,inc,n);
+  return 0;
+}

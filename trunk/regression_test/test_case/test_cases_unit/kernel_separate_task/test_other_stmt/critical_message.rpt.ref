@@ -1,0 +1,3 @@
+
+ERROR: [SEPAR-313] Task pragma scope can only filled by kernel call, not support: 
+int m = 0;

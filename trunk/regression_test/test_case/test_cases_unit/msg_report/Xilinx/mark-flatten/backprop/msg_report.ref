@@ -1,0 +1,247 @@
+================================================================================
+Kernel : backprop_kernel(backprop.cpp:293)
+================================================================================
+Report time     :  2018-12-28 09:46:16
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+weights1        512      (backprop.cpp:293) memory burst and coalescing 
+weights2        512      (backprop.cpp:294) memory burst and coalescing 
+weights3        512      (backprop.cpp:295) memory burst and coalescing 
+biases1         64       (backprop.cpp:296) memory burst[1] [2] [3]
+biases2         64       (backprop.cpp:297) memory burst[4] [5]
+biases3         64       (backprop.cpp:298) memory burst[6] [7]
+training_data   64       (backprop.cpp:299) memory burst[8]
+training_targets 64       (backprop.cpp:300) memory burst[9]
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++-------------------------------------------------------------------------+------+----------+----------+-------+-------+------+------+----------------------------+
+|                                hierarchy                                |  TC  |    AC    |   CPC    |  LUT  |  FF   | BRAM | DSP  |          comment           |
++-------------------------------------------------------------------------+------+----------+----------+-------+-------+------+------+----------------------------+
+|backprop_kernel (backprop.cpp:293)                                       |      |  63955534|  63955534|  22.00|  14.00|  8.00|  8.00|kernel                      |
+|    auto memory burst read and coalescing for 'weights1'                 |      |      3732|      3732|       |       |      |      |                            |
+|    auto memory burst read and coalescing for 'weights2'                 |      |      3732|      3732|       |       |      |      |                            |
+|    auto memory burst read and coalescing for 'weights3'                 |      |      3732|      3732|       |       |      |      |                            |
+|    auto memory burst read for 'biases1'                                 |      |      3732|      3732|       |       |      |      |[1]                         |
+|    auto memory burst read for 'biases2'                                 |      |      3732|      3732|       |       |      |      |                            |
+|    auto memory burst read for 'biases3'                                 |      |      3732|      3732|       |       |      |      |                            |
+|    auto memory burst read for 'training_data'                           |      |      3732|      3732|       |       |      |      |                            |
+|    auto memory burst read for 'training_targets'                        |      |      3732|      3732|       |       |      |      |                            |
+|    loop i (backprop.cpp:327)                                            |   163|  63950605|  63950605|       |       |      |      |                            |
+|        loop j (backprop.cpp:328)                                        |    64|     10432|        64|       |       |      |      |fully pipelined             |
+|        matrix_vector_product_with_bias_input_layer (backprop.cpp:335)   |      |    215649|      1323|   0.00|   0.00|  0.00|  0.00|                            |
+|        RELU (backprop.cpp:336)                                          |      |     26732|       164|   2.00|   1.00|  0.00|  1.00|                            |
+|        matrix_vector_product_with_bias_second_layer (backprop.cpp:337)  |      |    698944|      4288|   1.00|   1.00|  0.00|  1.00|                            |
+|        RELU (backprop.cpp:338)                                          |      |     26732|       164|   2.00|   1.00|  0.00|  1.00|                            |
+|        matrix_vector_product_with_bias_output_layer (backprop.cpp:339)  |      |    469929|      2883|   0.00|   0.00|  0.00|  0.00|                            |
+|        RELU (backprop.cpp:340)                                          |      |     26732|       164|   2.00|   1.00|  0.00|  1.00|inlined                     |
+|        soft_max (backprop.cpp:341)                                      |      |         -|         -|       |       |      |      |inlined                     |
+|        take_difference (backprop.cpp:342)                               |      |         -|         -|       |       |      |      |inlined                     |
+|        get_delta_matrix_weights3 (backprop.cpp:343)                     |      |     12388|        76|       |       |      |      |inlined                     |
+|        get_oracle_activations2 (backprop.cpp:344)                       |      |     64874|       398|   0.00|   0.00|  0.00|  0.00|                            |
+|        get_delta_matrix_weights2 (backprop.cpp:345)                     |      |    669604|      4108|       |       |      |      |inlined                     |
+|        get_oracle_activations1 (backprop.cpp:346)                       |      |    919972|      5644|   0.00|   0.00|  0.00|  0.00|                            |
+|        get_delta_matrix_weights1 (backprop.cpp:347)                     |      |    137572|       844|       |       |      |      |inlined                     |
+|        update_weights (backprop.cpp:348)                                |      |  60671045|    372215|   7.00|   5.00|  0.00|  1.00|                            |
+|    auto memory burst write and coalescing for 'weights1'                |      |      1197|      1197|       |       |      |      |                            |
+|    auto memory burst write and coalescing for 'weights2'                |      |      1197|      1197|       |       |      |      |                            |
+|    auto memory burst write and coalescing for 'weights3'                |      |      1197|      1197|       |       |      |      |                            |
+|    auto memory burst write for 'biases1'                                |      |      1197|      1197|       |       |      |      |[1]                         |
+|    auto memory burst write for 'biases2'                                |      |      1197|      1197|       |       |      |      |                            |
+|    auto memory burst write for 'biases3'                                |      |      1197|      1197|       |       |      |      |                            |
+|soft_max (backprop.cpp:4)                                                |      |         -|         -|       |       |      |      |                            |
+|    loop i (backprop.cpp:9)                                              |     3|         -|         -|       |       |      |      |3x parallelized             |
+|        exp (backprop.cpp:10)                                            |      |         -|         -|       |       |      |      |                            |
+|    loop i (backprop.cpp:12)                                             |     3|         -|         -|       |       |      |      |3x parallelized             |
+|        exp (backprop.cpp:13)                                            |      |         -|         -|       |       |      |      |                            |
+|RELU (backprop.cpp:17)                                                   |      |     80196|       164|   2.00|   1.00|  0.00|  1.00|                            |
+|    loop i (backprop.cpp:20)                                             |    64|     80196|       164|       |       |      |      |fully pipelined             |
+|        exp (backprop.cpp:22)                                            |      |         -|         -|       |       |      |      |                            |
+|add_bias_to_activations (backprop.cpp:26)                                |      |     62592|       128|       |       |      |      |                            |
+|    auto memory burst read for 'biases1'                                 |      |     31296|        64|       |       |      |      |                            |
+|    loop i (backprop.cpp:31)                                             |    64|     31296|        64|       |       |      |      |                            |
+|matrix_vector_product_with_bias_input_layer (backprop.cpp:36)            |      |    215649|      1323|   0.00|   0.00|  0.00|  0.00|                            |
+|    loop j (backprop.cpp:41)                                             |    64|     10432|        64|       |       |      |      |fully pipelined             |
+|    loop i (backprop.cpp:47)                                             |    13|    184353|      1131|       |       |      |      |fully pipelined             |
+|        loop j (backprop.cpp:48)                                         |    64|         -|         -|       |       |      |      |fully pipelined, flattened  |
+|    add_bias_to_activations (backprop.cpp:55)                            |      |     20864|       128|       |       |      |      |                            |
+|matrix_vector_product_with_bias_second_layer (backprop.cpp:58)           |      |    698944|      4288|   1.00|   1.00|  0.00|  1.00|                            |
+|    loop i (backprop.cpp:63)                                             |    64|     10432|        64|       |       |      |      |fully pipelined             |
+|    loop j (backprop.cpp:69)                                             |    64|    667648|      4096|       |       |      |      |                            |
+|        loop i (backprop.cpp:70)                                         |    64|         -|         -|       |       |      |      |64x parallelized            |
+|    add_bias_to_activations (backprop.cpp:77)                            |      |     20864|       128|       |       |      |      |                            |
+|matrix_vector_product_with_bias_output_layer (backprop.cpp:80)           |      |    469929|      2883|   0.00|   0.00|  0.00|  0.00|                            |
+|    loop j (backprop.cpp:85)                                             |     3|       489|         3|       |       |      |      |fully pipelined             |
+|    loop i (backprop.cpp:91)                                             |    64|    448576|      2752|       |       |      |      |pipelined II=10             |
+|        loop j (backprop.cpp:92)                                         |     3|         -|         -|       |       |      |      |pipelined, flattened II=10  |
+|    add_bias_to_activations (backprop.cpp:99)                            |      |     20864|       128|       |       |      |      |                            |
+|take_difference (backprop.cpp:102)                                       |      |         -|         -|       |       |      |      |inlined                     |
+|    loop i (backprop.cpp:107)                                            |     3|         -|         -|       |       |      |      |3x parallelized             |
+|get_delta_matrix_weights3 (backprop.cpp:112)                             |      |     12388|        76|       |       |      |      |                            |
+|    loop i (backprop.cpp:116)                                            |    64|     12388|        76|       |       |      |      |fully pipelined             |
+|        loop j (backprop.cpp:117)                                        |     3|         -|         -|       |       |      |      |3x parallelized             |
+|get_oracle_activations2 (backprop.cpp:123)                               |      |     64874|       398|   0.00|   0.00|  0.00|  0.00|                            |
+|    loop i (backprop.cpp:128)                                            |    64|     10432|        64|       |       |      |      |fully pipelined             |
+|    loop j (backprop.cpp:134)                                            |     3|     42054|       258|       |       |      |      |fully pipelined             |
+|        loop i (backprop.cpp:135)                                        |    64|         -|         -|       |       |      |      |fully pipelined, flattened  |
+|    loop i (backprop.cpp:143)                                            |    64|     12388|        76|       |       |      |      |fully pipelined             |
+|get_delta_matrix_weights2 (backprop.cpp:151)                             |      |    669604|      4108|       |       |      |      |                            |
+|    loop i (backprop.cpp:155)                                            |      |          |          |       |       |      |      |optimized in loop flatten   |
+|        loop j (backprop.cpp:156)                                        |  4096|    669604|      4108|       |       |      |      |fully pipelined             |
+|get_oracle_activations1 (backprop.cpp:162)                               |      |    919972|      5644|   0.00|   0.00|  0.00|  0.00|                            |
+|    loop i (backprop.cpp:167)                                            |    64|     10432|        64|       |       |      |      |fully pipelined             |
+|    loop j (backprop.cpp:173)                                            |    64|    897152|      5504|       |       |      |      |fully pipelined             |
+|        loop i (backprop.cpp:174)                                        |    64|         -|         -|       |       |      |      |fully pipelined, flattened  |
+|    loop i (backprop.cpp:181)                                            |    64|     12388|        76|       |       |      |      |fully pipelined             |
+|get_delta_matrix_weights1 (backprop.cpp:189)                             |      |    137572|       844|       |       |      |      |                            |
+|    loop i (backprop.cpp:193)                                            |      |          |          |       |       |      |      |optimized in loop flatten   |
+|        loop j (backprop.cpp:194)                                        |   832|    137572|       844|       |       |      |      |fully pipelined             |
+|update_weights (backprop.cpp:200)                                        |      |  60671045|    372215|   7.00|   5.00|  0.00|  1.00|                            |
+|    loop i (backprop.cpp:217)                                            |      |          |          |       |       |      |      |optimized in loop flatten   |
+|        loop j (backprop.cpp:218)                                        |   832|   1631956|     10012|       |       |      |      |pipelined II=12[10]         |
+|    loop i (backprop.cpp:223)                                            |    64|     98941|       607|       |       |      |      |pipelined II=9              |
+|    sqrt (backprop.cpp:228)                                              |      |         -|         -|       |       |      |      |                            |
+|    sqrt (backprop.cpp:229)                                              |      |         -|         -|       |       |      |      |                            |
+|    loop i (backprop.cpp:231)                                            |      |          |          |       |       |      |      |optimized in loop flatten   |
+|        loop j (backprop.cpp:232)                                        |   832|   8408192|     51584|       |       |      |      |pipelined II=62[11]         |
+|    loop i (backprop.cpp:236)                                            |    64|     20375|       125|       |       |      |      |fully pipelined             |
+|    loop i (backprop.cpp:243)                                            |      |          |          |       |       |      |      |optimized in loop flatten   |
+|        loop j (backprop.cpp:244)                                        |  4096|   8016340|     49180|       |       |      |      |pipelined II=12[12]         |
+|    loop i (backprop.cpp:249)                                            |    64|     98941|       607|       |       |      |      |pipelined II=9              |
+|    sqrt (backprop.cpp:254)                                              |      |         -|         -|       |       |      |      |                            |
+|    sqrt (backprop.cpp:255)                                              |      |         -|         -|       |       |      |      |                            |
+|    loop i (backprop.cpp:257)                                            |      |          |          |       |       |      |      |optimized in loop flatten   |
+|        loop j (backprop.cpp:258)                                        |  4096|  41394176|    253952|       |       |      |      |pipelined II=62[13]         |
+|    loop i (backprop.cpp:262)                                            |    64|     20375|       125|       |       |      |      |fully pipelined             |
+|    loop i (backprop.cpp:269)                                            |    64|    276448|      1696|       |       |      |      |pipelined II=26             |
+|        loop j (backprop.cpp:270)                                        |     3|         -|         -|       |       |      |      |3x parallelized             |
+|    loop i (backprop.cpp:275)                                            |     3|         -|         -|       |       |      |      |3x parallelized             |
+|    sqrt (backprop.cpp:280)                                              |      |         -|         -|       |       |      |      |                            |
+|    sqrt (backprop.cpp:281)                                              |      |         -|         -|       |       |      |      |                            |
+|    loop i (backprop.cpp:283)                                            |    64|    657216|      4032|       |       |      |      |pipelined II=63[14]         |
+|        loop j (backprop.cpp:284)                                        |     3|         -|         -|       |       |      |      |3x parallelized             |
+|    loop i (backprop.cpp:288)                                            |     3|         -|         -|       |       |      |      |3x parallelized             |
++-------------------------------------------------------------------------+------+----------+----------+-------+-------+------+------+----------------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++-----------------------------------------------------------------------+----------+----------+
+|                                 Name                                  |  Cycles  | Activity |
++-----------------------------------------------------------------------+----------+----------+
+|                   update_weights (backprop.cpp:200)                   | 59498749 |  93.03%  |
+|               update_weights:loop j (backprop.cpp:258)                | 41394176 |  64.72%  |
+|               update_weights:loop j (backprop.cpp:232)                | 8408192  |  13.15%  |
+|               update_weights:loop j (backprop.cpp:244)                | 8016340  |  12.53%  |
+|               update_weights:loop j (backprop.cpp:218)                | 1631956  |  2.55%   |
+|           get_oracle_activations1:loop j (backprop.cpp:173)           |  897152  |  1.40%   |
+|               backprop_kernel:loop i (backprop.cpp:327)               |  846296  |  1.32%   |
+|             get_delta_matrix_weights2 (backprop.cpp:151)              |  669604  |  1.05%   |
+|          get_delta_matrix_weights2:loop j (backprop.cpp:156)          |  669604  |  1.05%   |
+| matrix_vector_product_with_bias_second_layer:loop j (backprop.cpp:69) |  667648  |  1.04%   |
+|               update_weights:loop i (backprop.cpp:283)                |  657216  |  1.03%   |
+| matrix_vector_product_with_bias_output_layer:loop i (backprop.cpp:91) |  448576  |  0.70%   |
+|               update_weights:loop i (backprop.cpp:269)                |  276448  |  0.43%   |
+| matrix_vector_product_with_bias_input_layer:loop i (backprop.cpp:47)  |  184353  |  0.29%   |
+|             get_delta_matrix_weights1 (backprop.cpp:189)              |  137572  |  0.22%   |
+|          get_delta_matrix_weights1:loop j (backprop.cpp:194)          |  137572  |  0.22%   |
+|               update_weights:loop i (backprop.cpp:223)                |  98941   |  0.15%   |
+|               update_weights:loop i (backprop.cpp:249)                |  98941   |  0.15%   |
+|                     RELU:loop i (backprop.cpp:20)                     |  80196   |  0.13%   |
+|           get_oracle_activations2:loop j (backprop.cpp:134)           |  42054   |  0.07%   |
+|                  auto memory burst (backprop.cpp:26)                  |  31296   |  0.05%   |
+|           add_bias_to_activations:loop i (backprop.cpp:31)            |  31296   |  0.05%   |
+|               update_weights:loop i (backprop.cpp:236)                |  20375   |  0.03%   |
+|               update_weights:loop i (backprop.cpp:262)                |  20375   |  0.03%   |
+|          get_delta_matrix_weights3:loop i (backprop.cpp:116)          |  12388   |  0.02%   |
+|           get_oracle_activations2:loop i (backprop.cpp:143)           |  12388   |  0.02%   |
+|           get_oracle_activations1:loop i (backprop.cpp:181)           |  12388   |  0.02%   |
+| matrix_vector_product_with_bias_input_layer:loop j (backprop.cpp:41)  |  10432   |  0.02%   |
+| matrix_vector_product_with_bias_second_layer:loop i (backprop.cpp:63) |  10432   |  0.02%   |
+|           get_oracle_activations2:loop i (backprop.cpp:128)           |  10432   |  0.02%   |
+|           get_oracle_activations1:loop i (backprop.cpp:167)           |  10432   |  0.02%   |
+|               backprop_kernel:loop j (backprop.cpp:328)               |  10432   |  0.02%   |
+|                 auto memory burst (backprop.cpp:293)                  |   3732   |  0.01%   |
+|                 auto memory burst (backprop.cpp:293)                  |   3732   |  0.01%   |
+|                 auto memory burst (backprop.cpp:293)                  |   3732   |  0.01%   |
+|                 auto memory burst (backprop.cpp:293)                  |   3732   |  0.01%   |
+|                 auto memory burst (backprop.cpp:293)                  |   3732   |  0.01%   |
+|                 auto memory burst (backprop.cpp:293)                  |   3732   |  0.01%   |
+|                 auto memory burst (backprop.cpp:293)                  |   3732   |  0.01%   |
+|                 auto memory burst (backprop.cpp:293)                  |   3732   |  0.01%   |
+|                 auto memory burst (backprop.cpp:293)                  |   1197   |  0.00%   |
+|                 auto memory burst (backprop.cpp:293)                  |   1197   |  0.00%   |
+|                 auto memory burst (backprop.cpp:293)                  |   1197   |  0.00%   |
+|                 auto memory burst (backprop.cpp:293)                  |   1197   |  0.00%   |
+|                 auto memory burst (backprop.cpp:293)                  |   1197   |  0.00%   |
+|                 auto memory burst (backprop.cpp:293)                  |   1197   |  0.00%   |
+| matrix_vector_product_with_bias_output_layer:loop j (backprop.cpp:85) |   489    |  0.00%   |
+|                       soft_max (backprop.cpp:4)                       |    0     |  0.00%   |
+|                   soft_max:loop i (backprop.cpp:9)                    |    0     |  0.00%   |
+|                   soft_max:loop i (backprop.cpp:12)                   |    0     |  0.00%   |
+|                        RELU (backprop.cpp:17)                         |    0     |  0.00%   |
+|               add_bias_to_activations (backprop.cpp:26)               |    0     |  0.00%   |
++-----------------------------------------------------------------------+----------+----------+
+
++----------------------------------------------------------------+------+------+------+-------+
+|                              Name                              | BRAM | DSP  |  FF  |  LUT  |
++----------------------------------------------------------------+------+------+------+-------+
+|               backprop_kernel (backprop.cpp:293)               | 8.00 | 5.00 | 7.00 | 12.00 |
+|               update_weights (backprop.cpp:200)                | 0.00 | 1.00 | 5.00 | 7.00  |
+|                     RELU (backprop.cpp:17)                     | 0.00 | 1.00 | 1.00 | 2.00  |
+| matrix_vector_product_with_bias_second_layer (backprop.cpp:58) | 0.00 | 1.00 | 1.00 | 1.00  |
+|           get_oracle_activations1 (backprop.cpp:162)           | 0.00 | 0.00 | 0.00 | 0.00  |
+| matrix_vector_product_with_bias_input_layer (backprop.cpp:36)  | 0.00 | 0.00 | 0.00 | 0.00  |
+|           get_oracle_activations2 (backprop.cpp:123)           | 0.00 | 0.00 | 0.00 | 0.00  |
+|          get_delta_matrix_weights2 (backprop.cpp:151)          | 0.00 | 0.00 | 0.00 | 0.00  |
+|           add_bias_to_activations (backprop.cpp:26)            | 0.00 | 0.00 | 0.00 | 0.00  |
+|               take_difference (backprop.cpp:102)               | 0.00 | 0.00 | 0.00 | 0.00  |
++----------------------------------------------------------------+------+------+------+-------+
+[1] Low bandwidth efficiency of memory burst: variable 'biases' (backprop.cpp:26) in scope (backprop.cpp:31).
+  Reason: short burst length = 512 bytes
+
+[2] Memory coalescing NOT inferred: variable 'biases1' (backprop.cpp:296)
+  Reason: burst length is less than threshold (1024 bytes).
+  Hint: reset threshold by using --attribute bus_length_threshold=?
+[3] Low bandwidth efficiency of memory burst: variable 'biases1' (backprop.cpp:296) in scope (backprop.cpp:327).
+  Reason: short burst length = 512 bytes
+
+[4] Memory coalescing NOT inferred: variable 'biases2' (backprop.cpp:297)
+  Reason: burst length is less than threshold (1024 bytes).
+  Hint: reset threshold by using --attribute bus_length_threshold=?
+[5] Low bandwidth efficiency of memory burst: variable 'biases2' (backprop.cpp:297) in scope (backprop.cpp:327).
+  Reason: short burst length = 512 bytes
+
+[6] Suboptimal memory coalescing: variable 'biases3' (backprop.cpp:298)  Reason:  the lowest dimension of on-chip buffer  is less than the coalescing length
+[7] Low bandwidth efficiency of memory burst: variable 'biases3' (backprop.cpp:298) in scope (backprop.cpp:327).
+  Reason: short burst length = 24 bytes
+
+[8] Suboptimal memory coalescing: variable 'training_data' (backprop.cpp:299)
+  Reason: the lowest dimension size of on-chip buffer is not divisible by 8
+[9] Suboptimal memory coalescing: variable 'training_targets' (backprop.cpp:300)
+  Reason: the lowest dimension size of on-chip buffer is not divisible by 8
+[10] 'weights1' has no loop carried-dependence on loop 'j'  (backprop.cpp:218).
+Hint: applying Merlin false_dependence pragma for 'weights1' on loop 'j' may help enhance the performance.
+
+[11] 'weights1' has no loop carried-dependence on loop 'j'  (backprop.cpp:232).
+Hint: applying Merlin false_dependence pragma for 'weights1' on loop 'j' may help enhance the performance.
+
+[12] 'weights2' has no loop carried-dependence on loop 'j'  (backprop.cpp:244).
+Hint: applying Merlin false_dependence pragma for 'weights2' on loop 'j' may help enhance the performance.
+
+[13] 'weights2' has no loop carried-dependence on loop 'j'  (backprop.cpp:258).
+Hint: applying Merlin false_dependence pragma for 'weights2' on loop 'j' may help enhance the performance.
+
+[14] 'weights3' has no loop carried-dependence on loop 'i'  (backprop.cpp:283).
+Hint: applying Merlin false_dependence pragma for 'weights3' on loop 'i' may help enhance the performance.
+
+
+
+

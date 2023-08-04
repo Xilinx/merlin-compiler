@@ -1,0 +1,1463 @@
+{
+    "X": {
+        "org_identifier": "X",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0": {
+        "org_identifier": "X_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0": {
+        "org_identifier": "X_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0": {
+        "org_identifier": "X_0_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 6,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 0,
+                "location": 0
+            },
+            {
+                "action": 0,
+                "location": 0
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgVariableDeclaration:extern int __merlin_include__GB_memcpy_512_1d_h_0;\\nfrom: SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgVariableDeclaration:extern int __merlin_include__GB_memcpy_512_2d_h_1;\\nfrom: SgVariableDeclaration:extern int __merlin_include__GB_memcpy_512_1d_h_0;\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_0": {
+        "org_identifier": "BuiltInbitwidth_opt_152",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 2,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10987 for 139955382390544\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:extern int __merlin_include__GB_memcpy_512_2d_h_1;\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_1": {
+        "org_identifier": "BuiltInbitwidth_opt_151",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 2,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10987 for 139955382389880\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:extern int __merlin_include__GB_memcpy_512_1d_h_0;\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_2": {
+        "org_identifier": "X_0_0_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_3\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_3": {
+        "org_identifier": "X_0_0_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_3\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_extern_int_merlin_include_G_() {...}\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_4": {
+        "org_identifier": "X_0_0_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_3\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void __merlin_dummy_kernel_pragma() {...}\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5": {
+        "org_identifier": "X_0_0_0_3",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother F_0_0_0_3\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDeclaration:void vec_add_kernel(merlin_uint_512 * a,merlin_uint_512 * b,merlin_uint_512 * c)...\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_0": {
+        "org_identifier": "X_0_0_0_3_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_3_0\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionParameterList:merlin_uint_512 * a,merlin_uint_512 * b,merlin_uint_512 * c\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_0_0": {
+        "org_identifier": "X_0_0_0_3_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_3_0_1\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"memory_coalescing\": \"on\",\n    \"memory_coalescing_bitwidth\": \"512\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:a\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_0_1": {
+        "org_identifier": "X_0_0_0_3_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_3_0_1\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"memory_coalescing\": \"on\",\n    \"memory_coalescing_bitwidth\": \"512\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:b\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_0_2": {
+        "org_identifier": "X_0_0_0_3_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_3_0_1\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"memory_coalescing\": \"on\",\n    \"memory_coalescing_bitwidth\": \"512\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgInitializedName:c\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2": {
+        "org_identifier": "X_0_0_0_3_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_3_0\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionDefinition:function definition: void vec_add_kernel(merlin_uint_512 * a,merlin_uint_512 * b...\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0": {
+        "org_identifier": "X_0_0_0_3_2_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 19,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 0,
+                "location": 0
+            },
+            {
+                "action": 0,
+                "location": 0
+            },
+            {
+                "action": 0,
+                "location": 0
+            },
+            {
+                "action": 0,
+                "location": 12
+            },
+            {
+                "action": 0,
+                "location": 14
+            },
+            {
+                "action": 0,
+                "location": 15
+            },
+            {
+                "action": 0,
+                "location": 17
+            },
+            {
+                "action": 0,
+                "location": 19
+            },
+            {
+                "action": 0,
+                "location": 21
+            },
+            {
+                "action": 1,
+                "location": 13
+            },
+            {
+                "action": 1,
+                "location": 15
+            },
+            {
+                "action": 1,
+                "location": 18
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_3_2_0\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma HLS DATA_PACK VARIABLE=a\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma HLS DATA_PACK VARIABLE=b\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma HLS DATA_PACK VARIABLE=c\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma HLS array_partition variable=a_buf cyclic factor = 16 dim=2\\nfrom: SgExprStatement:memcpy(a_buf[0],(const void *)(&a[0]),sizeof(int ) * 10000);\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgExprStatement:memcpy_wide_bus_read_int_2d_16_512(a_buf,0,0,(merlin_uint_512 *)a,0 * 4,sizeof(i...\\nfrom: SgExprStatement:memcpy(a_buf[0],(const void *)(&a[0]),sizeof(int ) * 10000);\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma HLS array_partition variable=b_buf cyclic factor = 16 dim=2\\nfrom: SgExprStatement:memcpy(b_buf[0],(const void *)(&b[0]),sizeof(int ) * 10000);\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgExprStatement:memcpy_wide_bus_read_int_2d_16_512(b_buf,0,0,(merlin_uint_512 *)b,0 * 4,sizeof(i...\\nfrom: SgExprStatement:memcpy(b_buf[0],(const void *)(&b[0]),sizeof(int ) * 10000);\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgPragmaDeclaration:#pragma HLS array_partition variable=c_buf cyclic factor = 16 dim=2\\nfrom: SgExprStatement:memcpy((void *)(&c[0]),c_buf[0],sizeof(int ) * 10000);\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Insert: SgExprStatement:memcpy_wide_bus_write_int_2d_16_512((merlin_uint_512 *)c,c_buf,0,0,4 * 0,sizeof(...\\nfrom: SgExprStatement:memcpy((void *)(&c[0]),c_buf[0],sizeof(int ) * 10000);\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Delete: SgExprStatement:memcpy(a_buf[0],(const void *)(&a[0]),sizeof(int ) * 10000);\\nfrom: SgBasicBlock:{#pragma HLS DATA_PACK VARIABLE=c#pragma HLS DATA_PACK VARIABLE=b#pragma HLS DAT...\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Delete: SgExprStatement:memcpy(b_buf[0],(const void *)(&b[0]),sizeof(int ) * 10000);\\nfrom: SgBasicBlock:{#pragma HLS DATA_PACK VARIABLE=c#pragma HLS DATA_PACK VARIABLE=b#pragma HLS DAT...\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Delete: SgExprStatement:memcpy((void *)(&c[0]),c_buf[0],sizeof(int ) * 10000);\\nfrom: SgBasicBlock:{#pragma HLS DATA_PACK VARIABLE=c#pragma HLS DATA_PACK VARIABLE=b#pragma HLS DAT...\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgBasicBlock:{#pragma HLS DATA_PACK VARIABLE=c#pragma HLS DATA_PACK VARIABLE=b#pragma HLS DAT...\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_0": {
+        "org_identifier": "BuiltInbitwidth_opt_150",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9408 for 139955370071744\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS DATA_PACK VARIABLE=c\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_1": {
+        "org_identifier": "BuiltInbitwidth_opt_149",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9408 for 139955370071160\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS DATA_PACK VARIABLE=b\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_10": {
+        "org_identifier": "X_0_0_0_3_2_0_7",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_0_0_3_2_0_2\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:__merlin_access_range(b,0,9999UL);\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_11": {
+        "org_identifier": "X_0_0_0_3_2_0_8",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_0_0_3_2_0_2\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:__merlin_access_range(a,0,9999UL);\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_12": {
+        "org_identifier": "BuiltInbitwidth_opt_160",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9408 for 139955370072328\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS array_partition variable=a_buf cyclic factor = 16 dim=2\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_13": {
+        "org_identifier": "BuiltInbitwidth_opt_163",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 12131 for 139955369024816\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:memcpy_wide_bus_read_int_2d_16_512(a_buf,0,0,(merlin_uint_512 *)a,0 * 4,sizeof(i...\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_13_0": {
+        "org_identifier": "B_0_0_0_3_2_0_9_0",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 2,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10852 for 139955373091920\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionCallExp:memcpy(a_buf[0],(const void *)(&a[0]),sizeof(int ) * 10000)\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"memory_coalescing\": \"on\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionCallExp:memcpy_wide_bus_read_int_2d_16_512(a_buf,0,0,(merlin_uint_512 *)a,0 * 4,sizeof(i...\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_13_0_1": {
+        "org_identifier": "BuiltInbitwidth_opt_161",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 7,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10317 for 139955373316976\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprListExp:a_buf,0,0,(merlin_uint_512 *)a,0 * 4,sizeof(int ) *((unsigned long )10000),10000...\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_13_0_1_0": {
+        "org_identifier": "BuiltInbitwidth_opt_153",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11223 for 139955373527952\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgVarRefExp:a_buf\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_13_0_1_1": {
+        "org_identifier": "BuiltInbitwidth_opt_40",
+        "user_code_scope_id": "",
+        "applied_index": 1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 2,
+                "location": -1
+            },
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Copy: a floating node\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Build in 11399 for 139955383921712\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgIntVal:0\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_13_0_1_2": {
+        "org_identifier": "BuiltInbitwidth_opt_41",
+        "user_code_scope_id": "",
+        "applied_index": 1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 2,
+                "location": -1
+            },
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Copy: a floating node\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Build in 11399 for 139955383921816\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgIntVal:0\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_13_0_1_3": {
+        "org_identifier": "BuiltInbitwidth_opt_155",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11745 for 139955376373880\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgCastExp:(merlin_uint_512 *)a\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_13_0_1_3_0": {
+        "org_identifier": "BuiltInbitwidth_opt_154",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11223 for 139955373528056\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgVarRefExp:a\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_13_0_1_4": {
+        "org_identifier": "BuiltInbitwidth_opt_157",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 2,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11859 for 139955375920576\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgMultiplyOp:0 * 4\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_13_0_1_4_0": {
+        "org_identifier": "BuiltInbitwidth_opt_45",
+        "user_code_scope_id": "",
+        "applied_index": 1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 2,
+                "location": -1
+            },
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Copy: a floating node\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Build in 11399 for 139955383922024\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgIntVal:0\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_13_0_1_4_1": {
+        "org_identifier": "BuiltInbitwidth_opt_156",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11399 for 139955383926184\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgIntVal:4\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_13_0_1_5": {
+        "org_identifier": "X_0_0_0_3_2_0_9_0_1_2",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 2,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Copy: SgMultiplyOp:sizeof(int ) * 10000\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_12_0_1_2\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgMultiplyOp:sizeof(int ) *((unsigned long )10000)\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_13_0_1_6": {
+        "org_identifier": "BuiltInbitwidth_opt_159",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11408 for 37248432\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgLongIntVal:10000L\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_14": {
+        "org_identifier": "BuiltInbitwidth_opt_171",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9408 for 139955370072912\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS array_partition variable=b_buf cyclic factor = 16 dim=2\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_15": {
+        "org_identifier": "BuiltInbitwidth_opt_174",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 12131 for 139955369024912\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:memcpy_wide_bus_read_int_2d_16_512(b_buf,0,0,(merlin_uint_512 *)b,0 * 4,sizeof(i...\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_15_0": {
+        "org_identifier": "B_0_0_0_3_2_0_10_0",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 2,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10852 for 139955373092032\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionCallExp:memcpy(b_buf[0],(const void *)(&b[0]),sizeof(int ) * 10000)\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"memory_coalescing\": \"on\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionCallExp:memcpy_wide_bus_read_int_2d_16_512(b_buf,0,0,(merlin_uint_512 *)b,0 * 4,sizeof(i...\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_15_0_1": {
+        "org_identifier": "BuiltInbitwidth_opt_172",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 7,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10317 for 139955373317080\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprListExp:b_buf,0,0,(merlin_uint_512 *)b,0 * 4,sizeof(int ) *((unsigned long )10000),10000...\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_15_0_1_0": {
+        "org_identifier": "BuiltInbitwidth_opt_164",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11223 for 139955373528160\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgVarRefExp:b_buf\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_15_0_1_1": {
+        "org_identifier": "BuiltInbitwidth_opt_59",
+        "user_code_scope_id": "",
+        "applied_index": 1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 2,
+                "location": -1
+            },
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Copy: a floating node\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Build in 11399 for 139955383922336\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgIntVal:0\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_15_0_1_2": {
+        "org_identifier": "BuiltInbitwidth_opt_60",
+        "user_code_scope_id": "",
+        "applied_index": 1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 2,
+                "location": -1
+            },
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Copy: a floating node\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Build in 11399 for 139955383922440\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgIntVal:0\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_15_0_1_3": {
+        "org_identifier": "BuiltInbitwidth_opt_166",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11745 for 139955376372440\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgCastExp:(merlin_uint_512 *)b\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_15_0_1_3_0": {
+        "org_identifier": "BuiltInbitwidth_opt_165",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11223 for 139955373528264\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgVarRefExp:b\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_15_0_1_4": {
+        "org_identifier": "BuiltInbitwidth_opt_168",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 2,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11859 for 139955375920800\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgMultiplyOp:0 * 4\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_15_0_1_4_0": {
+        "org_identifier": "BuiltInbitwidth_opt_64",
+        "user_code_scope_id": "",
+        "applied_index": 1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 2,
+                "location": -1
+            },
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Copy: a floating node\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Build in 11399 for 139955383922648\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgIntVal:0\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_15_0_1_4_1": {
+        "org_identifier": "BuiltInbitwidth_opt_167",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11399 for 139955383926704\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgIntVal:4\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_15_0_1_5": {
+        "org_identifier": "X_0_0_0_3_2_0_10_0_1_2",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 2,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Copy: SgMultiplyOp:sizeof(int ) * 10000\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_15_0_1_2\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgMultiplyOp:sizeof(int ) *((unsigned long )10000)\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_15_0_1_6": {
+        "org_identifier": "BuiltInbitwidth_opt_170",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11408 for 37248536\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgLongIntVal:10000L\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_16": {
+        "org_identifier": "X_0_0_0_3_2_0_11",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 5,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_0_0_3_2_0_2\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgForStatement:for(int i = 0;i < 625;i++) {...}\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_17": {
+        "org_identifier": "BuiltInbitwidth_opt_182",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9408 for 139955370073496\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS array_partition variable=c_buf cyclic factor = 16 dim=2\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_18": {
+        "org_identifier": "BuiltInbitwidth_opt_185",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 12131 for 139955369025008\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:memcpy_wide_bus_write_int_2d_16_512((merlin_uint_512 *)c,c_buf,0,0,4 * 0,sizeof(...\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_18_0": {
+        "org_identifier": "B_0_0_0_3_2_0_12_0",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 2,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10852 for 139955373092144\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionCallExp:memcpy((void *)(&c[0]),c_buf[0],sizeof(int ) * 10000)\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"copy message from bind node\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"memory_coalescing\": \"on\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgFunctionCallExp:memcpy_wide_bus_write_int_2d_16_512((merlin_uint_512 *)c,c_buf,0,0,4 * 0,sizeof(...\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_18_0_1": {
+        "org_identifier": "BuiltInbitwidth_opt_183",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 7,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 10317 for 139955373317184\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprListExp:(merlin_uint_512 *)c,c_buf,0,0,4 * 0,sizeof(int ) *((unsigned long )10000),10000...\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_18_0_1_0": {
+        "org_identifier": "BuiltInbitwidth_opt_176",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 1,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11745 for 139955376371000\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgCastExp:(merlin_uint_512 *)c\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_18_0_1_0_0": {
+        "org_identifier": "BuiltInbitwidth_opt_175",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11223 for 139955373528368\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgVarRefExp:c\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_18_0_1_1": {
+        "org_identifier": "BuiltInbitwidth_opt_177",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11223 for 139955373528472\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgVarRefExp:c_buf\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_18_0_1_2": {
+        "org_identifier": "BuiltInbitwidth_opt_82",
+        "user_code_scope_id": "",
+        "applied_index": 1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 2,
+                "location": -1
+            },
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Copy: a floating node\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Build in 11399 for 139955383923168\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgIntVal:0\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_18_0_1_3": {
+        "org_identifier": "BuiltInbitwidth_opt_83",
+        "user_code_scope_id": "",
+        "applied_index": 1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 2,
+                "location": -1
+            },
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Copy: a floating node\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Build in 11399 for 139955383923272\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgIntVal:0\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_18_0_1_4": {
+        "org_identifier": "BuiltInbitwidth_opt_179",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 2,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11859 for 139955375921024\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgMultiplyOp:4 * 0\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_18_0_1_4_0": {
+        "org_identifier": "BuiltInbitwidth_opt_178",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11399 for 139955383927224\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgIntVal:4\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_18_0_1_4_1": {
+        "org_identifier": "BuiltInbitwidth_opt_75",
+        "user_code_scope_id": "",
+        "applied_index": 1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 2,
+                "location": -1
+            },
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Copy: a floating node\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"Build in 11399 for 139955383922856\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgIntVal:0\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_18_0_1_5": {
+        "org_identifier": "X_0_0_0_3_2_0_12_0_1_2",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 2,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Copy: SgMultiplyOp:sizeof(int ) * 10000\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0_0_5_2_0_19_0_1_2\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgMultiplyOp:sizeof(int ) *((unsigned long )10000)\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_18_0_1_6": {
+        "org_identifier": "BuiltInbitwidth_opt_181",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 11408 for 37248640\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgLongIntVal:10000L\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_2": {
+        "org_identifier": "BuiltInbitwidth_opt_148",
+        "user_code_scope_id": "",
+        "applied_index": 0,
+        "children_num": 0,
+        "propagate": 0,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "{\n    \"DebugInfo\": \"Build in 9408 for 139955370070576\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma HLS DATA_PACK VARIABLE=a\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_3": {
+        "org_identifier": "X_0_0_0_3_2_0_0",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_0_0_3_2_0_2\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:int b_buf[625][16];\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_4": {
+        "org_identifier": "X_0_0_0_3_2_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_0_0_3_2_0_2\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:int a_buf[625][16];\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_5": {
+        "org_identifier": "X_0_0_0_3_2_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_0_0_3_2_0_2\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgVariableDeclaration:int c_buf[625][16];\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_6": {
+        "org_identifier": "X_0_0_0_3_2_0_3",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_0_0_3_2_0_2\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL interface variable=c depth=10000 max_depth=10000\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_7": {
+        "org_identifier": "X_0_0_0_3_2_0_4",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_0_0_3_2_0_2\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL interface variable=b depth=10000 max_depth=10000\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_8": {
+        "org_identifier": "X_0_0_0_3_2_0_5",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 0,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_0_0_3_2_0_2\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgPragmaDeclaration:#pragma ACCEL interface variable=a depth=10000 max_depth=10000\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_0_0_5_2_0_9": {
+        "org_identifier": "X_0_0_0_3_2_0_6",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother V_0_0_0_3_2_0_2\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"SgExprStatement:__merlin_access_range(c,0,9999UL);\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_1": {
+        "org_identifier": "X_0_1",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    },
+    "X_0_2": {
+        "org_identifier": "X_0_2",
+        "user_code_scope_id": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "propagate": 1,
+        "no_hierarchy": 0,
+        "qor_merge_mode": "",
+        "parallel": 0,
+        "histories": [],
+        "messages": [
+            "{\n    \"DebugInfo\": \"cached when calculate its brother X_0_0\",\n    \"passname\": \"bitwidth_opt\"\n}",
+            "{\n    \"DebugInfo\": \"top level nodes, do not unparse.\",\n    \"passname\": \"bitwidth_opt\"\n}"
+        ]
+    }
+}

@@ -1,0 +1,2 @@
+
+ERROR: [PROCS-353] The argument 'c' contains an array or pointer of enum type(st a;)

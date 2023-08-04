@@ -1,0 +1,25 @@
+
+struct ::a_B_int_ 
+{
+  int m;
+}
+;
+int p_ZN1a6B_int_1fIEEv(struct a_B_int_ *this_);
+
+int p_ZN1a6B_int_1fIEEv(struct a_B_int_ *this_)
+{
+  return this_ -> m;
+}
+namespace a
+{
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+}
+static void __merlin_dummy_SgTemplateMemberFunctionDeclaration_return_m_();
+#pragma ACCEL kernel
+
+void k()
+{
+using namespace a;
+struct a_B_int_ b;
+p_ZN1a6B_int_1fIEEv(&b);
+}

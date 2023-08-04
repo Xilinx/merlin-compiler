@@ -1,0 +1,15 @@
+void p_Z3fooPi(int *);
+static void __merlin_dummy_SgFunctionDeclaration_void_foo_i_();
+
+void f()
+{
+  p_Z3fooPi(0);
+}
+void g();
+#pragma ACCEL kernel
+
+void top()
+{
+  f();
+  g();
+}

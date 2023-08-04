@@ -1,0 +1,120 @@
+#include "memcpy_512_1d.h"
+#include "memcpy_512.h"
+#include<string.h>
+extern int __merlin_include__GB_memcpy_512_h_1;
+extern int __merlin_include__GB_memcpy_512_1d_h_0;
+void sub1(int );
+void sub2(int *);
+#pragma ACCEL kernel
+
+void foo(ap_uint<512> *a,ap_uint<512> *b,int *c,int *d)
+{
+  
+#pragma HLS DATA_PACK VARIABLE=b
+  
+#pragma HLS DATA_PACK VARIABLE=a
+  int tmp_21;
+  int tmp_19;
+  int tmp_18;
+  int tmp_17;
+  int tmp_16;
+  int tmp_15;
+  int tmp_14;
+  int tmp_13;
+  int tmp_12;
+  int tmp_11;
+  int tmp_10;
+  int tmp_9;
+  int tmp_8;
+  int tmp_7;
+  int tmp_6;
+  int tmp_5;
+  int tmp_4;
+  int tmp_3;
+  int tmp_2;
+  int tmp_1;
+  int tmp_0;
+  int tmp;
+  int a_buf[1000];
+  int b_buf[1000];
+  int c_buf[1000];
+  
+#pragma  HLS array_partition  variable=a_buf cyclic factor = 16 dim=1
+  memcpy_wide_bus_write_int_512((ap_uint<512> *)a,a_buf,4 * 0,sizeof(int ) * ((unsigned long )1000),1000L);
+  tmp = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,50 * 4);
+  tmp++;
+  memcpy_wide_bus_single_write_int_512((ap_uint<512> *)a,tmp,4 * 50);
+  tmp_0 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,60 * 4);
+  tmp_0--;
+  memcpy_wide_bus_single_write_int_512((ap_uint<512> *)a,tmp_0,4 * 60);
+  tmp_1 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,70 * 4);
+  tmp_2 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,40 * 4);
+  tmp_1 += tmp_2;
+  memcpy_wide_bus_single_write_int_512((ap_uint<512> *)a,tmp_1,4 * 70);
+  tmp_3 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,70 * 4);
+  tmp_4 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,40 * 4);
+  tmp_3 -= tmp_4;
+  memcpy_wide_bus_single_write_int_512((ap_uint<512> *)a,tmp_3,4 * 70);
+  tmp_5 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,70 * 4);
+  tmp_6 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,40 * 4);
+  tmp_5 &= tmp_6;
+  memcpy_wide_bus_single_write_int_512((ap_uint<512> *)a,tmp_5,4 * 70);
+  tmp_7 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,70 * 4);
+  tmp_8 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,40 * 4);
+  tmp_7 |= tmp_8;
+  memcpy_wide_bus_single_write_int_512((ap_uint<512> *)a,tmp_7,4 * 70);
+  tmp_9 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,70 * 4);
+  tmp_10 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,40 * 4);
+  tmp_9 ^= tmp_10;
+  memcpy_wide_bus_single_write_int_512((ap_uint<512> *)a,tmp_9,4 * 70);
+  tmp_11 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,70 * 4);
+  tmp_12 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,40 * 4);
+  tmp_11 >>= tmp_12;
+  memcpy_wide_bus_single_write_int_512((ap_uint<512> *)a,tmp_11,4 * 70);
+  tmp_13 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,70 * 4);
+  tmp_14 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,40 * 4);
+  tmp_13 <<= tmp_14;
+  memcpy_wide_bus_single_write_int_512((ap_uint<512> *)a,tmp_13,4 * 70);
+  tmp_15 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,70 * 4);
+  tmp_16 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,40 * 4);
+  tmp_15 %= tmp_16;
+  memcpy_wide_bus_single_write_int_512((ap_uint<512> *)a,tmp_15,4 * 70);
+  tmp_17 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,70 * 4);
+  tmp_18 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,40 * 4);
+  tmp_17 /= tmp_18;
+  memcpy_wide_bus_single_write_int_512((ap_uint<512> *)a,tmp_17,4 * 70);
+  
+#pragma  HLS array_partition  variable=b_buf cyclic factor = 16 dim=1
+  memcpy_wide_bus_read_int_512(b_buf,(ap_uint<512> *)b,0 * 4,sizeof(int ) * ((unsigned long )1000),1000L);
+  tmp_21 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)b,0 * 4);
+  sub1(tmp_21);
+  memcpy(c_buf,c,sizeof(int ) * 1000);
+  sub2(&c[2]);
+  d[0]++;
+  tmp_19 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,0 * 4);
+  switch(tmp_19){
+    int tmp_23;
+    int tmp_22;
+    int tmp_20;
+    case 0:
+    tmp_20 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)a,0 * 4);
+    tmp_22 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)b,0 * 4);
+    tmp_20 += tmp_22;
+    memcpy_wide_bus_single_write_int_512((ap_uint<512> *)a,tmp_20,4 * 0);
+    break; 
+    default:
+    tmp_23 = memcpy_wide_bus_single_read_int_512((ap_uint<512> *)b,0 * 4);
+    a_buf[0] = tmp_23;
+    break; 
+  }
+}
+
+int main()
+{
+  int *a;
+  int *b;
+  int *c;
+  int *d;
+  foo((ap_uint<512> *)a,(ap_uint<512> *)b,c,d);
+  return 0;
+}

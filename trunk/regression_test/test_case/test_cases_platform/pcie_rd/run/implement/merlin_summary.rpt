@@ -1,0 +1,29 @@
+Merlin Compiler Version : 2016.4
+Merlin Compiler Build : 8367
+Merlin Compiler Build Date : 2017-02-07 08:54:51 -0800 (Tue, 07 Feb 2017)
+
+===================================================
+  Execution and Testing                            
+===================================================
+Host      :noisy
+gcc       :gcc version 4.6.3 (GCC) 
+Date      :Fri Feb 10 17:44:11 PST 2017
+Vivado    :/curr/software/Xilinx/SDx/2016.3/Vivado/bin/vivado
+Vivado_HLS:/curr/software/Xilinx/SDx/2016.3/Vivado_HLS/bin/vivado_hls
+===================================================
+Correctness : 
+    Optimized C code     : Fail
+    OpenCL Sim on CPU    : Fail
+    HW execution on FPGA : Fail
+Performance : 
+    +=================+==============+
+    |                 | Runtime (s)  |
+    +-----------------+--------------+
+    |FPGA compute     |              |
+    |PCIe transfer    |              |
+    |FPGA kernel total|              |
+    +-----------------+--------------+
+    |CPU  kernel total|              |
+    +-----------------+--------------+
+    |Speed up         |              |
+    +=================+==============+

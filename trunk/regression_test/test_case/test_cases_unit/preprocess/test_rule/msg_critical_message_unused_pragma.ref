@@ -1,0 +1,5 @@
+
+ERROR: [PROCS-363] Found an invalid INTERFACE pragma: ACCEL interface variable=hist_cache stream_prefetch=on (unused_interface_pragma.cpp:15).
+  Diagnosis information: 
+  Invalid value for attribute 'VARIABLE' = 'hist_cache'.
+  Hint: only support variable, constant and macro in pragma clause

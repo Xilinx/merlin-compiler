@@ -1,0 +1,12 @@
+
+ERROR: [SYNCHK-318] Function call 'A::operator++()' (vec_add.cpp:16) is not supported
+ because its callee definition is not included in the input file(s)
+
+ERROR: [SYNCHK-318] Function call 'sub' (vec_add.cpp:17) is not supported
+ because its callee definition is not included in the input file(s)
+
+ERROR: [SYNCHK-317] Implicit function call 'operator<<' (vec_add.cpp:19) declared in 'AA' (vec_add.cpp:5) is not supported
+Hint: Please explicitly specify the function definition under the delaration
+
+ERROR: [SYNCHK-317] Implicit function call 'operator<<' (vec_add.cpp:20) declared in 'AA' (vec_add.cpp:5) is not supported
+Hint: Please explicitly specify the function definition under the delaration

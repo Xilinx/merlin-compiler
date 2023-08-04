@@ -1,0 +1,41 @@
+#pragma ACCEL kernel
+
+void func_top_0()
+{
+  int a[100][100];
+  int b[100][100];
+  int k;
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    
+#pragma ACCEL PIPELINE AUTO
+    for (k = 0; k < 1; k++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      for (j = 0; j < 1; j++) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        a[i][0] = 0;
+      }
+    }
+  }
+  for (i = 0; i < 100; i++) {
+    for (k = 0; k < 0; k++) {
+      for (j = 0; j < 1; j++) {
+        a[i][0] = 2;
+      }
+    }
+  }
+  for (i = 0; i < 100; i++) {
+    for (k = 0; k < 100; k++) {
+      
+#pragma ACCEL PIPELINE AUTO
+      for (j = 0; j < 10; j++) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        a[i][j] = b[i * k][j] + b[i * k + 1][j + 1];
+      }
+    }
+  }
+}

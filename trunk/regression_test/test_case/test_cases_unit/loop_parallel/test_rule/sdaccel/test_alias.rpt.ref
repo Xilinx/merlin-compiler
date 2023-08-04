@@ -1,0 +1,16 @@
+INFO: [FGPIP-102] Loop 'j' (test_alias.cpp:13) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_alias.cpp:30) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_alias.cpp:40) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_alias.cpp:48) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_alias.cpp:57) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_alias.cpp:68) is fully parallelized
+INFO: [FGPIP-102] Loop 'i' (test_alias.cpp:78) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_alias.cpp:105) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_alias.cpp:109) is fully parallelized
+
+WARNING: [FGPIP-202] Loop fine-grained parallelization CANNOT be applied: loop 'j'
+  (test_alias.cpp:113),  because the loop contains subloop(s) not being parallelized.
+INFO: [FGPIP-102] Loop 'j' (test_alias.cpp:117) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_alias.cpp:122) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_alias.cpp:126) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_alias.cpp:132) is fully parallelized

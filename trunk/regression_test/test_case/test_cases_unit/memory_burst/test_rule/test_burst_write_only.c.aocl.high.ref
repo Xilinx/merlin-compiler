@@ -1,0 +1,72 @@
+#include <string.h> 
+// 1. loop structure
+// 2. function structure
+// 3. access pattern
+// 4. pragma modes
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void func_top_0(int *a,int *b)
+{
+  
+#pragma ACCEL interface variable=a write_only
+  int i;
+  for (i = 0; i < 100; i += 2) {
+    
+#pragma ACCEL pipeline_parallel factor = 10
+    a[i] = b[i];
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_1(int *a,int *b)
+{
+  int i;
+  for (i = 0; i < 100; i += 2) {
+    
+#pragma ACCEL pipeline
+    a[i] = b[i];
+  }
+}
+
+void sub(int *a)
+/* Original: #pragma ACCEL cache */
+{
+  for (int i = 0; i < 100; ++i) {
+    a[i]++;
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_2(int *a,int *b)
+{
+  
+#pragma ACCEL skip_sync variable=a_buf
+  
+#pragma ACCEL skip_sync variable=a
+  
+#pragma ACCEL interface variable=a write_only
+  int a_buf[100];
+  int i = 0;
+  for (int i = 0; i < 100; ++i) {
+    a_buf[i] = b[i];
+  }
+  sub(a_buf);
+  memcpy((void *)(&a[0]),(const void *)(&a_buf[0]),sizeof(int ) * 100);
+}
+
+int main()
+{
+  int *a;
+  int *b;
+  int *c;
+  int *aa;
+  int *bb;
+  int *cc;
+  int a_s;
+  int b_s;
+  int c_s;
+  func_top_0(a,b);
+  func_top_1(a,b);
+  return 0;
+}

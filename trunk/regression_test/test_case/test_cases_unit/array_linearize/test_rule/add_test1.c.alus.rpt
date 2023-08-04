@@ -1,0 +1,5 @@
+
+ERROR: [MDARR-303] Found overflowed dimension size of the interface variable : 
+variable=a, depth=4294967296L
+    kernel=void top(int [4294967296] a) {...} (add_test1.c:2)
+

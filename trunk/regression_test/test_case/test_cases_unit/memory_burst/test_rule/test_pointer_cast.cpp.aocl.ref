@@ -1,0 +1,36 @@
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void top(char *a)
+{
+  for (int i = 0; i < 10000; i += 4) {
+     *(((float *)a) + i) = 1.0;
+  }
+}
+#pragma ACCEL kernel
+
+void top2(char *a,int *b)
+{
+  int b_buf[9997];
+  char a_buf[9997];
+  memcpy((void *)(&a_buf[0]),(const void *)(&a[0]),sizeof(char ) * 9997);
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 9997);
+  for (int i = 0; i < 10000; i += 4) {
+    int tmp = (int )a_buf[i];
+    b_buf[i] = tmp;
+  }
+  memcpy((void *)(&b[0]),(const void *)(&b_buf[0]),sizeof(int ) * 9997);
+}
+#pragma ACCEL kernel
+
+void top3(char *a,int *b)
+{
+  int b_buf[9997];
+  memcpy((void *)(&b_buf[0]),(const void *)(&b[0]),sizeof(int ) * 9997);
+  for (int i = 0; i < 10000; i += 4) {
+    int tmp = (int )(&a[i]);
+    b_buf[i] = tmp;
+  }
+  memcpy((void *)(&b[0]),(const void *)(&b_buf[0]),sizeof(int ) * 9997);
+}

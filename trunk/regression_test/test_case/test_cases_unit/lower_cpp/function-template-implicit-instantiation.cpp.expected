@@ -1,0 +1,20 @@
+const int &p_Z3maxIiERKiRKi(const int &x,const int &y);
+const double &p_Z3maxIdERKdRKd(const double &x,const double &y);
+
+const int &p_Z3maxIiERKiRKi(const int &x,const int &y)
+{
+  return x > y?x : y;
+}
+
+const double &p_Z3maxIdERKdRKd(const double &x,const double &y)
+{
+  return x > y?x : y;
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+#pragma ACCEL kernel
+
+void k()
+{
+  p_Z3maxIiERKiRKi(0,1);
+  p_Z3maxIdERKdRKd(0.0,1.0);
+}

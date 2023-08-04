@@ -1,0 +1,126 @@
+#include<stdio.h>
+#include<string.h>
+#include"header.h"
+#pragma ACCEL kernel
+
+void func_top_1(float *merlin_input)
+{
+  
+#pragma ACCEL interface variable=merlin_input depth=4,100,100 max_depth=4,100,100 BURST_OFF
+  conv:
+  for (int j = 0; j < 4; ++j) {
+    float LineBuffer_merlin_input0[100];
+    float LineBuffer_merlin_input1[100];
+    float LineBuffer_merlin_input2[100];
+    float LineBuffer_merlin_input3[100];
+    float slide_wind_0[5][5];
+    loop_h:
+    for (int h = -4L; h < 96; ++h) {
+      loop_w:
+      for (int w = -4L; w < 96; ++w) {
+        
+#pragma ACCEL PIPELINE
+{
+          int h_2;
+          int h_1;
+          float tmp_wind_0[5];
+          int w_0;
+          int h_0;
+          for (h_0 = 0L; h_0 <= 4L; ++h_0) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            for (w_0 = 1L; w_0 <= 4L; ++w_0) {
+              
+#pragma ACCEL PARALLEL COMPLETE
+              slide_wind_0[h_0][w_0 + -1] = slide_wind_0[h_0][w_0];
+            }
+          }
+          for (h_1 = 0; h_1 <= 4L; ++h_1) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            if (h_1 == 0L) {
+              tmp_wind_0[h_1] = LineBuffer_merlin_input0[w - 0L + 4L];
+            }
+             else {
+              if (h_1 == 1L) {
+                tmp_wind_0[h_1] = LineBuffer_merlin_input1[w - 0L + 4L];
+              }
+               else {
+                if (h_1 == 2L) {
+                  tmp_wind_0[h_1] = LineBuffer_merlin_input2[w - 0L + 4L];
+                }
+                 else {
+                  if (h_1 == 3L) {
+                    tmp_wind_0[h_1] = LineBuffer_merlin_input3[w - 0L + 4L];
+                  }
+                }
+              }
+            }
+          }
+          tmp_wind_0[4UL] = merlin_input[(0L + j * 1L) * 10000L + (h + 0L + 4L) * 100L + (w + 0L + 4L) * 1L];
+          for (h_2 = 0; h_2 <= 4L; ++h_2) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            slide_wind_0[h_2][4L] = tmp_wind_0[h_2];
+          }
+{
+            int h_3;
+            float tmp_merlin_input;
+            for (h_3 = 0; h_3 <= 3UL; ++h_3) {
+              
+#pragma ACCEL PARALLEL COMPLETE
+              tmp_merlin_input = tmp_wind_0[h_3 + 1];
+              if (h_3 == 0L) {
+                LineBuffer_merlin_input0[w - 0L + 4L] = tmp_merlin_input;
+              }
+               else {
+                if (h_3 == 1L) {
+                  LineBuffer_merlin_input1[w - 0L + 4L] = tmp_merlin_input;
+                }
+                 else {
+                  if (h_3 == 2L) {
+                    LineBuffer_merlin_input2[w - 0L + 4L] = tmp_merlin_input;
+                  }
+                   else {
+                    if (h_3 == 3L) {
+                      LineBuffer_merlin_input3[w - 0L + 4L] = tmp_merlin_input;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        if (h >= 0L && h <= 95L && w >= 0L && w <= 95L) {
+          loop_p:
+          for (int iter = 0; iter < 16; iter++) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            float tmp = (float )0;
+            for (int p = 0; p < 5; ++p) {
+              
+#pragma ACCEL PARALLEL COMPLETE
+              Loop_q:
+              for (int q = 0; q < 5; ++q) {
+                
+#pragma ACCEL PARALLEL COMPLETE
+                tmp = slide_wind_0[p][q];
+                printf("%d, %d, %d, %d, %d, %d: %f\n",j,h,w,iter,p,q,(double )tmp);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+float c[40000];
+
+int main()
+{
+  for (size_t i = 0; i < 40000; i++) {
+    c[i] = i;
+  }
+  func_top_1(c);
+  return 0;
+}

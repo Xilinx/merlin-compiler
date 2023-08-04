@@ -1,0 +1,12 @@
+
+WARNING: [PROCS-241] Found a large const array size 'blockHist_buf0(3923458560 Byte)' (__merlinkernel_svm_top.cpp:41)
+ This may cause large on chip memory usage.
+
+WARNING: [PROCS-241] Found a large const array size 'blockHist_buf1(3923458560 Byte)' (__merlinkernel_svm_top.cpp:41)
+ This may cause large on chip memory usage.
+
+WARNING: [PROCS-241] Found a large const array size 'hist_cache(129820320 Byte)' (__merlinkernel_svm_top.cpp:6)
+ This may cause large on chip memory usage.
+
+WARNING: [PROCS-241] Found a large const array size 'x(987654312 Byte)' (__merlinkernel_svm_top.cpp:4)
+ This may cause large on chip memory usage.

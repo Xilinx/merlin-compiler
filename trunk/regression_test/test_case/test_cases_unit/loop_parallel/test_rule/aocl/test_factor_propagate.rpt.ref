@@ -1,0 +1,10 @@
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'mars_kernel_1_0_0_b_2_0_buf_1' (test_factor_propagate.cpp:87)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'mars_kernel_1_0_0_b_2_0_buf_0' (test_factor_propagate.cpp:88)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'c_2_0_buf' (test_factor_propagate.cpp:91)
+ Reason: multiple accesses or complex access pattern. 
+INFO: [FGPIP-102] Loop 'j' (test_factor_propagate.cpp:39) is fully parallelized

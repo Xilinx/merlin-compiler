@@ -1,0 +1,42 @@
+#include "cmost.h"
+static void __merlin_dummy_extern_int_merlin_include_G_();
+
+static void func(int *a)
+{
+//int i;
+  for (int _i0_l1 = 0; _i0_l1 < 10; ++_i0_l1) {
+    for (int _ii_l2 = 0; _ii_l2 < 10; ++_ii_l2) 
+// Original: #pragma ACCEL parallel
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+      
+#pragma ACCEL PARALLEL COMPLETE
+      int i = _i0_l1 * 10 + _ii_l2;
+      if (_i0_l1 > 10) {
+        i = 0;
+      }
+      a[i] = 0;
+    }
+  }
+}
+static void __merlin_dummy_kernel_pragma();
+// Original: #pragma ACCEL kernel
+
+void top(int *a)
+{
+  __merlin_access_range(a,0,999999UL);
+  
+#pragma ACCEL interface variable=a stream_prefetch=on max_depth=1000000 depth=1000000
+  int i;
+  int j;
+  for (i = 0; i < 10000 / 100; ++i) {
+    for (j = 0; j < 100; ++j) 
+// Original: #pragma ACCEL parallel
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+      
+#pragma ACCEL PARALLEL COMPLETE
+      func(a);
+    }
+  }
+}

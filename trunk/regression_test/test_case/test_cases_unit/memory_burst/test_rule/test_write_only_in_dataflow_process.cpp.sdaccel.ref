@@ -1,0 +1,23 @@
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+
+void sub(int *a)
+{
+  int a_buf[1024][1];
+  for (int i = 0; i < 1024; ++i) {
+    a_buf[i][0] = i;
+  }
+{
+    for (int i = 0; i < 1024; ++i) {
+      memcpy((void *)(&a[i * 2]),(const void *)a_buf[i],sizeof(int ) * 1);
+    }
+  }
+}
+#pragma ACCEL KERNEL
+
+void top(int *a)
+{
+  
+#pragma HLS dataflow
+  sub(a);
+}

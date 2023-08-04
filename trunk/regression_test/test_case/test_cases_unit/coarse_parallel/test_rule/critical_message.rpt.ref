@@ -1,0 +1,63 @@
+INFO: [CGPAR-101] Loop 'jj' (test_no_func.cpp:13) in function 'top' is fully parallelized
+INFO: [CGPAR-101] Loop 'j' (test_func.cpp:37) in function 'top' is fully parallelized
+INFO: [CGPAR-101] Loop 'jj' (test_with_zero_indice.cpp:20) in function 'vec_add_kernel' is fully parallelized
+INFO: [CGPAR-101] Loop 'sub' (kmeans_kernel.cpp:57) in function 'kmeans_kernel' is fully parallelized
+
+WARNING: [STREAM-201] stream ports cannot be separated:
+    '{best_index[_sub_l6] = 0;best_...' (kmeans_kernel.cpp:58)
+    Access to variable 'distances' (kmeans_kernel.cpp:17) has possible data dependence in function 'kmeans_kernel' (kmeans_kernel.cpp:3)
+    Access to variable 'partials' (kmeans_kernel.cpp:18) has possible data dependence in function 'kmeans_kernel' (kmeans_kernel.cpp:3)
+    Access to variable 'best_index' (kmeans_kernel.cpp:19) has possible data dependence in function 'kmeans_kernel' (kmeans_kernel.cpp:3)
+    Access to variable 'best_distance' (kmeans_kernel.cpp:20) has possible data dependence in function 'kmeans_kernel' (kmeans_kernel.cpp:3)
+
+
+WARNING: [CGPAR-210] Coarse-grained parallelization NOT applied: loop 'sub' (kmeans_kernel.cpp:57) in function 'kmeans_kernel' because of unsupported task spawn:
+'{best_index[_sub_l6] = 0;best_...' (kmeans_kernel.cpp:58)
+    Access to variable 'distances' (kmeans_kernel.cpp:17) has possible data dependence in function 'kmeans_kernel' (kmeans_kernel.cpp:3)
+    Access to variable 'partials' (kmeans_kernel.cpp:18) has possible data dependence in function 'kmeans_kernel' (kmeans_kernel.cpp:3)
+    Access to variable 'best_index' (kmeans_kernel.cpp:19) has possible data dependence in function 'kmeans_kernel' (kmeans_kernel.cpp:3)
+    Access to variable 'best_distance' (kmeans_kernel.cpp:20) has possible data dependence in function 'kmeans_kernel' (kmeans_kernel.cpp:3)
+
+INFO: [CGPAR-101] Loop 'j' (test_func_with_constant_global.cpp:38) in function 'top' is fully parallelized
+
+WARNING: [CGPAR-211] Coarse-grained parallelization NOT applied: loop 'j' (test_func_with_non_constant_global.cpp:38) in function 'top' because of access on non-constant global variable 'delta' (test_func_with_non_constant_global.cpp:3)
+
+WARNING: [CGPAR-212] Coarse-grained parallelization NOT applied: loop 'j' (test_func_with_non_constant_global.cpp:38) in function 'top' because of access on non-constant local static variable 'delta2' (test_func_with_non_constant_global.cpp:6)
+
+WARNING: [CGPAR-202] Cannot parallel the loop 'i' (test_fake_dead.cpp:9) in function 'top' because the access to the following array(s) cannot be separated among parallel threads. Please consider to separate the accesses by introducing a dimension along 'i' (test_fake_dead.cpp:9) in function 'top' to reshape the array(s):
+'index' (test_fake_dead.cpp:6)
+'a_buf' (test_fake_dead.cpp:7)
+
+
+WARNING: [CGPAR-202] Cannot parallel the loop 'i' (test_fake_dead.cpp:9) in function 'top' because the access to the following array(s) cannot be separated among parallel threads. Please consider to separate the accesses by introducing a dimension along 'i' (test_fake_dead.cpp:9) in function 'top' to reshape the array(s):
+'j' (test_fake_dead.cpp:6)
+'index' (test_fake_dead.cpp:6)
+'a_buf' (test_fake_dead.cpp:7)
+
+INFO: [CGPAR-101] Loop 'j' (test_func_with_assert.cpp:38) in function 'top' is fully parallelized
+
+WARNING: [CGPAR-202] Cannot parallel the loop 'j' (test_func_with_macro.cpp:22) in function 'top' because the access to the following array(s) cannot be separated among parallel threads. Please consider to separate the accesses by introducing a dimension along 'j' (test_func_with_macro.cpp:22) in function 'top' to reshape the array(s):
+'a_buf' (test_func_with_macro.cpp:21)
+
+INFO: [CGPAR-101] Loop 'j' (test_func_without_iterator.cpp:19) in function 'top' is fully parallelized
+INFO: [CGPAR-101] Loop 'j' (test_func_with_dead_port.cpp:38) in function 'top' is fully parallelized
+
+WARNING: [CGPAR-203] Coarse-grained parallelization NOT applied: loop 'L_0_2' (test_non_canonical.cpp:38) in function 'top' because of non-canonical loop
+
+WARNING: [CGPAR-202] Cannot parallel the loop 'j' (test_data_dep.cpp:37) in function 'top' because the access to the following array(s) cannot be separated among parallel threads. Please consider to separate the accesses by introducing a dimension along 'j' (test_data_dep.cpp:37) in function 'top' to reshape the array(s):
+'c_buf_0' (test_data_dep.cpp:20)
+'a_buf_0' (test_data_dep.cpp:22)
+
+
+WARNING: [CGPAR-203] Coarse-grained parallelization NOT applied: loop 'L_0_2' (test_non_const_bound.cpp:38) in function 'top' because of non-canonical loop
+
+WARNING: [CGPAR-207] Coarse-grained parallelization NOT applied: loop 'j' (test_return.cpp:37) in function 'top' because of return statements
+
+WARNING: [CGPAR-208] Coarse-grained parallelization NOT applied: loop 'j' (test_goto_stmt.cpp:37) in function 'top' because of goto statements
+
+WARNING: [CGPAR-206] Coarse-grained parallelization NOT applied: loop 'j' (test_continue.cpp:37) in function 'top' because of continue statements
+
+WARNING: [CGPAR-203] Coarse-grained parallelization NOT applied: loop 'L_0_2' (test_label.cpp:39) in function 'top' because of non-canonical loop
+INFO: [CGPAR-101] Loop 'i_sub' (test_func_with_pragma.cpp:73) in function 'align_kernel_fpga' is fully parallelized
+INFO: [CGPAR-101] Loop '_i1_l2' (test_stream_port.cpp:86) in function 'vec_add' is fully parallelized
+INFO: [CGPAR-101] Loop 'j' (test_copy_in_out.cpp:37) in function 'top' is fully parallelized

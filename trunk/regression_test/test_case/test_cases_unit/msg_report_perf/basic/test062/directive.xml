@@ -1,0 +1,16 @@
+
+<directives>
+<reduction_opt>off</reduction_opt>
+<platform_name>/curr/software/Xilinx/SDx/2017.1/platforms/xilinx_aws-vu9p-f1_4ddr-xpr-2pr_4_0/xilinx_aws-vu9p-f1_4ddr-xpr-2pr_4_0.xpfm</platform_name>
+<opt_effort>standard</opt_effort>
+<ihatebug>debug-level2</ihatebug>
+<merlincc>on</merlincc>
+<implementation_tool>sdaccel</implementation_tool>
+<memory_burst>off</memory_burst>
+<clock_period>5ns</clock_period>
+<part_name></part_name>
+<reduction_altera>off</reduction_altera>
+<include_path> -I/curr/hanhu/unit_test/test_case/test29 -I/curr/hanhu/unit_test/test_case/test29/src/ -I/curr/hanhu/WORK/Merlin_Compiler/trunk/build/..//mars-gen/lib/merlin</include_path>
+<macro_define></macro_define>
+</directives>
+

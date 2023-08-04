@@ -1,0 +1,26 @@
+[
+    {
+        "comment": "-", 
+        "comment_resource": "-", 
+        "comment_interface": "-", 
+        "src_col": 1, 
+        "total-BRAM": "638 (11%)", 
+        "src_line": 176, 
+        "total-FF": "21538 (~0%)", 
+        "src_filename": "aes.cpp", 
+        "CYCLE_UNIT": 8525994, 
+        "table_note": "", 
+        "type": "kernel", 
+        "total-DSP": "0 (~0%)", 
+        "total-URAM": "0 (~0%)", 
+        "CYCLE_TOT": "8525994 (100.0%)", 
+        "total-LUT": "68836 (3%)", 
+        "estimate": "2.433", 
+        "name": "aes256_encrypt_ecb_kernel", 
+        "target": "3.33", 
+        "uncertainty": "0.90", 
+        "inline": "", 
+        "global_variables": [], 
+        "src_topo_id": "F_0_0_0_47"
+    }
+]

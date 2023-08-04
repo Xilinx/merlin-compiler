@@ -1,0 +1,2 @@
+
+ERROR: [PROCS-369] Find name "long double" in long double x;(test2.cpp:3) which conflict with OpenCL key word.

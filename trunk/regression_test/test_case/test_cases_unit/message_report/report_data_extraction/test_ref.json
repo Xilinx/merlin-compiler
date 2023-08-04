@@ -1,0 +1,29 @@
+{
+    "mars_kernel_0_2_node_1_stage_1": {
+        "instance_name": "grp_mars_kernel_0_2_node_1_stage_1_fu_788",
+        "interval-max": "4154",
+        "interval-min": "1",
+        "latency-max": "4154",
+        "latency-min": "1",
+        "module_name": "mars_kernel_0_2_node_1_stage_1"
+    },
+    "test_extractor": {
+        "estimate": "2.373",
+        "interval-max": "4156",
+        "interval-min": "3",
+        "latency-max": "4156",
+        "latency-min": "3",
+        "target": "3.33",
+        "total-BRAM": 224,
+        "total-DSP": 0,
+        "total-FF": 17024,
+        "total-LUT": 30653,
+        "total-URAM": 0,
+        "uncertainty": "0.90",
+        "util-BRAM": "4",
+        "util-DSP": "0",
+        "util-FF": "~0",
+        "util-LUT": "1",
+        "util-URAM": "0"
+    }
+}

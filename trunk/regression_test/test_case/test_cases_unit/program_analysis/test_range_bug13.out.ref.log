@@ -1,0 +1,42 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int J = 0;J < 10;++J) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int I = 0;I < 10;++I) {...}
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+[Exp SgPntrArrRefExp:a[I + J * 10]] {a[I + J * 10]:SgPntrArrRefExp a[I + J * 10]->1,0} : a[I + J * 10]..a[I + J * 10], constant bound: {a[I + J * 10]:SgPntrArrRefExp a[I + J * 10]->1,0} : neg_inf..pos_inf
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void sub(int [100] a,int I) {...}
+  SgFunctionDeclaration void top(int [100] a) {...}
+  SgBasicBlock {a[I + J * 10];}
+  SgForStatement for(int J = 0;J < 10;++J) {...}
+  SgBasicBlock {sub(a,I);}
+  SgForStatement for(int I = 0;I < 10;++I) {...}
+
+Arrays: 
+  int [100] a
+  int [100] a
+
+Ranges: 
+  SgFunctionDeclaration void sub(int [100] a,int I) {...}
+    int [100] a :  R[min(I,0)..max(90 + I,99) inexact]
+  SgFunctionDeclaration void top(int [100] a) {...}
+    int [100] a :  R[0..99 exact]
+  SgBasicBlock {a[I + J * 10];}
+    int [100] a :  R[J * 10 + I..J * 10 + I exact]
+  SgForStatement for(int J = 0;J < 10;++J) {...}
+    int [100] a :  R[min(I,0)..max(90 + I,99) inexact]
+  SgBasicBlock {sub(a,I);}
+    int [100] a :  R[I..90 + I inexact]
+  SgForStatement for(int I = 0;I < 10;++I) {...}
+    int [100] a :  R[0..99 exact]
+

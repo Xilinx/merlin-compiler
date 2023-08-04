@@ -1,0 +1,171 @@
+Feature FALCON_ALTERA checked out. 
+debug mode
+
+====== Typedef replace ========>
+FUNC in: SgFunctionDeclaration:int calc(int * a,int * b,int i,int j) {...}
+FUNC in: SgFunctionDeclaration:void vec_add(int s,int [1024] a,int [1024] b,int [1024] c) {...}
+[print topo:]1
+[print topo:]5
+--a[0] 1024
+--b[0] 1024
+--c[0] 1024
+SpawnNodeFromAST -- void vec_add(int s,int [1024] ...
+firstNondefiningFunction = 0x7f501e6e5f30 
+funcdecl_stmt = 0x7f501d601c40 funcdecl_stmt->get_scope()                                        = 0x7f501ead0230 
+funcdecl_stmt = 0x7f501d601c40 funcdecl_stmt->get_declarationModifier().isFriend()               = false 
+firstNondefiningFunction = 0x7f501e6e5f30 firstNondefiningFunction->get_declarationModifier().isFriend() = false 
+TransformationSupport::getSourceFile(funcdecl_stmt = 0x7f501d601c40)->getFileName()              = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinkernel_vec_add.cpp 
+TransformationSupport::getSourceFile(funcdecl_stmt->get_scope() = 0x7f501ead0230)->getFileName() = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinkernel_vec_add.cpp 
+TransformationSupport::getSourceFile(firstNondefiningFunction = 0x7f501e6e5f30)->getFileName()   = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinwrapper_vec_add.cpp 
+TransformationSupport::getSourceFile(firstNondefiningFunction->get_scope() = 0x7f501ead0230)->getFileName() = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinkernel_vec_add.cpp 
+TransformationSupport::getSourceFile(funcdecl_stmt = 0x7f501d601c40)->getFileName()            = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinkernel_vec_add.cpp 
+TransformationSupport::getSourceFile(firstNondefiningFunction = 0x7f501e6e5f30)->getFileName() = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinwrapper_vec_add.cpp 
+firstNondefiningFunction = 0x7f501e6e5f30 
+firstNondefiningFunction = vec_add 
+funcdecl_stmt = 0x7f501d601c40 funcdecl_stmt->get_scope()                                        = 0x7f501ead0230 
+funcdecl_stmt = 0x7f501d601c40 funcdecl_stmt->get_declarationModifier().isFriend()               = false 
+firstNondefiningFunction = 0x7f501e6e5f30 firstNondefiningFunction->get_declarationModifier().isFriend() = false 
+TransformationSupport::getSourceFile(funcdecl_stmt = 0x7f501d601c40)->getFileName()              = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinkernel_vec_add.cpp 
+TransformationSupport::getSourceFile(funcdecl_stmt->get_scope() = 0x7f501ead0230)->getFileName() = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinkernel_vec_add.cpp 
+TransformationSupport::getSourceFile(firstNondefiningFunction = 0x7f501e6e5f30)->getFileName()   = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinwrapper_vec_add.cpp 
+TransformationSupport::getSourceFile(firstNondefiningFunction->get_scope() = 0x7f501ead0230)->getFileName() = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinkernel_vec_add.cpp 
+--   step: b(b[i])->P_nullptr:SgVarRefExp:b
+-- induct: b(b[i])->P_nullptr:SgVarRefExp:b
+--   step: i(b[i])->P_nullptr:SgAddOp:i * 4 + i_sub
+-- induct: i(b[i])->P_nullptr:SgAddOp:i * 4 + i_sub
+-- induct: b(a,b,i * 4 + i_sub,j)->P_nullptr:SgVarRefExp:b
+-- induct: c(c[i * 4 + i_sub])->P_nullptr:SgVarRefExp:c
+-- Find a ref: b
+-- Find a ref: b[i]
+-- induct: c(c,0,1023UL)->P_nullptr:SgVarRefExp:c
+-- induct: b(b,0,1023UL)->P_nullptr:SgVarRefExp:b
+-- induct: a(a,0,1023UL)->P_nullptr:SgVarRefExp:a
+-- induct: c0(c0 +=((int )(pow((double )(calc(a,b,i * 4 + i_sub,j)),1.5))) % 7 + s)->P_nullptr:SgVarRefExp:c0
+-- induct: a(a,b,i * 4 + i_sub,j)->P_nullptr:SgVarRefExp:a
+-- induct: b(a,b,i * 4 + i_sub,j)->P_nullptr:SgVarRefExp:b
+-- induct: s(((int )(pow((double )(calc(a,b,i * 4 + i_sub,j)),1.5))) % 7 + s)->P_nullptr:SgVarRefExp:s
+-- induct: c(c[i * 4 + i_sub])->P_nullptr:SgVarRefExp:c
+-- induct: c0(c[i * 4 + i_sub] = c0)->P_nullptr:SgVarRefExp:c0
+--   step: a(a[i])->P_nullptr:SgVarRefExp:a
+-- induct: a(a[i])->P_nullptr:SgVarRefExp:a
+--   step: i(a[i])->P_nullptr:SgAddOp:i * 4 + i_sub
+-- induct: i(a[i])->P_nullptr:SgAddOp:i * 4 + i_sub
+--   step: b(b[i])->P_nullptr:SgVarRefExp:b
+-- induct: b(b[i])->P_nullptr:SgVarRefExp:b
+--   step: i(b[i])->P_nullptr:SgAddOp:i * 4 + i_sub
+-- induct: i(b[i])->P_nullptr:SgAddOp:i * 4 + i_sub
+--   step: j(a[i] * b[i] + j)->P_nullptr:SgVarRefExp:j
+-- induct: j(a[i] * b[i] + j)->P_nullptr:SgVarRefExp:j
+--   step: a(a[i])->P_nullptr:SgVarRefExp:a
+-- induct: a(a[i])->P_nullptr:SgVarRefExp:a
+--   step: i(a[i])->P_nullptr:SgAddOp:i * 4 + i_sub
+-- induct: i(a[i])->P_nullptr:SgAddOp:i * 4 + i_sub
+--   step: a(a[i])->P_nullptr:SgVarRefExp:a
+-- induct: a(a[i])->P_nullptr:SgVarRefExp:a
+--   step: i(a[i])->P_nullptr:SgAddOp:i * 4 + i_sub
+-- induct: i(a[i])->P_nullptr:SgAddOp:i * 4 + i_sub
+ref = i
+ref = i
+ref = _i_sub
+ref = _i_sub
+ref = _i_sub
+ref = j
+ref = j
+ref = b
+ref = i
+ref = _i_sub
+ref = i, init = i
+ref = i, init = i
+ref = _i_sub, init = _i_sub
+ref = _i_sub, init = _i_sub
+ref = _i_sub, init = _i_sub
+ref = j, init = j
+ref = j, init = j
+ref = b, init = b
+ref = i, init = i
+ref = _i_sub, init = _i_sub
+-- ref_map:
+  SgPntrArrRefExp:b[i * 4 + _i_sub]@msm_port_b_vec_add_0 -> SgPntrArrRefExp:b[i]@calc
+** Stream port generated: msm_port_b_vec_add_0(b);
+
+[MERLIN WRAPPER] ret=1
+-- Find a ref: c[i * 4 + i_sub]
+-- induct: ch_b_0(&ch_b_0)->P_nullptr:SgVarRefExp:ch_b_0
+-- induct: b(b)->P_nullptr:SgVarRefExp:b
+-- induct: c(c,0,1023UL)->P_nullptr:SgVarRefExp:c
+-- induct: b(b,0,1023UL)->P_nullptr:SgVarRefExp:b
+-- induct: a(a,0,1023UL)->P_nullptr:SgVarRefExp:a
+-- induct: c0(c0 +=((int )(pow((double )(calc(a,b,i * 4 + i_sub,j)),1.5))) % 7 + s)->P_nullptr:SgVarRefExp:c0
+-- induct: a(a,b,i * 4 + i_sub,j)->P_nullptr:SgVarRefExp:a
+-- induct: b(a,b,i * 4 + i_sub,j)->P_nullptr:SgVarRefExp:b
+-- induct: s(((int )(pow((double )(calc(a,b,i * 4 + i_sub,j)),1.5))) % 7 + s)->P_nullptr:SgVarRefExp:s
+-- induct: c(c[i * 4 + i_sub])->P_nullptr:SgVarRefExp:c
+-- induct: c0(c[i * 4 + i_sub] = c0)->P_nullptr:SgVarRefExp:c0
+[CMarsExpression::substitude] Unknown def type SgAddressOfOp
+[CMarsExpression::substitude] Unknown def type SgAddressOfOp
+-- induct: ch_b_0(&ch_b_0)->P_nullptr:SgVarRefExp:ch_b_0
+-- induct: b_sp_tmp_0(b_sp_tmp_0 = b[i * 4 + _i_sub])->P_nullptr:SgVarRefExp:b_sp_tmp_0
+--   step: b(b[i * 4 + _i_sub])->P_nullptr:SgVarRefExp:b
+-- induct: b(b[i * 4 + _i_sub])->P_nullptr:SgVarRefExp:b
+[CMarsExpression::substitude] Unknown def type SgAddressOfOp
+[CMarsExpression::substitude] Unknown def type SgAddressOfOp
+-- induct: ch_b_0(&ch_b_0)->P_nullptr:SgVarRefExp:ch_b_0
+--   step: b_sp_tmp_0(&b_sp_tmp_0)->P_nullptr:SgPntrArrRefExp:b[i * 4 + _i_sub]
+-- induct: b_sp_tmp_0(&b_sp_tmp_0)->P_nullptr:SgPntrArrRefExp:b[i * 4 + _i_sub]
+-- induct: ch_b_0(&ch_b_0)->P_nullptr:SgVarRefExp:ch_b_0
+-- induct: b_sn_tmp_0(&b_sn_tmp_0)->P_nullptr:SgVarRefExp:b_sn_tmp_0
+--   step: a(a[i])->P_nullptr:SgVarRefExp:a
+-- induct: a(a[i])->P_nullptr:SgVarRefExp:a
+--   step: i(a[i])->P_nullptr:SgAddOp:i * 4 + i_sub
+-- induct: i(a[i])->P_nullptr:SgAddOp:i * 4 + i_sub
+-- induct: b_sn_tmp_0(a[i] * b_sn_tmp_0)->P_nullptr:SgVarRefExp:b_sn_tmp_0
+--   step: j(a[i] * b_sn_tmp_0 + j)->P_nullptr:SgVarRefExp:j
+-- induct: j(a[i] * b_sn_tmp_0 + j)->P_nullptr:SgVarRefExp:j
+--   step: a(a[i])->P_nullptr:SgVarRefExp:a
+-- induct: a(a[i])->P_nullptr:SgVarRefExp:a
+--   step: i(a[i])->P_nullptr:SgAddOp:i * 4 + i_sub
+-- induct: i(a[i])->P_nullptr:SgAddOp:i * 4 + i_sub
+--   step: a(a[i])->P_nullptr:SgVarRefExp:a
+-- induct: a(a[i])->P_nullptr:SgVarRefExp:a
+--   step: i(a[i])->P_nullptr:SgAddOp:i * 4 + i_sub
+-- induct: i(a[i])->P_nullptr:SgAddOp:i * 4 + i_sub
+ref = i
+ref = i
+ref = _i_sub
+ref = _i_sub
+ref = _i_sub
+ref = c
+ref = i
+ref = _i_sub
+ref = i, init = i
+ref = i, init = i
+ref = _i_sub, init = _i_sub
+ref = _i_sub, init = _i_sub
+ref = _i_sub, init = _i_sub
+ref = c, init = c
+ref = i, init = i
+ref = _i_sub, init = _i_sub
+-- ref_map:
+  SgPntrArrRefExp:c[i * 4 + _i_sub]@msm_port_c_vec_add_0 -> SgPntrArrRefExp:c[i * 4 + i_sub]@vec_add
+** Stream port generated: msm_port_c_vec_add_0(c);
+
+[MERLIN WRAPPER] ret=1
+firstNondefiningFunction = 0x7f501e6e5f30 
+funcdecl_stmt = 0x7f501d601c40 funcdecl_stmt->get_scope()                                        = 0x7f501ead0230 
+funcdecl_stmt = 0x7f501d601c40 funcdecl_stmt->get_declarationModifier().isFriend()               = false 
+firstNondefiningFunction = 0x7f501e6e5f30 firstNondefiningFunction->get_declarationModifier().isFriend() = false 
+TransformationSupport::getSourceFile(funcdecl_stmt = 0x7f501d601c40)->getFileName()              = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinkernel_vec_add.cpp 
+TransformationSupport::getSourceFile(funcdecl_stmt->get_scope() = 0x7f501ead0230)->getFileName() = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinkernel_vec_add.cpp 
+TransformationSupport::getSourceFile(firstNondefiningFunction = 0x7f501e6e5f30)->getFileName()   = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinwrapper_vec_add.cpp 
+TransformationSupport::getSourceFile(firstNondefiningFunction->get_scope() = 0x7f501ead0230)->getFileName() = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinkernel_vec_add.cpp 
+TransformationSupport::getSourceFile(funcdecl_stmt = 0x7f501d601c40)->getFileName()            = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinkernel_vec_add.cpp 
+TransformationSupport::getSourceFile(firstNondefiningFunction = 0x7f501e6e5f30)->getFileName() = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinwrapper_vec_add.cpp 
+firstNondefiningFunction = 0x7f501e6e5f30 
+firstNondefiningFunction = vec_add 
+funcdecl_stmt = 0x7f501d601c40 funcdecl_stmt->get_scope()                                        = 0x7f501ead0230 
+funcdecl_stmt = 0x7f501d601c40 funcdecl_stmt->get_declarationModifier().isFriend()               = false 
+firstNondefiningFunction = 0x7f501e6e5f30 firstNondefiningFunction->get_declarationModifier().isFriend() = false 
+TransformationSupport::getSourceFile(funcdecl_stmt = 0x7f501d601c40)->getFileName()              = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinkernel_vec_add.cpp 
+TransformationSupport::getSourceFile(funcdecl_stmt->get_scope() = 0x7f501ead0230)->getFileName() = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinkernel_vec_add.cpp 
+TransformationSupport::getSourceFile(firstNondefiningFunction = 0x7f501e6e5f30)->getFileName()   = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinwrapper_vec_add.cpp 
+TransformationSupport::getSourceFile(firstNondefiningFunction->get_scope() = 0x7f501ead0230)->getFileName() = /curr/lzou/projects/Merlin_Compiler/trunk/regression_test/test_case/test_cases_unit/stream_prefetch/stream_prefetch/vec_add_unsupported_10/__merlinkernel_vec_add.cpp 

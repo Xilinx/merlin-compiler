@@ -1,0 +1,8 @@
+
+WARNING: [PROCS-210] Function 'top_kernel' (break_check.c:7) with the return statements in the middle of the function body is not supported
+
+WARNING: [PROCS-224] Found multiple loops containing the accesses of an local array 'a_buf' (break_check.c:10).
+
+
+WARNING: [PROCS-227] Loop with the continue/break statement (break_check.c)
+ is not supported

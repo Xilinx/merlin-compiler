@@ -1,0 +1,232 @@
+// Testing labels
+#pragma ACCEL kernel
+
+void func_loop()
+{
+  int c[100];
+  int b[100];
+  int a[100];
+  int N = 100;
+  int _s_ic = 100;
+  unsigned char _l_ic = 100;
+  l1:
+// Canonicalized from: for(unsigned char ic = N;((char )_s_ic) >= 0;_s_ic--) {...}
+// Standardize from: for(_s_ic =((unsigned char )N);_s_ic >= 0;--_s_ic) {...}
+  for (_s_ic = 0; _s_ic <= 100; _s_ic++) {
+    int _in_s_ic = 100 + -1 * _s_ic;
+    c[_in_s_ic] = a[_in_s_ic] + b[_in_s_ic];
+  }
+  _s_ic = 0 + -1;
+  int _s_ic_0 = 100;
+  unsigned char _l_ic_0 = 100;
+  l2:
+// Canonicalized from: for(unsigned char ic = N;((char )_s_ic_0) >= 0;_s_ic_0 += 255) {...}
+// Standardize from: for(_s_ic_0 =((unsigned char )N);_s_ic_0 >= 0;--_s_ic_0) {...}
+  for (_s_ic_0 = 0; _s_ic_0 <= 100; _s_ic_0++) {
+    int _in_s_ic_0 = 100 + -1 * _s_ic_0;
+    c[_in_s_ic_0] = a[_in_s_ic_0] + b[_in_s_ic_0];
+  }
+  _s_ic_0 = 0 + -1;
+  l3:
+// Standardize from: for(unsigned short ic = N;((short )ic) >= 0;ic += 65535) {...}
+  for (unsigned short ic = 0; ic <= 100; ic++) {
+    unsigned short _in_ic = 100 + -1L * ic;
+    c[_in_ic] = a[_in_ic] + b[_in_ic];
+  }
+  l4:
+// Standardize from: for(unsigned int ic = N;((int )ic) >= 0;ic += 0xffffffff) {...}
+  for (unsigned int ic = 0; ic <= 100U; ic++) {
+    unsigned int _in_ic_0 = 100U + -1L * ic;
+    c[_in_ic_0] = a[_in_ic_0] + b[_in_ic_0];
+  }
+  l5:
+// Standardize from: for(unsigned long ic = N;((long )ic) >= 0;ic += 0xffffffffffffffffl) {...}
+  for (unsigned long ic = 0; ic <= 100UL; ic++) {
+    unsigned long _in_ic_1 = 100UL + -1L * ic;
+    c[_in_ic_1] = a[_in_ic_1] + b[_in_ic_1];
+  }
+  int _s_ic_1 = 100;
+  unsigned char _l_ic_1 = 100;
+  l6:
+// Canonicalized from: for(unsigned char ic = N;((char )_s_ic_1) >= 0;_s_ic_1 += 253) {...}
+// Standardize from: for(_s_ic_1 =((unsigned char )N);_s_ic_1 >= 0;_s_ic_1 -= 3) {...}
+  for (_s_ic_1 = 0; _s_ic_1 <= 33; _s_ic_1++) {
+    int _in_s_ic_1 = 100 + -3L * _s_ic_1;
+    c[_in_s_ic_1] = a[_in_s_ic_1] + b[_in_s_ic_1];
+  }
+  _s_ic_1 = 1 + -3L;
+  l7:
+// Standardize from: for(unsigned short ic = N;((short )ic) >= 0;ic += 65534) {...}
+  for (unsigned short ic = 0; ic <= 50; ic++) {
+    unsigned short _in_ic_2 = 100 + -2L * ic;
+    c[_in_ic_2] = a[_in_ic_2] + b[_in_ic_2];
+  }
+  l8:
+// Standardize from: for(unsigned int ic = N;((int )ic) >= 0;ic += 0xfffffff0) {...}
+  for (unsigned int ic = 0; ic <= 6U; ic++) {
+    unsigned int _in_ic_3 = 100U + -16L * ic;
+    c[_in_ic_3] = a[_in_ic_3] + b[_in_ic_3];
+  }
+  l9:
+// Standardize from: for(unsigned long ic = N;((long )ic) >= 0;ic += 0xfffffffffffffff2l) {...}
+  for (unsigned long ic = 0; ic <= 7UL; ic++) {
+    unsigned long _in_ic_4 = 100UL + -14L * ic;
+    c[_in_ic_4] = a[_in_ic_4] + b[_in_ic_4];
+  }
+}
+#pragma ACCEL kernel
+
+void func_loop_2()
+{
+  int c[100];
+  int b[100];
+  int a[100];
+  int N = 100;
+  int _s_ic = 100;
+  char _l_ic = 100;
+  l1:
+// Canonicalized from: for(char ic = N;((char )_s_ic) >= 0;_s_ic--) {...}
+// Standardize from: for(_s_ic =((char )N);_s_ic >= 0;--_s_ic) {...}
+  for (_s_ic = 0; _s_ic <= 100; _s_ic++) {
+    int _in_s_ic = 100 + -1 * _s_ic;
+    c[_in_s_ic] = a[_in_s_ic] + b[_in_s_ic];
+  }
+  _s_ic = 0 + -1;
+  int _s_ic_0 = 100;
+  char _l_ic_0 = 100;
+  l2:
+// Canonicalized from: for(char ic = N;((char )_s_ic_0) >= 0;_s_ic_0 += 255) {...}
+// Standardize from: for(_s_ic_0 =((char )N);_s_ic_0 >= 0;--_s_ic_0) {...}
+  for (_s_ic_0 = 0; _s_ic_0 <= 100; _s_ic_0++) {
+    int _in_s_ic_0 = 100 + -1 * _s_ic_0;
+    c[_in_s_ic_0] = a[_in_s_ic_0] + b[_in_s_ic_0];
+  }
+  _s_ic_0 = 0 + -1;
+  l3:
+// Standardize from: for(short ic = N;((short )ic) >= 0;ic += 65535) {...}
+  for (short ic = 0; ic <= 100; ic++) {
+    short _in_ic = 100 + -1L * ic;
+    c[_in_ic] = a[_in_ic] + b[_in_ic];
+  }
+  l4:
+// Standardize from: for(int ic = N;((int )ic) >= 0;ic += 0xffffffff) {...}
+  for (int ic = 0; ic <= 100; ic++) {
+    int _in_ic_0 = 100 + -1L * ic;
+    c[_in_ic_0] = a[_in_ic_0] + b[_in_ic_0];
+  }
+  l5:
+// Standardize from: for(long ic = N;((long )ic) >= 0;ic += 0xffffffffffffffffl) {...}
+  for (long ic = 0; ic <= 100L; ic++) {
+    long _in_ic_1 = 100L + -1L * ic;
+    c[_in_ic_1] = a[_in_ic_1] + b[_in_ic_1];
+  }
+  int _s_ic_1 = 100;
+  char _l_ic_1 = 100;
+  l6:
+// Canonicalized from: for(char ic = N;((char )_s_ic_1) >= 0;_s_ic_1 += 253) {...}
+// Standardize from: for(_s_ic_1 =((char )N);_s_ic_1 >= 0;_s_ic_1 -= 3) {...}
+  for (_s_ic_1 = 0; _s_ic_1 <= 33; _s_ic_1++) {
+    int _in_s_ic_1 = 100 + -3L * _s_ic_1;
+    c[_in_s_ic_1] = a[_in_s_ic_1] + b[_in_s_ic_1];
+  }
+  _s_ic_1 = 1 + -3L;
+  l7:
+// Standardize from: for(short ic = N;((short )ic) >= 0;ic += 65534) {...}
+  for (short ic = 0; ic <= 50; ic++) {
+    short _in_ic_2 = 100 + -2L * ic;
+    c[_in_ic_2] = a[_in_ic_2] + b[_in_ic_2];
+  }
+  l8:
+// Standardize from: for(int ic = N;((int )ic) >= 0;ic += 0xfffffff0) {...}
+  for (int ic = 0; ic <= 6; ic++) {
+    int _in_ic_3 = 100 + -16L * ic;
+    c[_in_ic_3] = a[_in_ic_3] + b[_in_ic_3];
+  }
+  l9:
+// Standardize from: for(long ic = N;((long )ic) >= 0;ic += 0xfffffffffffffff2l) {...}
+  for (long ic = 0; ic <= 7L; ic++) {
+    long _in_ic_4 = 100L + -14L * ic;
+    c[_in_ic_4] = a[_in_ic_4] + b[_in_ic_4];
+  }
+}
+#pragma ACCEL kernel
+
+void func_loop_3()
+{
+  int c[100];
+  int b[100];
+  int a[100];
+  int N = 100;
+  int _s_ic = 100;
+  signed char _l_ic = 100;
+  l1:
+// Canonicalized from: for(signed char ic = N;((char )_s_ic) >= 0;_s_ic--) {...}
+// Standardize from: for(_s_ic =((signed char )N);_s_ic >= 0;--_s_ic) {...}
+  for (_s_ic = 0; _s_ic <= 100; _s_ic++) {
+    int _in_s_ic = 100 + -1 * _s_ic;
+    c[_in_s_ic] = a[_in_s_ic] + b[_in_s_ic];
+  }
+  _s_ic = 0 + -1;
+  int _s_ic_0 = 100;
+  signed char _l_ic_0 = 100;
+  l2:
+// Canonicalized from: for(signed char ic = N;((char )_s_ic_0) >= 0;_s_ic_0 += 255) {...}
+// Standardize from: for(_s_ic_0 =((signed char )N);_s_ic_0 >= 0;--_s_ic_0) {...}
+  for (_s_ic_0 = 0; _s_ic_0 <= 100; _s_ic_0++) {
+    int _in_s_ic_0 = 100 + -1 * _s_ic_0;
+    c[_in_s_ic_0] = a[_in_s_ic_0] + b[_in_s_ic_0];
+  }
+  _s_ic_0 = 0 + -1;
+  l3:
+// Standardize from: for(signed short ic = N;((short )ic) >= 0;ic += 65535) {...}
+  for (signed short ic = 0; ic <= 100; ic++) {
+    signed short _in_ic = 100 + -1L * ic;
+    c[_in_ic] = a[_in_ic] + b[_in_ic];
+  }
+  l4:
+// Standardize from: for(signed int ic = N;((int )ic) >= 0;ic += 0xffffffff) {...}
+  for (signed int ic = 0; ic <= 100; ic++) {
+    signed int _in_ic_0 = 100 + -1L * ic;
+    c[_in_ic_0] = a[_in_ic_0] + b[_in_ic_0];
+  }
+  l5:
+// Standardize from: for(signed long ic = N;((long )ic) >= 0;ic += 0xffffffffffffffffl) {...}
+  for (signed long ic = 0; ic <= 100L; ic++) {
+    signed long _in_ic_1 = 100L + -1L * ic;
+    c[_in_ic_1] = a[_in_ic_1] + b[_in_ic_1];
+  }
+  int _s_ic_1 = 100;
+  signed char _l_ic_1 = 100;
+  l6:
+// Canonicalized from: for(signed char ic = N;((char )_s_ic_1) >= 0;_s_ic_1 += 253) {...}
+// Standardize from: for(_s_ic_1 =((signed char )N);_s_ic_1 >= 0;_s_ic_1 -= 3) {...}
+  for (_s_ic_1 = 0; _s_ic_1 <= 33; _s_ic_1++) {
+    int _in_s_ic_1 = 100 + -3L * _s_ic_1;
+    c[_in_s_ic_1] = a[_in_s_ic_1] + b[_in_s_ic_1];
+  }
+  _s_ic_1 = 1 + -3L;
+  l7:
+// Standardize from: for(signed short ic = N;((short )ic) >= 0;ic += 65534) {...}
+  for (signed short ic = 0; ic <= 50; ic++) {
+    signed short _in_ic_2 = 100 + -2L * ic;
+    c[_in_ic_2] = a[_in_ic_2] + b[_in_ic_2];
+  }
+  l8:
+// Standardize from: for(signed int ic = N;((int )ic) >= 0;ic += 0xfffffff0) {...}
+  for (signed int ic = 0; ic <= 6; ic++) {
+    signed int _in_ic_3 = 100 + -16L * ic;
+    c[_in_ic_3] = a[_in_ic_3] + b[_in_ic_3];
+  }
+  l9:
+// Standardize from: for(signed long ic = N;((long )ic) >= 0;ic += 0xfffffffffffffff2l) {...}
+  for (signed long ic = 0; ic <= 7L; ic++) {
+    signed long _in_ic_4 = 100L + -14L * ic;
+    c[_in_ic_4] = a[_in_ic_4] + b[_in_ic_4];
+  }
+}
+
+int main()
+{
+  func_loop();
+  return 0;
+}

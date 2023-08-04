@@ -1,0 +1,41 @@
+
+WARNING: [FUCIN-202] Cannot inline a function with "return" in the middle of function body 
+    Function: void sub(int * a) {...} at test_top_sub.c
+    Statement:return ; at test_top_sub.c
+
+
+ERROR: [FUCIN-303] A kernel function and a function used in the kernel are defined in the different files.
+Kernel function: 'top' (test_top.c)
+Sub function: 'sub' (test_top_sub.c) 
+  Hint: please merge them into the same file
+
+ERROR: [FUCIN-301] Non-constant global variable in kernel is not supported: 
+    Global variable: int g;
+    Kernel function: void top(int * a) {...}
+    File location:   test_global_var.c
+
+
+WARNING: [FUCIN-202] Cannot inline a function with "return" in the middle of function body 
+    Function: void sub(int * a) {...} at test_middle_return.c
+    Statement:return ; at test_middle_return.c
+
+
+WARNING: [FUCIN-201] Function with void return type called as an expression is not supported
+    Call: sub(a + 1) at test_void_return.c
+    Decl: void sub(int * a) {...} at test_void_return.c
+
+
+WARNING: [FUCIN-201] Function with void return type called as an expression is not supported
+    Call: sub(a) at test_void_return.c
+    Decl: void sub(int * a) {...} at test_void_return.c
+
+
+WARNING: [FUCIN-203] Cannot inline a function with "goto" statement 
+    Function: void sub(int * a) {...} at test_goto_stmt.c
+    Statement:goto L1; at test_goto_stmt.c
+
+
+ERROR: [FUCIN-302] Host function and kernel function cannot be defined in the same file, please separate them into different files. 
+  Host function: main
+  Kernel function: top
+  Common file name: test_kernel_host.c

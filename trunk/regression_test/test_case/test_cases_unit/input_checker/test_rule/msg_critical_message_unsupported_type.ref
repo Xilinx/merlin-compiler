@@ -1,0 +1,24 @@
+
+ERROR: [SYNCHK-313] Top function argument 'a' (test_unsupported_type.c:5) with type 'unsigned long long * which contains long long type not supported by OpenCL standard (unsigned long long)
+
+ERROR: [SYNCHK-313] Top function argument 'b' (test_unsupported_type.c:5) with type 'long long * which contains long long type not supported by OpenCL standard (long long)
+
+ERROR: [SYNCHK-313] Top function argument 'c' (test_unsupported_type.c:5) with type 'st * which contains long long type not supported by OpenCL standard (signed long long x;)
+
+ERROR: [SYNCHK-304] Find name "long long" in void top(unsigned long long * a,long long * b,st * c) {...}(test_unsupported_type.c:5) which conflict with OpenCL key word.
+
+ERROR: [SYNCHK-305] Expression 'c[i] . x =(a[i] + b[i])' (test_unsupported_type.c:7) with 'long long' type is not supported
+
+ERROR: [SYNCHK-305] Expression 'c[i] . x' (test_unsupported_type.c:7) with 'long long' type is not supported
+
+ERROR: [SYNCHK-305] Expression 'x' (test_unsupported_type.c:7) with 'long long' type is not supported
+
+ERROR: [SYNCHK-305] Expression '(a[i] + b[i])' (test_unsupported_type.c:7) with 'long long' type is not supported
+
+ERROR: [SYNCHK-305] Expression 'a[i]' (test_unsupported_type.c:7) with 'long long' type is not supported
+
+ERROR: [SYNCHK-305] Expression 'a' (test_unsupported_type.c:7) with 'long long' type is not supported
+
+ERROR: [SYNCHK-305] Expression 'b[i]' (test_unsupported_type.c:7) with 'long long' type is not supported
+
+ERROR: [SYNCHK-305] Expression 'b' (test_unsupported_type.c:7) with 'long long' type is not supported

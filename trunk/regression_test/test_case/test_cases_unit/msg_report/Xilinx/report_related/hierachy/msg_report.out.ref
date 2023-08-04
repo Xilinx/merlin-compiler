@@ -1,0 +1,95 @@
+================================================================================
+Kernel : top(hierachy.cpp:23)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+a               512      (hierachy.cpp:23) memory burst and coalescing 
+b               32       (hierachy.cpp:23) memory burst[1] [2] [3]
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++----------------------------------------------------+------+--------+--------+-------+------+------+------+-----------------------------------------------------------------+
+|                     hierarchy                      |  TC  |   AC   |  CPC   |  LUT  |  FF  | BRAM | DSP  |                             comment                             |
++----------------------------------------------------+------+--------+--------+-------+------+------+------+-----------------------------------------------------------------+
+|top (hierachy.cpp:23)                               |      |  317547|  317547|  15.90|  1.65|  2.45|  0.04|kernel                                                           |
+|    auto memory burst read and coalescing for 'a'   |      |       -|      65|       |      |      |      |                                                                 |
+|    sub (hierachy.cpp:25)                           |      |    3010|    3010|   0.22|  0.03|  0.09|  0.00|                                                                 |
+|    sub1 (hierachy.cpp:28)                          |      |    6025|    6025|   0.61|  0.06|  0.19|  0.00|                                                                 |
+|    loop i (hierachy.cpp:31)                        |    10|    1011|    1011|       |      |      |      |                                                                 |
+|        loop j (hierachy.cpp:32)                    |   100|    1011|    1011|       |      |      |      |flattened with loop i (hierachy.cpp:31), IL=13, fully pipelined  |
+|    loop i (hierachy.cpp:37)                        |    10|    5260|    5260|       |      |      |      |                                                                 |
+|        auto memory burst read for 'b'              |      |       -|     105|       |      |      |      |                                                                 |
+|        loop j (hierachy.cpp:38)                    |   100|    1090|     109|       |      |      |      |IL=11, fully pipelined                                           |
+|        loop j (hierachy.cpp:41)                    |   100|    3000|     300|       |      |      |      |IL=3, pipelined II=3[4]                                          |
+|    loop i (hierachy.cpp:47)                        |   100|  301200|  301200|       |      |      |      |                                                                 |
+|        sub (hierachy.cpp:48)                       |      |  301000|    3010|   0.22|  0.03|  0.09|  0.00|                                                                 |
+|    auto memory burst write and coalescing for 'a'  |      |       -|     976|       |      |      |      |                                                                 |
+|sub (hierachy.cpp:1)                                |      |    3010|    3010|   0.22|  0.03|  0.09|  0.00|                                                                 |
+|    auto memory burst read for 'a'                  |      |    1003|    1003|       |      |      |      |                                                                 |
+|    loop i (hierachy.cpp:3)                         |  1000|    1001|    1001|       |      |      |      |IL=3, fully pipelined                                            |
+|    auto memory burst write for 'a'                 |      |    1002|    1002|       |      |      |      |                                                                 |
+|sub2 (hierachy.cpp:7)                               |      |    3011|    3011|   0.23|  0.03|  0.09|  0.00|                                                                 |
+|    sub (hierachy.cpp:9)                            |      |    3010|    3010|   0.22|  0.03|  0.09|  0.00|                                                                 |
+|sub3 (hierachy.cpp:12)                              |      |    3011|    3011|   0.23|  0.03|  0.09|  0.00|                                                                 |
+|    sub (hierachy.cpp:14)                           |      |    3010|    3010|   0.22|  0.03|  0.09|  0.00|                                                                 |
+|sub1 (hierachy.cpp:16)                              |      |    6025|    6025|   0.61|  0.06|  0.19|  0.00|                                                                 |
+|    sub3 (hierachy.cpp:18)                          |      |    3011|    3011|   0.23|  0.03|  0.09|  0.00|                                                                 |
+|    sub2 (hierachy.cpp:19)                          |      |    3011|    3011|   0.23|  0.03|  0.09|  0.00|                                                                 |
++----------------------------------------------------+------+--------+--------+-------+------+------+------+-----------------------------------------------------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++-------------------------------------+--------+----------+
+|                Name                 | Cycles | Activity |
++-------------------------------------+--------+----------+
+|    top:loop j (hierachy.cpp:41)     |  3000  |  0.94%   |
+|    top:loop i (hierachy.cpp:37)     |  1170  |  0.37%   |
+|    top:loop j (hierachy.cpp:38)     |  1090  |  0.34%   |
+|        top (hierachy.cpp:23)        |  1041  |  0.33%   |
+|    top:loop j (hierachy.cpp:32)     |  1011  |  0.32%   |
+| auto memory burst (hierachy.cpp:1)  |  1003  |  0.32%   |
+| auto memory burst (hierachy.cpp:1)  |  1002  |  0.32%   |
+|     sub:loop i (hierachy.cpp:3)     |  1001  |  0.32%   |
+|    top:loop i (hierachy.cpp:47)     |  200   |  0.06%   |
+|        sub (hierachy.cpp:1)         |   4    |  0.00%   |
+|       sub1 (hierachy.cpp:16)        |   3    |  0.00%   |
+|        sub2 (hierachy.cpp:7)        |   1    |  0.00%   |
+|       sub3 (hierachy.cpp:12)        |   1    |  0.00%   |
+| auto memory burst (hierachy.cpp:23) |   0    |  0.00%   |
+| auto memory burst (hierachy.cpp:23) |   0    |  0.00%   |
+|    top:loop i (hierachy.cpp:31)     |   0    |  0.00%   |
+| auto memory burst (hierachy.cpp:37) |   0    |  0.00%   |
++-------------------------------------+--------+----------+
+
++------------------------+------+------+------+-------+
+|          Name          | BRAM | DSP  |  FF  |  LUT  |
++------------------------+------+------+------+-------+
+| top (hierachy.cpp:23)  | 2.17 | 0.04 | 1.56 | 15.07 |
+| sub3 (hierachy.cpp:12) | 0.00 | 0.00 | 0.00 | 0.01  |
+| sub1 (hierachy.cpp:16) | 0.01 | 0.00 | 0.00 | 0.15  |
+| sub2 (hierachy.cpp:7)  | 0.00 | 0.00 | 0.00 | 0.01  |
+|  sub (hierachy.cpp:1)  | 0.09 | 0.00 | 0.03 | 0.22  |
++------------------------+------+------+------+-------+
+[1] Memory coalescing variable 'b' (hierachy.cpp:23) may cause long compilation time of downstream tool.
+  Reason: the access offset is not divisible by 16
+[2] Memory coalescing NOT inferred: variable 'b' (hierachy.cpp:23)
+  Reason: burst length is less than threshold (1024 bytes).
+  Hint: reset threshold by using --attribute bus_length_threshold=?
+[3] Low bandwidth efficiency of memory burst: variable 'b' (hierachy.cpp:23) in scope (hierachy.cpp:41).
+  Reason: short burst length = 400 bytes
+
+[4] 'a_buf_0' has no loop carried-dependence on loop 'j'  (hierachy.cpp:41).
+Hint: applying Merlin false_dependence pragma for 'a_buf_0' on loop 'j' may help enhance the performance.
+
+
+
+

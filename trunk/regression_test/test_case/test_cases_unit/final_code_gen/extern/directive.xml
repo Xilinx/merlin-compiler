@@ -1,0 +1,80 @@
+
+<directives>
+    <include_path> -I/curr/shanh/WORK/Merlin_Compiler/trunk/regression_test/msg_report/vec_add/src/  -I /curr/shanh/WORK/Merlin_Compiler/trunk/mars-gen/lib/merlin</include_path>
+
+<!-- Platform setup -->
+<!--
+<clock_period>4.16ns</clock_period>
+<timing_slack_ratio>0.2</timing_slack_ratio>
+<platform_name>alphadata_pcie7v3</platform_name><part_name>xc7vx690tffg1761-2</part_name><arch_name>virtex7</arch_name>
+<platform_name>alphadata_pcieku3</platform_name><part_name>xcku060-ffva1156-2-e</part_name><arch_name>ultra_kintex7</arch_name>
+<platform_name>baidu_kintex7</platform_name><part_name>xc7k480tiffg1156-2L</part_name><arch_name>kintex7</arch_name>
+<platform_name>baidu_kintex7</platform_name><part_name>xc7k480tffg1156-1</part_name><arch_name>kintex7</arch_name>
+<platform_name>alphadata_pcieku3</platform_name><part_name>xcku060-ffva1156-2-e</part_name><arch_name>ultra_kintex7</arch_name>
+<platform_name>de5net_a7</platform_name><part_name>5SGXEA7N2F45C2</part_name><arch_name>stratixv</arch_name>
+<bus_bitwidth> 512 </bus_bitwidth>
+<platform_name>baidu_kintex7</platform_name><part_name>xc7k480tiffg1156-2L</part_name><arch_name>kintex7</arch_name>
+<platform_name>xilinx:adm-pcie-ku3:2ddr</platform_name><part_name>xcku060-ffva1156-2-e</part_name><arch_name>ultra_kintex7</arch_name>
+<platform_name>xilinx:adm-pcie-7v3:1ddr</platform_name><part_name>xc7vx690tffg1761-2</part_name><arch_name>virtex7</arch_name>
+<platform_name>xilinx:tul-pcie3-ku115:2ddr</platform_name><part_name> XCKU115-FLVB2104-2-E</part_name><arch_name>kintex7</arch_name>
+<platform_name>baidu_kintex7</platform_name><part_name>xcku115-flvf1924-2-e</part_name><arch_name>kintexu</arch_name>
+<pure_kernel>on</pure_kernel>
+<multi_layer_reduction>       on  </multi_layer_reduction>
+<platform_name>xilinx:minotaur-vu9p-f1:4ddr-xpr:3.3</platform_name><part_name>xcku060-ffva1156-2-e</part_name><arch_name>ultra_kintex7</arch_name>
+-->
+<clock_period>4.16ns</clock_period>
+<platform_name>xilinx:adm-pcie-ku3:2ddr:3.3</platform_name><part_name>xcku060-ffva1156-2-e</part_name><arch_name>ultra_kintex7</arch_name>
+
+<!-- optimization schemes -->
+
+<naive_hls>               off </naive_hls>
+<auto_fg_opt>             on  </auto_fg_opt>
+<loop_tiling>             on  </loop_tiling>
+<cg_memory_burst>         on  </cg_memory_burst>
+<memory_burst>            on  </memory_burst>
+<burst_total_size_threshold>4000000</burst_total_size_threshold> 
+<burst_single_size_threshold>2000000</burst_single_size_threshold> 
+<burst_lifting_size_threshold>128000</burst_lifting_size_threshold> 
+<delinearization>         on  </delinearization>
+<memory_coalescing>       on  </memory_coalescing>
+<reduction_opt>           off  </reduction_opt>
+<coarse_grained_pipeline> off  </coarse_grained_pipeline>
+<fg_pipeline_parallel>    on  </fg_pipeline_parallel>
+<aggressive_opt_for_c>    off </aggressive_opt_for_c>
+<aggressive_opt_for_cpp>  off </aggressive_opt_for_cpp>
+<pcie_transfer_opt>       on  </pcie_transfer_opt>
+<!-- design flow -->
+<high_level_synthesis> off </high_level_synthesis>
+<simulation>           off </simulation>
+<implementation>       off </implementation>
+
+<!-- run bitstream  -->
+<normal>on</normal>
+<static>off</static>
+<kernel>off</kernel>
+
+<!-- auto testing -->
+<testing        > off </testing>
+<testing_run_ref> on </testing_run_ref>
+<testing_run_opt> on </testing_run_opt>
+<testing_run_sim> on </testing_run_sim>
+<testing_run_bit> on </testing_run_bit>
+
+<!-- misc -->
+<!-- 
+<kernel_timeoue> 300 </kernel_timeout>
+<implementation_tool > sdaccel </implementation_tool>
+<runtime_integration> on </runtime_integration>
+<implementation_tool > built-in </implementation_tool>
+<implementation_tool > aocl </implementation_tool>
+<implementation_tool > cheetah </implementation_tool>
+-->
+<implementation_tool> sdaccel </implementation_tool>
+<cstd></cstd>
+<!-- 
+<pure_kernel>on</pure_kernel>
+-->
+<ihatebug>debug</ihatebug>
+<skip_syntax_check>on</skip_syntax_check>
+</directives>
+

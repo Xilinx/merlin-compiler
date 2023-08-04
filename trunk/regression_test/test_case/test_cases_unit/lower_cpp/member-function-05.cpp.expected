@@ -1,0 +1,23 @@
+
+struct ::xFMinSAD 
+{
+}
+;
+
+void p_ZN8xFMinSAD4findI1AIiEEER1AIiE(struct A_int_ &loc)
+{
+}
+static void __merlin_dummy_SgClassDeclaration_struct_xFM_();
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+
+struct ::A_int_ 
+{
+}
+;
+#pragma ACCEL kernel
+
+void stereoBM_accel()
+{
+  struct A_int_ a;
+  p_ZN8xFMinSAD4findI1AIiEEER1AIiE(a);
+}

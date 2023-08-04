@@ -1,0 +1,116 @@
+
+////////////////////////////////
+test
+////////////////////////////////
+
+func_top_0:*
+pre-apply CGPIP, incorrect
+now-case revised, should not apply CGPIP, w/r range donnot cover
+
+func_top_0_1:*
+pre-donot exist
+now-apply CGPIP
+
+func_top_0_0:*
+pre-donot exist
+now-apply CGPIP
+
+func_top_1:*
+pre, now ,same, apply CGPIP
+
+func_top_2:*
+pre, now ,same, apply CGPIP
+
+func_top_2_1:*
+pre, now ,same, apply CGPIP
+
+func_top_3:*
+pre-apply CGPIP, incorrect
+now-should not apply CGPIP, non-exact write
+
+func_top_3_0:*
+pre-donot exist
+now-apply CGPIP
+
+func_top_4:*
+pre-apply CGPIP, incorrect, write range didnt cover the read range
+now-case revised, apply CGPIP
+
+func_top_4_0:*
+pre-donot exist
+now-apply CGPIP
+
+func_top_11:* 
+pre-apply CGPIP, incorrect, write range didnt cover the read range
+now-will not apply CGPIP
+
+func_top_11_0: bug293 * (bug fixed)
+pre-apply CGPIP, incorrect, write range didnt cover the read range
+now-add func_top_4_0, case revised, apply CGPIP after bug fixing
+
+
+////////////////////////////////
+test2:
+////////////////////////////////
+
+func_top_0:*
+pre, now ,same
+
+func_top_0_1:*
+pre, now ,same
+
+func_top_0_2: bug287 =
+pre-apply CGPIP, incorrect
+now-case slightly changed, should not apply CGPIP after bug fixing. 
+		non-exact write
+
+func_top_0_2_1:*
+pre-donot exist
+now-new add case,should not apply because of w/r upper range 
+
+func_top_0_2_2:*
+pre-donot exist
+now-new add case,should not apply because of w/r upper range 
+
+func_top_1:*
+pre-apply CGPIP, incorrect
+now-should not apply CGPIP because of w/r range incompatible "a_buf"
+
+func_top_1_0:*
+pre-donot exist
+now-new add case, should apply CGPIP 
+
+func_top_2:*
+pre, now, same, not apply CGPIP
+
+func_top_3:*
+pre-apply CGPIP, incorrect
+now-should not apply CGPIP, non-exact write to "a_buf"
+
+func_top_3_0: bug288 =
+pre-donot exist
+now-new add case, should apply CGPIP after bug fixing 
+
+func_top_4: bug290 = 
+pre-apply CGPIP, correct!
+now-reported non-exact write, should apply CGPIP after bug fixing. 
+		Slightly revise the case
+
+func_top_5:*
+pre, now, same, not apply CGPIP
+
+func_top_6: bug291 *
+pre, now, same, should be reconganized as CGPIP after bug fixing
+now-wont apply CGPIP, because of non-exact write
+
+func_top_7: *
+pre-apply CGPIP, incorrect
+now-correct,after range analysis, should not apply CGPIP
+
+func_top_8: *
+pre, now, same, apply CGPIP
+
+func_top_8_1: *
+pre, now, same, apply CGPIP
+
+

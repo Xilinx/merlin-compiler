@@ -1,0 +1,25 @@
+
+struct A 
+{
+}
+;
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+static void __merlin_dummy_SgTemplateMemberFunctionDeclaration_();
+
+struct ::B_A_ 
+{
+}
+;
+void p_ZN4B_A_1fIEERK1A(struct B_A_ *this_,const struct A &t);
+
+void p_ZN4B_A_1fIEERK1A(struct B_A_ *this_,const struct A &t)
+{
+}
+#pragma ACCEL kernel
+
+void k()
+{
+  struct B_A_ b;
+  struct A temp;
+  p_ZN4B_A_1fIEERK1A(&b,temp);
+}

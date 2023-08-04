@@ -1,0 +1,4 @@
+INFO: [FGPIP-103] Loop 'j'  (test_call2.cpp:8) is pipelined
+INFO: [FGPIP-108] Loop 'j'  (test_call2.cpp:21) is pipelined with a target II of 1
+INFO: [FGPIP-108] Loop 'i'  (test_call2.cpp:28) is pipelined with a target II of 1
+INFO: [FGPIP-102] Loop 'j' (test_call2.cpp:30) is fully parallelized

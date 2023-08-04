@@ -1,0 +1,46 @@
+template < typename T, int size >
+class Array {
+    T m_arr [ size ];
+public :
+    T & operator [ ] ( int i );
+    int getSize ( );
+};
+static void __merlin_dummy_SgTemplateClassDeclaration_template_();
+static void __merlin_dummy_SgTemplateMemberFunctionDeclaration_return_m_();
+static void __merlin_dummy_SgTemplateMemberFunctionDeclaration_template_();
+void p_Z16print_char_arrayILi5EER5ArrayIcLi5EE(struct Array_char_5_ &arr);
+void p_Z16print_char_arrayILi6EER5ArrayIcLi6EE(struct Array_char_6_ &arr);
+
+void p_Z16print_char_arrayILi5EER5ArrayIcLi5EE(struct Array_char_5_ &arr)
+{
+}
+
+void p_Z16print_char_arrayILi6EER5ArrayIcLi6EE(struct Array_char_6_ &arr)
+{
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+
+struct ::Array_char_5_ 
+{
+  char m_arr[6];
+}
+;
+char &p_ZN13Array_char_5_ixIEEi(struct Array_char_5_ *this_,int i);
+int p_ZN13Array_char_5_7getSizeIEEv(struct Array_char_5_ *this_);
+
+struct ::Array_char_6_ 
+{
+  char m_arr[7];
+}
+;
+char &p_ZN13Array_char_6_ixIEEi(struct Array_char_6_ *this_,int i);
+int p_ZN13Array_char_6_7getSizeIEEv(struct Array_char_6_ *this_);
+#pragma ACCEL kernel
+
+void k()
+{
+  struct Array_char_5_ ac5;
+  struct Array_char_6_ ac6;
+  p_Z16print_char_arrayILi5EER5ArrayIcLi5EE(ac5);
+  p_Z16print_char_arrayILi6EER5ArrayIcLi6EE(ac6);
+}

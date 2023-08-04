@@ -1,0 +1,18 @@
+
+struct A 
+{
+}
+;
+void p_Z1fI1AERK1A(const struct A &t);
+
+void p_Z1fI1AERK1A(const struct A &t)
+{
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+#pragma ACCEL kernel
+
+void k()
+{
+  struct A temp;
+  p_Z1fI1AERK1A(temp);
+}

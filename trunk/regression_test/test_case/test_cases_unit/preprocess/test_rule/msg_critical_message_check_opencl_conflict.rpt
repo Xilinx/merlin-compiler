@@ -1,0 +1,26 @@
+
+ERROR: [PROCS-369] Find name "double16" in long long double16() {...}(test1.cpp:28) which conflict with OpenCL key word.
+
+ERROR: [PROCS-369] Find name "long long" in long long double16() {...}(test1.cpp:28) which conflict with OpenCL key word.
+
+ERROR: [PROCS-369] Find name "char8" in long char8(long long xx) {...}(test1.cpp:31) which conflict with OpenCL key word.
+
+ERROR: [PROCS-369] Find name "long long" in long char8(long long xx) {...}(test1.cpp:31) which conflict with OpenCL key word.
+
+ERROR: [PROCS-369] Find name "char4" in void ppp(int char4) {...}(test1.cpp:35) which conflict with OpenCL key word.
+
+ERROR: [PROCS-369] Find name "long2" in float long2 = 0;(test1.cpp:14) which conflict with OpenCL key word.
+
+ERROR: [PROCS-369] Find name "long16" in float long16 = 0;(test1.cpp:29) which conflict with OpenCL key word.
+
+ERROR: [PROCS-369] Find name "long16" in float long16 = 0;(test1.cpp:36) which conflict with OpenCL key word.
+
+ERROR: [PROCS-369] Find name "float4" in float float4 = 0;(test1.cpp:38) which conflict with OpenCL key word.
+
+ERROR: [PROCS-369] Find name "double8" in float double8 = 0;(test1.cpp:47) which conflict with OpenCL key word.
+
+ERROR: [PROCS-369] Find name "double2" in double2 new_struct2;(test1.cpp:50) which conflict with OpenCL key word.
+
+ERROR: [PROCS-369] Find name "long long" in long long mb = 1;(test1.cpp:55) which conflict with OpenCL key word.
+
+ERROR: [PROCS-372] Expression 'double16()' (test1.cpp:32) with 'long long' type is not supported

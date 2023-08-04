@@ -1,0 +1,60 @@
+{
+    "L,pipeline-merlinL1": {
+        "II": "-", 
+        "iteration-latency": "?", 
+        "iteration-latency-min": "5", 
+        "latency-max": "?", 
+        "latency-min": "0", 
+        "name": "merlinL1", 
+        "pipelined": "no", 
+        "trip-count": "1875"
+    }, 
+    "mars_kernel_0_8": {
+        "instance_name": "grp_mars_kernel_0_8_fu_1965", 
+        "interval-max": "?", 
+        "interval-min": "3", 
+        "latency-max": "?", 
+        "latency-min": "3", 
+        "module_name": "mars_kernel_0_8"
+    }, 
+    "mars_kernel_0_8_1": {
+        "instance_name": "grp_mars_kernel_0_8_1_fu_2498", 
+        "interval-max": "?", 
+        "interval-min": "3", 
+        "latency-max": "?", 
+        "latency-min": "3", 
+        "module_name": "mars_kernel_0_8_1"
+    }, 
+    "mars_kernel_0_8_2": {
+        "instance_name": "grp_mars_kernel_0_8_2_fu_3031", 
+        "interval-max": "?", 
+        "interval-min": "3", 
+        "latency-max": "?", 
+        "latency-min": "3", 
+        "module_name": "mars_kernel_0_8_2"
+    }, 
+    "mars_kernel_0_8_3": {
+        "instance_name": "grp_mars_kernel_0_8_3_fu_1432", 
+        "interval-max": "?", 
+        "interval-min": "3", 
+        "latency-max": "?", 
+        "latency-min": "3", 
+        "module_name": "mars_kernel_0_8_3"
+    }, 
+    "pipeline": {
+        "interval-max": "?", 
+        "interval-min": "1", 
+        "latency-max": "?", 
+        "latency-min": "1", 
+        "total-BRAM": 598, 
+        "total-DSP": 1518, 
+        "total-FF": 398530, 
+        "total-LUT": 292087, 
+        "total-URAM": 0, 
+        "util-BRAM": "11", 
+        "util-DSP": "12", 
+        "util-FF": "11", 
+        "util-LUT": "16", 
+        "util-URAM": "0"
+    }
+}

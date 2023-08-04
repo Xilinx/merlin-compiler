@@ -1,0 +1,208 @@
+#include "logistic.h"
+
+void shift_left(float regs[10])
+{
+  int i;
+  for (i = 0; i < 10 - 1; i++) {
+    regs[i] = regs[i + 1];
+  }
+}
+
+void recv_data(volatile float *global_data,unsigned int offset,float data[32][794])
+{
+  memcpy( *data,global_data + offset,(10 + 784) * 32 * 4);
+}
+
+void compute1(float data[32][794],float weights[10][785],float result1[32][10])
+{
+  int k_0;
+  int p_0;
+  int j_0;
+  int i;
+  int j;
+  int k;
+  int p;
+  for (j = 0; j < 32; j++) {
+    
+#pragma ACCEL pipeline
+    for (k = 0; k < 10; k++) {
+      
+#pragma ACCEL parallel complete
+      result1[j][k] = weights[k][0];
+    }
+  }
+/* Original label: STAGE1_D:for(i = 0;i < 784 / 4;i++) {STAGE1_n:for(j = 0;j < 32;j++) {#pragma ACCEL pipeline flattenfor(p = 0;p < 4;p++) {#pragma ACCEL parallel completefor(k = 0;k < 10;k++) {#pragma ACCEL parallel completeresult1[j][k] += weights[k][i + 1] * data[j][i + 10];}}}} */
+  float _result1_rdc[32][4][10];
+  for (j = 0; j < 32; j++) {
+    
+#pragma ACCEL pipeline flatten
+    for (p = 0; p < 4; p++) {
+      
+#pragma ACCEL parallel complete
+      for (k = 0; k < 10; k++) {
+        
+#pragma ACCEL parallel complete
+        _result1_rdc[j][p][k] = 0;
+      }
+    }
+  }
+  for (i = 0; i < 784 / 4; i++) {
+/* Original label: STAGE1_n:for(j = 0;j < 32;j++) {#pragma ACCEL pipeline flattenfor(p = 0;p < 4;p++) {#pragma ACCEL parallel completefor(k = 0;k < 10;k++) {#pragma ACCEL parallel completeresult1[j][k] += weights[k][i + 1] * data[j][i + 10];}}} */
+    for (j = 0; j < 32; j++) {
+      
+#pragma ACCEL pipeline flatten
+      for (p = 0; p < 4; p++) {
+        
+#pragma ACCEL parallel complete
+        for (k = 0; k < 10; k++) {
+          
+#pragma HLS dependence variable=_result1_rdc array inter false
+          
+#pragma ACCEL parallel complete
+          _result1_rdc[j][p][k] += weights[k][i + 1] * data[j][i + 10];
+        }
+      }
+    }
+  }
+  for (j_0 = 0; j_0 <= 31; ++j_0) {
+    
+#pragma ACCEL PIPELINE
+    for (p_0 = 0; p_0 <= 3; ++p_0) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      for (k_0 = 0; k_0 <= 9; ++k_0) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+{
+          result1[j][k] += _result1_rdc[j][p][k];
+        }
+      }
+    }
+  }
+}
+
+void compute2(float result1[32][10],float data[32][794],float result2[32][10])
+{
+  int j;
+  int k;
+/* Original label: STAGE2_L:for(k = 0;k < 10;k++) {STAGE2_n:for(j = 0;j < 32;j++) {#pragma ACCEL pipelinefloat temp = 1 + result1[j][k] * result1[j][k];result2[j][k] = result1[j][k] / temp -(2.f * data[j][k] - 1.f) / sqrtf(temp);}} */
+  for (k = 0; k < 10; k++) {
+/* Original label: STAGE2_n:for(j = 0;j < 32;j++) {#pragma ACCEL pipelinefloat temp = 1 + result1[j][k] * result1[j][k];result2[j][k] = result1[j][k] / temp -(2.f * data[j][k] - 1.f) / sqrtf(temp);} */
+    for (j = 0; j < 32; j++) {
+      
+#pragma ACCEL pipeline
+      float temp = 1 + result1[j][k] * result1[j][k];
+      result2[j][k] = result1[j][k] / temp - (2.f * data[j][k] - 1.f) / sqrtf(temp);
+//result2[j][k] = 1.f/(1.f+expf(-result1[j][k]))-data[j][k];
+    }
+  }
+}
+
+void compute3(float result2[32][10],float data[32][794],float gradient[10][785])
+{
+  int i;
+  int j;
+  int k;
+/* Original label: STAGE3_n:for(j = 0;j < 32;j++) {STAGE3_D:for(i = 0;i < 784 + 1;i++) {STAGE3_L:{#pragma ACCEL pipelinefor(k = 0;k < 10;k++) {#pragma ACCEL parallel completegradient[k][i] += result2[j][k] *((i == 0?1.f : data[j][i - 1 + 10]));}}}} */
+  for (j = 0; j < 32; j++) {
+/* Original label: STAGE3_D:for(i = 0;i < 784 + 1;i++) {STAGE3_L:{#pragma ACCEL pipelinefor(k = 0;k < 10;k++) {#pragma ACCEL parallel completegradient[k][i] += result2[j][k] *((i == 0?1.f : data[j][i - 1 + 10]));}}} */
+    for (i = 0; i < 784 + 1; i++) {
+      STAGE3_L:
+{
+        
+#pragma ACCEL pipeline
+        for (k = 0; k < 10; k++) {
+          
+#pragma ACCEL parallel complete
+          gradient[k][i] += result2[j][k] * ((i == 0?1.f : data[j][i - 1 + 10]));
+        }
+      }
+    }
+  }
+}
+
+void pipeline(int n_samples,volatile float *global_data,float weights[10][785],float gradient[10][785])
+{
+  int i;
+  int n_stage = n_samples / 32;
+/* Original label: TOP_LOOP:for(i = 0;i < n_stage;i++) {#pragma HLS loop_tripcount max=1875#pragma ACCEL pipelinefloat data[32][794];float result1[32][10];float result2[32][10];recv_data(global_data,(i * 32 *(784 + 10)),data);compute1(data,weights,result1);compute2(result1,data,result2);compute3(result2,data,gradient);} */
+  for (i = 0; i < n_stage; i++) {
+    
+#pragma HLS loop_tripcount max=1875
+    
+#pragma ACCEL pipeline
+    float data[32][794];
+    float result1[32][10];
+    float result2[32][10];
+    recv_data(global_data,(i * 32 * (784 + 10)),data);
+    compute1(data,weights,result1);
+    compute2(result1,data,result2);
+    compute3(result2,data,gradient);
+  }
+}
+#pragma ACCEL kernel
+//void logistic_regression_kernel( int n_samples, float global_weights[WEIGHTS_SIZE], float global_data[DATA_SIZE], float global_gradient[WEIGHTS_SIZE] )
+
+void logistic_regression_kernel(int n_samples,float *global_weights,float *global_data,float *global_gradient)
+{
+#ifdef ADD_IF
+#endif
+  float weights[10][785];
+  float gradient[10][785];
+  int i;
+  int j;
+  int k;
+  float regs[10];
+  float buffer[785];
+#if 0
+#else
+  for (i = 0; i < 10; i++) {
+    int j;
+    for (j = 0; j < 784 + 1; j++) {
+      gradient[i][j] = 0.f;
+    }
+  }
+  for (i = 0; i < 10; i++) {
+    memcpy((void *)buffer,(const void *)(global_weights + (784 + 1) * i),(784 + 1) * 4);
+    for (j = 0; j < 784 + 1; j++) {
+      
+#pragma ACCEL pipeline
+      for (k = 0; k < 10; k++) {
+        
+#pragma ACCEL parallel complete
+        regs[k] = weights[k][j];
+      }
+      shift_left(regs);
+      for (k = 0; k < 10; k++) {
+        
+#pragma ACCEL parallel complete
+        weights[k][j] = regs[k];
+      }
+      weights[10 - 1][j] = buffer[j];
+    }
+  }
+#endif
+  pipeline(n_samples,global_data,weights,gradient);
+#if 0
+#else
+  for (i = 0; i < 10; i++) {
+    for (j = 0; j < 784 + 1; j++) {
+      
+#pragma ACCEL pipeline
+      buffer[j] = gradient[0][j];
+      for (k = 0; k < 10; k++) {
+        
+#pragma ACCEL parallel complete
+        regs[k] = gradient[k][j];
+      }
+      shift_left(regs);
+      for (k = 0; k < 10; k++) {
+        
+#pragma ACCEL parallel complete
+        gradient[k][j] = regs[k];
+      }
+    }
+    memcpy((void *)(global_gradient + i * (784 + 1)),(const void *)buffer,(784 + 1) * 4);
+  }
+#endif
+}

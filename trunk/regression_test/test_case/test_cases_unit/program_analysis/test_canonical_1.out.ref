@@ -1,0 +1,81 @@
+// Testing NULL loop initial/testing/increment
+#pragma ACCEL kernel
+
+void func_loop()
+{
+  int a[10];
+  int b[10];
+  int c[10];
+  int i = 0;
+  int j = 0;
+  int x;
+  int y;
+  int z;
+  int N = 100;
+  for (i = 0; ; i++) {
+/* block 1*/
+    c[i] = a[i] + b[i];
+    if (i < 100) 
+      break; 
+  }
+  for (i = 0; ; ) {
+/* block 2*/
+    c[i] = a[i] + b[i];
+    i++;
+  }
+  for (; i < 100; i++) {
+/* block 3*/
+    c[i] = a[i] + b[i];
+  }
+  for (; ; i++) {
+/* block 4*/
+    c[i] = a[i] + b[i];
+    if (i < 100) 
+      break; 
+  }
+  for (i = 0; ; ) {
+/* block 5*/
+    c[i] = a[i] + b[i];
+    if (i < 100) 
+      break; 
+    i++;
+  }
+  for (; i < 100; ) {
+/* block 6*/
+    c[i] = a[i] + b[i];
+    i++;
+  }
+  for (; ; ) {
+/* block 7*/
+    c[i] = a[i] + b[i];
+    if (i < 100) 
+      break; 
+    i++;
+  }
+}
+
+int main()
+{
+  int aa[100][100];
+  int bb[100][100];
+  int cc[100][100];
+  int *a;
+  int *b;
+  int *c;
+  int a_s;
+  int b_s;
+  int c_s;
+  int d_s;
+  float aa_f[100][100];
+  float bb_f[100][100];
+  float cc_f[100][100];
+  float *a_f;
+  float *b_f;
+  float *c_f;
+  float a_s_f;
+  float b_s_f;
+  float c_s_f;
+  float d_s_f;
+  func_loop();
+  return 0;
+}

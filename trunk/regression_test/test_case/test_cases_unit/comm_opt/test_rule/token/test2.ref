@@ -1,0 +1,84 @@
+#pragma ACCEL kernel
+
+void foo1(int *a,int *b,int *c)
+{
+  int dummy_token_3;
+// Token comes from node 1 and 2 for sync level 0
+  int token_3;
+  int dummy_token_2;
+// Token comes from node 1 and 0 for sync level 4
+  int token_2;
+  int dummy_token_1;
+// Token comes from node 0 and 2 for sync level 0
+  int token_1;
+  int dummy_token_0;
+// Token comes from node 0 and 1 for sync level 4
+  int token_0;
+  int i;
+  int j;
+  int k;
+  for (i = 0; i < 100; ++i) {
+    for (j = 0; j < 100; ++j) {
+      for (k = 0; k < 100; ++k) {
+// Token gen: node 1 and 0 for sync level 4(backward)
+        if (k == 0 && (j != 0 || i != 0)) {
+          dummy_token_2 = token_2;
+          
+#pragma ACCEL mem_fence
+        }
+        a[k + i + j] += k;
+// Token gen: node 0 and 2 for sync level 0(forward)
+        if (k == 99 && j == 99 && i == 99) {
+          
+#pragma ACCEL mem_fence
+          token_1 = 1;
+        }
+// Token gen: node 0 and 1 for sync level 4(forward)
+        if (k == 99) {
+          
+#pragma ACCEL mem_fence
+          token_0 = 1;
+        }
+      }
+      for (k = 0; k < 100; ++k) {
+// Token gen: node 0 and 1 for sync level 4(forward)
+        if (k == 0) {
+          dummy_token_0 = token_0;
+          
+#pragma ACCEL mem_fence
+        }
+        b[k] += a[k + i];
+// Token gen: node 1 and 2 for sync level 0(forward)
+        if (k == 99 && j == 99 && i == 99) {
+          
+#pragma ACCEL mem_fence
+          token_3 = 1;
+        }
+// Token gen: node 1 and 0 for sync level 4(backward)
+        if (k == 99 && (j != 99 || i != 99)) {
+          
+#pragma ACCEL mem_fence
+          token_2 = 1;
+        }
+      }
+    }
+  }
+// Token gen: node 0 and 2 for sync level 0(forward)
+  dummy_token_1 = token_1;
+  
+#pragma ACCEL mem_fence
+// Token gen: node 1 and 2 for sync level 0(forward)
+  dummy_token_3 = token_3;
+  
+#pragma ACCEL mem_fence
+  c[i] += a[i];
+}
+
+int main()
+{
+  int a[300];
+  int b[300];
+  int c[300];
+  foo1(a,b,c);
+  return 0;
+}

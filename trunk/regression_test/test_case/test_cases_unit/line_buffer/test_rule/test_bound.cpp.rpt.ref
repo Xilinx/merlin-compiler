@@ -1,0 +1,1 @@
+INFO: [LINEBUF-101] Applying line buffer on variable 'in' in loop 'L_0_0' (test_bound.cpp:9) with a 5x1 stencil

@@ -1,0 +1,10 @@
+typedef int integer;
+#pragma ACCEL kernel
+
+void foobar()
+{
+  int x;
+  switch(x)
+  case 0:
+  ;
+}

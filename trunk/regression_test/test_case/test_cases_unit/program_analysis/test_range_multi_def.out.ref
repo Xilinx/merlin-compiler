@@ -1,0 +1,89 @@
+
+void foo(int a[10],int *b,int *c,int *d)
+{
+  int index = 0;
+  for (int i = 0; i < 10; ++i) {
+    if (a[i] > 0) {
+      index = i;
+    }
+  }
+  b[index];
+  index = index;
+  c[index];
+  index = index + 1;
+  d[index];
+}
+
+void foo2(int a[10],int *b,int *d)
+{
+  int index = 0;
+  for (int i = 0; i < 10; ++i) {
+    if (a[i] > 0) {
+      index = i;
+    }
+  }
+  b[index];
+  index = index + 1;
+  d[index];
+}
+
+void foo3(int a[10],int n,int *b,int *d)
+{
+  int index = 0;
+  for (int i = 0; i < 10; ++i) {
+    if (a[i] > 0) {
+      index = n;
+    }
+  }
+  b[index];
+  int i0 = 0;
+  for (int j = 0; j < 10; ++j) {
+    char tmp;
+    if (j) {
+      tmp = i0;
+    }
+     else {
+      tmp = (i0 + 1);
+    }
+    i0 = tmp;
+  }
+  d[i0];
+}
+
+void foo4_0(int *a,int i)
+{
+  a[i] = 0;
+}
+
+void foo4_1(int *a,int j)
+{
+  a[j] = 0;
+}
+
+void foo4(int a[10])
+{
+  foo4_0(a,2);
+  foo4_0(a,3);
+  foo4_1(a,4);
+}
+
+void foo5(int *a)
+{
+  int i;
+  if (a[0]) {
+    i = 10;
+  }
+  a[i];
+}
+
+void foo6(int *a)
+{
+  int i;
+  int j;
+  while(i < j){
+    j = i;
+    i = j++;
+  }
+  a[i];
+  a[j];
+}

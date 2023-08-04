@@ -1,0 +1,127 @@
+<configuration>
+	<param name="dup_factor">1</param>
+	<param name="impl_name"></param>
+	<param name="module_name">unmaned_task1</param>
+	<param name="module_type">wrapped</param>
+	<param name="loop_depth">0</param>
+	<param name="global_id"></param>
+	<param name="param_list"></param>
+	<param name="poly_iterators"></param>
+	<param name="poly_iterator_ranges"></param>
+	<param name="poly_parameters"></param>
+	<param name="poly_parameter_ranges"></param>
+	<param name="poly_orders">1</param>
+	<param name="poly_conditions">1</param>
+	<param name="sok_by_mbox">0</param>
+	<param name="sok_by_slv">1</param>
+	<param_array name="fifo_in_unit_depth"></param_array>
+	<param_array name="fifo_out_unit_depth"></param_array>
+	<param_array name="fifo_in"></param_array>
+	<param_array name="fifo_out"></param_array>
+	<param_array name="fifo_in_type"></param_array>
+	<param_array name="fifo_out_type"></param_array>
+	<param_array name="fifo_in_synclevel"></param_array>
+	<param_array name="fifo_out_synclevel"></param_array>
+	<param_array name="bus_port">
+		<item>a</item>
+	</param_array>
+	<param_array name="bus_type">
+		<item>bus_e1</item>
+	</param_array>
+	<param_array name="addr_mapping"></param_array>
+	<param_array name="port_list">
+		<item>burst_length</item>
+		<item>burst_number</item>
+		<item>a</item>
+	</param_array>
+	<param_array name="port_type">
+		<item>param</item>
+		<item>param</item>
+		<item>bus_e1</item>
+	</param_array>
+	<param_array name="port_dir">
+		<item>in</item>
+		<item>in</item>
+		<item>in</item>
+	</param_array>
+	<param_array name="port_synclevel">
+		<item>0</item>
+		<item>0</item>
+		<item>0</item>
+	</param_array>
+	<param_array name="port_fifodepth">
+		<item>1</item>
+		<item>1</item>
+		<item>1</item>
+	</param_array>
+	<param_array name="port_addrmap">
+		<item></item>
+		<item></item>
+		<item></item>
+	</param_array>
+	<param_array name="port_local_addr">
+		<item>0</item>
+		<item>0</item>
+		<item>0</item>
+	</param_array>
+	<param_array name="port_total_iterators">
+		<item></item>
+		<item></item>
+		<item></item>
+	</param_array>
+	<param_array name="port_dim">
+		<item></item>
+		<item></item>
+		<item></item>
+	</param_array>
+	<param_array name="port_data_type">
+		<item>int</item>
+		<item>int</item>
+		<item>int</item>
+	</param_array>
+	<param_array name="func_arg_idx">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+	</param_array>
+	<param_array name="func_arg_name">
+		<item>burst_length</item>
+		<item>burst_number</item>
+		<item>a</item>
+	</param_array>
+	<param name="port_idx_base">10</param>
+	<param name="ref_rename_ports"></param>
+	<param name="naive_hls">on</param>
+	<param name="include_path">-I/curr/hanhu/WORK/test_environment/test_case/test_cases_platform/1ddr_rd/src  -I/curr/hanhu/WORK/trunk_2016.4/mars-gen/lib/merlin</param>
+	<param name="clock_period">5ns</param>
+	<param name="platform_name">p385a_sch_ax115</param>
+	<param name="part_name">10ax115s2f45i2sges</param>
+	<param name="arch_name">arria10</param>
+	<param name="memory_burst">on</param>
+	<param name="altera_opt">on</param>
+	<param name="false_dep_removal">off</param>
+	<param name="comm_refine">on</param>
+	<param name="comm_sync">on</param>
+	<param name="comm_rename">on</param>
+	<param name="comm_dead_remove">on</param>
+	<param name="memory_reduce">on</param>
+	<param name="value_prop">on</param>
+	<param name="loop_flatten">on</param>
+	<param name="loop_tiling">off</param>
+	<param name="reduction_altera">off</param>
+	<param name="opt_effort">low</param>
+	<param name="pure_kernel">on</param>
+	<param name="cstd"></param>
+	<param name="high_level_synthesis">off</param>
+	<param name="simulation">off</param>
+	<param name="implementation">off</param>
+	<param name="testing">off</param>
+	<param name="testing_run_ref">on</param>
+	<param name="testing_run_opt">on</param>
+	<param name="testing_run_sim">on</param>
+	<param name="testing_run_bit">on</param>
+	<param name="implementation_tool">aocl</param>
+	<param name="ihatebug">debug</param>
+	<param name="skip_syntax_check">on</param>
+	<param name="working_dir">/curr/hanhu/WORK/test_environment/test_case/test_cases_platform/1ddr_rd/run/implement/opencl_gen/tldm/mhs_gen</param>
+</configuration>

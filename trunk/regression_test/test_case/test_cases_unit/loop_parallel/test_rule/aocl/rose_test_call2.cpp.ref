@@ -1,0 +1,50 @@
+
+int add_func_1(int a,int b)
+{
+  return a + b;
+}
+
+int add_func_2(int a[100],int b[100],int i,int j)
+{
+  return a[i] + b[j];
+}
+
+int add_func_3(int a[100],int b[100],int *sum)
+{
+  
+#pragma HLS array_partition variable=a cyclic factor=4
+  
+#pragma HLS array_partition variable=b complete
+  for (int j = 0; j < 99; j++) {
+     *sum += a[j] + b[j];
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_0()
+{
+  
+#pragma ACCEL attribute variable=a bankwidth=4
+  int a[100];
+  int b[100];
+  int i;
+  int j;
+  for (i = 0; i < 99; i++) {
+    for (j = 0; j < 90; j++) {
+      a[i] = add_func_1(b[j],b[j + 1]);
+      a[i + 1] = add_func_1(b[j + 2],b[j + 3]);
+    }
+  }
+  for (i = 0; i < 99; i++) {
+    
+#pragma unroll
+    for (j = 0; j < 99; j++) {
+      a[i] = add_func_2(b,b,j,j + 1);
+    }
+    a[i] += add_func_2(b,b,i,i + 1);
+  }
+  int sum = 0;
+  int aa[100];
+  int bb[100];
+  add_func_3(aa,bb,&sum);
+}

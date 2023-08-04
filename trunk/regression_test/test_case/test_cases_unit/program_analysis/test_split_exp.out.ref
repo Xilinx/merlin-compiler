@@ -1,0 +1,36 @@
+
+void test()
+{
+  int i;
+  int j;
+  int k;
+{
+    bool rose__temp = true;
+    int rose_temp = i > 0 || j < 0;
+    int rose_temp_0 = rose_temp || k > 0;
+    rose__temp = ((bool )rose_temp_0);
+    if (rose__temp) {
+    }
+  }{
+    bool rose__temp = true;
+    int rose_temp_1 = i > 0 && j < 0;
+    int rose_temp_2 = rose_temp_1 && k > 0;
+    rose__temp = ((bool )rose_temp_2);
+    if (rose__temp) {
+    }
+  }{
+    bool rose__temp = true;
+    int rose_temp_4;
+    if (i > 0) {
+      rose_temp_4 = 0;
+    }
+     else {
+      int rose_temp_5 = j > 0?1 : k;
+      rose_temp_4 = rose_temp_5;
+    }
+    int rose_temp_3 = rose_temp_4;
+    rose__temp = ((bool )((bool )rose_temp_3));
+    if (rose__temp) {
+    }
+  }
+}

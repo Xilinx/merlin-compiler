@@ -1,0 +1,8 @@
+{
+    "test": {
+        "interval-max": "?", 
+        "interval-min": "1", 
+        "latency-max": "?", 
+        "latency-min": "1"
+    }
+}

@@ -1,0 +1,144 @@
+#include <string.h> 
+#pragma ACCEL kernel
+
+void kmeans_kernel(int N,int K,int D,double points[784000],double centroids[7840],double merlin_output[7880])
+{
+  double merlin_output_buf_0[10][787];
+  double centroids_buf_0[10][10][49][16];
+  int i_sub;
+  
+#pragma ACCEL interface max_depth=7880 depth=7880 variable=merlin_output
+  
+#pragma ACCEL interface variable=centroids max_depth=7840 depth=7840
+  
+#pragma ACCEL interface variable=points max_depth=784000 depth=784000
+// Create buffers for sums and counts
+  double sums[7840];
+  int counts[10];
+  double distances[10][10];
+  double partials[10][784][10];
+  int best_index[10];
+  double best_distance[10];
+  for (int _chunk_l1 = 0; _chunk_l1 < 10; _chunk_l1++) {
+    for (int _k_l2 = 0; _k_l2 < 10; _k_l2++) {
+      
+#pragma ACCEL parallel
+      counts[_k_l2] = 0;
+    }
+    for (int _i_l3 = 0; _i_l3 < 980; _i_l3++) {
+      
+#pragma ACCEL PIPELINE AUTO
+      for (i_sub = 0; i_sub < 8; ++i_sub) {
+        
+#pragma ACCEL PARALLEL
+        sums[_i_l3 * 8 + i_sub] = 0.0;
+      }
+    }
+  }
+{
+    for (int _sub_l4 = 0; _sub_l4 < 10; _sub_l4++) {
+      
+#pragma HLS UNROLL
+      memcpy(centroids_buf_0[_sub_l4][0][0],(const void *)(&centroids[0]),sizeof(double ) * 7840);
+    }
+  }
+// Clear sums and counts
+  for (int _chunk_l5 = 0; _chunk_l5 < 1000 / 10; _chunk_l5++) {
+    double points_buf_1[10][784];
+    double points_buf_0[10][49][16];
+{
+      memcpy(points_buf_0[0][0],(const void *)(&points[_chunk_l5 * 7840]),sizeof(double ) * 7840);
+    }
+    
+#pragma ACCEL PIPELINE
+    for (int _sub_l6 = 0; _sub_l6 < 10; _sub_l6++) {
+      best_index[_sub_l6] = 0;
+      best_distance[_sub_l6] = 9999.00;
+      int n = _chunk_l5 * 10 + _sub_l6;
+      for (int _k_l7 = 0; _k_l7 < 10; _k_l7++) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        distances[_sub_l6][_k_l7] = 0.0;
+      }
+      for (int _d_l8 = 0; _d_l8 < 784 / 16; _d_l8++) {
+        
+#pragma ACCEL PIPELINE
+        for (int _k_l9 = 0; _k_l9 < 10; _k_l9++) {
+          
+#pragma ACCEL PIPELINE AUTO
+          
+#pragma ACCEL TILE
+          double partials_d_k = 0.0;
+          for (int _dd_l10 = 0; _dd_l10 < 16; _dd_l10++) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            double diff = centroids_buf_0[_sub_l6][_k_l9][_d_l8][_dd_l10] - points_buf_0[_sub_l6][_d_l8][_dd_l10];
+            double diff2 = diff * diff;
+            
+#pragma ACCEL reduction variable=partials_d_k
+            partials_d_k += diff2;
+          }
+          partials[_sub_l6][_d_l8][_k_l9] = partials_d_k;
+        }
+      }
+      for (int _d_l11 = 0; _d_l11 < 784 / 16; _d_l11++) {
+        
+#pragma ACCEL FALSE_DEPENDENCE VARIABLE=partials
+        
+#pragma ACCEL PIPELINE
+        for (int _k_l12 = 0; _k_l12 < 10; _k_l12++) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          
+#pragma ACCEL TILE
+          
+#pragma ACCEL reduction variable=distances
+          distances[_sub_l6][_k_l12] += partials[_sub_l6][_d_l11][_k_l12];
+        }
+      }
+// find best k
+      for (int _k_l13 = 0; _k_l13 < 10; _k_l13++) {
+        
+#pragma ACCEL PIPELINE
+        if (distances[_sub_l6][_k_l13] < best_distance[_sub_l6]) {
+          best_distance[_sub_l6] = distances[_sub_l6][_k_l13];
+          best_index[_sub_l6] = _k_l13;
+        }
+      }
+//// Update sums and counts
+//counts[best_index]++;
+//for (int d = 0; d < D_STATIC; d++) {
+//    sums[best_index*D_STATIC+d] += points[n*D_STATIC+d];
+//}
+    }
+    memcpy(points_buf_1[0],(const void *)(&points[_chunk_l5 * 7840]),sizeof(double ) * 7840);
+    for (int _sub_l14 = 0; _sub_l14 < 10; _sub_l14++) {
+      int n = _chunk_l5 * 10 + _sub_l14;
+      int best = best_index[_sub_l14];
+      counts[best]++;
+      for (int _d_l15 = 0; _d_l15 < 784; _d_l15++) {
+        
+#pragma ACCEL PIPELINE AUTO
+        
+#pragma ACCEL TILE
+        
+#pragma ACCEL FALSE_DEPENDENCE VARIABLE=sums
+        sums[best * 784 + _d_l15] += points_buf_1[_sub_l14][_d_l15];
+      }
+    }
+  }
+// For every point, assign a label (centroid index) which is the closest
+// pack output data
+  for (int _k_l16 = 0; _k_l16 < 10; _k_l16++) {
+    int offset = _k_l16 * (2 + 784 + 1);
+    merlin_output_buf_0[_k_l16][0] = ((double )0);
+    merlin_output_buf_0[_k_l16][1] = ((double )_k_l16);
+    for (int _d_l17 = 0; _d_l17 < 784; _d_l17++) {
+      
+#pragma ACCEL PIPELINE AUTO
+      merlin_output_buf_0[_k_l16][2 + _d_l17] = sums[_k_l16 * 784 + _d_l17];
+    }
+    merlin_output_buf_0[_k_l16][786] = ((double )counts[_k_l16]);
+  }
+  memcpy((void *)(&merlin_output[0]),merlin_output_buf_0[0],sizeof(double ) * 7870);
+}

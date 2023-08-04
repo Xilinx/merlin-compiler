@@ -1,0 +1,437 @@
+Merlin Pass [Auto Function Inlining] started ... 
+[AutoInline] processing void test1_1() {...} ...
+ -- [Partition] Alias of 'test1_1_a': sub1_1_a,test1_1_a,
+ -- Set partition info: sub1_1_a right_dim=0
+ -- Set partition info: test1_1_a right_dim=0
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'sub1_1_a': sub1_1_a,test1_1_a,
+ -- Insert inline at void sub1_1(int * sub1_1_a) {...}
+[AutoInline] processing void test1_2() {...} ...
+ -- [Partition] Alias of 'test1_2_a': sub1_2_a,test1_2_a,
+ -- Set partition info: sub1_2_a right_dim=0
+ -- Set partition info: test1_2_a right_dim=0
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'sub1_2_a': sub1_2_a,test1_2_a,
+ -- Insert inline at void sub1_2(int * sub1_2_a) {...}
+[AutoInline] processing void test1_3() {...} ...
+ERROR: unrecognized variable name 'test1_3_wrong' in pragma: 
+  SgPragmaDeclaration:#pragma hls array_partition variable=test1_3_wrong dim=1
+ -- [Partition] Alias of 'test1_3s_a': test1_3s_a,
+ -- Set partition info: test1_3s_a right_dim=0
+ -- [Partition] Alias of 'test1_3t_a': sub1_3t_a,test1_3t_a,
+ -- Set partition info: sub1_3t_a right_dim=0
+ -- Set partition info: test1_3t_a right_dim=0
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'sub1_3_a': sub1_3_a,test1_3_a,
+ -- [Filter] Alias of 'sub1_3s_a': sub1_3s_a,test1_3s_a,
+ -- [Filter] Alias of 'sub1_3t_a': sub1_3t_a,test1_3t_a,
+ -- Insert inline at void sub1_3t(int * sub1_3t_a) {...}
+[AutoInline] processing void test1_4() {...} ...
+ERROR: invalid dim index in array_partition pragma: partition_dim=0 array_dim=1
+  SgPragmaDeclaration:#pragma hls array_partition variable=test1_4_a
+ERROR: invalid dim index in array_partition pragma: partition_dim=2 array_dim=1
+  SgPragmaDeclaration:#pragma hls array_partition variable=test1_4s_a dim=2
+ERROR: invalid dim index in array_partition pragma: partition_dim=0 array_dim=1
+  SgPragmaDeclaration:#pragma hls array_partition variable=test1_4t_a dim=0
+ERROR: invalid dim index in array_partition pragma: partition_dim=1 array_dim=0
+  SgPragmaDeclaration:#pragma hls array_partition variable=test1_4u_a dim=1
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'sub1_4_a': sub1_4_a,test1_4_a,
+ -- [Filter] Alias of 'sub1_4s_a': sub1_4s_a,test1_4s_a,
+ -- [Filter] Alias of 'sub1_4t_a': sub1_4t_a,test1_4t_a,
+ -- [Filter] Alias of 'sub1_4u_a': sub1_4u_a,
+[AutoInline] processing void test1_5() {...} ...
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'sub1_1_a': sub1_1_a,test1_5_a,
+[AutoInline] processing void test2_1() {...} ...
+ -- [Partition] Alias of 'test2_1_a': sub2_1_a,test2_1_a,
+ -- Set partition info: sub2_1_a right_dim=2
+ -- Set partition info: test2_1_a right_dim=2
+ -- [Partition] Alias of 'test2_1s_a': sub2_1s_a,test2_1s_a,
+ -- Set partition info: sub2_1s_a right_dim=0
+ -- Set partition info: test2_1s_a right_dim=0
+ -- [Partition] Alias of 'test2_1t_a': sub2_1t_a,test2_1t_a,
+ -- Set partition info: sub2_1t_a right_dim=0
+ -- Set partition info: test2_1t_a right_dim=0
+ -- [Partition] Alias of 'test2_1t_a': sub2_1t_a,test2_1t_a,
+ -- [Partition] Alias of 'test2_1u_a': sub2_1u_a,test2_1u_a,
+ -- Set partition info: sub2_1u_a right_dim=2
+ -- Set partition info: test2_1u_a right_dim=2
+ -- [Partition] Alias of 'test2_1u_a': sub2_1u_a,test2_1u_a,
+ -- Update partition info: sub2_1u_a right_dim=0
+ -- Update partition info: test2_1u_a right_dim=0
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'sub2_1_a': sub2_1_a,test2_1_a,
+ -- [Filter] Alias of 'sub2_1s_a': sub2_1s_a,test2_1s_a,
+ -- [Filter] Alias of 'sub2_1t_a': sub2_1t_a,test2_1t_a,
+ -- [Filter] Alias of 'sub2_1u_a': sub2_1u_a,test2_1u_a,
+ -- Insert inline at void sub2_1(int *[16][16] sub2_1_a) {...}
+ -- Insert inline at void sub2_1s(int *[16][16] sub2_1s_a) {...}
+ -- Insert inline at void sub2_1t(int [16][16] sub2_1t_a) {...}
+ -- Insert inline at void sub2_1u(int [16][16] sub2_1u_a) {...}
+[AutoInline] processing void test2_2() {...} ...
+ -- [Partition] Alias of 'test2_2_a': sub2_2_a,test2_2_a,
+ -- Set partition info: sub2_2_a right_dim=2
+ -- Set partition info: test2_2_a right_dim=2
+ -- [Partition] Alias of 'test2_2s_a': sub2_2s_a,test2_2s_a,
+ -- Set partition info: sub2_2s_a right_dim=0
+ -- Set partition info: test2_2s_a right_dim=0
+ -- [Partition] Alias of 'test2_2s_a': sub2_2s_a,test2_2s_a,
+ -- [Partition] Alias of 'test2_2t_a': sub2_2t_a,test2_2t_a,
+ -- Set partition info: sub2_2t_a right_dim=1
+ -- Set partition info: test2_2t_a right_dim=1
+ -- [Partition] Alias of 'test2_2u_a': sub2_2u_a,test2_2u_a,
+ -- Set partition info: sub2_2u_a right_dim=2
+ -- Set partition info: test2_2u_a right_dim=2
+ -- [Partition] Alias of 'test2_2v_a': test2_2v_a,
+ -- Set partition info: test2_2v_a right_dim=2
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'sub2_2_a': sub2_2_a,test2_2_a,
+ -- [Filter] Alias of 'sub2_2s_a': sub2_2s_a,test2_2s_a,
+ -- [Filter] Alias of 'sub2_2t_a': sub2_2t_a,test2_2t_a,
+ -- [Filter] Alias of 'sub2_2u_a': sub2_2u_a,test2_2u_a,
+ -- Insert inline at void sub2_2(int *[16][16] sub2_2_a) {...}
+ -- Insert inline at void sub2_2s(int *[16][16] sub2_2s_a) {...}
+ -- Insert inline at void sub2_2t(int [16][16] sub2_2t_a) {...}
+[AutoInline] processing void test2_3() {...} ...
+ -- [Partition] Alias of 'test2_3_a': sub2_3_a,test2_3_a,
+ -- Set partition info: sub2_3_a right_dim=1
+ -- Set partition info: test2_3_a right_dim=1
+ -- [Partition] Alias of 'test2_3s_a': sub2_3s_a,test2_3s_a,
+ -- Set partition info: sub2_3s_a right_dim=1
+ -- Set partition info: test2_3s_a right_dim=1
+ -- [Partition] Alias of 'test2_3t_a': sub2_3t_a,test2_3t_a,
+ -- Set partition info: sub2_3t_a right_dim=1
+ -- Set partition info: test2_3t_a right_dim=1
+ -- [Partition] Alias of 'test2_3u_a': sub2_3u_a,sub2_3v_a,sub2_3w_b,test2_3u_a,
+ -- Set partition info: sub2_3u_a right_dim=0
+ -- Set partition info: sub2_3v_a right_dim=0
+ -- Set partition info: sub2_3w_b right_dim=0
+ -- Set partition info: test2_3u_a right_dim=0
+ -- [Partition] Alias of 'test2_3v_a': sub2_3v_b,test2_3v_a,
+ -- Set partition info: sub2_3v_b right_dim=1
+ -- Set partition info: test2_3v_a right_dim=1
+ -- [Partition] Alias of 'test2_3w_a': sub2_3w_a,sub2_3x_b,test2_3w_a,
+ -- Set partition info: sub2_3w_a right_dim=1
+ -- Set partition info: sub2_3x_b right_dim=1
+ -- Set partition info: test2_3w_a right_dim=1
+ -- [Partition] Alias of 'test2_3x_a': sub2_3x_a,test2_3x_a,
+ -- Set partition info: sub2_3x_a right_dim=1
+ -- Set partition info: test2_3x_a right_dim=1
+ -- [Partition] Alias of 'test2_3y_a': sub2_3y_a,test2_3y_a,
+ -- Set partition info: sub2_3y_a right_dim=1
+ -- Set partition info: test2_3y_a right_dim=1
+ -- [Partition] Alias of 'test2_3z_a': sub2_3z_wrap_a,test2_3z_a,
+ -- Set partition info: sub2_3z_wrap_a right_dim=0
+ -- Set partition info: test2_3z_a right_dim=0
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'sub2_3_a': sub2_3_a,test2_3_a,
+ -- [Filter] Alias of 'sub2_3s_a': sub2_3s_a,test2_3s_a,
+ -- [Filter] Alias of 'sub2_3t_a': sub2_3t_a,test2_3t_a,
+ -- [Filter] Alias of 'sub2_3u_a': sub2_3u_a,sub2_3v_a,sub2_3w_b,test2_3u_a,
+ -- [Filter] Alias of 'sub2_3v_a': sub2_3u_a,sub2_3v_a,sub2_3w_b,test2_3u_a,
+ -- [Filter] Alias of 'sub2_3w_a': sub2_3w_a,sub2_3x_b,test2_3w_a,
+ -- [Filter] Alias of 'sub2_3w_b': sub2_3u_a,sub2_3v_a,sub2_3w_b,test2_3u_a,
+ -- [Filter] Alias of 'sub2_3x_a': sub2_3x_a,test2_3x_a,
+ -- [Filter] Alias of 'sub2_3x_b': sub2_3w_a,sub2_3x_b,test2_3w_a,
+ -- [Filter] Alias of 'sub2_3y_a': sub2_3y_a,test2_3y_a,
+ -- [Filter] Alias of 'sub2_3z_a': sub2_3z_a,
+ -- [Filter] Alias of 'sub2_3z_wrap_a': sub2_3z_wrap_a,test2_3z_a,
+ -- Insert inline at void sub2_3(int(*)[16][16] sub2_3_a) {...}
+ -- Insert inline at void sub2_3s(int(*)[16] sub2_3s_a) {...}
+ -- Insert inline at void sub2_3u(int sub2_3u_n,int [16] sub2_3u_a) {...}
+ -- Insert inline at void sub2_3v(int [16] sub2_3v_a,int [16] sub2_3v_b) {...}
+ -- Insert inline at void sub2_3w(int [16] sub2_3w_a,int [16] sub2_3w_b) {...}
+ -- Insert inline at void sub2_3y(int [16][16] sub2_3y_a) {...}
+ -- Insert inline at int * sub2_3z_wrap(int * sub2_3z_wrap_a) {...}
+[AutoInline] processing void test2_4() {...} ...
+ -- [Partition] Alias of 'g_test2_4_a': sub2_4_a,g_test2_4_a,
+ -- Set partition info: sub2_4_a right_dim=0
+ -- Set partition info: g_test2_4_a right_dim=0
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'sub2_4_a': sub2_4_a,
+ -- Insert inline at void sub2_4(int * sub2_4_a) {...}
+[AutoInline] processing void test2_4s() {...} ...
+ -- [Partition] Alias of 'g_test2_4s_a': sub2_4s_a,g_test2_4s_a,
+ -- Set partition info: sub2_4s_a right_dim=0
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'sub2_4s_a': sub2_4s_a,
+ -- Insert inline at void sub2_4s(int * sub2_4s_a) {...}
+[AutoInline] processing void test2_4t() {...} ...
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Insert inline at void sub2_4t() {...}
+[AutoInline] processing void test2_4u() {...} ...
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- [Filter] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Insert inline at void sub2_4u() {...}
+ -- Insert inline at void sub2_4us() {...}
+[AutoInline] processing void test3_1() {...} ...
+ -- [Partition] Alias of 'test3_1_a': sub3_1_a,test3_1_a,test3_1_b,
+ -- Set partition info: sub3_1_a right_dim=1
+ -- Set partition info: test3_1_a right_dim=1
+ -- Set partition info: test3_1_b right_dim=1
+ -- [Partition] Alias of 'test3_1s_a': sub3_1s_a,test3_1s_a,
+ -- Set partition info: sub3_1s_a right_dim=2
+ -- Set partition info: test3_1s_a right_dim=2
+ -- [Partition] Alias of 'test3_1t_a': sub3_1t_a,sub3_1t_b,test3_1t_a,
+ -- Set partition info: sub3_1t_a right_dim=0
+ -- Set partition info: sub3_1t_b right_dim=0
+ -- Set partition info: test3_1t_a right_dim=0
+ -- [Partition] Alias of 'test3_1u_a': sub3_1u_a,sub3_1u_b,test3_1u_a,
+ -- Set partition info: sub3_1u_a right_dim=2
+ -- Set partition info: sub3_1u_b right_dim=2
+ -- Set partition info: test3_1u_a right_dim=2
+ -- [Partition] Alias of 'test3_1vw_a': sub3_1v_b,sub3_1w_a,test3_1vw_a,
+ -- Set partition info: sub3_1v_b right_dim=1
+ -- Set partition info: sub3_1w_a right_dim=1
+ -- Set partition info: test3_1vw_a right_dim=1
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'sub3_1_a': sub3_1_a,test3_1_a,test3_1_b,
+ -- [Filter] Alias of 'sub3_1s_a': sub3_1s_a,test3_1s_a,
+ -- [Filter] Alias of 'sub3_1t_a': sub3_1t_a,sub3_1t_b,test3_1t_a,
+ -- [Filter] Alias of 'sub3_1u_a': sub3_1u_a,sub3_1u_b,test3_1u_a,
+ -- [Filter] Alias of 'sub3_1u_b': sub3_1u_a,sub3_1u_b,test3_1u_a,
+ -- [Filter] Alias of 'sub3_1v_a': sub3_1v_a,sub3_1w_b,test3_1vw_dummy,
+ -- [Filter] Alias of 'sub3_1v_b': sub3_1v_b,sub3_1w_a,test3_1vw_a,
+ -- [Filter] Alias of 'sub3_1w_a': sub3_1v_b,sub3_1w_a,test3_1vw_a,
+ -- Insert inline at void sub3_1(int *[16][16] sub3_1_a) {...}
+ -- Insert inline at void sub3_1t(int [16][16] sub3_1t_a,int [16][16] sub3_1t_b) {...}
+ -- Insert inline at void sub3_1v(int [16][16] sub3_1v_a,int [16][16] sub3_1v_b) {...}
+ -- Insert inline at void sub3_1w(int [16][16] sub3_1w_a,int [16][16] sub3_1w_b) {...}
+[AutoInline] processing void test3_2() {...} ...
+ -- [Partition] Alias of 'test3_2_a': sub3_2_a,test3_2_a,
+ -- Set partition info: sub3_2_a right_dim=1
+ -- Set partition info: test3_2_a right_dim=1
+ -- [Partition] Alias of 'test3_2s_a': sub3_2s_a,test3_2s_a,
+ -- Set partition info: sub3_2s_a right_dim=1
+ -- Set partition info: test3_2s_a right_dim=1
+ -- [Partition] Alias of 'test3_2u_a': sub3_2u_a,test3_2u_a,
+ -- Set partition info: sub3_2u_a right_dim=2
+ -- Set partition info: test3_2u_a right_dim=2
+ -- [Partition] Alias of 'test3_2v_a': sub3_2vs_a,sub3_2v_a,test3_2v_a,
+ -- Set partition info: sub3_2vs_a right_dim=1
+ -- Set partition info: sub3_2v_a right_dim=1
+ -- Set partition info: test3_2v_a right_dim=1
+ -- [Partition] Alias of 'test3_2y_a': sub3_2ys_a,sub3_2y_a,test3_2y_a,
+ -- Set partition info: sub3_2ys_a right_dim=1
+ -- Set partition info: sub3_2y_a right_dim=1
+ -- Set partition info: test3_2y_a right_dim=1
+ -- [Partition] Alias of 'sub3_2t_a': sub3_2t_a,test3_2t_a,
+ -- Set partition info: sub3_2t_a right_dim=1
+ -- Set partition info: test3_2t_a right_dim=1
+ -- [Partition] Alias of 'sub3_2u_a': sub3_2u_a,test3_2u_a,
+ -- Update partition info: sub3_2u_a right_dim=1
+ -- Update partition info: test3_2u_a right_dim=1
+ -- [Partition] Alias of 'sub3_2w_a': sub3_2ws_a,sub3_2w_a,test3_2w_a,
+ -- Set partition info: sub3_2ws_a right_dim=1
+ -- Set partition info: sub3_2w_a right_dim=1
+ -- Set partition info: test3_2w_a right_dim=1
+ -- [Partition] Alias of 'sub3_2xs_a': sub3_2xs_a,sub3_2x_a,test3_2x_a,
+ -- Set partition info: sub3_2xs_a right_dim=1
+ -- Set partition info: sub3_2x_a right_dim=1
+ -- Set partition info: test3_2x_a right_dim=1
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'sub3_2_a': sub3_2_a,test3_2_a,
+ -- [Filter] Alias of 'sub3_2s_a': sub3_2s_a,test3_2s_a,
+ -- [Filter] Alias of 'sub3_2t_a': sub3_2t_a,test3_2t_a,
+ -- [Filter] Alias of 'sub3_2u_a': sub3_2u_a,test3_2u_a,
+ -- [Filter] Alias of 'sub3_2v_a': sub3_2vs_a,sub3_2v_a,test3_2v_a,
+ -- [Filter] Alias of 'sub3_2vs_a': sub3_2vs_a,sub3_2v_a,test3_2v_a,
+ -- [Filter] Alias of 'sub3_2w_a': sub3_2ws_a,sub3_2w_a,test3_2w_a,
+ -- [Filter] Alias of 'sub3_2ws_a': sub3_2ws_a,sub3_2w_a,test3_2w_a,
+ -- [Filter] Alias of 'sub3_2x_a': sub3_2xs_a,sub3_2x_a,test3_2x_a,
+ -- [Filter] Alias of 'sub3_2xs_a': sub3_2xs_a,sub3_2x_a,test3_2x_a,
+ -- [Filter] Alias of 'sub3_2y_a': sub3_2ys_a,sub3_2y_a,test3_2y_a,
+ -- [Filter] Alias of 'sub3_2ys_a': sub3_2ys_a,sub3_2y_a,test3_2y_a,
+ -- Insert inline at void sub3_2(int *[16][16] sub3_2_a) {...}
+ -- Insert inline at void sub3_2s(int(*)[16][16] sub3_2s_a) {...}
+ -- Insert inline at void sub3_2t(int(*)[16][16] sub3_2t_a) {...}
+ -- Insert inline at void sub3_2u(int(*)[16][16] sub3_2u_a) {...}
+ -- Insert inline at void sub3_2v(int(*)[16][16] sub3_2v_a) {...}
+ -- Insert inline at void sub3_2vs(int(*)[16][16] sub3_2vs_a) {...}
+ -- Insert inline at void sub3_2w(int(*)[16][16] sub3_2w_a) {...}
+ -- Insert inline at void sub3_2ws(int(*)[16][16] sub3_2ws_a) {...}
+ -- Insert inline at void sub3_2x(int(*)[16][16] sub3_2x_a) {...}
+ -- Insert inline at void sub3_2xs(int(*)[16][16] sub3_2xs_a) {...}
+ -- Insert inline at void sub3_2y(int [16][16] sub3_2y_a) {...}
+[AutoInline] processing void test3_3() {...} ...
+ -- [Partition] Alias of 'test3_3_a': sub3_3_a,test3_3_a,
+ -- Set partition info: sub3_3_a right_dim=0
+ -- Set partition info: test3_3_a right_dim=0
+ -- [Partition] Alias of 'test3_3s_a': sub3_3ss_a,sub3_3ss_a,sub3_3s_a,test3_3s_a,
+ -- Set partition info: sub3_3ss_a right_dim=0
+ -- Set partition info: sub3_3ss_a right_dim=0
+ -- Set partition info: sub3_3s_a right_dim=0
+ -- Set partition info: test3_3s_a right_dim=0
+ -- [Partition] Alias of 'test3_3t_a': sub3_3tt_a,sub3_3ts_a,sub3_3t_a,test3_3t_a,
+ -- Set partition info: sub3_3tt_a right_dim=0
+ -- Set partition info: sub3_3ts_a right_dim=0
+ -- Set partition info: sub3_3t_a right_dim=0
+ -- Set partition info: test3_3t_a right_dim=0
+ -- [Partition] Alias of 'sub3_3ut_a': sub3_3ut_a,sub3_3us_a,sub3_3u_a,test3_3u_a,
+ -- Set partition info: sub3_3ut_a right_dim=0
+ -- Set partition info: sub3_3us_a right_dim=0
+ -- Set partition info: sub3_3u_a right_dim=0
+ -- Set partition info: test3_3u_a right_dim=0
+ -- [Partition] Alias of 'sub3_3wt_a': sub3_3wt_a,sub3_3w_a,test3_3w_a,
+ -- Set partition info: sub3_3wt_a right_dim=0
+ -- Set partition info: sub3_3w_a right_dim=0
+ -- Set partition info: test3_3w_a right_dim=0
+ -- [Partition] Alias of 'sub3_3wt_b': sub3_3wt_b,sub3_3ws_a,
+ -- Set partition info: sub3_3wt_b right_dim=0
+ -- Set partition info: sub3_3ws_a right_dim=0
+ -- [Partition] Alias of 'sub3_3xt_a': sub3_3xs_a,sub3_3xt_a,sub3_3x_a,test3_3x_a,
+ -- Set partition info: sub3_3xs_a right_dim=0
+ -- Set partition info: sub3_3xt_a right_dim=0
+ -- Set partition info: sub3_3x_a right_dim=0
+ -- Set partition info: test3_3x_a right_dim=0
+ -- [Partition] Alias of 'sub3_3yt_a': sub3_3ys_a,sub3_3yt_a,sub3_3y_a,test3_3y_a,
+ -- Set partition info: sub3_3ys_a right_dim=1
+ -- Set partition info: sub3_3yt_a right_dim=1
+ -- Set partition info: sub3_3y_a right_dim=1
+ -- Set partition info: test3_3y_a right_dim=1
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'sub3_3_a': sub3_3_a,test3_3_a,
+ -- [Filter] Alias of 'sub3_3s_a': sub3_3ss_a,sub3_3ss_a,sub3_3s_a,test3_3s_a,
+ -- [Filter] Alias of 'sub3_3ss_a': sub3_3ss_a,sub3_3ss_a,sub3_3s_a,test3_3s_a,
+ -- [Filter] Alias of 'sub3_3ss_a': sub3_3ss_a,sub3_3ss_a,sub3_3s_a,test3_3s_a,
+ -- [Filter] Alias of 'sub3_3t_a': sub3_3tt_a,sub3_3ts_a,sub3_3t_a,test3_3t_a,
+ -- [Filter] Alias of 'sub3_3ts_a': sub3_3tt_a,sub3_3ts_a,sub3_3t_a,test3_3t_a,
+ -- [Filter] Alias of 'sub3_3tt_a': sub3_3tt_a,sub3_3ts_a,sub3_3t_a,test3_3t_a,
+ -- [Filter] Alias of 'sub3_3u_a': sub3_3ut_a,sub3_3us_a,sub3_3u_a,test3_3u_a,
+ -- [Filter] Alias of 'sub3_3us_a': sub3_3ut_a,sub3_3us_a,sub3_3u_a,test3_3u_a,
+ -- [Filter] Alias of 'sub3_3ut_a': sub3_3ut_a,sub3_3us_a,sub3_3u_a,test3_3u_a,
+ -- [Filter] Alias of 'sub3_3w_a': sub3_3wt_a,sub3_3w_a,test3_3w_a,
+ -- [Filter] Alias of 'sub3_3ws_a': sub3_3wt_b,sub3_3ws_a,
+ -- [Filter] Alias of 'sub3_3wt_a': sub3_3wt_a,sub3_3w_a,test3_3w_a,
+ -- [Filter] Alias of 'sub3_3x_a': sub3_3xs_a,sub3_3xt_a,sub3_3x_a,test3_3x_a,
+ -- [Filter] Alias of 'sub3_3xs_a': sub3_3xs_a,sub3_3xt_a,sub3_3x_a,test3_3x_a,
+ -- [Filter] Alias of 'sub3_3xt_a': sub3_3xs_a,sub3_3xt_a,sub3_3x_a,test3_3x_a,
+ -- [Filter] Alias of 'sub3_3y_a': sub3_3ys_a,sub3_3yt_a,sub3_3y_a,test3_3y_a,
+ -- [Filter] Alias of 'sub3_3ys_a': sub3_3ys_a,sub3_3yt_a,sub3_3y_a,test3_3y_a,
+ -- [Filter] Alias of 'sub3_3yt_a': sub3_3ys_a,sub3_3yt_a,sub3_3y_a,test3_3y_a,
+ -- Insert inline at void sub3_3(int * sub3_3_a) {...}
+ -- Insert inline at void sub3_3s(int * sub3_3s_a) {...}
+ -- Insert inline at void sub3_3ss(int * sub3_3ss_a) {...}
+ -- Insert inline at void sub3_3sss(int * sub3_3ss_a) {...}
+ -- Insert inline at void sub3_3t(int * sub3_3t_a) {...}
+ -- Insert inline at void sub3_3ts(int * sub3_3ts_a) {...}
+ -- Insert inline at void sub3_3tt(int * sub3_3tt_a) {...}
+ -- Insert inline at void sub3_3u(int * sub3_3u_a) {...}
+ -- Insert inline at void sub3_3us(int * sub3_3us_a) {...}
+ -- Insert inline at void sub3_3ut(int * sub3_3ut_a) {...}
+ -- Insert inline at void sub3_3w(int * sub3_3w_a) {...}
+ -- Insert inline at void sub3_3ws(int * sub3_3ws_a) {...}
+ -- Insert inline at void sub3_3wt(int * sub3_3wt_a,int * sub3_3wt_b) {...}
+ -- Insert inline at void sub3_3x(int ** sub3_3x_a) {...}
+ -- Insert inline at void sub3_3xs(int * sub3_3xs_a) {...}
+ -- Insert inline at void sub3_3xt(int ** sub3_3xt_a) {...}
+ -- Insert inline at void sub3_3y(int ** sub3_3y_a) {...}
+ -- Insert inline at void sub3_3yt(int ** sub3_3yt_a) {...}
+[AutoInline] processing void test4_1() {...} ...
+ -- [Partition] Alias of 'test4_1_a': sub4_1_a,sub4_1s_a,sub4_1ts_a,sub4_1t_a,sub4_1t_b,test4_1_a,test4_1_pa,test4_1s_pa,test4_1t_pa,
+ -- Set partition info: sub4_1_a right_dim=0
+ -- Set partition info: sub4_1s_a right_dim=0
+ -- Set partition info: sub4_1ts_a right_dim=0
+ -- Set partition info: sub4_1t_a right_dim=0
+ -- Set partition info: sub4_1t_b right_dim=0
+ -- Set partition info: test4_1_a right_dim=0
+ -- Set partition info: test4_1_pa right_dim=0
+ -- Set partition info: test4_1s_pa right_dim=0
+ -- Set partition info: test4_1t_pa right_dim=0
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'sub4_1_a': sub4_1_a,sub4_1s_a,sub4_1ts_a,sub4_1t_a,sub4_1t_b,test4_1_pa,test4_1s_pa,test4_1t_pa,
+ -- [Filter] Alias of 'sub4_1s_a': sub4_1s_a,sub4_1ts_a,sub4_1t_a,sub4_1t_b,test4_1s_pa,test4_1t_pa,
+ -- [Filter] Alias of 'sub4_1t_a': sub4_1ts_a,sub4_1t_a,sub4_1t_b,test4_1t_pa,
+ -- [Filter] Alias of 'sub4_1ts_a': sub4_1ts_a,sub4_1t_b,
+ -- Insert inline at void sub4_1(int * sub4_1_a) {...}
+ -- Insert inline at void sub4_1s(int * sub4_1s_a) {...}
+ -- Insert inline at void sub4_1t(int * sub4_1t_a) {...}
+ -- Insert inline at void sub4_1ts(int ** sub4_1ts_a) {...}
+[AutoInline] processing void test5_1() {...} ...
+ -- [Partition] Alias of 'test5_1_a': b,test5_1_a,
+ -- Set partition info: b right_dim=0
+ -- Set partition info: test5_1_a right_dim=0
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'b': b,test5_1_a,
+[AutoInline] processing void test6_1() {...} ...
+ -- [Partition] Alias of 'test6_1_a': sub6_1_a,test6_1_a,
+ -- Set partition info: sub6_1_a right_dim=0
+ -- Set partition info: test6_1_a right_dim=0
+ -- [Partition] Alias of 'test6_1s_a': test6_1s_a,
+ -- Set partition info: test6_1s_a right_dim=0
+ -- [Partition] Alias of 'test6_1t_a': sub6_1t_a,test6_1t_a,test6_1t_b,
+ -- Set partition info: sub6_1t_a right_dim=0
+ -- Set partition info: test6_1t_a right_dim=0
+ -- Set partition info: test6_1t_b right_dim=0
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'sub6_1_a': sub6_1_a,test6_1_a,
+ -- [Filter] Alias of 'sub6_1t_a': sub6_1t_a,test6_1t_b,
+ -- Insert inline at void sub6_1(int ** sub6_1_a) {...}
+ -- Insert inline at void sub6_1t(int ** sub6_1t_a) {...}
+[AutoInline] processing void test6_2() {...} ...
+ -- [Partition] Alias of 'test6_2_a': test6_2_a,
+ -- Set partition info: test6_2_a right_dim=0
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+[AutoInline] processing void test6_3() {...} ...
+[GetNodesByType_recur] ERROR: unexpected recursive function: SgFunctionDeclaration:void sub6_3(int * sub6_3_a) {...}
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+[GetNodesByType_recur] ERROR: unexpected recursive function: SgFunctionDeclaration:void sub6_3(int * sub6_3_a) {...}
+[AutoInline] processing void test6_4() {...} ...
+ -- [Partition] Alias of 'test6_4_a': sub6_4_a,test6_4_a,
+ -- Set partition info: sub6_4_a right_dim=0
+ -- Set partition info: test6_4_a right_dim=0
+ -- [Partition] Alias of 'sub6_4s_a': sub6_4s_a,
+ -- Set partition info: sub6_4s_a right_dim=0
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'sub6_4_a': sub6_4_a,test6_4_a,
+ -- [Filter] Alias of 'sub6_4s_a': sub6_4s_a,
+ -- Insert inline at void sub6_4(struct s6_4 {int s6_... sub6_4_a) {...}
+ -- Insert inline at void sub6_4s(int * sub6_4s_a) {...}
+[AutoInline] processing void test6_5() {...} ...
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+[AutoInline] processing void test6_6(int * in_a) {...} ...
+ -- [Partition] Alias of 'test6_6_a': sub6_6_a,test6_6_a,
+ -- Set partition info: sub6_6_a right_dim=0
+ -- Set partition info: test6_6_a right_dim=0
+ -- [Partition] Alias of 'g_test2_4s_a': g_test2_4s_a,
+ -- Set partition info: g_test2_4s_a right_dim=0
+ -- [Filter] Alias of 'sub6_6_a': sub6_6_a,test6_6_a,
+ -- Insert inline at void sub6_6(int * sub6_6_a) {...}
+Merlin Pass [Auto Function Inlining] started ... 
+[AutoInline] processing void test6_5() {...} ...
+ -- [Partition] Alias of 'test6_5_a': test6_5_a,
+ -- Set partition info: test6_5_a right_dim=0
+ -- [Partition] Alias of 'test6_5_b': sub6_5_a,sub6_5_a,test6_5_b,
+ -- Set partition info: sub6_5_a right_dim=0
+ -- Set partition info: sub6_5_a right_dim=0
+ -- Set partition info: test6_5_b right_dim=0
+ -- [Partition] Alias of 'c6_5_a': c6_5_a,
+ -- Set partition info: c6_5_a right_dim=0
+ -- [Filter] Alias of 'sub6_5_a': sub6_5_a,sub6_5_a,test6_5_b,
+ -- [Filter] Alias of 'sub6_5_a': sub6_5_a,sub6_5_a,test6_5_b,
+ -- Insert inline at void sub6_5(int * sub6_5_a) {...}
+ -- Insert inline at void sub6_5s(int * sub6_5_a) {...}

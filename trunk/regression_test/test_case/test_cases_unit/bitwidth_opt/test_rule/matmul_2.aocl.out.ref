@@ -1,0 +1,29 @@
+/*Step1: loop exchange*/
+//#include "//cmost.h"
+//#include <stdio.h>
+#define VEC_SIZE 256
+#define VEC_flat_SIZE (VEC_SIZE * VEC_SIZE)
+void matmul_kernel(float *a,float *b,float *c);
+
+int main()
+{
+  float *a;
+//cmost_malloc( &a, 4*VEC_flat_SIZE);
+  float *b;
+//cmost_malloc( &b, 4*VEC_flat_SIZE);
+  float *c;
+//cmost_malloc( &c, 4*VEC_flat_SIZE);
+//cmost_load_file(a, "float_i.dat" , VEC_flat_SIZE * 4);
+//cmost_load_file(b, "float_i2.dat", VEC_flat_SIZE * 4);
+//cmost_load_file(c, "0"           , VEC_flat_SIZE * 4);
+  if (!(a && b && c)) 
+    while(1)
+      ;
+  matmul_kernel(a,b,c);
+//cmost_write_file(c, "c_out.dat"  , VEC_flat_SIZE * 4);
+//cmost_dump(c, "out.dat");
+//cmost_free(a);
+//cmost_free(b);
+//cmost_free(c);
+  return 0;
+}

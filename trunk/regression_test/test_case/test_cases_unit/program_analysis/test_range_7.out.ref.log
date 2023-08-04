@@ -1,0 +1,34 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i1 = 0;i1 < 100;++i1) {...}
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+[Exp SgGreaterThanOp:a[i1] > 10] {a[i1] > 10:SgGreaterThanOp a[i1] > 10->1,0} : a[i1] > 10..a[i1] > 10, constant bound: {a[i1] > 10:SgGreaterThanOp a[i1] > 10->1,0} : neg_inf..pos_inf
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void test1(int [100] a) {...}
+  SgBasicBlock {if(a[i1] > 10) {a[i1] = i1;}}
+  SgForStatement for(i1 = 0;i1 < 100;++i1) {...}
+
+Arrays: 
+  int [100] a
+
+Ranges: 
+  SgFunctionDeclaration void test1(int [100] a) {...}
+    int [100] a :  R[0..99 exact] W[0..99 inexact]
+    intersect: 0..99 inexact
+    union: 0..99 exact
+  SgBasicBlock {if(a[i1] > 10) {a[i1] = i1;}}
+    int [100] a :  R[i1..i1 exact] W[i1..i1 inexact]
+    intersect: i1..i1 exact
+    union: i1..i1 exact
+  SgForStatement for(i1 = 0;i1 < 100;++i1) {...}
+    int [100] a :  R[0..99 exact] W[0..99 inexact]
+    intersect: 0..99 inexact
+    union: 0..99 exact
+

@@ -1,0 +1,27 @@
+
+void func(int M)
+{
+  int N = 100;
+  int a[100];
+  int b[100];
+  int i;
+  int j;
+  j = 23;
+/* Canonicalized from: for((i = 0 , j = 23);i <= N;i++) {...} */
+  for (i = 0; i <= 100; ++i) {
+    for (j = - 50; j < 1; j++) {
+      if (j % 2) 
+        a[i] = i;
+    }
+  }
+  0;
+  0;
+/* Standardize from: for(i = 100;i <= 200;i += 2) {...} */
+  for (i = 0; i <= 50; i++) {
+    int _in_i = 100 + 2L * i;
+    for (j = 100; j <= 200; j++) {
+      b[_in_i] = _in_i;
+    }
+  }
+  i = 200 + 2L;
+}

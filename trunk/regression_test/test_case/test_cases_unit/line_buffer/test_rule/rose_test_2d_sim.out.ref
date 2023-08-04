@@ -1,0 +1,93 @@
+#include<stdio.h>
+#include<string.h>
+#include"header.h"
+#define uu(n, m) (c[(n)*32 + (m)])
+#pragma ACCEL kernel
+
+void func_top_1(int *c)
+{
+  
+#pragma ACCEL interface variable=c max_depth=1024 depth=1024 BURST_OFF
+  int LineBuffer_c0[34];
+  int LineBuffer_c1[34];
+  int slide_wind_0[3][3];
+  for (int n = -1L; n < 33L; n++) {
+    for (int m = -1L; m < 33L; m++) {
+      
+#pragma ACCEL pipeline
+{
+        int n_2;
+        int n_1;
+        int tmp_wind_0[3];
+        int m_0;
+        int n_0;
+        for (n_0 = 0L; n_0 <= 2L; ++n_0) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          for (m_0 = 1L; m_0 <= 2L; ++m_0) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            slide_wind_0[n_0][m_0 + -1] = slide_wind_0[n_0][m_0];
+          }
+        }
+        for (n_1 = 0; n_1 <= 2L; ++n_1) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          if (n_1 == 0L) {
+            tmp_wind_0[n_1] = LineBuffer_c0[m + -1L - 0L + 2L];
+          }
+           else {
+            if (n_1 == 1L) {
+              tmp_wind_0[n_1] = LineBuffer_c1[m + -1L - 0L + 2L];
+            }
+          }
+        }
+        if (n + -1L + -1L + 2L < 32L && n + -1L + -1L + 2L >= 0L && m + -1L + -1L + 2L < 32L && m + -1L + -1L + 2L >= 0L) {
+          tmp_wind_0[2UL] = c[(n + -1L + -1L + 2L) * 32L + (m + -1L + -1L + 2L) * 1L];
+        }
+        for (n_2 = 0; n_2 <= 2L; ++n_2) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0[n_2][2L] = tmp_wind_0[n_2];
+        }
+{
+          int n_3;
+          int tmp_c;
+          for (n_3 = 0; n_3 <= 1UL; ++n_3) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            tmp_c = tmp_wind_0[n_3 + 1];
+            if (n_3 == 0L) {
+              LineBuffer_c0[m + -1L - 0L + 2L] = tmp_c;
+            }
+             else {
+              if (n_3 == 1L) {
+                LineBuffer_c1[m + -1L - 0L + 2L] = tmp_c;
+              }
+            }
+          }
+        }
+      }
+      if (n + -1L >= 1L && n + -1L <= 30L && m + -1L >= 1L && m + -1L <= 30L) {
+        if (n + -1L >= 1 && n + -1L <= 30 && m + -1L >= 1 && m + -1L <= 30) {
+          int u_0 = slide_wind_0[1L][1L];
+          int u_1 = slide_wind_0[1L][0L];
+          int u_2 = slide_wind_0[1L][2L];
+          int u_3 = slide_wind_0[0L][1L];
+          int u_4 = slide_wind_0[2L][1L];
+          printf("%d, %d: %d,%d,%d,%d, %d\n",n + -1L,m + -1L,u_1,u_2,u_3,u_4,u_0);
+        }
+      }
+    }
+  }
+}
+int c[1024];
+
+int main()
+{
+  for (int i = 0; i < 1024; i++) {
+    c[i] = i;
+  }
+  func_top_1(c);
+  return 0;
+}

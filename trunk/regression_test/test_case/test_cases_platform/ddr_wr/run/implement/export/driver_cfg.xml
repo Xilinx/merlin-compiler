@@ -1,0 +1,30 @@
+<configuration>
+	<param name="axi_slv_base">0x70000000</param>
+	<param name="mailbox_base">0x60000000</param>
+	<param name="sim_bram_base">0x80000000</param>
+	<param name="module_span">0x10000</param>
+	<param name="duplication_span">0x10000</param>
+	<param_tree name="module_list">
+		<module name="unmaned_task1">
+			<position></position>
+			<addrmap_id>0</addrmap_id>
+			<dup_factor>1</dup_factor>
+			<graph_name>unmaned_graph0</graph_name>
+			<kernel_name>test_kernel</kernel_name>
+			<async></async>
+			<device></device>
+			<loop_depth>0</loop_depth>
+			<addrmap>
+				<sok>0x60000000</sok>
+				<axi_slv>
+					<item dup="0">0x70000000</item>
+				</axi_slv>
+			</addrmap>
+			<port_list>
+				<port actual_argument="burst_length" array_dim="1" data_type="int" formal_argument="burst_length" func_arg_idx="0" func_arg_name="burst_length" func_arg_type="int" func_name="unmaned_task1" name="burst_length" port_type="param"></port>
+				<port actual_argument="burst_number" array_dim="1" data_type="int" formal_argument="burst_number" func_arg_idx="1" func_arg_name="burst_number" func_arg_type="int" func_name="unmaned_task1" name="burst_number" port_type="param"></port>
+				<port actual_argument="__m_a" array_dim="100000000" data_type="int" formal_argument="a" func_arg_idx="2" func_arg_name="a" func_arg_type="int" func_name="unmaned_task1" name="a" port_type="bus_e1"></port>
+			</port_list>
+		</module>
+	</param_tree>
+</configuration>

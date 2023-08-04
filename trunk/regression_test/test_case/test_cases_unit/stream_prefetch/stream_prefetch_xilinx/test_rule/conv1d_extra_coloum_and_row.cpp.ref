@@ -1,0 +1,106 @@
+#include<hls_stream.h>
+#include "cmost.h"
+extern int __merlin_include__GB_hls_stream_h_0;
+static hls::stream<float > __merlinconv1d_merlin_in_ch;
+static hls::stream<float > __merlinconv1d_merlin_out_ch;
+
+void __merlinconv1d_merlin_in_streaming(float *merlin_in)
+{
+  
+#pragma HLS INLINE off
+  for (long merlin_it_0 = 0L; merlin_it_0 <= 1023L; merlin_it_0 += 1L) {
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 1024L; ++merlin_it_1) {
+      
+#pragma ACCEL pipeline
+      long merlin_it_2;
+      for (merlin_it_2 = 0L; merlin_it_2 < 1; ++merlin_it_2) {
+        
+#pragma ACCEL parallel
+        float merlin_tmp_3;
+        merlin_tmp_3 = merlin_in[merlin_it_0 * 1025L + merlin_it_1 * 1 + merlin_it_2];
+        __merlinconv1d_merlin_in_ch .  write (merlin_tmp_3);
+      }
+    }
+  }
+}
+
+void __merlinconv1d_merlin_out_streaming(float *merlin_out)
+{
+  
+#pragma HLS INLINE off
+  long merlin_it_0;
+  for (merlin_it_0 = 0L; merlin_it_0 < 1044480L; ++merlin_it_0) {
+    
+#pragma ACCEL pipeline
+    long merlin_it_1;
+    for (merlin_it_1 = 0L; merlin_it_1 < 1; ++merlin_it_1) {
+      
+#pragma ACCEL parallel
+      float merlin_tmp_2;
+      merlin_tmp_2 = __merlinconv1d_merlin_out_ch .  read ();
+      merlin_out[0 + merlin_it_0 * 1 + merlin_it_1] = merlin_tmp_2;
+    }
+  }
+}
+
+void __merlinconv1d_computation(float *merlin_in,float filter[5],float *merlin_out)
+{
+  
+#pragma HLS inline off
+  __merlin_access_range(merlin_out,0,1044479);
+  __merlin_access_range(filter,0,4UL);
+  __merlin_access_range(merlin_in,0,1050624);
+  __merlin_streaming_range(merlin_out,0,1044480L);
+  for (int i = 0; i < 1024; i++) {
+    float slide_wind_0[5];
+    __merlin_streaming_range(merlin_in,(0L + ((long )i) * 1L) * 1025L,1024L);
+    for (int j = - 4; j < 1024 - 5 + 1; j++) {
+      
+#pragma ACCEL PIPELINE AUTO
+      if (((long )j) + 4L + 0L < 1025L) {
+        float tmp_wind_0;
+        int j_0;
+        for (j_0 = ((int )1L); ((long )j_0) <= 4L; ++j_0) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0[j_0 + - 1] = slide_wind_0[j_0];
+        }
+        tmp_wind_0 = __merlinconv1d_merlin_in_ch .  read ();
+        slide_wind_0[4L] = tmp_wind_0;
+      }
+      if (((long )j) >= 0L && ((long )j) <= 1019L) {
+        float tmp = 0.0f;
+        for (int q = 0; q < 5; q++) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          tmp += slide_wind_0[((long )q) + 0L] * filter[q];
+        }
+        __merlinconv1d_merlin_out_ch .  write (tmp);
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void conv1d(float *merlin_in,float filter[5],float *merlin_out)
+{
+  
+#pragma ACCEL interface variable=merlin_out depth=1024,1020 max_depth=1024,1020 BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=32
+  
+#pragma ACCEL interface variable=filter depth=5 max_depth=5
+  
+#pragma ACCEL interface variable=merlin_in depth=1025,1025 max_depth=1025,1025 BURST_OFF streaming_access=0,1050625 EXPLICIT_BUNDLE BUS_BITWIDTH=32
+  __merlin_access_range(merlin_out,0,1044479);
+  __merlin_access_range(filter,0,4UL);
+  __merlin_access_range(merlin_in,0,1050624);
+  
+#pragma HLS dataflow
+  
+#pragma HLS stream variable=__merlinconv1d_merlin_in_ch
+  __merlinconv1d_merlin_in_streaming(merlin_in);
+  __merlinconv1d_computation(0,filter,0);
+  
+#pragma HLS stream variable=__merlinconv1d_merlin_out_ch
+  __merlinconv1d_merlin_out_streaming(merlin_out);
+}

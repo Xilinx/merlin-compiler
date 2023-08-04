@@ -1,0 +1,45 @@
+//(C) Copyright 2016-2021 Xilinx, Inc.
+//All Rights Reserved.
+//
+//Licensed to the Apache Software Foundation (ASF) under one
+//or more contributor license agreements.  See the NOTICE file
+//distributed with this work for additional information
+//regarding copyright ownership.  The ASF licenses this file
+//to you under the Apache License, Version 2.0 (the
+//"License"); you may not use this file except in compliance
+//with the License.  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//Unless required by applicable law or agreed to in writing,
+//software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+//KIND, either express or implied.  See the License for the
+//specific language governing permissions and limitations
+//under the License. (edited)
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+#include<ap_int.h>
+#pragma ACCEL kernel
+
+void top(class ap_int< 10 > *a,class ap_uint< 10 > *b,class ap_fixed< 10 , 20 , AP_TRN , AP_WRAP , 0 > *c,class ap_ufixed< 10 , 20 , AP_TRN , AP_WRAP , 0 > *d)
+{
+  class ap_ufixed< 10 , 20 , AP_TRN , AP_WRAP , 0 > d_buf_0[100];
+  class ap_fixed< 10 , 20 , AP_TRN , AP_WRAP , 0 > c_buf_0[100];
+  class ap_uint< 10 > b_buf_0[100];
+  class ap_int< 10 > a_buf_0[100];
+  for (int i = 0; i < 100; ++i) {
+    a_buf_0[i] = i;
+    b_buf_0[i] = i;
+    c_buf_0[i] = i;
+    d_buf_0[i] = i;
+  }
+  memcpy((void *)(&d[0]),(const void *)(&d_buf_0[0]),sizeof(class ap_ufixed< 10 , 20 , AP_TRN , AP_WRAP , 0 > ) * 100);
+  memcpy((void *)(&c[0]),(const void *)(&c_buf_0[0]),sizeof(class ap_fixed< 10 , 20 , AP_TRN , AP_WRAP , 0 > ) * 100);
+  memcpy((void *)(&b[0]),(const void *)(&b_buf_0[0]),sizeof(class ap_uint< 10 > ) * 100);
+  memcpy((void *)(&a[0]),(const void *)(&a_buf_0[0]),sizeof(class ap_int< 10 > ) * 100);
+}
+
+void __merlinwrapper_top(class ap_int< 10 > *a,class ap_uint< 10 > *b,class ap_fixed< 10 , 20 , AP_TRN , AP_WRAP , 0 > *c,class ap_ufixed< 10 , 20 , AP_TRN , AP_WRAP , 0 > *d) {
+  top(a, b, c, d);
+}

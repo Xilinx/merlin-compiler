@@ -1,0 +1,20 @@
+#include <stdio.h>
+
+struct ::A 
+{
+  int data;
+}
+;
+
+void p_ZN1A3addEv(struct A *this_)
+{
+  this_ -> data++;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+#pragma ACCEL kernel
+
+int main()
+{
+  struct A a;
+  p_ZN1A3addEv(&a);
+}

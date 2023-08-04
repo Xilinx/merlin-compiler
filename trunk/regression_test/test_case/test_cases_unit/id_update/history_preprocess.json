@@ -1,0 +1,93 @@
+{
+    "X": {
+        "org_identifier": "X",
+        "applied_index": -1,
+        "children_num": 1,
+        "histories": [],
+        "messages": []
+    },
+    "X_0": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_0": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 4,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_0_0": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_0_0_1": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 3,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_0_0_1_2": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 1,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_0_0_1_2_0": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "histories": [
+            {
+                "action": 1,
+                "location": 1
+            }
+        ],
+        "messages": [
+            "Delete: SgPragmaDeclaration:#pragma ACCEL parallel factor=16\nfrom: SgBasicBlock:{int j;#pragma ACCEL parallel factor=16for(j = 0;j < 10000;j++) {c[j] = a[j] + b[j] + inc;}}"
+        ]
+    },
+    "X_0_0_0_1_2_0_1": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 5,
+        "histories": [],
+        "messages": []
+    },
+    "X_0_0_0_1_2_0_1_3": {
+        "org_identifier": "",
+        "applied_index": -1,
+        "children_num": 2,
+        "histories": [
+            {
+                "action": 0,
+                "location": 0
+            }
+        ],
+        "messages": [
+            "Insert: SgPragmaDeclaration:#pragma ACCEL PARALLEL FACTOR=16 "
+        ]
+    },
+    "X_0_0_0_1_2_0_1_3_0": {
+        "org_identifier": "Built15",
+        "applied_index": 0,
+        "children_num": 1,
+        "histories": [
+            {
+                "action": 3,
+                "location": -1
+            }
+        ],
+        "messages": [
+            "Build an SgNode"
+        ]
+    }
+}

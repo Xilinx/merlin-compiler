@@ -1,0 +1,2 @@
+
+ERROR: [SYNCHK-334] Function 'A::operator int()' (t.cpp:8) has no definition. 

@@ -1,0 +1,94 @@
+#include "memcpy_256_1d.h"
+#define SIZE_1 64
+#include "memcpy_256_2d.h"
+#undef SIZE_1
+#define SIZE_1 200
+#define SIZE_2 16
+#include "memcpy_256_3d.h"
+#undef SIZE_1
+#undef SIZE_2
+#define SIZE_1 200
+#define SIZE_2 300
+#define SIZE_3 16
+#include "memcpy_256_4d.h"
+#undef SIZE_1
+#undef SIZE_2
+#undef SIZE_3
+#define SIZE_1 200
+#include "memcpy_256_2d.h"
+#undef SIZE_1
+#include "memcpy_256.h"
+#include<string.h>
+//1d dimension
+extern int __merlin_include__GB_memcpy_256_h_5;
+extern int __merlin_include__GB_memcpy_256_2d_h_4;
+extern int __merlin_include__GB_memcpy_256_4d_h_3;
+extern int __merlin_include__GB_memcpy_256_3d_h_2;
+extern int __merlin_include__GB_memcpy_256_2d_h_1;
+extern int __merlin_include__GB_memcpy_256_1d_h_0;
+#pragma ACCEL kernel
+
+void top(merlin_uint_256 *a,merlin_uint_256 *b,merlin_uint_256 *c,merlin_uint_256 *d,merlin_uint_256 *f,merlin_uint_256 *g,merlin_uint_256 *h,merlin_uint_256 *k)
+{
+  
+#pragma HLS DATA_PACK VARIABLE=k
+  
+#pragma HLS DATA_PACK VARIABLE=h
+  
+#pragma HLS DATA_PACK VARIABLE=g
+  
+#pragma HLS DATA_PACK VARIABLE=f
+  
+#pragma HLS DATA_PACK VARIABLE=d
+  
+#pragma HLS DATA_PACK VARIABLE=c
+  
+#pragma HLS DATA_PACK VARIABLE=b
+  
+#pragma HLS DATA_PACK VARIABLE=a
+  int a_buf[1000];
+  
+#pragma  HLS array_partition  variable=a_buf cyclic factor = 8 dim=1
+  memcpy_wide_bus_read_int_256(a_buf,(merlin_uint_256 *)a,0 * 4,sizeof(int ) * ((unsigned long )1000),1000L);
+  char b_buf[100][64];
+  
+#pragma  HLS array_partition  variable=b_buf cyclic factor = 32 dim=2
+  memcpy_wide_bus_read_char_2d_64_256(b_buf,0,0,(merlin_uint_256 *)b,0 * 1,sizeof(char ) * ((unsigned long )100) * ((unsigned long )64),6400L);
+  unsigned int c_buf[100][200][16];
+  
+#pragma  HLS array_partition  variable=c_buf cyclic factor = 8 dim=3
+  memcpy_wide_bus_read_int_3d_200_16_256((int (*)[200][16])c_buf,0,0,0,(merlin_uint_256 *)c,0 * 4,sizeof(unsigned int ) * ((unsigned long )100) * ((unsigned long )200) * ((unsigned long )16),320000L);
+  float d_buf[100][200][300][16];
+  
+#pragma  HLS array_partition  variable=d_buf cyclic factor = 8 dim=4
+  memcpy_wide_bus_read_float_4d_200_300_16_256(d_buf,0,0,0,0,(merlin_uint_256 *)d,0 * 4,sizeof(float ) * ((unsigned long )100) * ((unsigned long )200) * ((unsigned long )300) * ((unsigned long )16),96000000L);
+  double f_buf[100][200];
+  
+#pragma  HLS array_partition  variable=f_buf cyclic factor = 4 dim=2
+  memcpy_wide_bus_read_double_2d_200_256(f_buf,0,0,(merlin_uint_256 *)f,0 * 8,sizeof(double ) * ((unsigned long )100) * ((unsigned long )200),20000L);
+  signed short g_buf[2000];
+  
+#pragma  HLS array_partition  variable=g_buf cyclic factor = 16 dim=1
+  memcpy_wide_bus_read_short_256((short *)g_buf,(merlin_uint_256 *)g,0 * 2,sizeof(signed short ) * ((unsigned long )2000),2000L);
+  unsigned long h_buf[2000];
+  
+#pragma  HLS array_partition  variable=h_buf cyclic factor = 4 dim=1
+  memcpy_wide_bus_read_long_256((long *)h_buf,(merlin_uint_256 *)h,0 * 8,sizeof(unsigned long ) * ((unsigned long )2000),2000L);
+  unsigned long long k_buf[2000];
+  
+#pragma  HLS array_partition  variable=k_buf cyclic factor = 4 dim=1
+  memcpy_wide_bus_read_long_long_256((long long *)k_buf,(merlin_uint_256 *)k,0 * 8,sizeof(unsigned long long ) * ((unsigned long )2000),2000L);
+}
+
+int main()
+{
+  int *a;
+  char *b;
+  unsigned int *c;
+  float *d;
+  double *f;
+  signed short *g;
+  unsigned long *h;
+  unsigned long long *k;
+  top((merlin_uint_256 *)a,(merlin_uint_256 *)b,(merlin_uint_256 *)c,(merlin_uint_256 *)d,(merlin_uint_256 *)f,(merlin_uint_256 *)g,(merlin_uint_256 *)h,(merlin_uint_256 *)k);
+}

@@ -1,0 +1,38 @@
+
+void foo_top_8()
+{
+  int tmp;
+  for (int j = 0; j < 64; j++) {
+    
+#pragma ACCEL PARALLEL COMPLETE
+    tmp++;
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_8()
+{
+  int k;
+  int i;
+  int j;
+  for (int k = 0; k < 100; k++) {
+    int j = 0;
+    do {
+      
+#pragma ACCEL PIPELINE AUTO
+      j++;
+      foo_top_8();
+    }while (j < 500);
+    do {
+      
+#pragma ACCEL PIPELINE AUTO
+      
+#pragma ACCEL loop_tripcount max=500
+      for (int i = 0; i < 15; i++) {
+        
+#pragma ACCEL PARALLEL COMPLETE
+        j++;
+      }
+    }while (j < 7500);
+  }
+}

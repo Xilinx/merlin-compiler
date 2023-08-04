@@ -1,0 +1,39 @@
+#include<ap_int.h>
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+  int a_buf[64];
+  
+#pragma HLS array_partition variable=a_buf cyclic factor=2 dim=1
+  for (class ap_int< 10 > i(0); i<16;  ++ i) {
+    for (class ap_int< 10 > j(0); j<4;  ++ j) 
+// Original: #pragma ACCEL parallel
+{
+      
+#pragma HLS unroll
+      a[i*4+j] = a_buf[i*4+j];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void top2(int *a)
+{
+  int a_buf[64];
+  
+#pragma HLS array_partition variable=a_buf cyclic factor=2 dim=1
+  int b_buf[64];
+  
+#pragma HLS array_partition variable=b_buf cyclic factor=4 dim=1
+  for (class ap_uint< 10 > i(0); i<16;  ++ i) {
+    for (class ap_uint< 10 > j(0); j<4;  ++ j) 
+// Original: #pragma ACCEL parallel
+{
+      
+#pragma HLS unroll
+      a[i*4+j] = a_buf[i*4+j];
+      b_buf[i*4+j] += a[i*4+j];
+    }
+  }
+}

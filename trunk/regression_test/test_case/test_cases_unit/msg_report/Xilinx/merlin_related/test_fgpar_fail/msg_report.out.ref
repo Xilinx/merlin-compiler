@@ -1,0 +1,56 @@
+================================================================================
+Kernel : top(test_fgpar_fail.cpp:3)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+a               32       (test_fgpar_fail.cpp:3)[1]
+b               32       (test_fgpar_fail.cpp:3)[2]
+c               32       (test_fgpar_fail.cpp:3)[3]
+n               32       (test_fgpar_fail.cpp:3) scalar
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++-----------------------------------------+----+----+-----+------+------+------+------+----------------------------------------------------------------------+
+|                hierarchy                | TC | AC | CPC | LUT  |  FF  | BRAM | DSP  |                               comment                                |
++-----------------------------------------+----+----+-----+------+------+------+------+----------------------------------------------------------------------+
+|top (test_fgpar_fail.cpp:3)              |    |  65|   65|  1.91|  1.11|  0.09|  0.00|kernel                                                                |
+|    loop i (test_fgpar_fail.cpp:5)       |  10|  65|   65|      |      |      |      |                                                                      |
+|        loop i0 (test_fgpar_fail.cpp:6)  |   1|  65|   65|      |      |      |      |flattened with loop i (test_fgpar_fail.cpp:5), IL=47, pipelined II=2  |
++-----------------------------------------+----+----+-----+------+------+------+------+----------------------------------------------------------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++-------------------------------------+--------+----------+
+|                Name                 | Cycles | Activity |
++-------------------------------------+--------+----------+
+| top:loop i0 (test_fgpar_fail.cpp:6) |   65   | 100.00%  |
+|     top (test_fgpar_fail.cpp:3)     |   0    |  0.00%   |
+| top:loop i (test_fgpar_fail.cpp:5)  |   0    |  0.00%   |
++-------------------------------------+--------+----------+
+
++-----------------------------+------+------+------+------+
+|            Name             | BRAM | DSP  |  FF  | LUT  |
++-----------------------------+------+------+------+------+
+| top (test_fgpar_fail.cpp:3) | 0.09 | 0.00 | 1.11 | 1.91 |
++-----------------------------+------+------+------+------+
+[1] Memory burst NOT inferred: variable 'a' (test_fgpar_fail.cpp:3)
+  Reason: the bound of the access range is not recognized (0..899 + n inexact)
+  Hint: please specify the bounds of the variables using 'assert'
+[2] Memory burst NOT inferred: variable 'b' (test_fgpar_fail.cpp:3)
+  Reason: the bound of the access range is not recognized (0..899 + n inexact)
+  Hint: please specify the bounds of the variables using 'assert'
+[3] Memory burst NOT inferred: variable 'c' (test_fgpar_fail.cpp:3)
+  Reason: the bound of the access range is not recognized (0..899 + n inexact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+
+

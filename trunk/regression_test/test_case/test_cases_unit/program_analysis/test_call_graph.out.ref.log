@@ -1,0 +1,6 @@
+Hello Program Analysis ... 
+**** Test Call Graph **** 
+[Func] SgFunctionDeclaration void top(int a) {...} : CALL:sub3  SUB:
+[Func] SgFunctionDeclaration void sub2() {...} : CALL:sub3  SUB:
+[Func] SgFunctionDeclaration void sub3() {...} : CALL: SUB:top sub2 
+

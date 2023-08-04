@@ -1,0 +1,28 @@
+#include "memcpy_512.h"
+#define SIZE_1 10
+#include "memcpy_256_2d.h"
+#undef SIZE_1
+#define SIZE_1 30
+#define SIZE_2 20
+#include "memcpy_64_3d.h"
+#undef SIZE_1
+#undef SIZE_2
+#define SIZE_1 30
+#define SIZE_2 20
+#define SIZE_3 128
+#include "memcpy_128_4d.h"
+#undef SIZE_1
+#undef SIZE_2
+#undef SIZE_3
+
+void func(class ap_uint< 512 > *a,class ap_uint< 256 > *b,class ap_uint< 64 > *c,class ap_uint< 128 > *d)
+{
+  int a_buf[1028];
+  memcpy_wide_bus_read_int(a_buf,a,20,1028 * sizeof(int ));
+  char b_buf[30][10];
+  memcpy_wide_bus_read_char_2d_10(b_buf,0,0,b,10,300 * sizeof(char ));
+  float c_buf[40][30][20];
+  memcpy_wide_bus_write_float_3d_30_20(c,c_buf,0,0,0,20,1200 * sizeof(float ));
+  double d_buf[5][30][20][128];
+  memcpy_wide_bus_write_double_4d_30_20_128(d,d_buf,0,0,0,0,16,(128 * 30 * 100) * sizeof(double ));
+}

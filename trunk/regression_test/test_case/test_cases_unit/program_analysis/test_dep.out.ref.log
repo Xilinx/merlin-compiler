@@ -1,0 +1,106 @@
+Hello Program Analysis ... 
+**** Test Dependence **** 
+a[i]: a[0..99] iv=k,ii,i,j pv= scope=_p_
+a[i - 1]: a[-1..98] iv=k,ii,i,j pv= scope=_p_
+a[i + 1]: a[1..100] iv=k,ii,i,j pv= scope=_p_
+n < 10?((void )0) : __assert_fail("n < 10","test_dep.c",19,__PRETTY_FUNCTION__): a iv= pv= scope=_p_
+f[i]: f[0..99] iv=i,j pv= scope=_p_
+f[i - n]: f[-9..na] iv=i,j pv=n scope=_p_
+f[i + n]: f[na..108] iv=i,j pv=n scope=_p_
+b[i][0]: b[0..9][0..0] iv=i pv= scope=_p_
+b[i - 1][j * 100]: b[-1..8][0..900] iv=i,j pv= scope=_p_
+a[i * 10 + j]: a[0..99] iv=i,j pv= scope=_p_
+a[i * 10 + 10 + j]: a[10..109] iv=i,j pv= scope=_p_
+a[i * 10 + 10 + j - 1]: a[9..108] iv=i,j pv= scope=_p_
+c[i][j]: c[0..9][0..9] iv=i,j pv= scope=_p_
+c[i][j - 1]: c[0..9][-1..8] iv=i,j pv= scope=_p_
+c[i - 1][j]: c[-1..8][0..9] iv=i,j pv= scope=_p_
+c[i - 1][j - 1]: c[-1..8][-1..8] iv=i,j pv= scope=_p_
+d[i - 1]: d[-1..8] iv=i,j pv= scope=_p_
+d[i - 1]: d[-1..8] iv=i,j pv= scope=_p_
+e[d[i]]: e[d[i]..d[i]] iv=i,j pv=d[i] scope=_p_
+e[d[i - 1]]: e[d[i - 1]..d[i - 1]] iv=i,j pv=d[i - 1] scope=_p_
+a[256]: a[256..256] iv=k,ii pv= scope=_p_
+[GetDist 1 : a[i]:  iv=ii,i,j scope=k -> a[i - 1]:  iv=ii,i,j scope=k ] *
+[GetDist 1 : a[i]:  iv=i,j scope=ii -> a[i - 1]:  iv=i,j scope=ii ] *
+[GetDist 1 : a[i]:  iv=j scope=i -> a[i - 1]:  iv=j scope=i ] 1
+[GetDist 1 : a[i]:  iv= scope=j -> a[i - 1]:  iv= scope=j ] empty
+[GetDist 1 : a[i]:  iv=ii,i,j scope=k -> a[i + 1]:  iv=ii,i,j scope=k ] *
+[GetDist 1 : a[i]:  iv=i,j scope=ii -> a[i + 1]:  iv=i,j scope=ii ] *
+[GetDist 1 : a[i]:  iv=j scope=i -> a[i + 1]:  iv=j scope=i ] -1
+[GetDist 1 : a[i]:  iv= scope=j -> a[i + 1]:  iv= scope=j ] empty
+[GetDist 1 : a[i - 1]:  iv=ii,i,j scope=k -> a[i]:  iv=ii,i,j scope=k ] *
+[GetDist 1 : a[i - 1]:  iv=i,j scope=ii -> a[i]:  iv=i,j scope=ii ] *
+[GetDist 1 : a[i - 1]:  iv=j scope=i -> a[i]:  iv=j scope=i ] -1
+[GetDist 1 : a[i - 1]:  iv= scope=j -> a[i]:  iv= scope=j ] empty
+[GetDist 1 : a[i - 1]:  iv=ii,i,j scope=k -> a[i + 1]:  iv=ii,i,j scope=k ] *
+[GetDist 1 : a[i - 1]:  iv=i,j scope=ii -> a[i + 1]:  iv=i,j scope=ii ] *
+[GetDist 1 : a[i - 1]:  iv=j scope=i -> a[i + 1]:  iv=j scope=i ] -2
+[GetDist 1 : a[i - 1]:  iv= scope=j -> a[i + 1]:  iv= scope=j ] empty
+[GetDist 1 : a[i + 1]:  iv=ii,i,j scope=k -> a[i]:  iv=ii,i,j scope=k ] *
+[GetDist 1 : a[i + 1]:  iv=i,j scope=ii -> a[i]:  iv=i,j scope=ii ] *
+[GetDist 1 : a[i + 1]:  iv=j scope=i -> a[i]:  iv=j scope=i ] 1
+[GetDist 1 : a[i + 1]:  iv= scope=j -> a[i]:  iv= scope=j ] empty
+[GetDist 1 : a[i + 1]:  iv=ii,i,j scope=k -> a[i - 1]:  iv=ii,i,j scope=k ] *
+[GetDist 1 : a[i + 1]:  iv=i,j scope=ii -> a[i - 1]:  iv=i,j scope=ii ] *
+[GetDist 1 : a[i + 1]:  iv=j scope=i -> a[i - 1]:  iv=j scope=i ] 2
+[GetDist 1 : a[i + 1]:  iv= scope=j -> a[i - 1]:  iv= scope=j ] empty
+[GetDist 1 : f[i]:  iv=j scope=i -> f[i - n]:  iv=j scope=i ] *..9
+[GetDist 1 : f[i]:  iv= scope=j -> f[i - n]:  iv= scope=j ] *
+[GetDist 1 : f[i]:  iv=j scope=i -> f[i + n]:  iv=j scope=i ] -9..*
+[GetDist 1 : f[i]:  iv= scope=j -> f[i + n]:  iv= scope=j ] *
+[GetDist 1 : f[i - n]:  iv=j scope=i -> f[i]:  iv=j scope=i ] -9..*
+[GetDist 1 : f[i - n]:  iv= scope=j -> f[i]:  iv= scope=j ] *
+[GetDist 1 : f[i - n]:  iv=j scope=i -> f[i + n]:  iv=j scope=i ] -18..*
+[GetDist 1 : f[i - n]:  iv= scope=j -> f[i + n]:  iv= scope=j ] *
+[GetDist 1 : f[i + n]:  iv=j scope=i -> f[i]:  iv=j scope=i ] *..9
+[GetDist 1 : f[i + n]:  iv= scope=j -> f[i]:  iv= scope=j ] *
+[GetDist 1 : f[i + n]:  iv=j scope=i -> f[i - n]:  iv=j scope=i ] *..18
+[GetDist 1 : f[i + n]:  iv= scope=j -> f[i - n]:  iv= scope=j ] *
+[GetDist 1 : b[i][0]:  iv= scope=i -> b[i - 1][j * 100]:  iv=j scope=i ] 1
+[GetDist 1 : b[i - 1][j * 100]:  iv=j scope=i -> b[i][0]:  iv= scope=i ] -1
+[GetDist 1 : a[i * 10 + j]:  iv=j scope=i -> a[i * 10 + 10 + j]:  iv=j scope=i ] -1
+[GetDist 1 : a[i * 10 + j]:  iv= scope=j -> a[i * 10 + 10 + j]:  iv= scope=j ] empty
+[GetDist 1 : a[i * 10 + j]:  iv=j scope=i -> a[i * 10 + 10 + j - 1]:  iv=j scope=i ] -1..0
+[GetDist 1 : a[i * 10 + j]:  iv= scope=j -> a[i * 10 + 10 + j - 1]:  iv= scope=j ] -9
+[GetDist 1 : a[i * 10 + 10 + j]:  iv=j scope=i -> a[i * 10 + j]:  iv=j scope=i ] 1
+[GetDist 1 : a[i * 10 + 10 + j]:  iv= scope=j -> a[i * 10 + j]:  iv= scope=j ] empty
+[GetDist 1 : a[i * 10 + 10 + j]:  iv=j scope=i -> a[i * 10 + 10 + j - 1]:  iv=j scope=i ] 0..1
+[GetDist 1 : a[i * 10 + 10 + j]:  iv= scope=j -> a[i * 10 + 10 + j - 1]:  iv= scope=j ] 1
+[GetDist 1 : a[i * 10 + 10 + j - 1]:  iv=j scope=i -> a[i * 10 + j]:  iv=j scope=i ] 0..1
+[GetDist 1 : a[i * 10 + 10 + j - 1]:  iv= scope=j -> a[i * 10 + j]:  iv= scope=j ] 9
+[GetDist 1 : a[i * 10 + 10 + j - 1]:  iv=j scope=i -> a[i * 10 + 10 + j]:  iv=j scope=i ] -1..0
+[GetDist 1 : a[i * 10 + 10 + j - 1]:  iv= scope=j -> a[i * 10 + 10 + j]:  iv= scope=j ] -1
+[GetDist 1 : c[i][j]:  iv=j scope=i -> c[i][j - 1]:  iv=j scope=i ] 0
+[GetDist 1 : c[i][j]:  iv= scope=j -> c[i][j - 1]:  iv= scope=j ] 1
+[GetDist 1 : c[i][j]:  iv=j scope=i -> c[i - 1][j]:  iv=j scope=i ] 1
+[GetDist 1 : c[i][j]:  iv= scope=j -> c[i - 1][j]:  iv= scope=j ] empty
+[GetDist 1 : c[i][j]:  iv=j scope=i -> c[i - 1][j - 1]:  iv=j scope=i ] 1
+[GetDist 1 : c[i][j]:  iv= scope=j -> c[i - 1][j - 1]:  iv= scope=j ] empty
+[GetDist 1 : c[i][j - 1]:  iv=j scope=i -> c[i][j]:  iv=j scope=i ] 0
+[GetDist 1 : c[i][j - 1]:  iv= scope=j -> c[i][j]:  iv= scope=j ] -1
+[GetDist 1 : c[i][j - 1]:  iv=j scope=i -> c[i - 1][j]:  iv=j scope=i ] 1
+[GetDist 1 : c[i][j - 1]:  iv= scope=j -> c[i - 1][j]:  iv= scope=j ] empty
+[GetDist 1 : c[i][j - 1]:  iv=j scope=i -> c[i - 1][j - 1]:  iv=j scope=i ] 1
+[GetDist 1 : c[i][j - 1]:  iv= scope=j -> c[i - 1][j - 1]:  iv= scope=j ] empty
+[GetDist 1 : c[i - 1][j]:  iv=j scope=i -> c[i][j]:  iv=j scope=i ] -1
+[GetDist 1 : c[i - 1][j]:  iv= scope=j -> c[i][j]:  iv= scope=j ] empty
+[GetDist 1 : c[i - 1][j]:  iv=j scope=i -> c[i][j - 1]:  iv=j scope=i ] -1
+[GetDist 1 : c[i - 1][j]:  iv= scope=j -> c[i][j - 1]:  iv= scope=j ] empty
+[GetDist 1 : c[i - 1][j]:  iv=j scope=i -> c[i - 1][j - 1]:  iv=j scope=i ] 0
+[GetDist 1 : c[i - 1][j]:  iv= scope=j -> c[i - 1][j - 1]:  iv= scope=j ] 1
+[GetDist 1 : c[i - 1][j - 1]:  iv=j scope=i -> c[i][j]:  iv=j scope=i ] -1
+[GetDist 1 : c[i - 1][j - 1]:  iv= scope=j -> c[i][j]:  iv= scope=j ] empty
+[GetDist 1 : c[i - 1][j - 1]:  iv=j scope=i -> c[i][j - 1]:  iv=j scope=i ] -1
+[GetDist 1 : c[i - 1][j - 1]:  iv= scope=j -> c[i][j - 1]:  iv= scope=j ] empty
+[GetDist 1 : c[i - 1][j - 1]:  iv=j scope=i -> c[i - 1][j]:  iv=j scope=i ] 0
+[GetDist 1 : c[i - 1][j - 1]:  iv= scope=j -> c[i - 1][j]:  iv= scope=j ] -1
+[GetDist 1 : d[i - 1]:  iv=j scope=i -> d[i - 1]:  iv=j scope=i ] 0
+[GetDist 1 : d[i - 1]:  iv= scope=j -> d[i - 1]:  iv= scope=j ] *
+[GetDist 1 : d[i - 1]:  iv=j scope=i -> d[i - 1]:  iv=j scope=i ] 0
+[GetDist 1 : d[i - 1]:  iv= scope=j -> d[i - 1]:  iv= scope=j ] *
+[GetDist 1 : e[d[i]]:  iv=j scope=i -> e[d[i - 1]]:  iv=j scope=i ] *
+[GetDist 1 : e[d[i]]:  iv= scope=j -> e[d[i - 1]]:  iv= scope=j ] *
+[GetDist 1 : e[d[i - 1]]:  iv=j scope=i -> e[d[i]]:  iv=j scope=i ] *
+[GetDist 1 : e[d[i - 1]]:  iv= scope=j -> e[d[i]]:  iv= scope=j ] *
+

@@ -1,0 +1,65 @@
+#include<string.h>
+#pragma ACCEL kernel
+
+void func1_kernel(int *a)
+{
+  int _memcpy_i4_2;
+  int _memcpy_i4_1;
+  int _memcpy_i4_0;
+  int _memcpy_i3_2;
+  int _memcpy_i3_1;
+  int _memcpy_i3_0;
+  int a_buf_0[34];
+  int a_buf_1[65];
+  int a_buf_2[1021];
+  int a_buf_3[10][3][15];
+  int a_buf_4[3][20][7];
+  long _memcpy_i_0;
+  for (_memcpy_i_0 = 0; _memcpy_i_0 < sizeof(int ) * ((unsigned long )34) / 4; ++_memcpy_i_0) {
+    
+#pragma ACCEL PARALLEL SKIP COMPLETE
+    long total_offset1 = 0 * 34 + 0;
+    long total_offset2 = 0 * 0 + 0;
+    a_buf_0[total_offset1 + _memcpy_i_0] = a[total_offset2 + _memcpy_i_0];
+  }
+  long _memcpy_i_1;
+  for (_memcpy_i_1 = 0; _memcpy_i_1 < sizeof(int ) * ((unsigned long )65) / 4; ++_memcpy_i_1) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=13
+    long total_offset1 = 0 * 65 + 0;
+    long total_offset2 = 0 * 0 + 0;
+    a_buf_1[total_offset1 + _memcpy_i_1] = a[total_offset2 + _memcpy_i_1];
+  }
+  long _memcpy_i_2;
+  for (_memcpy_i_2 = 0; _memcpy_i_2 < sizeof(int ) * ((unsigned long )1021) / 4; ++_memcpy_i_2) {
+    long total_offset1 = 0 * 1021 + 0;
+    long total_offset2 = 0 * 0 + 0;
+    a_buf_2[total_offset1 + _memcpy_i_2] = a[total_offset2 + _memcpy_i_2];
+  }
+  for (_memcpy_i3_2 = 0; _memcpy_i3_2 < 10; ++_memcpy_i3_2) {
+    
+#pragma HLS COALESCING_WIDTH=1440
+    for (_memcpy_i3_1 = 0; _memcpy_i3_1 < 3; ++_memcpy_i3_1) {
+      
+#pragma ACCEL PARALLEL SKIP COMPLETE
+      for (_memcpy_i3_0 = 0; _memcpy_i3_0 < 15; ++_memcpy_i3_0) {
+        
+#pragma ACCEL PARALLEL SKIP COMPLETE
+        a_buf_3[_memcpy_i3_2][_memcpy_i3_1][_memcpy_i3_0] = a[0 + (((0 * 10 + _memcpy_i3_2) * 3 + _memcpy_i3_1) * 15 + _memcpy_i3_0)];
+      }
+    }
+  }
+  for (_memcpy_i4_2 = 0; _memcpy_i4_2 < 3; ++_memcpy_i4_2) {
+    
+#pragma HLS COALESCING_WIDTH=1120
+    for (_memcpy_i4_1 = 0; _memcpy_i4_1 < 20; ++_memcpy_i4_1) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=5
+      for (_memcpy_i4_0 = 0; _memcpy_i4_0 < 7; ++_memcpy_i4_0) {
+        
+#pragma ACCEL PARALLEL SKIP COMPLETE
+        a_buf_4[_memcpy_i4_2][_memcpy_i4_1][_memcpy_i4_0] = a[0 + (((0 * 3 + _memcpy_i4_2) * 20 + _memcpy_i4_1) * 7 + _memcpy_i4_0)];
+      }
+    }
+  }
+}

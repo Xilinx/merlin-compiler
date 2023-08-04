@@ -1,0 +1,110 @@
+
+struct ::cls1 
+{
+  float x;
+}
+;
+
+void p_ZN4cls1C2Ev(struct cls1 *this_)
+{
+  this_ -> x = ((float )(- 1));
+}
+
+void p_ZN4cls1C2ERK4cls1(struct cls1 *this_,const struct cls1 &foo)
+{
+  this_ -> x = foo . x;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_cls_();
+
+struct st1 
+{
+  struct cls1 m1;
+  int y;
+}
+;
+
+struct ::st2 
+{
+  struct st1 m2;
+}
+;
+
+void p_ZN3st2C2Ev(struct st2 *this_)
+{
+  this_ -> m2 . m1 . x = ((float )2);
+}
+static void __merlin_dummy_SgClassDeclaration_struct_st2_();
+
+struct st3 
+{
+  struct st2 m3;
+}
+;
+#pragma ACCEL kernel
+
+void foo()
+{
+  struct st3 m4;
+  p_ZN4cls1C2Ev(&m4 . m3 . m2 . m1);
+  p_ZN3st2C2Ev(&m4 . m3);
+  ;
+  static struct st3 m5;
+  static int merlin_static_flag_m5 = 0;
+  if (!merlin_static_flag_m5) {
+    merlin_static_flag_m5 = 1;
+    p_ZN4cls1C2Ev(&m5 . m3 . m2 . m1);
+    p_ZN3st2C2Ev(&m5 . m3);
+  }
+  ;
+  m5 = m4;
+  struct cls1 m6;
+  p_ZN4cls1C2Ev(&m6);
+  ;
+  struct cls1 m7;
+  p_ZN4cls1C2Ev(&m7);
+  ;
+  m6 = m7;
+  struct st3 temp;
+  p_ZN4cls1C2Ev(&temp . m3 . m2 . m1);
+  p_ZN3st2C2Ev(&temp . m3);
+  struct st3 m8[20];
+{
+    int _i0;
+    for (_i0 = 0; _i0 <= 19UL; ++_i0) {
+      m8[_i0] = temp;
+    }
+  }
+  struct st3 temp_0;
+  static int merlin_static_flag_m9 = 0;
+  static struct st3 m9[20];
+  if (!merlin_static_flag_m9) {
+    merlin_static_flag_m9 = 1;
+    p_ZN4cls1C2Ev(&temp_0 . m3 . m2 . m1);
+    p_ZN3st2C2Ev(&temp_0 . m3);
+{
+      int _i0;
+      for (_i0 = 0; _i0 <= 19UL; ++_i0) {
+        m9[_i0] = temp_0;
+      }
+    }
+  }
+  static struct st3 m10;
+  static int merlin_static_flag_m10 = 0;
+  if (!merlin_static_flag_m10) {
+    merlin_static_flag_m10 = 1;
+    m10 . m3 . m2 . m1 . x = m4 . m3 . m2 . m1 . x;
+    m10 . m3 . m2 . y = m4 . m3 . m2 . y;
+    p_ZN4cls1C2ERK4cls1(&m10 . m3 . m2 . m1,m4 . m3 . m2 . m1);
+  }
+  ;
+  struct st3 m11;
+  m11 . m3 . m2 . m1 . x = m4 . m3 . m2 . m1 . x;
+  m11 . m3 . m2 . y = m4 . m3 . m2 . y;
+  p_ZN4cls1C2ERK4cls1(&m11 . m3 . m2 . m1,m4 . m3 . m2 . m1);
+  ;
+  struct st3 m12;
+  m12 . m3 . m2 . m1 . x = m4 . m3 . m2 . m1 . x;
+  m12 . m3 . m2 . y = m4 . m3 . m2 . y;
+  p_ZN4cls1C2ERK4cls1(&m12 . m3 . m2 . m1,m4 . m3 . m2 . m1);
+  ;
+}

@@ -1,0 +1,3 @@
+
+ERROR: [PARTITION-301] Parallel not match on variable 'ch_a_buf_0_2'
+

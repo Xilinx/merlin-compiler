@@ -1,0 +1,6 @@
+
+WARNING: [FGPIP-213] Loop 'i'  (test_pattern1.cpp:25) probably cannot be fully-pipelined as array 'cc' has an irregular access pattern and cannot be split into different sub-arrays.
+INFO: [FGPIP-103] Loop 'i'  (test_pattern1.cpp:10) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_pattern1.cpp:25) is pipelined
+INFO: [FGPIP-103] Loop 'i'  (test_pattern1.cpp:31) is pipelined
+INFO: [FGPIP-102] Loop 'j' (test_pattern1.cpp:33) is fully parallelized

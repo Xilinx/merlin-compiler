@@ -1,0 +1,153 @@
+#include <string.h> 
+#include <assert.h>
+#include "logistic.h"
+
+void mars_kernel_0_1_node_0_stage_0(int p,int exec,float *global_data,float global_data_buf_0_0[32][848])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    memcpy((void *)(&global_data_buf_0_0[0][0]),(const void *)(&global_data[p * 27136]),sizeof(float ) * ((unsigned long )27136));
+//#pragma HLS loop_tripcount max=1875
+  }
+}
+
+void mars_kernel_0_1_node_1_stage_0(int p,int exec,int *data_chunk_size_0,int *sample_size_0)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+     *data_chunk_size_0 = 32 * (784 + 64);
+     *sample_size_0 = 784 + 64;
+  }
+}
+
+void mars_kernel_0_1_node_2_stage_1(int p,int exec,float global_data_buf_0_0[32][848],float global_weights_buf_0[64][785],float result1_0[32][64])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int k_0;
+    int j_0;
+    int i_0;
+    for (i_0 = 0; i_0 < 784; i_0++) {
+      for (j_0 = 0; j_0 < 32; j_0++) 
+// Original: #pragma ACCEL pipeline flatten
+{
+        
+#pragma ACCEL PIPELINE II=1
+        for (k_0 = 0; k_0 < 64; k_0++) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          if (i_0 == 0) {
+            result1_0[j_0][k_0] = global_weights_buf_0[k_0][0];
+          }
+          result1_0[j_0][k_0] += global_weights_buf_0[k_0][1 + i_0] * global_data_buf_0_0[j_0][64 + i_0];
+        }
+      }
+    }
+  }
+}
+
+void mars_kernel_0_1_node_3_stage_2(int p,int exec,float global_data_buf_0_0[32][848],float result1_0[32][64],float result2_0[32][64])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int j_0;
+    int k_0;
+    for (k_0 = 0; k_0 < 64; k_0++) {
+      for (j_0 = 0; j_0 < 32; j_0++) 
+// Original: #pragma ACCEL pipeline
+{
+        
+#pragma ACCEL PIPELINE II=1
+        float temp = ((float )1) + result1_0[j_0][k_0] * result1_0[j_0][k_0];
+        result2_0[j_0][k_0] = result1_0[j_0][k_0] / temp - (2.f * global_data_buf_0_0[j_0][k_0] - 1.f) / sqrtf(temp);
+      }
+    }
+  }
+}
+
+void mars_kernel_0_1_node_4_stage_3(int p,int exec,float global_data_buf_0_0[32][848],float global_gradient_buf_0[64][785],float result2_0[32][64])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int k_0;
+    int i_0;
+    int j_0;
+    for (j_0 = 0; j_0 < 32; j_0++) {
+      for (i_0 = 0; i_0 < 784 + 1; i_0++) 
+// Original: #pragma ACCEL pipeline flatten
+{
+        
+#pragma ACCEL PIPELINE II=1
+        for (k_0 = 0; k_0 < 64; k_0++) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          global_gradient_buf_0[k_0][i_0] += result2_0[j_0][k_0] * ((i_0 == 0?1.f : global_data_buf_0_0[j_0][63 + i_0]));
+        }
+      }
+    }
+  }
+}
+
+void mars_kernel_0_1(int mars_p,int mars_init,int mars_cond,int *mars_data_chunk_size_0_0,float *global_data,float mars_global_data_buf_0_0_0[32][848],float mars_global_data_buf_0_0_1[32][848],float mars_global_data_buf_0_0_2[32][848],float mars_global_data_buf_0_0_3[32][848],float mars_global_gradient_buf_0_3[64][785],float mars_global_weights_buf_0_1[64][785],float mars_result1_0_1[32][64],float mars_result1_0_2[32][64],float mars_result2_0_2[32][64],float mars_result2_0_3[32][64],int *mars_sample_size_0_0)
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_0_1_node_0_stage_0(mars_p - 0,(int )(mars_p >= mars_init + 0 & mars_p <= mars_cond + 0),global_data,mars_global_data_buf_0_0_0);
+  mars_kernel_0_1_node_1_stage_0(mars_p - 0,(int )(mars_p >= mars_init + 0 & mars_p <= mars_cond + 0),mars_data_chunk_size_0_0,mars_sample_size_0_0);
+  mars_kernel_0_1_node_2_stage_1(mars_p - 1,(int )(mars_p >= mars_init + 1 & mars_p <= mars_cond + 1),mars_global_data_buf_0_0_1,mars_global_weights_buf_0_1,mars_result1_0_1);
+  mars_kernel_0_1_node_3_stage_2(mars_p - 2,(int )(mars_p >= mars_init + 2 & mars_p <= mars_cond + 2),mars_global_data_buf_0_0_2,mars_result1_0_2,mars_result2_0_2);
+  mars_kernel_0_1_node_4_stage_3(mars_p - 3,(int )(mars_p >= mars_init + 3 & mars_p <= mars_cond + 3),mars_global_data_buf_0_0_3,mars_global_gradient_buf_0_3,mars_result2_0_3);
+}
+#pragma ACCEL kernel
+
+void logistic_regression_kernel(int n_samples,float *global_weights,float *global_data,float *global_gradient)
+{
+  int p;
+  int n_stage = n_samples / 32;
+  n_stage < 1875?((void )0) : __assert_fail("n_stage < 1875","logistic_regression_kernel.cpp",10,__PRETTY_FUNCTION__);
+  float global_weights_buf_0[64][785];
+  memcpy((&global_weights_buf_0[0][0]),(&global_weights[0]),sizeof(float ) * 50240);
+  float global_gradient_buf_0[64][785];
+  memcpy((&global_gradient_buf_0[0][0]),(&global_gradient[0]),sizeof(float ) * 50240);
+  float global_data_buf_0_0[32][848];
+  int i_0;
+  int j_0;
+  int k_0;
+  float data_0[32][848];
+  float result1_0[32][64];
+  float result2_0[32][64];
+  int data_chunk_size_0;
+  int sample_size_0;
+  int mars_count_0_1 = 0;
+  float mars_kernel_0_1_global_data_buf_0_0_0[32][848];
+  float mars_kernel_0_1_global_data_buf_0_0_1[32][848];
+  float mars_kernel_0_1_global_data_buf_0_0_2[32][848];
+  float mars_kernel_0_1_global_data_buf_0_0_3[32][848];
+  float mars_kernel_0_1_result1_0_0[32][64];
+  float mars_kernel_0_1_result1_0_1[32][64];
+  float mars_kernel_0_1_result2_0_0[32][64];
+  float mars_kernel_0_1_result2_0_1[32][64];
+  for (p = 0; p < n_stage + 3; p++) 
+// Original: #pragma ACCEL pipeline
+// Original: #pragma ACCEL PIPELINE II=1
+{
+    if (mars_count_0_1 == 0) 
+      mars_kernel_0_1(p,0,-1 + n_stage,&data_chunk_size_0,global_data,mars_kernel_0_1_global_data_buf_0_0_0,mars_kernel_0_1_global_data_buf_0_0_1,mars_kernel_0_1_global_data_buf_0_0_2,mars_kernel_0_1_global_data_buf_0_0_3,global_gradient_buf_0,global_weights_buf_0,mars_kernel_0_1_result1_0_0,mars_kernel_0_1_result1_0_1,mars_kernel_0_1_result2_0_0,mars_kernel_0_1_result2_0_1,&sample_size_0);
+     else if (mars_count_0_1 == 1) 
+      mars_kernel_0_1(p,0,-1 + n_stage,&data_chunk_size_0,global_data,mars_kernel_0_1_global_data_buf_0_0_3,mars_kernel_0_1_global_data_buf_0_0_0,mars_kernel_0_1_global_data_buf_0_0_1,mars_kernel_0_1_global_data_buf_0_0_2,global_gradient_buf_0,global_weights_buf_0,mars_kernel_0_1_result1_0_1,mars_kernel_0_1_result1_0_0,mars_kernel_0_1_result2_0_1,mars_kernel_0_1_result2_0_0,&sample_size_0);
+     else if (mars_count_0_1 == 2) 
+      mars_kernel_0_1(p,0,-1 + n_stage,&data_chunk_size_0,global_data,mars_kernel_0_1_global_data_buf_0_0_2,mars_kernel_0_1_global_data_buf_0_0_3,mars_kernel_0_1_global_data_buf_0_0_0,mars_kernel_0_1_global_data_buf_0_0_1,global_gradient_buf_0,global_weights_buf_0,mars_kernel_0_1_result1_0_0,mars_kernel_0_1_result1_0_1,mars_kernel_0_1_result2_0_0,mars_kernel_0_1_result2_0_1,&sample_size_0);
+     else 
+      mars_kernel_0_1(p,0,-1 + n_stage,&data_chunk_size_0,global_data,mars_kernel_0_1_global_data_buf_0_0_1,mars_kernel_0_1_global_data_buf_0_0_2,mars_kernel_0_1_global_data_buf_0_0_3,mars_kernel_0_1_global_data_buf_0_0_0,global_gradient_buf_0,global_weights_buf_0,mars_kernel_0_1_result1_0_1,mars_kernel_0_1_result1_0_0,mars_kernel_0_1_result2_0_1,mars_kernel_0_1_result2_0_0,&sample_size_0);
+    mars_count_0_1++;
+    if (mars_count_0_1 == 4) 
+      mars_count_0_1 = 0;
+  }
+//#pragma HLS loop_tripcount max=1875
+  memcpy((&global_gradient[0]),(&global_gradient_buf_0[0][0]),sizeof(float ) * 50240);
+}

@@ -1,0 +1,482 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 0;i < uc;++i) {...}
+[Loop i] for(i = 0;i < uc;++i) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 0;i < us;++i) {...}
+[Loop i] for(i = 0;i < us;++i) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 0;i < ui;++i) {...}
+[Loop i] for(i = 0;i < ui;++i) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 0;i < ul;++i) {...}
+[Loop i] for(i = 0;i < ul;++i) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 0;i < ust;++i) {...}
+[Loop i] for(i = 0;i < ust;++i) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 0;i < N;++i) for(j = i;j < 2 * i;++j) ;
+[Loop i] for(i = 0;i < N;++i) for(j = i;j < 2 * i;++j) ; [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = i;j < 2 * i;++j) ;
+[Loop j] for(j = i;j < 2 * i;++j) ; [0..0]
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for((i = 0 , j = 23);i <= N;i++) for(j = - 50;j < 1;j++) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+[Loop i] for(i = 0;i <= N;++i) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = - 50;j < 1;j++) {...}
+[Loop j] for(j = - 50;j < 1;j++) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 100;i <= K;i++) for(j = 100;j <= K + 2 * i;j++) {...}
+[Loop i] for(i = 100;i <= K;i++) for(j = 100;j <= K + 2 * i;j++) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = 100;j <= K + 2 * i;j++) {...}
+[Loop j] for(j = 100;j <= K + 2 * i;j++) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = M;i < K;i++) {...}
+[Loop i] for(i = M;i < K;i++) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 0;i < K;i++) {...}
+[Loop i] for(i = 0;i < K;i++) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 0;i < K;i++) {...}
+[Loop i] for(i = 0;i < K;i++) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i <= - 1;i++) {...}
+[Loop i] for(i = - 1;i <= - 1;i++) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i <= - 1;++i) {...}
+[Loop i] for(i = - 1;i <= - 1;++i) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i >= - 1;i--) {...}
+[Loop i] for(i = - 1;i >= - 1;i--) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i >= - 1;--i) {...}
+[Loop i] for(i = - 1;i >= - 1;--i) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i >= - 1;i += - 1) {...}
+[Loop i] for(i = - 1;i >= - 1;i += - 1) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i <= - 1;i += 1) {...}
+[Loop i] for(i = - 1;i <= - 1;i += 1) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i <= - 1;i -= - 1) {...}
+[Loop i] for(i = - 1;i <= - 1;i -= - 1) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i >= - 1;i -= 1) {...}
+[Loop i] for(i = - 1;i >= - 1;i -= 1) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i >= - 1;i = i - 1) {...}
+[Loop i] for(i = - 1;i >= - 1;i = i - 1) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i <= - 1;i = i + 1) {...}
+[Loop i] for(i = - 1;i <= - 1;i = i + 1) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i >= - 1;i++) {...}
+[Loop i] for(i = - 1;i >= - 1;i++) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i >= - 1;++i) {...}
+[Loop i] for(i = - 1;i >= - 1;++i) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i <= - 1;i--) {...}
+[Loop i] for(i = - 1;i <= - 1;i--) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i <= - 1;--i) {...}
+[Loop i] for(i = - 1;i <= - 1;--i) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i <= - 1;i += - 1) {...}
+[Loop i] for(i = - 1;i <= - 1;i += - 1) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i >= - 1;i += 1) {...}
+[Loop i] for(i = - 1;i >= - 1;i += 1) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i >= - 1;i -= - 1) {...}
+[Loop i] for(i = - 1;i >= - 1;i -= - 1) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i <= - 1;i -= 1) {...}
+[Loop i] for(i = - 1;i <= - 1;i -= 1) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i <= - 1;i = i - 1) {...}
+[Loop i] for(i = - 1;i <= - 1;i = i - 1) {...} [0..0]
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 1;i >= - 1;i = i + 1) {...}
+[Loop i] for(i = - 1;i >= - 1;i = i + 1) {...} [0..0]
+
+**** Test Variable Range **** 
+
+**** Test Expression Range **** 
+[Exp SgAssignOp:i = 0] {i = 0:SgAssignOp i = 0->1,0} : i = 0..i = 0
+[Range i = 0..i = 0 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessThanOp:i < uc] {i <((int )uc):SgLessThanOp i < uc->1,0} : i <((int )uc)..i <((int )uc)
+[Range i <((int )uc)..i <((int )uc) (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : 0..-1L + uc
+[Range 0..-1L + uc (min(0x0L)...(max(0x62L))]
+[Exp SgAssignOp:i = 0] {i = 0:SgAssignOp i = 0->1,0} : i = 0..i = 0
+[Range i = 0..i = 0 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessThanOp:i < us] {i <((int )us):SgLessThanOp i < us->1,0} : i <((int )us)..i <((int )us)
+[Range i <((int )us)..i <((int )us) (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : 0..-1L + us
+[Range 0..-1L + us (min(0x0L)...(max(0x62L))]
+[Exp SgAssignOp:i = 0] {i = 0:SgAssignOp i = 0->1,0} : i = 0..i = 0
+[Range i = 0..i = 0 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessThanOp:i < ui] {((unsigned int )i) < ui:SgLessThanOp i < ui->1,0} : ((unsigned int )i) < ui..((unsigned int )i) < ui
+[Range ((unsigned int )i) < ui..((unsigned int )i) < ui (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : 0..-1L + ui
+[Range 0..-1L + ui (min(0x0L)...(max(0x62L))]
+[Exp SgAssignOp:i = 0] {i = 0:SgAssignOp i = 0->1,0} : i = 0..i = 0
+[Range i = 0..i = 0 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessThanOp:i < ul] {((unsigned long )i) < ul:SgLessThanOp i < ul->1,0} : ((unsigned long )i) < ul..((unsigned long )i) < ul
+[Range ((unsigned long )i) < ul..((unsigned long )i) < ul (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : 0..-1L + ul
+[Range 0..-1L + ul (min(0x0L)...(max(0x62L))]
+[Exp SgAssignOp:i = 0] {i = 0:SgAssignOp i = 0->1,0} : i = 0..i = 0
+[Range i = 0..i = 0 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessThanOp:i < ust] {((unsigned long )i) < ust:SgLessThanOp i < ust->1,0} : ((unsigned long )i) < ust..((unsigned long )i) < ust
+[Range ((unsigned long )i) < ust..((unsigned long )i) < ust (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : 0..-1L + ust
+[Range 0..-1L + ust (min(0x0L)...(max(0x62L))]
+[Exp SgAssignOp:i = 0] {i = 0:SgAssignOp i = 0->1,0} : i = 0..i = 0
+[Range i = 0..i = 0 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessThanOp:i < N] {i < N:SgLessThanOp i < N->1,0} : i < N..i < N
+[Range i < N..i < N (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgAssignOp:j = i] {j = i:SgAssignOp j = i->1,0} : j = i..j = i
+[Range j = i..j = i (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessThanOp:j < 2 * i] {j < 2 * i:SgLessThanOp j < 2 * i->1,0} : j < 2 * i..j < 2 * i
+[Range j < 2 * i..j < 2 * i (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgAssignOp:j = 23] {j = 23:SgAssignOp j = 23->1,0} : j = 23..j = 23
+[Range j = 23..j = 23 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgAssignOp:i = 0] {i = 0:SgAssignOp i = 0->1,0} : i = 0..i = 0
+[Range i = 0..i = 0 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessOrEqualOp:i <= N] {i <= N:SgLessOrEqualOp i <= N->1,0} : i <= N..i <= N
+[Range i <= N..i <= N (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgAssignOp:j = - 50] {j = - 50:SgAssignOp j = - 50->1,0} : j = - 50..j = - 50
+[Range j = - 50..j = - 50 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessThanOp:j < 1] {j < 1:SgLessThanOp j < 1->1,0} : j < 1..j < 1
+[Range j < 1..j < 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgAssignOp:a[i] = i] {a[i] = i:SgAssignOp a[i] = i->1,0} : a[i] = i..a[i] = i
+[Range a[i] = i..a[i] = i (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : 0..N
+[Range 0..N (min(0x0L)...(max(0xc7L))]
+[Exp SgAddOp:i + j] {i + j:SgForStatement i->1,SgForStatement j->1,0} : -50..N
+[Range -50..N (min(0xffffffffffffffceL)...(max(0xc7L))]
+[Exp SgMultiplyOp:i * j] {i * j:SgMultiplyOp i * j->1,0} : i * j..i * j
+[Range i * j..i * j (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgSubtractOp:2 * i - 2 * j] {i * 2 + j * -2:SgForStatement i->2,SgForStatement j->-2,0} : 0..100L + N * 2
+[Range 0..100L + N * 2 (min(0x0L)...(max(0x1f2L))]
+[Exp SgAddOp:-i + j] {-i + j:SgForStatement i->-1,SgForStatement j->1,0} : -50L + -N..0
+[Range -50L + -N..0 (min(0xffffffffffffff07L)...(max(0x0L))]
+[Exp SgIntVal:0] 0
+[Range 0..0 (min(0x0L)...(max(0x0L))]
+[Exp SgIntVal:0] 0
+[Range 0..0 (min(0x0L)...(max(0x0L))]
+[Exp SgAssignOp:i = 100] {i = 100:SgAssignOp i = 100->1,0} : i = 100..i = 100
+[Range i = 100..i = 100 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessOrEqualOp:i <= K] {i <= K:SgLessOrEqualOp i <= K->1,0} : i <= K..i <= K
+[Range i <= K..i <= K (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgAssignOp:j = 100] {j = 100:SgAssignOp j = 100->1,0} : j = 100..j = 100
+[Range j = 100..j = 100 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessOrEqualOp:j <= K + 2 * i] {j <= K + 2 * i:SgLessOrEqualOp j <= K + 2 * i->1,0} : j <= K + 2 * i..j <= K + 2 * i
+[Range j <= K + 2 * i..j <= K + 2 * i (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgAssignOp:a[i] = i] {a[i] = i:SgAssignOp a[i] = i->1,0} : a[i] = i..a[i] = i
+[Range a[i] = i..a[i] = i (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : K..100
+[Range K..100 (min(0x33L)...(max(0x64L))]
+[Exp SgAddOp:i + j] {i + j:SgForStatement i->1,SgForStatement j->1,0} : 200..K * 2 + i * 2
+[Range 200..K * 2 + i * 2 (min(0xc8L)...(max(0x18cL))]
+[Exp SgMultiplyOp:i * j] {i * j:SgMultiplyOp i * j->1,0} : i * j..i * j
+[Range i * j..i * j (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgSubtractOp:2 * i - 2 * j] {i * 2 + j * -2:SgForStatement i->2,SgForStatement j->-2,0} : 200L + K * -2 + i * -4..-200L + K * 2
+[Range 200L + K * -2 + i * -4..-200L + K * 2 (min(0xfffffffffffffe76L)...(max(0xfffffffffffffffeL))]
+[Exp SgAddOp:-i + j] {-i + j:SgForStatement i->-1,SgForStatement j->1,0} : 100L + -K..-100L + i * 2 + K
+[Range 100L + -K..-100L + i * 2 + K (min(0x1L)...(max(0xc5L))]
+[Exp SgAssignOp:K = a[1]] {K = a[1]:SgAssignOp K = a[1]->1,0} : na..199
+[Range na..199 (min(0x8000000000000000L)...(max(0xc7L))]
+[Exp SgAssignOp:M = a[0]] {M = a[0]:SgAssignOp M = a[0]->1,0} : 51..na
+[Range 51..na (min(0x33L)...(max(0x7fffffffffffffffL))]
+[Exp SgAssignOp:i = M] {i = M:SgAssignOp i = M->1,0} : i = M..i = M
+[Range i = M..i = M (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessThanOp:i < K] {i < K:SgLessThanOp i < K->1,0} : i < K..i < K
+[Range i < K..i < K (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgAddOp:i + 1] {1 + i:SgForStatement i->1,1} : 1L + M..K
+[Range 1L + M..K (min(0x34L)...(max(0xc7L))]
+[Exp SgVarRefExp:M] {M:SgVarRefExp M->1,0} : 51..na
+[Range 51..na (min(0x33L)...(max(0x7fffffffffffffffL))]
+[Exp SgAssignOp:K = a[2]] {K = a[2]:SgAssignOp K = a[2]->1,0} : K = a[2]..K = a[2]
+[Range K = a[2]..K = a[2] (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgAssignOp:K = a[3]] {K = a[3]:SgAssignOp K = a[3]->1,0} : K = a[3]..K = a[3]
+[Range K = a[3]..K = a[3] (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgAssignOp:i = 0] {i = 0:SgAssignOp i = 0->1,0} : i = 0..i = 0
+[Range i = 0..i = 0 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessThanOp:i < K] {i < K:SgLessThanOp i < K->1,0} : i < K..i < K
+[Range i < K..i < K (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgAddOp:i + 3] {3 + i:SgForStatement i->1,3} : 3..2L + K
+[Range 3..2L + K (min(0x3L)...(max(0x1fL))]
+[Exp SgMultiplyOp:i * 2] {i * 2:SgForStatement i->2,0} : 0..-2L + K * 2
+[Range 0..-2L + K * 2 (min(0x0L)...(max(0x38L))]
+[Exp SgAssignOp:K = a[4]] {K = a[4]:SgAssignOp K = a[4]->1,0} : 21..29
+[Range 21..29 (min(0x15L)...(max(0x1dL))]
+[Exp SgAssignOp:i = 0] {i = 0:SgAssignOp i = 0->1,0} : i = 0..i = 0
+[Range i = 0..i = 0 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessThanOp:i < K] {i < K:SgLessThanOp i < K->1,0} : i < K..i < K
+[Range i < K..i < K (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgAddOp:i + 3] {3 + i:SgForStatement i->1,3} : 3..2L + K
+[Range 3..2L + K (min(0x3L)...(max(0x1fL))]
+[Exp SgMultiplyOp:i * 2] {i * 2:SgForStatement i->2,0} : 0..-2L + K * 2
+[Range 0..-2L + K * 2 (min(0x0L)...(max(0x38L))]
+[Exp SgAddOp:b + 1] {1 + b:SgInitializedName b->1,1} : na..1025
+[Range na..1025 (min(0x8000000000000000L)...(max(0x401L))]
+[Exp SgDivideOp:b / 2] {b / 2:SgDivideOp b / 2->1,0} : na..512
+[Range na..512 (min(0x8000000000000000L)...(max(0x200L))]
+[Exp SgAddOp:c + 1] {1 + c:SgInitializedName c->1,1} : na..6
+[Range na..6 (min(0x8000000000000000L)...(max(0x6L))]
+[Exp SgDivideOp:c / 2] {c / 2:SgDivideOp c / 2->1,0} : na..2
+[Range na..2 (min(0x8000000000000000L)...(max(0x2L))]
+[Exp SgDivideOp:c / - 2] {c / -2:SgDivideOp c / -2->1,0} : -2..na
+[Range -2..na (min(0xfffffffffffffffeL)...(max(0x7fffffffffffffffL))]
+[Exp SgDivideOp:d / 2] {d / 2:SgDivideOp d / 2->1,0} : -2..na
+[Range -2..na (min(0xfffffffffffffffeL)...(max(0x7fffffffffffffffL))]
+[Exp SgDivideOp:d / - 2] {d / -2:SgDivideOp d / -2->1,0} : na..2
+[Range na..2 (min(0x8000000000000000L)...(max(0x2L))]
+[Exp SgDivideOp:e / 2] {e / 2:SgDivideOp e / 2->1,0} : na..-2
+[Range na..-2 (min(0x8000000000000000L)...(max(0xfffffffffffffffeL))]
+[Exp SgDivideOp:e / - 2] {e / -2:SgDivideOp e / -2->1,0} : 2..na
+[Range 2..na (min(0x2L)...(max(0x7fffffffffffffffL))]
+[Exp SgAddOp:bb + 1] {1 + bb:SgInitializedName bb->1,1} : 101..101
+[Range 101..101 (min(0x65L)...(max(0x65L))]
+[Exp SgCastExp:(char )88] 88
+[Range 88..88 (min(0x58L)...(max(0x58L))]
+[Exp SgCastExp:(signed char )88] 88
+[Range 88..88 (min(0x58L)...(max(0x58L))]
+[Exp SgCastExp:(short )88] 88
+[Range 88..88 (min(0x58L)...(max(0x58L))]
+[Exp SgCastExp:(int )88] 88
+[Range 88..88 (min(0x58L)...(max(0x58L))]
+[Exp SgCastExp:(long )88] 88
+[Range 88..88 (min(0x58L)...(max(0x58L))]
+[Exp SgCastExp:(char )0x1ffffffffLL] -1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgCastExp:(signed char )0x1ffffffffLL] -1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgCastExp:(short )0x1ffffffffLL] -1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgCastExp:(int )0x1ffffffffLL] -1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgCastExp:(long )0x1ffffffffLL] 8589934591L
+[Range 8589934591..8589934591 (min(0x1ffffffffL)...(max(0x1ffffffffL))]
+[Exp SgCastExp:(char )(- 1)] -1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgCastExp:(signed char )(- 1)] -1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgCastExp:(short )(- 1)] -1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgCastExp:(int )(- 1)] -1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgCastExp:(long )(- 1)] -1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgCastExp:(unsigned char )88] 88
+[Range 88..88 (min(0x58L)...(max(0x58L))]
+[Exp SgCastExp:(unsigned short )88] 88
+[Range 88..88 (min(0x58L)...(max(0x58L))]
+[Exp SgCastExp:(unsigned int )88] 88
+[Range 88..88 (min(0x58L)...(max(0x58L))]
+[Exp SgCastExp:(unsigned long )88] 88
+[Range 88..88 (min(0x58L)...(max(0x58L))]
+[Exp SgCastExp:(unsigned char )0x1ffffffffLL] 255
+[Range 255..255 (min(0xffL)...(max(0xffL))]
+[Exp SgCastExp:(unsigned short )0x1ffffffffLL] 65535
+[Range 65535..65535 (min(0xffffL)...(max(0xffffL))]
+[Exp SgCastExp:(unsigned int )0x1ffffffffLL] 4294967295L
+[Range 4294967295..4294967295 (min(0xffffffffL)...(max(0xffffffffL))]
+[Exp SgCastExp:(unsigned long )0x1ffffffffLL] 8589934591L
+[Range 8589934591..8589934591 (min(0x1ffffffffL)...(max(0x1ffffffffL))]
+[Exp SgCastExp:(unsigned char )(- 1)] 255
+[Range 255..255 (min(0xffL)...(max(0xffL))]
+[Exp SgCastExp:(unsigned short )(- 1)] 65535
+[Range 65535..65535 (min(0xffffL)...(max(0xffffL))]
+[Exp SgCastExp:(unsigned int )(- 1)] 4294967295L
+[Range 4294967295..4294967295 (min(0xffffffffL)...(max(0xffffffffL))]
+[Exp SgCastExp:(unsigned long )(- 1)] -1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessOrEqualOp:i <= - 1] {i <= - 1:SgLessOrEqualOp i <= - 1->1,0} : i <= - 1..i <= - 1
+[Range i <= - 1..i <= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : -1..-1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessOrEqualOp:i <= - 1] {i <= - 1:SgLessOrEqualOp i <= - 1->1,0} : i <= - 1..i <= - 1
+[Range i <= - 1..i <= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : -1..-1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgGreaterOrEqualOp:i >= - 1] {i >= - 1:SgGreaterOrEqualOp i >= - 1->1,0} : i >= - 1..i >= - 1
+[Range i >= - 1..i >= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : -1..-1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgGreaterOrEqualOp:i >= - 1] {i >= - 1:SgGreaterOrEqualOp i >= - 1->1,0} : i >= - 1..i >= - 1
+[Range i >= - 1..i >= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : -1..-1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgGreaterOrEqualOp:i >= - 1] {i >= - 1:SgGreaterOrEqualOp i >= - 1->1,0} : i >= - 1..i >= - 1
+[Range i >= - 1..i >= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : -1..-1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessOrEqualOp:i <= - 1] {i <= - 1:SgLessOrEqualOp i <= - 1->1,0} : i <= - 1..i <= - 1
+[Range i <= - 1..i <= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : -1..-1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessOrEqualOp:i <= - 1] {i <= - 1:SgLessOrEqualOp i <= - 1->1,0} : i <= - 1..i <= - 1
+[Range i <= - 1..i <= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : -1..-1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgGreaterOrEqualOp:i >= - 1] {i >= - 1:SgGreaterOrEqualOp i >= - 1->1,0} : i >= - 1..i >= - 1
+[Range i >= - 1..i >= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : -1..-1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgGreaterOrEqualOp:i >= - 1] {i >= - 1:SgGreaterOrEqualOp i >= - 1->1,0} : i >= - 1..i >= - 1
+[Range i >= - 1..i >= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : -1..-1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessOrEqualOp:i <= - 1] {i <= - 1:SgLessOrEqualOp i <= - 1->1,0} : i <= - 1..i <= - 1
+[Range i <= - 1..i <= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : -1..-1
+[Range -1..-1 (min(0xffffffffffffffffL)...(max(0xffffffffffffffffL))]
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgGreaterOrEqualOp:i >= - 1] {i >= - 1:SgGreaterOrEqualOp i >= - 1->1,0} : i >= - 1..i >= - 1
+[Range i >= - 1..i >= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : na..na
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgGreaterOrEqualOp:i >= - 1] {i >= - 1:SgGreaterOrEqualOp i >= - 1->1,0} : i >= - 1..i >= - 1
+[Range i >= - 1..i >= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : na..na
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessOrEqualOp:i <= - 1] {i <= - 1:SgLessOrEqualOp i <= - 1->1,0} : i <= - 1..i <= - 1
+[Range i <= - 1..i <= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : na..na
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessOrEqualOp:i <= - 1] {i <= - 1:SgLessOrEqualOp i <= - 1->1,0} : i <= - 1..i <= - 1
+[Range i <= - 1..i <= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : na..na
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessOrEqualOp:i <= - 1] {i <= - 1:SgLessOrEqualOp i <= - 1->1,0} : i <= - 1..i <= - 1
+[Range i <= - 1..i <= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : na..na
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgGreaterOrEqualOp:i >= - 1] {i >= - 1:SgGreaterOrEqualOp i >= - 1->1,0} : i >= - 1..i >= - 1
+[Range i >= - 1..i >= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : na..na
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgGreaterOrEqualOp:i >= - 1] {i >= - 1:SgGreaterOrEqualOp i >= - 1->1,0} : i >= - 1..i >= - 1
+[Range i >= - 1..i >= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : na..na
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessOrEqualOp:i <= - 1] {i <= - 1:SgLessOrEqualOp i <= - 1->1,0} : i <= - 1..i <= - 1
+[Range i <= - 1..i <= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : na..na
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgLessOrEqualOp:i <= - 1] {i <= - 1:SgLessOrEqualOp i <= - 1->1,0} : i <= - 1..i <= - 1
+[Range i <= - 1..i <= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : na..na
+[Exp SgAssignOp:i = - 1] {i = - 1:SgAssignOp i = - 1->1,0} : i = - 1..i = - 1
+[Range i = - 1..i = - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgGreaterOrEqualOp:i >= - 1] {i >= - 1:SgGreaterOrEqualOp i >= - 1->1,0} : i >= - 1..i >= - 1
+[Range i >= - 1..i >= - 1 (min(0x8000000000000000L)...(max(0x7fffffffffffffffL))]
+[Exp SgVarRefExp:i] {i:SgForStatement i->1,0} : na..na
+SgForStatement:for(i = 0;i < uc;++i) {...}: TC = 0, TC_ub = 99
+SgForStatement:for(i = 0;i < us;++i) {...}: TC = 0, TC_ub = 99
+SgForStatement:for(i = 0;i < ui;++i) {...}: TC = 0, TC_ub = 99
+SgForStatement:for(i = 0;i < ul;++i) {...}: TC = 0, TC_ub = 99
+SgForStatement:for(i = 0;i < ust;++i) {...}: TC = 0, TC_ub = 99
+SgForStatement:for(i = 0;i < N;++i) {...}: TC = 0, TC_ub = 199
+SgForStatement:for(j = i;j < 2 * i;++j) ;: TC = 0, TC_ub = 198
+SgForStatement:for(i = 0;i <= N;++i) {...}: TC = 0, TC_ub = 200
+SgForStatement:for(j = - 50;j < 1;j++) {...}: TC = 51, TC_ub = 51
+SgForStatement:for(i = 100;i <= K;i++) {...}: TC = ? , TC_ub = ?
+SgForStatement:for(j = 100;j <= K + 2 * i;j++) {...}: TC = 0, TC_ub = 198
+SgForStatement:for(i = M;i < K;i++) {...}: TC = 0, TC_ub = 148
+SgForStatement:for(i = 0;i < K;i++) {...}: TC = 0, TC_ub = 29
+SgForStatement:for(i = 0;i < K;i++) {...}: TC = 0, TC_ub = 29
+SgForStatement:for(i = - 1;i <= - 1;i++) {...}: TC = 1, TC_ub = 1
+SgForStatement:for(i = - 1;i <= - 1;++i) {...}: TC = 1, TC_ub = 1
+SgForStatement:for(i = - 1;i >= - 1;i--) {...}: TC = 1, TC_ub = 1
+SgForStatement:for(i = - 1;i >= - 1;--i) {...}: TC = 1, TC_ub = 1
+SgForStatement:for(i = - 1;i >= - 1;i += - 1) {...}: TC = 1, TC_ub = 1
+SgForStatement:for(i = - 1;i <= - 1;i += 1) {...}: TC = 1, TC_ub = 1
+SgForStatement:for(i = - 1;i <= - 1;i -= - 1) {...}: TC = 1, TC_ub = 1
+SgForStatement:for(i = - 1;i >= - 1;i -= 1) {...}: TC = 1, TC_ub = 1
+SgForStatement:for(i = - 1;i >= - 1;i = i - 1) {...}: TC = 1, TC_ub = 1
+SgForStatement:for(i = - 1;i <= - 1;i = i + 1) {...}: TC = 1, TC_ub = 1
+SgForStatement:for(i = - 1;i >= - 1;i++) {...}: TC = ? , TC_ub = ?
+SgForStatement:for(i = - 1;i >= - 1;++i) {...}: TC = ? , TC_ub = ?
+SgForStatement:for(i = - 1;i <= - 1;i--) {...}: TC = ? , TC_ub = ?
+SgForStatement:for(i = - 1;i <= - 1;--i) {...}: TC = ? , TC_ub = ?
+SgForStatement:for(i = - 1;i <= - 1;i += - 1) {...}: TC = ? , TC_ub = ?
+SgForStatement:for(i = - 1;i >= - 1;i += 1) {...}: TC = ? , TC_ub = ?
+SgForStatement:for(i = - 1;i >= - 1;i -= - 1) {...}: TC = ? , TC_ub = ?
+SgForStatement:for(i = - 1;i <= - 1;i -= 1) {...}: TC = ? , TC_ub = ?
+SgForStatement:for(i = - 1;i <= - 1;i = i - 1) {...}: TC = ? , TC_ub = ?
+SgForStatement:for(i = - 1;i >= - 1;i = i + 1) {...}: TC = ? , TC_ub = ?
+

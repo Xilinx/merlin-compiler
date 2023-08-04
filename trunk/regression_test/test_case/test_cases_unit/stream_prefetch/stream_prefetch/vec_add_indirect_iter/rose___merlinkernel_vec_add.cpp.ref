@@ -1,0 +1,52 @@
+#include "merlin_stream.h" 
+extern int __merlin_include__GB_merlin_stream_h_0;
+#pragma ACCEL STREAM_CHANNEL CHANNEL_DEPTH=32 NODE=top PORT=msm_port_a_top_0 
+merlin_stream ch_a_0;
+#include "cmost.h"
+
+void msm_port_a_top_0(int *a)
+{
+  int _i_1;
+  int _j_2;
+  for (_i_1 = 0; _i_1 < 10000 / 100; ++_i_1) {
+    for (_j_2 = 0; _j_2 < 100; ++_j_2) 
+// Original: #pragma ACCEL parallel
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+      int a_sp_tmp_0;
+      
+#pragma ACCEL PARALLEL COMPLETE
+      merlin_stream_read(&ch_a_0,&a_sp_tmp_0);
+      a[_j_2] = a_sp_tmp_0;
+    }
+  }
+}
+
+void top(int *a)
+{
+  merlin_stream_init(&ch_a_0,0,4);
+  __merlin_access_range(a,0,999999UL);
+  
+#pragma ACCEL interface variable=a stream_prefetch=on max_depth=1000000 depth=1000000 memory_burst=off
+  int i;
+  int j;
+  for (i = 0; i < 10000 / 100; ++i) {
+    for (j = 0; j < 100; ++j) 
+// Original: #pragma ACCEL parallel
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+      int a_sn_tmp_0;
+      
+#pragma ACCEL PARALLEL COMPLETE
+      int index = j;
+      a_sn_tmp_0 = 0;
+      merlin_stream_write(&ch_a_0,&a_sn_tmp_0);
+    }
+  }
+{
+    
+#pragma ACCEL STREAM_PORT ACCESS_TYPE=write DIM_NUM=1 NODE=top VARIABLE=a 
+    msm_port_a_top_0(a);
+  }
+  merlin_stream_reset(&ch_a_0);
+}

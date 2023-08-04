@@ -1,0 +1,44 @@
+
+WARNING: [FGPIP-213] Loop 'j'  (test_false_dependence_aocl.cpp:121) probably cannot be fully-pipelined as array 'b' has an irregular access pattern and cannot be split into different sub-arrays.
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test_false_dependence_aocl.cpp:5)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test_false_dependence_aocl.cpp:6)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test_false_dependence_aocl.cpp:30)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test_false_dependence_aocl.cpp:31)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test_false_dependence_aocl.cpp:55)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test_false_dependence_aocl.cpp:56)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'a' (test_false_dependence_aocl.cpp:82)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'b' (test_false_dependence_aocl.cpp:83)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-208] Ignoring pragma '#pragma ACCEL FALSE_DEPENDENCE' (test_false_dependence_aocl.cpp:119)  because loop-carried dependence exists on variable 'a' (test_false_dependence_aocl.cpp:109)
+
+WARNING: [FGPIP-208] Ignoring pragma '#pragma ACCEL FALSE_DEPENDENCE' (test_false_dependence_aocl.cpp:119)  because loop-carried dependence exists on variable 'b' (test_false_dependence_aocl.cpp:110)
+
+WARNING: [FGPIP-208] Ignoring pragma '#pragma ACCEL FALSE_DEPENDENCE' (test_false_dependence_aocl.cpp:91)  because loop-carried dependence exists on variable 'a' (test_false_dependence_aocl.cpp:82)
+INFO: [FGPIP-107] False loop-carried data dependence applied to all the arrays in loop 'i' (test_false_dependence_aocl.cpp:60)
+
+WARNING: [FGPIP-208] Ignoring pragma '#pragma ACCEL FALSE_DEPENDENCE VARIABLE=a' (test_false_dependence_aocl.cpp:39)  because loop-carried dependence exists on variable 'a' (test_false_dependence_aocl.cpp:30)
+INFO: [FGPIP-106] False loop-carried data dependence applied to variable 'a' (test_false_dependence_aocl.cpp:5)
+ in loop 'i' (test_false_dependence_aocl.cpp:10)
+INFO: [FGPIP-102] Loop 'k' (test_false_dependence_aocl.cpp:14) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_aocl.cpp:18) is fully parallelized
+INFO: [FGPIP-102] Loop 'k' (test_false_dependence_aocl.cpp:40) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_aocl.cpp:43) is fully parallelized
+INFO: [FGPIP-102] Loop 'k' (test_false_dependence_aocl.cpp:67) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_aocl.cpp:70) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_false_dependence_aocl.cpp:97) is fully parallelized

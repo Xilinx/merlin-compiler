@@ -1,0 +1,7 @@
+
+#ifndef __MERLIN_TYPE_DEFINE_H__
+
+#define __MERLIN_TYPE_DEFINE_H__
+struct S {const int *cp;int *p;int x;int y;volatile int z;};
+
+#endif

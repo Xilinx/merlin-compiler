@@ -1,0 +1,13 @@
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'u' (test_pattern.cpp:72)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'optVal' (test_pattern.cpp:98)
+ Reason: multiple accesses or complex access pattern. 
+
+WARNING: [FGPIP-220] Potentially inefficient variable configuration: array 'optValBuf' (test_pattern.cpp:99)
+ Reason: multiple accesses or complex access pattern. 
+INFO: [FGPIP-102] Loop 'k' (test_pattern.cpp:14) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_pattern.cpp:106) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_pattern.cpp:110) is fully parallelized
+INFO: [FGPIP-102] Loop 'j' (test_pattern.cpp:146) is fully parallelized

@@ -1,0 +1,77 @@
+#include <string.h> 
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void func_top_0(int *a,int *b)
+{
+  int b_7_0_buf[10];
+  int a_7_0_buf[100];
+  int i;
+  int j;
+{
+    memcpy((void *)(&b_7_0_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10);
+  }
+  for (i = 0; i < 10; ++i) {
+    
+#pragma ACCEL parallel complete
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL parallel complete priority = logic
+      a_7_0_buf[i * 10 + j] = b_7_0_buf[j];
+    }
+  }
+{
+    memcpy((void *)(&a[0]),(const void *)(&a_7_0_buf[0]),sizeof(int ) * 100);
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_1(int *a,int *b)
+{
+  int b_8_0_buf[10];
+  int a_8_0_buf[109];
+  int i;
+  int j;
+{
+    memcpy((void *)(&a_8_0_buf[0]),(const void *)(&a[0]),sizeof(int ) * 109);
+  }
+{
+    memcpy((void *)(&b_8_0_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10);
+  }
+  for (i = 0; i < 10; ++i) {
+    
+#pragma ACCEL parallel complete
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL parallel complete priority = logic
+      a_8_0_buf[i * 11 + j] = b_8_0_buf[j];
+    }
+  }
+{
+    memcpy((void *)(&a[0]),(const void *)(&a_8_0_buf[0]),sizeof(int ) * 109);
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_2(int *a,int *b)
+{
+  int b_9_0_buf[10];
+  int a_9_0_buf[91];
+  int i;
+  int j;
+{
+    memcpy((void *)(&b_9_0_buf[0]),(const void *)(&b[0]),sizeof(int ) * 10);
+  }
+  for (i = 0; i < 10; ++i) {
+    
+#pragma ACCEL parallel complete
+    for (j = 0; j < 10; j++) {
+      
+#pragma ACCEL parallel complete priority = logic
+      a_9_0_buf[i * 9 + j] = b_9_0_buf[j];
+    }
+  }
+{
+    memcpy((void *)(&a[0]),(const void *)(&a_9_0_buf[0]),sizeof(int ) * 91);
+  }
+}

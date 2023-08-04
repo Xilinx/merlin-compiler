@@ -1,0 +1,45 @@
+#pragma ACCEL kernel
+
+void func_top_2_1()
+{
+  int a[100][100];
+  int b[100][100];
+  int i;
+  int j;
+  for (i = 0; i < 50; i++) 
+// Original: #pragma ACCEL parallel complete
+{
+    
+#pragma ACCEL PARALLEL COMPLETE
+    for (j = 0; j < 2; j++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[i][j] = b[i][j];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_4()
+{
+  int a[100][100];
+  int b[100][100];
+  int i;
+  int j;
+  for (i = 0; i < 50; i++) 
+// Original: #pragma ACCEL parallel complete
+{
+    
+#pragma ACCEL PARALLEL COMPLETE
+    for (j = 0; j < 2; j++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[i][j] = b[i][j];
+    }
+    for (j = 0; j < 8; j++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[i + 1][j] = b[i][j + 1];
+    }
+  }
+}

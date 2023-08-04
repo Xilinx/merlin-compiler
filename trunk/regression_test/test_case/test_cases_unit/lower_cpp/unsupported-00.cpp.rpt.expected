@@ -1,0 +1,37 @@
+
+ERROR: [LWCPP-301] Destructor is not supported: void ~S() {...} (unsupported-00.cpp:14)
+
+ERROR: [LWCPP-301] Try-catch clause is not supported: try {}catch(... ){} (unsupported-00.cpp:25)
+
+ERROR: [LWCPP-301] Bit-fields is not supported: struct BitFielded {unsigned int :127;} (unsupported-00.cpp:36)
+
+ERROR: [LWCPP-301] Virtual function declaration is not supported: void f() {...} (unsupported-00.cpp:42)
+
+ERROR: [LWCPP-301] Delegated ctor is not supported: void Delegated(unsigned int ) {...} (unsupported-00.cpp:51)
+
+ERROR: [LWCPP-301] Operator new expression is not supported: void * operator new(unsigned long ) {...} (unsupported-00.cpp:63)
+
+ERROR: [LWCPP-301] Operator new expression is not supported: void * operator new[](unsigned long ) {...} (unsupported-00.cpp:64)
+
+ERROR: [LWCPP-301] Operator delete expression is not supported: void operator delete(void * ,unsigned long ) {...} (unsupported-00.cpp:65)
+
+ERROR: [LWCPP-301] Operator delete expression is not supported: void operator delete[](void * ,unsigned long ) {...} (unsupported-00.cpp:66)
+
+ERROR: [LWCPP-301] Reference-typed member variable is not supported: struct RefMem {unsigned int &u;} (unsupported-00.cpp:69)
+
+ERROR: [LWCPP-301] Constructor call outside of function or class scope is not supported: S() (unsupported-00.cpp:73)
+
+ERROR: [LWCPP-301] Operator new expression is not supported: new int [42] (unsupported-00.cpp:82)
+
+ERROR: [LWCPP-301] Inline struct definition is not supported: struct {unsigned int u;} (unsupported-00.cpp:92)
+INFO: [LWCPP-102] Hint: Consider separating the aggregate definition from variable declaration.
+
+ERROR: [LWCPP-301] Inline struct definition is not supported: struct {inline void f(){}} (unsupported-00.cpp:96)
+
+ERROR: [LWCPP-301] Operator new expression is not supported: new( BadOperators ) (unsupported-00.cpp:100)
+
+ERROR: [LWCPP-301] Operator delete expression is not supported: delete t (unsupported-00.cpp:101)
+
+ERROR: [LWCPP-301] Operator new expression is not supported: new BadOperators {static void *operator new(unsigned long );static void *operato... (unsupported-00.cpp:102)
+
+ERROR: [LWCPP-301] Operator delete expression is not supported: delete []v (unsupported-00.cpp:103)

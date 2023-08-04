@@ -1,0 +1,8 @@
+#include "ap_fixed.h"
+#pragma ACCEL kernel
+
+void top(class ap_int< 12 > *a,class ap_fixed< 12 , 1 , AP_TRN , AP_WRAP , 0 > *b)
+{
+  a[0] . range() = 12;
+  b[0] = 0.12;
+}

@@ -1,0 +1,409 @@
+Hello Program Analysis ... 
+**** Test UseDef and Liveness **** 
+[Stmt 13 SgVariableDeclaration] int c[10]; -- 
+  DEF: 
+  c SgInitializedName c
+  g_asdf SgInitializedName g_asdf
+  USE: 
+  LIVE in :  c, g_asdf,
+  LIVE out:  c, g_asdf, 
+[Stmt 0 SgBasicBlock] {int _i0;for(_i0 = 0;_i0 <= 9UL;++_i0) {int c_tmp = 0;c[_i0] = c_tmp;}} -- 
+  DEF: 
+  USE: 
+  LIVE in : 
+  LIVE out:  
+[Stmt 0 SgVariableDeclaration] int _i0; -- 
+  DEF: 
+  _i0 SgInitializedName _i0
+  c SgInitializedName c
+  g_asdf SgInitializedName g_asdf
+  USE: 
+  LIVE in :  c, g_asdf,
+  LIVE out:  c, g_asdf, 
+[Stmt 0 SgForStatement] for(_i0 = 0;_i0 <= 9UL;++_i0) {...} -- 
+  DEF: 
+  _i0 SgPlusPlusOp ++_i0
+  _i0 SgAssignOp _i0 = 0
+  c SgInitializedName c
+  g_asdf SgInitializedName g_asdf
+  USE: 
+  _i0 SgVarRefExp in _i0 <= 9UL
+  LIVE in :  _i0, c, g_asdf,
+  LIVE out:  c, g_asdf, 
+[Stmt 0 SgForInitStatement] _i0 = 0;; -- 
+  DEF: 
+  _i0 SgAssignOp _i0 = 0
+  c SgInitializedName c
+  g_asdf SgInitializedName g_asdf
+  USE: 
+  LIVE in :  _i0, c, g_asdf,
+  LIVE out:  _i0, c, g_asdf, 
+[Stmt 0 SgExprStatement] _i0 = 0; -- 
+  DEF: 
+  _i0 SgAssignOp _i0 = 0
+  c SgInitializedName c
+  g_asdf SgInitializedName g_asdf
+  USE: 
+  LIVE in :  _i0, c, g_asdf,
+  LIVE out:  _i0, c, g_asdf, 
+[Stmt 0 SgExprStatement] _i0 <= 9UL; -- 
+  DEF: 
+  _i0 SgPlusPlusOp ++_i0
+  _i0 SgAssignOp _i0 = 0
+  c SgInitializedName c
+  g_asdf SgInitializedName g_asdf
+  USE: 
+  _i0 SgVarRefExp in _i0 <= 9UL
+  LIVE in :  _i0, c, g_asdf,
+  LIVE out:  _i0, c, g_asdf, 
+[Stmt 0 SgBasicBlock] {int c_tmp = 0;c[_i0] = c_tmp;} -- 
+  DEF: 
+  USE: 
+  LIVE in : 
+  LIVE out:  
+[Stmt 0 SgVariableDeclaration] int c_tmp = 0; -- 
+  DEF: 
+  _i0 SgPlusPlusOp ++_i0
+  _i0 SgAssignOp _i0 = 0
+  c_tmp SgAssignInitializer 0
+  c SgInitializedName c
+  g_asdf SgInitializedName g_asdf
+  USE: 
+  _i0 SgVarRefExp in _i0 <= 9UL
+  LIVE in :  _i0, c, c_tmp, g_asdf,
+  LIVE out:  _i0, c, c_tmp, g_asdf, 
+[Stmt 0 SgExprStatement] c[_i0] = c_tmp; -- 
+  DEF: 
+  _i0 SgPlusPlusOp ++_i0
+  _i0 SgAssignOp _i0 = 0
+  c_tmp SgAssignInitializer 0
+  c SgInitializedName c
+  g_asdf SgInitializedName g_asdf
+  USE: 
+  _i0 SgVarRefExp in _i0 <= 9UL
+  _i0 SgVarRefExp in c[_i0]
+  c_tmp SgVarRefExp in c[_i0] = c_tmp
+  LIVE in :  _i0, c, g_asdf,
+  LIVE out:  _i0, c, g_asdf, 
+[Stmt 14 SgVariableDeclaration] int a = 0 + c[2]; -- 
+  DEF: 
+  a SgAssignInitializer 0 + c[2]
+  c SgInitializedName c
+  g_asdf SgInitializedName g_asdf
+  USE: 
+  c SgVarRefExp in c[2]
+  LIVE in :  a, c, g_asdf,
+  LIVE out:  a, c, g_asdf, 
+[Stmt 15 SgVariableDeclaration] int b = a + 2; -- 
+  DEF: 
+  a SgAssignInitializer 0 + c[2]
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  g_asdf SgInitializedName g_asdf
+  USE: 
+  a SgVarRefExp in a + 2
+  c SgVarRefExp in c[2]
+  LIVE in :  b, c, g_asdf,
+  LIVE out:  b, c, g_asdf, 
+[Stmt 16 SgVariableDeclaration] int aa[100]; -- 
+  DEF: 
+  a SgAssignInitializer 0 + c[2]
+  aa SgInitializedName aa
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  g_asdf SgInitializedName g_asdf
+  USE: 
+  a SgVarRefExp in a + 2
+  c SgVarRefExp in c[2]
+  LIVE in :  aa, b, c, g_asdf,
+  LIVE out:  aa, b, c, g_asdf, 
+[Stmt 17 SgVariableDeclaration] int cc[100]; -- 
+  DEF: 
+  a SgAssignInitializer 0 + c[2]
+  aa SgInitializedName aa
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  cc SgInitializedName cc
+  g_asdf SgInitializedName g_asdf
+  USE: 
+  a SgVarRefExp in a + 2
+  c SgVarRefExp in c[2]
+  LIVE in :  aa, b, c, cc, g_asdf,
+  LIVE out:  aa, b, c, cc, g_asdf, 
+[Stmt 18 SgExprStatement] func2(aa); -- 
+  DEF: 
+  a SgAssignInitializer 0 + c[2]
+  aa SgInitializedName aa
+  aa SgFunctionCallExp func2(aa)
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  cc SgInitializedName cc
+  g_asdf SgInitializedName g_asdf
+  USE: 
+  a SgVarRefExp in a + 2
+  c SgVarRefExp in c[2]
+  LIVE in :  b, c, cc, g_asdf,
+  LIVE out:  b, c, cc, g_asdf, 
+[Stmt 19 SgExprStatement] func(&cc[0],b); -- 
+  DEF: 
+  a SgAssignInitializer 0 + c[2]
+  aa SgInitializedName aa
+  aa SgFunctionCallExp func2(aa)
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  cc SgInitializedName cc
+  g_asdf SgInitializedName g_asdf
+  USE: 
+  a SgVarRefExp in a + 2
+  b SgVarRefExp in &cc[0],b
+  c SgVarRefExp in c[2]
+  cc SgVarRefExp in cc[0]
+  LIVE in :  b, c, g_asdf,
+  LIVE out:  b, c, g_asdf, 
+[Stmt 20 SgExprStatement] a = 1 + g_asdf; -- 
+  DEF: 
+  a SgAssignOp a = 1 + g_asdf
+  aa SgInitializedName aa
+  aa SgFunctionCallExp func2(aa)
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  cc SgInitializedName cc
+  g_asdf SgInitializedName g_asdf
+  USE: 
+  b SgVarRefExp in &cc[0],b
+  c SgVarRefExp in c[2]
+  cc SgVarRefExp in cc[0]
+  g_asdf SgVarRefExp in 1 + g_asdf
+  LIVE in :  a, b, c,
+  LIVE out:  a, b, c, 
+[Stmt 22 SgForStatement] for(int i = 0;i < 100;i++) {...} -- 
+  DEF: 
+  a SgAssignOp a = 1 + g_asdf
+  a SgAssignOp a = 2
+  aa SgInitializedName aa
+  aa SgFunctionCallExp func2(aa)
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  cc SgInitializedName cc
+  g_asdf SgInitializedName g_asdf
+  i SgAssignInitializer 0
+  i SgPlusPlusOp i++
+  USE: 
+  b SgVarRefExp in &cc[0],b
+  c SgVarRefExp in c[2]
+  cc SgVarRefExp in cc[0]
+  g_asdf SgVarRefExp in 1 + g_asdf
+  i SgVarRefExp in i < 100
+  LIVE in :  a, b, c, i,
+  LIVE out:  b, c, 
+[Stmt 22 SgForInitStatement] int i = 0;; -- 
+  DEF: 
+  a SgAssignOp a = 1 + g_asdf
+  aa SgInitializedName aa
+  aa SgFunctionCallExp func2(aa)
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  cc SgInitializedName cc
+  g_asdf SgInitializedName g_asdf
+  i SgAssignInitializer 0
+  USE: 
+  b SgVarRefExp in &cc[0],b
+  c SgVarRefExp in c[2]
+  cc SgVarRefExp in cc[0]
+  g_asdf SgVarRefExp in 1 + g_asdf
+  LIVE in :  a, b, c, i,
+  LIVE out:  a, b, c, i, 
+[Stmt 22 SgVariableDeclaration] int i = 0; -- 
+  DEF: 
+  a SgAssignOp a = 1 + g_asdf
+  aa SgInitializedName aa
+  aa SgFunctionCallExp func2(aa)
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  cc SgInitializedName cc
+  g_asdf SgInitializedName g_asdf
+  i SgAssignInitializer 0
+  USE: 
+  b SgVarRefExp in &cc[0],b
+  c SgVarRefExp in c[2]
+  cc SgVarRefExp in cc[0]
+  g_asdf SgVarRefExp in 1 + g_asdf
+  LIVE in :  a, b, c, i,
+  LIVE out:  a, b, c, i, 
+[Stmt 22 SgExprStatement] i < 100; -- 
+  DEF: 
+  a SgAssignOp a = 1 + g_asdf
+  a SgAssignOp a = 2
+  aa SgInitializedName aa
+  aa SgFunctionCallExp func2(aa)
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  cc SgInitializedName cc
+  g_asdf SgInitializedName g_asdf
+  i SgAssignInitializer 0
+  i SgPlusPlusOp i++
+  USE: 
+  b SgVarRefExp in &cc[0],b
+  c SgVarRefExp in c[2]
+  cc SgVarRefExp in cc[0]
+  g_asdf SgVarRefExp in 1 + g_asdf
+  i SgVarRefExp in i < 100
+  LIVE in :  a, b, c, i,
+  LIVE out:  a, b, c, i, 
+[Stmt 23 SgBasicBlock] {int d;c[i] = a;a = 2;i;} -- 
+  DEF: 
+  USE: 
+  LIVE in : 
+  LIVE out:  
+[Stmt 24 SgVariableDeclaration] int d; -- 
+  DEF: 
+  a SgAssignOp a = 1 + g_asdf
+  a SgAssignOp a = 2
+  aa SgInitializedName aa
+  aa SgFunctionCallExp func2(aa)
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  cc SgInitializedName cc
+  d SgInitializedName d
+  g_asdf SgInitializedName g_asdf
+  i SgAssignInitializer 0
+  i SgPlusPlusOp i++
+  USE: 
+  b SgVarRefExp in &cc[0],b
+  c SgVarRefExp in c[2]
+  cc SgVarRefExp in cc[0]
+  g_asdf SgVarRefExp in 1 + g_asdf
+  i SgVarRefExp in i < 100
+  LIVE in :  a, b, c, i,
+  LIVE out:  a, b, c, i, 
+[Stmt 25 SgExprStatement] c[i] = a; -- 
+  DEF: 
+  a SgAssignOp a = 1 + g_asdf
+  a SgAssignOp a = 2
+  aa SgInitializedName aa
+  aa SgFunctionCallExp func2(aa)
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  cc SgInitializedName cc
+  d SgInitializedName d
+  g_asdf SgInitializedName g_asdf
+  i SgAssignInitializer 0
+  i SgPlusPlusOp i++
+  USE: 
+  a SgVarRefExp in c[i] = a
+  b SgVarRefExp in &cc[0],b
+  c SgVarRefExp in c[2]
+  cc SgVarRefExp in cc[0]
+  g_asdf SgVarRefExp in 1 + g_asdf
+  i SgVarRefExp in i < 100
+  i SgVarRefExp in c[i]
+  LIVE in :  b, c, i,
+  LIVE out:  b, c, i, 
+[Stmt 26 SgExprStatement] a = 2; -- 
+  DEF: 
+  a SgAssignOp a = 2
+  aa SgInitializedName aa
+  aa SgFunctionCallExp func2(aa)
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  cc SgInitializedName cc
+  d SgInitializedName d
+  g_asdf SgInitializedName g_asdf
+  i SgAssignInitializer 0
+  i SgPlusPlusOp i++
+  USE: 
+  b SgVarRefExp in &cc[0],b
+  c SgVarRefExp in c[2]
+  cc SgVarRefExp in cc[0]
+  g_asdf SgVarRefExp in 1 + g_asdf
+  i SgVarRefExp in i < 100
+  i SgVarRefExp in c[i]
+  LIVE in :  a, b, c, i,
+  LIVE out:  a, b, c, i, 
+[Stmt 27 SgExprStatement] i; -- 
+  DEF: 
+  a SgAssignOp a = 2
+  aa SgInitializedName aa
+  aa SgFunctionCallExp func2(aa)
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  cc SgInitializedName cc
+  d SgInitializedName d
+  g_asdf SgInitializedName g_asdf
+  i SgAssignInitializer 0
+  i SgPlusPlusOp i++
+  USE: 
+  b SgVarRefExp in &cc[0],b
+  c SgVarRefExp in c[2]
+  cc SgVarRefExp in cc[0]
+  g_asdf SgVarRefExp in 1 + g_asdf
+  i SgVarRefExp in i < 100
+  i SgVarRefExp in c[i]
+  i SgVarRefExp in i;
+  LIVE in :  a, b, c, i,
+  LIVE out:  a, b, c, i, 
+[Stmt 29 SgExprStatement] g_asdf = 12; -- 
+  DEF: 
+  a SgAssignOp a = 1 + g_asdf
+  a SgAssignOp a = 2
+  aa SgInitializedName aa
+  aa SgFunctionCallExp func2(aa)
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  cc SgInitializedName cc
+  g_asdf SgAssignOp g_asdf = 12
+  USE: 
+  b SgVarRefExp in &cc[0],b
+  c SgVarRefExp in c[2]
+  cc SgVarRefExp in cc[0]
+  LIVE in :  b, c,
+  LIVE out:  b, c, 
+[Stmt 31 SgExprStatement] a = 3; -- 
+  DEF: 
+  a SgAssignOp a = 3
+  aa SgInitializedName aa
+  aa SgFunctionCallExp func2(aa)
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  cc SgInitializedName cc
+  g_asdf SgAssignOp g_asdf = 12
+  USE: 
+  b SgVarRefExp in &cc[0],b
+  c SgVarRefExp in c[2]
+  cc SgVarRefExp in cc[0]
+  LIVE in :  a, b, c,
+  LIVE out:  a, b, c, 
+[Stmt 32 SgExprStatement] func(&b,a); -- 
+  DEF: 
+  a SgAssignOp a = 3
+  aa SgInitializedName aa
+  aa SgFunctionCallExp func2(aa)
+  b SgAddressOfOp &b
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  cc SgInitializedName cc
+  g_asdf SgAssignOp g_asdf = 12
+  USE: 
+  a SgVarRefExp in &b,a
+  c SgVarRefExp in c[2]
+  cc SgVarRefExp in cc[0]
+  LIVE in :  c,
+  LIVE out:  c, 
+[Stmt 34 SgReturnStmt] return c[0]; -- 
+  DEF: 
+  a SgAssignOp a = 3
+  aa SgInitializedName aa
+  aa SgFunctionCallExp func2(aa)
+  b SgAddressOfOp &b
+  b SgAssignInitializer a + 2
+  c SgInitializedName c
+  cc SgInitializedName cc
+  g_asdf SgAssignOp g_asdf = 12
+  USE: 
+  a SgVarRefExp in &b,a
+  c SgVarRefExp in c[2]
+  c SgVarRefExp in c[0]
+  cc SgVarRefExp in cc[0]
+  LIVE in : 
+  LIVE out:  
+

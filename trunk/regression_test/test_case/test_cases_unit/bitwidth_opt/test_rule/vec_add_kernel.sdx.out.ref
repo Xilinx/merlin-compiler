@@ -1,0 +1,33 @@
+#include "memcpy_512_1d.h"
+#include <string.h>
+#define VEC_SIZE 10000
+extern int __merlin_include__GB_memcpy_512_1d_h_0;
+#pragma ACCEL kernel
+
+void vec_add_kernel(ap_uint<512> *a,ap_uint<512> *b,ap_uint<512> *c,int inc)
+{
+  
+#pragma HLS DATA_PACK VARIABLE=c
+  
+#pragma HLS DATA_PACK VARIABLE=b
+  
+#pragma HLS DATA_PACK VARIABLE=a
+  int i;
+  int j;
+  for (j = 0; j < 10000 / 1000; j++) {
+    int a_buf[1000];
+    int b_buf[1000];
+    int c_buf[1000];
+    
+#pragma  HLS array_partition  variable=a_buf cyclic factor = 16 dim=1
+    memcpy_wide_bus_read_int_512(a_buf,(ap_uint<512> *)a,1000 * j * 4,((unsigned long )1000) * sizeof(int ),1000L);
+    
+#pragma  HLS array_partition  variable=b_buf cyclic factor = 16 dim=1
+    memcpy_wide_bus_read_int_512(b_buf,(ap_uint<512> *)b,1000 * j * 4,((unsigned long )1000) * sizeof(int ),1000L);
+    for (i = 0; i < 1000; i++) 
+      c_buf[i] = a_buf[i] + b_buf[i] + inc;
+    
+#pragma  HLS array_partition  variable=c_buf cyclic factor = 16 dim=1
+    memcpy_wide_bus_write_int_512((ap_uint<512> *)c,c_buf,4 * (1000 * j),((unsigned long )1000) * sizeof(int ),1000L);
+  }
+}

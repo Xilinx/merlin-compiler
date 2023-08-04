@@ -1,0 +1,36 @@
+#include <hls_stream.h>
+#include<ap_int.h>
+
+void sub_func(class hls::stream< ap_uint< 32 >  > *c1)
+{
+}
+#pragma ACCEL kernel
+
+void func_top_1()
+{
+  class hls::stream< ap_uint< 32 >  > strm_arry_c1[8];
+  
+#pragma HLS array_partition variable=strm_arry_c1 complete dim=1
+  
+#pragma HLS stream variable = strm_arry_c1 depth = 8
+  
+#pragma HLS resource variable = strm_arry_c1 core = FIFO_SRL
+  class hls::stream< ap_uint< 32 >  > c0[8];
+  
+#pragma HLS array_partition variable=c0 complete dim=1
+  
+#pragma HLS stream variable = c0 depth = 8
+  
+#pragma HLS RESOURCE variable=c0 core=RAM_T2P_URAM
+  int c1[8];
+  
+#pragma HLS array_partition variable=c1 complete dim=1
+  for (int i = 0; i < 8; i++) 
+// Original: #pragma ACCEL parallel
+{
+    
+#pragma HLS unroll
+    sub_func(&strm_arry_c1[i]);
+    c0[i] . write(c1[i]);
+  }
+}

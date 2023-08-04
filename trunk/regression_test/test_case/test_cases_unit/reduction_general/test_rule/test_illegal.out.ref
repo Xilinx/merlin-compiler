@@ -1,0 +1,193 @@
+#define VEC_SIZE 10000
+#define VEC_DIM_SIZE 100
+#pragma ACCEL kernel
+
+void func_top_1(int *a)
+{
+  int j;
+  int j_sub;
+  int sum = 0;
+  int _sum_rdc[10];
+{
+    int j_sub_0;
+    for (j_sub_0 = 0; j_sub_0 <= 9; ++j_sub_0) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      _sum_rdc[j_sub_0] = 0;
+    }
+  }
+  for (j = 0; j < 1000; j++) {
+    
+#pragma ACCEL pipeline
+    for (j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL PARALLEL
+      _sum_rdc[j_sub] += a[j * 10 + j_sub];
+    }
+  }
+{
+    int j_sub_1;
+    for (j_sub_1 = 0; j_sub_1 <= 9; ++j_sub_1) {
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      
+#pragma ACCEL PARALLEL COMPLETE
+      sum += _sum_rdc[j_sub_1];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_2(int *a,int *b,int *c)
+{
+  int j;
+  int j_sub;
+  int sum = 0;
+  int sum1 = 0;
+  int _sum_rdc[10];
+{
+    int j_sub_0;
+    for (j_sub_0 = 0; j_sub_0 <= 9; ++j_sub_0) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      _sum_rdc[j_sub_0] = 0;
+    }
+  }
+  int _sum1_rdc[10];
+{
+    int j_sub_2;
+    for (j_sub_2 = 0; j_sub_2 <= 9; ++j_sub_2) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      _sum1_rdc[j_sub_2] = 0;
+    }
+  }
+  for (j = 0; j < 1000; j++) {
+    
+#pragma ACCEL pipeline
+    for (j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL PARALLEL
+      _sum_rdc[j_sub] += a[j * 10 + j_sub];
+      _sum1_rdc[j_sub] += a[j * 10 + j_sub];
+    }
+  }
+{
+    int j_sub_3;
+    for (j_sub_3 = 0; j_sub_3 <= 9; ++j_sub_3) {
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      
+#pragma ACCEL PARALLEL COMPLETE
+      sum1 += _sum1_rdc[j_sub_3];
+    }
+  }
+{
+    int j_sub_1;
+    for (j_sub_1 = 0; j_sub_1 <= 9; ++j_sub_1) {
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      
+#pragma ACCEL PARALLEL COMPLETE
+      sum += _sum_rdc[j_sub_1];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_3(int *a,int *b,int *c)
+{
+  int j;
+  int j_sub;
+  int sum = 0;
+  int sum1 = 0;
+  int _sum1_rdc[10];
+{
+    int j_sub_0;
+    for (j_sub_0 = 0; j_sub_0 <= 9; ++j_sub_0) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      _sum1_rdc[j_sub_0] = 0;
+    }
+  }
+  for (j = 0; j < 1000; j++) {
+    
+#pragma ACCEL pipeline
+    for (j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL PARALLEL
+      sum += a[j * 10 + j_sub];
+      _sum1_rdc[j_sub] += sum;
+    }
+  }
+{
+    int j_sub_1;
+    for (j_sub_1 = 0; j_sub_1 <= 9; ++j_sub_1) {
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      
+#pragma ACCEL PARALLEL COMPLETE
+      sum1 += _sum1_rdc[j_sub_1];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_4(int *a)
+{
+  int j;
+  int j_sub;
+  int sum = 0;
+  int sum1 = 0;
+  for (j = 0; j < 1000; j++) {
+    
+#pragma ACCEL pipeline
+    for (j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL PARALLEL
+      sum -= a[j * 10 + j_sub];
+      sum *= a[j * 10 + j_sub];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_6(int *a,int N)
+{
+  int sum = 0;
+  for (int j = 0; j < N / 10; j++) {
+    
+#pragma ACCEL PIPELINE
+    for (int j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL PARALLEL
+      sum |= a[j * 10 + j_sub];
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_7(int *a,int N)
+{
+  int sum = 0;
+  int i = 0;
+  while(i <= 100){
+    
+#pragma ACCEL PIPELINE
+    sum += a[i];
+    i++;
+  }
+  for (; i <= 100; i++) {
+    
+#pragma ACCEL PARALLEL
+    sum += a[i];
+  }
+}

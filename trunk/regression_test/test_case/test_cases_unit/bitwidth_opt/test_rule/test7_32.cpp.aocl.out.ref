@@ -1,0 +1,69 @@
+#include<string.h>
+//1d dimension
+#pragma ACCEL kernel
+
+void top(int *a,char *b,unsigned int *c,float *d,double *f,signed short *g,short *h)
+{
+  int _memcpy_i2_4;
+  int _memcpy_i2_3;
+  int _memcpy_i2_2;
+  int _memcpy_i2_1;
+  int _memcpy_i2_0;
+  int _memcpy_i0_1;
+  int _memcpy_i0_0;
+  int a_buf[1000];
+  memcpy(a_buf,a,sizeof(int ) * 1000);
+  char b_buf[100][64];
+  for (_memcpy_i0_1 = 0; _memcpy_i0_1 < 100; ++_memcpy_i0_1) {
+    
+#pragma HLS COALESCING_WIDTH=32
+    for (_memcpy_i0_0 = 0; _memcpy_i0_0 < 64; ++_memcpy_i0_0) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=4
+      b_buf[_memcpy_i0_1][_memcpy_i0_0] = b[0 + ((0 * 100 + _memcpy_i0_1) * 64 + _memcpy_i0_0)];
+    }
+  }
+  unsigned int c_buf[100][200][16];
+  memcpy(c_buf[0][0],c,sizeof(unsigned int ) * 100 * 200 * 16);
+  float d_buf[100][200][300][16];
+  memcpy(d_buf[0][0][0],d,sizeof(float ) * 100 * 200 * 300 * 16);
+  double f_buf[100][200];
+  memcpy(f_buf[0],f,sizeof(double ) * 100 * 200);
+  signed short g_buf[2000];
+  long _memcpy_i_1;
+  for (_memcpy_i_1 = 0; _memcpy_i_1 < sizeof(signed short ) * ((unsigned long )2000) / 2; ++_memcpy_i_1) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=2
+    long total_offset1 = 0 * 2000 + 0;
+    long total_offset2 = 0 * 0 + 0;
+    g_buf[total_offset1 + _memcpy_i_1] = g[total_offset2 + _memcpy_i_1];
+  }
+  short h_buf[25][4][128][8][32];
+  for (_memcpy_i2_4 = 0; _memcpy_i2_4 < 25; ++_memcpy_i2_4) {
+    
+#pragma HLS COALESCING_WIDTH=32
+    for (_memcpy_i2_3 = 0; _memcpy_i2_3 < 4; ++_memcpy_i2_3) {
+      for (_memcpy_i2_2 = 0; _memcpy_i2_2 < 128; ++_memcpy_i2_2) {
+        for (_memcpy_i2_1 = 0; _memcpy_i2_1 < 8; ++_memcpy_i2_1) {
+          for (_memcpy_i2_0 = 0; _memcpy_i2_0 < 32; ++_memcpy_i2_0) {
+            
+#pragma ACCEL PARALLEL SKIP FACTOR=2
+            h_buf[_memcpy_i2_4][_memcpy_i2_3][_memcpy_i2_2][_memcpy_i2_1][_memcpy_i2_0] = h[0 + (((((0 * 25 + _memcpy_i2_4) * 4 + _memcpy_i2_3) * 128 + _memcpy_i2_2) * 8 + _memcpy_i2_1) * 32 + _memcpy_i2_0)];
+          }
+        }
+      }
+    }
+  }
+}
+
+int main()
+{
+  int *a;
+  char *b;
+  unsigned int *c;
+  float *d;
+  double *f;
+  signed short *g;
+  short *h;
+  top(a,b,c,d,f,g,h);
+}

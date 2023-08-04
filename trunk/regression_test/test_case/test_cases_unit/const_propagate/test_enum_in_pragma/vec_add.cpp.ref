@@ -1,0 +1,62 @@
+#include <stdio.h>
+enum _ram_type {RAM_1P_BRAM=2} ;
+#pragma ACCEL kernel
+
+void top(int a[10],int b[10])
+{
+  
+#pragma ACCEL parallel factor=2
+  for (int i = 0; i < 10; ++i) {
+//#pragma HLS pipeline II=RAM_1P_BRAM
+    b[i] = a[i] + RAM_1P_BRAM;
+  }
+}
+#pragma ACCEL kernel
+
+void top_acc(int a[10],int b[10])
+{
+  enum _ram_type {RAM_2P_BRAM=3} ;
+  
+#pragma ACCEL pipeline II=3
+  for (int i = 0; i < 10; ++i) {
+//#pragma HLS pipeline II=RAM_1P_BRAM
+    b[i] = a[i] + ::RAM_1P_BRAM;
+  }
+}
+enum _ram_top_type {RAM_3P_BRAM=4} ;
+#pragma ACCEL kernel
+
+void top_top(int a[10],int b[10])
+{
+//#pragma ACCEL parallel factor=RAM_1P_BRAM
+  for (int i = 0; i < 10; ++i) {
+    
+#pragma HLS pipeline II=4
+    b[i] = a[i] + RAM_1P_BRAM;
+  }
+}
+#pragma ACCEL kernel
+
+void top_hls(int a[10],int b[10])
+{
+  enum _ram_type {RAM_4P_BRAM=5} ;
+//#pragma ACCEL parallel factor=RAM_1P_BRAM
+  for (int i = 0; i < 10; ++i) {
+    
+#pragma HLS pipeline II=5
+    b[i] = a[i] + ::RAM_1P_BRAM;
+  }
+}
+#pragma ACCEL kernel
+
+void top_mer1969(int a[10],int b[10])
+{
+  enum _ram_type {RAM_5P_BRAM=5} ;
+  const int II = (int )RAM_5P_BRAM;
+//#pragma ACCEL parallel factor=RAM_1P_BRAM
+  for (int i = 0; i < 10; ++i) {
+    
+#pragma HLS pipeline II=10*5
+    b[i] = a[i] + RAM_5P_BRAM;
+  }
+}

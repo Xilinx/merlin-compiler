@@ -1,0 +1,48 @@
+#include <string.h> 
+#define FACTOR 100
+
+void func(int *a)
+{
+//int i;
+  for (int i0 = 0; i0 < 10; ++i0) {
+    for (int ii = 0; ii < 10; ++ii) {
+      
+#pragma ACCEL parallel
+      int i = i0 * 10 + ii;
+      a[i] = i;
+    }
+  }
+}
+
+void top_L_0_0_para_sub(int j)
+// Original: #pragma ACCEL parallel
+{
+  
+#pragma HLS inline off
+  int a_buf[100];
+  func(a_buf);
+}
+
+void top_L_0_0_para()
+{
+  
+#pragma HLS inline off
+  int j;
+  for (j = 0; j < 100; ++j) {
+    
+#pragma HLS unroll complete
+    top_L_0_0_para_sub(j);
+  }
+}
+#pragma ACCEL kernel
+
+void top(int *a,int *b,int *c)
+{
+  for (int i = 0; i < 10000 / 100; ++i) {
+    top_L_0_0_para();
+    for (int j = 0; j < 100; ++j) 
+// Original: #pragma ACCEL parallel
+{
+    }
+  }
+}

@@ -1,0 +1,23 @@
+
+void remove_modifier(int a[10],double b[][10])
+{
+  char *ptr;
+  int &ref = a[0];
+  int s = 10;
+  double a2[10];
+  int s2;
+  float **a3;
+}
+
+struct st 
+{
+  int a;
+}
+;
+const int ss = 10;
+
+void replace_vars_ref(const int a[10],double b[][10])
+{
+  volatile double a2[10];
+  const float (*a3)[10];
+}

@@ -1,0 +1,105 @@
+#include <string.h> 
+#include "memcpy_512_1d.h"
+#include <string.h> 
+#include <string.h> 
+#include <string.h> 
+extern int __merlin_include__GB_string_h_3;
+extern int __merlin_include__GB_string_h_2;
+extern int __merlin_include__GB_memcpy_512_1d_h_1;
+extern int __merlin_include__GB_string_h_0;
+#pragma ACCEL kernel
+
+void func1_kernel(ap_uint<512> *a,ap_uint<512> *b,ap_uint<512> *c)
+{
+  
+#pragma HLS DATA_PACK VARIABLE=c
+  
+#pragma HLS DATA_PACK VARIABLE=b
+  
+#pragma HLS DATA_PACK VARIABLE=a
+  for (int i = 0; i < 64; ++i) {
+    int c_buf[16];
+    int b_buf[16];
+    int a_buf[16];
+    
+#pragma  HLS array_partition  variable=b_buf cyclic factor = 16 dim=1
+    memcpy_wide_bus_read_int_512(&b_buf[0],(ap_uint<512> *)b,i * 16 * 4,sizeof(int ) * 16,16L);
+    
+#pragma  HLS array_partition  variable=c_buf cyclic factor = 16 dim=1
+    memcpy_wide_bus_read_int_512(&c_buf[0],(ap_uint<512> *)c,i * 16 * 4,sizeof(int ) * 16,16L);
+    for (int j = 0; j < 16; ++j) {
+      
+#pragma ACCEL parallel
+      a_buf[j] = b_buf[j] + c_buf[j];
+    }
+    
+#pragma  HLS array_partition  variable=a_buf cyclic factor = 16 dim=1
+    memcpy_wide_bus_write_int_512((ap_uint<512> *)a,&a_buf[0],4 * (i * 16),sizeof(int ) * 16,16L);
+  }
+}
+#pragma ACCEL kernel
+
+void func2_kernel(ap_uint<512> *a,ap_uint<512> *b,ap_uint<512> *c)
+{
+  
+#pragma HLS DATA_PACK VARIABLE=c
+  
+#pragma HLS DATA_PACK VARIABLE=b
+  
+#pragma HLS DATA_PACK VARIABLE=a
+  for (int i = 0; i < 64; ++i) {
+    int c_buf[16];
+    int b_buf[16];
+    int a_buf[16];
+    
+#pragma  HLS array_partition  variable=b_buf cyclic factor = 16 dim=1
+    memcpy_wide_bus_read_int_512(&b_buf[0],(ap_uint<512> *)b,i * 16 * 4,sizeof(int ) * 16,16L);
+    
+#pragma  HLS array_partition  variable=c_buf cyclic factor = 16 dim=1
+    memcpy_wide_bus_read_int_512(&c_buf[0],(ap_uint<512> *)c,i * 16 * 4,sizeof(int ) * 16,16L);
+    a_buf[0] = b_buf[0] + c_buf[0];
+    a_buf[1] = b_buf[1] + c_buf[1];
+    a_buf[2] = b_buf[2] + c_buf[2];
+    a_buf[3] = b_buf[3] + c_buf[3];
+    a_buf[4] = b_buf[4] + c_buf[4];
+    a_buf[5] = b_buf[5] + c_buf[5];
+    a_buf[6] = b_buf[6] + c_buf[6];
+    a_buf[7] = b_buf[7] + c_buf[7];
+    a_buf[8] = b_buf[8] + c_buf[8];
+    a_buf[9] = b_buf[9] + c_buf[9];
+    a_buf[10] = b_buf[10] + c_buf[10];
+    a_buf[11] = b_buf[11] + c_buf[11];
+    a_buf[12] = b_buf[12] + c_buf[12];
+    a_buf[13] = b_buf[13] + c_buf[13];
+    a_buf[14] = b_buf[14] + c_buf[14];
+    a_buf[15] = b_buf[15] + c_buf[15];
+    
+#pragma  HLS array_partition  variable=a_buf cyclic factor = 16 dim=1
+    memcpy_wide_bus_write_int_512((ap_uint<512> *)a,&a_buf[0],4 * (i * 16),sizeof(int ) * 16,16L);
+  }
+}
+//auto lifting 
+#pragma ACCEL kernel
+
+void top(ap_uint<512> *a,ap_uint<512> *b)
+{
+  
+#pragma HLS DATA_PACK VARIABLE=b
+  
+#pragma HLS DATA_PACK VARIABLE=a
+  int b_buf[16];
+  
+#pragma  HLS array_partition  variable=b_buf cyclic factor = 16 dim=1
+  memcpy_wide_bus_read_int_512(&b_buf[0],(ap_uint<512> *)b,0 * 4,sizeof(int ) * 16,16L);
+  for (int i = 0; i < 100; ++i) {
+    int a_buf[16];
+    for (int j = 0; j < 16; ++j) {
+      
+#pragma ACCEL parallel
+      a_buf[j] = b_buf[j] + 2;
+    }
+    
+#pragma  HLS array_partition  variable=a_buf cyclic factor = 16 dim=1
+    memcpy_wide_bus_write_int_512((ap_uint<512> *)a,&a_buf[0],4 * (i * 16),sizeof(int ) * 16,16L);
+  }
+}

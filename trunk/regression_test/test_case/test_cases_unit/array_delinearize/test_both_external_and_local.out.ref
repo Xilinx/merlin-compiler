@@ -1,0 +1,19 @@
+
+void sub(int a[1024])
+{
+  int i;
+  int j;
+  for (i = 0; i < 16; i++) {
+    for (j = 0; j < 64; j++) {
+      a[i * 64 + j] = 0;
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void top(int a[1024])
+{
+  int a1[1024];
+  sub(a);
+  sub(a1);
+}

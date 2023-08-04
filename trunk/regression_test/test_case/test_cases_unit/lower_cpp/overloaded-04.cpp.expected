@@ -1,0 +1,26 @@
+
+void p_Z1fVi(volatile int )
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_f_vol_();
+
+void p_Z1fKb(const bool )
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_f_con_();
+
+void p_Z1fPVbPKj(volatile bool *,const unsigned int a[12])
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_f_vol_();
+#pragma ACCEL kernel
+
+int main()
+{
+  volatile int a;
+  volatile bool *ptr;
+  const unsigned int arr[12] = {(0)};
+  p_Z1fVi(a);
+  p_Z1fKb(false);
+  p_Z1fPVbPKj(ptr,arr);
+}

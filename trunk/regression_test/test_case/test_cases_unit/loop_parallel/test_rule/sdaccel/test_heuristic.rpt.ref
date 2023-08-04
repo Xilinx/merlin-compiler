@@ -1,0 +1,2 @@
+INFO: [FGPIP-103] Loop 'j'  (test_heuristic.cpp:13) is pipelined
+INFO: [FGPIP-102] Loop 'k' (test_heuristic.cpp:19) is fully parallelized

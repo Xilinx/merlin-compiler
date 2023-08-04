@@ -1,0 +1,35 @@
+
+struct ::S 
+{
+}
+;
+
+void p_ZN1S1fEv(struct S *this_)
+{
+}
+static void __merlin_dummy_SgClassDeclaration_struct_S_();
+
+struct ::A 
+{
+  struct S S;
+}
+;
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+
+struct ::B 
+{
+  struct A A;
+}
+;
+static void __merlin_dummy_SgClassDeclaration_struct_B_();
+#pragma ACCEL kernel
+
+void k()
+{
+  struct B bo;
+  p_ZN1S1fEv(&bo . A . S);
+  struct B *pb = &bo;
+  p_ZN1S1fEv(&(&pb -> A) -> S);
+  void *p = (&bo);
+  p_ZN1S1fEv(&(&((struct B *)p) -> A) -> S);
+}

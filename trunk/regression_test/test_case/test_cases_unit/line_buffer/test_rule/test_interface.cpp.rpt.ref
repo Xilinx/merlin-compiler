@@ -1,0 +1,3 @@
+INFO: [LINEBUF-101] Applying line buffer on variable 'c' in loop 'L_0_0' (test_interface.cpp:11) with a 2x2 stencil
+INFO: [LINEBUF-101] Applying line buffer on variable 'b' in loop 'L_1_0' (test_interface.cpp:18) with a 2x2 stencil
+INFO: [LINEBUF-101] Applying line buffer on variable 'bb' in loop 'L_2_0' (test_interface.cpp:25) with a 2x2 stencil

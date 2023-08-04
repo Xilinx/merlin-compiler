@@ -1,0 +1,44 @@
+#include <string.h> 
+#include "cmost.h"
+static void __merlin_dummy_extern_int_merlin_include_G_();
+static void __merlin_dummy_extern_int_merlin_include_G_();
+
+static void sub(int *a,int *b)
+{
+  int b_buf_0[512];
+  long long _memcpy_i_1;
+  
+#pragma unroll 16
+  for (_memcpy_i_1 = 0; _memcpy_i_1 < (sizeof(int ) * ((unsigned long )512) / 4); ++_memcpy_i_1) {
+    long long total_offset1 = (0 * 512 + 0);
+    long long total_offset2 = (0 * 0 + 0);
+    b_buf_0[total_offset1 + _memcpy_i_1] = b[total_offset2 + _memcpy_i_1];
+  }
+  int a_buf_0[512];
+  __merlin_access_range(b,0,1023UL);
+  for (int __i_l1_l1 = 0; __i_l1_l1 < 512; ++__i_l1_l1) {
+    a_buf_0[__i_l1_l1] = b_buf_0[__i_l1_l1];
+  }
+  long long _memcpy_i_0;
+  
+#pragma unroll 16
+  for (_memcpy_i_0 = 0; _memcpy_i_0 < (sizeof(int ) * ((unsigned long )512) / 4); ++_memcpy_i_0) {
+    long long total_offset1 = (0 * 0 + 0);
+    long long total_offset2 = (0 * 512 + 0);
+    a[total_offset1 + _memcpy_i_0] = a_buf_0[total_offset2 + _memcpy_i_0];
+  }
+}
+static void __merlin_dummy_kernel_pragma();
+// Original: #pragma ACCEL kernel
+
+void vec_add(int a[1024],int b[1024])
+{
+  __merlin_access_range(b,0,1023UL);
+  __merlin_access_range(a,0,1023UL);
+  
+#pragma ACCEL interface variable=b max_depth=1024 depth=1024
+  
+#pragma ACCEL interface variable=a max_depth=1024 depth=1024
+  sub(a + 512,b);
+  sub(a,b);
+}

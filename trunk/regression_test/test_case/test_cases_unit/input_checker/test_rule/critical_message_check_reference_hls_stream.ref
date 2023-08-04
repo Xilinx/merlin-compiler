@@ -1,0 +1,4 @@
+
+ERROR: [SYNCHK-312] Reference type at the kernel interface is not supported:
+ argument: 'a' (test_hls_stream_reference.cpp:4)
+  Please try pure kernel flow with '--attribute pure_kernel=on'

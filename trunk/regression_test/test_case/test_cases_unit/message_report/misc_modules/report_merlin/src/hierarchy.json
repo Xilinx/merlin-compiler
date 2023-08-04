@@ -1,0 +1,175 @@
+[
+    {
+        "src_line": 4,
+        "src_col": 1,
+        "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+        "src_topo_id": "F_0_0_0_1",
+        "type": "kernel",
+        "name": "vec_add_kernel",
+        "global_variables": [],
+        "interfaces": [
+            {
+                "src_line": 4,
+                "src_col": 25,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "X_0_0_0_1_0_0",
+                "type": "interface",
+                "name": "a",
+                "interface_bitwidth": "32",
+                "var_type": "array"
+            },
+            {
+                "src_line": 4,
+                "src_col": 38,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "X_0_0_0_1_0_1",
+                "type": "interface",
+                "name": "b",
+                "interface_bitwidth": "32",
+                "var_type": "array"
+            },
+            {
+                "src_line": 4,
+                "src_col": 51,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "X_0_0_0_1_0_2",
+                "type": "interface",
+                "name": "c",
+                "interface_bitwidth": "32",
+                "var_type": "array"
+            }
+        ],
+        "arrays": [],
+        "var_refs": [
+            {
+                "src_line": 9,
+                "src_col": 5,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "X_0_0_0_1_2_0_1_3_0_0_0_0",
+                "type": "var_ref",
+                "name": "c"
+            },
+            {
+                "src_line": 9,
+                "src_col": 12,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "X_0_0_0_1_2_0_1_3_0_0_1_0_0",
+                "type": "var_ref",
+                "name": "a"
+            },
+            {
+                "src_line": 9,
+                "src_col": 19,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "X_0_0_0_1_2_0_1_3_0_0_1_1_0",
+                "type": "var_ref",
+                "name": "b"
+            }
+        ],
+        "var_defs": [
+            {
+                "src_line": 8,
+                "src_col": 8,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "X_0_0_0_1_2_0_1_0_0_1",
+                "type": "var_def",
+                "name": "i"
+            }
+        ],
+        "stmts": [
+            {
+                "src_line": 4,
+                "src_col": 1,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "F_0_0_0_1",
+                "type": "stmt"
+            },
+            {
+                "src_line": 4,
+                "src_col": 1,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "X_0_0_0_1_0",
+                "type": "stmt"
+            },
+            {
+                "src_line": 5,
+                "src_col": 1,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "F_0_0_0_1_2",
+                "type": "stmt"
+            },
+            {
+                "src_line": 5,
+                "src_col": 1,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "X_0_0_0_1_2_0",
+                "type": "stmt"
+            },
+            {
+                "src_line": 7,
+                "src_col": 1,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "X_0_0_0_1_2_0_0",
+                "type": "stmt"
+            },
+            {
+                "src_line": 8,
+                "src_col": 3,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "L_0_0_0_1_2_0_1",
+                "type": "stmt"
+            },
+            {
+                "src_line": 8,
+                "src_col": 8,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "X_0_0_0_1_2_0_1_0",
+                "type": "stmt"
+            },
+            {
+                "src_line": 8,
+                "src_col": 8,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "V_0_0_0_1_2_0_1_0_0",
+                "type": "stmt"
+            },
+            {
+                "src_line": 8,
+                "src_col": 19,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "X_0_0_0_1_2_0_1_1",
+                "type": "stmt"
+            },
+            {
+                "src_line": 8,
+                "src_col": 35,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "X_0_0_0_1_2_0_1_3",
+                "type": "stmt",
+                "map_to_id": "L_0_0_0_1_2_0_1"
+            },
+            {
+                "src_line": 9,
+                "src_col": 5,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "X_0_0_0_1_2_0_1_3_0",
+                "type": "stmt"
+            }
+        ],
+        "childs": [
+            {
+                "src_line": 8,
+                "src_col": 3,
+                "src_filename": "rose_rose_rose_rose_vec_add_kernel.cpp",
+                "src_topo_id": "L_0_0_0_1_2_0_1",
+                "type": "loop",
+                "name": "i",
+                "trip-count": "10000",
+                "src_func_name": "vec_add_kernel",
+                "childs": []
+            }
+        ],
+        "sub_functions": [],
+        "call_functions": []
+    }
+]

@@ -1,0 +1,49 @@
+#include "memcpy_64_1d.h"
+#include "memcpy_128_1d.h"
+#include "memcpy_64.h"
+#include "memcpy_128.h"
+#include<string.h>
+extern int __merlin_include__GB_memcpy_128_h_3;
+extern int __merlin_include__GB_memcpy_64_h_2;
+extern int __merlin_include__GB_memcpy_128_1d_h_1;
+extern int __merlin_include__GB_memcpy_64_1d_h_0;
+
+void func1_sub(ap_uint<64> *a,int a_buf[1000],int k)
+{
+  
+#pragma  HLS array_partition  variable=a_buf cyclic factor = 2 dim=1
+  memcpy_wide_bus_read_int_64(a_buf,(ap_uint<64> *)a,k * 4,sizeof(int ) * ((unsigned long )1000),1000L);
+}
+
+void func2_sub(ap_uint<128> *a,int a_buf[1000])
+{
+  
+#pragma  HLS array_partition  variable=a_buf cyclic factor = 4 dim=1
+  memcpy_wide_bus_write_int_128((ap_uint<128> *)a,a_buf,4 * 0,sizeof(int ) * ((unsigned long )1000),1000L);
+}
+#pragma ACCEL kernel
+
+void func1_kernel(ap_uint<64> *a,ap_uint<128> *b,int k)
+{
+  
+#pragma HLS DATA_PACK VARIABLE=b
+  
+#pragma HLS DATA_PACK VARIABLE=a
+  
+#pragma ACCEL interface variable=a bus_bitwidth=64
+  
+#pragma ACCEL interface variable=b bus_bitwidth=128
+  int a_buf[1000];
+  func1_sub(a,a_buf,k);
+  func2_sub(b,a_buf);
+}
+
+int main()
+{
+  int *a;
+  int *b;
+  int *c;
+  int k;
+  func1_kernel((ap_uint<64> *)a,(ap_uint<128> *)b,k);
+  return 0;
+}

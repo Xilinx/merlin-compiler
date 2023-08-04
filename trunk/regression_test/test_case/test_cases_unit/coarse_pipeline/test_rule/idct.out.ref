@@ -1,0 +1,279 @@
+#include "AllInOne.h"
+#include <math.h>
+const int cwidth = 13;
+const int shift = 3;
+int idx2;
+int idx;
+extern int kid;
+const int inv_coeff[8][8] = {{(2048), (2048), (2048), (2048), (2048), (2048), (2048), (2048)}, {(1841), (2408), (1609), (565), (- 565), (- 1609), (- 2408), (- 1841)}, {(2676), (1108), (- 1108), (- 2676), (- 2676), (- 1108), (1108), (2676)}, {(2408), (- 565), (- 1841), (- 1609), (1609), (1841), (565), (- 2408)}, {(2048), (- 2048), (- 2048), (2048), (2048), (- 2048), (- 2048), (2048)}, {(1609), (- 1841), (565), (2408), (- 2408), (- 565), (1841), (- 1609)}, {(1108), (- 2676), (2676), (- 1108), (- 1108), (2676), (- 2676), (1108)}, {(565), (- 1609), (2408), (- 1841), (1841), (- 2408), (1609), (- 565)}};
+//void idctrow(volatile int12 *dequant_fifo2, volatile int16 *row2col_fifo2);
+int idx_base0;
+int idx_base1;
+int idx_base2;
+int idx_base3;
+void idct_row(int blk,int mbx,int mby,int img,int mb_width,int mb_height,int *dequant_data,int *row2col_data,int *row2col_dc);
+void idct_col(int blk,int mbx,int mby,int img,int mb_width,int mb_height,int *row2col_data,int *row2col_dc,int *text_data);
+#pragma ACCEL kernel
+
+void idct_kernel(int img,int mb_width,int mb_height,int *dequant_data,int *row2col_data,int *text_data)
+{
+  int blk;
+  int mbx;
+  int mby;
+  int row2col_dc;
+  for (mby = 0; mby < mb_height; mby++) {
+    for (mbx = 0; mbx < mb_width; mbx++) {
+      for (blk = 0; blk < 6; blk++) 
+/* Original: #pragma ACCEL PIPELINE II=1 */
+{
+        idct_row(blk,mbx,mby,img,mb_width,mb_height,dequant_data,row2col_data,&row2col_dc);
+        idct_col(blk,mbx,mby,img,mb_width,mb_height,row2col_data,&row2col_dc,text_data);
+      }
+    }
+  }
+}
+
+void mars_kernel_1_8_node_1_stage_1(int j,int exec,int *dequant_data,int *tmpval,int *x)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int ii;
+    for (ii = 0; ii < 8; ii++) {
+       *x = dequant_data[idx + 8 * j + ii];
+       *tmpval +=  *x * inv_coeff[ii][j];
+    }
+  }
+}
+
+void mars_kernel_1_8_node_2_stage_2(int j,int exec,int idx2,int *row2col_data,int tmpval,int *tmpval2)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+     *tmpval2 = tmpval + (1 << cwidth - shift - 3) >> cwidth - shift - 2;
+    row2col_data[idx2 + j] =  *tmpval2;
+  }
+}
+
+void mars_kernel_1_8_bus(int mars_j,int mars_init,int mars_cond,int *mars_dc_value_3,int *dequant_data,int mars_i_3,int mars_idx2_2,int *row2col_data,int *mars_tmpval_0,int *mars_tmpval_1,int *mars_tmpval_2,int *mars_tmpval2_2,int *mars_tmpval2_3,int *mars_x_1)
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_1_8_node_1_stage_1(mars_j - 1,(int )(mars_j >= mars_init + 1 & mars_j <= mars_cond + 1),dequant_data,mars_tmpval_1,mars_x_1);
+  mars_kernel_1_8_node_2_stage_2(mars_j - 2,(int )(mars_j >= mars_init + 2 & mars_j <= mars_cond + 2),mars_idx2_2,row2col_data, *mars_tmpval_2,mars_tmpval2_2);
+}
+
+void mars_kernel_1_8_node_0_stage_0(int j,int exec,int *tmpval)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+     *tmpval = 0;
+  }
+}
+
+void mars_kernel_1_8_node_3_stage_3(int j,int exec,int *dc_value,int i,int tmpval2)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    if (i == 0 && j == 0) {
+       *dc_value = tmpval2;
+    }
+  }
+}
+
+void mars_kernel_1_8_comp(int mars_j,int mars_init,int mars_cond,int *mars_dc_value_3,int *dequant_data,int mars_i_3,int mars_idx2_2,int *row2col_data,int *mars_tmpval_0,int *mars_tmpval_1,int *mars_tmpval_2,int *mars_tmpval2_2,int *mars_tmpval2_3,int *mars_x_1)
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_1_8_node_0_stage_0(mars_j - 0,(int )(mars_j >= mars_init + 0 & mars_j <= mars_cond + 0),mars_tmpval_0);
+  mars_kernel_1_8_node_3_stage_3(mars_j - 3,(int )(mars_j >= mars_init + 3 & mars_j <= mars_cond + 3),mars_dc_value_3,mars_i_3, *mars_tmpval2_3);
+}
+
+void mars_kernel_1_8(int mars_j,int mars_init,int mars_cond,int *mars_dc_value_3,int *dequant_data,int mars_i_3,int mars_idx2_2,int *row2col_data,int *mars_tmpval_0,int *mars_tmpval_1,int *mars_tmpval_2,int *mars_tmpval2_2,int *mars_tmpval2_3,int *mars_x_1)
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_1_8_bus(mars_j,mars_init,mars_cond,mars_dc_value_3,dequant_data,mars_i_3,mars_idx2_2,row2col_data,mars_tmpval_0,mars_tmpval_1,mars_tmpval_2,mars_tmpval2_2,mars_tmpval2_3,mars_x_1);
+  mars_kernel_1_8_comp(mars_j,mars_init,mars_cond,mars_dc_value_3,dequant_data,mars_i_3,mars_idx2_2,row2col_data,mars_tmpval_0,mars_tmpval_1,mars_tmpval_2,mars_tmpval2_2,mars_tmpval2_3,mars_x_1);
+}
+
+void idct_row(int blk,int mbx,int mby,int img,int mb_width,int mb_height,int *dequant_data,int *row2col_data,int *row2col_dc)
+{
+//unsigned char i;
+  int i;
+  int j;
+  int mb_idx = mbx + mb_width * mby + mb_width * mb_height * img;
+//get_global_id(0);
+  idx_base0 = img;
+//get_global_id(1);
+  idx_base1 = mby;
+//get_global_id(2);
+  idx_base2 = mbx;
+//get_global_id(3);
+  idx_base3 = blk;
+// 1-D IDCT on rows
+  int dc_value = 0;
+  int blk_idx = mb_idx * 6 + blk;
+  for (i = 0; i < 8; i++) {
+    idx = 0;
+{
+      int tmpval;
+      int tmpval2;
+      int x;
+      int ii;
+      int j;
+      int idx2 = blk_idx * 64 + 8 * i;
+      idx = blk_idx * 64;
+      int mars_count_1_8 = 0;
+      int mars_kernel_1_8_tmpval_0 = tmpval;
+      int mars_kernel_1_8_tmpval_1 = tmpval;
+      int mars_kernel_1_8_tmpval_2 = tmpval;
+      int mars_kernel_1_8_tmpval_3 = tmpval;
+      int mars_kernel_1_8_tmpval2_0 = tmpval2;
+      int mars_kernel_1_8_tmpval2_1 = tmpval2;
+      for (j = 0; j < 8 + 3; j++) 
+/* Original: #pragma ACCEL PIPELINE II=1 */
+{
+        if (mars_count_1_8 == 0) 
+          mars_kernel_1_8(j,0,7,&dc_value,dequant_data,i,idx2,row2col_data,&mars_kernel_1_8_tmpval_0,&mars_kernel_1_8_tmpval_1,&mars_kernel_1_8_tmpval_2,&mars_kernel_1_8_tmpval2_0,&mars_kernel_1_8_tmpval2_1,&x);
+         else if (mars_count_1_8 == 1) 
+          mars_kernel_1_8(j,0,7,&dc_value,dequant_data,i,idx2,row2col_data,&mars_kernel_1_8_tmpval_3,&mars_kernel_1_8_tmpval_0,&mars_kernel_1_8_tmpval_1,&mars_kernel_1_8_tmpval2_1,&mars_kernel_1_8_tmpval2_0,&x);
+         else if (mars_count_1_8 == 2) 
+          mars_kernel_1_8(j,0,7,&dc_value,dequant_data,i,idx2,row2col_data,&mars_kernel_1_8_tmpval_2,&mars_kernel_1_8_tmpval_3,&mars_kernel_1_8_tmpval_0,&mars_kernel_1_8_tmpval2_0,&mars_kernel_1_8_tmpval2_1,&x);
+         else 
+          mars_kernel_1_8(j,0,7,&dc_value,dequant_data,i,idx2,row2col_data,&mars_kernel_1_8_tmpval_1,&mars_kernel_1_8_tmpval_2,&mars_kernel_1_8_tmpval_3,&mars_kernel_1_8_tmpval2_1,&mars_kernel_1_8_tmpval2_0,&x);
+        mars_count_1_8++;
+        if (mars_count_1_8 == 4) 
+          mars_count_1_8 = 0;
+      }
+    }
+  }
+/*[blk_idx]*/
+   *row2col_dc = dc_value;
+// BlockIDCT
+}
+
+void mars_kernel_0_7_node_0_stage_0(int i,int exec,short *negMaxval,int *x)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+     *x = 0;
+//FIXME
+//int x;
+//short negMaxval;
+//int tmpInt, ii, j;
+     *negMaxval = ((short )0);
+  }
+}
+
+void mars_kernel_0_7_node_1_stage_1(int i,int exec,char dc_scaler,short *negMaxval)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    if (dc_scaler) {
+       *negMaxval = ((short )0);
+    }
+     else {
+       *negMaxval = ((short )(- 255 - 1));
+    }
+//   tmpInt = ii = j = 0;
+//  tmpInt = 0;
+//	ii = 0;
+//		j = 0;
+  }
+}
+
+void mars_kernel_0_7_node_2_stage_2(int i,int exec,int idx,int idx2,short negMaxval,int *row2col_data,int *text_data,int *tmpInt,int *x)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int ii;
+    int j;
+    for (j = 0; j < 8; j++) {
+       *tmpInt = 0;
+      for (ii = 0; ii < 8; ii++) {
+         *x = row2col_data[idx + ii + 8 * j];
+         *tmpInt +=  *x * inv_coeff[ii][j];
+      }
+       *tmpInt =  *tmpInt + (1 << cwidth + shift) >> cwidth + shift + 1;
+      int tmp =  *tmpInt < ((int )negMaxval)?((int )negMaxval) : (( *tmpInt > 255?255 :  *tmpInt));
+      text_data[idx2 + i + 8 * j] = tmp;
+    }
+  }
+}
+
+void mars_kernel_0_7(int mars_i,int mars_init,int mars_cond,char mars_dc_scaler_1,int mars_idx_2,int mars_idx2_2,short *mars_negMaxval_0,short *mars_negMaxval_1,short *mars_negMaxval_2,int *row2col_data,int *text_data,int *mars_tmpInt_2,int *mars_x_0,int *mars_x_1,int *mars_x_2)
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_0_7_node_0_stage_0(mars_i - 0,(int )(mars_i >= mars_init + 0 & mars_i <= mars_cond + 0),mars_negMaxval_0,mars_x_0);
+  mars_kernel_0_7_node_1_stage_1(mars_i - 1,(int )(mars_i >= mars_init + 1 & mars_i <= mars_cond + 1),mars_dc_scaler_1,mars_negMaxval_1);
+  mars_kernel_0_7_node_2_stage_2(mars_i - 2,(int )(mars_i >= mars_init + 2 & mars_i <= mars_cond + 2),mars_idx_2,mars_idx2_2, *mars_negMaxval_2,row2col_data,text_data,mars_tmpInt_2,mars_x_2);
+}
+
+void idct_col(int blk,int mbx,int mby,int img,int mb_width,int mb_height,int *row2col_data,int *row2col_dc,int *text_data)
+{
+//unsigned char i,j;
+  int i;
+  int j;
+//	int i;
+  char dc_scaler;
+  int out[64];
+  int tmpval;
+  int k;
+{
+    int idx_base0 = img;
+    int idx_base1 = mby;
+    int idx_base2 = mbx;
+    int idx_base3 = blk;
+    int mb_idx = mbx + mb_width * mby + mb_width * mb_height * img;
+    int idx_base = idx_base3 + mb_idx * 6;
+    int idx = idx_base * 64;
+    int idx2 = idx_base * 64;
+//[idx_base];
+    int tmpdc =  *row2col_dc;
+    dc_scaler = (tmpdc & 0xff);
+    int x;
+    short negMaxval;
+    int tmpInt;
+    int ii;
+    int j;
+// 1-D IDCT on columns
+    int mars_count_0_7 = 0;
+    short mars_kernel_0_7_negMaxval_0 = negMaxval;
+    short mars_kernel_0_7_negMaxval_1 = negMaxval;
+    short mars_kernel_0_7_negMaxval_2 = negMaxval;
+    int mars_kernel_0_7_x_0 = x;
+    int mars_kernel_0_7_x_1 = x;
+    int mars_kernel_0_7_x_2 = x;
+    for (i = 0; i < 8 + 2; i++) 
+/* Original: #pragma ACCEL PIPELINE II=1 */
+{
+      if (mars_count_0_7 == 0) 
+        mars_kernel_0_7(i,0,7,dc_scaler,idx,idx2,&mars_kernel_0_7_negMaxval_0,&mars_kernel_0_7_negMaxval_1,&mars_kernel_0_7_negMaxval_2,row2col_data,text_data,&tmpInt,&mars_kernel_0_7_x_0,&mars_kernel_0_7_x_1,&mars_kernel_0_7_x_2);
+       else if (mars_count_0_7 == 1) 
+        mars_kernel_0_7(i,0,7,dc_scaler,idx,idx2,&mars_kernel_0_7_negMaxval_2,&mars_kernel_0_7_negMaxval_0,&mars_kernel_0_7_negMaxval_1,row2col_data,text_data,&tmpInt,&mars_kernel_0_7_x_2,&mars_kernel_0_7_x_0,&mars_kernel_0_7_x_1);
+       else 
+        mars_kernel_0_7(i,0,7,dc_scaler,idx,idx2,&mars_kernel_0_7_negMaxval_1,&mars_kernel_0_7_negMaxval_2,&mars_kernel_0_7_negMaxval_0,row2col_data,text_data,&tmpInt,&mars_kernel_0_7_x_1,&mars_kernel_0_7_x_2,&mars_kernel_0_7_x_0);
+      mars_count_0_7++;
+      if (mars_count_0_7 == 3) 
+        mars_count_0_7 = 0;
+//idx2++;
+    }
+//FIXME
+//int x;
+//short negMaxval;
+//int tmpInt, ii, j;
+//   tmpInt = ii = j = 0;
+//  tmpInt = 0;
+//	ii = 0;
+//		j = 0;
+  }
+// BlockIDCT
+}

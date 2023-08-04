@@ -1,0 +1,124 @@
+#include <string.h> 
+#pragma ACCEL kernel
+
+void two_kernel(int *b)
+{
+  int dummy_token_5;
+// Token comes from node 2 and 4 for sync level 0
+  int token_5;
+  int dummy_token_4;
+// Token comes from node 2 and 3 for sync level 0
+  int token_4;
+  int dummy_token_3;
+// Token comes from node 1 and 4 for sync level 0
+  int token_3;
+  int dummy_token_2;
+// Token comes from node 1 and 3 for sync level 0
+  int token_2;
+  int dummy_token_1;
+// Token comes from node 0 and 2 for sync level 0
+  int token_1;
+  int dummy_token_0;
+// Token comes from node 0 and 1 for sync level 0
+  int token_0;
+  int b_buf_0_rn[100];
+  int b_buf_0[100];
+  int __memcpy_i_0;
+  int a_0[100];
+  int i_0;
+  int j_0;
+  int i1_0;
+  int c_0;
+  int __memcpy_i_1_0;
+  for (__memcpy_i_0 = 0; __memcpy_i_0 < sizeof(int ) * ((unsigned long )100) / 4; ++__memcpy_i_0) {
+    b_buf_0[__memcpy_i_0 + 0] = b[__memcpy_i_0 + 0];
+// Token gen: node 0 and 2 for sync level 0(forward)
+    if (__memcpy_i_0 == 99U) {
+      
+#pragma ACCEL mem_fence
+      token_1 = 1;
+    }
+// Token gen: node 0 and 1 for sync level 0(forward)
+    if (__memcpy_i_0 == 99U) {
+      
+#pragma ACCEL mem_fence
+      token_0 = 1;
+    }
+  }
+  for (j_0 = 0; j_0 < 10; j_0++) {
+    for (i_0 = 0; i_0 < 100; i_0++) {
+// Token gen: node 0 and 1 for sync level 0(forward)
+      if (i_0 == 0 && j_0 == 0) {
+        dummy_token_0 = token_0;
+        
+#pragma ACCEL mem_fence
+      }
+      a_0[i_0] = i_0;
+// Token gen: node 1 and 4 for sync level 0(forward)
+      if (i_0 == 99 && j_0 == 9) {
+        
+#pragma ACCEL mem_fence
+        token_3 = 1;
+      }
+// Token gen: node 1 and 3 for sync level 0(forward)
+      if (i_0 == 99 && j_0 == 9) {
+        
+#pragma ACCEL mem_fence
+        token_2 = 1;
+      }
+    }
+    for (i1_0 = 0; i1_0 < 100; i1_0++) {
+//b[i1] = a[i1] ;
+// Token gen: node 0 and 2 for sync level 0(forward)
+      if (i1_0 == 0 && j_0 == 0) {
+        dummy_token_1 = token_1;
+        
+#pragma ACCEL mem_fence
+      }
+      b_buf_0[i1_0] = a_0[99 - i1_0];
+// Token gen: node 2 and 4 for sync level 0(forward)
+      if (i1_0 == 99 && j_0 == 9) {
+        
+#pragma ACCEL mem_fence
+        token_5 = 1;
+      }
+// Token gen: node 2 and 3 for sync level 0(forward)
+      if (i1_0 == 99 && j_0 == 9) {
+        
+#pragma ACCEL mem_fence
+        token_4 = 1;
+      }
+    }
+  }
+  for (i_0 = 0; i_0 < 100; i_0++) {
+// Token gen: node 1 and 3 for sync level 0(forward)
+    if (i_0 == 0) {
+      dummy_token_2 = token_2;
+      
+#pragma ACCEL mem_fence
+    }
+// Token gen: node 2 and 3 for sync level 0(forward)
+    if (i_0 == 0) {
+      dummy_token_4 = token_4;
+      
+#pragma ACCEL mem_fence
+    }
+    b_buf_0[i_0] += 3;
+    b_buf_0_rn[i_0] = b_buf_0[i_0];
+  }
+  for (__memcpy_i_1_0 = 0; __memcpy_i_1_0 < sizeof(int ) * ((unsigned long )100) / 4; ++__memcpy_i_1_0) {
+// Token gen: node 1 and 4 for sync level 0(forward)
+    if (__memcpy_i_1_0 == 0) {
+      dummy_token_3 = token_3;
+      
+#pragma ACCEL mem_fence
+    }
+// Token gen: node 2 and 4 for sync level 0(forward)
+    if (__memcpy_i_1_0 == 0) {
+      dummy_token_5 = token_5;
+      
+#pragma ACCEL mem_fence
+    }
+    b[__memcpy_i_1_0 + 0] = b_buf_0_rn[__memcpy_i_1_0 + 0];
+  }
+}

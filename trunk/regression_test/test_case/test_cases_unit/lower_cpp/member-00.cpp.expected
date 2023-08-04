@@ -1,0 +1,35 @@
+extern void printf(const char *,... );
+enum U {UA=0} ;
+typedef enum U X;
+
+struct ::A 
+{
+  volatile int data;
+}
+;
+
+void p_ZN1A3addEv(struct A *this_)
+{
+  this_ -> data++;
+}
+
+void p_ZN1A5printEv(struct A *this_)
+{
+  printf("%d\n",this_ -> data);
+}
+
+void p_ZN1A8enum_argEU(struct A *this_,enum U )
+{
+}
+
+void p_ZN1A13two_enum_argsEUU(struct A *this_,enum U ,X )
+{
+}
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+#pragma ACCEL kernel
+
+int main()
+{
+  struct A a;
+  p_ZN1A3addEv(&a);
+}

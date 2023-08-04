@@ -1,0 +1,24 @@
+#include<vector>
+using namespace std;
+class A {
+  vector<int> data;
+  public:
+    int get() const {
+      return data.at(0);
+    }
+};
+
+//template <typename T> 
+//void f(vector<T> &a, T b) {
+//  a[0] = b;
+//}
+
+int main() {
+  A a;
+  int r = a.get();
+//  vector<int> c;
+//  f(c, 0);
+  vector<int> d;
+  d.at(0) = 0;
+  return 0;
+}

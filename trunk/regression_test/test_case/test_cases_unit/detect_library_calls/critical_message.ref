@@ -1,0 +1,23 @@
+
+ERROR: [SYNCHK-333] Standard library function atof((const char *)line) (test1.c:24) is not supported. 
+
+ERROR: [SYNCHK-333] Standard library function getchar() (test1.c:29) is not supported. 
+
+ERROR: [SYNCHK-334] Function call bar() (test1.c:35) has no function definition. Please either remove it or provide a synthesizable implementation.
+
+ERROR: [SYNCHK-333] Standard library function malloc(16) (test1.c:36) is not supported. 
+
+ERROR: [SYNCHK-334] Function call log() (test2.c:5) has no function definition. Please either remove it or provide a synthesizable implementation.
+
+ERROR: [SYNCHK-334] Function call malloc(16) (test2.c:6) has no function definition. Please either remove it or provide a synthesizable implementation.
+
+ERROR: [SYNCHK-317] Implicit function call 'operator++' (test3.cpp:16) declared in 'A' (test3.cpp:1) is not supported
+Hint: Please explicitly specify the function definition under the delaration
+
+ERROR: [SYNCHK-334] Function call sub() (test3.cpp:17) has no function definition. Please either remove it or provide a synthesizable implementation.
+
+ERROR: [SYNCHK-317] Implicit function call 'operator<<' (test3.cpp:19) declared in 'AA' (test3.cpp:5) is not supported
+Hint: Please explicitly specify the function definition under the delaration
+
+ERROR: [SYNCHK-317] Implicit function call 'operator<<' (test3.cpp:20) declared in 'AA' (test3.cpp:5) is not supported
+Hint: Please explicitly specify the function definition under the delaration

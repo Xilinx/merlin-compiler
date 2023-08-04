@@ -1,0 +1,84 @@
+//Testing canonizalize the loops with label
+#pragma ACCEL kernel
+
+void func_loop(int aa[100],int bb[100])
+{
+  int _s_ii = 0;
+  unsigned char _l_ii = 0;
+  L1:
+// Canonicalized from: for(unsigned char ii = 0;_s_ii < 100;_s_ii++) {...}
+  for (_s_ii = ((unsigned char )0); _s_ii <= 99; ++_s_ii) {
+    aa[_s_ii] = bb[_s_ii];
+  }
+  int a[10];
+  int b[10];
+  int c[10];
+  int j;
+  int x;
+  int y;
+  int z;
+  int N = 100;
+  char i;
+  int _s_i;
+  L2:
+// Canonicalized from: for(_s_i = 0;_s_i < 100;_s_i++) {...}
+  for (_s_i = ((char )0); _s_i <= 'c'; ++_s_i) {
+    c[_s_i] = a[_s_i] + b[_s_i];
+  }
+  i = _s_i;
+{
+    int _s_i_0;
+    L20:
+// Canonicalized from: for(_s_i_0 = 0;_s_i_0 < 100;_s_i_0++) {...}
+    for (_s_i_0 = ((char )0); _s_i_0 <= 'c'; ++_s_i_0) {
+      c[_s_i_0] = a[_s_i_0] + b[_s_i_0];
+    }
+    i = _s_i_0;
+  }
+{
+    unsigned char i0;
+    int _s_i0;
+    L3:
+// Canonicalized from: for(_s_i0 = 0;_s_i0 < 100;_s_i0++) {...}
+    for (_s_i0 = ((unsigned char )0); _s_i0 <= 99; ++_s_i0) {
+      c[_s_i0] = a[_s_i0] + b[_s_i0];
+    }
+    i0 = _s_i0;
+  }
+  int _s_i_1;
+  j = 0;
+  L4:
+// Canonicalized from: for((_s_i_1 = 0 , j = 0);_s_i_1 < 100;_s_i_1++) {...}
+  for (_s_i_1 = ((char )0); _s_i_1 <= 'c'; ++_s_i_1) {
+    c[_s_i_1] = a[_s_i_1] + b[j];
+  }
+  i = _s_i_1;
+{
+    int _s_i_2;
+    j = 0;
+    L5:
+// Canonicalized from: for((_s_i_2 = 0 , j = 0);_s_i_2 < 100;_s_i_2++) {...}
+    for (_s_i_2 = ((char )0); _s_i_2 <= 'c'; ++_s_i_2) {
+      c[_s_i_2] = a[_s_i_2] + b[j];
+    }
+    i = _s_i_2;
+  }
+{
+    unsigned char i0;
+    int _s_i0_0;
+    j = 1;
+    L6:
+// Canonicalized from: for((_s_i0_0 = 0 , j = 1);_s_i0_0 < 100;_s_i0_0++) {...}
+    for (_s_i0_0 = ((unsigned char )0); _s_i0_0 <= 99; ++_s_i0_0) {
+      c[_s_i0_0] = a[_s_i0_0] + b[j];
+    }
+    i0 = _s_i0_0;
+  }
+}
+
+int main()
+{
+  int aa[100];
+  int bb[100];
+  func_loop(aa,bb);
+}

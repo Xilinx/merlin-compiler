@@ -1,0 +1,155 @@
+//(C) Copyright 2016-2021 Xilinx, Inc.
+//All Rights Reserved.
+//
+//Licensed to the Apache Software Foundation (ASF) under one
+//or more contributor license agreements.  See the NOTICE file
+//distributed with this work for additional information
+//regarding copyright ownership.  The ASF licenses this file
+//to you under the Apache License, Version 2.0 (the
+//"License"); you may not use this file except in compliance
+//with the License.  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//Unless required by applicable law or agreed to in writing,
+//software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+//KIND, either express or implied.  See the License for the
+//specific language governing permissions and limitations
+//under the License. (edited)
+
+#pragma ACCEL kernel
+void func_top_0()
+{
+  int a[100][100];
+  int b[100][100];
+  int k;
+  int i;
+  int j;
+#pragma ACCEL pipeline
+  for (i = 0; i < 100; i++) {
+#pragma ACCEL parallel complete
+    for (k = 0; k < 100; k++) 
+#pragma ACCEL parallel complete
+    for (j = 0; j < 100; j++) 
+{
+	a[i][j] = b[i*k][j]+ b[i*k+1][j+1];
+    }
+  }
+}
+
+#pragma ACCEL kernel
+void func_top_1()
+{
+  int a[100][100];
+  int b[100][100];
+  int k;
+  int i;
+  int j;
+#pragma ACCEL pipeline flatten
+  for (i = 0; i < 100; i++) {
+    for (k = 0; k < 100; k++) 
+    for (j = 0; j < 100; j++) 
+{
+	a[i][j] = b[i*k][j]+ b[i*k+1][j+1];
+    }
+  }
+}
+
+
+#pragma ACCEL kernel
+void func_top_2()
+{
+  int a[100][100];
+  int b[100][100];
+  int k;
+  int i;
+  int j;
+#pragma ACCEL pipeline_parallel flatten
+  for (i = 0; i < 100; i++) {
+#pragma ACCEL parallel complete
+    for (k = 0; k < 100; k++) 
+    for (j = 0; j < 100; j++) 
+{
+	a[i][j] = b[i*k][j]+ b[i*k+1][j+1];
+    }
+  }
+}
+
+
+#pragma ACCEL kernel
+void func_top_3()
+{
+  int a[100][100];
+  int b[100][100];
+  int k;
+  int i;
+  int j;
+#pragma ACCEL pipeline
+  for (i = 0; i < 100; i++) {
+#pragma ACCEL pipeline flatten 
+    for (k = 0; k < 100; k++) 
+    for (j = 0; j < 100; j++) 
+{
+	a[i][j] = b[i*k][j]+ b[i*k+1][j+1];
+    }
+  }
+}
+
+
+#pragma ACCEL kernel
+void func_top_4()
+{
+  int a[100][100];
+  int b[100][100];
+  int k;
+  int i;
+  int j;
+#pragma ACCEL pipeline
+  for (i = 0; i < 100; i++) {
+#pragma ACCEL parallel complete
+    for (k = 0; k < 100; k++) 
+#pragma ACCEL  pipeline flatten 
+    for (j = 0; j < 100; j++) 
+{
+	a[i][j] = b[i*k][j]+ b[i*k+1][j+1];
+    }
+  }
+}
+
+
+#pragma ACCEL kernel
+void func_top_5()
+{
+  int k;
+  int i;
+  int j;
+  int sum=0;
+#pragma ACCEL parallel complete
+  while (i < 10){
+#pragma ACCEL parallel complete
+    do { sum++;
+      j++;
+    } while (j <= 100);
+    i++;
+  }
+#pragma ACCEL pipeline flatten
+  while (i < 10){
+    do { k++;
+      j++;
+    } while (j <= i);
+    i++;
+  }
+}
+
+#pragma ACCEL kernel
+void func_top_6(int *a, int *b, int (*c)[2][2]) 
+{
+#pragma ACCEL interface variable=a depth=100
+#pragma ACCEL interface variable=b depth=100
+#pragma ACCEL interface variable=c depth=100,,
+    for (int i = 0; i < 100; i++)
+    {
+        a[i] = b[i] + c[i][0][0];
+    }
+}

@@ -1,0 +1,28 @@
+#pragma accel kernel
+
+void top(int *a)
+{
+  for (int i = 0; i < 100; ++i) 
+/* Original: #pragma ACCEL parallel auto{options: R=["", "reduction=a"]; default:""} factor=auto{options: P1=range(1, 101); default: 1} */
+/* Original: #pragma ACCEL tile factor=auto{options: T1=[2**x for x in range(7) if x==0 or (2**x)*T2<100]; default: 1} parallel_factor=4 */
+/* Original: #pragma ACCEL tile factor=auto{options: T2=[2**x for x in range(7) if x==0 or (2**x)*T1 < 100]; default:1} */
+{
+    
+#pragma ACCEL PIPELINE AUTO
+    
+#pragma ACCEL tile factor=10 parallel_factor=auto
+     *a += i;
+  }
+}
+#pragma accel kernel
+
+void top1(int *a)
+{
+  for (int i = 0; i < 100; ++i) 
+/* Original: #pragma ACCEL parallel factor=1 */
+{
+    
+#pragma ACCEL PIPELINE AUTO
+    a[i] = 0;
+  }
+}

@@ -1,0 +1,39 @@
+===============================================================================
+Version:    xocc v2019.1 (64-bit)
+Build:      SW Build 2552052 on Fri May 24 14:47:09 MDT 2019
+Copyright:  Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+Created:    Thu Sep 19 23:46:25 2019
+===============================================================================
+
+-------------------------------------------------------------------------------
+Design Name:             vec_add_kernel
+Target Device:           xilinx:u250:xdma:201830.1
+Target Clock:            300.000000MHz
+Total number of kernels: 1
+-------------------------------------------------------------------------------
+
+Kernel Summary
+Kernel Name     Type  Target              OpenCL Library  Compute Units
+--------------  ----  ------------------  --------------  -------------
+vec_add_kernel  c     fpga0:OCL_REGION_0  vec_add_kernel  1
+
+
+-------------------------------------------------------------------------------
+OpenCL Binary:     vec_add_kernel
+Kernels mapped to: clc_region
+
+Timing Information (MHz)
+Compute Unit      Kernel Name     Module Name     Target Frequency  Estimated Frequency
+----------------  --------------  --------------  ----------------  -------------------
+vec_add_kernel_1  vec_add_kernel  vec_add_kernel  300.300293        411.015198
+
+Latency Information (clock cycles)
+Compute Unit      Kernel Name     Module Name     Start Interval  Best Case  Avg Case  Worst Case
+----------------  --------------  --------------  --------------  ---------  --------  ----------
+vec_add_kernel_1  vec_add_kernel  vec_add_kernel  2530            2529       2529      2529
+
+Area Information
+Compute Unit      Kernel Name     Module Name     FF    LUT   DSP  BRAM  URAM
+----------------  --------------  --------------  ----  ----  ---  ----  ----
+vec_add_kernel_1  vec_add_kernel  vec_add_kernel  4425  4369  0    126   0
+-------------------------------------------------------------------------------

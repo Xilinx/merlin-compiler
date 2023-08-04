@@ -1,0 +1,34 @@
+#pragma ACCEL kernel
+
+void func_top_1()
+{
+  int a[100][100];
+  int b[100][100];
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) 
+// Original: #pragma ACCEL PIPELINE FLATTEN
+{
+    
+#pragma ACCEL PIPELINE
+    for (j = 0; j < 100; j++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[i][j] = b[i][j];
+    }
+    for (j = 0; j < 8; j++) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      a[i + 1][j] = b[i][j + 1];
+    }
+  }
+  for (i = 0; i < 100; i++) {
+    
+#pragma HLS unroll
+    for (j = 0; j < 100; j++) {
+      
+#pragma ACCEL PIPELINE AUTO
+      a[i][j] = b[i][j];
+    }
+  }
+}

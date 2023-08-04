@@ -1,0 +1,12 @@
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: int ** ptr (test_multi_array_preprocess.c:2)
+    Reference: ptr += 2; (test_multi_array_preprocess.c:5)
+    In function: void sub(int ** a) {...} (test_multi_array_preprocess.c:1)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: int ** ptr (test_multi_array_preprocess.c:2)
+    Reference: ptr -= 1; (test_multi_array_preprocess.c:6)
+    In function: void sub(int ** a) {...} (test_multi_array_preprocess.c:1)
+

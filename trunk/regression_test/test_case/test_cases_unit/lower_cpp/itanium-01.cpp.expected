@@ -1,0 +1,293 @@
+// Operator function mangling
+
+struct ::n_T 
+{
+}
+;
+namespace n
+{
+static void __merlin_dummy_SgClassDeclaration_struct_T_();
+}
+// namespace n
+
+struct ::S 
+{
+}
+;
+
+void p_ZN1SpsEv(struct S *this_)
+{
+}
+
+void p_ZN1SngEv(struct S *this_)
+{
+}
+
+void p_ZN1SadEv(struct S *this_)
+{
+}
+
+void p_ZN1SdeEv(struct S *this_)
+{
+}
+
+void p_ZN1ScoEv(struct S *this_)
+{
+}
+
+void p_ZN1SplEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SmiEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SmlEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SdvEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SrmEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SanEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SorEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SeoEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SaSEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SpLEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SmIEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SmLEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SdVEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SrMEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SaNEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SoREi(struct S *this_,int )
+{
+}
+
+void p_ZN1SeOEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SlsEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SrsEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SlSEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SrSEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SeqEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SneEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SltEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SgtEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SleEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SgeEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SntEv(struct S *this_)
+{
+}
+
+void p_ZN1SaaEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SooEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SppEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SppEv(struct S *this_)
+{
+}
+
+void p_ZN1SmmEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SmmEv(struct S *this_)
+{
+}
+
+void p_ZN1ScmEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SpmEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SptEv(struct S *this_)
+{
+}
+
+void p_ZN1SclEi(struct S *this_,int )
+{
+}
+
+void p_ZN1SclEv(struct S *this_)
+{
+}
+
+void p_ZN1SixEi(struct S *this_,int )
+{
+}
+struct n_T p_ZN1Scv1TEv(struct S *this_);
+double p_ZN1ScvdEv(struct S *this_);
+
+void p_ZN1S17operatornotreallyEv(struct S *this_)
+{
+}
+static void __merlin_dummy_SgClassDeclaration_struct_S_();
+
+struct R 
+{
+}
+;
+
+void p_Zls1R1R(struct R ,struct R )
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_opera_();
+
+void p_Zco1R(struct R )
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_opera_();
+
+void p_Zpp1Ri(struct R ,int )
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_opera_();
+#pragma ACCEL kernel
+
+void kernel()
+{
+struct S s;
+p_ZN1SclEi(&s,2);
+double d = p_ZN1ScvdEv(&s);
+struct n_T t = p_ZN1Scv1TEv(&s);
+p_ZN1S17operatornotreallyEv(&s);
+struct R temp;
+struct R temp_0;
+p_Zls1R1R(temp,temp_0);
+struct R temp_1;
+p_Zco1R(temp_1);
+struct R temp_2;
+p_Zpp1Ri(temp_2,0);
+}
+// Copied from the Itanium mangling spec.
+// ::= nw    # new
+// ::= na    # new[]
+// ::= dl    # delete
+// ::= da    # delete[]
+//
+// ::= ps    # + (unary)
+// ::= ng    # - (unary)
+// ::= ad    # & (unary)
+// ::= de    # * (unary)
+// ::= co    # ~
+// ::= pl    # +
+// ::= mi    # -
+// ::= ml    # *
+// ::= dv    # /
+// ::= rm    # %
+// ::= an    # &
+// ::= or    # |
+// ::= eo    # ^
+// ::= aS    # =
+// ::= pL    # +=
+// ::= mI    # -=
+// ::= mL    # *=
+// ::= dV    # /=
+// ::= rM    # %=
+// ::= aN    # &=
+// ::= oR    # |=
+// ::= eO    # ^=
+// ::= ls    # <<
+// ::= rs    # >>
+// ::= lS    # <<=
+// ::= rS    # >>=
+// ::= eq    # ==
+// ::= ne    # !=
+// ::= lt    # <
+// ::= gt    # >
+// ::= le    # <=
+// ::= ge    # >=
+// ::= nt    # !
+// ::= aa    # &&
+// ::= oo    # ||
+// ::= pp    # ++ (postfix in <expression> context)
+// ::= mm    # -- (postfix in <expression> context)
+// ::= cm    # ,
+// ::= pm    # ->*
+// ::= pt    # ->
+// ::= cl    # ()
+// ::= ix    # []
+// ::= qu    # ?
+//             ^ what is this?!
+// ::= cv <type>    # (cast)
+// ::= li <source-name>          # operator ""
+// ::= v <digit> <source-name>    # vendor extended operator

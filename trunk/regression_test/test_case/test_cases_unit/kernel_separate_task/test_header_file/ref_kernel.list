@@ -1,0 +1,3 @@
+__merlinkernel_vec_add.c
+__merlinkernel_vec_add_kernel1.c
+__merlinkernel_vec_add_kernel2.c

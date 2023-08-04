@@ -1,0 +1,291 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for((i = a[i] , j = 3);i < N;i++) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = a[0];i >= 0;i--) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = a[1];i >= 0;i--) {...}
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for((i = N * 3 , j = 3);i >= 0;i--) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for((i = N * x , j = 3);i >= 0;i++) {...}
+Non-canonicalizable 
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for((j = i , k = 3);j < 10;j++) {...}
+  -- Rewrite the for loop into canonical form
+[canonicalize] Move and rename multiple init declaration.
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = N;i >= 0;i--) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = i;j < - 1;j += 1) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = N;i >= 0;i--) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = i;j < - 1;j += 1) {...}
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(i = N;i >= 0;i--) {...}
+Cannot be canonicalized: iterator variable is updated in loop body
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = i;j < - 1;j += 1) {...}
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(i = N;i >= 0;i--) {...}
+Cannot be canonicalized: iterator variable is updated in loop body
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(i != 0;i < N;i++) {...}
+Non-canonicalizable 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = i / 2;i < N;i++) {...}
+
+====== Loop Canonicalize ====> 
+
+[Canonicalize] for(i << 2;i < N;i--) {...}
+Non-canonicalizable 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = - 32767;i > N;i--) {...}
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+[Exp SgMinusMinusOp:i--] {i--:SgMinusMinusOp i--->1,0} : i--..i--, constant bound: {i--:SgMinusMinusOp i--->1,0} : neg_inf..pos_inf
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void func_loop() {...}
+  SgFunctionDeclaration int main() {...}
+  SgBasicBlock {c[i] = a[i] + b[j];}
+  SgForStatement for(i = a[i];i <= 99;++i) {...}
+  SgBasicBlock {#pragma HLS loop_tripcount max=TCc[i] = a[i] + b[i];}
+  SgForStatement for(i = a[0];i >= 0;i--) {...}
+  SgBasicBlock {#pragma HLS loop_tripcount max=11c[i] = a[i] + b[i];}
+  SgForStatement for(i = a[1];i >= 0;i--) {...}
+  SgBasicBlock {int _in_i = 300 + -1 * i;c[_in_i] = a[_in_i] + b[_in_i];}
+  SgForStatement for(i = 0;i <= 300;i++) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];}
+  SgForStatement for((i = N * x , j = 3);i >= 0;i++) {...}
+  SgBasicBlock {int _in_i_0 = 100 + -1 * i;k = 3;for(j = _in_i_0;j <= 9;++j) {c[_in_i_0] = a[k] + b[j];}}
+  SgForStatement for(i = 0;i <= 100;i++) {...}
+  SgBasicBlock {c[_in_i_0] = a[k] + b[j];}
+  SgForStatement for(j = _in_i_0;j <= 9;++j) {...}
+  SgBasicBlock {int _in_i_1 = 100 + -1 * i;for(j = _in_i_1;j < - 1;j += 1) {c[_in_i_1] = a[k] + b[j];}}
+  SgForStatement for(i = 0;i <= 100;i++) {...}
+  SgBasicBlock {c[_in_i_1] = a[k] + b[j];}
+  SgForStatement for(j = _in_i_1;j < - 1;j += 1) {...}
+  SgBasicBlock {for(j = i;j < - 1;j += 1) {c[i] = a[k] + b[j];}i--;}
+  SgForStatement for(i = N;i >= 0;i--) {...}
+  SgBasicBlock {c[i] = a[k] + b[j];}
+  SgForStatement for(j = i;j < - 1;j += 1) {...}
+  SgBasicBlock {for(j = i;j < - 1;j += 1) {c[i] = a[k] + b[j];}i = 2 * i;}
+  SgForStatement for(i = N;i >= 0;i--) {...}
+  SgBasicBlock {c[i] = a[k] + b[j];}
+  SgForStatement for(j = i;j < - 1;j += 1) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];}
+  SgForStatement for(i != 0;i < N;i++) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];}
+  SgForStatement for(i = i / 2;i < N;i++) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];}
+  SgForStatement for(i << 2;i < N;i--) {...}
+  SgBasicBlock {c[i] = a[i] + b[i];}
+  SgForStatement for(i = - 32767;i > N;i--) {...}
+
+Arrays: 
+  int [10] a
+  int [10] b
+  int [10] c
+  int [100][100] aa
+  int [100][100] bb
+  int [100][100] cc
+  int * a
+  int * b
+  int * c
+  float [100][100] aa_f
+  float [100][100] bb_f
+  float [100][100] cc_f
+  float * a_f
+  float * b_f
+  float * c_f
+
+Ranges: 
+  SgFunctionDeclaration void func_loop() {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgFunctionDeclaration int main() {...}
+  SgBasicBlock {c[i] = a[i] + b[j];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[3..3 exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(i = a[i];i <= 99;++i) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[3..3 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {#pragma HLS loop_tripcount max=TCc[i] = a[i] + b[i];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(i = a[0];i >= 0;i--) {...}
+    int [10] a :  R[0..max(a[0],9) inexact]
+    int [10] b :  R[0..max(a[0],9) inexact]
+    int [10] c :  W[0..max(a[0],9) inexact]
+  SgBasicBlock {#pragma HLS loop_tripcount max=11c[i] = a[i] + b[i];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(i = a[1];i >= 0;i--) {...}
+    int [10] a :  R[0..max(a[1],9) inexact]
+    int [10] b :  R[0..max(a[1],9) inexact]
+    int [10] c :  W[0..max(a[1],9) inexact]
+  SgBasicBlock {int _in_i = 300 + -1 * i;c[_in_i] = a[_in_i] + b[_in_i];}
+    int [10] a :  R[300 + -i..300 + -i exact]
+    int [10] b :  R[300 + -i..300 + -i exact]
+    int [10] c :  W[300 + -i..300 + -i exact]
+  SgForStatement for(i = 0;i <= 300;i++) {...}
+    int [10] a :  R[0..300 exact]
+    int [10] b :  R[0..300 exact]
+    int [10] c :  W[0..300 exact]
+  SgBasicBlock {c[i] = a[i] + b[i];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for((i = N * x , j = 3);i >= 0;i++) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {int _in_i_0 = 100 + -1 * i;k = 3;for(j = _in_i_0;j <= 9;++j) {c[_in_i_0] = a[k] + b[j];}}
+    int [10] a :  R[3..3 inexact]
+    int [10] b :  R[100 + -i..9 inexact]
+    int [10] c :  W[100 + -i..max(100 + -i,9) inexact]
+  SgForStatement for(i = 0;i <= 100;i++) {...}
+    int [10] a :  R[3..3 exact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..100 exact]
+  SgBasicBlock {c[_in_i_0] = a[k] + b[j];}
+    int [10] a :  R[3..3 exact]
+    int [10] b :  R[j..j exact]
+    int [10] c :  W[100 + -i..100 + -i exact]
+  SgForStatement for(j = _in_i_0;j <= 9;++j) {...}
+    int [10] a :  R[3..3 inexact]
+    int [10] b :  R[100 + -i..9 inexact]
+    int [10] c :  W[100 + -i..max(100 + -i,9) inexact]
+  SgBasicBlock {int _in_i_1 = 100 + -1 * i;for(j = _in_i_1;j < - 1;j += 1) {c[_in_i_1] = a[k] + b[j];}}
+    int [10] a :  R[k..k inexact]
+    int [10] b :  R[0..max(100 + -i,9) inexact]
+    int [10] c :  W[100 + -i..max(100 + -i,9) inexact]
+  SgForStatement for(i = 0;i <= 100;i++) {...}
+    int [10] a :  R[k..k inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {c[_in_i_1] = a[k] + b[j];}
+    int [10] a :  R[k..k exact]
+    int [10] b :  R[j..j exact]
+    int [10] c :  W[100 + -i..100 + -i exact]
+  SgForStatement for(j = _in_i_1;j < - 1;j += 1) {...}
+    int [10] a :  R[k..k inexact]
+    int [10] b :  R[0..max(100 + -i,9) inexact]
+    int [10] c :  W[100 + -i..max(100 + -i,9) inexact]
+  SgBasicBlock {for(j = i;j < - 1;j += 1) {c[i] = a[k] + b[j];}i--;}
+    int [10] a :  R[k..k inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgForStatement for(i = N;i >= 0;i--) {...}
+    int [10] a :  R[k..k inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {c[i] = a[k] + b[j];}
+    int [10] a :  R[k..k exact]
+    int [10] b :  R[j..j exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(j = i;j < - 1;j += 1) {...}
+    int [10] a :  R[k..k inexact]
+    int [10] c :  W[min(i,0)..max(i,9) inexact]
+  SgBasicBlock {for(j = i;j < - 1;j += 1) {c[i] = a[k] + b[j];}i = 2 * i;}
+    int [10] a :  R[k..k inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgForStatement for(i = N;i >= 0;i--) {...}
+    int [10] a :  R[k..k inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {c[i] = a[k] + b[j];}
+    int [10] a :  R[k..k exact]
+    int [10] b :  R[j..j exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(j = i;j < - 1;j += 1) {...}
+    int [10] a :  R[k..k inexact]
+    int [10] c :  W[min(i,0)..max(i,9) inexact]
+  SgBasicBlock {c[i] = a[i] + b[i];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(i != 0;i < N;i++) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {c[i] = a[i] + b[i];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(i = i / 2;i < N;i++) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {c[i] = a[i] + b[i];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(i << 2;i < N;i--) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+  SgBasicBlock {c[i] = a[i] + b[i];}
+    int [10] a :  R[i..i exact]
+    int [10] b :  R[i..i exact]
+    int [10] c :  W[i..i exact]
+  SgForStatement for(i = - 32767;i > N;i--) {...}
+    int [10] a :  R[0..9 inexact]
+    int [10] b :  R[0..9 inexact]
+    int [10] c :  W[0..9 inexact]
+

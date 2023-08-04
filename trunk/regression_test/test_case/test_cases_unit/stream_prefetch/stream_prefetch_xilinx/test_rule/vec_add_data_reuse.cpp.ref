@@ -1,0 +1,21 @@
+#define FC 16
+#pragma ACCEL kernel
+
+void top(int *a,int *b,int *c)
+{
+  
+#pragma ACCEL interface variable=a depth=10000
+  
+#pragma ACCEL interface variable=b depth=10000
+  
+#pragma ACCEL interface variable=c depth=10000
+  for (int k = 0; k < 10; ++k) {
+    for (int i = 0; i < 10000 / 16; ++i) {
+      for (int i0 = 0; i0 < 16; ++i0) {
+        
+#pragma ACCEL parallel
+        c[i * 16 + i0] = a[i * 16 + i0] + b[i * 16 + i0];
+      }
+    }
+  }
+}

@@ -1,0 +1,343 @@
+#define DUMP 0
+#define learning_rate 0.01f
+#define LABEL_SIZE		10
+#define HIDDEN_SIZE     50
+#define FEATURE_SIZE	784
+#define CHUNK_SIZE 20
+#define lambda 0.0001f
+#define two_lambda 0.0002f
+#define two_lambda_learning_rate 0.000002f
+#define learning_rate_CHUNK_SIZE 0.0005f
+#define WEIGHTS_SIZE 238510 //(FEATURE_SIZE+1)*HIDDEN_SIZE+(HIDDEN_SIZE+1)*LABEL_SIZE
+#define TOTAL_SIZE 60000
+#define DATA_SIZE 47640000
+// if the iteration is less than the pipeline depth, the dependence may be ignored wrongly
+//#define ADDITIONAL_CYCLES 2    // for 150MHz
+#define ADDITIONAL_CYCLES 5    // for 200MHz
+#include <math.h>
+
+void shift_left(float regs[50])
+{
+  int i;
+  for (i = 0; i < 50 - 1; i++) {
+    regs[i] = regs[i + 1];
+  }
+}
+
+void pipeline(int n_samples,volatile float *global_data,float weights1[50][785],float bias2[10],float weights2[10][50],float regs[50],float regs2[50],float regs3[50])
+{
+  float data[20][794];
+  float neuron1[20][50];
+  float error2[20][10];
+  float error1[20][50];
+  int i;
+  int j;
+  int k;
+  int p;
+  int n_stage = n_samples / 20;
+  for (i = 0; i < n_stage; i++) {
+    memcpy((void *)( *data),(const void *)(global_data + i * 20 * (784 + 10)),(10 + 784) * 20 * 4);
+  }
+}
+
+void mars_kernel_0_1_assign_buffer1(float target[785],float orig[785])
+{
+  int i0;
+  for (i0 = 0; i0 < 785; i0++) {
+    target[i0] = orig[i0];
+  }
+}
+
+void mars_kernel_0_1_node_0_stage_0(int i,int exec,float buffer1[785],volatile float *global_weights)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    memcpy((void *)buffer1,(const void *)(global_weights + i * (784 + 1)),(784 + 1) * 4);
+  }
+}
+
+void mars_kernel_0_1_node_1_stage_1(int i,int exec,float buffer1[785],float regs[50],float weights1[50][785])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int k;
+    int j;
+    for (j = 0; j < 784 + 1; j++) 
+/* Original: #pragma ACCEL pipeline */
+/* Original: #pragma ACCEL PIPELINE II=1 */
+{
+      for (k = 0; k < 50; k++) {
+        regs[k] = weights1[k][j];
+      }
+      shift_left(regs);
+      for (k = 0; k < 50; k++) {
+        weights1[k][j] = regs[k];
+      }
+      weights1[50 - 1][j] = buffer1[j];
+    }
+  }
+}
+
+void mars_kernel_0_1(int mars_i,int mars_init,int mars_cond,float mars_buffer1_0[785],float mars_buffer1_1[785],volatile float *global_weights,float mars_regs_1[50],float mars_weights1_1[50][785])
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_0_1_node_0_stage_0(mars_i - 0,(int )(mars_i >= mars_init + 0 & mars_i <= mars_cond + 0),mars_buffer1_0,global_weights);
+  mars_kernel_0_1_node_1_stage_1(mars_i - 1,(int )(mars_i >= mars_init + 1 & mars_i <= mars_cond + 1),mars_buffer1_1,mars_regs_1,mars_weights1_1);
+}
+
+void mars_kernel_1_2_assign_buffer(float target[51],float orig[51])
+{
+  int i0;
+  for (i0 = 0; i0 < 51; i0++) {
+    target[i0] = orig[i0];
+  }
+}
+
+void mars_kernel_1_2_assign_regs(float target[50],float orig[50])
+{
+  int i0;
+  for (i0 = 0; i0 < 50; i0++) {
+    target[i0] = orig[i0];
+  }
+}
+
+void mars_kernel_1_2_node_0_stage_0(int i,int exec,float buffer[51],volatile float *global_weights,int weights_offset)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    memcpy((void *)buffer,(const void *)(global_weights + weights_offset + (50 + 1) * i),(50 + 1) * 4);
+  }
+}
+
+void mars_kernel_1_2_node_1_stage_1(int i,int exec,float bias2[10],float buffer[51])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    bias2[i] = buffer[0];
+  }
+}
+
+void mars_kernel_1_2_node_2_stage_2(int i,int exec,float buffer[51],float regs[50])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int j;
+    for (j = 0; j < 50; j++) {
+      shift_left(regs);
+      regs[50 - 1] = buffer[j + 1];
+    }
+  }
+}
+
+void mars_kernel_1_2_node_3_stage_3(int i,int exec,float regs[50],float weights2[10][50])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int j;
+    for (j = 0; j < 50; j++) {
+      weights2[i][j] = regs[j];
+    }
+  }
+}
+
+void mars_kernel_1_2(int mars_i,int mars_init,int mars_cond,float mars_bias2_1[10],float mars_buffer_0[51],float mars_buffer_1[51],float mars_buffer_2[51],volatile float *global_weights,float mars_regs_2[50],float mars_regs_3[50],float mars_weights2_3[10][50],int mars_weights_offset_0)
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_1_2_node_0_stage_0(mars_i - 0,(int )(mars_i >= mars_init + 0 & mars_i <= mars_cond + 0),mars_buffer_0,global_weights,mars_weights_offset_0);
+  mars_kernel_1_2_node_1_stage_1(mars_i - 1,(int )(mars_i >= mars_init + 1 & mars_i <= mars_cond + 1),mars_bias2_1,mars_buffer_1);
+  mars_kernel_1_2_node_2_stage_2(mars_i - 2,(int )(mars_i >= mars_init + 2 & mars_i <= mars_cond + 2),mars_buffer_2,mars_regs_2);
+  mars_kernel_1_2_node_3_stage_3(mars_i - 3,(int )(mars_i >= mars_init + 3 & mars_i <= mars_cond + 3),mars_regs_3,mars_weights2_3);
+}
+
+void mars_kernel_2_3_node_0_stage_0(int i,int exec,float buffer1[785],float regs[50],float weights1[50][785])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int k;
+    int j;
+    for (j = 0; j < 784 + 1; j++) {
+      buffer1[j] = weights1[0][j];
+      for (k = 0; k < 50; k++) {
+        regs[k] = weights1[k][j];
+      }
+      shift_left(regs);
+      for (k = 0; k < 50; k++) {
+        weights1[k][j] = regs[k];
+      }
+    }
+  }
+}
+
+void mars_kernel_2_3_node_1_stage_1(int i,int exec,float buffer1[785],volatile float *global_weights)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    memcpy((void *)(global_weights + i * (784 + 1)),(const void *)buffer1,(784 + 1) * 4);
+  }
+}
+
+void mars_kernel_2_3(int mars_i,int mars_init,int mars_cond,float mars_buffer1_0[785],float mars_buffer1_1[785],volatile float *global_weights,float mars_regs_0[50],float mars_weights1_0[50][785])
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_2_3_node_0_stage_0(mars_i - 0,(int )(mars_i >= mars_init + 0 & mars_i <= mars_cond + 0),mars_buffer1_0,mars_regs_0,mars_weights1_0);
+  mars_kernel_2_3_node_1_stage_1(mars_i - 1,(int )(mars_i >= mars_init + 1 & mars_i <= mars_cond + 1),mars_buffer1_1,global_weights);
+}
+
+void mars_kernel_3_4_node_0_stage_0(int i,int exec,float regs[50],float weights2[10][50])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int j;
+    for (j = 0; j < 50; j++) {
+      regs[j] = weights2[i][j];
+    }
+  }
+}
+
+void mars_kernel_3_4_node_1_stage_0(int i,int exec,float bias2[10],float buffer[51])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    buffer[0] = bias2[i];
+  }
+}
+
+void mars_kernel_3_4_node_2_stage_1(int i,int exec,float buffer[51],float regs[50])
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    int j;
+    for (j = 0; j < 50; j++) {
+      buffer[j + 1] = regs[0];
+      shift_left(regs);
+    }
+  }
+}
+
+void mars_kernel_3_4_node_3_stage_2(int i,int exec,float buffer[51],volatile float *global_weights,int weights_offset)
+{
+  
+#pragma HLS INLINE OFF
+  if (exec == 1) {
+    memcpy((void *)(global_weights + weights_offset + (50 + 1) * i),(const void *)buffer,(50 + 1) * 4);
+  }
+}
+
+void mars_kernel_3_4(int mars_i,int mars_init,int mars_cond,float mars_bias2_0[10],float mars_buffer_0[51],float mars_buffer_1[51],float mars_buffer_2[51],volatile float *global_weights,float mars_regs_0[50],float mars_regs_1[50],float mars_weights2_0[10][50],int mars_weights_offset_2)
+{
+  
+#pragma HLS INLINE OFF
+  mars_kernel_3_4_node_0_stage_0(mars_i - 0,(int )(mars_i >= mars_init + 0 & mars_i <= mars_cond + 0),mars_regs_0,mars_weights2_0);
+  mars_kernel_3_4_node_1_stage_0(mars_i - 0,(int )(mars_i >= mars_init + 0 & mars_i <= mars_cond + 0),mars_bias2_0,mars_buffer_0);
+  mars_kernel_3_4_node_2_stage_1(mars_i - 1,(int )(mars_i >= mars_init + 1 & mars_i <= mars_cond + 1),mars_buffer_1,mars_regs_1);
+  mars_kernel_3_4_node_3_stage_2(mars_i - 2,(int )(mars_i >= mars_init + 2 & mars_i <= mars_cond + 2),mars_buffer_2,global_weights,mars_weights_offset_2);
+}
+#pragma ACCEL kernel
+
+void twonn_kernel(int n_samples,volatile float *global_weights,volatile float *global_data)
+{
+  float weights1[50][785];
+  float bias2[10];
+  float weights2[10][50];
+  int i;
+  int j;
+  int k;
+  float regs[50];
+  float regs2[50];
+  float regs3[50];
+  float buffer1[785];
+  int mars_count_0_1 = 0;
+  float mars_kernel_0_1_buffer1_0[785];
+  float mars_kernel_0_1_buffer1_1[785];
+  for (i = 0; i < 50 + 1; i++) 
+/* Original: #pragma ACCEL pipeline */
+/* Original: #pragma ACCEL PIPELINE II=1 */
+{
+    if (mars_count_0_1 == 0) 
+      mars_kernel_0_1(i,0,49,mars_kernel_0_1_buffer1_0,mars_kernel_0_1_buffer1_1,global_weights,regs,weights1);
+     else 
+      mars_kernel_0_1(i,0,49,mars_kernel_0_1_buffer1_1,mars_kernel_0_1_buffer1_0,global_weights,regs,weights1);
+    mars_count_0_1++;
+    if (mars_count_0_1 == 2) 
+      mars_count_0_1 = 0;
+  }
+  mars_kernel_0_1_assign_buffer1(buffer1,mars_kernel_0_1_buffer1_0);
+  int weights_offset = (784 + 1) * 50;
+  float buffer[51];
+  int mars_count_1_2 = 0;
+  float mars_kernel_1_2_buffer_0[51];
+  float mars_kernel_1_2_buffer_1[51];
+  float mars_kernel_1_2_buffer_2[51];
+  float mars_kernel_1_2_buffer_3[51];
+  float mars_kernel_1_2_regs_0[50];
+  float mars_kernel_1_2_regs_1[50];
+  for (i = 0; i < 10 + 3; i++) 
+/* Original: #pragma ACCEL pipeline */
+/* Original: #pragma ACCEL PIPELINE II=1 */
+{
+    if (mars_count_1_2 == 0) 
+      mars_kernel_1_2(i,0,9,bias2,mars_kernel_1_2_buffer_0,mars_kernel_1_2_buffer_1,mars_kernel_1_2_buffer_2,global_weights,mars_kernel_1_2_regs_0,mars_kernel_1_2_regs_1,weights2,weights_offset);
+     else if (mars_count_1_2 == 1) 
+      mars_kernel_1_2(i,0,9,bias2,mars_kernel_1_2_buffer_3,mars_kernel_1_2_buffer_0,mars_kernel_1_2_buffer_1,global_weights,mars_kernel_1_2_regs_1,mars_kernel_1_2_regs_0,weights2,weights_offset);
+     else if (mars_count_1_2 == 2) 
+      mars_kernel_1_2(i,0,9,bias2,mars_kernel_1_2_buffer_2,mars_kernel_1_2_buffer_3,mars_kernel_1_2_buffer_0,global_weights,mars_kernel_1_2_regs_0,mars_kernel_1_2_regs_1,weights2,weights_offset);
+     else 
+      mars_kernel_1_2(i,0,9,bias2,mars_kernel_1_2_buffer_1,mars_kernel_1_2_buffer_2,mars_kernel_1_2_buffer_3,global_weights,mars_kernel_1_2_regs_1,mars_kernel_1_2_regs_0,weights2,weights_offset);
+    mars_count_1_2++;
+    if (mars_count_1_2 == 4) 
+      mars_count_1_2 = 0;
+  }
+  mars_kernel_1_2_assign_regs(regs,mars_kernel_1_2_regs_0);
+  mars_kernel_1_2_assign_buffer(buffer,mars_kernel_1_2_buffer_0);
+  pipeline(n_samples,global_data,weights1,bias2,weights2,regs,regs2,regs3);
+  int mars_count_2_3 = 0;
+  float mars_kernel_2_3_buffer1_0[785];
+  float mars_kernel_2_3_buffer1_1[785];
+  for (i = 0; i < 50 + 1; i++) 
+/* Original: #pragma ACCEL pipeline */
+/* Original: #pragma ACCEL PIPELINE II=1 */
+{
+    if (mars_count_2_3 == 0) 
+      mars_kernel_2_3(i,0,49,mars_kernel_2_3_buffer1_0,mars_kernel_2_3_buffer1_1,global_weights,regs,weights1);
+     else 
+      mars_kernel_2_3(i,0,49,mars_kernel_2_3_buffer1_1,mars_kernel_2_3_buffer1_0,global_weights,regs,weights1);
+    mars_count_2_3++;
+    if (mars_count_2_3 == 2) 
+      mars_count_2_3 = 0;
+  }
+  int mars_count_3_4 = 0;
+  float mars_kernel_3_4_buffer_0[51];
+  float mars_kernel_3_4_buffer_1[51];
+  float mars_kernel_3_4_buffer_2[51];
+  float mars_kernel_3_4_regs_0[50];
+  float mars_kernel_3_4_regs_1[50];
+  float mars_kernel_3_4_regs_2[50];
+  for (i = 0; i < 10 + 2; i++) 
+/* Original: #pragma ACCEL pipeline */
+/* Original: #pragma ACCEL PIPELINE II=1 */
+{
+    if (mars_count_3_4 == 0) 
+      mars_kernel_3_4(i,0,9,bias2,mars_kernel_3_4_buffer_0,mars_kernel_3_4_buffer_1,mars_kernel_3_4_buffer_2,global_weights,mars_kernel_3_4_regs_0,mars_kernel_3_4_regs_1,weights2,weights_offset);
+     else if (mars_count_3_4 == 1) 
+      mars_kernel_3_4(i,0,9,bias2,mars_kernel_3_4_buffer_2,mars_kernel_3_4_buffer_0,mars_kernel_3_4_buffer_1,global_weights,mars_kernel_3_4_regs_2,mars_kernel_3_4_regs_0,weights2,weights_offset);
+     else 
+      mars_kernel_3_4(i,0,9,bias2,mars_kernel_3_4_buffer_1,mars_kernel_3_4_buffer_2,mars_kernel_3_4_buffer_0,global_weights,mars_kernel_3_4_regs_1,mars_kernel_3_4_regs_2,weights2,weights_offset);
+    mars_count_3_4++;
+    if (mars_count_3_4 == 3) 
+      mars_count_3_4 = 0;
+  }
+}

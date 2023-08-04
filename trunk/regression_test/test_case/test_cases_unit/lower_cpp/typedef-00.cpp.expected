@@ -1,0 +1,18 @@
+
+struct ::A 
+{
+}
+;
+typedef int A_INT;
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+
+::A_INT sub(::A_INT res)
+{
+  return res;
+}
+#pragma ACCEL kernel
+
+void top(::A_INT *a)
+{
+  ::A_INT res = sub(a[0]);
+}

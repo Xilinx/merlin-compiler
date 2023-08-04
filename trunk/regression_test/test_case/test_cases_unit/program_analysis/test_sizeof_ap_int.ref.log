@@ -1,0 +1,16 @@
+Hello Program Analysis ... 
+Test sizeof ap_int
+sizeof(ap_int<1> = 1
+sizeof(ap_int<7> = 1
+sizeof(ap_int<11> = 2
+sizeof(ap_int<15> = 2
+sizeof(ap_int<20> = 4
+sizeof(ap_int<34> = 8
+sizeof(ap_int<55> = 8
+sizeof(ap_int<100> = 16
+sizeof(ap_int<120> = 16
+sizeof(ap_int<200> = 32
+sizeof(ap_int<266> = 40
+sizeof(ap_int<312> = 40
+sizeof(ap_int<500> = 64
+

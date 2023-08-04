@@ -1,0 +1,45 @@
+#pragma ACCEL kernel
+
+void func_top_0(int b[100][100],int c[100][100])
+{
+  
+#pragma ACCEL INTERFACE VARIABLE=b DEPTH=100,100 BURST_OFF
+  
+#pragma ACCEL INTERFACE VARIABLE=c DEPTH=100,100 BURST_OFF
+  int i;
+  int j;
+  int sum[100][100];
+  for (i = 1; i < 99; i++) {
+    int slide_wind_0[5];
+    int slide_wind_0_0[5];
+    for (j = -3L; j < 95; j++) {{
+        int tmp_wind_0_0;
+        int j_1;
+        for (j_1 = 1L; j_1 <= 4L; ++j_1) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0_0[j_1 + -1] = slide_wind_0_0[j_1];
+        }
+        tmp_wind_0_0 = c[0L + j * 1L][j + 0L + 4L];
+        slide_wind_0_0[4L] = tmp_wind_0_0;
+      }
+      if (j >= 1L && j <= 94L) {{
+          int tmp_wind_0;
+          int j_0;
+          for (j_0 = 1L; j_0 <= 4L; ++j_0) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            slide_wind_0[j_0 + -1] = slide_wind_0[j_0];
+          }
+          tmp_wind_0 = b[0L + i * 1L][j + 0L + 4L];
+          slide_wind_0[4L] = tmp_wind_0;
+        }
+        if (j >= 1L && j <= 94L) {
+          for (int h = 0; h < 5; h++) {
+            sum[i][j] = slide_wind_0[h] + slide_wind_0_0[h];
+          }
+        }
+      }
+    }
+  }
+}

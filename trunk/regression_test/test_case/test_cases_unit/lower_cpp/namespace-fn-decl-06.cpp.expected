@@ -1,0 +1,27 @@
+int p_ZN1a1fEv();
+int p_ZN1a1fEi(int x);
+
+int p_ZN1a1fEv()
+{
+  return 1;
+}
+
+int p_ZN1a1fEi(int x)
+{
+  return x + 1;
+}
+namespace a
+{
+static void __merlin_dummy_SgFunctionDeclaration_int_a_f_();
+static void __merlin_dummy_SgFunctionDeclaration_int_a_f_i_();
+}
+static void __merlin_dummy_SgFunctionDeclaration_int_f_();
+static void __merlin_dummy_SgFunctionDeclaration_int_f_int_();
+#pragma ACCEL kernel
+
+void k()
+{
+using a::f;
+p_ZN1a1fEv();
+p_ZN1a1fEi(123);
+}

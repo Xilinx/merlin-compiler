@@ -1,0 +1,26 @@
+#define HS 256
+#define WS 1024
+#define FW 1
+#define FH 1
+#pragma ACCEL kernel
+
+void conv1d(float in[256][1024],float filter[1][1],float out[256][1024])
+{
+  for (int i = 0; i < 256 - 1 + 1; i++) {
+    float slide_wind_0;
+    for (int j = 1; j < 1024 - 1 + 1; j++) {
+      if (j + -1L + 0L < 1024L) {
+        float tmp_wind_0;
+        tmp_wind_0 = in[0L + i * 1L][j + 1];
+        slide_wind_0 = tmp_wind_0;
+      }
+      if (j >= 0L && j <= 1023L) {
+        float tmp = 0.0f;
+        for (int p = 0; p < 1; p++) 
+          for (int q = 0; q < 1; q++) 
+            tmp += slide_wind_0 * filter[p][q];
+        out[i][j] = tmp;
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+
+void sub1(int *a,int n)
+{
+}
+static void __merlin_dummy_void_sub3_int_a_int_n_();
+static void __merlin_dummy_void_sub2_int_a_int_n_();
+
+void sub4(int *a,int n)
+{
+}
+
+void sub(int *a,int n)
+{
+  sub(a,n);
+{
+    a[0] = 0;
+  }
+{
+    a[2] = 2;
+  }
+}
+#pragma ACCEL kernel
+
+void top(int *a,int n)
+{
+  sub(a,n);
+{
+    sub1(a,n);
+  }
+}

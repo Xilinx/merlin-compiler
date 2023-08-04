@@ -1,0 +1,69 @@
+#define N 5
+#define n 100
+#pragma ACCEL kernel
+
+void func_top_0(int b[5][100][100],int *c,int addr,int bb[100][100])
+{
+  
+#pragma ACCEL interface VARIABLE=b BURST_OFF
+  int tmp;
+  int k;
+  int i;
+  int j;
+  int LineBuffer_b0[100];
+  int slide_wind_0[2][2];
+  for (i = -1L; i < 99; i++) {
+    for (j = -1L; j < 99; j++) {{
+        int i_2;
+        int i_1;
+        int tmp_wind_0[2];
+        int j_0;
+        int i_0;
+        for (i_0 = 0L; i_0 <= 1L; ++i_0) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          for (j_0 = 1L; j_0 <= 1L; ++j_0) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            slide_wind_0[i_0][j_0 + -1] = slide_wind_0[i_0][j_0];
+          }
+        }
+        for (i_1 = 0; i_1 <= 1L; ++i_1) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          if (i_1 == 0L) {
+            tmp_wind_0[i_1] = LineBuffer_b0[j - 0L + 1L];
+          }
+        }
+        tmp_wind_0[1UL] = b[0L + addr * 1L][i + 0L + 1L][j + 0L + 1L];
+        for (i_2 = 0; i_2 <= 1L; ++i_2) {
+          
+#pragma ACCEL PARALLEL COMPLETE
+          slide_wind_0[i_2][1L] = tmp_wind_0[i_2];
+        }
+{
+          int i_3;
+          int tmp_b;
+          for (i_3 = 0; i_3 <= 0UL; ++i_3) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            tmp_b = tmp_wind_0[i_3 + 1];
+            if (i_3 == 0L) {
+              LineBuffer_b0[j - 0L + 1L] = tmp_b;
+            }
+          }
+        }
+      }
+      if (i >= 0L && i <= 98L && j >= 0L && j <= 98L) {
+        tmp += slide_wind_0[0L][0L] + slide_wind_0[1L][1L];
+      }
+    }
+  }
+  for (j = 0; j < 100; j++) {
+    for (i = 0; i < 1; i++) {
+      for (int h = 0; h < 99; h++) {
+        tmp += bb[j * addr][h + 1] + bb[i * j][h];
+      }
+    }
+  }
+}

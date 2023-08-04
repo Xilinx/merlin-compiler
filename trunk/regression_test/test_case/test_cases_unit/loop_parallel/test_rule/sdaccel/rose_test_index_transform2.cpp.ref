@@ -1,0 +1,50 @@
+typedef double Scalar;
+#pragma ACCEL kernel
+
+void top(int start,int j0,int step)
+{
+  double data_3_0_buf[90000];
+  
+#pragma HLS array_partition variable=data_3_0_buf cyclic factor=2 dim=1
+  int indices_3_0_buf[500][36];
+  int sub_start;
+  int i;
+  for (i = 0; i < 18; ++i) {
+    for (sub_start = 0; sub_start < 500; sub_start++) 
+// Original: #pragma ACCEL PIPELINE II = 1
+{
+      
+#pragma HLS pipeline II=1
+      double _data_3_0_buf_w0;
+      double _data_3_0_buf_w1;
+      double _data_3_0_buf_w2;
+      int sub_start0 = sub_start * 2 + 0;
+      int sub_start1 = sub_start * 2 + 1;
+      int new_start0 = start * 10000 + sub_start0 + j0 * 1000;
+      int new_start1 = start * 10000 + sub_start1 + j0 * 1000;
+      int idx_step = indices_3_0_buf[sub_start][i] * step;
+      int idx_step1 = indices_3_0_buf[sub_start][18 + i] * step;
+{
+        int _data_3_0_buf_addr0 = indices_3_0_buf[sub_start][i] * step / 2;
+        int _data_3_0_buf_bank0 = indices_3_0_buf[sub_start][i] * step % 2;
+        if (_data_3_0_buf_bank0 == 0) {
+          _data_3_0_buf_w0 = ((double )i);
+          data_3_0_buf[_data_3_0_buf_addr0 * 2 + 0] = _data_3_0_buf_w0;
+          _data_3_0_buf_w1 = ((double )(i + 1));
+          data_3_0_buf[_data_3_0_buf_addr0 * 2 + 1] = _data_3_0_buf_w1;
+          _data_3_0_buf_w2 = ((double )(i + 2));
+          data_3_0_buf[_data_3_0_buf_addr0 * 2 + 2] = _data_3_0_buf_w2;
+        }
+         else {
+          _data_3_0_buf_w0 = ((double )i);
+          data_3_0_buf[_data_3_0_buf_addr0 * 2 + 1] = _data_3_0_buf_w0;
+          _data_3_0_buf_w1 = ((double )(i + 1));
+          data_3_0_buf[_data_3_0_buf_addr0 * 2 + 2] = _data_3_0_buf_w1;
+          _data_3_0_buf_w2 = ((double )(i + 2));
+          data_3_0_buf[_data_3_0_buf_addr0 * 2 + 3] = _data_3_0_buf_w2;
+        }
+      }
+    }
+  }
+  return ;
+}

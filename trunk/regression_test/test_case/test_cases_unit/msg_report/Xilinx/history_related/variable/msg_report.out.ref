@@ -1,0 +1,56 @@
+================================================================================
+Kernel : mykernel(variable.cpp:8)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+g_buf           512      (variable.cpp:3) memory burst and coalescing [1]
+port_a           -       (variable.cpp:5) scalar
+
+================================================================================
+Interface      Width
+================================================================================
+orig            32       (variable.cpp:8) detect user manual memory burst
+cpy             512      (variable.cpp:8) memory burst and coalescing 
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++--------------------------------------------------------+------+------+------+-------+------+------+------+------------------------+
+|                       hierarchy                        |  TC  |  AC  | CPC  |  LUT  |  FF  | BRAM | DSP  |        comment         |
++--------------------------------------------------------+------+------+------+-------+------+------+------+------------------------+
+|mykernel (variable.cpp:8)                               |      |  8192|  8192|  20.59|  1.44|  2.87|  0.14|kernel                  |
+|    loop i (variable.cpp:10)                            |  2048|  2057|  2057|       |      |      |      |IL=11, fully pipelined  |
+|    loop i (variable.cpp:14)                            |     1|    29|    29|       |      |      |      |IL=29, pipelined II=20  |
+|    loop i (variable.cpp:18)                            |  2048|  2057|  2057|       |      |      |      |IL=11, fully pipelined  |
+|    auto memory burst write and coalescing for 'cpy'    |      |     -|   134|       |      |      |      |                        |
+|    auto memory burst write and coalescing for 'g_buf'  |      |     -|   134|       |      |      |      |                        |
++--------------------------------------------------------+------+------+------+-------+------+------+------+------------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++------------------------------------+--------+----------+
+|                Name                | Cycles | Activity |
++------------------------------------+--------+----------+
+|     mykernel (variable.cpp:8)      |  4049  |  49.43%  |
+| mykernel:loop i (variable.cpp:10)  |  2057  |  25.11%  |
+| mykernel:loop i (variable.cpp:18)  |  2057  |  25.11%  |
+| mykernel:loop i (variable.cpp:14)  |   29   |  0.35%   |
+| auto memory burst (variable.cpp:8) |   0    |  0.00%   |
+| auto memory burst (variable.cpp:8) |   0    |  0.00%   |
++------------------------------------+--------+----------+
+
++---------------------------+------+------+------+-------+
+|           Name            | BRAM | DSP  |  FF  |  LUT  |
++---------------------------+------+------+------+-------+
+| mykernel (variable.cpp:8) | 2.87 | 0.14 | 1.44 | 20.59 |
++---------------------------+------+------+------+-------+
+[1] Memory burst NOT inferred: variable 'g_buf' (variable.cpp:3)
+  Reason: the bound of the access range is not recognized (0..-1 + *port_a * 2 exact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+
+

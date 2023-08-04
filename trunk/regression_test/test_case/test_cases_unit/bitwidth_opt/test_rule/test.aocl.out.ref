@@ -1,0 +1,43 @@
+#include<string.h>
+
+void func1_sub(int *a,int a_buf[100],int k)
+{
+  long _memcpy_i_0;
+  for (_memcpy_i_0 = 0; _memcpy_i_0 < sizeof(int ) * ((unsigned long )100) / 4; ++_memcpy_i_0) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=50
+    long total_offset1 = 0 * 100 + 0;
+    long total_offset2 = 0 * 0 + k;
+    a_buf[total_offset1 + _memcpy_i_0] = a[total_offset2 + _memcpy_i_0];
+  }
+}
+
+void func2_sub(int *a,int a_buf[100])
+{
+  long _memcpy_i_1;
+  for (_memcpy_i_1 = 0; _memcpy_i_1 < sizeof(int ) * ((unsigned long )100) / 4; ++_memcpy_i_1) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=50
+    long total_offset1 = 0 * 0 + 0;
+    long total_offset2 = 0 * 100 + 0;
+    a[total_offset1 + _memcpy_i_1] = a_buf[total_offset2 + _memcpy_i_1];
+  }
+}
+#pragma ACCEL kernel
+
+void func1_kernel(int *a,int *b,int k)
+{
+  int a_buf[100];
+  func1_sub(a,a_buf,k);
+  func2_sub(b,a_buf);
+}
+
+int main()
+{
+  int *a;
+  int *b;
+  int *c;
+  int k;
+  func1_kernel(a,b,k);
+  return 0;
+}

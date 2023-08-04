@@ -1,0 +1,2 @@
+error: direct return of operator new[] expressions is currently unsupported.
+error: GCC extension `typeof` is unsupported

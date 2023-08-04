@@ -1,0 +1,27 @@
+#pragma ACCEL kernel
+
+void func_top_0()
+{
+  int a[100][100];
+  
+#pragma HLS array_partition variable=a cyclic factor=64 dim=2
+  int b[100][100];
+  
+#pragma HLS array_partition variable=b complete dim=1
+  int k;
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    int *A = a[i];
+    for (k = 0; k < 99; k++) {
+      for (j = 0; j < 99; j++) 
+// Original: #pragma ACCEL parallel complete
+{
+        
+#pragma HLS unroll
+        int *B = b[j];
+        A[j] = B[k] + B[k + 1];
+      }
+    }
+  }
+}

@@ -1,0 +1,111 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i = 0;i < 10;++i) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i = 0;i < 10;++i) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int i = 0;i < 10;++i) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int j = 0;j < 10;++j) {...}
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+[Exp SgGreaterThanOp:a[i] > 0] {a[i] > 0:SgGreaterThanOp a[i] > 0->1,0} : a[i] > 0..a[i] > 0, constant bound: {a[i] > 0:SgGreaterThanOp a[i] > 0->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:b[index]] {b[index]:SgPntrArrRefExp b[index]->1,0} : b[index]..b[index], constant bound: {b[index]:SgPntrArrRefExp b[index]->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:c[index]] {c[index]:SgPntrArrRefExp c[index]->1,0} : c[index]..c[index], constant bound: {c[index]:SgPntrArrRefExp c[index]->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:d[index]] {d[index]:SgPntrArrRefExp d[index]->1,0} : d[index]..d[index], constant bound: {d[index]:SgPntrArrRefExp d[index]->1,0} : neg_inf..pos_inf
+[Exp SgGreaterThanOp:a[i] > 0] {a[i] > 0:SgGreaterThanOp a[i] > 0->1,0} : a[i] > 0..a[i] > 0, constant bound: {a[i] > 0:SgGreaterThanOp a[i] > 0->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:b[index]] {b[index]:SgPntrArrRefExp b[index]->1,0} : b[index]..b[index], constant bound: {b[index]:SgPntrArrRefExp b[index]->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:d[index]] {d[index]:SgPntrArrRefExp d[index]->1,0} : d[index]..d[index], constant bound: {d[index]:SgPntrArrRefExp d[index]->1,0} : neg_inf..pos_inf
+[Exp SgGreaterThanOp:a[i] > 0] {a[i] > 0:SgGreaterThanOp a[i] > 0->1,0} : a[i] > 0..a[i] > 0, constant bound: {a[i] > 0:SgGreaterThanOp a[i] > 0->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:b[index]] {b[index]:SgPntrArrRefExp b[index]->1,0} : b[index]..b[index], constant bound: {b[index]:SgPntrArrRefExp b[index]->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:d[i0]] {d[i0]:SgPntrArrRefExp d[i0]->1,0} : d[i0]..d[i0], constant bound: {d[i0]:SgPntrArrRefExp d[i0]->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i]] {a[i]:SgPntrArrRefExp a[i]->1,0} : a[i]..a[i], constant bound: {a[i]:SgPntrArrRefExp a[i]->1,0} : neg_inf..pos_inf
+[Exp SgLessThanOp:i < j] {i < j:SgLessThanOp i < j->1,0} : i < j..i < j, constant bound: {i < j:SgLessThanOp i < j->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[i]] {a[i]:SgPntrArrRefExp a[i]->1,0} : a[i]..a[i], constant bound: {a[i]:SgPntrArrRefExp a[i]->1,0} : neg_inf..pos_inf
+[Exp SgPntrArrRefExp:a[j]] {a[j]:SgPntrArrRefExp a[j]->1,0} : a[j]..a[j], constant bound: {a[j]:SgPntrArrRefExp a[j]->1,0} : neg_inf..pos_inf
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void foo(int [10] a,int * b,int * c,int * d) {...}
+  SgFunctionDeclaration void foo2(int [10] a,int * b,int * d) {...}
+  SgFunctionDeclaration void foo3(int [10] a,int n,int * b,int * d) {...}
+  SgFunctionDeclaration void foo4_0(int * a,int i) {...}
+  SgFunctionDeclaration void foo4_1(int * a,int j) {...}
+  SgFunctionDeclaration void foo4(int [10] a) {...}
+  SgFunctionDeclaration void foo5(int * a) {...}
+  SgFunctionDeclaration void foo6(int * a) {...}
+  SgBasicBlock {if(a[i] > 0) {index = i;}}
+  SgForStatement for(int i = 0;i < 10;++i) {...}
+  SgBasicBlock {if(a[i] > 0) {index = i;}}
+  SgForStatement for(int i = 0;i < 10;++i) {...}
+  SgBasicBlock {if(a[i] > 0) {index = n;}}
+  SgForStatement for(int i = 0;i < 10;++i) {...}
+  SgBasicBlock {char tmp;if(j) {tmp = i0;}else {tmp =(i0 + 1);}i0 = tmp;}
+  SgForStatement for(int j = 0;j < 10;++j) {...}
+
+Arrays: 
+  int [10] a
+  int * b
+  int * c
+  int * d
+  int [10] a
+  int * b
+  int * d
+  int [10] a
+  int * b
+  int * d
+  int * a
+  int * a
+  int [10] a
+  int * a
+  int * a
+
+Ranges: 
+  SgFunctionDeclaration void foo(int [10] a,int * b,int * c,int * d) {...}
+    int [10] a :  R[0..9 exact]
+    int * b :  R[0..9 inexact]
+    int * c :  R[na..na inexact]
+    int * d :  R[na..na inexact]
+  SgFunctionDeclaration void foo2(int [10] a,int * b,int * d) {...}
+    int [10] a :  R[0..9 exact]
+    int * b :  R[0..9 inexact]
+    int * d :  R[na..na inexact]
+  SgFunctionDeclaration void foo3(int [10] a,int n,int * b,int * d) {...}
+    int [10] a :  R[0..9 exact]
+    int * b :  R[na..na inexact]
+    int * d :  R[na..na inexact]
+  SgFunctionDeclaration void foo4_0(int * a,int i) {...}
+    int * a :  W[i..i exact]
+  SgFunctionDeclaration void foo4_1(int * a,int j) {...}
+    int * a :  W[j..j exact]
+  SgFunctionDeclaration void foo4(int [10] a) {...}
+    int [10] a :  W[2..4 exact]
+  SgFunctionDeclaration void foo5(int * a) {...}
+    int * a :  R[na..na inexact]
+  SgFunctionDeclaration void foo6(int * a) {...}
+    int * a :  R[na..na inexact]
+  SgBasicBlock {if(a[i] > 0) {index = i;}}
+    int [10] a :  R[i..i exact]
+  SgForStatement for(int i = 0;i < 10;++i) {...}
+    int [10] a :  R[0..9 exact]
+  SgBasicBlock {if(a[i] > 0) {index = i;}}
+    int [10] a :  R[i..i exact]
+  SgForStatement for(int i = 0;i < 10;++i) {...}
+    int [10] a :  R[0..9 exact]
+  SgBasicBlock {if(a[i] > 0) {index = n;}}
+    int [10] a :  R[i..i exact]
+  SgForStatement for(int i = 0;i < 10;++i) {...}
+    int [10] a :  R[0..9 exact]
+  SgBasicBlock {char tmp;if(j) {tmp = i0;}else {tmp =(i0 + 1);}i0 = tmp;}
+  SgForStatement for(int j = 0;j < 10;++j) {...}
+

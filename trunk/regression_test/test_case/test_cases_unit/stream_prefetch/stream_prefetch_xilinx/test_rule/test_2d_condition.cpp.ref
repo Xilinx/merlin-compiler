@@ -1,0 +1,99 @@
+#include<hls_stream.h>
+/* (previously processed: ignoring self-referential macro declaration) macro name = c */
+extern int __merlin_include__GB_hls_stream_h_0;
+static hls::stream<int > __merlinfunc_top_1_c_ch;
+
+void __merlinfunc_top_1_c_streaming(int *c)
+{
+  
+#pragma HLS INLINE off
+  for (long merlin_it_0 = 0L; merlin_it_0 <= 31L; merlin_it_0 += 1L) {
+    for (long merlin_it_1 = 1L; merlin_it_1 <= 32L; merlin_it_1 += 1L) {
+      long merlin_it_2;
+      for (merlin_it_2 = 0L; merlin_it_2 < 31L; ++merlin_it_2) {
+        
+#pragma ACCEL pipeline
+        long merlin_it_3;
+        for (merlin_it_3 = 0L; merlin_it_3 < 1; ++merlin_it_3) {
+          
+#pragma ACCEL parallel
+          int merlin_tmp_4;
+          merlin_tmp_4 = c[-31L + merlin_it_0 * 1024L + merlin_it_1 * 32L + merlin_it_2 * 1 + merlin_it_3];
+          __merlinfunc_top_1_c_ch .  write (merlin_tmp_4);
+        }
+      }
+    }
+  }
+}
+
+void __merlinfunc_top_1_computation(int *c)
+{
+  
+#pragma HLS inline off
+  int sum;
+  for (int i = 0; i < 32; i++) {
+    int LineBuffer_c0[32];
+    int slide_wind_0[2][1];
+    for (int j = (int )0L; ((long )j) < 33L; j++) {
+      for (int k = (int )(- 1L); ((long )k) < 31L; k++) {
+        
+#pragma ACCEL pipeline
+{
+          int j_2;
+          int j_1;
+          int tmp_wind_0[2];
+          int j_0;
+          for (j_0 = ((int )0L); ((long )j_0) <= 1L; ++j_0) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            slide_wind_0[j_0][0] = slide_wind_0[j_0][0];
+          }
+          for (j_1 = 0; ((long )j_1) <= 1L; ++j_1) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            if (((long )j_1) == 0L) {
+              tmp_wind_0[j_1] = LineBuffer_c0[((long )k) + 1L - 0L];
+            }
+          }
+          if (((long )j) + - 1L + - 1L + 1L >= 0L && ((long )k) + 1L + 1L + 0L < 32L) {
+            tmp_wind_0[1UL] = __merlinfunc_top_1_c_ch .  read ();
+          }
+          for (j_2 = 0; ((long )j_2) <= 1L; ++j_2) {
+            
+#pragma ACCEL PARALLEL COMPLETE
+            slide_wind_0[j_2][0L] = tmp_wind_0[j_2];
+          }
+{
+            int j_3;
+            int tmp_c;
+            for (j_3 = 0; ((unsigned long )j_3) <= 0UL; ++j_3) {
+              
+#pragma ACCEL PARALLEL COMPLETE
+              tmp_c = tmp_wind_0[j_3 + 1];
+              if (((long )j_3) == 0L) {
+                LineBuffer_c0[((long )k) + 1L - 0L + 0L] = tmp_c;
+              }
+            }
+          }
+        }
+        if (((long )j) + - 1L >= 1L && ((long )j) + - 1L <= 30L && ((long )k) + 1L >= 1L && ((long )k) + 1L <= 30L) {
+          if (i >= 1 && i <= 30 && ((long )j) + - 1L >= ((long )1) && ((long )j) + - 1L <= ((long )30) && ((long )k) + 1L >= ((long )1) && ((long )k) + 1L <= ((long )30)) 
+            sum += slide_wind_0[1L][0L] + slide_wind_0[0L][0L];
+        }
+      }
+    }
+  }
+}
+#pragma ACCEL kernel
+
+void func_top_1(int *c)
+{
+  
+#pragma ACCEL interface variable=c max_depth=32768 depth=32768 BURST_OFF EXPLICIT_BUNDLE BUS_BITWIDTH=32
+  
+#pragma HLS dataflow
+  
+#pragma HLS stream variable=__merlinfunc_top_1_c_ch
+  __merlinfunc_top_1_c_streaming(c);
+  __merlinfunc_top_1_computation(0);
+}

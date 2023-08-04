@@ -1,0 +1,79 @@
+
+struct ::A 
+{
+}
+;
+
+int p_ZN1A1fEv(struct A *this_)
+{
+  return 123;
+}
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+
+struct A g()
+{
+  struct A temp;
+  return temp;
+}
+struct A tmp;
+int m = (tmp = g() , p_ZN1A1fEv(&tmp));
+#pragma ACCEL kernel
+
+void k()
+{
+  struct A tmp_0;
+  if (((tmp_0 = g() , p_ZN1A1fEv(&tmp_0)))) {
+    m;
+    struct A tmp_1;
+    (tmp_1 = g() , p_ZN1A1fEv(&tmp_1));
+  }
+   else {
+    struct A tmp_2;
+    if (((tmp_2 = g() , p_ZN1A1fEv(&tmp_2)))) {
+      ;
+      struct A tmp_3;
+      (tmp_3 = g() , p_ZN1A1fEv(&tmp_3));
+    }
+  }
+  switch(1){
+    case 1:;
+    case 2:
+    ;
+    struct A tmp_4;
+    (tmp_4 = g() , p_ZN1A1fEv(&tmp_4));
+    struct A tmp_5;
+    default:
+    (tmp_5 = g() , p_ZN1A1fEv(&tmp_5));
+  }
+  struct A tmp_6;
+  struct A tmp_7;
+  struct A tmp_8;
+  for (int x = (tmp_6 = g() , p_ZN1A1fEv(&tmp_6)); ((tmp_7 = g() , p_ZN1A1fEv(&tmp_7))); (tmp_8 = g() , p_ZN1A1fEv(&tmp_8))) {
+    struct A tmp_9;
+    for (int x = (tmp_9 = g() , p_ZN1A1fEv(&tmp_9)); ; ) {
+      struct A tmp_10;
+      for (; ((tmp_10 = g() , p_ZN1A1fEv(&tmp_10))); ) {
+        struct A tmp_11;
+        for (; ; (tmp_11 = g() , p_ZN1A1fEv(&tmp_11))) {
+          ;
+          struct A tmp_12;
+          (tmp_12 = g() , p_ZN1A1fEv(&tmp_12));
+        }
+      }
+    }
+  }
+  struct A tmp_13;
+  while(((tmp_13 = g() , p_ZN1A1fEv(&tmp_13)))){
+    struct A tmp_14;
+    (tmp_14 = g() , p_ZN1A1fEv(&tmp_14));
+  }
+  struct A tmp_16;
+  do {
+    struct A tmp_15;
+    (tmp_15 = g() , p_ZN1A1fEv(&tmp_15));
+  }while (((tmp_16 = g() , p_ZN1A1fEv(&tmp_16))));
+{
+    struct A tmp_17;
+    (tmp_17 = g() , p_ZN1A1fEv(&tmp_17));
+  }
+}

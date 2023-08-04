@@ -1,0 +1,3 @@
+
+ERROR: [SEPAR-312] Task pragma must followed by function declaration:
+task

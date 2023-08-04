@@ -1,0 +1,14 @@
+<project name="run">
+  <source_file_set>
+    <file type="c">../src/cnn_host.c</file>
+    <file type="c">../src/cnn_kernel.c</file>
+    <file type="h">../src/config.h</file>
+  </source_file_set>
+  <aux_file_set>
+    <file>../src/.cnn_host.c.swo</file>
+    <file>../src/a.out</file>
+    <file>../src/.cnn_kernel.c.swp</file>
+    <file>../src/.config.h.swp</file>
+  </aux_file_set>
+  <spec_file>../run/spec/directive.xml</spec_file>
+</project>

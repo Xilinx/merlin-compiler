@@ -1,0 +1,16 @@
+INFO: [BURST-101] Memory burst inferred: variable 'c' (vec_add_kernel.cpp:8) in scope (vec_add_kernel.cpp:15)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'a' (vec_add_kernel.cpp:8) in scope (vec_add_kernel.cpp:15)
+  burst buffer size = 40000 bytes
+INFO: [BURST-101] Memory burst inferred: variable 'b' (vec_add_kernel.cpp:8) in scope (vec_add_kernel.cpp:15)
+  burst buffer size = 40000 bytes
+INFO: [WDBUS-101] Memory coalescing inferred: variable 'a' (vec_add_kernel.cpp:8)
+  interface bitwidth = 128 bits
+INFO: [WDBUS-101] Memory coalescing inferred: variable 'b' (vec_add_kernel.cpp:8)
+  interface bitwidth = 128 bits
+INFO: [WDBUS-101] Memory coalescing inferred: variable 'c' (vec_add_kernel.cpp:8)
+  interface bitwidth = 128 bits
+
+WARNING: [CGPIP-208] Coarse-grained pipelining NOT applied on loop 'j' (vec_add_kernel.cpp:15)
+  Reason: there is only one statement in the loop. 
+INFO: [FGPIP-103] Loop 'm'  (vec_add_kernel.cpp:18) is pipelined

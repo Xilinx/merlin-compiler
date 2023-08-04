@@ -1,0 +1,21 @@
+#define N 5
+#define n 100
+#pragma ACCEL kernel
+
+void func_top_0(int b[100][100],int *c)
+{
+  
+#pragma ACCEL INTERFACE VARIABLE=c DEPTH=1000
+  int a[100][100];
+  int k;
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) {
+    for (j = 0; j < 100; j++) {
+      
+#pragma ACCEL pipeline
+      a[i][j] += b[i][j] + b[j + 1][j + 1];
+      a[i][j + 1] += b[i][j] + b[j - 1][j - 1];
+    }
+  }
+}

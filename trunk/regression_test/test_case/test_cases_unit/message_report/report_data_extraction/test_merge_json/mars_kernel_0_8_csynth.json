@@ -1,0 +1,50 @@
+{
+    "mars_kernel_0_8": {
+        "interval-max": "?", 
+        "interval-min": "3", 
+        "latency-max": "?", 
+        "latency-min": "3", 
+        "total-BRAM": 0, 
+        "total-DSP": 364, 
+        "total-FF": 63813, 
+        "total-LUT": 36011, 
+        "total-URAM": 0, 
+        "util-BRAM": "0", 
+        "util-DSP": "2", 
+        "util-FF": "1", 
+        "util-LUT": "2", 
+        "util-URAM": "0"
+    }, 
+    "mars_kernel_0_8_node_0_stage_0": {
+        "instance_name": "grp_mars_kernel_0_8_node_0_stage_0_fu_1404", 
+        "interval-max": "?", 
+        "interval-min": "1", 
+        "latency-max": "?", 
+        "latency-min": "1", 
+        "module_name": "mars_kernel_0_8_node_0_stage_0"
+    }, 
+    "mars_kernel_0_8_node_1_stage_1": {
+        "instance_name": "grp_mars_kernel_0_8_node_1_stage_1_fu_864", 
+        "interval-max": "25140", 
+        "interval-min": "1", 
+        "latency-max": "25140", 
+        "latency-min": "1", 
+        "module_name": "mars_kernel_0_8_node_1_stage_1"
+    }, 
+    "mars_kernel_0_8_node_2_stage_2": {
+        "instance_name": "grp_mars_kernel_0_8_node_2_stage_2_fu_1416", 
+        "interval-max": "2094", 
+        "interval-min": "1", 
+        "latency-max": "2094", 
+        "latency-min": "1", 
+        "module_name": "mars_kernel_0_8_node_2_stage_2"
+    }, 
+    "mars_kernel_0_8_node_3_stage_3": {
+        "instance_name": "grp_mars_kernel_0_8_node_3_stage_3_fu_1127", 
+        "interval-max": "401947", 
+        "interval-min": "1", 
+        "latency-max": "401947", 
+        "latency-min": "1", 
+        "module_name": "mars_kernel_0_8_node_3_stage_3"
+    }
+}

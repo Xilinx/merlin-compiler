@@ -1,0 +1,99 @@
+// This file is meant to test LowerCpp's implementation of Itanium C++ mangling.
+// Even though we don't lower ap_uint (or any of its friends), it could still
+// show up as the type of a function parameter and thus needs to be handled in
+// the mangler. See `templated_fn` and the `falcon` overload below.
+#include "ap_int.h"
+#include <stdarg.h>
+
+bool p_Z6falconPFjcPbEPA10_l(unsigned int (*)(char , bool [10]),long (*)[10])
+{
+  return true;
+}
+static void __merlin_dummy_SgFunctionDeclaration_bool_falco_();
+
+bool p_Z6falconPA34_l(long (*)[34])
+{
+  return true;
+}
+static void __merlin_dummy_SgFunctionDeclaration_bool_falco_();
+
+bool p_Z6falconv()
+{
+  return true;
+}
+static void __merlin_dummy_SgFunctionDeclaration_bool_falco_();
+
+bool p_Z6falcon7ap_uintILi512EE(class ap_uint< 512 > )
+{
+  return true;
+}
+static void __merlin_dummy_SgFunctionDeclaration_bool_falco_();
+
+void p_Z11zero_paramsv()
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_zero_();
+
+void p_Z11zero_paramsb(bool )
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_zero_();
+
+void p_Z6falconPFjvE(unsigned int (*zero_params)())
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_falco_();
+// Ensure completeness of the mangler's leaf type handling.
+
+void p_Z13all_the_typessilx(signed short ,signed int ,signed long ,signed long long )
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_all_t_();
+
+void p_Z13all_the_typesv()
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_all_t_();
+void p_Z12templated_fnI7ap_uintILi512EEE7ap_uintILi512EE(class ap_uint< 512 > );
+void p_Z12templated_fnI9ap_ufixedILi32ELi16EAP_TRNAP_WRAPLi0EEE9ap_ufixedILi32ELi16EAP_TRNAP_WRAPLi0EE(class ap_ufixed< 32 , 16 , AP_TRN , AP_WRAP , 0 > );
+
+void p_Z12templated_fnI7ap_uintILi512EEE7ap_uintILi512EE(class ap_uint< 512 > )
+{
+}
+
+void p_Z12templated_fnI9ap_ufixedILi32ELi16EAP_TRNAP_WRAPLi0EEE9ap_ufixedILi32ELi16EAP_TRNAP_WRAPLi0EE(class ap_ufixed< 32 , 16 , AP_TRN , AP_WRAP , 0 > )
+{
+}
+static void __merlin_dummy_SgTemplateFunctionDeclaration_template_();
+// Test _Complex mangling.
+
+void p_Z6falconCfCd(float _Complex ,double _Complex )
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_falco_();
+// Test va_list mangling.
+
+void p_Z6falconjP12_va_list_tagc(unsigned int ,va_list ,char )
+{
+}
+static void __merlin_dummy_SgFunctionDeclaration_void_falco_();
+#pragma ACCEL kernel
+
+void top()
+{
+  p_Z6falconPFjcPbEPA10_l(0,0);
+  p_Z6falconPA34_l((long (*)[34])0);
+  p_Z6falconv();
+  p_Z11zero_paramsv();
+  p_Z11zero_paramsb(false);
+  p_Z6falconPFjvE((unsigned int (*)())0);
+  p_Z13all_the_typesv();
+  p_Z13all_the_typessilx(0,0,0,0);
+  p_Z12templated_fnI7ap_uintILi512EEE7ap_uintILi512EE(ap_uint< 512> ());
+  p_Z6falcon7ap_uintILi512EE(ap_uint< 512> ());
+  p_Z12templated_fnI9ap_ufixedILi32ELi16EAP_TRNAP_WRAPLi0EEE9ap_ufixedILi32ELi16EAP_TRNAP_WRAPLi0EE(ap_ufixed< 32,16,AP_TRN,AP_WRAP,0> ());
+  float _Complex fcomp = 23;
+  p_Z6falconCfCd(fcomp,0);
+  p_Z6falconjP12_va_list_tagc(0,0,'z');
+}
+// TODO: namespaced and member fns.

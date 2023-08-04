@@ -1,0 +1,43 @@
+void func_2(float *a);
+void func_0(float *a);
+
+void func_1(float *a)
+{
+  int i;
+  int j;
+  for (i = 0; i < 100; i++) 
+    for (j = 0; j < 100; j++) {
+      a[i];
+    }
+}
+
+void main()
+{
+  int a[1024];
+  func_2(a);
+}
+
+void func_2(float *a)
+{
+  int k;
+  int i;
+  int j;
+  for (k = 0; k < 100; k++) 
+    func_0(a);
+  int b[10][10];
+  for (i = 0; i < 100 / 10; i++) {
+    for (j = 0; j < 10; j++) {
+      b[i][j * 100];
+      a[i * 10 + j];
+    }
+  }
+}
+
+void func_0(float *a)
+{
+  int ii;
+  for (ii = 0; ii < 100; ii++) {
+    func_1(a);
+//        func_1(a+1);
+  }
+}

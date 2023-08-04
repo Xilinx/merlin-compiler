@@ -1,0 +1,45 @@
+
+struct ::A 
+{
+  int a;
+}
+;
+
+void p_ZN1AC2Ev(struct A *this_)
+{
+  this_ -> a = 0;
+}
+
+void p_ZN1A2_AEv(struct A *this_)
+{
+}
+static void __merlin_dummy_SgClassDeclaration_struct_A_();
+
+struct ::B 
+{
+  int b;
+}
+;
+
+void p_ZN1BC2Ev(struct B *this_)
+{
+  this_ -> b = 1;
+}
+void p_ZN1B2_BEv(struct B *this_);
+
+void p_ZN1B2_BEv(struct B *this_)
+{
+}
+static void __merlin_dummy_SgClassDeclaration_struct_B_();
+static void __merlin_dummy_SgMemberFunctionDeclaration_void_B_();
+#pragma ACCEL kernel
+
+void top(int *a)
+{
+  struct A a_obj;
+  p_ZN1AC2Ev(&a_obj);
+  ;
+  struct B b_obj;
+  p_ZN1BC2Ev(&b_obj);
+  ;
+}

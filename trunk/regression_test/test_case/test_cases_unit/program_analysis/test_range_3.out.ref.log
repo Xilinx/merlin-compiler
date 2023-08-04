@@ -1,0 +1,125 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int j = 1;j < 10;j++) (b[M] , a[N]);
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(int j = 1;j < 10;j++) memcpy((b + M),a,(10 * 8));
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = 1;j < N;j++) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = 1;j < N;j++) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(pe = 1;pe < 4;pe++) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = 1;j < N;j++) {...}
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration int dummy() {...}
+  SgFunctionDeclaration void test0(int * a) {...}
+  SgFunctionDeclaration void test1(int * a) {...}
+  SgFunctionDeclaration void test(int * a) {...}
+  SgFunctionDeclaration void test3_sub(double * b,int * a1,size_t c) {...}
+  SgFunctionDeclaration void test3(int * a) {...}
+  SgFunctionDeclaration void test4_sub(int * a1) {...}
+  SgFunctionDeclaration void test4(int * a) {...}
+  SgExprStatement (b[M] , a[N]);
+  SgForStatement for(int j = 1;j < 10;j++) (b[M] , a[N]);
+  SgExprStatement memcpy((b + M),a,(10 * 8));
+  SgForStatement for(int j = 1;j < 10;j++) memcpy((b + M),a,(10 * 8));
+  SgBasicBlock {memcpy((b + M),a,j * 8);}
+  SgForStatement for(j = 1;j < N;j++) {...}
+  SgBasicBlock {test3_sub(b,a,j);}
+  SgForStatement for(j = 1;j < N;j++) {...}
+  SgBasicBlock {int pe;for(pe = 1;pe < 4;pe++) {test4_sub(&a[j + pe]);}}
+  SgForStatement for(j = 1;j < N;j++) {...}
+  SgBasicBlock {test4_sub(&a[j + pe]);}
+  SgForStatement for(pe = 1;pe < 4;pe++) {...}
+
+Arrays: 
+  int * a
+  double [1000] b
+  int * a
+  double [1000] b
+  int * a
+  double [1000] b
+  double [1000] c
+  double * b
+  int * a1
+  int * a
+  double [1000] b
+  double [1000] c
+  int * a1
+  int * a
+  double [1000] b
+  double [1000] c
+
+Ranges: 
+  SgFunctionDeclaration int dummy() {...}
+  SgFunctionDeclaration void test0(int * a) {...}
+    int * a :  R[100..100 exact]
+    double [1000] b :  R[0..999 inexact]
+  SgFunctionDeclaration void test1(int * a) {...}
+    int * a :  R[0..19 exact]
+    double [1000] b :  W[100..109 exact]
+  SgFunctionDeclaration void test(int * a) {...}
+    int * a :  R[0..17 exact]
+    double [1000] b :  W[100..108 exact]
+  SgFunctionDeclaration void test3_sub(double * b,int * a1,size_t c) {...}
+    double * b :  W[0..-1 + c exact]
+    int * a1 :  R[0..-1 + c * 2L exact]
+  SgFunctionDeclaration void test3(int * a) {...}
+    int * a :  R[0..17 exact]
+    double [1000] b :  W[0..8 exact]
+  SgFunctionDeclaration void test4_sub(int * a1) {...}
+    int * a1 :  W[0..1 exact]
+  SgFunctionDeclaration void test4(int * a) {...}
+    int * a :  W[2..13 exact]
+  SgExprStatement (b[M] , a[N]);
+    int * a :  R[100..100 exact]
+    double [1000] b :  R[M..M exact]
+  SgForStatement for(int j = 1;j < 10;j++) (b[M] , a[N]);
+    int * a :  R[100..100 exact]
+    double [1000] b :  R[M..M exact]
+  SgExprStatement memcpy((b + M),a,(10 * 8));
+    int * a :  R[0..19 exact]
+    double [1000] b :  W[100..109 exact]
+  SgForStatement for(int j = 1;j < 10;j++) memcpy((b + M),a,(10 * 8));
+    int * a :  R[0..19 exact]
+    double [1000] b :  W[100..109 exact]
+  SgBasicBlock {memcpy((b + M),a,j * 8);}
+    int * a :  R[0..-1 + j * 2L exact]
+    double [1000] b :  W[100..99 + j exact]
+  SgForStatement for(j = 1;j < N;j++) {...}
+    int * a :  R[0..17 exact]
+    double [1000] b :  W[100..108 exact]
+  SgBasicBlock {test3_sub(b,a,j);}
+    int * a :  R[0..-1 + j * 2L exact]
+    double [1000] b :  W[0..-1 + j exact]
+  SgForStatement for(j = 1;j < N;j++) {...}
+    int * a :  R[0..17 exact]
+    double [1000] b :  W[0..8 exact]
+  SgBasicBlock {int pe;for(pe = 1;pe < 4;pe++) {test4_sub(&a[j + pe]);}}
+    int * a :  W[1 + j..4 + j exact]
+  SgForStatement for(j = 1;j < N;j++) {...}
+    int * a :  W[2..13 exact]
+  SgBasicBlock {test4_sub(&a[j + pe]);}
+    int * a :  W[j + pe..1 + j + pe exact]
+  SgForStatement for(pe = 1;pe < 4;pe++) {...}
+    int * a :  W[1 + j..4 + j exact]
+

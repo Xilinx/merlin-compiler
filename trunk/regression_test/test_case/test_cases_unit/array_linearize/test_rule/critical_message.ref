@@ -1,0 +1,316 @@
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'a' (test2.c:6)
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'a' (test3.c:4)
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char * a (multi_dim_array_fail.cpp:4)
+    Reference: a = "hello"; (multi_dim_array_fail.cpp:7)
+    In function: void test_1(char * a) {...} (multi_dim_array_fail.cpp:4)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char ** a (multi_dim_array_fail.cpp:11)
+    Reference: a =((char **)"hello"); (multi_dim_array_fail.cpp:14)
+    In function: void test_2(char ** a) {...} (multi_dim_array_fail.cpp:11)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char * a (multi_dim_array_fail.cpp:18)
+    Reference: a = &b; (multi_dim_array_fail.cpp:22)
+    In function: void test_3(char * a) {...} (multi_dim_array_fail.cpp:18)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char ** b (multi_dim_array_fail.cpp:25)
+    Reference: b =((char **)"hello"); (multi_dim_array_fail.cpp:27)
+    In function: void test_4_sub(char ** b) {...} (multi_dim_array_fail.cpp:25)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char ** b (multi_dim_array_fail.cpp:37)
+    Reference: b =((char **)"hello"); (multi_dim_array_fail.cpp:39)
+    In function: void test_5_sub_sub(char ** b) {...} (multi_dim_array_fail.cpp:37)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char ** b (multi_dim_array_fail.cpp:54)
+    Reference: b =((char **)"hello"); (multi_dim_array_fail.cpp:56)
+    In function: void test_6_sub(char ** b) {...} (multi_dim_array_fail.cpp:54)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char **** a (multi_dim_array_fail.cpp:67)
+    Reference: *( *a) =((char **)"hello"); (multi_dim_array_fail.cpp:70)
+    In function: void test_7(char **** a) {...} (multi_dim_array_fail.cpp:67)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char **** a (multi_dim_array_fail.cpp:74)
+    Reference: *(&( *(&( *( *a))))) =((char **)"hello"); (multi_dim_array_fail.cpp:77)
+    In function: void test_8(char **** a) {...} (multi_dim_array_fail.cpp:74)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char **** a (multi_dim_array_fail.cpp:81)
+    Reference: *(&a[0][1]) =((char **)"hello"); (multi_dim_array_fail.cpp:84)
+    In function: void test_9(char **** a) {...} (multi_dim_array_fail.cpp:81)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char **** a (multi_dim_array_fail.cpp:88)
+    Reference: *(&( *( *(a + 1) - 2))) =((char **)"hello"); (multi_dim_array_fail.cpp:91)
+    In function: void test_10(char **** a) {...} (multi_dim_array_fail.cpp:88)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char **** a (multi_dim_array_fail.cpp:95)
+    Reference: *(a + 1)[2] =((char **)"hello"); (multi_dim_array_fail.cpp:98)
+    In function: void test_11(char **** a) {...} (multi_dim_array_fail.cpp:95)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char ** b (multi_dim_array_fail.cpp:101)
+    Reference: *b =((char *)"hello"); (multi_dim_array_fail.cpp:103)
+    In function: void test_12_sub(char ** b) {...} (multi_dim_array_fail.cpp:101)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char ** b (multi_dim_array_fail.cpp:113)
+    Reference: *b =((char *)"hello"); (multi_dim_array_fail.cpp:115)
+    In function: void test_13_sub_sub(char ** b) {...} (multi_dim_array_fail.cpp:113)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char ** b (multi_dim_array_fail.cpp:130)
+    Reference: *b =((char *)"hello"); (multi_dim_array_fail.cpp:132)
+    In function: void test_14_sub(char ** b) {...} (multi_dim_array_fail.cpp:130)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: const char ** p (write_interface_fail.c:1)
+    Reference: *p += 10; (write_interface_fail.c:3)
+    In function: void sub_func1(const char ** p) {...} (write_interface_fail.c:1)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char ** p (write_interface_fail.c:13)
+    Reference: *p += count; (write_interface_fail.c:15)
+    In function: void sub_func2(char ** p,int count) {...} (write_interface_fail.c:13)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char ** p (write_interface_fail.c:25)
+    Reference: *p += count; (write_interface_fail.c:27)
+    In function: void sub_sub_func3(char ** p,int count) {...} (write_interface_fail.c:25)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char * b (write_interface_fail.c:72)
+    Reference: b += 10; (write_interface_fail.c:75)
+    In function: void func6(char * b) {...} (write_interface_fail.c:72)
+
+
+ERROR: [SYNCHK-325] Pointer to interface arrays/pointers is not supported: 
+    Array: char * b (write_interface_fail.c:84)
+    Reference: &b (write_interface_fail.c:87)
+    In function: void func7(char * b) {...} (write_interface_fail.c:84)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char *** b (write_interface_fail.c:92)
+    Reference: *b += 1; (write_interface_fail.c:95)
+    In function: void func8(char *** b) {...} (write_interface_fail.c:92)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char *** b (write_interface_fail.c:100)
+    Reference: *b = g9; (write_interface_fail.c:102)
+    In function: void sub_func9(char *** b) {...} (write_interface_fail.c:100)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: const char ** p (write_interface_fail.c:112)
+    Reference: p += 10; (write_interface_fail.c:114)
+    In function: void sub_func10(const char ** p) {...} (write_interface_fail.c:112)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: char *** b (write_interface_fail.c:135)
+    Reference: b += 1; (write_interface_fail.c:138)
+    In function: void func12(char *** b) {...} (write_interface_fail.c:135)
+
+
+ERROR: [SYNCHK-325] Pointer to interface arrays/pointers is not supported: 
+    Array: char * b (write_interface_fail.c:147)
+    Reference: &b (write_interface_fail.c:150)
+    In function: void func13(char * b) {...} (write_interface_fail.c:147)
+
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'a' (test_f0_write.c:3)
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: int ** f0 (test_f0_write.c:12)
+    Reference: f0 += 2; (test_f0_write.c:14)
+    In function: void func(int **[1024] a,int ** b,int [3][5] c,int n) {...} (test_f0_write.c:3)
+
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'c' (test_f0_write.c:3)
+
+ERROR: [MDARR-306] Complex access on multiple dimension array/pointer is not supported : 
+    Array: int ** b (test_invalid_standarise_pntr.cpp:1)
+    Reference: --b; (test_invalid_standarise_pntr.cpp:8)
+    In function: void sub(int ** b) {...} (test_invalid_standarise_pntr.cpp:1)
+
+
+ERROR: [MDARR-306] Complex access on multiple dimension array/pointer is not supported : 
+    Array: int ** b (test_invalid_standarise_pntr.cpp:1)
+    Reference: b--; (test_invalid_standarise_pntr.cpp:7)
+    In function: void sub(int ** b) {...} (test_invalid_standarise_pntr.cpp:1)
+
+
+ERROR: [MDARR-306] Complex access on multiple dimension array/pointer is not supported : 
+    Array: int ** b (test_invalid_standarise_pntr.cpp:1)
+    Reference: ++b; (test_invalid_standarise_pntr.cpp:3)
+    In function: void sub(int ** b) {...} (test_invalid_standarise_pntr.cpp:1)
+
+
+ERROR: [MDARR-306] Complex access on multiple dimension array/pointer is not supported : 
+    Array: int ** b (test_invalid_standarise_pntr.cpp:1)
+    Reference: b++; (test_invalid_standarise_pntr.cpp:2)
+    In function: void sub(int ** b) {...} (test_invalid_standarise_pntr.cpp:1)
+
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'a' (test_a_fail.c:17)
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'b' (test_a_fail.c:31)
+
+ERROR: [SYNCHK-301] Found an out-of-bound write access on argument 'c' (test_a_fail.c:31) : access range=[0..99]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+ERROR: [SYNCHK-302] Found an out-of-bound read access on argument 'c' (test_a_fail.c:31) : access range=[0..99]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'a' (test_a_fail.c:51)
+
+ERROR: [SYNCHK-301] Found an out-of-bound write access on argument 'a' (test_a_fail.c:57) : access range=[0..99]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+ERROR: [MDARR-305] Cannot determine some of the dimension sizes of the interface variable 'a' (test_array_dim.c:6) of type 'int **'.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=a max_depth=?,?
+
+ERROR: [INFTF-304] Incorrect pragma : #pragma ACCEL interface variable=a depth=b,c (test_array_dim.c:11)
+    depth defined as variable, so the max_depth must be set
+Example : #pragma ACCEL interface variable=a depth=b,c max_depth=?,?
+
+
+ERROR: [MDARR-305] Cannot determine some of the dimension sizes of the interface variable 'a' (test_array_dim.c:10) of type 'int **'.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=a max_depth=?,?
+
+ERROR: [INFTF-305] Invalid interface max_depth value : b
+    max_depth can only be constant integer number, do not support expression.
+
+
+ERROR: [MDARR-305] Cannot determine some of the dimension sizes of the interface variable 'a' (test_array_dim.c:16) of type 'int **'.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=a max_depth=?,?
+
+ERROR: [MDARR-305] Cannot determine some of the dimension sizes of the interface variable 'a' (test_array_dim.c:22) of type 'int **'.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=a max_depth=?,
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: int ** ptr (test_multi_array_preprocess.c:2)
+    Reference: ptr += 2; (test_multi_array_preprocess.c:5)
+    In function: void sub(int ** a) {...} (test_multi_array_preprocess.c:1)
+
+
+ERROR: [SYNCHK-326] The assignment on interface arrays/pointers is not supported: 
+    Array: int ** ptr (test_multi_array_preprocess.c:2)
+    Reference: ptr -= 1; (test_multi_array_preprocess.c:6)
+    In function: void sub(int ** a) {...} (test_multi_array_preprocess.c:1)
+
+
+ERROR: [MDARR-302] The dimensions of interface array variables do not match in multiple function calls or alias: 
+    (1): "int ** a (test_conflict_array_dim.c:1)" at "sub(a) (test_conflict_array_dim.c:8)" : [2][4]
+    (2): "int ** a" (test_conflict_array_dim.c:1) at "sub(b) (test_conflict_array_dim.c:9) " : [3][5]
+
+
+ERROR: [SYNCHK-302] Found an out-of-bound read access on argument 'b' (test0.c:62) : access range=[0..99]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+ERROR: [SYNCHK-301] Found an out-of-bound write access on argument 'cc' (test0.c:62) : access range=[0..99]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+WARNING: [SYNCHK-201] Found a potential out-of-bound write access on the argument 'a' (add_test5.c:2) : access range=[-1..0]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+WARNING: [SYNCHK-201] Found a potential out-of-bound write access on the argument 'a' (add_test7.c:2) : access range=[99..101]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+WARNING: [SYNCHK-202] Found a potential out-of-bound read access on the argument 'a' (add_test7.c:2) : access range=[98..100]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+ERROR: [MDARR-303] Found overflowed dimension size of the interface variable : 
+variable=a, depth=4294967296L
+    kernel=void top(int [4294967296] a) {...} (add_test1.c:2)
+
+
+ERROR: [SYNCHK-301] Found an out-of-bound write access on argument 'a' (add_test2.c:2) : access range=[-1..-1]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+WARNING: [SYNCHK-201] Found a potential out-of-bound write access on the argument 'a' (add_test3.c:2) : access range=[-1..99]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+WARNING: [SYNCHK-202] Found a potential out-of-bound read access on the argument 'a' (add_test3.c:2) : access range=[-1..-1]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+ERROR: [SYNCHK-302] Found an out-of-bound read access on argument 'a' (add_test6.c:6) : access range=[-1..-1]
+  Hint: please check the array size or the 'depth/max_depth' in the interface pragma.
+
+ERROR: [MDARR-304] Complex pointer reinterpretation on interface array/pointer is not supported : 
+    Array: int [40][40] a (add_test4.c:2)
+    Reference: *(((char *)a[2]) + 4) = 0; (add_test4.c:4)
+    In function: void top(int [40][40] a,int ** b) {...} (add_test4.c:2)
+
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'b' (add_test4.c:2)
+
+ERROR: [MDARR-305] Cannot determine some of the dimension sizes of the interface variable 'b' (add_test9.c:5) of type 'int *'.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=b max_depth=?
+
+ERROR: [INFTF-306] Found multiple interface pragmas for port 'a' (add_test10.c:2)
+:
+#pragma ACCEL interface variable=a depth=100 (add_test10.c:3)
+#pragma ACCEL interface variable=a depth=100 (add_test10.c:4)
+  Hint: please try to merge them into one single pragma
+
+ERROR: [INFTF-307] Found incorrect depth info '10,20' for port 'b' (add_test10.c:2)
+with dimension size 1
+
+ERROR: [INFTF-308] Found incorrect max_depth info '10,20'for port 'b' (add_test10.c:2)
+with dimension size 1
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'b' (add_test10.c:2)
+
+WARNING: [MDARR-203] Found a task interface variable unused in the kernel function 'b' (add_test11.c:4)
+
+ERROR: [INFTF-302] Kernel and all the functions used in a kernel  cannot be declared in the header file, if it contains multiple dimension parameters
+    Function name  : void top(int ** a,int ** b) {...}
+    File location  : (add_test11.h:1)
+
+ERROR: [INFTF-304] Incorrect pragma : #pragma ACCEL interface variable=a depth=b (add_test12.c:3)
+    depth defined as variable, so the max_depth must be set
+Example : #pragma ACCEL interface variable=a depth=b max_depth=?
+
+
+ERROR: [MDARR-305] Cannot determine some of the dimension sizes of the interface variable 'a' (add_test12.c:2) of type 'int *'.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=a max_depth=?
+
+ERROR: [MDARR-305] Cannot determine some of the dimension sizes of the interface variable 'a' (add_test14.c:8) of type 'int *'.
+  Hint: please specify the missing dimension sizes in the following pragma and add it to your kernel:
+#pragma ACCEL interface variable=a max_depth=?

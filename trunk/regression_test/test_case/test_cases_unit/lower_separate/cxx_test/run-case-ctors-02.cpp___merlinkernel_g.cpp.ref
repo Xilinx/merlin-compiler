@@ -1,0 +1,19 @@
+#include "merlin_type_define.h"
+extern int __merlin_include__GB_merlin_type_define_h_0;
+
+static void f_1(struct Foo )
+{
+}
+
+static struct Foo p_ZN3Bar1fEv_1(struct Bar *this_)
+{
+  struct Foo temp;
+  return temp;
+}
+#pragma ACCEL kernel
+
+void g(struct Foo foo)
+{
+  struct Bar temp;
+  f_1((p_ZN3Bar1fEv_1(&(temp))));
+}

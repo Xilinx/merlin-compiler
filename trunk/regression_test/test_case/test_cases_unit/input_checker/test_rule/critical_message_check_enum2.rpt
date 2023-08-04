@@ -1,0 +1,2 @@
+
+ERROR: [SYNCHK-313] Top function argument 'c' (test2.c:9) with type 'st1 * which contains an array or pointer of enum type (st a;)

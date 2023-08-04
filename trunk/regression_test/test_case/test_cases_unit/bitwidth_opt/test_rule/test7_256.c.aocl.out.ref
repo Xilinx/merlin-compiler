@@ -1,0 +1,106 @@
+#include<string.h>
+//1d dimension
+#pragma ACCEL kernel
+
+void top(int *a,char *b,unsigned int *c,float *d,double *f,signed short *g,unsigned long *h,unsigned long long *k)
+{
+  int _memcpy_i4_1;
+  int _memcpy_i4_0;
+  int _memcpy_i3_3;
+  int _memcpy_i3_2;
+  int _memcpy_i3_1;
+  int _memcpy_i3_0;
+  int _memcpy_i2_2;
+  int _memcpy_i2_1;
+  int _memcpy_i2_0;
+  int _memcpy_i1_1;
+  int _memcpy_i1_0;
+  int a_buf[1000];
+  long _memcpy_i_0;
+  for (_memcpy_i_0 = 0; _memcpy_i_0 < sizeof(int ) * ((unsigned long )1000) / 4; ++_memcpy_i_0) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=8
+    long total_offset1 = 0 * 1000 + 0;
+    long total_offset2 = 0 * 0 + 0;
+    a_buf[total_offset1 + _memcpy_i_0] = a[total_offset2 + _memcpy_i_0];
+  }
+  char b_buf[100][64];
+  for (_memcpy_i1_1 = 0; _memcpy_i1_1 < 100; ++_memcpy_i1_1) {
+    
+#pragma HLS COALESCING_WIDTH=256
+    for (_memcpy_i1_0 = 0; _memcpy_i1_0 < 64; ++_memcpy_i1_0) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=32
+      b_buf[_memcpy_i1_1][_memcpy_i1_0] = b[0 + ((0 * 100 + _memcpy_i1_1) * 64 + _memcpy_i1_0)];
+    }
+  }
+  unsigned int c_buf[100][200][16];
+  for (_memcpy_i2_2 = 0; _memcpy_i2_2 < 100; ++_memcpy_i2_2) {
+    
+#pragma HLS COALESCING_WIDTH=256
+    for (_memcpy_i2_1 = 0; _memcpy_i2_1 < 200; ++_memcpy_i2_1) {
+      for (_memcpy_i2_0 = 0; _memcpy_i2_0 < 16; ++_memcpy_i2_0) {
+        
+#pragma ACCEL PARALLEL SKIP FACTOR=8
+        c_buf[_memcpy_i2_2][_memcpy_i2_1][_memcpy_i2_0] = c[0 + (((0 * 100 + _memcpy_i2_2) * 200 + _memcpy_i2_1) * 16 + _memcpy_i2_0)];
+      }
+    }
+  }
+  float d_buf[100][200][300][16];
+  for (_memcpy_i3_3 = 0; _memcpy_i3_3 < 100; ++_memcpy_i3_3) {
+    
+#pragma HLS COALESCING_WIDTH=256
+    for (_memcpy_i3_2 = 0; _memcpy_i3_2 < 200; ++_memcpy_i3_2) {
+      for (_memcpy_i3_1 = 0; _memcpy_i3_1 < 300; ++_memcpy_i3_1) {
+        for (_memcpy_i3_0 = 0; _memcpy_i3_0 < 16; ++_memcpy_i3_0) {
+          
+#pragma ACCEL PARALLEL SKIP FACTOR=8
+          d_buf[_memcpy_i3_3][_memcpy_i3_2][_memcpy_i3_1][_memcpy_i3_0] = d[0 + ((((0 * 100 + _memcpy_i3_3) * 200 + _memcpy_i3_2) * 300 + _memcpy_i3_1) * 16 + _memcpy_i3_0)];
+        }
+      }
+    }
+  }
+  double f_buf[100][200];
+  for (_memcpy_i4_1 = 0; _memcpy_i4_1 < 100; ++_memcpy_i4_1) {
+    
+#pragma HLS COALESCING_WIDTH=256
+    for (_memcpy_i4_0 = 0; _memcpy_i4_0 < 200; ++_memcpy_i4_0) {
+      
+#pragma ACCEL PARALLEL SKIP FACTOR=4
+      f_buf[_memcpy_i4_1][_memcpy_i4_0] = f[0 + ((0 * 100 + _memcpy_i4_1) * 200 + _memcpy_i4_0)];
+    }
+  }
+  signed short g_buf[2000];
+  long _memcpy_i_5;
+  for (_memcpy_i_5 = 0; _memcpy_i_5 < sizeof(signed short ) * ((unsigned long )2000) / 2; ++_memcpy_i_5) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=16
+    long total_offset1 = 0 * 2000 + 0;
+    long total_offset2 = 0 * 0 + 0;
+    g_buf[total_offset1 + _memcpy_i_5] = g[total_offset2 + _memcpy_i_5];
+  }
+  unsigned long h_buf[2000];
+  long _memcpy_i_6;
+  for (_memcpy_i_6 = 0; _memcpy_i_6 < sizeof(unsigned long ) * ((unsigned long )2000) / 8; ++_memcpy_i_6) {
+    
+#pragma ACCEL PARALLEL SKIP FACTOR=4
+    long total_offset1 = 0 * 2000 + 0;
+    long total_offset2 = 0 * 0 + 0;
+    h_buf[total_offset1 + _memcpy_i_6] = h[total_offset2 + _memcpy_i_6];
+  }
+  unsigned long long k_buf[2000];
+  memcpy(k_buf,k,sizeof(unsigned long long ) * 2000);
+}
+
+int main()
+{
+  int *a;
+  char *b;
+  unsigned int *c;
+  float *d;
+  double *f;
+  signed short *g;
+  unsigned long *h;
+  unsigned long long *k;
+  top(a,b,c,d,f,g,h,k);
+}

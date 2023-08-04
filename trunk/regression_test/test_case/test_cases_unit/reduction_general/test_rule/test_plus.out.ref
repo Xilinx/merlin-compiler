@@ -1,0 +1,75 @@
+#include<stdio.h>
+#include<string.h>
+#include<math.h>
+#pragma ACCEL kernel
+
+void func_top(int a[1000],int *val)
+{
+  int j;
+  int j_sub;
+  int sum =  *val;
+  int _sum_rdc[10];
+{
+    int j_sub_0;
+    for (j_sub_0 = 0; j_sub_0 <= 9; ++j_sub_0) {
+      
+#pragma ACCEL PARALLEL COMPLETE
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      _sum_rdc[j_sub_0] = 0;
+    }
+  }
+  for (j = 0; j < 100; j++) {
+    
+#pragma ACCEL pipeline
+    for (j_sub = 0; j_sub < 10; ++j_sub) {
+      
+#pragma ACCEL PARALLEL
+      _sum_rdc[j_sub] += a[j * 10 + j_sub];
+    }
+  }
+{
+    int j_sub_1;
+    for (j_sub_1 = 0; j_sub_1 <= 9; ++j_sub_1) {
+      
+#pragma ACCEL ARRAY_PARTITION OFF
+      
+#pragma ACCEL PARALLEL COMPLETE
+      sum += _sum_rdc[j_sub_1];
+    }
+  }
+   *val = sum;
+}
+
+void func_top_sw(int a[1000],int *val)
+{
+  int j;
+  int j_sub;
+  int sum =  *val;
+  for (j = 0; j < 100; j++) {
+    for (j_sub = 0; j_sub < 10; ++j_sub) {
+      sum += a[j * 10 + j_sub];
+    }
+  }
+   *val = sum;
+}
+
+int main()
+{
+  int c[1000];
+  for (int i = 0; i < 1000; i++) {
+    c[i] = i;
+  }
+  int sum = 0;
+  int sum_sw = 0;
+  func_top(c,&sum);
+  func_top_sw(c,&sum_sw);
+  int larger = sum - sum_sw;
+  if (larger != 0) {
+    printf("[ERROR] out=%d exp=%d\n",sum,sum_sw);
+    printf("Error.\n");
+    return 1;
+  }
+  printf("Success.\n");
+  return 0;
+}

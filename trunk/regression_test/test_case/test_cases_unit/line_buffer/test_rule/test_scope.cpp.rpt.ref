@@ -1,0 +1,2 @@
+INFO: [LINEBUF-101] Applying line buffer on variable 'c' in loop 'L_1' (test_scope.cpp:18) with a 51 stencil
+INFO: [LINEBUF-101] Applying line buffer on variable 'b' in loop 'L_0_0_0' (test_scope.cpp:10) with a 2x2 stencil

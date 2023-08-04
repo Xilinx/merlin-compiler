@@ -1,0 +1,248 @@
+#define get_compute_id(x) x
+extern int __merlin_include__GB__0;
+#pragma OPENCL EXTENSION cl_altera_channels : enable
+#include <string.h>
+// Original: #pragma ACCEL array_partition type=channel variable=ch_c_buf_0_2 dim=2 factor=10
+// Original: #pragma ACCEL array_partition type=channel variable=ch_c_buf_0_2 dim=1 factor=5
+// Original: #pragma ACCEL array_partition type=channel variable=ch_a_buf_0_1 dim=2 factor=10
+// Original: #pragma ACCEL array_partition type=channel variable=ch_a_buf_0_1 dim=1 factor=5
+// Original: #pragma ACCEL array_partition type=channel variable=ch_b_buf_0_0 dim=2 factor=10
+// Original: #pragma ACCEL array_partition type=channel variable=ch_b_buf_0_0 dim=1 factor=5
+#include "merlin_stream.h" 
+static void __merlin_dummy__pragma_ACCEL_stream_channel_c_();
+#ifndef __defined_ch_c_buf_0_2_p
+#define __defined_ch_c_buf_0_2_p
+#pragma channel int ch_c_buf_0_2_p[5][10] __attribute__((depth(200)));
+typedef int __merlin_channel_typedef;
+#include "channel_def.h"
+__merlin_channel_typedef ch_c_buf_0_2_p[5][10];
+#endif
+static void __merlin_dummy__pragma_ACCEL_stream_channel_c_();
+#ifndef __defined_ch_a_buf_0_1_p
+#define __defined_ch_a_buf_0_1_p
+#pragma channel int ch_a_buf_0_1_p[5][10] __attribute__((depth(200)));
+typedef int __merlin_channel_typedef;
+#include "channel_def.h"
+__merlin_channel_typedef ch_a_buf_0_1_p[5][10];
+#endif
+static void __merlin_dummy__pragma_ACCEL_stream_channel_c_();
+#ifndef __defined_ch_b_buf_0_0_p
+#define __defined_ch_b_buf_0_0_p
+#pragma channel int ch_b_buf_0_0_p[5][10] __attribute__((depth(200)));
+typedef int __merlin_channel_typedef;
+#include "channel_def.h"
+__merlin_channel_typedef ch_b_buf_0_0_p[5][10];
+#endif
+#include <string.h> 
+#include <string.h> 
+#define TILE_FACTOR 100
+#define UNROLL_FACTOR 5
+static void __merlin_dummy___merlin_dummy_kernel_pragma();
+// Original: #pragma ACCEL kernel
+
+void func(int jj)
+{
+  int k0;
+  int kk;
+  for (k0 = 0; k0 < 10; ++k0) {
+    
+#pragma unroll
+    for (kk = 0; kk < 10; ++kk) 
+// Original: #pragma ACCEL parallel
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+      int c_buf_0_sn_tmp_0;
+      int a_buf_0_sn_tmp_0;
+      int b_buf_0_sn_tmp_0;
+      b_buf_0_sn_tmp_0 = ((int )(read_channel_altera_ch_b_buf_0_0_p__merlinalterafuncend(ch_b_buf_0_0_p[jj][kk])));
+      a_buf_0_sn_tmp_0 = ((int )(read_channel_altera_ch_a_buf_0_1_p__merlinalterafuncend(ch_a_buf_0_1_p[jj][kk])));
+      c_buf_0_sn_tmp_0 = a_buf_0_sn_tmp_0 + b_buf_0_sn_tmp_0;
+      write_channel_altera_ch_c_buf_0_2_p__merlinalterafuncend(ch_c_buf_0_2_p[jj][kk],c_buf_0_sn_tmp_0);
+    }
+  }
+}
+void __merlin_dummy_msm_node_0();
+ __attribute__ (( autorun))
+ __attribute__ (( num_compute_units(5)))
+ __attribute__ (( max_global_work_dim(0)))
+
+__kernel void msm_node_0()
+{
+  int id_0 = get_compute_id(0);
+  while(1){
+    int j0;
+    for (j0 = 0; j0 < 20; ++j0) {
+      func(id_0);
+    }
+  }
+}
+
+void msm_port_b_buf_0_msm_node_0_0(int b_buf_0[5][20][10][10],int jj)
+{
+  int _jj;
+  _jj = jj;
+  int _j0;
+  int _k0;
+  int _kk;
+  for (_j0 = 0; _j0 < 20; ++_j0) {
+    for (_k0 = 0; _k0 < 10; ++_k0) {
+      
+#pragma unroll
+      for (_kk = 0; _kk < 10; ++_kk) 
+// Original: #pragma ACCEL parallel
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+        int jj_0;
+{
+          
+#pragma unroll
+          for (jj_0 = ((int )0); jj_0 <= ((int )4); ++jj_0) {
+            int b_buf_0_sp_tmp_0;
+            b_buf_0_sp_tmp_0 = b_buf_0[jj_0][_j0][_k0][_kk];
+            write_channel_altera_ch_b_buf_0_0_p__merlinalterafuncend(ch_b_buf_0_0_p[jj_0][_kk],b_buf_0_sp_tmp_0);
+          }
+        }
+      }
+    }
+  }
+}
+
+void msm_port_a_buf_0_msm_node_0_0(int a_buf_0[5][20][10][10],int jj)
+{
+  int _jj;
+  _jj = jj;
+  int _j0;
+  int _k0;
+  int _kk;
+  for (_j0 = 0; _j0 < 20; ++_j0) {
+    for (_k0 = 0; _k0 < 10; ++_k0) {
+      
+#pragma unroll
+      for (_kk = 0; _kk < 10; ++_kk) 
+// Original: #pragma ACCEL parallel
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+        int jj_0;
+{
+          
+#pragma unroll
+          for (jj_0 = ((int )0); jj_0 <= ((int )4); ++jj_0) {
+            int a_buf_0_sp_tmp_0;
+            a_buf_0_sp_tmp_0 = a_buf_0[jj_0][_j0][_k0][_kk];
+            write_channel_altera_ch_a_buf_0_1_p__merlinalterafuncend(ch_a_buf_0_1_p[jj_0][_kk],a_buf_0_sp_tmp_0);
+          }
+        }
+      }
+    }
+  }
+}
+
+void msm_port_c_buf_0_msm_node_0_0(int c_buf_0[5][20][10][10],int jj)
+{
+  int _jj;
+  _jj = jj;
+  int _j0;
+  int _k0;
+  int _kk;
+  for (_j0 = 0; _j0 < 20; ++_j0) {
+    for (_k0 = 0; _k0 < 10; ++_k0) {
+      
+#pragma unroll
+      for (_kk = 0; _kk < 10; ++_kk) 
+// Original: #pragma ACCEL parallel
+// Original: #pragma ACCEL PARALLEL COMPLETE
+{
+        int jj_0;
+{
+          
+#pragma unroll
+          for (jj_0 = ((int )0); jj_0 <= ((int )4); ++jj_0) {
+            int c_buf_0_sp_tmp_0;
+            c_buf_0_sp_tmp_0 = ((int )(read_channel_altera_ch_c_buf_0_2_p__merlinalterafuncend(ch_c_buf_0_2_p[jj_0][_kk])));
+            c_buf_0[jj_0][_j0][_k0][_kk] = c_buf_0_sp_tmp_0;
+          }
+        }
+      }
+    }
+  }
+}
+
+void msm_port_jj_msm_node_0_0(int jj)
+{
+  int _jj;
+  _jj = jj;
+  _jj;
+}
+#pragma ACCEL kernel
+
+void top(int *a,int *b,int *c)
+{
+  int _memcpy_i2_3;
+  int _memcpy_i2_2;
+  int _memcpy_i2_1;
+  int _memcpy_i2_0;
+  int _memcpy_i1_3;
+  int _memcpy_i1_2;
+  int _memcpy_i1_1;
+  int _memcpy_i1_0;
+  int _memcpy_i0_3;
+  int _memcpy_i0_2;
+  int _memcpy_i0_1;
+  int _memcpy_i0_0;
+  
+#pragma accel interface variable=a max_depth=1000000 depth=1000000
+  
+#pragma accel interface variable=b max_depth=1000000 depth=1000000
+  
+#pragma accel interface variable=c max_depth=1000000 depth=1000000
+  for (int i = 0; i < 100; ++i) {
+    int b_buf_0[5][20][10][10];
+    int a_buf_0[5][20][10][10];
+    int c_buf_0[5][20][10][10];
+{
+      for (_memcpy_i0_3 = 0; _memcpy_i0_3 < 5UL; ++_memcpy_i0_3) {
+        for (_memcpy_i0_2 = 0; _memcpy_i0_2 < 20UL; ++_memcpy_i0_2) {
+          for (_memcpy_i0_1 = 0; _memcpy_i0_1 < 10UL; ++_memcpy_i0_1) {
+            
+#pragma unroll
+            for (_memcpy_i0_0 = 0; _memcpy_i0_0 < 10UL; ++_memcpy_i0_0) {
+              a_buf_0[_memcpy_i0_3][_memcpy_i0_2][_memcpy_i0_1][_memcpy_i0_0] = a[(i * 10000) + ((((0 * 5UL + _memcpy_i0_3) * 20UL + _memcpy_i0_2) * 10UL + _memcpy_i0_1) * 10UL + _memcpy_i0_0)];
+            }
+          }
+        }
+      }
+    }
+{
+      for (_memcpy_i1_3 = 0; _memcpy_i1_3 < 5UL; ++_memcpy_i1_3) {
+        for (_memcpy_i1_2 = 0; _memcpy_i1_2 < 20UL; ++_memcpy_i1_2) {
+          for (_memcpy_i1_1 = 0; _memcpy_i1_1 < 10UL; ++_memcpy_i1_1) {
+            
+#pragma unroll
+            for (_memcpy_i1_0 = 0; _memcpy_i1_0 < 10UL; ++_memcpy_i1_0) {
+              b_buf_0[_memcpy_i1_3][_memcpy_i1_2][_memcpy_i1_1][_memcpy_i1_0] = b[(i * 10000) + ((((0 * 5UL + _memcpy_i1_3) * 20UL + _memcpy_i1_2) * 10UL + _memcpy_i1_1) * 10UL + _memcpy_i1_0)];
+            }
+          }
+        }
+      }
+    }
+    msm_port_b_buf_0_msm_node_0_0(b_buf_0,0);
+    msm_port_a_buf_0_msm_node_0_0(a_buf_0,0);
+    msm_port_jj_msm_node_0_0(0);
+    
+#pragma ACCEL mem_fence autokernel=msm_node_0 parent=top depth=5
+    msm_port_c_buf_0_msm_node_0_0(c_buf_0,0);
+{
+      for (_memcpy_i2_3 = 0; _memcpy_i2_3 < 5UL; ++_memcpy_i2_3) {
+        for (_memcpy_i2_2 = 0; _memcpy_i2_2 < 20UL; ++_memcpy_i2_2) {
+          for (_memcpy_i2_1 = 0; _memcpy_i2_1 < 10UL; ++_memcpy_i2_1) {
+            
+#pragma unroll
+            for (_memcpy_i2_0 = 0; _memcpy_i2_0 < 10UL; ++_memcpy_i2_0) {
+              c[(i * 10000) + ((((0 * 5UL + _memcpy_i2_3) * 20UL + _memcpy_i2_2) * 10UL + _memcpy_i2_1) * 10UL + _memcpy_i2_0)] = c_buf_0[_memcpy_i2_3][_memcpy_i2_2][_memcpy_i2_1][_memcpy_i2_0];
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,68 @@
+================================================================================
+Kernel : mykernel(unroll_loop_in_pipeline.cpp:4)
+================================================================================
+
+
+================================================================================
+GlobalVariable Width
+================================================================================
+
+================================================================================
+Interface      Width
+================================================================================
+orig            512      (unroll_loop_in_pipeline.cpp:4) memory burst and coalescing [1] [2]
+len             32       (unroll_loop_in_pipeline.cpp:4) scalar
+
+================================================================================
+Source code hierarchy ( TC: Trip Count, AC: Accumulated Cycles, CPC: Cycles per Call )
+================================================================================
++--------------------------------------------------------------+------+------+------+------+------+------+------+-----------------------+
+|                          hierarchy                           |  TC  |  AC  | CPC  | LUT  |  FF  | BRAM | DSP  |        comment        |
++--------------------------------------------------------------+------+------+------+------+------+------+------+-----------------------+
+|mykernel (unroll_loop_in_pipeline.cpp:4)                      |      |  2772|  2772|  0.10|  0.03|  0.00|  0.00|kernel                 |
+|    auto memory burst read and coalescing for 'orig'          |      |     -|   134|      |      |      |      |                       |
+|    auto memory burst read and coalescing for 'orig'          |      |     -|   134|      |      |      |      |                       |
+|    auto memory burst read and coalescing for 'orig'          |      |     -|   134|      |      |      |      |                       |
+|    loop i (unroll_loop_in_pipeline.cpp:10)                   |   128|   128|   128|      |      |      |      |                       |
+|        tilied loop: loop i (unroll_loop_in_pipeline.cpp:10)  |    16|     -|     -|      |      |      |      |16x parallelized       |
+|    loop i (unroll_loop_in_pipeline.cpp:15)                   |    64|    64|    64|      |      |      |      |                       |
+|        tilied loop: loop i (unroll_loop_in_pipeline.cpp:15)  |    32|     -|     -|      |      |      |      |32x parallelized       |
+|    loop i (unroll_loop_in_pipeline.cpp:22)                   |   128|   128|   128|      |      |      |      |                       |
+|        loop j (unroll_loop_in_pipeline.cpp:24)               |    16|     -|     -|      |      |      |      |16x parallelized       |
+|    loop i (unroll_loop_in_pipeline.cpp:31)                   |  2048|  2048|  2048|      |      |      |      |                       |
+|    loop i (unroll_loop_in_pipeline.cpp:38)                   |     1|     2|     2|      |      |      |      |IL=1, fully pipelined  |
++--------------------------------------------------------------+------+------+------+------+------+------+------+-----------------------+
+================================================================================
+Hotspot
+================================================================================
+* Self Accumulated Cycles
++---------------------------------------------------------------------+--------+----------+
+|                                Name                                 | Cycles | Activity |
++---------------------------------------------------------------------+--------+----------+
+|          mykernel:loop i (unroll_loop_in_pipeline.cpp:31)           |  2048  |  73.88%  |
+|              mykernel (unroll_loop_in_pipeline.cpp:4)               |  402   |  14.50%  |
+|          mykernel:loop i (unroll_loop_in_pipeline.cpp:10)           |  128   |  4.62%   |
+|          mykernel:loop i (unroll_loop_in_pipeline.cpp:22)           |  128   |  4.62%   |
+|          mykernel:loop i (unroll_loop_in_pipeline.cpp:15)           |   64   |  2.31%   |
+|          mykernel:loop i (unroll_loop_in_pipeline.cpp:38)           |   2    |  0.07%   |
+|          auto memory burst (unroll_loop_in_pipeline.cpp:4)          |   0    |  0.00%   |
+|          auto memory burst (unroll_loop_in_pipeline.cpp:4)          |   0    |  0.00%   |
+|          auto memory burst (unroll_loop_in_pipeline.cpp:4)          |   0    |  0.00%   |
+| mykernel:tilied loop tiled loop: i (unroll_loop_in_pipeline.cpp:10) |   0    |  0.00%   |
+| mykernel:tilied loop tiled loop: i (unroll_loop_in_pipeline.cpp:15) |   0    |  0.00%   |
++---------------------------------------------------------------------+--------+----------+
+
++------------------------------------------+------+------+------+------+
+|                   Name                   | BRAM | DSP  |  FF  | LUT  |
++------------------------------------------+------+------+------+------+
+| mykernel (unroll_loop_in_pipeline.cpp:4) | 0.00 | 0.00 | 0.03 | 0.10 |
++------------------------------------------+------+------+------+------+
+[1] Memory burst NOT inferred: variable 'orig' (unroll_loop_in_pipeline.cpp:4)
+  Reason: the bound of the access range is not recognized (0..-1 + len exact)
+  Hint: please specify the bounds of the variables using 'assert'
+[2] Memory burst NOT inferred: variable 'orig' (unroll_loop_in_pipeline.cpp:4)
+  Reason: the bound of the access range is not recognized (-1..-2 + len exact)
+  Hint: please specify the bounds of the variables using 'assert'
+
+
+

@@ -1,0 +1,47 @@
+Hello Program Analysis ... 
+**** Test Loop Canonicalization **** 
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(j = 0;j <= 100;j++) a[addr + i * 100 + j] = i;
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(i = 0;i <= 100;i++) {...}
+
+====== Loop Canonicalize ====> 
+[isCanonical] for(k = 0;k < N;++k) {...}
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+====== Loop Standardize ====> 
+
+**** Test Expression Range ****
+
+**** Test Scope Range ****
+
+Scopes: 
+  SgFunctionDeclaration void func(int M,int N,int * a) {...}
+  SgBasicBlock {offset = k + MM * NN;for(i = 0;i <= 100;i++) {addr = offset * 64;for(j = 0;j <= 100;j++) a[addr + i * 100 + j] = i;}}
+  SgForStatement for(k = 0;k < N;++k) {...}
+  SgBasicBlock {addr = offset * 64;for(j = 0;j <= 100;j++) a[addr + i * 100 + j] = i;}
+  SgForStatement for(i = 0;i <= 100;i++) {...}
+  SgExprStatement a[addr + i * 100 + j] = i;
+  SgForStatement for(j = 0;j <= 100;j++) a[addr + i * 100 + j] = i;
+
+Arrays: 
+  int * a
+
+Ranges: 
+  SgFunctionDeclaration void func(int M,int N,int * a) {...}
+    int * a :  W[M * N * 64..10036 + M * N * 64 + N * 64 inexact]
+  SgBasicBlock {offset = k + MM * NN;for(i = 0;i <= 100;i++) {addr = offset * 64;for(j = 0;j <= 100;j++) a[addr + i * 100 + j] = i;}}
+    int * a :  W[M * N * 64 + k * 64..10100 + M * N * 64 + k * 64 exact]
+  SgForStatement for(k = 0;k < N;++k) {...}
+    int * a :  W[M * N * 64..10036 + M * N * 64 + N * 64 inexact]
+  SgBasicBlock {addr = offset * 64;for(j = 0;j <= 100;j++) a[addr + i * 100 + j] = i;}
+    int * a :  W[M * N * 64 + i * 100 + k * 64..100 + M * N * 64 + i * 100 + k * 64 exact]
+  SgForStatement for(i = 0;i <= 100;i++) {...}
+    int * a :  W[M * N * 64 + k * 64..10100 + M * N * 64 + k * 64 exact]
+  SgExprStatement a[addr + i * 100 + j] = i;
+    int * a :  W[M * N * 64 + i * 100 + k * 64 + j..M * N * 64 + i * 100 + k * 64 + j exact]
+  SgForStatement for(j = 0;j <= 100;j++) a[addr + i * 100 + j] = i;
+    int * a :  W[M * N * 64 + i * 100 + k * 64..100 + M * N * 64 + i * 100 + k * 64 exact]
+

@@ -1,0 +1,8 @@
+
+ERROR: [PROCS-379] Do not support array of pointers for char type variable 'a' (check_array_type1.c:3)
+
+ERROR: [PROCS-379] Do not support array of pointers for char type variable 'b' (check_array_type1.c:4)
+
+ERROR: [PROCS-379] Do not support array of pointers for char type variable 'c' (check_array_type1.c:5)
+
+ERROR: [PROCS-379] Do not support array of pointers for char type variable 'd' (check_array_type1.c:6)

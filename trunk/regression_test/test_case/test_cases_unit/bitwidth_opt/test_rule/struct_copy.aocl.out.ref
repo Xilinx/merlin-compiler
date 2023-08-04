@@ -1,0 +1,14 @@
+#include<string.h>
+
+struct A 
+{
+  int a;
+}
+;
+#pragma ACCEL kernel
+
+void top(struct A *a)
+{
+  struct A a_buf[100];
+  memcpy(a_buf,a,sizeof(struct A ) * 100);
+}
